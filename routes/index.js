@@ -8,11 +8,11 @@ router.get('/', function(req, res, next) {
 
 /* login page */
 router.get('/login', function(req, res, next) {
-  res.render('index/login', { title: '登入' });
+  res.render('login/login', { title: '登入' });
 });
 
 /* register page */
 router.get('/register', function(req, res, next) {
-  res.render('index/register', { title: '註冊' });
+  res.render('login/register', { title: '註冊' });
 });
 module.exports = router;
