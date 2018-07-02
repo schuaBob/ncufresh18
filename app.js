@@ -32,6 +32,23 @@ var video = require('./routes/video');
 var personal = require('./routes/personal');
 var about = require('./routes/about');
 
+//加入strict路由
+var router = express.Router({strict:true});
+router.all('*');
+
+//session
+var session = require('express-session');
+app.use(session({
+  secret: 'ThisIsNcuFresh18Speaking.',
+  resave: true,
+  saveUninitialized: false
+}));
+
+// database config
+var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost:27017');
+
 // 首頁
 app.use('/', index);
 // 新生必讀
@@ -41,7 +58,6 @@ app.use('/qna', qna);
 // 校園導覽
 app.use('/campus', campus);
 // 系所社團
-console.log(groups);
 app.use('/groups', groups);
 // 中大生活
 app.use('/life', life);
