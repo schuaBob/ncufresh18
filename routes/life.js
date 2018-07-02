@@ -1,9 +1,46 @@
 var express = require('express');
+var request = require('request');
 var router = express.Router();
+// var apiKey = 'c7282145be089c1ab3c03aa2e2f7c5dd';
 
 /* 中大生活首頁 */
-router.get('/', function(req, res, next) {
-  res.render('life/index', { title: '中大生活' });
+router.get('/', function(req, res, next){
+  let url = "https://works.ioa.tw/weather/api/weathers/81.json";
+  request(url, function(err, response, body){
+    if(err){
+      res.render('life/index', { title: '中大生活', temperature: null, error: "Error, please try again later",
+                                 desc: " ", humidity: " "});
+    }else{
+      let weather = JSON.parse(body),
+          temp = weather.temperature,
+          desc = weather.desc,
+          humidity = weather.humidity;
+      
+      console.log(weather);
+      res.render('life/index', { title: '中大生活', temperature: temp, error: " ",
+                                 desc: desc, humidity: humidity});
+    }
+  });
 });
 
+// router.post('/', function(req, res, next){
+//   let city = req.body.city;
+//   let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
+//   request(url, function(err, response, body){
+//     if(err){
+//       res.render('life/index', { title: '中大生活', weather: null, error: "Error, please try again"});
+//     }
+//     else{
+//       let weather = JSON.parse(body);
+//       if(weather.main == undefined){
+//         res.render('life/index', { title: '中大生活', weather: null, error: "Error, please try again"});
+//       }else{
+//         let weatherText = `It's ${weather.main.temp} degrees in ${weather.name}!`;
+//         res.render('life/index', { title: '中大生活', weather: weatherText, error: null});
+//       }
+//     }
+//   });
+// });
+
 module.exports = router;
+

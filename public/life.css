@@ -1,0 +1,16 @@
+body{
+    font-family: 'Noto Sans TC';
+}
+
+.weather_info{
+    position: relative;
+    width: 15%;
+    height: 230px;
+    left: 30px;
+    background-color: #23b5a6
+}
+
+.weather_info#p{
+    
+    background-color: black;
+}
