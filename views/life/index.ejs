@@ -2,6 +2,7 @@
 <html>
 <head>
     <% include ../layout/head %>
+    <link rel=stylesheet type="text/css" href="life.css">
 </head>
 <body>
     <header>
@@ -10,6 +11,15 @@
     <main>
         <h1><%= title %></h1>
     </main>
+
+    <div class="weather_info">
+        <p> 中壢區 </p>
+        <p style="font-size:1.2cm;"> <%= temperature %> °C</p>
+        <hr />
+        <p> <%= desc %> </p>
+        <p> 濕度 <%= humidity %></p>
+    </div>
+
     <footer>
         <% include ../layout/footer %>
     </footer>
