@@ -1,0 +1,9 @@
+#List_index {
+    color: rebeccapurple;
+    list-style: none;
+    margin: 0;
+}
+#List_index {
+    display: inline-block;
+    position: relative;
+}
