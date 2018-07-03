@@ -1,0 +1,32 @@
+
+
+#CDbox {
+    position: relative;
+    margin-top: 10vh;
+    margin-left: 35vw;
+    width: 40%;
+    height: 24vw;
+    background-color: rgba(50, 9, 146, 0.863);
+    border: 1px solid black;
+}
+
+.rotate {
+    margin: 2vw;
+    margin-left: 70vw;
+}
+
+.video_item_title {
+    position: absolute;
+    top: 10vh;
+    left: 0vw;
+    writing-mode: vertical-lr;
+    margin-top: auto;
+    margin-bottom: auto;
+    
+}
+
+.video_item {
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    background-color: aquamarine;
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../layout/head %>
+    <link rel='stylesheet' href='video.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+        <% include ../layout/navbar %>
+    </header>
+    <main>
+        <!--
+        <div class="video_item_title ">
+            <div class="video_item">中大長劇</div>
+            <div class="video_item">快問快答</div>
+            <div class="video_item">悠遊中大</div>
+        </div>-->
+        
+        <div id="CDbox" >
+            影音專區(光碟盒圖片)
+        </div>
+        <div class="rotate_button">    
+            <button class="rotate">簡介</button>
+        </div>
+        
+        <table class="video_item_title ">
+            <td class="video_item">
+                中大長劇
+            </td>
+            <td class="video_item">
+                快問快答
+            </td>
+            <td class="video_item">
+                悠遊中大
+            </td>
+        </table>
+    </main>
+    <footer>
+        <% include ../layout/footer %>
+    </footer>
+        <% include ../layout/js %>
+        <% include js %>
+</body>
+</html>

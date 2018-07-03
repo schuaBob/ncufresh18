@@ -1,1 +1,50 @@
-
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script>
+    var x, n=0, nx=0, rotINT, rotate = 0, end = 1;
+    $(document).ready(() => {
+        $(document).on("click",".rotate",function(event){
+            if(end == 1){
+                if(rotate == 0){
+                $('.rotate_button').children('.rotate').remove();
+                $('.rotate_button').append('<button class="rotate">影片</button>');
+                rotate = 1;
+                }
+                else{
+                    $('.rotate_button').children('.rotate').remove();
+                    $('.rotate_button').append('<button class="rotate">簡介</button>')
+                    rotate = 0;
+                }
+                rotateDIV()
+            }
+           
+        })
+        
+    })
+        
+    
+    function rotateDIV()
+    {
+        x=document.getElementById("CDbox")
+        clearInterval(rotINT)
+        rotINT=setInterval("startRotate()",10)
+    }
+        
+    function startRotate()
+    {
+        end = 0;
+        nx=nx+1
+        x.style.transform="rotateX(" + nx + "deg)"
+        x.style.webkitTransform="rotateX(" + nx + "deg)"
+        x.style.OTransform="rotateX(" + nx + "deg)"
+        x.style.MozTransform="rotateX(" + nx + "deg)"
+        if (nx==180 || nx>=360)
+        {
+            clearInterval(rotINT)
+            if (nx>=360){
+                nx=0
+            }
+            end = 1;
+        }
+    }
+       
+</script>
