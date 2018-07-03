@@ -3,6 +3,10 @@ body{
     font-family: 'Noto Sans TC';
 }
 
+a{
+    color: black;
+}
+
 .header-2{
     position: relative;
     height: 70px;
@@ -25,14 +29,15 @@ body{
     left: 30px;
     color: black;
 }
-.weather_info, p{
+.weather_info p{
     position: relative;
     text-align: center;
     padding: 0px;
     margin: 0px;
 }
-.weather_info, hr{
+.weather_info hr{
     border-color: black;
+    width: 100%;
     padding: 0px;
     margin: 0px;
 }
@@ -45,7 +50,6 @@ body{
     z-index: 2;
 }
 .middle a{
-    color: black;
     margin: 10px;
 }
 
@@ -73,9 +77,15 @@ body{
     z-index: 1;
 }
 
-#circle_little{
+.selectbar{
     position: absolute;
-    left: 5%;
+    top: 18%;
+    left: 6%;
+    width: 400px;
+    height: 200px;
+}
+#circle_little{
+    position: relative;
     width: 120px;
     height: 120px;
     background-color: transparent; /* Can be set to transparent */
@@ -83,10 +93,27 @@ body{
     -webkit-border-radius: 120px;
     z-index: 1;
 }
-
 .oncircle{
     position: absolute;
-    left: 8%;
+    top: 50px;
+    left: 80px;
     font-size: 38px;
-    color: black;
+    z-index: 10;
+}
+.select{
+    position: absolute;
+    top: 120px;
+    left: 200px;
+    background-color: #a9a9a9c5;
+}
+.select a{
+    font-size: 25px;
+    padding: 10px;
+}
+.selectbar hr{
+    position: absolute;
+    top: 90px;
+    left: 82px;
+    border-color: black;
+    width: 200px;
 }
