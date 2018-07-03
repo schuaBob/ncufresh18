@@ -2,6 +2,7 @@
 <html>
 <head>
     <% include ../layout/head %>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 </head>
 <body>
     <header>
@@ -9,11 +10,28 @@
     </header>
     <main>
         <h1><%= title %></h1>
+        <p id="demo"></p>
+        <div id="timecounter">
+            <tr>
+                <td>
+                    <p id="dd"></p>
+                </td>
+                <td>
+                    <p id="h"></p>
+                </td>
+                <td>
+                    <p id="m"></p>
+                </td>
+                <td>
+                    <p id="s"></p>
+                </td>
+            </tr>
+        </div>
     </main>
     <footer>
         <% include ../layout/footer %>
     </footer>
-        <% include ../layout/js %>
-        <% include js %>
+    <% include ../layout/js %>
+    <% include js %>
 </body>
 </html>
