@@ -14,5 +14,10 @@ router.get('/login', function(req, res, next) {
 /* register page */
 router.get('/register', function(req, res, next) {
   res.render('login/register', { title: '註冊' });
-});
+});  
+
+/* register page */
+router.get('/comingsoon', function(req, res, next) {
+  res.render('comingsoon/index', { title: '倒數' });
+});  
 module.exports = router;
