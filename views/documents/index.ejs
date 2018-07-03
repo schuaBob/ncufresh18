@@ -3,16 +3,36 @@
 <head>
     <% include ../layout/head %>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel='stylesheet'  href='style.css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="http://hayageek.github.io/jQuery-Upload-File/4.0.11/uploadfile.css" rel="stylesheet">
+    <script src="http://hayageek.github.io/jQuery-Upload-File/4.0.11/jquery.uploadfile.min.js"></script>
 </head>
 <body>
     <header>
         <% include ../layout/navbar %>
     </header>
     <main>
-        <h1><%= title %></h1>
+            
+            <div class="add" id="add" >  
+                    <div class="addcontent">
+                        <textarea cols="100", rows="10",style='resize:none', name="Content"></textarea>
+                        <button type="button" class="btn btn-primary" id="pic">上傳圖</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                    <div class="addpic">
+                            <div id="previewupload">Upload</div>
+                        <button type="button" class="btn btn-primary" id="edit">編輯</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                    
+            </div>
+        
+            
+        <div class="undergraduate">
         <h2>大一新生</h2>
+        <input type="submit" id="big" value="" >
+        <h3>切換碩士生</h3>
         <nav class="nav navbar-default">
             <div class="container-fluid">
             <ul class="nav nav-tabs">
@@ -23,45 +43,182 @@
             </ul>
             </div>
         </nav>
+        <p></p>
         <div class="tab-content">
             <div id="register" class="tab-pane fade in active">
                 <div class="container">
-                    <table width="100%" height="300px" border="1px">
-                      <div class="col"  href="#room">
-                            <tr col>
-                                <td  colspan=1 rowspan=1 href="#money">學雜費繳費、減免</td>
-                                <td colspan=1 rowspan=1 href="#room">住宿注意事項</td>
-                                <td colspan=2 rowspan=2  href="#notice"> 註冊通知、日程表</td>
-                            </tr>
-                            <tr>
-                                <td  colspan=1 rowspan=2>學籍登入</td>
-                                <td colspan=1 rowspan=1 >兵役注意資料</td>
-                            </tr>
-                            <tr>
-                                <td colspan=2 rowspan=1>入住通管制圖、報到流程</td>
-                                <td colspan=1 rowspan=1>腳踏車通行申請</td>
-                            </tr>
-                    </table>
+                   
+                      <div class="grid">
+                            
+                                <div class="box money">學雜費繳費、減免</div>
+                                <div class="box room">住宿注意事項</div>
+                                <div class="box notice"> 註冊通知、日程表</div>
+                            
+                            
+                                <div class="box enter">學籍登入</div>
+                                <div class="box solider">兵役注意資料</div>
+                            
+                                <div class="box control">入住通管制圖、報到流程</div>
+                                <div class="box bike">腳踏車通行申請</div>
+                      </div>
                    
             </div>
             </div>
             <div id="activity" class="tab-pane fade">
-                <h3>Menu 1</h3>
-                <p>Some content in menu 1.</p>
+                    <div class="grid">
+                            
+                            <div class="box money">校園安全宣導</div>
+                            <div class="box room">新生餐</div>
+                            <div class="box notice">新生健康檢查</div>
+                        
+                        
+                            <div class="box enter">新生週日程表</div>
+                            <div class="box solider">社團聯展</div>
+                        
+                            <div class="box control">心理適應座談</div>
+                            <div class="box bike">新生資訊網圖</div>
+                  </div>
             </div>
             <div id="score" class="tab-pane fade">
-                <h3>Menu 2</h3>
-                <p>Some content in menu 2.</p>
+                    <div class="grid">
+                            
+                             <div class="box a">畢業門檻</div>
+                             <div class="box b">英文免修申請門檻</div>
+                            <div class="box a2">雙主修、輔系、學分學程、第二專長
+                                </div>
+                            <div class="box b2">課業輔導管道
+                                </div>
+                             <div class="box c">選課懶人包
+                                </div>
+                        
+                            <div class="box c2">畢業學習護照說明
+                                </div>
+                             <div class="box d">ＮＣＵ＊中大磨課師
+                                </div>
+                             <div class="box e">交換學生
+                                </div>
+                            <div class="box d2">大一國文
+                                </div>
+                            <div class="box e2">通識課程概念
+                                </div>
+                  </div>
             </div>
             <div id="other" class="tab-pane fade">
-                <h3>Menu 2</h3>
-                <p>Some content in menu 2.</p>
+                    <div class="grid">
+          
+                             <div class="box a">106行事曆
+                                </div>
+                             <div class="box b">學生掛號郵件
+                                </div>
+                            <div class="box intoduce">常用連結介紹</div>
+                            <div class="box lms">ＬＭＳ數位學習平台
+
+                                </div>
+                             <div class="box c">中大圖書館
+
+                                </div>
+                        
+                            <div class="box portal">NCU Portal
+
+                                </div>
+                             <div class="box d">中大電算中心
+
+                                </div>
+                             <div class="box e">輔導資訊
+
+                                </div>
+                            <div class="box ask">學生申訴管道
+
+                                </div>
+
+                  </div>
             </div>
         </div>
+        </div>
+        <div class="graduate">
+                <h2>碩一新生</h2>
+                <input type="submit" id="young" value="" ><h3>切換大學生</h3>
+                
+        
+                <nav class="nav navbar-default">
+                    <div class="container-fluid">
+                    <ul class="nav nav-tabs">
+                        <li><a data-toggle="tab" href="#register1">註冊報到</a></li>
+                        <li><a data-toggle="tab" href="#activity1">新生週活動</a></li>
+                        <li><a data-toggle="tab" href="#other1">其他</a></li>
+                    </ul>
+                    </div>
+                </nav>
+                <p></p>
+                <div class="tab-content">
+                    <div id="register1" class="tab-pane fade in active">
+                        <div class="container">
+                           
+                              <div class="grid">
+                                    
+                                        <div class="box money">學雜費繳費、減免</div>
+                                        <div class="box room">住宿注意事項</div>
+                                        <div class="box notice"> 註冊通知、日程表</div>
+                                    
+                                    
+                                        <div class="box enter">學籍登入</div>
+                                        <div class="box solider">兵役注意資料</div>
+                                    
+                                        <div class="box control">入住通管制圖、報到流程</div>
+                                        <div class="box bike">腳踏車通行申請</div>
+                              </div>
+                           
+                    </div>
+                    </div>
+                    <div id="activity1" class="tab-pane fade">
+                            <div class="grid">
+                                    <div class="box notice">新生健康檢查</div>
+                                    <div class="box solider">社團聯展</div>
+                          </div>
+                    </div>
+                    
+                    <div id="other1" class="tab-pane fade">
+                            <div class="grid">
+                  
+                                     <div class="box a">106行事曆
+                                        </div>
+                                     <div class="box b">學生掛號郵件
+                                        </div>
+                                    <div class="box intoduce">常用連結介紹
+        
+                                        </div>
+                                    <div class="box lms">ＬＭＳ數位學習平台
+        
+                                        </div>
+                                     <div class="box c">中大圖書館
+        
+                                        </div>
+                                
+                                    <div class="box portal">NCU Portal
+        
+                                        </div>
+                                     <div class="box d">中大電算中心
+        
+                                        </div>
+                                     <div class="box e">輔導資訊
+        
+                                        </div>
+                                    <div class="box ask">學生申訴管道
+        
+                                        </div>
+        
+                          </div>
+                    </div>
+                </div>
+                </div>
         
          
 
     </main>
+
+<style type="text/css">
+
+    </style>
     <footer>
         <% include ../layout/footer %>
     </footer>

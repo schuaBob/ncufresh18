@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../layout/head %>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <% /*<link rel='stylesheet'  href='C:\Users\ruby\Desktop\資訊網\ncufresh18\views\documents\style.css'>*/ %>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <header>
+        <% include ../layout/navbar %>
+    </header>
+    <main>
+        <h1><%= title %></h1>
+        <div class="graduate">
+        <h2>碩一新生</h2>
+        <input type="button" id="big" value="button" style="background-image:url(https://img.alicdn.com/imgextra/i3/737575635/TB2WWzvXYL9F1JjSZFlXXa2sVXa_!!0-martrix_bbs.jpg)";width:800px;height:250px;>
+        <h3>切換大學生</h3>
+
+        <nav class="nav navbar-default">
+            <div class="container-fluid">
+            <ul class="nav nav-tabs">
+                <li><a data-toggle="tab" href="#register">註冊報到</a></li>
+                <li><a data-toggle="tab" href="#activity">新生週活動</a></li>
+                <li><a data-toggle="tab" href="#other">其他</a></li>
+            </ul>
+            </div>
+        </nav>
+        <div class="tab-content">
+            <div id="register" class="tab-pane fade in active">
+                <div class="container">
+                   
+                      <div class="grid">
+                            
+                                <div class="box money">學雜費繳費、減免</div>
+                                <div class=="box room">住宿注意事項</div>
+                                <div class="box notice"> 註冊通知、日程表</div>
+                            
+                            
+                                <div class="box enter">學籍登入</div>
+                                <div class="box solider">兵役注意資料</div>
+                            
+                                <div class="box control">入住通管制圖、報到流程</div>
+                                <div class="box bike">腳踏車通行申請</div>
+                      </div>
+                   
+            </div>
+            </div>
+            <div id="activity" class="tab-pane fade">
+                    <div class="grid">
+                            <div class="box notice">新生健康檢查</div>
+                            <div class="box solider">社團聯展</div>
+                  </div>
+            </div>
+            
+            <div id="other" class="tab-pane fade">
+                    <div class="grid">
+          
+                             <div class="box a">106行事曆
+                                </div>
+                             <div class=="box b">學生掛號郵件
+                                </div>
+                            <div class="box intoduce">常用連結介紹
+
+                                </div>
+                            <div class="box lms">ＬＭＳ數位學習平台
+
+                                </div>
+                             <div class="box c">中大圖書館
+
+                                </div>
+                        
+                            <div class="box portal">NCU Portal
+
+                                </div>
+                             <div class="box d">中大電算中心
+
+                                </div>
+                             <div class="box e">輔導資訊
+
+                                </div>
+                            <div class="box ask">學生申訴管道
+
+                                </div>
+
+                  </div>
+            </div>
+        </div>
+        </div>
+        
+         
+
+    </main>
+    <style type="text/css">
+.grid {
+    display: grid;
+    
+    height: 100%;
+    width: 100%;
+    grid-template: repeat(4, 1fr 2fr) / repeat(4, 3fr 2fr);
+    grid-gap: 5px;
+    
+  }
+.money {
+    grid-area: 1 / 1 / span 1 / span 1;
+  }
+.room {
+    grid-area: 1 / 2 / span 1 / span 1;
+}
+.notice{
+    grid-area:  1/ 3 / span 2 / span 2;
+}
+.enter{
+    grid-area: 2 / 1 / span 2 / span 1;
+}
+.solider{
+    grid-area: 2 / 2 / span 1 / span 1;
+}
+.control{
+    grid-area: 3 / 2 / span 1 / span 2;
+}
+.bike{
+    grid-area: 3 / 4 / span 1 / span 1;
+}
+.a {
+    grid-area: 1 / 1 / span 1 / span 1;
+  }
+.b {
+    grid-area: 1 / 2 / span 1 / span 1;
+}
+.c{
+    grid-area:  2/ 1 / span 1 / span 2;
+}
+.d{
+    grid-area: 3 / 1 / span 1 / span 1;
+}
+.e{
+    grid-area: 3 / 2 / span 1 / span 1;
+}
+.introduce {
+    grid-area: 1 / 3 / span 1 / span 1;
+  }
+.lms {
+    grid-area: 1/ 4 / span 2 / span 1;
+}
+.portal{
+    grid-area:  2/ 3 / span 2 / span 1;
+}
+.ask{
+    grid-area: 3 / 4 / span 1 / span 1;
+}
+
+.box {
+  background-color: beige;
+  color: black;
+  border-radius: 5px;
+  border: 2px dodgerblue solid;
+}
+    </style>
+    <footer>
+        <% include ../layout/footer %>
+    </footer>
+        <% include ../layout/js %>
+        <% include js %>
+</body>
+</html>
