@@ -1,23 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
     <% include ../layout/head %>
-    <link rel="stylesheet" href="campus.css">
+        <link rel="stylesheet" href="campus.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
+
 <body>
     <header>
         <% include ../layout/navbar %>
     </header>
     <main>
-        <h1><%= title %></h1>
+        <h1>
+            <%= title %>
+        </h1>
         <div class="Admin_edit">
-            <button><a href="">新增物件</a></button>
-            <button><a href="">編輯物件</a></button>        
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                新增物件
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">新增物件</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button>
+                <a href="editElement">編輯物件</a>
+            </button>
+
         </div>
         <div class="Mainmap">
-            <img src="back2.png" alt="" width="100%" height="100%">
+            <img id="map"src="back2.png" alt="" width="100%" height="100%">
         </div>
-        <div class="list">
+        <div class="Main_list">
             <ul id="List_index">
                 <li>系館</li>
                 <li>運動</li>
@@ -35,7 +68,13 @@
     <footer>
         <% include ../layout/footer %>
     </footer>
-        <% include ../layout/js %>
+    <% include ../layout/js %>
         <% include js %>
 </body>
+<script>
+    $(document).ready(function () {
+
+    })
+</script>
+
 </html>

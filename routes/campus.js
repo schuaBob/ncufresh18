@@ -5,5 +5,8 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('campus/index', { title: '校園導覽' });
 });
+router.get('/editElement', function(req, res, next) {
+  res.render('campus/editElement', { title: '編輯物件' });
+});
 
 module.exports = router;
