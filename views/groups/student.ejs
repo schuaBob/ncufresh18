@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../layout/head %>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <header>
+        <% include ../layout/navbar %>
+    </header>
+    <main>
+        <h1><%= title %></h1>
+        
+        <div class="container">
+                <nav class="nav navbar-nav navbar-right">
+                        <div class="container-fluid">
+                        <ul class="nav nav-tabs">
+                            <li><a data-toggle="tab" href="#intro">簡介</a></li>
+                            <li><a data-toggle="tab" href="#branch">部門介紹</a></li>
+                            <li><a data-toggle="tab" href="#activity">活動剪影</a></li>
+                        </ul>
+                        </div>
+                </nav>
+                <div class="tab-content">
+                        <div id="intro" class="tab-pane fade in active">
+                            <h3>簡介</h3>
+                            <p></p>
+                        </div>
+                        <div id="branch" class="tab-pane fade">
+                            <h3>部門介紹</h3>
+                            <p></p>
+                        </div>
+                        <div id="activity" class="tab-pane fade">
+                            <h3>活動剪影</h3>
+                            <p></p>
+                        </div>
+                    </div>
+        </div>
+
+</body>
+</html>
+
+    </main>
+    <footer>
+        <% include ../layout/footer %>
+    </footer>
+        <% include ../layout/js %>
+        <% include js %>
+</body>
+</html>

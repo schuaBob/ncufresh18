@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../layout/head %>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <header>
+        <% include ../layout/navbar %>
+    </header>
+    <main>
+        <h1><%= title %></h1>
+        <h2>系所列表</h2>
+        <nav class="nav navbar">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                    </div>
+                    <div>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a data-toggle="tab" href="#">系</a></li>
+                            <li><a data-toggle="tab" href="#">系</a></li>
+                            <li><a data-toggle="tab" href="#">系</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>       
+        
+        <div class="all">
+        </div>
+    </main>
+    <footer>
+        <% include ../layout/footer %>
+    </footer>
+        <% include ../layout/js %>
+        <% include js %>
+</body>
+</html>
