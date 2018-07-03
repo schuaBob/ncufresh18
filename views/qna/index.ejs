@@ -9,6 +9,68 @@
     </header>
     <main>
         <h1><%= title %></h1>
+        <div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">我要發問</button>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">新增問題</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                                <form name="addq" action="/qna/addq" method="post">
+                                    <div class="form-group">
+                                        <label for="validationServer01" class="col-form-label">標題：</label>
+                                        <input type="text" class="form-control title" id="validationServer01" name="Title">
+                                    </div>
+                                    <div class="form-group">
+                                            <label for="exampleFormControlSelect1">類別：</label>
+                                            <select class="form-control type" name="Type">
+                                              <option>校園生活</option>
+                                              <option>學生事務</option>
+                                              <option>課程相關</option>
+                                              <option>其他</option>
+                                            </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="message-text" class="col-form-label">問題內容：</label>
+                                        <textarea class="form-control content" id="message-text" name="Content" rows="5"></textarea>
+                                    </div>
+                                    <input class="btn btn-primary submit" type="submit" value="提交問題">
+                                </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>              
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+            </div>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                排序
+                <button type="button" class="btn btn-secondary">時間</button>
+                <button type="button" class="btn btn-secondary">人氣</button>
+            </div>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                類別
+                <button type="button" class="btn btn-secondary">校園生活</button>
+                <button type="button" class="btn btn-secondary">學生事務</button>
+                <button type="button" class="btn btn-secondary">課程相關</button>
+                <button type="button" class="btn btn-secondary">其他</button>
+            </div>
+        </div>
+        <table>
+            <thead>
+                <th>類別</th>
+                <th>標題</th>
+                <th>時間</th>
+                <th>人氣</th>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
     </main>
     <footer>
         <% include ../layout/footer %>

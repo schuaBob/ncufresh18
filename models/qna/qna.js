@@ -1,11 +1,10 @@
 var mongoose = require('mongoose');
 
 var Question =new Schema({
-    Username: String, 
-    Type: String, //文章類型
-    Title: String, //文章標題
-    Article: String, //文章內容
+    Title: String, //問題標題
+    Type: String, //問題類型
+    Content: String, //問題內容
     CreateDate: Date
 });
 
-module.exports = mongoose.model( 'Question', Question );
+module.exports = mongoose.model( 'Question', question );
