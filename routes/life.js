@@ -15,14 +15,31 @@ router.get('/', function(req, res, next){
           temp = weather.temperature,
           desc = weather.desc,
           humidity = weather.humidity;
-      
-      console.log(weather);
       res.render('life/index', { title: '中大生活', temperature: temp, error: " ",
                                  desc: desc, humidity: humidity});
     }
   });
 });
 
+router.get('/food', function(req, res, next){
+  res.render('life/food', { title: '食'});
+});
+
+router.get('/dorm', function(req, res, next){
+  res.render('life/dorm', { title: '住'});
+});
+
+router.get('/comm', function(req, res, next){
+  res.render('life/comm', { title: '行'});
+});
+
+router.get('/edu', function(req, res, next){
+  res.render('life/edu', { title: '育'});
+});
+
+router.get('/entertainment', function(req, res, next){
+  res.render('life/entertainment', { title: '樂'});
+});
 // router.post('/', function(req, res, next){
 //   let city = req.body.city;
 //   let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;

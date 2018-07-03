@@ -1,16 +1,92 @@
+
 body{
     font-family: 'Noto Sans TC';
 }
 
-.weather_info{
+.header-2{
     position: relative;
-    width: 15%;
-    height: 230px;
-    left: 30px;
-    background-color: #23b5a6
+    height: 70px;
+    background-color: #a9a9a9c5;
+}
+.header-3{
+    position: relative;
+    height: 40px;
+    background-color: #e0e0e0;
+}
+.space{
+    position: relative;
+    height: 15px;
 }
 
-.weather_info#p{
-    
-    background-color: black;
+.weather_info{
+    position: relative;
+    width: 10%;
+    height: 230px;
+    left: 30px;
+    color: black;
+}
+.weather_info, p{
+    position: relative;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+}
+.weather_info, hr{
+    border-color: black;
+    padding: 0px;
+    margin: 0px;
+}
+
+.middle{
+    position: absolute;
+    top: 45%;
+    left: 48%;
+    font-size: 25px;
+    z-index: 2;
+}
+.middle a{
+    color: black;
+    margin: 10px;
+}
+
+#circle {
+    position: absolute;
+    top: 40%;
+    left: 37%;
+    width: 250px;
+    height: 250px;
+    background-color: transparent; /* Can be set to transparent */
+    border: 3px #a9a9a9c5 solid;
+    -webkit-border-radius: 150px;
+    z-index: 0;
+}
+
+#circle_small {
+    position: absolute;
+    left: 47%;
+    top: 55%;
+    width: 150px;
+    height: 150px;
+    background-color: transparent; /* Can be set to transparent */
+    border: 3px #a9a9a9c5 solid;
+    -webkit-border-radius: 100px;
+    z-index: 1;
+}
+
+#circle_little{
+    position: absolute;
+    left: 5%;
+    width: 120px;
+    height: 120px;
+    background-color: transparent; /* Can be set to transparent */
+    border: 3px #a9a9a9c5 solid;
+    -webkit-border-radius: 120px;
+    z-index: 1;
+}
+
+.oncircle{
+    position: absolute;
+    left: 8%;
+    font-size: 38px;
+    color: black;
 }

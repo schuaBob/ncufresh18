@@ -8,18 +8,40 @@
     <header>
         <% include ../layout/navbar %>
     </header>
-    <main>
-        <h1><%= title %></h1>
-    </main>
-
+    
+    <div class="header-2"></div>
+    <div class="header-3"></div>
+    <div class="space"></div>
     <div class="weather_info">
         <p> 中壢區 </p>
-        <p style="font-size:1.2cm;"> <%= temperature %> °C</p>
+        <p style="font-size:1.5cm;"> <%= temperature %> °C</p>
         <hr />
         <p> <%= desc %> </p>
         <p> 濕度 <%= humidity %></p>
     </div>
+    
+    <% if(desc == '晴') { %>
+        
+    <% } %>
+    <% if(desc == '陰') { %>
+        
+    <% } %>
+    <% if(desc == '雨') { %>
+        
+    <% } %>
+    <% if(desc == '午後短暫雷陣') { %>
+        
+    <% } %>
 
+    <div id="circle"></div>
+    <div id="circle_small"></div>
+    <div class="middle">
+        <a href="/life/food">食</a> <br /> 
+        <a href="/life/dorm">住</a> <br />
+        <a href="/life/comm">行</a> <br /> 
+        <a href="/life/edu">育</a> <br />
+        <a href="/life/entertainment">樂</a> <br /> 
+    </div>
     <footer>
         <% include ../layout/footer %>
     </footer>
