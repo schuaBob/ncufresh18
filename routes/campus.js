@@ -19,7 +19,11 @@ router.post('/AddNew_element', function(req, res, next) {
           AED : (req.body.AED === "AED_yes"),
           Emercall : (req.body.SOS === "SOS_yes"),
           LastUpDate : Date.now() 
-        }).save(function)
+        }).save(function(err) {
+          if(err) {
+            return next(err)
+          }
+        })
       }
     })
   }
