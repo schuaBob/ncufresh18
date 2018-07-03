@@ -45,7 +45,7 @@ app.use(session({
 // database config
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017');
+mongoose.connect('mongodb://localhost/ncufresh18');
 
 // 首頁
 app.use('/', index);
