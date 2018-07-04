@@ -2,6 +2,7 @@
 <html>
 <head>
     <% include ../layout/head %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel='stylesheet'  href='style.css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -13,20 +14,28 @@
         <% include ../layout/navbar %>
     </header>
     <main>
-            
-            <div class="add" id="add" >  
-                    <div class="addcontent">
-                        <textarea cols="100", rows="10",style='resize:none', name="Content"></textarea>
-                        <button type="button" class="btn btn-primary" id="pic">上傳圖</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  
+
+                  <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="編輯文字" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">編輯</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                                <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                      </div>
                     </div>
-                    <div class="addpic">
-                            <div id="previewupload">Upload</div>
-                        <button type="button" class="btn btn-primary" id="edit">編輯</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                    
-            </div>
+                  </div>
+
         
             
         <div class="undergraduate">
@@ -50,7 +59,7 @@
                    
                       <div class="grid">
                             
-                                <div class="box money">學雜費繳費、減免</div>
+                                <div class="box money"><a href="#add" data-toggle="modal" data-target="#add">學雜費繳費、減免</a></div>
                                 <div class="box room">住宿注意事項</div>
                                 <div class="box notice"> 註冊通知、日程表</div>
                             
@@ -216,9 +225,7 @@
 
     </main>
 
-<style type="text/css">
 
-    </style>
     <footer>
         <% include ../layout/footer %>
     </footer>

@@ -1,8 +1,10 @@
 <script>
     $(document).ready(function(){
+        $(".box").attr("href","#add");
         $(".graduate").hide();
-        $(".undergraduate").show(); 
-        $(".modal fade") .show();
+        $(".undergraduate").show();
+        $(".addpic").hide();
+        $(".addcontent").hide() 
         $("#big").click(function(){
             $(".graduate").show();
             $(".undergraduate").hide();
@@ -19,6 +21,11 @@
             $(".addpic").hide();
             $(".addcontent").show(); 
         });
+        $(".box a").click(function(){
+            $(".addpic").hide();
+            $(".addcontent").show(); 
+        });
+        
         $("#previewupload").uploadFile({
                         url:"upload.php",  //SERVER端，官網有提供
                         dragDrop: true,  //可否拖拉圖片上傳 預設是FALSE
@@ -51,6 +58,6 @@
                                                                                 //xhr : jquer xhr object
                                                                               }
                                                                             }); 
-                                                                             });
+         });
 
 </script>
