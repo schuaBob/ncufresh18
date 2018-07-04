@@ -1,5 +1,6 @@
 var express = require('express');
 var request = require('request');
+var life = require('../models/life/life');
 var router = express.Router();
 // var apiKey = 'c7282145be089c1ab3c03aa2e2f7c5dd';
 
@@ -22,7 +23,10 @@ router.get('/', function(req, res, next){
 });
 
 router.get('/food', function(req, res, next){
-  res.render('life/food', { title: '食'});
+  life.find({}, function(err, data){
+    console.log(data);
+    res.render('life/food', { title: '食', life: data});
+  });
 });
 
 router.get('/dorm', function(req, res, next){

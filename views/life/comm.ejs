@@ -2,48 +2,51 @@
 <html>
 <head>
     <% include ../layout/head %>
-    <link rel=stylesheet type="text/css" href="../life.css">
+    <link rel=stylesheet type="text/css" href="../life/life.css">
 </head>
 <body>
     <header>
         <% include ../layout/navbar %>
     </header>
     <div class="header-2"></div>
+    <div class="selectArea">
+        <div class="selectbar">
+            <div id="circle_little"></div>
+            <a class="oncircle" href="" id="comm-1">如何到中大</a>
+            <hr />
+            <ul class="select" id="comm-1-sel">
+                <li><a href="">飛機</a></li>
+                <li><a href="">高鐵</a></li>
+                <li><a href="">火車</a></li>
+                <li><a href="">客運</a></li>
+                <li><a href="">開車</a></li>
+            </ul>
+        </div>
+        <div class="selectbar">
+            <div id="circle_little"></div>
+            <a class="oncircle" href="" id="comm-2">校內交通</a>
+            <hr />
+            <ul class="select" id="comm-2-sel">
+                <li><a href="">小綠</a></li>
+                <li><a href="">汽機車停放位置</a></li>
+                <li><a href="">繞校公車</a></li>
+            </ul>
+        </div>
+        <div class="selectbar">
+            <div id="circle_little"></div>
+            <a class="oncircle" href="" id="comm-3">桃園交通</a>
+            <hr />
+            <ul class="select" id="comm-3-sel">
+                <li><a href="">桃園客運</a></li>
+                <li><a href="">免費公車</a></li>
+            </ul>
+        </div>
+    </div>
+    <% include navi %>
     <footer>
         <% include ../layout/footer %>
     </footer>
         <% include ../layout/js %>
         <% include js %>
-    <div class="selectbar">
-        <div id="circle_little"></div>
-        <a class="oncircle" href="">如何到中大</a>
-        <hr />
-        <div class="select">
-            <a href="">飛機</a> <br />
-            <a href="">高鐵</a> <br />
-            <a href="">火車</a> <br />
-            <a href="">客運</a> <br />
-            <a href="">開車</a> <br />
-        </div>
-    </div>
-    <div class="selectbar" style="top: 38%">
-        <div id="circle_little"></div>
-        <a class="oncircle" href="">校內交通</a>
-        <hr />
-        <div class="select">
-            <a href="">小綠</a> <br />
-            <a href="">汽機車停放位置</a> <br />
-            <a href="">繞校公車</a> <br />
-        </div>
-    </div>
-    <div class="selectbar" style="top: 58%">
-        <div id="circle_little"></div>
-        <a class="oncircle" href="">桃園交通</a>
-        <hr />
-        <div class="select">
-            <a href="">桃園客運</a> <br />
-            <a href="">免費公車</a> <br />
-        </div>
-    </div>
 </body>
 </html>

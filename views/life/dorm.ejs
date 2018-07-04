@@ -2,34 +2,37 @@
 <html>
 <head>
     <% include ../layout/head %>
-    <link rel=stylesheet type="text/css" href="../life.css">
+    <link rel=stylesheet type="text/css" href="../life/life.css">
 </head>
 <body> 
     <header>
         <% include ../layout/navbar %>
     </header>
     <div class="header-2"></div>
+    <div class="selectArea">
+        <div class="selectbar">
+            <div id="circle_little"></div>
+            <a class="oncircle" href="" id="dorm-1">宿舍</a>
+            <hr />
+            <ul class="select" id="dorm-1-sel">
+                <li><a href="">住宿用品介紹</a></li>
+                <li><a href="">全部宿舍</a></li>
+            </ul>
+        </div>
+        <div class="selectbar">
+            <div id="circle_little"></div>
+            <a class="oncircle" href="" id="dorm-2">氣候</a>
+        </div>
+        <div class="selectbar">
+            <div id="circle_little"></div>
+            <a class="oncircle" href="" id="dorm-3">租屋</a>
+        </div>
+    </div>
+    <% include navi %>
     <footer>
         <% include ../layout/footer %>
     </footer>
         <% include ../layout/js %>
         <% include js %>
-    <div class="selectbar">
-        <div id="circle_little"></div>
-        <a class="oncircle" href="">宿舍</a>
-        <hr />
-        <div class="select">
-            <a href="">住宿用品介紹</a> <br />
-            <a href="">全部宿舍</a> <br />
-        </div>
-    </div>
-    <div class="selectbar" style="top: 38%">
-        <div id="circle_little"></div>
-        <a class="oncircle" href="">氣候</a>
-    </div>
-    <div class="selectbar" style="top: 58%">
-        <div id="circle_little"></div>
-        <a class="oncircle" href="">租屋</a>
-    </div>
 </body>
 </html>
