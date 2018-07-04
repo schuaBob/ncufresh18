@@ -24,7 +24,7 @@ router.get('/', function(req, res, next){
 
 router.get('/food', function(req, res, next){
   life.find({}, function(err, data){
-    console.log(data);
+   // console.log(data);
     res.render('life/food', { title: '食', life: data});
   });
 });
