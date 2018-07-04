@@ -1,24 +1,28 @@
 <script>
     $(document).ready(function(){
+        
+        $(".box").children("a")
+            .attr('data-toggle',"modal")
+            .attr('data-target',"#add");
+           
         $(".graduate").hide();
-        $(".undergraduate").show(); 
-        $(".modal fade") .show();
-        $("#big").click(function(){
+        $(".undergraduate").show();
+        
+        $(".gra").mousedown(function(){
+           
             $(".graduate").show();
             $(".undergraduate").hide();
         });
-        $("#young").click(function(){
+        $(".under").mousedown(function(){
             $(".graduate").hide();
             $(".undergraduate").show(); 
         });
-        $("#pic").click(function(){
-            $(".addcontent").hide();
-            $(".addpic").show(); 
-        });
-        $("#edit").click(function(){
+      
+        $(".box a").click(function(){
             $(".addpic").hide();
             $(".addcontent").show(); 
         });
+
         $("#previewupload").uploadFile({
                         url:"upload.php",  //SERVER端，官網有提供
                         dragDrop: true,  //可否拖拉圖片上傳 預設是FALSE
@@ -51,6 +55,6 @@
                                                                                 //xhr : jquer xhr object
                                                                               }
                                                                             }); 
-                                                                             });
+         });
 
 </script>

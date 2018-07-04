@@ -2,7 +2,7 @@
 <html>
 <head>
     <% include ../layout/head %>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
     <link rel='stylesheet'  href='style.css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <link href="http://hayageek.github.io/jQuery-Upload-File/4.0.11/uploadfile.css" rel="stylesheet">
@@ -13,121 +13,173 @@
         <% include ../layout/navbar %>
     </header>
     <main>
-            
-            <div class="add" id="add" >  
-                    <div class="addcontent">
-                        <textarea cols="100", rows="10",style='resize:none', name="Content"></textarea>
-                        <button type="button" class="btn btn-primary" id="pic">上傳圖</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                    <div class="addpic">
-                            <div id="previewupload">Upload</div>
-                        <button type="button" class="btn btn-primary" id="edit">編輯</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                    
-            </div>
+                  
+                  <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLongTitle">
+                                    欄位名稱<input type="text" name="欄位名稱">
+                              </h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <form name="add" action="/documents/add/" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+                                <!-- <input type="hidden" name="id" value="<"> -->
+                                <div class="modal-body">
+                                    <textarea class="form-control" id="message-text"></textarea>     
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary" value="save"></submit>
+                                </div>
+                        </form>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="modal fade" id="show" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLongTitle">
+                                        <div class="title" id="title"></div> 
+                                  </h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                
+                                    <div class="modal-body">
+                                            <div class="content" id="content"></div>     
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    
+                                    </div>
+                            
+                              </div>
+                            </div>
+                          </div>
+
         
             
-        <div class="undergraduate">
-        <h2>大一新生</h2>
-        <input type="submit" id="big" value="" >
-        <h3>切換碩士生</h3>
-        <nav class="nav navbar-default">
-            <div class="container-fluid">
-            <ul class="nav nav-tabs">
-                <li><a data-toggle="tab" href="#register">註冊報到</a></li>
-                <li><a data-toggle="tab" href="#activity">新生週活動</a></li>
-                <li><a data-toggle="tab" href="#score">學霸之路</a></li>
-                <li><a data-toggle="tab" href="#other">其他</a></li>
-            </ul>
-            </div>
-        </nav>
+        <div class="undergraduate" id="undergraduate">
+        <h2><a href="#undergraduate" class="under">大一新生</a><span style="padding-left:60px"><a href="#graduate" class="gra">碩一新生</a></h2>
+        
+            <% /*<input type="submit" id="big" value="" >
+        <h3>切換碩士生</h3>*/ %>
+
+        <ul class="nav nav-pills mb-3" id="tab" role="tablist">
+            
+                <li class="nav-item"><a data-toggle="tab" href="#register" class="nav-link active"  role="tab" aria-controls="home" aria-selected="true">註冊報到</a></li>
+                <li class="nav-item"><a data-toggle="tab" href="#activity" class="nav-link "  role="tab" aria-controls="home" aria-selected="false">新生週活動</a></li>
+                <li class="nav-item"><a data-toggle="tab" href="#score" class="nav-link "  role="tab" aria-controls="home" aria-selected="false">學霸之路</a></li>
+                <li class="nav-item"><a data-toggle="tab" href="#other" class="nav-link "  role="tab" aria-controls="home" aria-selected="false">其他</a></li>
+            
+        </ul>
         <p></p>
         <div class="tab-content">
-            <div id="register" class="tab-pane fade in active">
+            <div id="register" class="tab-pane fade show active" role="tabpanel">
                 <div class="container">
                    
                       <div class="grid">
                             
-                                <div class="box money">學雜費繳費、減免</div>
-                                <div class="box room">住宿注意事項</div>
-                                <div class="box notice"> 註冊通知、日程表</div>
+                                <div class="box parent money">
+                                    <a data-toggle="modal" data-target="#add">
+                                            學雜費繳費、減免
+                                        
+                                    </a>
+                                </div>
+                                <div class="box parent room" onclick="">
+                                        <div class="child bg-one">
+                                        <a  data-toggle="modal" data-target="#add "> 住宿注意事項</a>
+                                    </div>
+                                    </div>
+                                <div class="box parent notice">
+                                    <div class="child bg-two">
+                                        <a data-toggle="modal" data-target="#show" >
+                                            註冊通知、日程表
+                                        </a>
+                                     </div>
+                                    </div>
                             
                             
-                                <div class="box enter">學籍登入</div>
-                                <div class="box solider">兵役注意資料</div>
+                                <div class="box parent enter"><a>學籍登入</a></div>
+                                <div class="box parent solider"><a>兵役注意資料</a></div>
                             
-                                <div class="box control">入住通管制圖、報到流程</div>
-                                <div class="box bike">腳踏車通行申請</div>
+                                <div class="box parent control"><a>入住通管制圖、報到流程</a></div>
+                                <div class="box parent bike"><a>腳踏車通行申請</a></div>
                       </div>
+                      <p style="padding-bottom:40px;"></p>
                    
             </div>
             </div>
-            <div id="activity" class="tab-pane fade">
+            <div id="activity" class="tab-pane fade " role="tabpanel">
                     <div class="grid">
                             
-                            <div class="box money">校園安全宣導</div>
-                            <div class="box room">新生餐</div>
-                            <div class="box notice">新生健康檢查</div>
+                            <div class="box parent money"><a>校園安全宣導</a></div>
+                            <div class="box parent room"><a>新生餐</a></div>
+                            <div class="box parent notice"><a>新生健康檢查</a></div>
                         
                         
-                            <div class="box enter">新生週日程表</div>
-                            <div class="box solider">社團聯展</div>
+                            <div class="box parent enter"><a>新生週日程表</a></div>
+                            <div class="box parent solider"><a>社團聯展</a></div>
                         
-                            <div class="box control">心理適應座談</div>
-                            <div class="box bike">新生資訊網圖</div>
+                            <div class="box parent control"><a>心理適應座談</a></div>
+                            <div class="box parent bike"><a>新生資訊網圖</a></div>
                   </div>
             </div>
-            <div id="score" class="tab-pane fade">
+            <div id="score" class="tab-pane fade" role="tabpanel">
                     <div class="grid">
                             
-                             <div class="box a">畢業門檻</div>
-                             <div class="box b">英文免修申請門檻</div>
-                            <div class="box a2">雙主修、輔系、學分學程、第二專長
+                             <div class="box parent a"><a>畢業門檻</a></div>
+                             <div class="box parent b"><a>英文免修申請門檻</a></div>
+                            <div class="box parent a2"><a>雙主修、輔系、學分學程、第二專長
+                                </a></div>
+                            <div class="box parent b2"><a>課業輔導管道</a>
                                 </div>
-                            <div class="box b2">課業輔導管道
-                                </div>
-                             <div class="box c">選課懶人包
+                             <div class="box parent c"><a>選課懶人包</a>
                                 </div>
                         
-                            <div class="box c2">畢業學習護照說明
+                            <div class="box parent c2"><a>畢業學習護照說明</a>
                                 </div>
-                             <div class="box d">ＮＣＵ＊中大磨課師
+                             <div class="box parent  d"><a>ＮＣＵ＊中大磨課師</a>
                                 </div>
-                             <div class="box e">交換學生
+                             <div class="box parent e"><a>交換學生</a>
                                 </div>
-                            <div class="box d2">大一國文
+                            <div class="box parent d2"><a>大一國文</a>
                                 </div>
-                            <div class="box e2">通識課程概念
+                            <div class="box parent e2"><a>通識課程概念</a>
                                 </div>
                   </div>
             </div>
-            <div id="other" class="tab-pane fade">
+            <div id="other" class="tab-pane fade" role="tabpanel">
                     <div class="grid">
           
-                             <div class="box a">106行事曆
+                             <div class="box parent a"><a>106行事曆</a>
                                 </div>
-                             <div class="box b">學生掛號郵件
+                             <div class="box parent b"><a>學生掛號郵件</a>
                                 </div>
-                            <div class="box intoduce">常用連結介紹</div>
-                            <div class="box lms">ＬＭＳ數位學習平台
+                            <div class="box parent intoduce"><a>常用連結介紹</a></div>
+                            <div class="box parent lms"><a>ＬＭＳ數位學習平台</a>
 
                                 </div>
-                             <div class="box c">中大圖書館
+                             <div class="box parent c"><a>中大圖書館</a>
 
                                 </div>
                         
-                            <div class="box portal">NCU Portal
+                            <div class="box parent portal"><a>NCU Portal</a>
 
                                 </div>
-                             <div class="box d">中大電算中心
+                             <div class="box parent d"><a>中大電算中心</a>
 
                                 </div>
-                             <div class="box e">輔導資訊
+                             <div class="box parent e"><a>輔導資訊</a>
 
                                 </div>
-                            <div class="box ask">學生申訴管道
+                            <div class="box parent ask"><a>學生申訴管道</a>
 
                                 </div>
 
@@ -135,75 +187,71 @@
             </div>
         </div>
         </div>
-        <div class="graduate">
-                <h2>碩一新生</h2>
-                <input type="submit" id="young" value="" ><h3>切換大學生</h3>
+        <div class="graduate" id="graduate">
                 
+                <% /*<input type="submit" id="young" value="" ><h3>切換大學生</h3>*/ %>
+                <h2><a href="#undergraduate" class="under">大一新生</a><span style="padding-left:60px"><a href="#graduate" class="gra">碩一新生</a></h2>
         
-                <nav class="nav navbar-default">
-                    <div class="container-fluid">
-                    <ul class="nav nav-tabs">
-                        <li><a data-toggle="tab" href="#register1">註冊報到</a></li>
-                        <li><a data-toggle="tab" href="#activity1">新生週活動</a></li>
-                        <li><a data-toggle="tab" href="#other1">其他</a></li>
-                    </ul>
-                    </div>
-                </nav>
+                <ul class="nav nav-pills mb-3" id="tab2" role="tablist">
+                        <li><a data-toggle="tab" href="#register1" class="nav-link active"  role="tab" aria-controls="home" aria-selected="true">註冊報到</a></li>
+                        <li><a data-toggle="tab" href="#activity1" class="nav-link "  role="tab" aria-controls="home" aria-selected="false">新生週活動</a></li>
+                        <li><a data-toggle="tab" href="#other1" class="nav-link"  role="tab" aria-controls="home" aria-selected="false">其他</a></li>
+                </ul>
                 <p></p>
                 <div class="tab-content">
-                    <div id="register1" class="tab-pane fade in active">
+                    <div id="register1" class="tab-pane fade show active">
                         <div class="container">
                            
                               <div class="grid">
                                     
-                                        <div class="box money">學雜費繳費、減免</div>
-                                        <div class="box room">住宿注意事項</div>
-                                        <div class="box notice"> 註冊通知、日程表</div>
+                                        <div class="box parent money"><a>學雜費繳費、減免</a></div>
+                                        <div class="box parent room"><a>住宿注意事項</a></div>
+                                        <div class="box parent notice"><a>註冊通知、日程表</a></div>
                                     
                                     
-                                        <div class="box enter">學籍登入</div>
-                                        <div class="box solider">兵役注意資料</div>
+                                        <div class="box parent enter"><a>學籍登入</a></div>
+                                        <div class="box parent solider"><a>兵役注意資料</a></div>
                                     
-                                        <div class="box control">入住通管制圖、報到流程</div>
-                                        <div class="box bike">腳踏車通行申請</div>
+                                        <div class="box parent control"><a>入住通管制圖、報到流程</a></div>
+                                        <div class="box parent bike"><a>腳踏車通行申請</a></div>
                               </div>
                            
                     </div>
                     </div>
                     <div id="activity1" class="tab-pane fade">
                             <div class="grid">
-                                    <div class="box notice">新生健康檢查</div>
-                                    <div class="box solider">社團聯展</div>
+                                    <div class="box parent notice"><a>新生健康檢查</a></div>
+                                    <div class="box parent solider"><a>社團聯展</a>></div>
                           </div>
                     </div>
                     
                     <div id="other1" class="tab-pane fade">
                             <div class="grid">
                   
-                                     <div class="box a">106行事曆
+                                     <div class="box parent a"><a>106行事曆</a>
                                         </div>
-                                     <div class="box b">學生掛號郵件
+                                     <div class="box parent b"><a>學生掛號郵件</a>
                                         </div>
-                                    <div class="box intoduce">常用連結介紹
+                                    <div class="box parent intoduce"><a>常用連結介紹</a>
         
                                         </div>
-                                    <div class="box lms">ＬＭＳ數位學習平台
+                                    <div class="box parent lms"><a>ＬＭＳ數位學習平台</a>
         
                                         </div>
-                                     <div class="box c">中大圖書館
+                                     <div class="box parent c"><a>中大圖書館</a>
         
                                         </div>
                                 
-                                    <div class="box portal">NCU Portal
+                                    <div class="box parent portal"><a>NCU Portal</a>
         
                                         </div>
-                                     <div class="box d">中大電算中心
+                                     <div class="box parent d"><a>中大電算中心</a>
         
                                         </div>
-                                     <div class="box e">輔導資訊
+                                     <div class="box parent e"><a>輔導資訊</a>
         
                                         </div>
-                                    <div class="box ask">學生申訴管道
+                                    <div class="box parent ask"><a>學生申訴管道</a>
         
                                         </div>
         
@@ -216,9 +264,7 @@
 
     </main>
 
-<style type="text/css">
 
-    </style>
     <footer>
         <% include ../layout/footer %>
     </footer>
