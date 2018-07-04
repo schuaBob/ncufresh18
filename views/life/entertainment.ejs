@@ -2,21 +2,24 @@
 <html>
 <head>
     <% include ../layout/head %>
-    <link rel=stylesheet type="text/css" href="../life.css">
+    <link rel=stylesheet type="text/css" href="../life/life.css">
 </head>
 <body> 
     <header>
         <% include ../layout/navbar %>
     </header>
     <div class="header-2"></div>
+    <div class="selectArea">
+        <div class="selectbar">
+            <div id="circle_little"></div>
+            <a class="oncircle" href="" id="entertain-1">桃園景點</a>
+        </div>
+    </div>
+    <% include navi %>
     <footer>
         <% include ../layout/footer %>
     </footer>
         <% include ../layout/js %>
         <% include js %>
-    <div class="selectbar">
-        <div id="circle_little"></div>
-        <a class="oncircle" href="">桃園景點</a>
-    </div>
 </body>
 </html>

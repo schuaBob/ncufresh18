@@ -2,37 +2,60 @@
 <html>
 <head>
     <% include ../layout/head %>
-    <link rel=stylesheet type="text/css" href="../life.css">
+    <link rel=stylesheet type="text/css" href="../life/life.css">
 </head>
 <body> 
     <header>
         <% include ../layout/navbar %>
     </header>
     <div class="header-2"></div>
+    <div class="selectArea">
+        <% for (var i in life) { %>
+            <% if (life[i].type == "food") { %>
+                <div class="selectbar">
+                    <div id="circle_little"></div>
+                    <p class="mainTitle"> <%= life[i].mainTitle %></p>
+                    <hr />
+                    <% if(life[i].subTitle.length != 0) { %>
+                        <ul class="select">
+                        <% for (var j=0 ; j<life[i].subTitle.length ; j++) { %>
+                            <li><a href=""><%= life[i].subTitle[j] %></a></li>
+                        <% } %>
+                        </ul>
+                    <% } %>
+                </div>
+            <% } %>
+        <% } %>
+    </div>
+    <!--
+    <div class="selectArea">
+        <div class="selectbar">
+            <div id="circle_little"></div>
+            <a class="oncircle" href="" id="food-1">校內</a>
+            <hr />
+            <ul class="select" id="food-1-sel">
+                <li><a href="">松苑</a></li>
+                <li><a href="">松果</a></li>
+                <li><a href="">九餐</a></li>
+                <li><a href="">麥斯爾</a></li>
+                <li><a href="">小木屋</a></li>
+            </ul>
+        </div>
+        <div class="selectbar" id="food-2">
+            <div id="circle_little"></div>
+            <a class="oncircle" href="">宵夜街</a>
+        </div>    
+        <div class="selectbar" id="food-3">
+            <div id="circle_little"></div>
+            <a class="oncircle" href="">後門</a>
+        </div>
+    </div>
+    -->
+    <% include navi %>
     <footer>
         <% include ../layout/footer %>
     </footer>
         <% include ../layout/js %>
         <% include js %>
-    <div class="selectbar">
-        <div id="circle_little"></div>
-        <a class="oncircle" href="">校內</a>
-        <hr />
-        <div class="select">
-            <a href="">松苑</a> <br />
-            <a href="">松果</a> <br />
-            <a href="">九餐</a> <br />
-            <a href="">麥斯爾</a> <br />
-            <a href="">小木屋</a> <br />
-        </div>
-    </div>
-    <div class="selectbar" style="top: 38%">
-        <div id="circle_little"></div>
-        <a class="oncircle" href="">宵夜街</a>
-    </div>    
-    <div class="selectbar" style="top: 58%">
-        <div id="circle_little"></div>
-        <a class="oncircle" href="">後門</a>
-    </div>
 </body>
 </html>
