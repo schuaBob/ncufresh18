@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var user = mongoose.Schema({
+var elebuilding = mongoose.Schema({
     Element_Name : String,
     Type : String,
     Element_Intro : String,
@@ -9,4 +9,4 @@ var user = mongoose.Schema({
     LastUpDate : Date
 });
 
-module.exports = mongoose.model('elements_building',elements_buildings);
+module.exports = mongoose.model('elebuilding',elebuilding);

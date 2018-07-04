@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var elebuilding = require('../models/campus/elebuilding');
 
 /* 校園導覽首頁 */
 router.get('/', function(req, res, next) {
@@ -9,10 +10,10 @@ router.get('/editElement', function(req, res, next) {
   res.render('campus/editElement', { title: '編輯物件' });
 });
 router.post('/AddNew_element', function(req, res, next) {
-  if((req.body.elename)&&(req.body.elecategory!=0)&&(req.body.eleintro)) {
-    elements_building.findOne({Element_Name:req.body.elename}).exec(function(err,result) {
+  if((req.body.elename)&&(req.body.elecategory!=0)) {
+    elebuilding.findOne({Element_Name:req.body.elename}).exec(function(err,result) {
       if (result === null) {
-        var temp = new Element_Name({
+        var temp = new elebuilding({
           Element_Name : req.body.elename,
           Type : req.body.elecategory,
           Element_Intro : req.body.eleintro,
@@ -23,9 +24,14 @@ router.post('/AddNew_element', function(req, res, next) {
           if(err) {
             return next(err)
           }
+          res.redirect('/campus/')
         })
+      }else{
+        res.redirect('/campus/')
       }
     })
+  }else{
+    res.redirect('/campus/')
   }
 })
 
