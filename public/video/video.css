@@ -1,23 +1,40 @@
 
-
 #CDbox {
+    padding: 0vw;
+    margin: 0vw;
     position: relative;
-    margin-top: 10vh;
-    margin-left: 35vw;
+    top: 10vh;
+    left: 30vw;
     width: 40%;
-    height: 24vw;
-    background-color: rgba(50, 9, 146, 0.863);
-    border: 1px solid black;
+    height: 28vw;
+    
+}
+
+.CDpicture {
+    display: none;
+    width:100%;
+    height:100%;
+    -moz-transform: scaleY(-1);
+    -o-transform: scaleY(-1);
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+    filter: FlipV;
+    -ms-filter: "FlipV";
+}
+.CDplayer {
+    display: block;
 }
 
 .rotate {
-    margin: 2vw;
-    margin-left: 70vw;
+    margin: 0vw;
+    position: relative;
+    top: 15vh;
+    left: 60vw;
 }
 
 .video_item_title {
     position: absolute;
-    top: 10vh;
+    top: 15vh;
     left: 0vw;
     writing-mode: vertical-lr;
     margin-top: auto;
@@ -25,8 +42,27 @@
     
 }
 
-.video_item {
+.videoitem {
     padding-top: 5vh;
     padding-bottom: 5vh;
     background-color: aquamarine;
 }
+.video_item {
+    margin:3vh;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+  }
+  
+.video-container iframe, .video-container object, .video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }

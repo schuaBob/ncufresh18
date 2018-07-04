@@ -3,10 +3,6 @@ var router = express.Router();
 
 /* 影音專區首頁 */
 router.get('/', function(req, res, next) {
-  res.render('video/index', { title: '影音專區' });
-});
-
-router.get('/page', function(req, res, next) {
   /*video.find({}).exec(function(err, video) {
     var foodURL, housingURL, transportationURL, educationURL, entertainmentURL, streetInterviewURL;
     var l1, l2, l3, l4, sequence;
@@ -15,8 +11,10 @@ router.get('/page', function(req, res, next) {
       
     }
   })*/
-  res.render('video/page', { title: '影音專區頁面' });
-})
+  res.render('video/index', { title: '影音專區' });
+});
+
+
 
 
 router.post('/add', isAdmin, function(req, res, next){

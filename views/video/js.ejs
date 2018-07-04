@@ -5,20 +5,38 @@
         $(document).on("click",".rotate",function(event){
             if(end == 1){
                 if(rotate == 0){
-                $('.rotate_button').children('.rotate').remove();
-                $('.rotate_button').append('<button class="rotate">影片</button>');
-                rotate = 1;
+                    $('.rotate').html('影片');
+                    rotate = 1;
                 }
                 else{
-                    $('.rotate_button').children('.rotate').remove();
-                    $('.rotate_button').append('<button class="rotate">簡介</button>')
+                    $('.rotate').html('簡介');
+                    
                     rotate = 0;
                 }
                 rotateDIV()
             }
-           
+            
+            //按介紹時暫停
+            /*$('.CDplayer').each(function(){
+                if(rotate == 0){
+                    $(this).stopVideo();
+                }
+            });*/
         })
-        
+
+        $(document).on("click",".enter",function(event){
+            $(".enter").animate({
+                left:"40vw",
+                top: "40vh",
+                height:'+=20vh',
+                width:'+=20vw'
+            });
+        })
+
+    })
+
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
     })
         
     
@@ -32,11 +50,19 @@
     function startRotate()
     {
         end = 0;
-        nx=nx+1
+        nx=nx+2.5
         x.style.transform="rotateX(" + nx + "deg)"
         x.style.webkitTransform="rotateX(" + nx + "deg)"
         x.style.OTransform="rotateX(" + nx + "deg)"
         x.style.MozTransform="rotateX(" + nx + "deg)"
+        if(nx == 90){
+            $('.CDplayer').css("display", "none");
+            $('.CDpicture').css("display", "block");
+        }
+        else if(nx == 270){
+            $('.CDplayer').css("display", "block");
+            $('.CDpicture').css("display", "none");
+        }
         if (nx==180 || nx>=360)
         {
             clearInterval(rotINT)
@@ -46,5 +72,9 @@
             end = 1;
         }
     }
+
+    
+
+    
        
 </script>
