@@ -67,6 +67,31 @@ app.use('/personal', personal);
 // 關於我們
 app.use('/about', about);
 
+// ckeditor uploader
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart();
+app.post('/uploader', multipartMiddleware, function(req, res, next) {
+  var fs = require('fs');
+
+  fs.readFile(req.files.upload.path, function(err, data) {
+    if (err) return next(err);
+    var newPath = __dirname + '/public/uploads/' + req.files.upload.name;
+    fs.writeFile(newPath, data, function(err) {
+      if (err) return next(err);
+
+      html = "";
+      html += "<script type='text/javascript'>";
+      html += "    var funcNum = " + req.query.CKEditorFuncNum + ";";
+      html += "    var url     = \"/uploads/" + req.files.upload.name + "\";";
+      html += "    var message = \"Uploaded file successfully\";";
+      html += "";
+      html += "    window.parent.CKEDITOR.tools.callFunction(funcNum, url, message);";
+      html += "</script>";
+
+      res.send(html);
+    });
+  });
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

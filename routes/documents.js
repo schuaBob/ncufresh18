@@ -5,16 +5,16 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('documents/index', { title: '新生必讀' });
 });
-$(document).ready(function(){
-  alert("又來");
-  $("#big").click(function(){
-    res.redirect('documents/index');
-  });
-  $("#young").click(function(){
-    res.redirect('documents/graduate');
-    alert("又來");
-  });
-})
+// $(document).ready(function(){
+//   alert("又來");
+//   $("#big").click(function(){
+//     res.redirect('documents/index');
+//   });
+//   $("#young").click(function(){
+//     res.redirect('documents/graduate');
+//     alert("又來");
+//   });
+// })
       
 router.post('/add', function(req, res, next) {
   if ((!req.session.name) ){
