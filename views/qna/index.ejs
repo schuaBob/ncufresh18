@@ -8,10 +8,10 @@
         <% include ../layout/navbar %>
     </header>
     <main>
-        <h1><%= title %></h1>
+        <h1 style="text-align: center"><%= title %></h1>
         <div>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">我要發問</button>
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <button type="button" class="btn btn-primary ask" data-toggle="modal" data-target="#askQuestion" style="float:right">我要發問</button>
+            <div class="modal fade" id="askQuestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -24,11 +24,11 @@
                                 <form name="addq" action="/qna/addq" method="post">
                                     <div class="form-group">
                                         <label for="validationServer01" class="col-form-label">標題：</label>
-                                        <input type="text" class="form-control title" id="validationServer01" name="Title">
+                                        <input type="text" class="form-control title" name="Title" required="required">
                                     </div>
                                     <div class="form-group">
                                             <label for="exampleFormControlSelect1">類別：</label>
-                                            <select class="form-control type" name="Type">
+                                            <select class="form-control type" name="Type" required="required">
                                               <option>校園生活</option>
                                               <option>學生事務</option>
                                               <option>課程相關</option>
@@ -48,27 +48,82 @@
                       </div>
                     </div>
             </div>
-            <div class="btn-group" role="group" aria-label="Basic example">
+            <div class="btn-group" role="group" aria-label="Basic example" style="float:center">
                 排序
                 <button type="button" class="btn btn-secondary">時間</button>
                 <button type="button" class="btn btn-secondary">人氣</button>
             </div>
-            <div class="btn-group" role="group" aria-label="Basic example">
+            <div class="btn-group" role="group" aria-label="Basic example" style="float:center">
                 類別
-                <button type="button" class="btn btn-secondary">校園生活</button>
+                <button type="button" class="btn btn-secondary" marked="校園生活">校園生活</button>
                 <button type="button" class="btn btn-secondary">學生事務</button>
                 <button type="button" class="btn btn-secondary">課程相關</button>
                 <button type="button" class="btn btn-secondary">其他</button>
             </div>
         </div>
-        <table>
+        <table style="margin:0 auto">
             <thead>
-                <th>類別</th>
-                <th>標題</th>
-                <th>時間</th>
-                <th>人氣</th>
+                <th style="text-align: center">類別</th>
+                <th style="text-align: center">標題</th>
+                <th style="text-align: center">時間</th>
+                <th style="text-align: center">人氣</th>
+                <th style="text-align: center">解答與否</th>
             </thead>
             <tbody>
+                <% for(var i=0;i<question.length;i++) {%>
+                    <tr type="button" id=<%= question[i].id %> data-toggle="modal" data-target=#<%= question[i].id %>>
+                        <td style="text-align: center"><%= question[i].Type %></td>
+                        <td style="text-align: center"><%= question[i].Title %></td>
+                        <td style="text-align: center"><%= question[i].CreateDate %></td>
+                        <td class="view" style="text-align: center"><%= question[i].Click %></td>
+                        <% if(question[i].Answer) {%>
+                            <td style="text-align: center">是</td>
+                        <%} 
+                        else{%>
+                            <td style="text-align: center">否</td>
+                        <%} 
+                        %>
+                    </tr>
+                    <!-- 顯示問題跟答案的Modal -->
+                    <div class="modal fade" id=<%= question[i].id %> tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel"><%= question[i].Title %></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                <!--<div class="modal-body"><h5>Question 問題</h5></div>-->
+                                <!--<div class="modal-body"><%= question[i].Content %></div>-->
+
+                                <%if(question[i].Answer){%>
+                                    <div class="modal-body"><h5>Question 問題</h5></div>
+                                    <div class="modal-body"><%= question[i].Content %></div>
+                                    <div class="modal-body"><h5>Answer 答案</h5></div>
+                                    <div class="modal-body"><%= question[i].Answer %></div>
+                                    <div class="modal-body"></div>
+                                    <%}
+                                  else{%>
+                                    <form name="adda" action="/qna/adda" method="post">
+                                        <div class="modal-body"><h5>Question 問題</h5></div>
+                                        <div class="modal-body"><%= question[i].Content %></div>
+                                        <div class="modal-body"><h5>輸入解答</h5>
+                                            <br>
+                                            <textarea id="message-text" style="width:90%;position:center" required="required" name="Answer" rows="5"></textarea>
+                                            <input class="btn btn-primary submit" type="submit" value="送出答案"> 
+                                        </div>
+                                    </form>      
+                                    <%}
+                                %>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    
+                <% } %>
             </tbody>
         </table>
     </main>
