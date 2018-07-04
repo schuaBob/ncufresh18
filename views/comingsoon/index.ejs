@@ -3,30 +3,13 @@
 <head>
     <% include ../layout/head %>
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <% include ../layout/navbar %>
-    </header>
     <main>
-        <h1><%= title %></h1>
+        <img id="ncufresh" src="nfwlogo.png" /> 
+        <p id="made">あと</p>
         <p id="demo"></p>
-        <div id="timecounter">
-            <tr>
-                <td>
-                    <p id="dd"></p>
-                </td>
-                <td>
-                    <p id="h"></p>
-                </td>
-                <td>
-                    <p id="m"></p>
-                </td>
-                <td>
-                    <p id="s"></p>
-                </td>
-            </tr>
-        </div>
     </main>
     <footer>
         <% include ../layout/footer %>
