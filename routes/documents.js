@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var document = require('../models/document/document');
 
 /* 新生必讀首頁 */
 router.get('/', function(req, res, next) {
@@ -7,38 +8,24 @@ router.get('/', function(req, res, next) {
 });
 
       
-router.post('/add/:id', function(req, res, next) {
-  if ((!req.session.name) ){
-    res.redirect('/');
-    return;
-  }
-  new Blog({
-    Username:req.session.name,
-    Article:req.body.Content,
-    CreateDate: Date.now()
-  }).save(function(err){
-    if(err){
-      console.log('fail to save to DB.');
-      return;
-    }
-    console.log('Save to DB.');
-  });
-  res.redirect('/');
-  });
+router.post('/edit/:id', function(req, res, next) {
 
-router.post('/update/:id', function(req, res, next) {
-  if ((!req.params.id) ){
-    res.redirect('/');
-    return;
-  }
-  Blog.update({_id:req.params.id},{Article:req.body.Content},
-    function(err){
-      if(err)
-        console.log('fail to update article.');
-      else
-        console.log('Save to DB.');
-    });
-    res.redirect('/users/profile');
-    });
+  
+  console.log('Save to DB.');
+      document.update({_id:req.params.id},{title:req.body.title},{content:req.body.add-text},
+        function(err){
+          if(err)
+            console.log('fail to update article.');
+          else
+            console.log('Save to DB.');
+    })
+  
+ 
+  res.redirect('/documents');
+});
+
+
+ 
+    
 
 module.exports = router;
