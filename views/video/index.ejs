@@ -11,78 +11,73 @@
     </header>
     <main>
         <!--
-        <div class="video_item_title ">
+        <div class="video_item_title_allvideo ">
             <div class="video_item">中大長劇</div>
             <div class="video_item">快問快答</div>
             <div class="video_item">悠遊中大</div>
         </div>-->
 
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                新增影片
+        <button type="button" class="turn btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                更新影片
         </button>
             
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">                
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form>
+                    <form action="/video/add" method="post">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">新增影片</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <h5 class="modal-title" id="exampleModalLabel">更新影片</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"  accept-charset="utf-8">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form>
-                                
-                            </form>
-                            <input class="form-control" type="text" placeholder="輸入影片嵌入碼">
-                            <select class="form-control">
-                                <option>中大長劇-序</option>
-                                <option>中大長劇-1</option>
-                                <option>中大長劇-2</option>
-                                <option>中大長劇-3</option>
-                                <option>中大長劇-4</option>
-                                <option>中大生活-食</option>
-                                <option>中大生活-住</option>
-                                <option>中大生活-行</option>
-                                <option>中大生活-育</option>
-                                <option>中大生活-樂</option>
-                                <option>中大生活-街頭訪問</option>
-                                <option>快問快答-中國文學系</option>
-                                <option>快問快答-英美語文學系</option>
-                                <option>快問快答-法國語文學系</option>
-                                <option>快問快答-理學院學士班</option>
-                                <option>快問快答-物理學系</option>
-                                <option>快問快答-數學系</option>
-                                <option>快問快答-化學學系</option>
-                                <option>快問快答-光電科學與工程學系</option>
-                                <option>快問快答-化學工程與材料工程學系</option>
-                                <option>快問快答-土木工程學系</option>
-                                <option>快問快答-機械工程學系</option>
-                                <option>快問快答-工學院學士班</option>
-                                <option>快問快答-企業管理學系</option>
-                                <option>快問快答-資訊管理學系</option>
-                                <option>快問快答-財務金融學系</option>
-                                <option>快問快答-經濟學系</option>
-                                <option>快問快答-電機工程學系</option>
-                                <option>快問快答-資訊工程學系</option>
-                                <option>快問快答-通訊工程學系</option>
-                                <option>快問快答-資訊電機學院學士班</option>
-                                <option>快問快答-地球科學學系</option>
-                                <option>快問快答-大氣科學學系</option>
-                                <option>快問快答-客家語文暨社會科學學系</option>
-                                <option>快問快答-生命科學系</option>
-                                <option>快問快答-生醫科學與工程學系</option>
+                            <input name="introduce" type="file" class="form-control-file" id="exampleFormControlFile1">
+                            <input  name="insert" class="form-control" type="text" placeholder="輸入影片嵌入碼">
+                            <select name="type" class="form-control">
+                                <option value="l1">中大長劇-1</option>
+                                <option value="l2">中大長劇-2</option>
+                                <option value="l3">中大長劇-3</option>
+                                <option value="l4">中大長劇-4</option>
+                                <option value="l5">中大長劇-5</option>
+                                <option value="food">中大生活-食</option>
+                                <option value="housing">中大生活-住</option>
+                                <option value="transportation">中大生活-行</option>
+                                <option value="education">中大生活-育</option>
+                                <option value="entertainment">中大生活-樂</option>
+                                <option value="streetInterview">中大生活-街頭訪問</option>
+                                <option value="D1">快問快答-中國文學系</option>
+                                <option value="D2">快問快答-英美語文學系</option>
+                                <option value="D3">快問快答-法國語文學系</option>
+                                <option value="D4">快問快答-理學院學士班</option>
+                                <option value="D5">快問快答-物理學系</option>
+                                <option value="D6">快問快答-數學系</option>
+                                <option value="D7">快問快答-化學學系</option>
+                                <option value="D8">快問快答-光電科學與工程學系</option>
+                                <option value="D9">快問快答-化學工程與材料工程學系</option>
+                                <option value="D10">快問快答-土木工程學系</option>
+                                <option value="D11">快問快答-機械工程學系</option>
+                                <option value="D12">快問快答-工學院學士班</option>
+                                <option value="D13">快問快答-企業管理學系</option>
+                                <option value="D14">快問快答-資訊管理學系</option>
+                                <option value="D15">快問快答-財務金融學系</option>
+                                <option value="D16">快問快答-經濟學系</option>
+                                <option value="D17">快問快答-電機工程學系</option>
+                                <option value="D18">快問快答-資訊工程學系</option>
+                                <option value="D19">快問快答-通訊工程學系</option>
+                                <option value="D20">快問快答-資訊電機學院學士班</option>
+                                <option value="D21">快問快答-地球科學學系</option>
+                                <option value="D22">快問快答-大氣科學學系</option>
+                                <option value="D23">快問快答-客家語文暨社會科學學系</option>
+                                <option value="D24">快問快答-生命科學系</option>
+                                <option value="D25">快問快答-生醫科學與工程學系</option>
                             </select>
-                        </div>
-                        <div class="form-group">
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">新增</button>
+                            <button type="sibmit" class="btn btn-primary">更新</button>
                         </div>
                     </form>
                 </div>
@@ -91,12 +86,11 @@
         
         <div>
             <div id="CDbox" class='video-container'>
-            <!--影音專區(光碟盒圖片)-->
-                <iframe class="CDplayer" width="560" height="315" src="https://www.youtube.com/embed/JwjBbWQs71k" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                <img class="CDpicture"  src="test.jpg">
+            <!--影音專區(光碟盒圖片)
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/JwjBbWQs71k" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <img class="CDpicture"  src="test.jpg">-->
             </div>
-
-            <button class="rotate">簡介</button>
+            <button type="button" class="rotate btn btn-outline-info">簡介</button>
         </div>
        
 
@@ -104,18 +98,22 @@
             <iframe width="560" height="315" src="https://www.youtube.com/embed/JwjBbWQs71k" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>-->
         
+        <table class="video_item_title_allvideo ">
+            <td>
+                <button type="button" class="video_item btn btn-outline-success turn btn-lg longvideo">中大長劇</button>
+            </td>
+            <td>
+                <button type="button" class="video_item btn btn-outline-success turn btn-lg lifevideo">悠遊中大</button>
+                
+            </td>
+            <td>
+                <button type="button" class="video_item btn btn-outline-success turn btn-lg QAvideo">快問快答</button>
+                
+            </td>
+        </table>
+
         <table class="video_item_title ">
-            <td>
-                <button type="button" class="video_item btn btn-outline-success">中大長劇</button>
-            </td>
-            <td>
-                <button type="button" class="video_item btn btn-outline-success">快問快答</button>
-                
-            </td>
-            <td>
-                <button type="button" class="video_item btn btn-outline-success">悠遊中大</button>
-                
-            </td>
+            
         </table>
 
         
