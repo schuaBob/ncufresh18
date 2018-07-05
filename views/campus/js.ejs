@@ -1,18 +1,37 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
-        var small = true;
-        $('.Main_listele').click(function(){
-            small = !small;
-            if(small) var properties = {
-                'margin-left' : '15%'
-            }; else properties = {
-                'margin-left' : '2%'
-            };
-            $('#map').stop().animate(properties,250); 
+        var temp;
+        var properties = null
+        $("a[class^='Main_listele']").click(function () {
+            if ($(this)[0] === temp) {
+                if ($('#map').hasClass('clicked')) {
+                    properties = {
+                        'margin-left': '15%'
+                    };
+                    temp = $(this)[0];
+                    $('#map').removeClass('clicked')
+                    
+
+                } else {
+                    properties = {
+                        'margin-left': '2%'
+                    };
+                    temp = $(this)[0]
+                    $('#map').addClass('clicked')
+                    
+                }
+            } else {
+                properties = {
+                    'margin-left': '2%'
+                };
+                $('#map').addClass('clicked')
+                temp = $(this)[0];
+            }
             
+            $('#map').stop().animate(properties, 250)
         });
-        
+
     });
 
 </script>
