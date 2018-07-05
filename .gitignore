@@ -30,7 +30,7 @@ node_modules
 npm-debug.log
 
 #macOS temp
-.DS_Store
+**/.DS_Store
 
 #npm generations
 package-lock.json

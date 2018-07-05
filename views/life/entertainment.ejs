@@ -10,10 +10,26 @@
     </header>
     <div class="header-2"></div>
     <div class="selectArea">
-        <div class="selectbar">
-            <div id="circle_little"></div>
-            <a class="oncircle" href="" id="entertain-1">桃園景點</a>
-        </div>
+        <% for (var i in life) { %>
+            <% if (life[i].type == "entertain") { %>
+                <div class="selectbar">
+                    <div id="circle_little"></div>
+                    <p class="mainTitle" id="1_<%=i%>"> <%= life[i].mainTitle %></p>
+                    <% if(life[i].subTitle.length != 0) { %>
+                        <hr class="hide" id="1_<%=i%>_hr"/>
+                        <ul class="hide" id="1_<%=i%>_sub">
+                        <% for (var j=0 ; j<life[i].subTitle.length ; j++) { %>
+                            <li><a href=""><%= life[i].subTitle[j] %></a></li>
+                        <% } %>
+                        </ul>
+                    <% } %>
+                </div>
+            <% } %>
+        <% } %>
+    </div>
+    <div class="pictureArea">
+    </div>
+    <div class="discribeArea">
     </div>
     <% include navi %>
     <footer>

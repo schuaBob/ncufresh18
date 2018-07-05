@@ -24,25 +24,32 @@ router.get('/', function(req, res, next){
 
 router.get('/food', function(req, res, next){
   life.find({}, function(err, data){
-   // console.log(data);
     res.render('life/food', { title: '食', life: data});
   });
 });
 
 router.get('/dorm', function(req, res, next){
-  res.render('life/dorm', { title: '住'});
+  life.find({}, function(err, data){
+     res.render('life/dorm', { title: '住', life: data});
+   });
 });
 
 router.get('/comm', function(req, res, next){
-  res.render('life/comm', { title: '行'});
+  life.find({}, function(err, data){
+    res.render('life/comm', { title: '行', life: data});
+  });
 });
 
 router.get('/edu', function(req, res, next){
-  res.render('life/edu', { title: '育'});
+  life.find({}, function(err, data){
+    res.render('life/edu', { title: '育', life: data});
+  });
 });
 
 router.get('/entertainment', function(req, res, next){
-  res.render('life/entertainment', { title: '樂'});
+  life.find({}, function(err, data){
+    res.render('life/entertainment', { title: '樂', life: data});
+  });
 });
 // router.post('/', function(req, res, next){
 //   let city = req.body.city;

@@ -4,8 +4,28 @@
         e.preventDefault();
     });
 
-    $('').on('click', function(e){
-
-        e.preventDefault();
-    });
+    $(document).ready(function(){ 
+        $('.hide').slideUp();
+        $('.mainTitle').hover(function(){
+            var id = $(this).attr("id"),
+                sub_id = "#" + id + "_sub",
+                sub_hr = "#" + id + "_hr";
+            $(sub_id).slideDown();
+            $(sub_id).addClass("show");
+            $(sub_id).removeClass("hide");
+            $(sub_hr).slideDown();
+            $(sub_hr).addClass("show");
+            $(sub_hr).removeClass("hide");
+        }, function(){
+            var id = $(this).attr("id"),
+                sub_id = "#" + id + "_sub",
+                sub_hr = "#" + id + "_hr";
+            $(sub_id).slideUp();
+            $(sub_id).addClass("hide");
+            $(sub_id).removeClass("show");
+            $(sub_hr).slideUp();
+            $(sub_hr).addClass("hide");
+            $(sub_hr).removeClass("show");
+        });
+    })
 </script>

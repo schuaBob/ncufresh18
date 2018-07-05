@@ -10,37 +10,26 @@
     </header>
     <div class="header-2"></div>
     <div class="selectArea">
-        <div class="selectbar">
-            <div id="circle_little"></div>
-            <a class="oncircle" href="" id="comm-1">如何到中大</a>
-            <hr />
-            <ul class="select" id="comm-1-sel">
-                <li><a href="">飛機</a></li>
-                <li><a href="">高鐵</a></li>
-                <li><a href="">火車</a></li>
-                <li><a href="">客運</a></li>
-                <li><a href="">開車</a></li>
-            </ul>
-        </div>
-        <div class="selectbar">
-            <div id="circle_little"></div>
-            <a class="oncircle" href="" id="comm-2">校內交通</a>
-            <hr />
-            <ul class="select" id="comm-2-sel">
-                <li><a href="">小綠</a></li>
-                <li><a href="">汽機車停放位置</a></li>
-                <li><a href="">繞校公車</a></li>
-            </ul>
-        </div>
-        <div class="selectbar">
-            <div id="circle_little"></div>
-            <a class="oncircle" href="" id="comm-3">桃園交通</a>
-            <hr />
-            <ul class="select" id="comm-3-sel">
-                <li><a href="">桃園客運</a></li>
-                <li><a href="">免費公車</a></li>
-            </ul>
-        </div>
+        <% for (var i in life) { %>
+            <% if (life[i].type == "comm") { %>
+                <div class="selectbar">
+                    <div id="circle_little"></div>
+                    <p class="mainTitle" id="1_<%=i%>"> <%= life[i].mainTitle %></p>
+                    <% if(life[i].subTitle.length != 0) { %>
+                        <hr class="hide" id="1_<%=i%>_hr"/>
+                        <ul class="hide" id="1_<%=i%>_sub">
+                        <% for (var j=0 ; j<life[i].subTitle.length ; j++) { %>
+                            <li><a href=""><%= life[i].subTitle[j] %></a></li>
+                        <% } %>
+                        </ul>
+                    <% } %>
+                </div>
+            <% } %>
+        <% } %>
+    </div>
+    <div class="pictureArea">
+    </div>
+    <div class="discribeArea">
     </div>
     <% include navi %>
     <footer>
