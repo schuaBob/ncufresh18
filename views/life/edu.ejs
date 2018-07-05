@@ -10,37 +10,26 @@
     </header>
     <div class="header-2"></div>
     <div class="selectArea">
-        <div class="selectbar">
-            <div id="circle_little"></div>
-            <a class="oncircle" href="" id="edu-1">票卡辦理</a>
-            <hr />
-            <ul class="select" id="edu-1-sel">
-                <li><a href="">移民署</a></li>
-                <li><a href="">桃園市民卡</a></li>
-                <li><a href="">校內運動年票</a></li>
-            </ul>
-        </div>
-        <div class="selectbar" style="top: 38%">
-            <div id="circle_little"></div>
-            <a class="oncircle" href="" id="edu-2">學生權益</a>
-            <hr />
-            <ul class="select" id="edu-2-sel">
-                <li><a href="">黑盒子</a></li>
-                <li><a href="">諮商中心</a></li>
-                <li><a href="">衛保組</a></li>
-                <li><a href="">國際處</a></li>
-            </ul>
-        </div>
-        <div class="selectbar" style="top: 58%">
-            <div id="circle_little"></div>
-            <a class="oncircle" href="" id="edu-3">其他</a>
-            <hr />
-            <ul class="select" id="edu-3-sel">
-                <li><a href="">影印店</a></li>
-                <li><a href="">敦煌書局</a></li>
-                <li><a href="">印象髮廊、中大眼鏡行</a></li>
-            </ul>
-        </div>
+        <% for (var i in life) { %>
+            <% if (life[i].type == "edu") { %>
+                <div class="selectbar">
+                    <div id="circle_little"></div>
+                    <p class="mainTitle" id="1_<%=i%>"> <%= life[i].mainTitle %></p>
+                    <% if(life[i].subTitle.length != 0) { %>
+                        <hr class="hide" id="1_<%=i%>_hr"/>
+                        <ul class="hide" id="1_<%=i%>_sub">
+                        <% for (var j=0 ; j<life[i].subTitle.length ; j++) { %>
+                            <li><a href=""><%= life[i].subTitle[j] %></a></li>
+                        <% } %>
+                        </ul>
+                    <% } %>
+                </div>
+            <% } %>
+        <% } %>
+    </div>
+    <div class="pictureArea">
+    </div>
+    <div class="discribeArea">
     </div>
     <% include navi %>
      <footer>

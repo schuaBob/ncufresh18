@@ -10,23 +10,26 @@
     </header>
     <div class="header-2"></div>
     <div class="selectArea">
-        <div class="selectbar">
-            <div id="circle_little"></div>
-            <a class="oncircle" href="" id="dorm-1">宿舍</a>
-            <hr />
-            <ul class="select" id="dorm-1-sel">
-                <li><a href="">住宿用品介紹</a></li>
-                <li><a href="">全部宿舍</a></li>
-            </ul>
-        </div>
-        <div class="selectbar">
-            <div id="circle_little"></div>
-            <a class="oncircle" href="" id="dorm-2">氣候</a>
-        </div>
-        <div class="selectbar">
-            <div id="circle_little"></div>
-            <a class="oncircle" href="" id="dorm-3">租屋</a>
-        </div>
+        <% for (var i in life) { %>
+            <% if (life[i].type == "dorm") { %>
+                <div class="selectbar">
+                    <div id="circle_little"></div>
+                    <p class="mainTitle" id="1_<%=i%>"> <%= life[i].mainTitle %></p>
+                    <% if(life[i].subTitle.length != 0) { %>
+                        <hr class="hide" id="1_<%=i%>_hr"/>
+                        <ul class="hide" id="1_<%=i%>_sub">
+                        <% for (var j=0 ; j<life[i].subTitle.length ; j++) { %>
+                            <li><a href=""><%= life[i].subTitle[j] %></a></li>
+                        <% } %>
+                        </ul>
+                    <% } %>
+                </div>
+            <% } %>
+        <% } %>
+    </div>
+    <div class="pictureArea">
+    </div>
+    <div class="discribeArea">
     </div>
     <% include navi %>
     <footer>

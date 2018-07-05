@@ -14,10 +14,10 @@
             <% if (life[i].type == "food") { %>
                 <div class="selectbar">
                     <div id="circle_little"></div>
-                    <p class="mainTitle"> <%= life[i].mainTitle %></p>
-                    <hr />
+                    <p class="mainTitle" id="1_<%=i%>"> <%= life[i].mainTitle %></p>
                     <% if(life[i].subTitle.length != 0) { %>
-                        <ul class="select">
+                        <hr class="hide" id="1_<%=i%>_hr"/>
+                        <ul class="hide" id="1_<%=i%>_sub">
                         <% for (var j=0 ; j<life[i].subTitle.length ; j++) { %>
                             <li><a href=""><%= life[i].subTitle[j] %></a></li>
                         <% } %>
@@ -27,30 +27,23 @@
             <% } %>
         <% } %>
     </div>
-    <!--
-    <div class="selectArea">
-        <div class="selectbar">
-            <div id="circle_little"></div>
-            <a class="oncircle" href="" id="food-1">校內</a>
-            <hr />
-            <ul class="select" id="food-1-sel">
-                <li><a href="">松苑</a></li>
-                <li><a href="">松果</a></li>
-                <li><a href="">九餐</a></li>
-                <li><a href="">麥斯爾</a></li>
-                <li><a href="">小木屋</a></li>
-            </ul>
+
+    <div class="pictureArea">
+        <div class="slideshow_container">
+            <div class="mySlides">
+                
+            </div>
         </div>
-        <div class="selectbar" id="food-2">
-            <div id="circle_little"></div>
-            <a class="oncircle" href="">宵夜街</a>
-        </div>    
-        <div class="selectbar" id="food-3">
-            <div id="circle_little"></div>
-            <a class="oncircle" href="">後門</a>
+        <a class="prev">&#10094;</a>
+        <a class="next">&#10095;</a>
+        <div class="dot_container">
+            <p class="dot"></p>
+            <p class="dot"></p>
         </div>
     </div>
-    -->
+
+    <div class="discribeArea">
+    </div>
     <% include navi %>
     <footer>
         <% include ../layout/footer %>
