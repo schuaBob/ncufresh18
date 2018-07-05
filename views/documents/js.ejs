@@ -1,10 +1,34 @@
 <script>
+    
     $(document).ready(function(){
+            
+       
+
         
-        $(".box").children("a")
-            .attr('data-toggle',"modal")
-            .attr('data-target',"#add");
-           
+        //編輯者
+        $(".box").mousedown(function(){
+            //先抓那個form的id，再更新ckeditor
+            $.ajax({
+                    url:    "/documents/require_data",
+                    method:'POST',
+                    data: {id : id},
+                    error: function(err){
+                        
+                    },
+                    success: function(data){
+                        
+                    }
+                });
+            $("#edit").modal("show");
+        });
+        
+        /* 一般民眾
+        $(".box").mousedown(function(){
+            
+            $("#edit").modal("show");
+        });*/
+
+          
         $(".graduate").hide();
         $(".undergraduate").show();
         
@@ -12,49 +36,49 @@
            
             $(".graduate").show();
             $(".undergraduate").hide();
+            
         });
         $(".under").mousedown(function(){
             $(".graduate").hide();
             $(".undergraduate").show(); 
         });
-      
-        $(".box a").click(function(){
-            $(".addpic").hide();
-            $(".addcontent").show(); 
+        
+
+
+         var editor=CKEDITOR.replace( 'add-text', {width:800});
+
+            $("#edit").click(function(){
+                var data= editor.getData();;
+                
+                alert(data);
+
+            })
+        
+        /*data-toggle方法，我很喜歡，但後端不好做嗚嗚，只好放棄
+        $(".box").click({
+            function(){
+                $(".box").children("a")
+            .attr('data-toggle',"modal")
+            .attr('data-target',"#add");
+            }
+        })*/
+
+        /*處理ckeditor與model相容的問題，之後發現刪除tabindex="-1"也可
+        $('.modal').removeAttr('tabindex');
+
+        $('.modal').focusout(function(){
+            $(this).css({'position':'relative'});
         });
 
-        $("#previewupload").uploadFile({
-                        url:"upload.php",  //SERVER端，官網有提供
-                        dragDrop: true,  //可否拖拉圖片上傳 預設是FALSE
-                        fileName: "myfile", //檔名，若想更動建議到上傳的API那隻PHP去更動
-                        returnType: "json", //回傳JSON格式
-                        showDelete: true,  //是否顯示刪除鈕 預設FALSE
-                        acceptFiles:"image/*",  
-                        showPreview:true,  //能否預覽上傳圖片 預設FALSE
-                        statusBarWidth:350, //狀態欄寬 用於顯示上傳的圖片名稱+檔案大小
-                        dragdropWidth:350, //拖拉的寬度
-                        maxFileCount:1,  //可同時上傳檔案數
-                        allowedTypes:"jpg,png,gif",  //限制上傳的格式
-                        previewHeight: "150px",  //預覽圖片高度
-                        previewWidth: "150px",  //預覽圖片寬度
-                         maxFileSize:950*300,  //限制上傳檔案大小
-                        deleteCallback: function (data, pd) {
-                            for (var i = 0; i < data.length; i++) {
-                                    $.post("delpic.php", {op: "delete",name: data[i]},   //利用AJAX CALL 刪除的API 將檔名與OP送過去可處理
-                                                function (resp,textStatus, jqXHR) {
-                                                                //Show Message 
-                                                                alert("圖片已刪除");
-                                                              });
-                                                                  }
-                                                                      pd.statusbar.hide(); //You choice.
-                                                                    },
-                                                                    onSuccess:function(files,data,xhr,pd)
-                                                                    {
-                                                                        //files: list of files
-                                                                            $("#file_name").val(data);   //這邊單純是紀錄檔名使用
-                                                                                //xhr : jquer xhr object
-                                                                              }
-                                                                            }); 
-         });
+        $('.modal').focusin(function(){
+            $(this).css({'position':'fixed'});
+        }); */
+       
+        
+
+
+       
+    })
+    
 
 </script>

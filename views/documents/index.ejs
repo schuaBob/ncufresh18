@@ -4,7 +4,7 @@
     <% include ../layout/head %>
 
     <link rel='stylesheet'  href='style.css'>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    
     <link href="http://hayageek.github.io/jQuery-Upload-File/4.0.11/uploadfile.css" rel="stylesheet">
     <script src="http://hayageek.github.io/jQuery-Upload-File/4.0.11/jquery.uploadfile.min.js"></script>
 </head>
@@ -14,25 +14,28 @@
     </header>
     <main>
                   
-                  <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
+                 <% /* <div class="modal fade bd-example-modal-lg "  tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">*/%>
+                        <div class="modal fade bd-example-modal-lg " id="edit"   role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+
+                        <div class="modal-dialog modal-dialog-centered " role="document">
+                        <form name="add" action="/documents/edit/" method="post" accept-charset="utf-8">
                           <div class="modal-content">
                             <div class="modal-header">
                               <h5 class="modal-title" id="exampleModalLongTitle">
-                                    欄位名稱<input type="text" name="欄位名稱">
+                                    欄位名稱<input type="text" name="title">
                               </h5>
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                               </button>
                             </div>
-                            <form name="add" action="/documents/add/" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+                            
                                 <!-- <input type="hidden" name="id" value="<"> -->
                                 <div class="modal-body">
-                                    <textarea class="form-control" id="message-text"></textarea>     
+                                    <textarea class="form-control" id="message-text"name="add-text"></textarea>    
                                 </div>
                                 <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <input type="submit" class="btn btn-primary" value="save"></submit>
+                                <input type="submit" class="btn btn-primary" value="save" id="save"></submit>
                                 </div>
                         </form>
                           </div>
@@ -66,7 +69,7 @@
         
             
         <div class="undergraduate" id="undergraduate">
-        <h2><a href="#undergraduate" class="under">大一新生</a><span style="padding-left:60px"><a href="#graduate" class="gra">碩一新生</a></h2>
+        <h2><a href="#undergraduate" class="under">大一新生</a><span style="padding-left:30px">/<span style="padding-left:30px"><a href="#graduate" class="gra">碩一新生</a></h2>
         
             <% /*<input type="submit" id="big" value="" >
         <h3>切換碩士生</h3>*/ %>
@@ -87,21 +90,21 @@
                       <div class="grid">
                             
                                 <div class="box parent money">
-                                    <a data-toggle="modal" data-target="#add">
+                                    <a >
                                             學雜費繳費、減免
                                         
                                     </a>
                                 </div>
                                 <div class="box parent room" onclick="">
                                         <div class="child bg-one">
-                                        <a  data-toggle="modal" data-target="#add "> 住宿注意事項</a>
+                                        <a  data-toggle="modal" data-target="#edit  "> 住宿注意事項</a>
                                     </div>
                                     </div>
-                                <div class="box parent notice">
+                                <div class="box parent notice" id="box">
                                     <div class="child bg-two">
-                                        <a data-toggle="modal" data-target="#show" >
+                                        
                                             註冊通知、日程表
-                                        </a>
+                                        
                                      </div>
                                     </div>
                             
@@ -129,7 +132,9 @@
                         
                             <div class="box parent control"><a>心理適應座談</a></div>
                             <div class="box parent bike"><a>新生資訊網圖</a></div>
+                            
                   </div>
+                  <p style="padding-bottom:40px;"></p>
             </div>
             <div id="score" class="tab-pane fade" role="tabpanel">
                     <div class="grid">
@@ -153,6 +158,7 @@
                                 </div>
                             <div class="box parent e2"><a>通識課程概念</a>
                                 </div>
+                                <p style="padding-bottom:40px;"></p>
                   </div>
             </div>
             <div id="other" class="tab-pane fade" role="tabpanel">
@@ -184,13 +190,14 @@
                                 </div>
 
                   </div>
+                  <p style="padding-bottom:40px;"></p>
             </div>
         </div>
         </div>
         <div class="graduate" id="graduate">
                 
                 <% /*<input type="submit" id="young" value="" ><h3>切換大學生</h3>*/ %>
-                <h2><a href="#undergraduate" class="under">大一新生</a><span style="padding-left:60px"><a href="#graduate" class="gra">碩一新生</a></h2>
+                <h2><a href="#undergraduate" class="under">大一新生</a><span style="padding-left:30px">/<span style="padding-left:30px"><a href="#graduate" class="gra">碩一新生</a></h2>
         
                 <ul class="nav nav-pills mb-3" id="tab2" role="tablist">
                         <li><a data-toggle="tab" href="#register1" class="nav-link active"  role="tab" aria-controls="home" aria-selected="true">註冊報到</a></li>
@@ -215,6 +222,7 @@
                                         <div class="box parent control"><a>入住通管制圖、報到流程</a></div>
                                         <div class="box parent bike"><a>腳踏車通行申請</a></div>
                               </div>
+                              <p style="padding-bottom:40px;"></p>
                            
                     </div>
                     </div>
@@ -256,6 +264,7 @@
                                         </div>
         
                           </div>
+                          <p style="padding-bottom:40px;"></p>
                     </div>
                 </div>
                 </div>
