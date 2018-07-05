@@ -2,6 +2,8 @@
 <html>
 <head>
     <% include ../layout/head %>
+    <link rel='stylesheet' href='index.css'>
+
 </head>
 <body>
     <header>
@@ -10,10 +12,10 @@
     <main>
         <h1><%= title %></h1>
         <div class="all">
-            <a href="/groups/club"><b>社團</b></a>
-            <a href="/groups/community"><b>社群</b></a>
-            <a href="/groups/student"><b>學生會</b></a>
-            <a href="/groups/department"><b>系所</b></a>
+            <a href="/groups/club" class="btn btn-primary" role="button" aria-pressed="true">社團</a>
+            <a href="/groups/community" class="btn btn btn-primary" role="button" aria-pressed="true">社群</a>
+            <a href="/groups/student" class="btn btn btn-primary" role="button" aria-pressed="true">學生會</a>
+            <a href="/groups/department" class="btn btn btn-primary" role="button" aria-pressed="true">系所</a>
         </div>
     </main>
     <footer>

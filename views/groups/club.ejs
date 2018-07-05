@@ -12,19 +12,19 @@
         <h1><%= title %></h1>
         
                 
-        <!-- edit Modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_club">編輯社團介紹</button>
-        <div class="modal fade" id="edit_club" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- add Modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_club">新增社團介紹</button>
+        <div class="modal fade" id="add_club" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">編輯社團</h5>
+                <h5 class="modal-title" id="exampleModalLabel">新增社團</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                  <form action="/groups/edit_club" method="post" accept-charset="utf-8">
+                  <form action="/groups/add_club" method="post" accept-charset="utf-8">
                     <div class="form-group">
                         <label for="type" class="form-control">社團性質</label>
                         <select name="type" id="edit_type" class="form-control">
@@ -36,38 +36,65 @@
                       </div>
                         <div class="form-group">
                                 <label for="name" class="form-control">社團名稱</label>
-                                <input type="text" class="form-control" id="edit_name">
+                                <input type="text" class="form-control" id="add_name">
                               </div>
                               <div class="form-group">
                                 <label for="introduction" class="form-control">社團介紹</label>
-                                <textarea name="introduction" id="edit_introduction"></textarea></br>
+                                <textarea name="introduction" rows="8" cols="55" id="add_introduction"></textarea></br>
                               </div>
                               <div class="form-group">
-                                <label for="howtoadd" class="form-control">如何加入社團</label>
-                                <textarea name="howtoadd" id="edit_howtoadd"></textarea></br>
+                                <label for="participation" class="form-control">如何加入社團</label>
+                                <textarea name="participation" rows="5" cols="55" id="add_participation"></textarea></br>
                               </div>
                               <div class="form-group">
-                                <label for="FBfans" class="form-control">FB粉絲團</label>
-                                <textarea name="FBfans" id="edit_FBfans"></textarea></br>
+                                <label for="FB" class="form-control">FB粉絲團</label>
+                                <textarea name="FB" rows="5" cols="55" id="add_FB"></textarea></br>
                               </div>
+                              <div class="form-group">
+                                <label for="picture" class="form-control">活動剪影</label>
+                                <textarea name="picture" rows="4" cols="55" id="add_picture"></textarea></br>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                              <button type="submit" class="btn btn-primary">儲存</button>
+                            </div>
                 </form>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                <button type="button" class="btn btn-primary">儲存</button>
-              </div>
+              
             </div>
           </div>
-        </div>  
-          <div class="grid">
-            <div class="btn-group-vertical">
-              <button class="btn btn-primary btn-sm" type="submit">學術性</button>
-              <button class="btn btn-primary btn-sm" type="submit">康樂性</button>
-              <button class="btn btn-primary btn-sm" type="submit">聯誼性</button>
-              <button class="btn btn-primary btn-sm" type="submit">服務性</button>
+        </div> 
+        <nav class="nav flex-column">
+            <a data-toggle="tab" href="#learn">學術性</a>
+            <a data-toggle="tab" href="#play">康樂性</a>
+            <a data-toggle="tab" href="#love">聯誼性</a>
+            <a data-toggle="tab" href="#service">服務性</a>
+          </nav>
+          <div class="tab-pane fade" id="learn" >
+              <div class="tab-content">
+                <h4>如何加入社團</h4>
+                <h6></h6>
+              </div>
           </div>
-        </div>
-
+          <div class="tab-pane fade" id="play" >
+              <div class="tab-content">
+                <h4>加入社團</h4>
+                <h6></h6>
+              </div>
+          </div>
+          <div class="tab-pane fade" id="love" >
+              <div class="tab-content">
+                <h4>入社團</h4>
+                <h6></h6>
+              </div>
+          </div>
+          <div class="tab-pane fade" id="service" >
+              <div class="tab-content">
+                <h4>社團</h4>
+                <h6></h6>
+              </div>
+          </div>
     </main>
     <footer>
         <% include ../layout/footer %>

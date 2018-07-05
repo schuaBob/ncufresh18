@@ -2,18 +2,53 @@
 <html>
 <head>
     <% include ../layout/head %>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    
+    <link rel='stylesheet' href='student.css'>
 </head>
 <body>
     <header>
         <% include ../layout/navbar %>
     </header>
     <main>
-        <h1><%= title %></h1>
         
-        <div class="container">
+         <!-- add Modal -->
+         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_student">新增學生會介紹</button>
+         <div class="modal fade" id="add_student" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+           <div class="modal-dialog" role="document">
+             <div class="modal-content">
+               <div class="modal-header">
+                 <h5 class="modal-title" id="exampleModalLabel">學生會介紹</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+                 </button>
+               </div>
+               <div class="modal-body">
+                   <form action="/groups/add_student" method="post" accept-charset="utf-8">
+            
+                               <div class="form-group">
+                                 <label for="introduction" class="form-control">簡介</label>
+                                 <textarea name="introduction" rows="8" cols="55" id="add_introduction"></textarea></br>
+                               </div>
+                               <div class="form-group">
+                                 <label for="branch" class="form-control">部門介紹</label>
+                                 <textarea name="branch" rows="5" cols="55" id="add_branch"></textarea></br>
+                               </div>
+                               <div class="form-group">
+                                <label for="picture" class="form-control">活動剪影</label>
+                                <textarea name="picture" rows="5" cols="55" id="add_picture"></textarea></br>
+                              </div>
+                              
+                             <div class="modal-footer">
+                               <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                               <button type="submit" class="btn btn-primary">儲存</button>
+                             </div>
+                 </form>
+               </div>
+             </div>
+           </div>
+         </div> 
+         <h1><%= title %></h1>
+         <div class="container">
+                
                 <nav class="nav navbar-nav navbar-right">
                         <div class="container-fluid">
                         <ul class="nav nav-tabs">
@@ -26,18 +61,19 @@
                 <div class="tab-content">
                         <div id="intro" class="tab-pane fade in active">
                             <h3>簡介</h3>
-                            <p>學生會簡介</p>
+                            <p><%- student[0].introduction %></p>
                         </div>
                         <div id="branch" class="tab-pane fade in">
                             <h3>部門介紹</h3>
-                            <p></p>
+                            <p><%- student[0].branch %></p>
                         </div>
                         <div id="activity" class="tab-pane fade in">
                             <h3>活動剪影</h3>
                             <p></p>
                         </div>
-                </div>
         </div>
+    </div>
+    
 
 </body>
 </html>

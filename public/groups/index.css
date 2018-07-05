@@ -1,0 +1,11 @@
+.btn{
+   border-radius: 40%;
+   align-content: center;
+}
+body{
+    background-image: url(系所社團背景.png);
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
