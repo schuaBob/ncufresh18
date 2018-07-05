@@ -1,0 +1,26 @@
+h1{
+    margin-left: 5%;
+    margin-top: 5%;
+}
+.tab-content{
+    margin-left: 2%;
+}
+.container{
+    margin-left: 10%;
+}
+.nav{
+    margin-left: 50%;  
+}
+li a {
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+h3{
+    margin-top: 5%;
+}
+p{
+    margin-top: 2%;
+}
