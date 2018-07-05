@@ -36,7 +36,7 @@ router.post('/addq',function(req,res,next){
   }
 });
 /*新增答案*/
-router.post('/adda',function(req,res,next){
+router.post('/adda/:id',function(req,res,next){
   /*有內容才能送出解答*/
   if(req.body.Answer){
     if(mongoose.Types.ObjectId.isValid(req.params.id)){
@@ -60,6 +60,22 @@ router.post('/adda',function(req,res,next){
   }
 
 });
+/*紀錄點擊次數*/
+router.post('/:id', function(req, res, next) {
+  if(mongoose.Types.ObjectId.isValid(req.params.id)){
+      Question.findById(req.params.id).exec(function(err,result){
+          if(err){return next(err)};
+          req.body.Click++;
+          Question.update({_id:req.params.id}, {Click:req.body.Click},function(err){
+            if(err)
+              console.log('Fail to update click number.');
+            else
+              console.log('Done');
+          });
+      })
+  }
+});
+/*編輯答案*/
 /*刪除問題*/
 /*搜尋功能*/
 module.exports = router;

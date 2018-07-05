@@ -48,18 +48,26 @@
                       </div>
                     </div>
             </div>
-            <div class="btn-group" role="group" aria-label="Basic example" style="float:center">
-                排序
-                <button type="button" class="btn btn-secondary">時間</button>
-                <button type="button" class="btn btn-secondary">人氣</button>
+            <div style="text-align: center">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        排序
+                        <li class="page-item"><a class="page-link" href="#time">時間</a></li>
+                        <li class="page-item"><a class="page-link" href="#hot">人氣</a></li>
+                    </ul>
+                </nav>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        類別
+                        <li class="page-item"><a class="page-link" href="#all">全部</a></li>
+                        <li class="page-item"><a class="page-link" href="#校園生活">校園生活</a></li>
+                        <li class="page-item"><a class="page-link" href="#學生事務">學生事務</a></li>
+                        <li class="page-item"><a class="page-link" href="#課程相關">課程相關</a></li>
+                        <li class="page-item"><a class="page-link" href="#其他">其他</a></li>
+                    </ul>
+                </nav>
             </div>
-            <div class="btn-group" role="group" aria-label="Basic example" style="float:center">
-                類別
-                <button type="button" class="btn btn-secondary" marked="校園生活">校園生活</button>
-                <button type="button" class="btn btn-secondary">學生事務</button>
-                <button type="button" class="btn btn-secondary">課程相關</button>
-                <button type="button" class="btn btn-secondary">其他</button>
-            </div>
+            
         </div>
         <table style="margin:0 auto">
             <thead>
@@ -71,7 +79,7 @@
             </thead>
             <tbody>
                 <% for(var i=0;i<question.length;i++) {%>
-                    <tr type="button" id=<%= question[i].id %> data-toggle="modal" data-target=#<%= question[i].id %>>
+                    <tr type="button" id="<%= question[i].id %>" class="<%= question[i].Type %> Q"  data-toggle="modal" data-target=#<%= question[i].id %>>
                         <td style="text-align: center"><%= question[i].Type %></td>
                         <td style="text-align: center"><%= question[i].Title %></td>
                         <td style="text-align: center"><%= question[i].CreateDate %></td>
@@ -85,7 +93,7 @@
                         %>
                     </tr>
                     <!-- 顯示問題跟答案的Modal -->
-                    <div class="modal fade" id=<%= question[i].id %> tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="<%= question[i].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -94,8 +102,7 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                                 </div>
-                                <!--<div class="modal-body"><h5>Question 問題</h5></div>-->
-                                <!--<div class="modal-body"><%= question[i].Content %></div>-->
+                            
 
                                 <%if(question[i].Answer){%>
                                     <div class="modal-body"><h5>Question 問題</h5></div>
@@ -105,7 +112,7 @@
                                     <div class="modal-body"></div>
                                     <%}
                                   else{%>
-                                    <form name="adda" action="/qna/adda" method="post">
+                                    <form name="adda" action="/qna/adda/<%= question[i].id %>" method="post">
                                         <div class="modal-body"><h5>Question 問題</h5></div>
                                         <div class="modal-body"><%= question[i].Content %></div>
                                         <div class="modal-body"><h5>輸入解答</h5>
