@@ -8,31 +8,46 @@
     <header>
         <% include ../layout/navbar %>
     </header>
-    <div class="header-2"></div>
-    <div class="selectArea">
-        <% for (var i in life) { %>
-            <% if (life[i].type == "edu") { %>
-                <div class="selectbar">
-                    <div id="circle_little"></div>
-                    <p class="mainTitle" id="1_<%=i%>"> <%= life[i].mainTitle %></p>
-                    <% if(life[i].subTitle.length != 0) { %>
-                        <hr class="hide" id="1_<%=i%>_hr"/>
-                        <ul class="hide" id="1_<%=i%>_sub">
-                        <% for (var j=0 ; j<life[i].subTitle.length ; j++) { %>
-                            <li><a href=""><%= life[i].subTitle[j] %></a></li>
+    <main style="background-image: url('sub_background.png'); background-repeat: no-repeat;  background-size:cover; background-attachment: fixed; height: 100vw;">
+        <div class="header-2"></div>
+        <div class="selectArea">
+            <% var cnt = 0 %>
+            <% for (var i in life) { %>
+                <% if (life[i].type == "edu") { %>
+                    <div class="selectbar">
+                        <img class="mainTitle" src="4_<%=cnt%>_edu.png" id="4_<%=cnt%>" alt="<%=life[i].alt%>"/>
+                        <% if(life[i].subTitle.length != 0) { %>
+                            <hr class="hide" id="4_<%=cnt%>_hr"/>
+                            <ul class="hide" id="4_<%=cnt%>_sub">
+                            <% for (var j=0 ; j<life[i].subTitle.length ; j++) { %>
+                                <li><a href=""><%= life[i].subTitle[j] %></a></li>
+                            <% } %>
+                            </ul>
                         <% } %>
-                        </ul>
-                    <% } %>
-                </div>
+                    </div>
+                    <% cnt = cnt + 1 %>
+                <% } %>
             <% } %>
-        <% } %>
-    </div>
-    <div class="pictureArea">
-    </div>
-    <div class="discribeArea">
-    </div>
-    <% include navi %>
-     <footer>
+        </div>
+        <<div class="pictureArea">
+            <div class="slideshow_container">
+                <div class="mySlides">
+                    
+                </div>
+            </div>
+            <a class="prev">&#10094;</a>
+            <a class="next">&#10095;</a>
+            <div class="dot_container">
+                <p class="dot"></p>
+                <p class="dot"></p>
+            </div>
+        </div>
+        <div class="discribeArea">
+        </div>
+        <img src="earth.png" style="position: absolute; left: -200px; top: 350px; width: 100%; height: 50%; opacity: 0.5; z-index: 1;"/>
+        <% include navi %>
+    </main>
+    <footer>
         <% include ../layout/footer %>
     </footer>
         <% include ../layout/js %>

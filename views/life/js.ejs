@@ -5,27 +5,30 @@
     });
 
     $(document).ready(function(){ 
+        var ifHide = 1;
         $('.hide').slideUp();
-        $('.mainTitle').hover(function(){
+        $('.mainTitle').click(function(){
             var id = $(this).attr("id"),
                 sub_id = "#" + id + "_sub",
                 sub_hr = "#" + id + "_hr";
-            $(sub_id).slideDown();
-            $(sub_id).addClass("show");
-            $(sub_id).removeClass("hide");
-            $(sub_hr).slideDown();
-            $(sub_hr).addClass("show");
-            $(sub_hr).removeClass("hide");
-        }, function(){
-            var id = $(this).attr("id"),
-                sub_id = "#" + id + "_sub",
-                sub_hr = "#" + id + "_hr";
-            $(sub_id).slideUp();
-            $(sub_id).addClass("hide");
-            $(sub_id).removeClass("show");
-            $(sub_hr).slideUp();
-            $(sub_hr).addClass("hide");
-            $(sub_hr).removeClass("show");
+            if(ifHide == 1){
+                $(sub_id).slideDown();
+                $(sub_id).addClass("show");
+                $(sub_id).removeClass("hide");
+                $(sub_hr).slideDown();
+                $(sub_hr).addClass("show");
+                $(sub_hr).removeClass("hide");
+                ifHide = (ifHide + 1) % 2;
+            }
+            else{
+                $(sub_id).slideUp();
+                $(sub_id).addClass("hide");
+                $(sub_id).removeClass("show");
+                $(sub_hr).slideUp();
+                $(sub_hr).addClass("hide");
+                $(sub_hr).removeClass("show");
+                ifHide = (ifHide + 1) % 2;
+            }
         });
     })
 </script>

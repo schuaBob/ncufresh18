@@ -14,6 +14,7 @@ ul li{
     position: relative;
     height: 70px;
     background-color: #a9a9a9c5;
+    z-index: 1000000;
 }
 .header-3{
     position: relative;
@@ -26,18 +27,9 @@ ul li{
 }
 
 /* index */
-.background{
-    position: absolute;
-    top: 11.5%;
-    height: 87%;
-    z-index: -100;
-    background-size:cover;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-}
 .weather_info{
     position: absolute;
-    top: 20%;
+    top: 10%;
     left: 5%;
     width: 10%;
     height: 10%;
@@ -57,7 +49,7 @@ ul li{
 }
 .middle{
     position: absolute;
-    top: 45%;
+    top: 25%;
     left: 48%;
     font-size: 25px;
     z-index: 2;
@@ -76,7 +68,7 @@ ul li{
 }
 #circle {
     position: absolute;
-    top: 40%;
+    top: 20%;
     left: 37%;
     width: 250px;
     height: 250px;
@@ -87,8 +79,8 @@ ul li{
 }
 #circle_small {
     position: absolute;
+    top: 30%;
     left: 47%;
-    top: 55%;
     width: 150px;
     height: 150px;
     background-color: transparent; /* Can be set to transparent */
@@ -100,35 +92,28 @@ ul li{
 /* 分頁 */
 .selectArea{
     position: absolute;
-    top: 18%;
+    top: 8%;
     left: 6%;
 }
 .selectbar{
     position: relative;
     width: 400px;
-    height: 160px;
-}
-#circle_little{
-    position: relative;
-    width: 120px;
-    height: 120px;
-    background-color: transparent; /* Can be set to transparent */
-    border: 3px #a9a9a9c5 solid;
-    -webkit-border-radius: 120px;
-    z-index: 1;
+    height: 200px;
 }
 .mainTitle{
     position: absolute;
-    top: 50px;
-    left: 80px;
-    font-size: 38px;
-    z-index: 10;
+    top: -70px;
+    left: 0px;
+    width: 300px;
+    height: 300px;
 }
-.hide{
+.hide, .show{
     position: absolute;
-    top: 115px;
+    top: 140px;
     left: 200px;
     width: 60%;
+}
+.hide{
     opacity: 0;
     background-color: #e0e0e0;
     -webkit-transition: opacity 0.5s ease-in-out;
@@ -137,10 +122,6 @@ ul li{
     transition: opacity 0.5s ease-in-out;
 }
 .show{
-    position: absolute;
-    top: 115px;
-    left: 200px;
-    width: 60%;
     background-color: #e0e0e0;
     opacity: 100;
 }
@@ -153,7 +134,7 @@ ul li{
 }
 .selectbar hr{
     position: absolute;
-    top: 90px;
+    top: 110px;
     left: 82px;
     border-color: black;
     border-width: 3px;
@@ -161,10 +142,11 @@ ul li{
 }
 .pictureArea{
     position: absolute;
-    height: 55%;
-    width: 45%;
-    top: 16%;
-    left: 40%;
+    height: 30%;
+    width: 50%;
+    top: 6%;
+    left: 37.5%;
+    z-index: 2;
 }
 .slideshow_container{
     position: absolute;
@@ -211,9 +193,10 @@ ul li{
 }
 .discribeArea{
     position: absolute;
-    height: 20%;
+    height: 11%;
     width: 50%;
-    top: 71%;
+    top: 36%;
     left: 37.5%;
     background-color: #e0e0e0;
+    z-index: 2;
 }

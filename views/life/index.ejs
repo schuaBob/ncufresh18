@@ -8,7 +8,7 @@
     <header>
         <% include ../layout/navbar %>
     </header>
-    <main style="background-image: url('sunny_daytime2.png'); background-repeat: no-repeat;  background-size:cover; background-attachment: fixed; height: 87vw;">
+    <main style="background-image: url('sunny_daytime2.png'); background-repeat: no-repeat;  background-size:cover; background-attachment: fixed; height: 100vw;">
         <div class="header-2"></div>
         <div class="weather_info">
             <p> 中壢區 </p>
@@ -18,7 +18,6 @@
             <p> 濕度 <%= humidity %></p>
         </div>
         <% include weather-sunnyCSS %>
-        <!-- <img class="background" src="sunny_daytime2.png" width="100%" height="82%" /> -->
         <img class="sunray" src="sunray.png" />
         <div class="sun"></div>
         <% if(desc == '晴') { %> 
