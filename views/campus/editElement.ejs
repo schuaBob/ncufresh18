@@ -30,21 +30,31 @@
         </div>
         <div id="content">
             <table>
-                <tr>
-                    <th>物件名</th>
-                    <th>圖片</th>
-                    <th>位置&大小</th>
-                    <th>編輯</th>
-                    <th>刪除</th>
-                </tr>
-                <%_ for (let i in result) { -%>
-                    <tr>
-                        <td>
-                            <%- result[i]['Element_Name'] %>
-                        </td>
-
+                <thead>
+                    <tr id="tablehead">
+                        <td>物件名</td>
+                        <td>圖片</td>
+                        <td>位置&大小</td>
+                        <td>內容</td>
+                        <td>刪除</td>
                     </tr>
-                    <%_ } -%>
+
+                </thead>
+                <tbody>
+                    <%_ for (let i in result) { -%>
+                        <tr>
+                            <td>
+                                <%= result[i]['Element_Name'] %>
+                            </td>
+                            <td>編輯</td>
+                            <td>編輯</td>
+                            <td>編輯</td>
+                            <td>編輯</td>
+
+                        </tr>
+                        <%_ } -%>
+
+                </tbody>
             </table>
         </div>
 
