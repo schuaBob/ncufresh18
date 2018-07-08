@@ -4,6 +4,19 @@ var video = require('../models/video/video');
 
 /* 影音專區首頁 */
 router.get('/', function(req, res, next) {
+  /*video.find({type:"長劇"}).sort({id:-1}).exec(function(err, video) {
+    res.render('',{video:video});
+  })
+
+  <% for(let i = 0;i<video;i++){ %>
+    <tr><%= video[i].fdsafkld %></tr>
+  <% } %>
+  let jjj = ["is","fdsaf","fdsaf"]
+  let ppp = JSON.stringify(jjj)*/
+
+
+
+
   video.find({}).exec(function(err, video) {
     var l1_img, l2_img, l3_img, l4_img, l5_img;
     var food_img, housing_img, transportation_img, education_img, entertainment_img, streetInterview_img;

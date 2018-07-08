@@ -1,20 +1,41 @@
-<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
 <script>
+    //載入IFrame Player API code
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
     var x, n=0, nx=0, rotINT, rotate = 0, end = 1;
+    //var player;
+    //function onYouTubeIframeAPIReady() {player = new YT.Player('playser');}
     //初始影片
     //$("#CDbox").html('<%- l1 %>')
     //$("#CDbox").append('<img class="CDpicture"  src="' + '<%- l1_img %>' + '">')
+
+    //let aaa = JSON.parse(<%= %>);
+
+    function onYouTubeIframeAPIReady() {//此函數在IFrame Player API code 載入後將自動呼叫
+        player = new YT.Player('qq', {
+          height: '390',
+          width: '640',
+          videoId: '27R6ZavdzzQ' //Youtube ID
+        });
+      } 
+    
 
     $(document).ready(() => {
         $(document).on("click",".rotate",function(event){
             if(end == 1){
                 if(rotate == 0){
                     $('.rotate').html('影片');
+                    player.pauseVideo();
+                    
                     rotate = 1;
                 }
                 else{
                     $('.rotate').html('簡介');
-                    
+                    player.playVideo();
                     rotate = 0;
                 }
                 rotateDIV()
@@ -59,6 +80,7 @@
             $(document).on("click",".l1",function(event){
                 $("#CDbox").html('<%- l1 %>')
                 $("#CDbox").append('<img class="CDpicture"  src="' + '<%- l1_img %>' + '">')
+               
             })
             $(document).on("click",".l2",function(event){
                 $("#CDbox").html('<%- l2 %>')
@@ -351,8 +373,8 @@
             })
         })
             
-            //按介紹時暫停
-            /*$('.CDplayer').each(function(){
+            /*//按介紹時暫停
+            $('.CDplayer').each(function(){
                 if(rotate == 0){
                     $(this).stopVideo();
                 }
@@ -383,10 +405,12 @@
         if(nx == 90){
             $('iframe').css("display", "none");
             $('.CDpicture').css("display", "block");
+            
         }
         else if(nx == 270){
             $('iframe').css("display", "block");
             $('.CDpicture').css("display", "none");
+            
         }
         if (nx==180 || nx>=360)
         {
