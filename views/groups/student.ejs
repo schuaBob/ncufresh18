@@ -9,68 +9,67 @@
         <% include ../layout/navbar %>
     </header>
     <main>
-        
-         <!-- add Modal -->
-         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_student">新增學生會介紹</button>
-         <div class="modal fade" id="add_student" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-           <div class="modal-dialog" role="document">
-             <div class="modal-content">
-               <div class="modal-header">
-                 <h5 class="modal-title" id="exampleModalLabel">學生會介紹</h5>
-                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                   <span aria-hidden="true">&times;</span>
-                 </button>
-               </div>
+        <!-- edit Modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_student">編輯學生會介紹</button>
+        <div class="modal fade" id="edit_student" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">學生會介紹</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                <div class="modal-body">
-                   <form action="/groups/add_student" method="post" accept-charset="utf-8">
+                   <form action="/groups/edit_student" method="post" accept-charset="utf-8">
             
-                               <div class="form-group">
-                                 <label for="introduction" class="form-control">簡介</label>
-                                 <textarea name="introduction" rows="8" cols="55" id="add_introduction"></textarea></br>
-                               </div>
-                               <div class="form-group">
-                                 <label for="branch" class="form-control">部門介紹</label>
-                                 <textarea name="branch" rows="5" cols="55" id="add_branch"></textarea></br>
-                               </div>
-                               <div class="form-group">
-                                <label for="picture" class="form-control">活動剪影</label>
-                                <textarea name="picture" rows="5" cols="55" id="add_picture"></textarea></br>
-                              </div>
-                              
-                             <div class="modal-footer">
-                               <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                               <button type="submit" class="btn btn-primary">儲存</button>
-                             </div>
-                 </form>
-               </div>
-             </div>
+                        <div class="form-group">
+                            <label for="introduction" class="form-control">簡介</label>
+                            <textarea name="introduction" rows="8" cols="55" id="edit_introduction"></textarea></br>
+                        </div>
+                        <div class="form-group">
+                            <label for="branch" class="form-control">部門介紹</label>
+                            <textarea name="branch" rows="5" cols="55" id="edit_branch"></textarea></br>
+                        </div>
+                        <div class="form-group">
+                            <label for="picture" class="form-control">活動剪影</label>
+                            <textarea name="picture" rows="5" cols="55" id="edit_picture"></textarea></br>
+                        </div>
+       
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                        <button type="submit" class="btn btn-primary">儲存</button>
+                    </div>
+                   </form>
+                </div>
+            </div>
            </div>
-         </div> 
+        </div>
+        
          <h1><%= title %></h1>
-         <div class="container">
-                
+        <div class="container">
                 <nav class="nav navbar-nav navbar-right">
-                        <div class="container-fluid">
+                    <div class="container-fluid">
                         <ul class="nav nav-tabs">
                             <li><a data-toggle="tab" href="#intro">簡介</a></li>
                             <li><a data-toggle="tab" href="#branch">部門介紹</a></li>
                             <li><a data-toggle="tab" href="#activity">活動剪影</a></li>
                         </ul>
-                        </div>
+                    </div>
                 </nav>
                 <div class="tab-content">
-                        <div id="intro" class="tab-pane fade in active">
-                            <h3>簡介</h3>
-                            <p><%- student[0].introduction %></p>
-                        </div>
-                        <div id="branch" class="tab-pane fade in">
-                            <h3>部門介紹</h3>
-                            <p><%- student[0].branch %></p>
-                        </div>
-                        <div id="activity" class="tab-pane fade in">
-                            <h3>活動剪影</h3>
-                            <p></p>
-                        </div>
+                    <div id="intro" class="tab-pane fade in active">
+                        <h3>簡介</h3>
+                        <p><%- student[0].introduction %></p>
+                    </div>
+                    <div id="branch" class="tab-pane fade in">
+                        <h3>部門介紹</h3>
+                        <p><%- student[0].branch %></p>
+                    </div>
+                    <div id="activity" class="tab-pane fade in">
+                        <h3>活動剪影</h3>
+                        <p><%- student[0].picture %></p>
+                    </div>
         </div>
     </div>
     

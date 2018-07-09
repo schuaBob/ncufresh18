@@ -5,14 +5,15 @@ var club = require('../models/groups/club');
 var community = require('../models/groups/community');
 var student = require('../models/groups/student');
 
+
 /* 系所社團首頁 */
 router.get('/', function(req, res, next) {
   res.render('groups/index', { title: '系所社團' });
 });
 
-router.get('/club', function(req, res, next) {
-  res.render('groups/club', { title: '社團 ', user: req.user });
-});
+// router.get('/club', function(req, res, next) {
+//   res.render('groups/club', { title: '社團 ', user: req.user });
+// });
 
 router.get('/community', function(req, res, next){
   res.render('groups/community', {title: '社群 ', user: req.user });
@@ -67,7 +68,7 @@ router.get('/department', function(req, res, next) {
 
   router.post('/edit_club', function(req, res, next) {
     club.update({  
-      type: req.body.type,
+      typenum: req.body.typenum,
       name: req.body.name,
       introduction: req.body.introduction,
       participation: req.body.participation,
@@ -82,9 +83,24 @@ router.get('/department', function(req, res, next) {
     });
   });
 
+  router.post('/edit_student', function(req, res, next) {
+    student.update({
+      introduction: req.body.introduction,
+      branch: req.body.branch,
+      picture: req.body.picture,
+    }, function(err, doc) {
+      if (err) {
+        return next(err)
+      }
+      else 
+      res.redirect('/groups/student');
+    });
+  });
+  
+
   router.post('/add_club', function(req, res, next) {
     var cb = new club ({
-      type: req.body.type,
+      typenum: req.body.typenum,
       name: req.body.name,
       introduction: req.body.introduction,
       participation: req.body.participation,
@@ -98,21 +114,6 @@ router.get('/department', function(req, res, next) {
       res.redirect('/groups/club');
     });
   });
-
-  router.post('/add_student', function(req, res, next) {
-    var cb = new student ({
-      name: req.body.name,
-      introduction: req.body.introduction,
-      branch: req.body.branch,
-    }).save(function(err, doc) {
-      if (err) {
-        return next(err)
-      }
-      else 
-      res.redirect('/groups/student');
-    });
-  });
-
 
 function isAdmin(req, res, next) {
   if (req.isAuthenticated() && req.user.local.accountType === 'admin')

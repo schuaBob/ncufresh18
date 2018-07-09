@@ -9,9 +9,7 @@
         <% include ../layout/navbar %>
     </header>
     <main>
-        <h1><%= title %></h1>
-        
-                
+        <h1><%= title %></h1>       
         <!-- add Modal -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_club">新增社團介紹</button>
         <div class="modal fade" id="add_club" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -26,17 +24,17 @@
               <div class="modal-body">
                   <form action="/groups/add_club" method="post" accept-charset="utf-8">
                     <div class="form-group">
-                        <label for="type" class="form-control">社團性質</label>
-                        <select name="type" id="edit_type" class="form-control">
-                                <option value="learn">學術性</option>
-                                <option value="play">康樂性</option>
-                                <option value="love">聯誼性</option>
-                                <option value="service">服務性</option>
+                        <label for="typenum" class="form-control">社團性質</label>
+                        <select name="typenum" id="edit_typenum" class="form-control">
+                                <option value="1">學術性</option>
+                                <option value="2">康樂性</option>
+                                <option value="3">聯誼性</option>
+                                <option value="4">服務性</option>
                         </select>
                       </div>
                         <div class="form-group">
                                 <label for="name" class="form-control">社團名稱</label>
-                                <input type="text" class="form-control" id="add_name">
+                                <textarea name="name" rows="2" cols="55" id="add_name"></textarea></br>
                               </div>
                               <div class="form-group">
                                 <label for="introduction" class="form-control">社團介紹</label>
@@ -59,42 +57,99 @@
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
                               <button type="submit" class="btn btn-primary">儲存</button>
                             </div>
-                </form>
+                  </form>
+                </div>
               </div>
-              
             </div>
-          </div>
+          </div> 
+        <div>
+          <button class="learn" id="learn">學術性</button>
+          <button class="play" id="play">康樂性</button>
+          <button class="love" id="love">聯誼性</button>
+          <button class="service" id="service">服務性</button>
         </div> 
-        <nav class="nav flex-column">
-            <a data-toggle="tab" href="#learn">學術性</a>
-            <a data-toggle="tab" href="#play">康樂性</a>
-            <a data-toggle="tab" href="#love">聯誼性</a>
-            <a data-toggle="tab" href="#service">服務性</a>
-          </nav>
-          <div class="tab-pane fade" id="learn" >
-              <div class="tab-content">
-                <h4>如何加入社團</h4>
-                <h6></h6>
-              </div>
-          </div>
-          <div class="tab-pane fade" id="play" >
-              <div class="tab-content">
-                <h4>加入社團</h4>
-                <h6></h6>
-              </div>
-          </div>
-          <div class="tab-pane fade" id="love" >
-              <div class="tab-content">
-                <h4>入社團</h4>
-                <h6></h6>
-              </div>
-          </div>
-          <div class="tab-pane fade" id="service" >
-              <div class="tab-content">
-                <h4>社團</h4>
-                <h6></h6>
-              </div>
-          </div>
+        <div class="learns" id="learns">
+          <h4>學術性社團</h4>
+            <p><% for (var i in club){ %>
+                <% if ( club[i].typenum == 1){ %>
+                  <a href="#<%- club[i].name %> " data-toggle="modal" class="club_name"
+                    data-target="#<%- club[i].name %>"><%- club[i].name %><br></br></a>
+                  <!-- Modal -->
+                  <div class="modal fade " id="<%- club[i].name %>" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel"><%- club[i].name %></h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <nav class="nav navbar-nav">
+                              <div class="container">
+                                <ul class="nav nav-tabs flex-column">
+                                  <li><a data-toggle="tab" href="#introduction">社團介紹</a></li>
+                                  <li><a data-toggle="tab" href="#participation">加入社團</a></li>
+                                  <li><a data-toggle="tab" href="#FB">FB粉絲團</a></li>
+                                  <li><a data-toggle="tab" href="#activity">活動剪影</a></li>
+                                </ul>
+                              </div>
+                          </nav>
+                          <div class="tab-content">
+                            <div id="introduction" class="tab-pane fade in">
+                              <h3>社團介紹</h3>    
+                            </div>
+                            <div id="participation" class="tab-pane fade in">
+                              <h3>加入社團</h3>
+                            </div>
+                            <div id="FB" class="tab-pane fade in">
+                              <h3>FB粉絲團</h3>
+                            </div>
+                            <div id="activity" class="tab-pane fade in">
+                              <h3>活動剪影</h3>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div> 
+              <%}%>                       
+            <%}%>
+          </p>
+        </div>     
+        <div class="plays" id="plays">
+          <h4>康樂性社團</h4>
+          <p><% for (var i in club){%>
+              <% if ( club[i].typenum == 2){ %>
+                <%- club[i].name %>
+                <br></br>
+              <%}%>
+            <%}%> 
+          </p>
+        </div> 
+        <div class="loves" id="loves">
+          <h4>聯誼性社團</h4>
+          <p><% for (var i in club){%>
+              <% if ( club[i].typenum == 3){ %>
+                <%- club[i].name %>
+                <br></br>
+              <%}%>
+            <%}%> 
+          </p>
+        </div>
+        <div class="services" id="services">
+            <h4>服務性社團</h4>
+            <p><% for (var i in club){%>
+                <% if ( club[i].typenum == 4){ %>
+                  <%- club[i].name %>
+                  <br></br>
+                <%}%>
+              <%}%> 
+            </p>
+        </div>      
     </main>
     <footer>
         <% include ../layout/footer %>
@@ -103,3 +158,5 @@
         <% include js %>
 </body>
 </html>
+
+

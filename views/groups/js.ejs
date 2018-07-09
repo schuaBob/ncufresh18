@@ -1,1 +1,39 @@
+<script>
 
+    $(document).ready(function(){
+        $(".learns").hide();
+        $(".plays").hide();
+        $(".loves").hide();
+        $(".services").hide();
+
+        $(".learn").mousedown(function(){
+            $(".learns").show();
+            $(".plays").hide();
+            $(".loves").hide();
+            $(".services").hide();
+        });
+
+        $(".play").mousedown(function(){
+            $(".plays").show();
+            $(".learns").hide();
+            $(".loves").hide();
+            $(".services").hide();
+        });
+
+        $(".love").mousedown(function(){
+            $(".loves").show();
+            $(".learns").hide();
+            $(".plays").hide();
+            $(".services").hide();
+        });
+
+        $(".service").mousedown(function(){
+            $(".services").show();
+            $(".learns").hide();
+            $(".plays").hide();
+            $(".loves").hide();
+        });
+
+        
+    })
+</script>
