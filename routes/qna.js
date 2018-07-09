@@ -9,9 +9,20 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.locals.username = req.session.account ;
   res.locals.authenticated = req.session.logined;
-  Question.find(function(err, question,count){
+  Question.find().sort({Click:'desc'}).exec(function(err, question,count){
     if(err){return next(err)};
-    res.render('qna/index',{title:'新生Q&A',question:question});
+    //轉換時間欄位
+      var Time = function(date) {
+      var monthIndex = date.getMonth();
+      var day = date.getDate();
+      var time = (++monthIndex) + '/' + day;
+      return time;
+    }
+    res.render('qna/index',{
+      title:'新生Ｑ＆Ａ ｜ 新生知訊網',
+      question:question,
+      Time:Time
+    });
   }); 
 });
 /*新增問題*/
@@ -61,21 +72,77 @@ router.post('/adda/:id',function(req,res,next){
 
 });
 /*紀錄點擊次數*/
-router.post('/:id', function(req, res, next) {
+router.get('/:id', function(req, res, next) {
   if(mongoose.Types.ObjectId.isValid(req.params.id)){
-      Question.findById(req.params.id).exec(function(err,result){
+      Question.findById(req.params.id,function(err,question){
           if(err){return next(err)};
-          req.body.Click++;
-          Question.update({_id:req.params.id}, {Click:req.body.Click},function(err){
-            if(err)
-              console.log('Fail to update click number.');
-            else
-              console.log('Done');
+          //增加瀏覽次數
+          question.Click++;
+          //儲存瀏覽次數
+          question.save(function(err) {
+            if (err){return next(err);}
+            // 回傳 title, content, answer
+            res.json({
+              //title: qna.title,
+              //content: qna.content,
+              //answer: qna.answer
+              click:question.click
+            });
           });
       })
   }
 });
 /*編輯答案*/
+router.post('/update/:id',function(req,res,next){
+  if(req.body.Answer){
+      if(mongoose.Types.ObjectId.isValid(req.params.id)){
+          Question.findById(req.params.id).exec(function(err,result){
+              if(err){return next(err)};
+              //if(result.Username===res.locals.username||req.session.type==="admin"){
+              Question.update({_id:req.params.id}, {Answer:req.body.Answer},function(err){
+                if(err)
+                    console.log('Fail to update answer.');
+                else
+                    console.log('Done');
+              });
+              //}
+          })   
+          res.redirect('/qna');
+      }
+      else{
+          res.redirect('/qna');
+      }
+  }
+});
 /*刪除問題*/
+router.get('/delete/:id',function(req,res,next){
+  /*沒登入導向到登入頁面*/
+  /*if(!req.session.logined){
+      res.redirect('/signin');
+  }*/
+  //else{
+      /*確定傳進來的是不是有效ID*/
+      if(mongoose.Types.ObjectId.isValid(req.params.id)){
+          /*確定這篇文章是他發的或他是管理員*/
+          Question.findById(req.params.id).exec(function(err,result){
+              if(err){return next(err)};
+              /*真的有這篇文章*/
+              if(result!==null){
+                      /*刪除*/
+                      result.remove();
+                      res.redirect('/qna');
+                  
+              }
+              else{
+                  res.redirect('/qna');
+              }
+          })
+      }
+      else{
+        return next(err);
+      }
+  //}
+});
 /*搜尋功能*/
+
 module.exports = router;

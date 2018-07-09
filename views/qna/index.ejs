@@ -6,9 +6,9 @@
 <body>
     <header>
         <% include ../layout/navbar %>
+        <link rel='stylesheet' href='qna.css'>
     </header>
     <main>
-        <h1 style="text-align: center"><%= title %></h1>
         <div>
             <button type="button" class="btn btn-primary ask" data-toggle="modal" data-target="#askQuestion" style="float:right">我要發問</button>
             <div class="modal fade" id="askQuestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -48,15 +48,13 @@
                       </div>
                     </div>
             </div>
-            <div style="text-align: center">
+            <div>
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
                         排序
                         <li class="page-item"><a class="page-link" href="#time">時間</a></li>
                         <li class="page-item"><a class="page-link" href="#hot">人氣</a></li>
                     </ul>
-                </nav>
-                <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
                         類別
                         <li class="page-item"><a class="page-link" href="#all">全部</a></li>
@@ -71,27 +69,39 @@
         </div>
         <table style="margin:0 auto">
             <thead>
-                <th style="text-align: center">類別</th>
-                <th style="text-align: center">標題</th>
-                <th style="text-align: center">時間</th>
-                <th style="text-align: center">人氣</th>
-                <th style="text-align: center">解答與否</th>
+                <tr>
+                    <th>類別</th>
+                    <th id="title">標題</th>
+                    <th>時間</th>
+                    <th>人氣</th>
+                    <%# /管理員頁面才有的 %>
+                    <th>解答與否</th>
+                    <th>新增/編輯解答</th>
+                    <th>刪除問題</th>
+                    <%# /管理員頁面才有的 %>
+                </tr>
             </thead>
-            <tbody>
-                <% for(var i=0;i<question.length;i++) {%>
-                    <tr type="button" id="<%= question[i].id %>" class="<%= question[i].Type %> Q"  data-toggle="modal" data-target=#<%= question[i].id %>>
-                        <td style="text-align: center"><%= question[i].Type %></td>
-                        <td style="text-align: center"><%= question[i].Title %></td>
-                        <td style="text-align: center"><%= question[i].CreateDate %></td>
+                <tbody>
+                <% for(var i=0; i<question.length; i++) {%>
+                    <tr id="<%= question[i].id %>" class="<%= question[i].Type %> Q">
+                        <td><%= question[i].Type %></td>
+                        <td id="title" type="button" data-toggle="modal" data-target="#<%= question[i].id %>"><%= question[i].Title %></td>
+                        <td><%= Time(question[i].CreateDate) %></td>
                         <td class="view" style="text-align: center"><%= question[i].Click %></td>
+                        <%# /管理員頁面才有的 %>
                         <% if(question[i].Answer) {%>
-                            <td style="text-align: center">是</td>
+                            <td>是</td>
+                            <td type="button" data-toggle="modal" data-target="#<%= question[i].id %>-edit">編輯答案</td>
                         <%} 
                         else{%>
-                            <td style="text-align: center">否</td>
+                            <td>否</td>
+                            <td type="button"  data-toggle="modal" data-target="#<%= question[i].id %>-edit">新增答案</td>
                         <%} 
                         %>
+                        <td><a href="/qna/delete/<%= question[i].id %>" method="post">刪除問題</a></td>
+                        <%# /管理員頁面才有的 %>
                     </tr>
+                   
                     <!-- 顯示問題跟答案的Modal -->
                     <div class="modal fade" id="<%= question[i].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -102,35 +112,63 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                                 </div>
-                            
-
-                                <%if(question[i].Answer){%>
                                     <div class="modal-body"><h5>Question 問題</h5></div>
                                     <div class="modal-body"><%= question[i].Content %></div>
                                     <div class="modal-body"><h5>Answer 答案</h5></div>
                                     <div class="modal-body"><%= question[i].Answer %></div>
                                     <div class="modal-body"></div>
-                                    <%}
-                                  else{%>
-                                    <form name="adda" action="/qna/adda/<%= question[i].id %>" method="post">
-                                        <div class="modal-body"><h5>Question 問題</h5></div>
-                                        <div class="modal-body"><%= question[i].Content %></div>
-                                        <div class="modal-body"><h5>輸入解答</h5>
-                                            <br>
-                                            <textarea id="message-text" style="width:90%;position:center" required="required" name="Answer" rows="5"></textarea>
-                                            <input class="btn btn-primary submit" type="submit" value="送出答案"> 
-                                        </div>
-                                    </form>      
-                                    <%}
-                                %>
                                 <div class="modal-footer">
                                 <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
                                 </div>
                             </div>
                             </div>
                         </div>
+                        <!-- 新增/編輯問題的Modal -->
+                        <div class="modal fade" id="<%= question[i].id %>-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel"><%= question[i].Title %></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                <div class="modal-body">
+                                        <%if(question[i].Answer){%>
+                                            <form name="update" action="/qna/update/<%= question[i].id %>" method="post">
+                                                <div class="modal-body"><h5>Question 問題</h5></div>
+                                                <div class="modal-body"><%= question[i].Content %></div>
+                                                <div class="modal-body"><h5>Answer 答案</h5></div>
+                                                <div class="modal-body"><h5>編輯答案</h5>
+                                                    <br>
+                                                    <textarea id="message-text" style="width:90%;position:center" required="required" name="Answer" rows="5"><%= question[i].Answer %></textarea>
+                                                    <input class="btn btn-primary submit" type="submit" value="更改答案"> 
+                                                </div>
+                                            </form>
+                                            <%}
+                                          else{%>
+                                            <form name="adda" action="/qna/adda/<%= question[i].id %>" method="post">
+                                                <div class="modal-body"><h5>Question 問題</h5></div>
+                                                <div class="modal-body"><%= question[i].Content %></div>
+                                                <div class="modal-body"><h5>輸入解答</h5>
+                                                    <br>
+                                                    <textarea id="message-text" style="width:90%;position:center" required="required" name="Answer" rows="5"></textarea>
+                                                    <input class="btn btn-primary submit" type="submit" value="送出答案"> 
+                                                </div>
+                                            </form>      
+                                            <%}
+                                        %>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                     
-                <% } %>
+            <% } %>
             </tbody>
         </table>
     </main>
