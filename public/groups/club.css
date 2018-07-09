@@ -1,23 +1,28 @@
 .nav{
-    margin-top: 5%;
-    margin-left: 15%;
-    padding:14px 14px;
+    padding:12px 12px;
 }
 
-h3{
-    margin-top: 5%;
-    margin-left: 5%;
-}
 p{
     margin-top: 2%;
 }
 
-.container{
+.club_name{
     margin-left: 70%;
-    margin-top: 2%;
 }
 
 h4{
     margin-top: 3%;
-    margin-left:70%; 
+    margin-left:68%;  
 }
+
+button{
+    border-top-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+}
+button:hover {
+    background-color: rgb(43, 78, 233);
+    color: white;
+}
+
