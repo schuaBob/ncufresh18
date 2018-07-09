@@ -11,22 +11,6 @@ router.get('/', function(req, res, next) {
   res.render('groups/index', { title: '系所社團' });
 });
 
-// router.get('/club', function(req, res, next) {
-//   res.render('groups/club', { title: '社團 ', user: req.user });
-// });
-
-router.get('/community', function(req, res, next){
-  res.render('groups/community', {title: '社群 ', user: req.user });
-});
-
-router.get('/department', function(req, res, next){
-  res.render('groups/department', {title: '系所 ', user: req.user });
-});
-
-// router.get('/student', function(req, res, next){
-//   res.render('groups/student', {title: '學生會 ', user: req.user });
-// });
-
 router.get('/department', function(req, res, next) {
   department.find({}).exec(function(err, department) {
     res.render('groups/department', {
@@ -37,15 +21,15 @@ router.get('/department', function(req, res, next) {
   });
 });
 
-  router.get('/club', function(req, res, next) { 
-    club.find({}).exec(function(err, club) {
-        res.render('groups/club', {
-          title: '社團 ',
-          user: req.user,
-          club: club,    
-        });
-      });
+router.get('/club', function(req, res, next) { 
+  club.find({}).exec(function(err, club) {
+    res.render('groups/club', {
+      title: '社團 ',
+      user: req.user,
+      club: club,    
     });
+  });
+});
 
     router.get('/community', function(req, res, next) { 
     community.find({}).exec(function(err, community) {
@@ -114,11 +98,5 @@ router.get('/department', function(req, res, next) {
       res.redirect('/groups/club');
     });
   });
-
-function isAdmin(req, res, next) {
-  if (req.isAuthenticated() && req.user.local.accountType === 'admin')
-    return next();
-  res.redirect('/');
-}
 
 module.exports = router;
