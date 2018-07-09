@@ -8,10 +8,12 @@ var document = require('../../models/document/document');
 var QQQQQQ = Array();
 
 
-for(let i = 0;i<1;i++){
+for(let i = 1;i<51;i++){
     var QQ = new document({
+        count:i,
         title:"",
-        content:""
+        content:"",
+       
     }).save();
     QQQQQQ.push(QQ);
 }
