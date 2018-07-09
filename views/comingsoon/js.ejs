@@ -1,8 +1,11 @@
 <script>
   // Set the date we're counting down to
-  var countDownDate = new Date("Aug 7, 2018 00:00:00").getTime() ;
+  var countDownDate = new Date("Aug 6, 2018 16:00:00 UTC").getTime() ;
   
-  document.getElementById("demo").innerHTML = "00d 00h 00m 00s ";
+  document.getElementById("day").innerHTML = 00 ;
+  document.getElementById("hour").innerHTML = 00 ;
+  document.getElementById("min").innerHTML = 00 ;
+  document.getElementById("sec").innerHTML = 00 ;
   // Update the count down every 1 second
   var x = setInterval(function() {
   
@@ -31,13 +34,14 @@
     }
   
     // Display the result in the element with id="demo"
-    document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-    + minutes + "m " + seconds + "s ";
+    document.getElementById("day").innerHTML = days ;
+    document.getElementById("hour").innerHTML = hours ;
+    document.getElementById("min").innerHTML = minutes ;
+    document.getElementById("sec").innerHTML = seconds ;
   
     // If the count down is finished, write some text 
     if (distance < 0) {
-      clearInterval(x);
-      document.getElementById("demo").innerHTML = "準備要開始囉";
+
     }
   }, 1000);
   
