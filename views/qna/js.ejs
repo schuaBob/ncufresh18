@@ -4,35 +4,49 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
 $(document).ready(() => {
+    //只看單一分類
+    $("li a[href='#校園生活']").on('click',function(){
+        $('tr.Q').hide();
+        $('tr.校園生活').fadeIn(500);
+    });
+    $("li a[href='#學生事務']").on('click',function(event){
+        $('tr.Q').hide();
+        $('tr.學生事務').fadeIn(500);
+    });
+    $("li a[href='#課程相關']").on('click',function(event){
+        $('tr.Q').hide();
+        $('tr.課程相關').fadeIn(500);
+    });
+    $("li a[href='#其他']").on('click',function(event){
+        $('tr.Q').hide();
+        $('tr.其他').fadeIn(500);
+    });
+    $("li a[href='#all']").on('click',function(event){
+        $('tr.Q').fadeIn(500);
+    });
+    /*$("li a[href='#time']").on('click',function(event){
+        $('tr.Q').fadeIn(500);
+    });*/
+    //紀錄點擊次數
     $('tr').on('click',function(){
-        console.log($(this).prop('id'));
         var id = $(this).prop('id');
         $.ajax({
             url: '/qna/' + id,
-            method: 'POST',
-            data:id,
-            dataType:'String',
-            }).done(function(res) {
+            method: 'GET',
+            success: function(res) {
             
             //document.getElementById('show-title').innerHTML = res.title;
             //document.getElementById('show-content').innerHTML = res.content;
             //document.getElementById('show-answer').innerHTML = res.answer;
-
+            console.log("測試用");
             var objs = $('#' + id).find('#view');
+            console.log(objs);
             for (var i = 0; i < objs.length; i++) {
                 objs[i].innerHTML = parseInt(objs[i].innerHTML) + 1;
             }
         
-        });
+            }
+        })
     })
-})
-
-          
-</script>
-<script language="JavaScript">
-    /*var count=0;
-    function cli(){
-        count++;
-        document.getElementById("viewa").innerHTML=count; 
-    }*/
+})         
 </script>
