@@ -1,6 +1,8 @@
 var mongoose=require('mongoose');
+var Schema = mongoose.Schema;
 
 var document= mongoose.Schema({
+    count : String,
     title:String,
     content:String,
 });
