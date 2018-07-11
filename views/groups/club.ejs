@@ -72,14 +72,14 @@
           <h4>學術性社團</h4>
             <p><% for (var i in club){ %>
                 <% if ( club[i].typenum == 1){ %>
-                  <a href="#<%- club[i].name %> " data-toggle="modal" class="club_name"
-                    data-target="#<%- club[i].name %>"><%- club[i].name %><br></br></a>
+                  <a href="#<%= club[i].name %> " data-toggle="modal" class="club_name"
+                    data-target="#<%= club[i].name %>"><%= club[i].name %><br></br></a>
                   <!-- Modal -->
-                  <div class="modal fade " id="<%- club[i].name %>" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade " id="<%= club[i].name %>" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel"><%- club[i].name %></h5>
+                          <h5 class="modal-title" id="exampleModalLabel"><%= club[i].name %></h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>
@@ -124,7 +124,7 @@
           <h4>康樂性社團</h4>
           <p><% for (var i in club){%>
               <% if ( club[i].typenum == 2){ %>
-                <%- club[i].name %>
+                <%= club[i].name %>
                 <br></br>
               <%}%>
             <%}%> 
@@ -134,7 +134,7 @@
           <h4>聯誼性社團</h4>
           <p><% for (var i in club){%>
               <% if ( club[i].typenum == 3){ %>
-                <%- club[i].name %>
+                <%= club[i].name %>
                 <br></br>
               <%}%>
             <%}%> 
@@ -144,7 +144,7 @@
             <h4>服務性社團</h4>
             <p><% for (var i in club){%>
                 <% if ( club[i].typenum == 4){ %>
-                  <%- club[i].name %>
+                  <%= club[i].name %>
                   <br></br>
                 <%}%>
               <%}%> 

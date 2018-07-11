@@ -31,23 +31,23 @@ router.get('/club', function(req, res, next) {
   });
 });
 
-    router.get('/community', function(req, res, next) { 
-    community.find({}).exec(function(err, community) {
-        res.render('groups/community', {
-          title: '社群 ',
-          community: community,    
-        });
-      });
+router.get('/community', function(req, res, next) { 
+  community.find({}).exec(function(err, community) {
+    res.render('groups/community', {
+      title: '社群 ',
+      community: community,    
     });
+  });
+});
 
-    router.get('/student', function(req, res, next) {
-      student.find({}).exec(function(err, student) { 
-          res.render('groups/student', {
-            title: '學生會',
-            student: student,
-        });
-      });
+router.get('/student', function(req, res, next) {
+  student.find({}).exec(function(err, student) { 
+    res.render('groups/student', {
+      title: '學生會',
+      student: student,
     });
+  });
+});
 
 
   router.post('/edit_club', function(req, res, next) {
