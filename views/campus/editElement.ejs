@@ -46,10 +46,125 @@
                             <td>
                                 <%= result[i]['Element_Name'] %>
                             </td>
-                            <td>編輯</td>
-                            <td>編輯</td>
-                            <td>編輯</td>
-                            <td>編輯</td>
+                            <td id="edit1">
+                                <button type="button" data-toggle="modal" data-target="#picedit<%= i %>">編輯</button>
+                            </td>
+                            <div class="modal fade" id="picedit<%= i %>" tabindex="-1" role="dialog" aria-labelledby="myModalTitle" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="myModalTitle">Modal title</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <td id="edit2">
+                                <button type="button" data-toggle="modal" data-target="#mapedit<%= i %>">編輯</button>
+                            </td>
+                            <div id="mapedit<%= i %>" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="myModalTitle">Modal title</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>mapedit</p>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <td id="edit3">
+                                <button type="button" data-toggle="modal" data-target="#textedit<%= i %>">編輯</button>
+                            </td>
+                            <div id="textedit<%= i %>" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Modal title</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal" action="/campus/editElement/<%= result[i]['_id']%>" method="POST">
+                                                <fieldset>
+
+                                                    <!-- Text input-->
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 control-label" for="elename">物件名稱</label>
+                                                        <div class="col-md-6">
+                                                            <input name="elename" type="text" class="form-control input-md" value="<%= result[i]['Element_Name'] %>">
+
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Select Basic -->
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 control-label" for="elecategory">類別</label>
+                                                        <div class="col-md-6">
+                                                            <select id="elecategory<%= i %>" name="elecategory" class="form-control">
+                                                                <option value="1">系館</option>
+                                                                <option value="2">運動</option>
+                                                                <option value="3">餐廳</option>
+                                                                <option value="4">商店&amp;郵局&amp;銀行</option>
+                                                                <option value="5">住宿</option>
+                                                                <option value="6">行政</option>
+                                                                <option value="7">圖書館</option>
+                                                                <option value="8">藝文中心&amp;活動場地</option>
+                                                                <option value="9">醫療&amp;緊急電話</option>
+                                                                <option value="10">景點</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Textarea -->
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 control-label" for="eleintro">物件說明</label>
+                                                        <div class="col-lg">
+                                                            <textarea class="form-control" rows="8" cols="60" name="eleintro"><%= result[i]['Element_Intro'] %></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Multiple Radios (inline) -->
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                                        <button type="submit" class="btn btn-primary">儲存</button>
+                                                    </div>
+
+
+                                                </fieldset>
+                                            </form>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <td id="edit4">刪除</td>
+
 
                         </tr>
                         <%_ } -%>
@@ -64,7 +179,7 @@
         <% include ../layout/footer %>
     </footer>
     <% include ../layout/js %>
-        <% include js %>
+        <% include js2 %>
 </body>
 
 </html>

@@ -7,40 +7,16 @@ router.get("/", function(req, res, next) {
   res.render("campus/index", { title: "校園導覽" });
 });
 router.get("/editElement", function(req, res, next) {
-  elebuilding.find({}).exec(function(err, result) {
-    if (err) {
+  elebuilding.find({},{_id:1,Element_Name:1,Type : 1,
+    Element_Intro : 1}).exec(function(err,result){
+    if(err) {
       return next(err);
     }
-    if (Object.keys(result).lenght === 0) {
-      res.render("campus/editElement", {
-        title: "編輯物件",
-        rew: req,
-        result: Object()
-      });
-    } else {
-      let count = 0;
-      for (let i in result) {
-        elebuilding
-          .findOne({
-            Element_Name: result[i].Element_Name
-          })
-          .exec(function(err, result_elebuilding) {
-            if (err) {
-              next(err);
-            }
-            result[i].Element_Name = result_elebuilding.Element_Name;
-            count = count + 1;
-            if (count === Object.keys(result).length) {
-              res.render("campus/editElement", {
-                title: "編輯物件",
-                req: req,
-                result: result
-              });
-            }
-          });
-      }
-    }
-  });
+    res.render("campus/editElement",{title:"編輯物件",result:result})
+    
+    
+  })
+    
 });
 router.post("/AddNew_element", function(req, res, next) {
   if (req.body.elename && req.body.elecategory != 0) {
@@ -52,7 +28,7 @@ router.post("/AddNew_element", function(req, res, next) {
             Element_Name: req.body.elename,
             Type: req.body.elecategory,
             Element_Intro: req.body.eleintro,
-            LastUpDate: Date.now()
+            
           }).save(function(err) {
             if (err) {
               return next(err);
@@ -67,5 +43,17 @@ router.post("/AddNew_element", function(req, res, next) {
     res.redirect("/campus/");
   }
 });
+router.post("/editElement/:id",function(req,res,next) {
+  elebuilding.findByIdAndUpdate(req.params.id,{
+    Element_Name : req.body.elename,
+    Type : req.body.elecategory,
+    Element_Intro : req.body.eleintro
+  }).exec(function(err) {
+    if(err) {
+      return next(err);
+    }
+    res.redirect("/campus/editElement");
+  })
+})
 
 module.exports = router;

@@ -1,0 +1,23 @@
+tbody{
+    float:center;
+    display: block;
+    height: 300px;
+    overflow-y: scroll;
+    border: 1px;
+}
+thead{
+    display: block;
+    background-color: azure;
+    text-align: center;
+}
+td{
+    text-align: center;
+    width:80px;
+}
+th{
+    border:10px;
+    width:80px;
+}
+#title{
+    width:200px;
+}

@@ -1,8 +1,10 @@
 var mongoose = require('mongoose');
 
 var video = mongoose.Schema({
-    type: String,
-    insert: String, //youtube嵌入碼
+    title: {type : String, unique :true},
+    type: String,//中大長劇or悠遊中大 or快問快答
+    college: String,//學院
+    insert: String, //youtubeID
     introduce: String //影片介紹圖片
 });
 

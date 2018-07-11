@@ -10,18 +10,23 @@
     //var player;
     //function onYouTubeIframeAPIReady() {player = new YT.Player('playser');}
     //初始影片
-    //$("#CDbox").html('<%- l1 %>')
-    //$("#CDbox").append('<img class="CDpicture"  src="' + '<%- l1_img %>' + '">')
-
+    
     //let aaa = JSON.parse(<%= %>);
-
-    function onYouTubeIframeAPIReady() {//此函數在IFrame Player API code 載入後將自動呼叫
-        player = new YT.Player('qq', {
-          height: '390',
-          width: '640',
-          videoId: '27R6ZavdzzQ' //Youtube ID
-        });
-      } 
+        let ppp = Object();
+        function onYouTubeIframeAPIReady() {//此函數在IFrame Player API code 載入後將自動呼叫
+            $(".player").each(function(){
+                console.log(this.id);
+                console.log($(this));
+                let id=this.id;
+                ppp[id] = new YT.Player(id, {
+                    height: '390',
+                    width: '640',
+                    videoId: id, //Youtube ID
+                });
+            })
+        }
+    
+     
     
 
     $(document).ready(() => {
@@ -29,13 +34,13 @@
             if(end == 1){
                 if(rotate == 0){
                     $('.rotate').html('影片');
-                    player.pauseVideo();
+                    //player.pauseVideo();
                     
                     rotate = 1;
                 }
                 else{
                     $('.rotate').html('簡介');
-                    player.playVideo();
+                    
                     rotate = 0;
                 }
                 rotateDIV()
@@ -57,95 +62,32 @@
             }
         })
 
+        
+
         $(document).on("click",".longvideo",function(event){
             $("#CDbox").css('background-image', 'url("test_background_longvideo.png")');
-            if(rotate==1){
-                $('.rotate').html('簡介');
-                rotate = 0;
-                rotateDIV()
-            }
-
-            $("#CDbox").html('');
-            $('.video_item_title').css("display", "block");
+            
             //$('.rotate').css("display", "none");
+            $('.sbtn').css("display", "none");
+            $('.video_item_longvideo').css("display", "block");
 
-            $('.video_item_title').html(
-                "<td><button type='button' class='video_item_longvideo btn btn-outline-secondary l1 turn'>長劇1</button></td>"+
-                "<td><button type='button' class='video_item_longvideo btn btn-outline-secondary l2 turn'>長劇2</button></td>"+
-                "<td><button type='button' class='video_item_longvideo btn btn-outline-secondary l3 turn'>長劇3</button></td>"+
-                "<td><button type='button' class='video_item_longvideo btn btn-outline-secondary l4 turn'>長劇4</button></td>"+
-                "<td><button type='button' class='video_item_longvideo btn btn-outline-secondary l5 turn'>長劇5</button></td>"
-            );
-
-            $(document).on("click",".l1",function(event){
-                $("#CDbox").html('<%- l1 %>')
-                $("#CDbox").append('<img class="CDpicture"  src="' + '<%- l1_img %>' + '">')
-               
-            })
-            $(document).on("click",".l2",function(event){
-                $("#CDbox").html('<%- l2 %>')
-                $("#CDbox").append('<img class="CDpicture"  src="' + '<%- l2_img %>' + '">')
-            })
-            $(document).on("click",".l3",function(event){
-                $("#CDbox").html('<%- l3 %>')
-                $("#CDbox").append('<img class="CDpicture"  src="' + '<%- l3_img %>' + '">')
-            })
-            $(document).on("click",".l4",function(event){
-                $("#CDbox").html('<%- l4 %>')
-                $("#CDbox").append('<img class="CDpicture"  src="' + '<%- l4_img %>' + '">')
-            })
-            $(document).on("click",".l5",function(event){
-                $("#CDbox").html('<%- l5 %>')
-                $("#CDbox").append('<img class="CDpicture"  src="' + '<%- l5_img %>' + '">')
+            $(document).on("click",".video_item_longvideo",function(event){
+                /**/$("#"+$(this).attr("ytID")).css("display", "block");
             })
             
         })
         $(document).on("click",".lifevideo",function(event){
-            $("#CDbox").html('')
             $("#CDbox").css('background-image', 'url("test_background_lifevideo.png")');
-            if(rotate==1){
-                $('.rotate').html('簡介');
-                rotate = 0;
-                rotateDIV()
-            }
 
-            $("#CDbox").html('');
-            $('.video_item_title').css("display", "block");
             //$('.rotate').css("display", "none");
+            $('.sbtn').css("display", "none");
+            $('.video_item_lifevideo').css("display", "block");
 
-            $('.video_item_title').html(
-                '<td><button type="button" class="video_item_lifevideo btn btn-outline-secondary food turn">食</button></td>'+
-                '<td><button type="button" class="video_item_lifevideo btn btn-outline-secondary housing turn">住</button></td>'+
-                '<td><button type="button" class="video_item_lifevideo btn btn-outline-secondary transportation turn">行</button></td>'+
-                '<td><button type="button" class="video_item_lifevideo btn btn-outline-secondary education turn">育</button></td>'+
-                '<td><button type="button" class="video_item_lifevideo btn btn-outline-secondary entertainment turn">樂</button></td>'+
-                '<td><button type="button" class="video_item_lifevideo btn btn-outline-dark streetInterview turn">街頭訪問</button></td>'
-            );
 
-            $(document).on("click",".food",function(event){
-                $("#CDbox").html('<%- food %>')
-                $("#CDbox").append('<img class="CDpicture"  src="' + '<%- food_img %>' + '">')
+            $(document).on("click",".video_item_lifevideo",function(event){
+                
             })
-            $(document).on("click",".housing",function(event){
-                $("#CDbox").html('<%- housing %>')
-                $("#CDbox").append('<img class="CDpicture"  src="' + '<%- housing_img %>' + '">')
-            })
-            $(document).on("click",".transportation",function(event){
-                $("#CDbox").html('<%- transportation %>')
-                $("#CDbox").append('<img class="CDpicture"  src="' + '<%- transportation_img %>' + '">')
-            })
-            $(document).on("click",".education",function(event){
-                $("#CDbox").html('<%- education %>')
-                $("#CDbox").append('<img class="CDpicture"  src="' + '<%- education_img %>' + '">')
-            })
-            $(document).on("click",".entertainment",function(event){
-                $("#CDbox").html('<%- entertainment %>')
-                $("#CDbox").append('<img class="CDpicture"  src="' + '<%- entertainment_img %>' + '">')
-            })
-            $(document).on("click",".streetInterview",function(event){
-                $("#CDbox").html('<%- streetInterview %>')
-                $("#CDbox").append('<img class="CDpicture"  src="' + '<%- streetInterview_img %>' + '">')
-            })
+            
 
             
         })
@@ -154,231 +96,31 @@
 
         $(document).on("click",".QAvideo", function(event){
             $("#CDbox").css('background-image', 'url("test_background_QAvideo.png")');
-            if(rotate==1){
-                $('.rotate').html('簡介');
-                rotate = 0;
-                rotateDIV()
-            }
-
-            $("#CDbox").html('');
-            $('.video_item_title').css("display", "block");
+            
             //$('.rotate').css("display", "none");
+            $('.sbtn').css("display", "none");
+            $('.video_item_QAvideo').css("display", "block");
 
-            $('.video_item_title').html(
-                "<td><button type='button' class='video_item_QAvideo btn btn-outline-secondary c1 turn'>文學院</button></td>"+
-                "<td><button type='button' class='video_item_QAvideo btn btn-outline-secondary c2 turn'>理學院</button></td>"+
-                "<td><button type='button' class='video_item_QAvideo btn btn-outline-secondary c3 turn'>工學院</button></td>"+
-                "<td><button type='button' class='video_item_QAvideo btn btn-outline-secondary c4 turn'>管理學院</button></td>"+
-                "<td><button type='button' class='video_item_QAvideo btn btn-outline-secondary c5 turn'>資訊電機學院</button></td>"+
-                "<td><button type='button' class='video_item_QAvideo btn btn-outline-secondary c6 turn'>地球科學學院</button></td>"+
-                "<td><button type='button' class='video_item_QAvideo btn btn-outline-secondary c7 turn'>客家學院</button></td>"+
-                "<td><button type='button' class='video_item_QAvideo btn btn-outline-secondary c8 turn'>生醫理工學院</button></td>"
-            );
-
-            $(document).on("click",".c1",function(event){
-                $("#CDbox").css('background-image', 'url("test_background_c1.png")');
-
-                $('.video_item_title').html(
-                "<td><button type='button' class='video_item_QAvideo_c1 btn btn-outline-secondary D1 turn'>中國文學系</button></td>"+
-                "<td><button type='button' class='video_item_QAvideo_c1 btn btn-outline-secondary D2 turn'>英美語文學系</button></td>"+
-                "<td><button type='button' class='video_item_QAvideo_c1 btn btn-outline-secondary D3 turn'>法國語文學系</button></td>"+
-                '<td><button type="button" class="video_item_QAvideo_c1 btn btn-outline-dark QAvideo">返回</button></td>'
-                );
-
-                $(document).on("click",".D1",function(event){
-                    $("#CDbox").html('<%- D1 %>')
-                    $("#CDbox").append('<img class="CDpicture"  src="' + '<%- D1_img %>' + '">')
-                })
-                $(document).on("click",".D2",function(event){
-                    $("#CDbox").html('<%- D2 %>')
-                    $("#CDbox").append('<img class="CDpicture"  src="' + '<%- D2_img %>' + '">')
-                })
-                $(document).on("click",".D3",function(event){
-                    $("#CDbox").html('<%- D3 %>')
-                    $("#CDbox").append('<img class="CDpicture"  src="' + '<%- D3_img %>' + '">')
-                })
-            })
-            $(document).on("click",".c2",function(event){
-                $("#CDbox").css('background-image', 'url("test_background_c2.png")');
-
-                $('.video_item_title').html(
-                "<td><button type='button' class='video_item_QAvideo_c2 btn btn-outline-secondary D4 turn'>理學院學士班</button></td>"+
-                "<td><button type='button' class='video_item_QAvideo_c2 btn btn-outline-secondary D5 turn'>物理學系</button></td>"+
-                "<td><button type='button' class='video_item_QAvideo_c2 btn btn-outline-secondary D6 turn'>數學系</button></td>"+
-                "<td><button type='button' class='video_item_QAvideo_c2 btn btn-outline-secondary D7 turn'>化學學系</button></td>"+
-                "<td><button type='button' class='video_item_QAvideo_c2 btn btn-outline-secondary D8 turn'>光電科學與工程學系</button></td>"+
-                '<td><button type="button" class="video_item_QAvideo_c2 btn btn-outline-dark QAvideo">返回</button></td>'
-                );
-
-                $(document).on("click",".D4",function(event){
-                    $("#CDbox").html('<%- D4 %>')
-                    $("#CDbox").append('<img class="CDpicture"  src="' + '<%- D4_img %>' + '">')
-                })
-                $(document).on("click",".D5",function(event){
-                    $("#CDbox").html('<%- D5 %>')
-                    $("#CDbox").append('<img class="CDpicture"  src="' + '<%- D5_img %>' + '">')
-                })
-                $(document).on("click",".D6",function(event){
-                    $("#CDbox").html('<%- D6 %>')
-                    $("#CDbox").append('<img class="CDpicture"  src="' + '<%- D6_img %>' + '">')
-                })
-                $(document).on("click",".D7",function(event){
-                    $("#CDbox").html('<%- D7 %>')
-                    $("#CDbox").append('<img class="CDpicture"  src="' + '<%- D7_img %>' + '">')
-                })
-                $(document).on("click",".D8",function(event){
-                    $("#CDbox").html('<%- D8 %>')
-                    $("#CDbox").append('<img class="CDpicture"  src="' + '<%- D8_img %>' + '">')
-                })
-            
-            })
-            $(document).on("click",".c3",function(event){
-                $("#CDbox").css('background-image', 'url("test_background_c3.png")');
-
-                $('.video_item_title').html(
-                "<td><button type='button' class='video_item_QAvideo_c3 btn btn-outline-secondary D9 turn'>化學工程與材料工程學系</button></td>"+
-                "<td><button type='button' class='video_item_QAvideo_c3 btn btn-outline-secondary D10 turn'>土木工程學系</button></td>"+
-                "<td><button type='button' class='video_item_QAvideo_c3 btn btn-outline-secondary D11 turn'>機械工程學系</button></td>"+
-                "<td><button type='button' class='video_item_QAvideo_c3 btn btn-outline-secondary D12 turn'>工學院學士班</button></td>"+
-                '<td><button type="button" class="video_item_QAvideo_c3 btn btn-outline-dark QAvideo">返回</button></td>'
-                );
-
-                $(document).on("click",".D9",function(event){
-                    $("#CDbox").html('<%- D9 %>')
-                    $("#CDbox").append('<img class="CDpicture"  src="' + '<%- D9_img %>' + '">')
-                })
-                $(document).on("click",".D10",function(event){
-                    $("#CDbox").html('<%- D10 %>')
-                    $("#CDbox").append('<img class="CDpicture"  src="' + '<%- D10_img %>' + '">')
-                })
-                $(document).on("click",".D11",function(event){
-                    $("#CDbox").html('<%- D11 %>')
-                    $("#CDbox").append('<img class="CDpicture"  src="' + '<%- D11_img %>' + '">')
-                })
-                $(document).on("click",".D12",function(event){
-                    $("#CDbox").html('<%- D12 %>')
-                    $("#CDbox").append('<img class="CDpicture"  src="' + '<%- D12_img %>' + '">')
-                })
-            
-            })
-            $(document).on("click",".c4",function(event){
-                $("#CDbox").css('background-image', 'url("test_background_c4.png")');
-
-                $('.video_item_title').html(
-                "<td><button type='button' class='video_item_QAvideo_c4 btn btn-outline-secondary D13 turn'>企業管理學系</button></td>"+
-                "<td><button type='button' class='video_item_QAvideo_c4 btn btn-outline-secondary D14 turn'>資訊管理學系</button></td>"+
-                "<td><button type='button' class='video_item_QAvideo_c4 btn btn-outline-secondary D15 turn'>財務金融學系</button></td>"+
-                "<td><button type='button' class='video_item_QAvideo_c4 btn btn-outline-secondary D16 turn'>經濟學系</button></td>"+
-                '<td><button type="button" class="video_item_QAvideo_c4 btn btn-outline-dark QAvideo">返回</button></td>'
-                );
-
-                $(document).on("click",".D13",function(event){
-                    $("#CDbox").html('<%- D13 %>')
-                    $("#CDbox").append('<img class="CDpicture"  src="' + '<%- D13_img %>' + '">')
-                })
-                $(document).on("click",".D14",function(event){
-                    $("#CDbox").html('<%- D14 %>')
-                    $("#CDbox").append('<img class="CDpicture"  src="' + '<%- D14_img %>' + '">')
-                })
-                $(document).on("click",".D15",function(event){
-                    $("#CDbox").html('<%- D15 %>')
-                    $("#CDbox").append('<img class="CDpicture"  src="' + '<%- D15_img %>' + '">')
-                })
-                $(document).on("click",".D16",function(event){
-                    $("#CDbox").html('<%- D16 %>')
-                    $("#CDbox").append('<img class="CDpicture"  src="' + '<%- D16_img %>' + '">')
-                })
-            
-            })
-            $(document).on("click",".c5",function(event){
-                $("#CDbox").css('background-image', 'url("test_background_c5.png")');
-
-                $('.video_item_title').html(
-                "<td><button type='button' class='video_item_QAvideo_c5 btn btn-outline-secondary D17 turn'>電機工程學系</button></td>"+
-                "<td><button type='button' class='video_item_QAvideo_c5 btn btn-outline-secondary D18 turn'>資訊工程學系</button></td>"+
-                "<td><button type='button' class='video_item_QAvideo_c5 btn btn-outline-secondary D19 turn'>通訊工程學系</button></td>"+
-                "<td><button type='button' class='video_item_QAvideo_c5 btn btn-outline-secondary D20 turn'>資訊電機學院學士班</button></td>"+
-                '<td><button type="button" class="video_item_QAvideo_c5 btn btn-outline-dark QAvideo">返回</button></td>'
-                );
-                $(document).on("click",".D17",function(event){
-                    $("#CDbox").html('<%- D17 %>')
-                    $("#CDbox").append('<img class="CDpicture"  src="' + '<%- D17_img %>' + '">')
-                })
-                $(document).on("click",".D18",function(event){
-                    $("#CDbox").html('<%- D18 %>')
-                    $("#CDbox").append('<img class="CDpicture"  src="' + '<%- D18_img %>' + '">')
-                })
-                $(document).on("click",".D19",function(event){
-                    $("#CDbox").html('<%- D19 %>')
-                    $("#CDbox").append('<img class="CDpicture"  src="' + '<%- D19_img %>' + '">')
-                })
-                $(document).on("click",".D20",function(event){
-                    $("#CDbox").html('<%- D20 %>')
-                    $("#CDbox").append('<img class="CDpicture"  src="' + '<%- D20_img %>' + '">')
-                })
-            
-            })
-            $(document).on("click",".c6",function(event){
-                $("#CDbox").css('background-image', 'url("test_background_c6.png")');
-
-                $('.video_item_title').html(
-                "<td><button type='button' class='video_item_QAvideo_c6 btn btn-outline-secondary D21 turn'>地球科學學系</button></td>"+
-                "<td><button type='button' class='video_item_QAvideo_c6 btn btn-outline-secondary D22 turn'>大氣科學學系</button></td>"+
-                '<td><button type="button" class="video_item_QAvideo_c6 btn btn-outline-dark QAvideo">返回</button></td>'
-                );
-
-                $(document).on("click",".D21",function(event){
-                    $("#CDbox").html('<%- D21 %>')
-                    $("#CDbox").append('<img class="CDpicture"  src="' + '<%- D21_img %>' + '">')
-                })
-                $(document).on("click",".D22",function(event){
-                    $("#CDbox").html('<%- D22 %>')
-                    $("#CDbox").append('<img class="CDpicture"  src="' + '<%- D22_img %>' + '">')
-                })
-            
-            })
-            $(document).on("click",".c7",function(event){
-                $("#CDbox").css('background-image', 'url("test_background_c7.png")');
-
-                $('.video_item_title').html(
-                "<td><button type='button' class='video_item_QAvideo_c7 btn btn-outline-secondary D23 turn'>客家語文暨社會科學學系</button></td>"+
-                '<td><button type="button" class="video_item_QAvideo_c7 btn btn-outline-dark QAvideo">返回</button></td>'
-                );
-
-                $(document).on("click",".D23",function(event){
-                    $("#CDbox").html('<%- D23 %>')
-                    $("#CDbox").append('<img class="CDpicture"  src="' + '<%- D23_img %>' + '">')
-                })
+            $(document).on("click",".video_item_QAvideo",function(event){
+                $('.sbtn').css("display", "none");
+                $(".video_item_QAvideo_"+ $(this).attr('college')).css("display", "block");
                 
-            
-            })
-            $(document).on("click",".c8",function(event){
-                $("#CDbox").css('background-image', 'url("test_background_c8.png")');
-
-                $('.video_item_title').html(
-                "<td><button type='button' class='video_item_QAvideo_c8 btn btn-outline-secondary D24 turn'>生命科學系</button></td>"+
-                "<td><button type='button' class='video_item_QAvideo_c8 btn btn-outline-secondary D25 turn'>生醫科學與工程學系</button></td>"+
-                '<td><button type="button" class="video_item_QAvideo_c8 btn btn-outline-dark QAvideo">返回</button></td>'
-                );
-
-                $(document).on("click",".D24",function(event){
-                    $("#CDbox").html('<%- D24 %>')
-                    $("#CDbox").append('<img class="CDpicture"  src="' + '<%- D24_img %>' + '">')
+                
+                $(document).on("click","'.video_item_QAvideo_"+ $(this).attr('college')+"'",function(event){
+                    
                 })
-                $(document).on("click",".D25",function(event){
-                    $("#CDbox").html('<%- D25 %>')
-                    $("#CDbox").append('<img class="CDpicture"  src="' + '<%- D25_img %>' + '">')
-                })
-            
             })
+            
         })
-            
-            /*//按介紹時暫停
-            $('.CDplayer').each(function(){
-                if(rotate == 0){
-                    $(this).stopVideo();
-                }
-            });*/
+
+        $(document).on("click",".ssbtn",function(event){
+            $('.rotate').css('display', "block");
+            $(iframe).css("display", "none");
+            $("#"+ $(this).attr('ytID')).css("display", "block");
+            $(".picture").css("display", "none");
+            $("."+ $(this).attr('ytID')).css("display", "block");
+                
+        })
     })
 
 
@@ -403,12 +145,12 @@
         x.style.OTransform="rotateX(" + nx + "deg)"
         x.style.MozTransform="rotateX(" + nx + "deg)"
         if(nx == 90){
-            $('iframe').css("display", "none");
+            $('.CDplayer').css("display", "none");
             $('.CDpicture').css("display", "block");
             
         }
         else if(nx == 270){
-            $('iframe').css("display", "block");
+            $('.CDplayer').css("display", "block");
             $('.CDpicture').css("display", "none");
             
         }

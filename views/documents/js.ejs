@@ -1,59 +1,98 @@
 <script>
-    
-    $(document).ready(function(){
-            
-       
 
-        
-        //編輯者
-        $(".box").mousedown(function(){
-            //先抓那個form的id，再更新ckeditor
-            $.ajax({
-                    url:    "/documents/require_data",
-                    method:'POST',
-                    data: {id : id},
-                    error: function(err){
-                        
-                    },
-                    success: function(data){
-                        
-                    }
-                });
-            $("#edit").modal("show");
+    $(document).ready(function () {
+
+        CKEDITOR.replace('add_text', {
+            width: 800,
+            filebrowserUploadUrl: '/uploader',
+        });
+        $(".under").mousedown(function(){
+            $(".under").removeClass("small").addClass("big");
+            $(".gra").removeClass("big").addClass("small");
+        });
+        $(".under").mouseover(function(){
+            $(".gra").removeClass("big").addClass("small");
+        });
+        $(".gra").mouseover(function(){
+            $(".under").removeClass("big").addClass("small");
+        });
+        $(".gra").mousedown(function(){
+            $(".gra").removeClass("small").addClass("big");
+            $(".under").removeClass("big").addClass("small");
         });
         
+
+        //編輯者
+        $(".box").mousedown(function () {
+            let count = 0;
+            let textid = this.id;
+            $("#edit").modal("show");
+            $('#add').attr('action', "/documents/edit/"+textid);
+
+
+
+            $.ajax({
+                url: "/documents/require_data/"+textid,
+                method: 'get',
+                error: function (err) {
+                    console.log(err);
+
+                },
+                success: function (data) {
+                    
+                    $("#show_title").html(data.title);
+                    $("#show_content").html(data.content);
+                    $("#edit_title").val(data.title);
+                    CKEDITOR.instances.edit_content.setData(data.content);
+                }
+            });
+        });
+
+
+
+
+
+        /*for (var i ;i<data.length;i++){
+                  alert("t/6ej/"); 
+              console.log(data[i]);
+              count++;
+              if(textid==count){
+                  
+                  $("#show_title").html(data[i].title);
+                  $("#show_text").html(data[i].content);
+                  $("#edit_title").val(data[i].title);
+                  CKEDITOR.instances.edit_content.setData(data[i].content);
+              }
+          };*/
+
         /* 一般民眾
         $(".box").mousedown(function(){
             
             $("#edit").modal("show");
         });*/
 
-          
+
         $(".graduate").hide();
         $(".undergraduate").show();
-        
-        $(".gra").mousedown(function(){
-           
+
+        $(".gra").mousedown(function () {
+
             $(".graduate").show();
             $(".undergraduate").hide();
-            
+
         });
-        $(".under").mousedown(function(){
+        $(".under").mousedown(function () {
             $(".graduate").hide();
-            $(".undergraduate").show(); 
+            $(".undergraduate").show();
         });
-        
 
+        $("#save").click(function () {
+            // var data = editor.html();;
 
-         var editor=CKEDITOR.replace( 'add-text', {width:800});
+            // alert(data);
 
-            $("#edit").click(function(){
-                var data= editor.getData();;
-                
-                alert(data);
+        })
 
-            })
-        
         /*data-toggle方法，我很喜歡，但後端不好做嗚嗚，只好放棄
         $(".box").click({
             function(){
@@ -73,12 +112,12 @@
         $('.modal').focusin(function(){
             $(this).css({'position':'fixed'});
         }); */
-       
-        
 
 
-       
+
+
+
     })
-    
+
 
 </script>

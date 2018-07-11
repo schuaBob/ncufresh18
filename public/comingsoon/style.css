@@ -1,13 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Itim');
-#demo {
-    color : white ;
-    position : absolute ;
-    top : 65% ;
-    left : 17% ;
-    font-size : 9vw ;
-    font-family: 'Itim', cursive;
-    z-index: 1 ;
-}
 #ncufresh {
     margin : auto ;
     display : block ;
@@ -27,4 +18,21 @@ main {
     background-position: center ;
     background-size: cover ;
     min-height: 100vh;
+}
+#grid-counter {
+    display: grid ;
+    grid-template-columns: auto auto auto auto auto auto auto auto ;
+    grid-column-gap: 1vw ;
+    grid-template-rows: 10vw 8vw;
+}
+#grid-block {
+    color:  white ;
+    text-align: center;
+    font-family: 'Itim', cursive ;
+}
+.time {
+    font-size: 10vw ;
+}
+.num {
+    font-size: 5vw ;
 }
