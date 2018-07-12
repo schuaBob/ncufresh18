@@ -46,29 +46,49 @@
                             <td>
                                 <%= result[i]['Element_Name'] %>
                             </td>
-                            <td id="edit1">
-                                <button type="button" data-toggle="modal" data-target="#picedit<%= i %>">編輯</button>
+                            <td>
+                                <button class="picedit" type="button" data-toggle="modal" data-target="#editpic<%=i%>" ooo="<%= result[i]['_id'] %>">編輯</button>
                             </td>
-                            <div class="modal fade" id="picedit<%= i %>" tabindex="-1" role="dialog" aria-labelledby="myModalTitle" aria-hidden="true">
+                            <!--picedit<%= i %>-->
+                            <div class="modal fade" id="editpic<%=i%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="myModalTitle">Modal title</h5>
+                                            <h5 class="modal-title-buildpic">物件圖片</h5>
+                                            <h5 class="sep">|</h5>
+                                            <h5 class="modal-title-intropic">介紹圖片</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <div class="modal-body">
+                                        <div class="modal-body imgcontent">
+                                            <div class="buildpicc">
 
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                            <div class="intropicc">
+
+                                            </div>
+                                            
+                                            <img id="output" width="300px" />
+                                            <form action="/campus/insert_img/<%=result[i]['_id']%>" enctype="multipart/form-data" method="post">
+                                                <fieldset>
+                                                    <input type="file" name="uploadingImg" accept="image/*" onchange="loadFile(event)">
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary picclose" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">上傳</button>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+
+
+
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <td id="edit2">
+                            <td>
                                 <button type="button" data-toggle="modal" data-target="#mapedit<%= i %>">編輯</button>
                             </td>
                             <div id="mapedit<%= i %>" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
@@ -82,7 +102,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <p>mapedit</p>
+
                                         </div>
 
 
@@ -92,7 +112,7 @@
 
 
 
-                            <td id="edit3">
+                            <td>
                                 <button type="button" data-toggle="modal" data-target="#textedit<%= i %>">編輯</button>
                             </td>
                             <div id="textedit<%= i %>" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
@@ -163,7 +183,7 @@
                             </div>
 
 
-                            <td id="edit4">刪除</td>
+                            <td><a href="delete/<%=result[i]['_id']%>">刪除</a></td>
 
 
                         </tr>
