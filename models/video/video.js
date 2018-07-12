@@ -5,7 +5,7 @@ var video = mongoose.Schema({
     type: String,//中大長劇or悠遊中大 or快問快答
     college: String,//學院
     insert: String, //youtubeID
-    introduce: String //影片介紹圖片
+    //introduce: String //影片介紹圖片
 });
 
 module.exports = mongoose.model( 'video', video );
