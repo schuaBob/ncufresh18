@@ -2,6 +2,7 @@
 <html>
 <head>
     <% include ../layout/head %>
+    <link rel='stylesheet' href='community.css'>
 </head>
 <body>
     <header>
@@ -9,7 +10,99 @@
     </header>
     <main>
         <h1><%= title %></h1>
-        
+        <!-- 新增其他社團組織的Modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_community">新增/編輯學生組織</button><br></br>
+        <div class="modal fade" id="add_community" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">新增/編輯學生組織</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/groups/add_community" method="post" accept-charset="utf-8">
+                            <div class="form-group">
+                                <label for="name" class="form-control">學生組織名稱</label>
+                                <textarea name="name" rows="2" cols="55" id="add_name"></textarea></br>
+                                </div>
+                                <div class="form-group">
+                                <label for="introduction" class="form-control">學生組織介紹</label>
+                                <textarea name="introduction" rows="8" cols="55" id="add_introduction"></textarea></br>
+                                </div>
+                                <div class="form-group">
+                                <label for="participation" class="form-control">如何加入學生組織</label>
+                                <textarea name="participation" rows="5" cols="55" id="add_participation"></textarea></br>
+                                </div>
+                                <div class="form-group">
+                                <label for="FB" class="form-control">FB粉絲團</label>
+                                <textarea name="FB" rows="5" cols="55" id="add_FB"></textarea></br>
+                                </div>
+                                <div class="form-group">
+                                <label for="picture" class="form-control">活動剪影</label>
+                                <textarea name="picture" rows="4" cols="55" id="add_picture"></textarea></br>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                <button type="submit" class="btn btn-primary">儲存</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div> 
+        </div>
+        <!-- 按鈕 -->
+        <% for(var i in community) { %>
+            <div class="mainbutton">
+                <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#<%= community[i]._id %>"><%= community[i].name %></button><br></br>
+            </div>
+            <!-- 社團介紹 Modal -->
+            <div class="modal fade " role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id ="<%= community[i]._id %>">  <!-- 根據資料庫id判斷modal內容 -->
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="exampleModalLabel"><%= community[i].name %></h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <ul class="nav nav-pills flex-column">
+                                    <li><a data-toggle="pill" href="#introduction_<%= community[i].name %>">學生組織介紹</a></li>
+                                    <li><a data-toggle="pill" href="#participation_<%= community[i].name %>">加入學生組織</a></li>
+                                    <li><a data-toggle="pill" href="#FB_<%= community[i].name %>">FB粉絲團</a></li>
+                                    <li><a data-toggle="pill" href="#activity_<%= community[i].name %>">活動剪影</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div id="introduction_<%= community[i].name %>" class="tab-pane fade in">
+                                        <h5>學生組織介紹</h5>  
+                                        <p><%= community[i].introduction %></p>  
+                                    </div>
+                                    <div id="participation_<%= community[i].name %>" class="tab-pane fade in">
+                                        <h5>加入學生組織</h5>
+                                        <p><%= community[i].participation %></p>
+                                    </div>
+                                    <div id="FB_<%= community[i].name %>" class="tab-pane fade in">
+                                        <h5>FB粉絲團</h5>
+                                        <p><%= community[i].FB %></p>
+                                    </div>
+                                    <div id="activity_<%= community[i].name %>" class="tab-pane fade in">
+                                        <h5>活動剪影</h5>
+                                        <p><%= community[i].picture %></p>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        <% } %>
     </main>
     <footer>
         <% include ../layout/footer %>

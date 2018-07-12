@@ -1,0 +1,22 @@
+.mainbutton{
+    margin-left: 70%;
+}
+
+li{ 
+    border-style:outset;
+    padding-top:13px; 
+    padding-bottom: 13px;
+}
+
+ul{
+    float:left;
+}
+
+h5{
+    margin-left: 30%;
+}
+
+p{
+    margin-top: 2%;
+    margin-left: 30%;
+}
