@@ -83,9 +83,6 @@ router.get('/:id', function(req, res, next) {
             if (err){return next(err);}
             // 回傳 title, content, answer
             res.json({
-              //title: qna.title,
-              //content: qna.content,
-              //answer: qna.answer
               click:question.click
             });
           });
@@ -144,5 +141,20 @@ router.get('/delete/:id',function(req,res,next){
   //}
 });
 /*搜尋功能*/
-
+router.get('/search',function(req,res,next){
+  if(req.query.keyword){
+    console.log(req.query.keyword);
+    Question.find({Title: req.query.keyword},function(err,result,count){
+      if(err){return next(err)};
+      console.log("測試用");
+      res.render('qna/search', { 
+        title: '新生Ｑ＆Ａ ｜ 新生知訊網',
+        result:result
+      });
+      /*res.json({
+        result:result
+      });*/
+    });
+  }
+});
 module.exports = router;
