@@ -1,4 +1,5 @@
-
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.1.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
 <script>
     //載入IFrame Player API code
     var tag = document.createElement('script');
@@ -6,22 +7,26 @@
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    var x, n=0, nx=0, rotINT, rotate = 0, end = 1;
+    var x, n=0, nx=0, rotINT, rotate = 0, end = 1, currentid, currentcollege, QAvideoplay = 0;//currentid紀錄現在播到哪個影片
+    //var allmove, move, moveINT, moveD = 0, i=0, moveend=1;
     //var player;
     //function onYouTubeIframeAPIReady() {player = new YT.Player('playser');}
     //初始影片
     
     //let aaa = JSON.parse(<%= %>);
-        let ppp = Object();
+        let player = Object();
         function onYouTubeIframeAPIReady() {//此函數在IFrame Player API code 載入後將自動呼叫
             $(".player").each(function(){
-                console.log(this.id);
-                console.log($(this));
+                //console.log(this.id);
+                //console.log($(this));
                 let id=this.id;
-                ppp[id] = new YT.Player(id, {
+                player[id] = new YT.Player(id, {
                     height: '390',
                     width: '640',
                     videoId: id, //Youtube ID
+                    enablejsapi: 1,
+                    origin: 'http://localhost:3000'
+
                 });
             })
         }
@@ -30,12 +35,12 @@
     
 
     $(document).ready(() => {
-        $(document).on("click",".rotate",function(event){
-            if(end == 1){
+        $(document).on("click",".rotate",function(event){//旋轉唱片盒
+            if(end == 1){//end記錄唱片盒轉完了沒
                 if(rotate == 0){
                     $('.rotate').html('影片');
-                    //player.pauseVideo();
-                    
+                    player[currentid].pauseVideo();
+                    //console.log(currentid);
                     rotate = 1;
                 }
                 else{
@@ -46,81 +51,105 @@
                 rotateDIV()
             }
             
-            //按介紹時暫停
-            /*$('.CDplayer').each(function(){
-                if(rotate == 0){
-                    $(this).stopVideo();
-                }
-            });*/
         })
 
         $(document).on("click",".turn",function(event){
-            if(rotate==1){
+            if(rotate==1){//每個按鍵都唱片盒轉回正面
                 $('.rotate').html('簡介');
                 rotate = 0;
                 rotateDIV()
             }
         })
 
-        
-
-        $(document).on("click",".longvideo",function(event){
-            $("#CDbox").css('background-image', 'url("test_background_longvideo.png")');
+        $(document).on("click",".video_item",function(event){
+            $("#CDbox").css('background-image', 'url("background_'+$(this).attr("video")+'.png")');
             
+            
+
+            if(this.id != "back"){
+                QAvideoplay = 0;
+                $("iframe").css("display", "none");
+                $(".picture").css("display", "none");
+                if(currentid)
+                    player[currentid].pauseVideo();
+            }
             //$('.rotate').css("display", "none");
             $('.sbtn').css("display", "none");
-            $('.video_item_longvideo').css("display", "block");
-
-            $(document).on("click",".video_item_longvideo",function(event){
-                /**/$("#"+$(this).attr("ytID")).css("display", "block");
-            })
+            $('.video_item_'+$(this).attr("video")).css("display", "block");
             
-        })
-        $(document).on("click",".lifevideo",function(event){
-            $("#CDbox").css('background-image', 'url("test_background_lifevideo.png")');
+            $(document).on("click",".video_item_"+$(this).attr("video"),function(event){
+              
+                //console.log(this);
+                if($(this).attr("video") == "QAvideo"){
+                    
 
-            //$('.rotate').css("display", "none");
-            $('.sbtn').css("display", "none");
-            $('.video_item_lifevideo').css("display", "block");
-
-
-            $(document).on("click",".video_item_lifevideo",function(event){
+                    //console.log('QAvideo!');
+                    $('.sbtn').css("display", "none");
+                    $(".video_item_QAvideo_"+ $(this).attr('college')).css("display", "block");
                 
-            })
-            
+                    if(QAvideoplay == 1){
+                        $('.rotate').css('display', "block");
+                    }
 
-            
-        })
-
-        
-
-        $(document).on("click",".QAvideo", function(event){
-            $("#CDbox").css('background-image', 'url("test_background_QAvideo.png")');
-            
-            //$('.rotate').css("display", "none");
-            $('.sbtn').css("display", "none");
-            $('.video_item_QAvideo').css("display", "block");
-
-            $(document).on("click",".video_item_QAvideo",function(event){
-                $('.sbtn').css("display", "none");
-                $(".video_item_QAvideo_"+ $(this).attr('college')).css("display", "block");
+                    if((this.id != "back") && (currentcollege != $(this).attr("college"))){
+                        //console.log("QAvideoplay = 0");
+                        QAvideoplay = 0;
+                        $("#CDbox").css('background-image', 'url("background_'+$(this).attr("college")+'.png")');
+                        $("iframe").css("display", "none");
+                        $(".picture").css("display", "none");
+                        if(currentid)
+                            player[currentid].pauseVideo();
+                    }
+                    currentcollege = $(this).attr("college");
                 
-                
-                $(document).on("click","'.video_item_QAvideo_"+ $(this).attr('college')+"'",function(event){
+                    $(document).on("click",".video_item_QAvideo_"+ $(this).attr('college'),function(event){
+                        //console.log("QAvideoplay = 1");
+                        QAvideoplay = 1;
+                        $("#"+$(this).attr("ytID")).css("display", "block");
+                    })
+                }
+                else{
+                    $("#"+$(this).attr("ytID")).css("display", "block");
+                }
                     
                 })
-            })
+            
             
         })
 
+
         $(document).on("click",".ssbtn",function(event){
+            if(currentid)
+                player[currentid].pauseVideo();
+            currentid = $(this).attr('ytID');
             $('.rotate').css('display', "block");
-            $(iframe).css("display", "none");
+            $("iframe").css("display", "none");
             $("#"+ $(this).attr('ytID')).css("display", "block");
             $(".picture").css("display", "none");
             $("."+ $(this).attr('ytID')).css("display", "block");
                 
         })
+
+        $(document).on("click","#back",function(event){
+            //console.log("if QAvideoplay?");
+            //console.log(QAvideoplay);
+            if(QAvideoplay == 1)
+                $('.rotate').css('display', "block");
+                
+        })
+
+        $(document).on("click",".video_item",function(event){
+            // allmove= $('.video_item_'+$(this).attr("video"));
+            // //console.log(allmove[0]);
+            // move = allmove[i];
+            // clearInterval(moveINT);
+            // moveINT=setInterval("startMove()",10);
+            // $('.video_item_'+$(this).attr("video")).addClass("move");
+            // $('.video_item_'+$(this).attr("video")).removeClass("stop");
+            
+        })
+
+        
     })
 
 
@@ -132,10 +161,11 @@
     function rotateDIV()
     {
         x=document.getElementById("CDbox")
+        
         clearInterval(rotINT)
         rotINT=setInterval("startRotate()",10)
     }
-        
+
     function startRotate()
     {
         end = 0;
@@ -163,6 +193,28 @@
             end = 1;
         }
     }
+
+    
+
+    // function startMove()
+    // {
+    //     moveD=moveD+1
+    //     move.style.transform="translateX(" + moveD + "vw)"
+    //     move.style.webkitTransform="translateX(" + moveD + "vw)"
+    //     move.style.OTransform="translateX(" + moveD + "vw)"
+    //     move.style.MozTransform="translateX(" + moveD + "vw)"
+        
+    //     if (moveD == (4-i)*20)
+    //     {
+    //         console.log(moveD);
+    //         clearInterval(moveINT)
+    //         moveD = 0;
+    //         moveend = 1;
+    //         i++;
+    //     }
+    // }
+
+    
 
     
 

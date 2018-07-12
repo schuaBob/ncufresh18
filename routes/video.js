@@ -75,14 +75,14 @@ router.post('/add', function(req, res, next){
           if(e) console.log(e);
         })
       }
-      if(req.body.introduce != ""){
-        video.update({title: title},{
-          title: title,//中大長劇or悠遊中大or快問快答
-          introduce: req.body.introduce
-        },function(err){
-          if(e) console.log(e);
-        })
-      }
+      // if(req.body.introduce != ""){
+      //   video.update({title: title},{
+      //     title: title,//中大長劇or悠遊中大or快問快答
+      //     introduce: req.body.introduce
+      //   },function(err){
+      //     if(e) console.log(e);
+      //   })
+      // }
       
     }else {
       new video({
@@ -90,7 +90,7 @@ router.post('/add', function(req, res, next){
         type: type,//中大長劇or悠遊中大 or快問快答
         college: college,//學院
         insert: req.body.insert, //youtubeID
-        introduce: req.body.introduce //影片介紹圖片
+        //introduce: req.body.introduce //影片介紹圖片
       }).save();
     }
   });

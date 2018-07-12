@@ -1,6 +1,6 @@
 
 #CDbox {
-    background-image: url('test_background.png');
+    background-image: url('background.png');
     background-size: 100%;
     padding: 0vw;
     margin: 0vw;
@@ -74,9 +74,9 @@ iframe {
 .video_item_lifevideo {
     margin-left: 4vw;
 }
-.video_item_QAvideo {
+/* .video_item_QAvideo {
     margin-left: 1vw;
-}
+} */
 
 .video_item_QAvideo_c1 {
     margin-left: 5vw;
@@ -115,7 +115,22 @@ iframe {
     height: 100%;
   }
 
-  .sbtn {
-      display: none;
-  }
+.sbtn {
+    display: none;
+}
+
+/* .stop {
+    position: absolute;
+    left: 0;
+    -webkit-transition: left 1s;
+    -moz-transition: left 1s;
+     -o-transition: left 1s;
+    transition: left 1s;
+} */
+
+/* .move {
+    left: auto;
+} */
+
+
 
