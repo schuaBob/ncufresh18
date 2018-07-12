@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var club = mongoose.Schema({
-    typenum : Number, // 性質類別
+    type : String, // 性質類別
     name : String,  // 社團名稱
     introduction : String, // 社團介紹
     participation : String, // 加入社團

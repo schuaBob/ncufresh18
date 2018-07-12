@@ -60,15 +60,16 @@
                 <div class="tab-content">
                     <div id="intro" class="tab-pane fade in active">
                         <h3>簡介</h3>
-                        <p><%- student[0].introduction %></p>
+                        <!-- 只有一項所以[]裡面設0就可 -->
+                        <p><%= student[0].introduction %></p>
                     </div>
                     <div id="branch" class="tab-pane fade in">
                         <h3>部門介紹</h3>
-                        <p><%- student[0].branch %></p>
+                        <p><%= student[0].branch %></p>
                     </div>
                     <div id="activity" class="tab-pane fade in">
                         <h3>活動剪影</h3>
-                        <p><%- student[0].picture %></p>
+                        <p><%= student[0].picture %></p>
                     </div>
         </div>
     </div>

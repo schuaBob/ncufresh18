@@ -1,14 +1,35 @@
-.nav{
-    padding:12px 12px;
+li{ 
+    border-style:outset;
+    padding-top:13px; 
+    padding-bottom: 13px;
 }
-
+ul{
+    float:left;
+}
+.btn-group-vertical{
+    float:left;
+    margin-left: 5%;
+}
 p{
     margin-top: 2%;
+    margin-left: 30%;
+}
+h5{
+    margin-left: 20%;
+}
+.typelearn_name{
+    margin-left: 60%;
+}
+.typeplay_name{
+    margin-left: 60%;
+}
+.typedate_name{
+    margin-left: 60%;
+}
+.typeservice_name{
+    margin-left: 60%;
 }
 
-.club_name{
-    margin-left: 70%;
-}
 
 h4{
     margin-top: 3%;
