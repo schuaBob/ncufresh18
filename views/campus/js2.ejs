@@ -1,8 +1,46 @@
 <script>
+    var loadFile = function (event) {
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+    };
+
     $(document).ready(function () {
-        <% for (let i = 0;i< result.length;i++){ %>
-            $("#elecategory"+<%=i%>).children("[value=<%= result[i]['Type'] %>]").attr({"selected":"selected"});
+        $(".picedit").click(function (event) {
+
+            $.ajax({
+                url: "getimg?id=" + event.currentTarget.attributes.ooo.value,
+                method: 'GET',
+                error: function (err) {
+                    //失敗要做的事
+                },
+                success: function (data) {
+                    $('.buildpic').prepend("<img class='saved 'width='300' src='/campus/" + data.Buildpic + "'>")
+                    console.log(data)
+                    for (let i = 0; i < data.Intropic.length; i++) {
+                        $('.intropic').prepend("<img class='saved 'width='300' src='/campus/" + data.Intropic[i] + "'>")
+                    }
+
+
+                }
+            });
+            $(".modal-title-buildpic").click(function () {
+                $('intropic').hide()
+                $('.buildpic').show()
+                
+            })
+            $(".modal-title-intropic").click(function () {
+                $('.buildpic').hide()
+                $('.intropic').show()
+            })
+
+        })
+        $('.picclose').click(function () {
+            $('.saved').remove()
+        })
+            <% for (let i = 0; i < result.length; i++) { %>
+                $("#elecategory" +<%=i %>).children("[value=<%= result[i]['Type'] %>]").attr({ "selected": "selected" });
         <%}%>
+            
 
     })
 </script>
