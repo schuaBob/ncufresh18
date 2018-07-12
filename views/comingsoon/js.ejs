@@ -1,7 +1,7 @@
 <script>
   // Set the date we're counting down to
   var countDownDate = new Date("Aug 6, 2018 16:00:00 UTC").getTime() ;
-  
+  let flag=true;
   document.getElementById("day").innerHTML = 00 ;
   document.getElementById("hour").innerHTML = 00 ;
   document.getElementById("min").innerHTML = 00 ;
@@ -38,7 +38,10 @@
     document.getElementById("hour").innerHTML = hours ;
     document.getElementById("min").innerHTML = minutes ;
     document.getElementById("sec").innerHTML = seconds ;
-  
+    if(flag){
+      $('#grid-counter').fadeIn(1000);
+      flag=false;
+    }
     // If the count down is finished, write some text 
     if (distance < 0) {
 

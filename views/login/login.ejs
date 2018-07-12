@@ -2,20 +2,21 @@
 <html>
 <head>
     <% include ../layout/head %>
+    <link href="../login/mdb.min.css" rel="stylesheet">
 </head>
 <body>
     <header>
         <% include ../layout/navbar %>
     </header>
     <main>
-        <div>
-            <%_ /* 帳號 */ -%>
-            <label>PORTAL帳號：</label>
-            <input type="text" name="account"><br>
-            <%_ /* 密碼 */ -%>
-            <label>密碼：</label>
-            <input type="password" name="password"><br>
-            <input type="submit" value="登入">
+        <span class="fa fa-sign-in"></span> 登入
+        <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" name="email" required>
+            </div>
+        <div >
+            <label>帳號：</label>
+            <input type="text" class="form-control" name="email" required>
         </div>
     </main>
     <footer>
