@@ -203,11 +203,10 @@ var quiz = temp
 function quizFormat() {
     for(i = 0; i < temp.length; i++) {
         if (temp[i].q.length > 14) {
-            // console.log("hhhhhhhhhhhhhhhhhhhhhhh")
-            quiz[i].q = temp[i].q.insert(14, "\n")
+            quiz[i].q = temp[i].q.insert(15, "\n")
         } 
         if (temp[i].q.length > 28) {
-            quiz[i].q = temp[i].q.insert(28, "\n")            
+            quiz[i].q = temp[i].q.insert(29, "\n")            
         }
     }    
 }
@@ -254,7 +253,6 @@ var game = new Phaser.Game(width, height, Phaser.AUTO, 'game')
 var states = {
 	// 加载场景, 載入資源
     preload: function() {
-
     	this.preload = function() {
             game.state.backgroundColor = '#000000'
             // 載入資源
@@ -268,11 +266,12 @@ var states = {
             game.load.image('bonus2', 'images/+3s.png')
             game.load.image('bonus3', 'images/+7s.png')
             game.load.image('bonus4', 'images/+20s.png')
+            game.load.image('combo', 'images/combo.png')
             game.load.spritesheet('question', 'images/question.png', 400, 200)
             game.load.spritesheet('btnBack', 'images/back.png', 60, 60)
             game.load.spritesheet('blank', 'images/blank.png', 800, 600)
+            game.load.spritesheet('testLeft', 'images/testleft.png', 100, 600)
             
-
             // 添加進度提示
             var progressText = game.add.text(game.world.centerX, game.world.centerY, '0%', {
                 fontSize: '60px',
@@ -363,136 +362,190 @@ var states = {
     // 遊戲 play 界面
     start: function() {
         this.create = function() {
+            var combo = 0
+            var score = 0
             // 設置背景邊界
             game.world.setBounds(0, 0, 800, 2000);
+
             // 背景
             var bg = game.add.image(0, 0, 'bg')
             bg.width = game.world.width     
             bg.height = game.world.height
             
-            // 鏡頭糾區域
+            // 鏡頭區域
             game.physics.startSystem(Phaser.Physics.P2JS)
             var cameraFocus = game.add.sprite(game.world.centerX, game.world.centerY + 700, 'blank')
             game.physics.p2.enable(cameraFocus)
-            cameraFocus.body.fixedRotation = true
 
             // 返回按鈕            
             var btnBack = game.add.button(0, 0, 'btnBack', btnBackClick)
             btnBack.alignIn(cameraFocus, Phaser.TOP_RIGHT)
             
-            // 問題
+            // 問題框
             var questionSprite = game.add.sprite(game.world.centerX + 100, game.world.centerY - 120, 'question')
             questionSprite.anchor.setTo(0.5, 0.5)
+
+            // 問題文字
             var style = { 
                 font: "32px Courier",
                 fill: "#00ff44",
+                align: "center",
+                wordWrap: true,
+                wordWrapWidth: questionSprite.width
             }
-
             var questionText = game.add.text(0, 0, style)
             questionText.alignIn(questionSprite, Phaser.LEFT_CENTER)
+
             // 選擇按鈕
             var btnChoiceA = new LabelButton(false, this.game, game.world.centerX + 100, game.world.centerY + 30, "btnChoice", "Choice A", inputDown) 
             var btnChoiceB = new LabelButton(false, this.game, game.world.centerX + 100, game.world.centerY + 85, "btnChoice", "Choice B", inputDown) 
             var btnChoiceC = new LabelButton(false, this.game, game.world.centerX + 100, game.world.centerY + 140, "btnChoice", "Choice C", inputDown) 
             var btnChoiceD = new LabelButton(false, this.game, game.world.centerX + 100, game.world.centerY + 195, "btnChoice", "Choice D", inputDown) 
 
-            // 返回按鈕
-            // 建立 playUI
-            var playUI = game.add.group()
-            // playUI.body.fixedRotation = true
-            playUI.forEach(game.physics.p2.enable)
-            playUI.setAll('body.fixedRotation', true)
+            // 添加 combo
+            var comboSprite = game.add.image(0, 0, 'combo')
+            comboSprite.alignTo(cameraFocus, Phaser.RIGHT_CENTER, -150, 15)
+            var comboText = game.add.text(0, 0, '0', {
+                fontSize: "45px"
+            })
+            comboText.alignTo(comboSprite, Phaser.BOTTOM_CENTER, 0, -10)
+            comboSprite.visible = false
+            comboText.visible = false
 
+            // 添加松鼠動畫， test
+            // var testLeft = game.add.sprite(0, 0, 'testLeft')
+            // testLeft.alignTo(cameraFocus, Phaser.LEFT_CENTER)
+
+            // 添加獎勵圖片
+            var bonus1 = game.add.image(0, 0, 'bonus1');
+            var bonus2 = game.add.image(0, 0, 'bonus2');
+            var bonus3 = game.add.image(0, 0, 'bonus3');
+            var bonus4 = game.add.image(0, 0, 'bonus4');
+
+            // 選擇 bonus
+            function choiceBonus(combo) {
+                if (combo == 1) {
+                    return "bonus1"
+                } else if (combo == 2) {
+                    return "bonus2"
+                } else if (combo == 3) {
+                    return "bonus3"
+                } else if (combo == 4) {
+                    return "bonus4"
+                } else {
+                    return false
+                }
+            }
+
+            var otherUI = game.add.group()
+            otherUI.add(btnBack)
+            otherUI.add(comboSprite)
+            otherUI.add(comboText)
+            otherUI.add(bonus1)
+            otherUI.add(bonus2)
+            otherUI.add(bonus3)
+            otherUI.add(bonus4)
+
+            // 建立 playUI group
+            var playUI = game.add.group()
             playUI.add(btnChoiceD)
             playUI.add(btnChoiceC)
             playUI.add(btnChoiceB)
             playUI.add(btnChoiceA)
             playUI.add(questionSprite)
             playUI.add(questionText)
-            // playUI.add(cameraFocus)
-            // playUI.add(btnBack)
-
-            
+ 
             playUI.alignIn(bg, Phaser.BOTTOM_CENTER)
             playUI.y -= 100
 
             game.camera.focusOnXY(600, 2000)
             
-            game.camera.follow(cameraFocus, Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
-            // 鏡頭移動到底部
-
-
-            // 打亂順序，每次不同
+            // 打亂順序，每次題目不同
             var data = quiz.shuffle()
             var count = 0
+            var choiceState = 0
             
             // 刷新題目
             function resetQuestionAndChoice(data) {
+                choiceState = 0
                 questionText.setText(data.q)
-                // console.log(data.q.length)
                 choices = [btnChoiceA, btnChoiceB, btnChoiceC, btnChoiceD]
                 console.log("correctIndex:" + data.correctIndex)
                 for (i = 0; i < choices.length; i++) {
                     choices[i].setLabel(data.o[i])
                     if (i == data.correctIndex) {
                         choices[i].setRightOrWrong(true)
-                        // console.log(choices[i].rightOrWrong)
                     } else {
                         choices[i].setRightOrWrong(false)
                     }
                 }
             }
             
-            // 按下按鈕 event
+            // 按下按鈕 event, 
             function inputDown(item) {
                 count++
-                cameraFocus.body.setZeroVelocity();
-                if (item.rightOrWrong) {
-                    item.setLabel("Congratulations!")
-                    // playUI.callAll('body.moveUp', 100)
-                    
-                    cameraFocus.body.moveUp(100)
-                    setTimeout(resetQuestionAndChoice, 500, data[count])
+                // choiceState 判斷一次答題是否點擊多次
+                if (!choiceState) {
+                    choiceState = 1
+                    // 選擇正確
+                    if (item.rightOrWrong) {
+                        combo++
+                        item.setLabel("Congratulations!")                    
+                        var goal = choiceBonus(combo)
+
+                        // 顯示 bonus 效果
+                        if (goal) {
+                            var bonus = game.add.image(game.camera.x + 620, game.camera.y + 150, goal)
+                            console.log(bonus.y)
+                            bonus.alpha = 0
+                            // 添加過渡效果
+                            var showTween = game.add.tween(bonus).to({
+                                alpha: 1,
+                                y: bonus.y - 20
+                            }, 500, Phaser.Easing.Linear.None, true, 0, 0, false);
+                            showTween.onComplete.add(function () {
+                                game.add.tween(bonus).to({
+                                    alpha: 0,
+                                    y: bonus.y - 20
+                                }, 500, Phaser.Easing.Linear.None, true, 200, 0, false);
+                            });        
+                        }
+                        
+                        // 使用 tween 移動鏡頭
+                        if (game.camera.y >= 40) {
+                            console.log("game.camera.y: " + game.camera.y)
+                            game.add.tween(playUI).to({y: playUI.y - 40}, 500, null, true, "Quart.easeOut");
+                            game.add.tween(otherUI).to({y: otherUI.y - 40}, 500, null, true, "Quart.easeOut");
+                            game.add.tween(game.camera).to({y: game.camera.y - 40}, 500, null, true, "Quart.easeOut");
+                        }
+                        setTimeout(resetQuestionAndChoice, 500, data[count])
+                    } else {
+                        combo = 0
+                        item.setLabel("you are wrong!")
+                        if (game.camera.y <= 1360) {
+                            console.log("game.camera.y: " + game.camera.y)
+                            game.add.tween(playUI).to({y: playUI.y + 40}, 500, null, true, "Quart.easeOut");
+                            game.add.tween(otherUI).to({y: otherUI.y + 40}, 500, null, true, "Quart.easeOut");
+                            game.add.tween(game.camera).to({y: game.camera.y + 40}, 500, null, true, "Quart.easeOut");
+                        }
+                        setTimeout(resetQuestionAndChoice, 1500, data[count])
+                    } 
+                }
+
+                // 更新 combo 顯示
+                comboText.setText(combo.toString())
+                if (combo == 0) {
+                    comboSprite.visible = false
+                    comboText.visible = false
                 } else {
-                    item.setLabel("you are wrong!")
-                    if (playUI.y <= 1800) {
-                        playUI.moveDown(100)
-                    }
-                    cameraFocus.body.moveDown(100);
-                    setTimeout(resetQuestionAndChoice, 1500, data[count])
+                    comboSprite.visible = true
+                    comboText.visible = true
+
                 }
             }
 
-            // // 上移背景圖
-            // function upBackground(i) {     
-            //     if (!i) {
-            //         i = 0
-            //     }
-            //     ++i
-            //     playUI.y -= 3
-            //     game.camera.y -= 3
-            //     if (i < 30) {
-            //         setTimeout(upBackground, 10, i)
-            //     }
-                
-            // }
-
-            // // 下移背景圖
-            // function downBackground(i) {
-            //     if (!i) {
-            //         i = 0
-            //     }
-            //     ++i
-            //     playUI.y += 3
-            //     game.camera.y += 3
-            //     if (i < 30) {
-            //         setTimeout(downBackground, 10, i)
-            //     }            
-            // }
-
             // 第一次刷新題目
             resetQuestionAndChoice(data[count])
-
         }
     },
 
