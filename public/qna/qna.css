@@ -3,21 +3,30 @@ tbody{
     display: block;
     height: 300px;
     overflow-y: scroll;
-    border: 1px;
+    border-collapse: collapse;
+    font-family: Microsoft JhengHei;
 }
 thead{
     display: block;
-    background-color: azure;
     text-align: center;
+    background-color: #b8daff;
+    font-family: Microsoft JhengHei;
 }
 td{
     text-align: center;
     width:80px;
 }
 th{
-    border:10px;
     width:80px;
 }
 #title{
     width:200px;
+}
+.ask{
+    float: right;
+    top:300px;
+    position: absolute;
+}
+.classification{
+    margin: 35px;
 }

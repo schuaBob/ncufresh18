@@ -2,6 +2,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <script>
 $(document).ready(() => {
     //只看單一分類
@@ -25,22 +26,21 @@ $(document).ready(() => {
         $('tr.Q').fadeIn(500);
     });
     /*$("li a[href='#time']").on('click',function(event){
-        $('tr.Q').fadeIn(500);
+
+    });*/
+    /*$("li a[href='#hot']").on('click',function(event){
+
     });*/
     //紀錄點擊次數
     $('tr').on('click',function(){
-        var id = $(this).prop('id');
+        //var id = $(this).prop('id');
+        var id = this.id.split('-')[0];
         $.ajax({
             url: '/qna/' + id,
             method: 'GET',
             success: function(res) {
             
-            //document.getElementById('show-title').innerHTML = res.title;
-            //document.getElementById('show-content').innerHTML = res.content;
-            //document.getElementById('show-answer').innerHTML = res.answer;
-            console.log("測試用");
-            var objs = $('#' + id).find('#view');
-            console.log(objs);
+            var objs = $('.' + id).find('.view');
             for (var i = 0; i < objs.length; i++) {
                 objs[i].innerHTML = parseInt(objs[i].innerHTML) + 1;
             }
@@ -48,5 +48,20 @@ $(document).ready(() => {
             }
         })
     })
+    //搜尋功能
+    /*$(".searchbtn").on('click',function(){
+        if($("#searchtext").val()!==""){
+            var keyword = $("#searchtext").val();
+            console.log(keyword);
+            $.ajax({
+                url: '/qna/search?keyword='+keyword,
+                method: 'GET',
+                success: function(res) {
+                    //$('tr.Q').hide();
+                }
+            })
+        }
+    })*/
+    //置頂功能
 })         
 </script>
