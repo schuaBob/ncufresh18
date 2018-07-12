@@ -8,29 +8,8 @@
     <header>
         <% include ../layout/navbar %>
     </header>
-    <main style="background-image: url('sub_background.png'); background-repeat: no-repeat;  background-size:cover; background-attachment: fixed; height: 100vw;">
-        <div class="header-2"></div>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">新增</button>
-        <!-- model -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      ...
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+    <main style="background-image: url('backstar.png'); background-repeat: no-repeat;  background-size:cover; background-attachment: fixed; height: 100vw;">
+        <% include modify %>
         <div class="selectArea">
             <% var cnt = 0 %>
             <% for (var i in life) { %>
@@ -38,10 +17,10 @@
                     <div class="selectbar">
                         <img class="mainTitle" src="1_<%=i%>_food.png" id="1_<%=cnt%>" alt="<%=life[i].alt%>"/>
                         <% if(life[i].subTitle.length != 0) { %>
-                            <hr class="hide" id="1_<%=cnt%>_hr"/>
-                            <ul class="hide" id="1_<%=cnt%>_sub">
+                            <hr class="hide1" id="1_<%=cnt%>_hr"/>
+                            <ul class="hide1" id="1_<%=cnt%>_sub">
                             <% for (var j=0 ; j<life[i].subTitle.length ; j++) { %>
-                                <li><a href=""><%= life[i].subTitle[j] %></a></li>
+                                <li><a href="" class="showDetail"><%= life[i].subTitle[j] %></a></li>
                             <% } %>
                             </ul>
                         <% } %>
@@ -50,6 +29,7 @@
                 <% } %>
             <% } %>
         </div>
+        
         <div class="pictureArea">
             <div class="slideshow_container">
                 <div class="mySlides">

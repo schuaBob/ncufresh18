@@ -6,29 +6,32 @@
 
     $(document).ready(function(){ 
         var ifHide = 1;
-        $('.hide').slideUp();
+        $('.hide1').slideUp();
         $('.mainTitle').click(function(){
             var id = $(this).attr("id"),
                 sub_id = "#" + id + "_sub",
                 sub_hr = "#" + id + "_hr";
             if(ifHide == 1){
                 $(sub_id).slideDown();
-                $(sub_id).addClass("show");
-                $(sub_id).removeClass("hide");
+                $(sub_id).addClass("show1");
+                $(sub_id).removeClass("hide1");
                 $(sub_hr).slideDown();
-                $(sub_hr).addClass("show");
-                $(sub_hr).removeClass("hide");
+                $(sub_hr).addClass("show1");
+                $(sub_hr).removeClass("hide1");
                 ifHide = (ifHide + 1) % 2;
             }
             else{
                 $(sub_id).slideUp();
-                $(sub_id).addClass("hide");
-                $(sub_id).removeClass("show");
+                $(sub_id).addClass("hide1");
+                $(sub_id).removeClass("show1");
                 $(sub_hr).slideUp();
-                $(sub_hr).addClass("hide");
-                $(sub_hr).removeClass("show");
+                $(sub_hr).addClass("hide1");
+                $(sub_hr).removeClass("show1");
                 ifHide = (ifHide + 1) % 2;
             }
         });
-    })
+    });
+
+    $('.showDetail').on('click', function(e){
+    });
 </script>

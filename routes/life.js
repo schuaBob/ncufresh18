@@ -2,6 +2,7 @@ var express = require('express');
 var request = require('request');
 var life = require('../models/life/life');
 var router = express.Router();
+var formidable = require('formidable');
 // var apiKey = 'c7282145be089c1ab3c03aa2e2f7c5dd';
 
 /* 中大生活首頁 */
@@ -50,6 +51,21 @@ router.get('/entertainment', function(req, res, next){
   life.find({}, function(err, data){
     res.render('life/entertainment', { title: '樂', life: data});
   });
+});
+
+router.post('/edit', function(req, res, next){
+  var form = new formidable.IncomingForm();
+  form.parse(req, function(err, fields, files){
+    if(err)
+      return next(err);
+    res.redirect('food');
+  });
+});
+
+router.post('/editTitle', function(req, res, next){
+  var newLife = new life({
+  }).save();
+  res.redirect('food');
 });
 // router.post('/', function(req, res, next){
 //   let city = req.body.city;

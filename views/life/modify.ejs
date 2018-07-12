@@ -1,0 +1,79 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#labelModal">新增/修改項</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#contentModal">新增內容</button>
+<!-- Modal -->
+<div class="modal fade" id="labelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">新增/修改項</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+            <form action="editTitle" method="POST">
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="elename">大項</label>
+                    <div class="col-md-6">
+                        <input type="text" placeholder="請輸入" class="form-control input-md" name="mainTitle">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="elename">小項(以;分隔)</label>
+                    <div class="col-md-12">
+                        <input type="text" placeholder="請輸入" class="form-control input-md" main="subTitle">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                    <button type="submit" class="btn btn-primary">儲存/修改</button>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+    </div>
+</div>
+
+<div class="modal fade" id="contentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">新增內容</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <form action="edit" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="elecategory">選擇小項</label>
+                    <div class="col-md-6">
+                        <select class="form-control input-md">
+                            <option value="0">請選擇</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="elecategory">圖片</label>
+                    <div class="col-md-12">
+                        <input type="file" class="form-control input-md" name="picture">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="elecategory">敘述文字</label>
+                    <div class="col-md-12">
+                        <textarea class="form-control input-md" name="discription"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                    <button type="submit" class="btn btn-primary">儲存</button>
+                </div>
+            </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
