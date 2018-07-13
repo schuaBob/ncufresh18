@@ -10,6 +10,17 @@ main{
     
 }
 
+
+#show_content{
+
+   
+    display:inline-block;
+}
+.modal-footer{
+    display:inline-block; 
+}
+
+
 /*電腦大螢幕*/
 
 @media only screen and (min-width: 993px) {
@@ -21,7 +32,8 @@ main{
         grid-auto-columns:20%;
         align-content:center;
         margin-left:14%;
-        grid-gap: 13px 4%;
+        grid-gap: 14px 14px;
+        
         
       }
     /*給那些排版會莫名噴錯的*/
@@ -139,7 +151,7 @@ main{
             grid-auto-columns:21%;
             align-content:center;
             margin-left:9%;
-            grid-gap: 13px 4%;
+            grid-gap: 12px 12px;
             
         }
         .special{
@@ -246,7 +258,6 @@ main{
 }
  
 /*手機螢幕大小，新排版
-!!!ckeditor show model 會爆炸
 */
  @media only screen and (min-width: 0px) and (max-width: 768px){
     a{
@@ -259,7 +270,7 @@ main{
         grid-auto-columns:30%;
         align-content:center;
         margin-left:4%;
-        grid-gap: 13px 4%;
+        grid-gap: 10px 10px;
         
     }
 
@@ -270,7 +281,7 @@ main{
         grid-auto-columns:45%;
         align-content:center;
         margin-left:4%;
-        grid-gap: 13px 4%;
+        grid-gap: 10px 10px;
         
     }
     /*研究生新生周活動的排版*/
@@ -392,7 +403,7 @@ main{
   background-color: beige;
   border: 2px solid black;
   font-size: 25px;
-  
+ /* border-radius: 50%;*/
 }
 
 
@@ -401,7 +412,6 @@ main{
     padding-top:2%;
     
 }
-
 
 
 .child {
@@ -419,6 +429,23 @@ main{
     align-items: center;
     
 }
+/*
+.big {
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+    text-align: center;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    
+}*/
+
     
 a{
     color:black;
@@ -436,20 +463,38 @@ a{
     transform: scale(1.1);
     text-decoration: none;
 }
+/*
+.big:hover{
+    -ms-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
+    text-decoration: none;
+}*/
 
 
 /*未修好!!!!
 不能偵測後才觸發
-還不能浮動
 為手機版設浮動按鈕固定下方*/
-#b_close {
-    width:100%;
-    float:right;
-    position:fixed;
-    right:0px;
-    bottom:0px;
-    z-index:999;
+@media only screen and (min-width: 0px) and (max-width: 530px){
+    .modal {
+        overflow: hidden;
+    }
+    .modal .modal-body {
+        height: var(--height);
+        overflow: auto;
+    }
+    
+    #b_close {
+        width:100%;
+        position:fixed;
+        left:0;
+        bottom:0;
+      
+    }
 }
+
 
 
 
