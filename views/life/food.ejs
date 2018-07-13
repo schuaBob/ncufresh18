@@ -15,12 +15,13 @@
             <% for (var i in life) { %>
                 <% if (life[i].type == "food") { %>
                     <div class="selectbar">
-                        <img class="mainTitle" src="1_<%=i%>_food.png" id="1_<%=cnt%>" alt="<%=life[i].alt%>"/>
+                        <img class="mainTitle" src="1_<%=cnt%>_food.png" alt="<%=life[i].mainTitle%>" />
+                        <div class="clk" id="1_<%=cnt%>"></div>
                         <% if(life[i].subTitle.length != 0) { %>
                             <hr class="hide1" id="1_<%=cnt%>_hr"/>
                             <ul class="hide1" id="1_<%=cnt%>_sub">
                             <% for (var j=0 ; j<life[i].subTitle.length ; j++) { %>
-                                <li><a href="" class="showDetail"><%= life[i].subTitle[j] %></a></li>
+                                <li><a href="#" class="showDetail"><%= life[i].subTitle[j] %></a></li>
                             <% } %>
                             </ul>
                         <% } %>

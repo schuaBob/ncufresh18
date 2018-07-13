@@ -56,16 +56,33 @@ router.get('/entertainment', function(req, res, next){
 router.post('/edit', function(req, res, next){
   var form = new formidable.IncomingForm();
   form.parse(req, function(err, fields, files){
-    if(err)
-      return next(err);
-    res.redirect('food');
+    if(err) return next(err);
+    res.redirect('back');
   });
 });
 
 router.post('/editTitle', function(req, res, next){
-  var newLife = new life({
-  }).save();
-  res.redirect('food');
+  var subTitled = req.body.subTitle.split(";");
+  subTitled.pop();
+  var typed = req.get('referer').split("/");
+  
+  life.find({mainTitle: req.body.mainTitle}, function(err, result){
+    if(err) return next(err);
+    if(result.length == 0){
+      var newLife = new life({
+        mainTitle : req.body.mainTitle,
+        subTitle  : subTitled,
+        type      : typed[typed.length-1]
+      }).save();
+    }
+    else{
+      life.update({mainTitle: req.body.mainTitle}, {subTitle: subTitled}, function(err, result){
+        if(err) return next(err);
+      })
+    }
+  });
+  
+  res.redirect('back');
 });
 // router.post('/', function(req, res, next){
 //   let city = req.body.city;

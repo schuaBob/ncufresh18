@@ -192,3 +192,11 @@ ul li{
     z-index: 2;
     border: solid;
 }
+.clk{
+    position: relative;
+    top: 10%;
+    left: 5%;
+    width: 130px;
+    height: 130px;
+    z-index: 4000;
+}
