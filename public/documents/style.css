@@ -1,142 +1,402 @@
 main{
-    font-family: Comic Sans MS,微軟正黑體;
+    font-family:simsun, Comic Sans MS,微軟正黑體;
+    background-image:url("test.jpg");
+    background-size: cover;
 }
+
 .nav-item:hover  {
     background-color: #F8F8F8;
     border-color: #E7E7E7;
     
 }
 
+/*電腦大螢幕*/
 
-.grid {
-    padding-top:2%;
-    display: grid;
-    grid-auto-rows: 175px;
-    grid-auto-columns:175px;
-    align-content:center;
-    margin-left:18%;  
-    grid-gap: 0.8em;
+@media only screen and (min-width: 993px) {
+
+    .grid {
+        padding-top:2%;
+        display: grid;
+        grid-auto-rows: 175px;
+        grid-auto-columns:20%;
+        align-content:center;
+        margin-left:14%;
+        grid-gap: 13px 4%;
+        
+      }
+    /*給那些排版會莫名噴錯的*/
+    .special{
+        margin-left:10%;      
+    }
+    /*一連串的grid排版*/
+    .money {
+        grid-area: 1 / 1 / span 1 / span 1;
+      }
+    .room {
+        grid-area: 1 / 2 / span 1 / span 1;
+    }
+    .notice{
+        grid-area:  1/ 3 / span 2 / span 2;
+    }
+    .enter{
+        grid-area: 2 / 1 / span 2 / span 1;
+    }
+    .solider{
+        grid-area: 2 / 2 / span 1 / span 1;
+    }
+    .control{
+        grid-area: 3 / 2 / span 1 / span 2;
+    }
+    .bike{
+        grid-area: 3 / 4 / span 1 / span 1;
+    }
+    .a {
+        grid-area: 1 / 1 / span 1 / span 1;
+      }
+    .b {
+        grid-area: 1 / 2 / span 1 / span 1;
+    }
+    .c{
+        grid-area:  2/ 1 / span 1 / span 2;
+    }
+    .d{
+        grid-area: 3 / 1 / span 1 / span 1;
+    }
+    .e{
+        grid-area: 3 / 2 / span 1 / span 1;
+    }
+    .a2 {
+        grid-area: 1 / 3 / span 1 / span 1;
+      }
+    .b2 {
+        grid-area: 1 / 4 / span 1 / span 1;
+    }
+    .c2{
+        grid-area:  2/ 3 / span 1 / span 2;
+    }
+    .d2{
+        grid-area: 3 / 3 / span 1 / span 1;
+    }
+    .e2{
+        grid-area: 3 / 4 / span 1 / span 1;
+    }
+    .introduce {
+        grid-area: 1 / 3 / span 1 / span 1;
+      }
+    .lms {
+        grid-area: 1/ 4 / span 2 / span 1;
+    }
+    .portal{
+        grid-area:  2/ 3 / span 2 / span 1;
+    }
+    .ask{
+        grid-area: 3 / 4 / span 1 / span 1;
+    }
+    .first{
+        grid-area: 1 /  1/ span 2 / span 2;
+    }
+    .second{
+        grid-area: 1 / 3 / span 2 / span 2;
+    }
+/*大學生研究生*/
+    h2{
+        text-align:center;
+        font-size:40px;
+        margin-top:2%;
+        
+    }
+    h2 a:hover{
+        color: white;
+        position: relative; 
+        top: 1px;
+        left: 1px;
+        text-decoration:none;
+        font-size:40px;
+    }
+
+    /*變大*/
+    .big{
+        font-size:40px;
+        color: white;
+        font-weight: bold;
+
+    }
+    .small{
+        font-size:30px;
+    }
     
-  }
-.special{
-    margin-left:22%;
 }
-.money {
-    grid-area: 1 / 1 / span 1 / span 1;
-  }
-.room {
-    grid-area: 1 / 2 / span 1 / span 1;
+/*點腦尺寸縮小，調字體，調長度*/   
+@media only screen and (min-width: 768px) and (max-width: 993px) {
+        a{
+            font-size: 18px;
+        }
+
+        .grid {
+            padding-top:2%;
+            display: grid;
+            grid-auto-rows: 120px;
+            grid-auto-columns:21%;
+            align-content:center;
+            margin-left:9%;
+            grid-gap: 13px 4%;
+            
+        }
+        .special{
+            margin-left:8%;         
+        }
+        /*跟上面一樣，但不寫排版既沒了....找方法中*/
+        .money {
+            grid-area: 1 / 1 / span 1 / span 1;
+        }
+        .room {
+            grid-area: 1 / 2 / span 1 / span 1;
+        }
+        .notice{
+            grid-area:  1/ 3 / span 2 / span 2;
+        }
+        .enter{
+            grid-area: 2 / 1 / span 2 / span 1;
+        }
+        .solider{
+            grid-area: 2 / 2 / span 1 / span 1;
+        }
+        .control{
+            grid-area: 3 / 2 / span 1 / span 2;
+        }
+        .bike{
+            grid-area: 3 / 4 / span 1 / span 1;
+        }
+        .a {
+            grid-area: 1 / 1 / span 1 / span 1;
+          }
+        .b {
+            grid-area: 1 / 2 / span 1 / span 1;
+        }
+        .c{
+            grid-area:  2/ 1 / span 1 / span 2;
+        }
+        .d{
+            grid-area: 3 / 1 / span 1 / span 1;
+        }
+        .e{
+            grid-area: 3 / 2 / span 1 / span 1;
+        }
+        .a2 {
+            grid-area: 1 / 3 / span 1 / span 1;
+          }
+        .b2 {
+            grid-area: 1 / 4 / span 1 / span 1;
+        }
+        .c2{
+            grid-area:  2/ 3 / span 1 / span 2;
+        }
+        .d2{
+            grid-area: 3 / 3 / span 1 / span 1;
+        }
+        .e2{
+            grid-area: 3 / 4 / span 1 / span 1;
+        }
+        .introduce {
+            grid-area: 1 / 3 / span 1 / span 1;
+          }
+        .lms {
+            grid-area: 1/ 4 / span 2 / span 1;
+        }
+        .portal{
+            grid-area:  2/ 3 / span 2 / span 1;
+        }
+        .ask{
+            grid-area: 3 / 4 / span 1 / span 1;
+        }
+        .first{
+            grid-area: 1 /  1/ span 2 / span 2;
+        }
+        .second{
+            grid-area: 1 / 3 / span 2 / span 2;
+        }
+        /*大學生研究生*/
+    h2{
+        text-align:center;
+        font-size:40px;
+        margin-top:2%;
+        
+    }
+    h2 a:hover{
+        color: white;
+        position: relative; 
+        top: 1px;
+        left: 1px;
+        text-decoration:none;
+        font-size:40px;
+    }
+
+    /*變大*/
+    .big{
+        font-size:40px;
+        color: white;
+        font-weight: bold;
+
+    }
+    .small{
+        font-size:30px;
+    }
+    
+        
 }
-.notice{
-    grid-area:  1/ 3 / span 2 / span 2;
-}
-.enter{
-    grid-area: 2 / 1 / span 2 / span 1;
-}
-.solider{
-    grid-area: 2 / 2 / span 1 / span 1;
-}
-.control{
-    grid-area: 3 / 2 / span 1 / span 2;
-}
-.bike{
-    grid-area: 3 / 4 / span 1 / span 1;
-}
-.a {
-    grid-area: 1 / 1 / span 1 / span 1;
-  }
-.b {
-    grid-area: 1 / 2 / span 1 / span 1;
-}
-.c{
-    grid-area:  2/ 1 / span 1 / span 2;
-}
-.d{
-    grid-area: 3 / 1 / span 1 / span 1;
-}
-.e{
-    grid-area: 3 / 2 / span 1 / span 1;
-}
-.a2 {
-    grid-area: 1 / 3 / span 1 / span 1;
-  }
-.b2 {
-    grid-area: 1 / 4 / span 1 / span 1;
-}
-.c2{
-    grid-area:  2/ 3 / span 1 / span 2;
-}
-.d2{
-    grid-area: 3 / 3 / span 1 / span 1;
-}
-.e2{
-    grid-area: 3 / 4 / span 1 / span 1;
-}
-.introduce {
-    grid-area: 1 / 3 / span 1 / span 1;
-  }
-.lms {
-    grid-area: 1/ 4 / span 2 / span 1;
-}
-.portal{
-    grid-area:  2/ 3 / span 2 / span 1;
-}
-.ask{
-    grid-area: 3 / 4 / span 1 / span 1;
-}
-.first{
-    grid-area: 1 /  1/ span 2 / span 2;
-}
-.second{
-    grid-area: 1 / 3 / span 2 / span 2;
+ 
+/*手機螢幕大小，新排版
+!!!ckeditor show model 會爆炸
+*/
+ @media only screen and (min-width: 0px) and (max-width: 768px){
+    a{
+     font-size: 15px;
+    }
+    .grid {
+        padding-top:2%;
+        display: grid;
+        grid-auto-rows: 90px;
+        grid-auto-columns:30%;
+        align-content:center;
+        margin-left:4%;
+        grid-gap: 13px 4%;
+        
+    }
+
+    .p_grid {
+        padding-top:2%;
+        display: grid;
+        grid-auto-rows: 90px;
+        grid-auto-columns:45%;
+        align-content:center;
+        margin-left:4%;
+        grid-gap: 13px 4%;
+        
+    }
+    /*研究生新生周活動的排版*/
+    .p_ugly {
+        padding-top:5%;
+        display: grid;
+        grid-auto-rows: 90px;
+        grid-auto-columns:40%;
+        align-content:center;
+        margin-left:12%;
+        grid-gap: 10px 20px;
+        
+    }
+
+    /*新grid排版*/
+    .p_money {
+        grid-area: 1 / 1 / span 1 / span 1;
+      }
+    .p_notice{
+        grid-area: 1/ 2 / span 2 / span 2;
+    }
+    .p_bike{
+        grid-area: 2 / 1 / span 1 / span 1;
+    }
+    .p_enter{
+        grid-area: 3 / 1 / span 2 / span 1;
+    }
+    .p_room {
+        grid-area: 3 / 2 / span 1 / span 1;
+    }
+    .p_solider{
+        grid-area: 3 / 3 / span 1 / span 1;
+    }
+    .p_control{
+        grid-area: 4 / 2 / span 1 / span 2;
+    }
+
+    .a {
+        grid-area: 1 / 1 / span 1 / span 1;
+      }
+    .b {
+        grid-area: 1 / 2 / span 1 / span 1;
+    }
+    .c{
+        grid-area:  2/ 1 / span 1 / span 2;
+    }
+    .d{
+        grid-area: 3 / 1 / span 1 / span 1;
+    }
+    .e{
+        grid-area: 3 / 2 / span 1 / span 1;
+    }
+    .a2 {
+        grid-area: 4 / 1 / span 1 / span 1;
+      }
+    .b2 {
+        grid-area: 4 / 2 / span 1 / span 1;
+    }
+    .c2{
+        grid-area:  5/ 1 / span 1 / span 2;
+    }
+    .d2{
+        grid-area: 6 / 2 / span 1 / span 1;
+    }
+    .e2{
+        grid-area: 6 / 1 / span 1 / span 1;
+    }
+    .introduce {
+        grid-area: 4 / 1 / span 1 / span 1;
+      }
+    .lms {
+        grid-area: 4/ 2 / span 2 / span 1;
+    }
+    .portal{
+        grid-area:  5/ 1 / span 2 / span 1;
+    }
+    .ask{
+        grid-area: 6 / 2 / span 1 / span 1;
+    }
+    .first{
+        grid-area: 1 /  1/ span 1 / span 2;
+    }
+    .second{
+        grid-area: 2 / 1 / span 1 / span 2;
+    }
+    /*大學生研究生*/
+    h2{
+        text-align:center;
+        font-size:25px;
+        margin-top:2%;
+        
+    }
+    h2 a:hover{
+        color: white;
+        position: relative; 
+        top: 1px;
+        left: 1px;
+        text-decoration:none;
+        font-size:30px;
+    }
+
+    /*變大*/
+    .big{
+        font-size:30px;
+        color: white;
+        font-weight: bold;
+
+    }
+    .small{
+        font-size:25px;
+    }
+    
 }
 
+
+
+/*每個按鈕*/
 .box {
   background-color: beige;
   border: 2px solid black;
-  
   font-size: 25px;
   
 }
-.container-fluid{
-    margin-left: 35%;
-}
-h2{
-    text-align:center;
-    font-size:40px;
-    margin-top:2%;
-    
-}
-h2 a:hover{
-    color: royalblue;
 
-    position: relative; 
 
-    top: 1px;
 
-    left: 1px;
-    text-decoration:none;
-    font-size:40px;
-}
-    
-.gra:hover {
-    
-    
-}
-.big{
-    font-size:40px;
-
-}
-.small{
-    font-size:30px;
-}
-
-h3{
-    writing-mode: vertical-lr;
-    font-size:20px;
-    margin-left:79%;
-    margin-top:-9%;
-}
 #tab{
     padding-top:2%;
     
@@ -166,6 +426,8 @@ a{
 
 }
 
+/*!!!!!還要用一個抓按鈕過大的bug*/
+
 .parent:hover .child, .parent:focus .child {
     -ms-transform: scale(1.1);
     -moz-transform: scale(1.1);
@@ -176,17 +438,33 @@ a{
 }
 
 
+/*未修好!!!!
+不能偵測後才觸發
+還不能浮動
+為手機版設浮動按鈕固定下方*/
+#b_close {
+    width:100%;
+    float:right;
+    position:fixed;
+    right:0px;
+    bottom:0px;
+    z-index:999;
+}
 
 
 
 
 
-.bg1 {background-color: #5151a2}
-.bg2{background-color: rgb(158, 107, 240);}
-.bg3{background-color: #b8b8dc}
-.bg4{background-color: #5a5aad}
-.bg5{background-color: #7373b9}
-.bg6{background-color: #a6a6d2}
-.bg7{background-color: #d8d8eb}
+
+
+
+.bg1 {background-color: #CCCCCC;}
+.bg2{background-color: #FFCC99;}
+.bg3{background-color: #FFFFCC}
+.bg4{background-color: #99CCFF}
+.bg5{background-color: #CCFFCC}
+.bg6{background-color: #CCCCFF}
+.bg7{background-color: #FFCCCC}
+
 
 

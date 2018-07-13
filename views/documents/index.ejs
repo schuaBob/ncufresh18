@@ -16,10 +16,10 @@
     </header>
     <main>
 
+        <% /*管理者介面 */%>
+        <div class="modal fade " id="edit" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 
-        <div class="modal fade bd-example-modal-lg " id="edit" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-
-            <div class="modal-dialog modal-dialog-centered " role="document">
+            <div class="modal-dialog modal-dialog-centered modal-lg " role="document">
                 <form name="add" id="add" method="post" accept-charset="utf-8">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -32,8 +32,8 @@
                             </button>
                         </div>
 
-                        <!-- <input type="hidden" name="id" value="<"> -->
                         <div class="modal-body">
+                            <% /*ckeditor放置地方*/ %>
                             <textarea class="form-control" id="edit_content" name="add_text"></textarea>
                         </div>
                         <div class="modal-footer">
@@ -46,27 +46,31 @@
             </div>
         </div>
 
-        <div class="modal fade bd-example-modal-lg " id="show" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+        <% /*使用者介面*/ %>
+        <div class="modal fade" id="show" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
             aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLongTitle">
                             <div class="title" id="show_title"></div>
                         </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="t_close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
 
                     <div class="modal-body">
                         <div class="content" id="show_content"></div>
+                        
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
+                   
+                    <div class="modal-footer" id="o_close">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
                     </div>
-
+                    <div class="modal-footer" >
+                            <button type="button" class="btn fixed-bottom btn-secondary" data-dismiss="modal" id="b_close" >Close</button>
+                        </div>
                 </div>
             </div>
         </div>
@@ -75,15 +79,13 @@
 
         <div class="undergraduate" id="undergraduate">
             <h2>
-                <a href="#undergraduate" class="under">大一新生</a>
+                <a href="#undergraduate" class="under big">大一新生</a>
                 <span style="padding-left:30px">/
                     <span style="padding-left:30px">
-                        <a href="#graduate" class="gra">碩一新生</a>
+                        <a href="#graduate" class="gra small">碩一新生</a>
             </h2>
 
-
                 <ul class="nav nav-pills mb-3 justify-content-center nav-fill" id="tab" role="tablist">
-
                     <li class="nav-item  ">
                         <a data-toggle="tab" href="#register" class="nav-link active" role="tab" aria-controls="home" aria-selected="true">註冊報到</a>
                     </li>
@@ -99,13 +101,14 @@
 
                 </ul>
                 <p></p>
+
                 <div class="tab-content">
                     <div id="register" class="tab-pane fade show active" role="tabpanel">
-                        <div class="container">
+                        
 
-                            <div class="grid">
+                            <div class="grid ">
 
-                                <div class="box parent money" id="1">
+                                <div class="box parent money p_money" id="1">
                                     <div class="child bg1">
                                     <a>
                                         學雜費繳費、減免
@@ -113,67 +116,69 @@
                                     </a>
                                     </div>
                                 </div>
-                                <div class="box parent room" id="6">
+                                <div class="box parent room p_room" id="6">
                                     <div class="child bg2">
                                         <a data-toggle="modal" data-target="#edit"> 住宿注意事項</a>
                                     </div>
                                 </div>
-                                <div class="box parent notice" id="2">
+                                <div class="box parent notice p_notice"  id="2">
                                     <div class="child bg3">
+                                        <a>
                                         註冊通知、日程表
+                                        </a>
                                     </div>
                                 </div>
 
-                                <div class="box parent enter" id="3">
+                                <div class="box parent enter p_enter" id="3">
                                     <div class="child bg4">
                                     <a>學籍登入</a>
                                     </div>
                                 </div>
-                                <div class="box parent solider" id="4">
+                                <div class="box parent solider p_solider" id="4">
                                     <div class="child bg5">
                                     <a>兵役注意資料</a>
                                     </div>
                                 </div>
 
-                                <div class="box parent control" id="5">
+                                <div class="box parent control p_control" id="5">
                                     <div class="child bg6">
                                     <a>入住通管制圖、報到流程</a>
                                     </div>
                                 </div>
-                                <div class="box parent bike" id="7">
+                                <div class="box parent bike p_bike" id="7">
                                     <div class="child bg7">
                                     <a>腳踏車通行申請</a>
                                     </div>
                                 </div>
                             </div>
-                            <p style="padding-bottom:40px;"></p>
+                            <p style="padding-bottom:80px;"></p>
 
-                        </div>
+                      
                     </div>
                     <div id="activity" class="tab-pane fade " role="tabpanel">
                         <div class="grid special">
 
-                            <div class="box parent money" id="8">
+                            <div class="box parent money p_money" id="8">
                                 <a>校園安全宣導</a>
                             </div>
-                            <div class="box parent room" id="9">
+                            <div class="box parent room p_room" id="9">
                                 <a>新生餐</a>
                             </div>
-                            <div class="box parent notice" id="10">
+                            <div class="box parent notice p_notice" id="10">
                                 <a>新生健康檢查</a>
                             </div>
 
-                            <div class="box parent enter" id="11">
+                            <div class="box parent enter p_enter" id="11">
                                 <a>新生週日程表</a>
                             </div>
-                            <div class="box parent solider" id="12">
+                            <div class="box parent solider p_control" id="12">
                                 <a>社團聯展</a>
                             </div>
 
-                            <div class="box parent control" id="13">
+                            <div class="box parent control p_bike" id="13">
                                 <a>心理適應座談</a>
                             </div>
-                            <div class="box parent bike" id="14">
+                            <div class="box parent bike p_solider" id="14">
                                 <a>新生資訊網圖</a>
                             </div>
 
@@ -181,7 +186,7 @@
                         <p style="padding-bottom:40px;"></p>
                     </div>
                     <div id="score" class="tab-pane fade" role="tabpanel">
-                        <div class="grid special">
+                        <div class="grid p_grid special">
 
                             <div class="box parent a" id="15">
                                 <a>畢業門檻</a>
@@ -219,7 +224,7 @@
                         </div>
                     </div>
                     <div id="other" class="tab-pane fade" role="tabpanel">
-                        <div class="grid special">
+                        <div class="grid p_grid special">
 
                             <div class="box parent a" id="25">
                                 <a>106行事曆</a>
@@ -289,28 +294,28 @@
 
                         <div class="grid">
 
-                            <div class="box parent money" id="34">
+                            <div class="box parent money p_money" id="34">
                                 <a>學雜費繳費、減免</a>
                             </div>
-                            <div class="box parent room" id="35">
+                            <div class="box parent room  p_room" id="35">
                                 <a>住宿注意事項</a>
                             </div>
-                            <div class="box parent notice" id="36">
+                            <div class="box parent notice p_notice" id="36">
                                 <a>註冊通知、日程表</a>
                             </div>
 
 
-                            <div class="box parent enter" id="37">
+                            <div class="box parent enter p_enter" id="37">
                                 <a>學籍登入</a>
                             </div>
-                            <div class="box parent solider" id="38">
+                            <div class="box parent solider p_solider" id="38">
                                 <a>兵役注意資料</a>
                             </div>
 
-                            <div class="box parent control" id="39">
+                            <div class="box parent control p_control" id="39">
                                 <a>入住通管制圖、報到流程</a>
                             </div>
-                            <div class="box parent bike" id="40">
+                            <div class="box parent bike p_bike" id="40">
                                 <a>腳踏車通行申請</a>
                             </div>
                         </div>
@@ -319,7 +324,7 @@
                     </div>
                 </div>
                 <div id="activity1" class="tab-pane fade">
-                    <div class="grid special">
+                    <div class="grid special p_ugly">
                         <div class="box parent first" id="41">
                             <a>新生健康檢查</a>
                         </div>
@@ -331,7 +336,7 @@
                 </div>
 
                 <div id="other1" class="tab-pane fade">
-                    <div class="grid special">
+                    <div class="grid special p_grid">
 
                         <div class="box parent a" id="43">
                             <a>106行事曆</a>
