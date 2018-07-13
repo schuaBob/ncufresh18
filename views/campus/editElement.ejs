@@ -54,26 +54,21 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title-buildpic">物件圖片</h5>
+                                            <h5 class="pic-title modal-title-buildpic">物件圖片</h5>
                                             <h5 class="sep">|</h5>
-                                            <h5 class="modal-title-intropic">介紹圖片</h5>
+                                            <h5 class="pic-title modal-title-intropic">介紹圖片</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
+                                                <span class=".picclose" aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body imgcontent">
-                                            <div class="buildpicc">
-
-                                            </div>
-                                            <div class="intropicc">
-
-                                            </div>
+                                            
                                             
                                             <img id="output" width="300px" />
-                                            <form action="/campus/insert_img/<%=result[i]['_id']%>" enctype="multipart/form-data" method="post">
+                                            <form class="picuploadform" action="/campus/insert_img/<%=result[i]['_id']%>" enctype="multipart/form-data" method="post">
                                                 <fieldset>
                                                     <input type="file" name="uploadingImg" accept="image/*" onchange="loadFile(event)">
-
+                                                    <input type="hidden" class="imgtype" name="imgtype">
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary picclose" data-dismiss="modal">Close</button>
                                                         <button type="submit" class="btn btn-primary">上傳</button>
