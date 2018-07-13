@@ -12,6 +12,9 @@ thead{
     background-color: #b8daff;
     font-family: Microsoft JhengHei;
 }
+table{
+    margin:0 auto;
+}
 td{
     text-align: center;
     width:80px;
@@ -24,9 +27,19 @@ th{
 }
 .ask{
     float: right;
-    top:300px;
-    position: absolute;
+    vertical-align: middle;
+    text-align: center;
+    position: fixed;
+
 }
 .classification{
     margin: 35px;
+}
+.search{
+    float: right;
+}
+.top{
+    position: absolute;
+    top:0px;
+    background-color: rgb(196, 150, 233);
 }

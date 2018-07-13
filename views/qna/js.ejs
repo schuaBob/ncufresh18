@@ -1,7 +1,4 @@
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script>
 $(document).ready(() => {
@@ -40,10 +37,11 @@ $(document).ready(() => {
             method: 'GET',
             success: function(res) {
             
-            var objs = $('.' + id).find('.view');
-            for (var i = 0; i < objs.length; i++) {
-                objs[i].innerHTML = parseInt(objs[i].innerHTML) + 1;
-            }
+                //動態新增點擊次數
+                var objs = $('.' + id).find('.view');
+                for (var i = 0; i < objs.length; i++) {
+                    objs[i].innerHTML = parseInt(objs[i].innerHTML) + 1;
+                }
         
             }
         })
@@ -63,5 +61,15 @@ $(document).ready(() => {
         }
     })*/
     //置頂功能
+    $('.checktop').on('click',() =>{
+        console.log($('input.checktop').prop('checked'));
+        if($('input.checktop').prop('checked')){
+            console.log("測試用2");
+            //var id = this.id.split('-')[0];
+            var id = $(this).prop('id');
+            console.log($('tbody').find('#' + id));
+            $($('tbody').find('#' + id)).addClass('top');
+        }
+    })
 })         
 </script>
