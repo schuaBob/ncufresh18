@@ -89,6 +89,7 @@ router.post('/add_club', function(req, res, next) {
   res.redirect('/groups/club');
 });
 
+/* 新增編輯其他學生組織 */
 router.post('/add_community', function(req, res, next) {
   name = req.body.name;
   community.find({name: name}, function(err, data) {
@@ -110,6 +111,36 @@ router.post('/add_community', function(req, res, next) {
     }
   });
   res.redirect('/groups/community');
+});
+
+/* 新增編輯系所 */
+router.post('/add_department', function(req, res, next) {
+  let typenum = req.body.type[0];
+  name = req.body.name;
+  college = req.body.type.slice(1);
+  department.find({name: name}, function(err, data) {
+    if (data.length == 0) {
+      new department ({
+        type: typenum,
+        college: college,
+        name: req.body.name,
+        introduction: req.body.introduction,
+        organization: req.body.organization,
+        activity: req.body.activity,
+        team: req.body.team,
+        course: req.body.course,
+      }).save();
+    }
+    else{
+      data[0].introduction = req.body.introduction;
+      data[0].organization = req.body.organization;
+      data[0].activity = req.body.activity;
+      data[0].team = req.body.team;
+      data[0].course = req.body.course;
+      data[0].save() ; 
+    }
+  });
+  res.redirect('/groups/department');
 });
   
 

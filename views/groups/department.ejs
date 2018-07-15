@@ -2,6 +2,7 @@
 <html>
 <head>
     <% include ../layout/head %>
+    <link rel='stylesheet' href='department.css'>
 </head>
 <body>
     <header>
@@ -9,71 +10,170 @@
     </header>
     <main>
         <h1><%= title %></h1>
-        <!-- edit Modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">編輯系所介紹</button>
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        
+        <!-- 新增編輯button -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_department">新增/編輯系所</button><br></br>
+        <!--  新增編輯系所的Modal -->
+        <div class="modal fade" id="add_department" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">編輯系所</h5>
+                <h5 class="modal-title" id="exampleModalLabel">新增/編輯系所</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="type" class="form-control">系所學院</label>
-                            <select name="type" id="edit_type" class="form-control">
-                                        <option value="literature">文學院</option>
-                                        <option value="science">理學院</option>
-                                        <option value="management">管理學院</option>
-                                        <option value="engineering">工學院</option>
-                                        <option value="ceecs">資訊電機學院</option>
-                                        <option value="earth">地球科學學院</option>
-                                        <option value="hikka">客家學院</option>
-                                        <option value="chst">生醫理工學院</opton>
-                                        <option value="space">太空及遙測學位中心</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                          <label for="name" class="form-control">系所名稱</label>
-                          <input type="text" class="form-control" id="edit_name" name="name">
-                        </div>
-                        <div class="form-group">
-                          <label for="introduction" class="form-control">系所介紹</label>
-                          <textarea name="introduction" id="edit_introduction" rows="5" cols="55"></textarea></br>
-                        </div>
-                        <div class="form-group">
-                          <label for="organization" class="form-control">系學會</label>
-                          <textarea name="organization" id="edit_organization" rows="5" cols="55"></textarea></br>
-                        </div>
-                        <div class="form-group">
-                          <label for="activity" class="form-control">系所活動</label>
-                          <textarea name="activity" id="edit_activity" rows="5" cols="55"></textarea></br>
-                        </div>
-                        <div class="form-group">
-                          <label for="team" class="form-control">系隊</label>
-                          <textarea name="team" id="edit_team" rows="5" cols="55"></textarea></br>
-                        </div>
-                        <div class="form-group">
-                          <label for="course" class="form-control">系上課程</label>
-                          <textarea name="course" id="edit_course" rows="5" cols="55"></textarea></br>
-                        </div>
-                        <div class="form-group">
-                                <label for="lightning_round" class="form-control">快問快答</label>
-                                <textarea name="lightning_round" id="edit_lightning_round" rows="5" cols="55"></textarea></br>
-                              </div>
-                              <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                                  <button type="submit" class="btn btn-primary">儲存</button>
-                          </div>
-                      </form>
-                    </div>
-                    
-                </div>
+                <form action="/groups/add_department" method="post" accept-charset="utf-8">
+                  <div class="form-group">
+                    <!-- 選擇類別 -->
+                    <label for="type" class="form-control">系所學院</label>
+                    <select name="type" id="edit_type" class="form-control">
+                      <option value="1文學院">文學院</option>
+                      <option value="2理學院">理學院</option>
+                      <option value="3管理學院">管理學院</option>
+                      <option value="4工學院">工學院</option>
+                      <option value="5資訊電機學院">資訊電機學院</option>
+                      <option value="6地球科學學院">地球科學學院</option>
+                      <option value="7客家學院">客家學院</option>
+                      <option value="8生醫理工學院">生醫理工學院</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="form-control">系所名稱</label>
+                    <input type="text" class="form-control" id="edit_name" name="name">
+                  </div>
+                  <div class="form-group">
+                    <label for="introduction" class="form-control">系所介紹</label>
+                    <textarea name="introduction" id="edit_introduction" rows="5" cols="55"></textarea></br>
+                  </div>
+                  <div class="form-group">
+                    <label for="organization" class="form-control">系學會</label>
+                    <textarea name="organization" id="edit_organization" rows="5" cols="55"></textarea></br>
+                  </div>
+                  <div class="form-group">
+                    <label for="activity" class="form-control">系所活動</label>
+                    <textarea name="activity" id="edit_activity" rows="5" cols="55"></textarea></br>
+                  </div>
+                  <div class="form-group">
+                    <label for="team" class="form-control">系隊</label>
+                    <textarea name="team" id="edit_team" rows="5" cols="55"></textarea></br>
+                  </div>
+                  <div class="form-group">
+                    <label for="course" class="form-control">系上課程</label>
+                    <textarea name="course" id="edit_course" rows="5" cols="55"></textarea></br>
+                  </div>
+                  <div class="form-group">
+                    <label for="lightning_round" class="form-control">快問快答</label>
+                    <textarea name="lightning_round" id="edit_lightning_round" rows="5" cols="55"></textarea></br>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                    <button type="submit" class="btn btn-primary">儲存</button>
+                  </div>
+                </form>
               </div>
             </div>
+          </div>
+        </div>
+        <% let ffffffff  = ["文學院","理學院","管理學院","工學院","資訊電機學院","地球科學學院","客家學院","生醫理工學院"]%>
+        <!--左側按鈕-->
+        <div class="btn-group-vertical">
+            <button class="literature" id="literature">文學院</button></br>
+            <button class="science" id="science">理學院</button></br>
+            <button class="management" id="management">管理學院</button></br>
+            <button class="engineering" id="engineering">工學院</button></br> 
+            <button class="csee" id="csee">資訊電機學院</button></br> 
+            <button class="earth" id="earth">地球科學學院</button></br> 
+            <button class="hakka" id="hakka">客家學院</button></br> 
+            <button class="chst" id="chst">生醫理工學院</button></br>
+        </div>
+
+        <!-- 根據按鈕選出相對類別 -->
+          <%for (let q = 1 ;q<=8;q++){%>
+            <table>
+              <thead>
+                <tr>
+                  <th><%= ffffffff[q-1] %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for(var i in department) {%>
+                  <% if(department[i].type == q) {%>
+                    <tr>
+                      <td><a href="#<%= department[i].name %> " data-toggle="modal" class="department_content"
+                      data-target="#<%= department[i]._id %>">・<%= department[i].name %></a></td>
+                    </tr>
+                  <%}%>
+                <%}%> 
+              </tbody>
+            </table>
+          <% } %>
+        </div>
+          
+        
+        <% for(var i in department){ %>
+          <!-- 社團介紹 Modal -->                            
+            <div class="modal fade bd-example-modal-lg" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id ="<%= department[i]._id %>"><!-- 根據資料庫id判斷modal內容 --> 
+              <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel"><%= department[i].name %></h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="container">
+                      <ul class="nav nav-pills flex-column">
+                        <li><a data-toggle="pill" href="#introduction_<%= department[i].name %>">系所介紹</a></li>
+                        <li><a data-toggle="pill" href="#organization<%= department[i].name %>">系學會</a></li>
+                        <li><a data-toggle="pill" href="#activity_<%= department[i].name %>">系所活動</a></li>
+                        <li><a data-toggle="pill" href="#team<%= department[i].name %>">系隊</a></li>
+                        <li><a data-toggle="pill" href="#course<%= department[i].name %>">系上課程</a></li> <!-- 之後跟影音專區拿影片 -->
+                        <li><a data-toggle="pill" href="#lightning_round<%= department[i].name %>" data-src="https://www.youtube.com/embed/m4KG5G4nmjE">快問快答</a></li>
+                      </ul>
+                      <div class="tab-content">
+                          <div id="introduction_<%= department[i].name %>" class="tab-pane fade in">
+                            <h5>系所介紹</h5>  
+                            <p><%= department[i].introduction %></p>  
+                          </div>
+                          <div id="organization<%= department[i].name %>" class="tab-pane fade in">
+                            <h5>系學會</h5>
+                            <p><%= department[i].organization %></p>
+                          </div>
+                          <div id="activity_<%= department[i].name %>" class="tab-pane fade in">
+                            <h5>系所活動</h5>
+                            <p><%= department[i].activity_ %></p>
+                          </div>
+                          <div id="team<%= department[i].name %>" class="tab-pane fade in">
+                            <h5>系隊</h5>
+                            <p><%= department[i].team %></p>
+                          </div>
+                          <div id="course<%= department[i].name %>" class="tab-pane fade in">
+                            <h5>系上課程</h5>
+                            <p><%= department[i].course %></p>
+                          </div>
+                          <div id="lightning_round<%= department[i].name %>" class="tab-pane fade in">
+                            <h5>快問快答</h5>
+                            <!-- 16比9 youtube影片-->
+                            <div class="embed-responsive embed-responsive-16by9">
+                            <!--之後跟影音專區拿影片 -->
+                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/m4KG5G4nmjE" id="video" allowscriptaccess="always">></iframe>
+                            </div>
+                          </div>
+                        </div>
+                    </div> 
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div> 
+        <%}%>                       
+        
+        
     </main>
     <footer>
         <% include ../layout/footer %>
