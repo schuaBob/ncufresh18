@@ -5,6 +5,14 @@ var router = express.Router();
 var formidable = require('formidable');
 // var apiKey = 'c7282145be089c1ab3c03aa2e2f7c5dd';
 
+var match_num = {
+  'food'           : 1,
+  'dorm'          : 2,
+  'comm'          : 3,
+  'edu'           :  4,
+  'entertainment' : 5 
+}
+
 /* 中大生活首頁 */
 router.get('/', function(req, res, next){
   let url = "https://works.ioa.tw/weather/api/weathers/81.json";
@@ -24,48 +32,75 @@ router.get('/', function(req, res, next){
 });
 
 router.get('/food', function(req, res, next){
+  var type = req.url;
+  type = type.substr(1);
   life.find({}, function(err, data){
-    res.render('life/food', { title: '食', life: data});
+    res.render('life/food', { title: '食', life: data, page: type, num: match_num[type]});
   });
 });
 
 router.get('/dorm', function(req, res, next){
+  var type = req.url;
+  type = type.substr(1);
   life.find({}, function(err, data){
-     res.render('life/dorm', { title: '住', life: data});
+     res.render('life/dorm', { title: '住', life: data, page: type, num: match_num[type]});
    });
 });
 
 router.get('/comm', function(req, res, next){
+  var type = req.url;
+  type = type.substr(1);
   life.find({}, function(err, data){
-    res.render('life/comm', { title: '行', life: data});
+    res.render('life/comm', { title: '行', life: data, page: type, num: match_num[type]});
   });
 });
 
 router.get('/edu', function(req, res, next){
+  var type = req.url;
+  type = type.substr(1);
   life.find({}, function(err, data){
-    res.render('life/edu', { title: '育', life: data});
+    res.render('life/edu', { title: '育', life: data, page: type, num: match_num[type]});
   });
 });
 
 router.get('/entertainment', function(req, res, next){
+  var type = req.url;
+  type = type.substr(1);
   life.find({}, function(err, data){
-    res.render('life/entertainment', { title: '樂', life: data});
+    res.render('life/entertainment', { title: '樂', life: data, page: type, num: match_num[type]});
   });
 });
 
 router.post('/edit', function(req, res, next){
   var form = new formidable.IncomingForm();
   form.parse(req, function(err, fields, files){
-    if(err)
-      return next(err);
-    res.redirect('food');
+    if(err) return next(err);
+    res.redirect('back');
   });
 });
 
 router.post('/editTitle', function(req, res, next){
-  var newLife = new life({
-  }).save();
-  res.redirect('food');
+  var subTitled = req.body.subTitle.split(";");
+  subTitled.pop();
+  var typed = req.get('referer').split("/");
+  
+  life.find({mainTitle: req.body.mainTitle}, function(err, result){
+    if(err) return next(err);
+    if(result.length == 0){
+      var newLife = new life({
+        mainTitle : req.body.mainTitle,
+        subTitle  : subTitled,
+        type      : typed[typed.length-1]
+      }).save();
+    }
+    else{
+      life.update({mainTitle: req.body.mainTitle}, {subTitle: subTitled}, function(err, result){
+        if(err) return next(err);
+      })
+    }
+  });
+  
+  res.redirect('back');
 });
 // router.post('/', function(req, res, next){
 //   let city = req.body.city;

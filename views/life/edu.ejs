@@ -8,27 +8,10 @@
     <header>
         <% include ../layout/navbar %>
     </header>
-    <main style="background-image: url('sub_background.png'); background-repeat: no-repeat;  background-size:cover; background-attachment: fixed; height: 100vw;">
-        <div class="selectArea">
-            <% var cnt = 0 %>
-            <% for (var i in life) { %>
-                <% if (life[i].type == "edu") { %>
-                    <div class="selectbar">
-                        <img class="mainTitle" src="4_<%=cnt%>_edu.png" id="4_<%=cnt%>" alt="<%=life[i].alt%>"/>
-                        <% if(life[i].subTitle.length != 0) { %>
-                            <hr class="hide1" id="4_<%=cnt%>_hr"/>
-                            <ul class="hide1" id="4_<%=cnt%>_sub">
-                            <% for (var j=0 ; j<life[i].subTitle.length ; j++) { %>
-                                <li><a href=""><%= life[i].subTitle[j] %></a></li>
-                            <% } %>
-                            </ul>
-                        <% } %>
-                    </div>
-                    <% cnt = cnt + 1 %>
-                <% } %>
-            <% } %>
-        </div>
-        <<div class="pictureArea">
+    <main style="background-image: url('backstar.png'); background-repeat: no-repeat;  background-size:cover; background-attachment: fixed; height: 100vw;">
+        <% include modify %>
+        <% include title %>
+        <div class="pictureArea">
             <div class="slideshow_container">
                 <div class="mySlides">
                     

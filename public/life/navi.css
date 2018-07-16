@@ -1,11 +1,12 @@
 #sideNav{
     position: fixed;
     right: 0px;
-    width: 100px;
-    background-color: #e0e0e0;
-    transform: translate(100px);
+    width: 180px;
+    height: 500px;
+    background-color: white;
+    transform: translate(200px);
     transition: transform 1s ease;
-    z-index: 100;
+    z-index: 300;
 }
 
 .navBtn{
