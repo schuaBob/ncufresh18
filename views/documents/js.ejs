@@ -2,8 +2,51 @@
 
     $(document).ready(function () {
 
+
+        //showmodel全屏，偵測手機高度
+        let i =$(window).height();
+        let h =(i-80)+"px"
+        //將css的變數取出
+        var bodyStyles = window.getComputedStyle(document.body);
+        //var fooBar = bodyStyles.getPropertyValue('--height'); //get
+        document.body.style.setProperty('--height', h);//set
+    
+        //判斷是用電腦還手機
+        let y= $(window).width();    
+        if(y>450){
+            $("#t_close").show();
+            $("#o_close").show();
+            $("#b_close").hide();
+        }
+        else{
+           // $("#edit").modal("hide");
+            $("#t_close").hide();
+            $("#o_close").hide();
+            $("#b_close").show();   
+        }
+
+
+
+        //螢幕縮放偵測
+        $(window).resize(function(){
+            
+            let x= $(window).width();
+           
+            if(x>520){
+                $("#t_close").show();
+                $("#o_close").show();
+                $("#b_close").hide();
+            }
+            else{
+                $("#t_close").hide();
+                $("#o_close").hide();
+                $("#b_close").show();
+
+            }
+       })
+
         CKEDITOR.replace('add_text', {
-            width: 800,
+            
             filebrowserUploadUrl: '/uploader',
         });
 
@@ -24,7 +67,7 @@
         });
 
 
-        //編輯者
+        
         $(".box").mousedown(function () {
             
             //抓按下按鈕的id
@@ -50,7 +93,7 @@
         });
 
         //使用者
-        $(".room").mousedown(function () {
+        $(".box").mousedown(function () {
 
             let count = 0;
             let textid = this.id;
@@ -71,6 +114,7 @@
             });
         });
 
+
         //預設為大學生
         $(".graduate").hide();
         $(".undergraduate").show();
@@ -88,32 +132,11 @@
         });
        
         
-        $("#t_close").show();
-        $("#o_close").show();
-        $("#b_close").hide();
+       
 
-        $(window).resize(function(){
-            
-             let x= $(window).width();
-     
-             if(x>768){
-                 $("#t_close").show();
-                 $("#o_close").show();
-                 $("#b_close").hide();
-             }
-             else{
-                 $("#t_close").hide();
-                 $("#o_close").hide();
-                 $("#b_close").show();
-             }
-        })
 
-         $("#b_close").posfixed({  
-        distance:0,  
-        pos:"top",  
-        type:"while",  
-        hide:false  
-    }); 
+
+        
         /*處理ckeditor與model相容的問題，之後發現刪除tabindex="-1"也可
         $('.modal').removeAttr('tabindex');
 
