@@ -392,7 +392,7 @@ var states = {
         this.create = function() {
             var combo = 0
             var score = 0
-            var remainTime = 60
+            var remainTime = 600
 
             // 設置背景邊界
             game.world.setBounds(0, 0, 800, 2000);
@@ -441,7 +441,7 @@ var states = {
                 remainTimeText.setText(remainTime.toString())
                 if (remainTime === 0) {
                     game.state.start('start')
-                    alert('遊戲結束')
+                    // alert('遊戲結束')
                 }
             }, this)
             timer.start()
@@ -567,7 +567,7 @@ var states = {
                         }
                         
                         // 使用 tween 移動鏡頭
-                        if (squirrelGroupY <= 1050) {
+                        if (squirrelGroupY <= 1050 && game.camera.y >= 40) {
                             console.log("game.camera.y: " + game.camera.y)
                             game.add.tween(playUI).to({y: playUI.y -40}, 500, null, true, "Quart.easeOut");
                             game.add.tween(otherUI).to({y: otherUI.y - 40}, 500, null, true, "Quart.easeOut");
