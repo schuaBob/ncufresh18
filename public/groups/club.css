@@ -1,8 +1,9 @@
-ul li{ 
+#modal_button{ 
     border-style:outset;
     padding-top:13px; 
     padding-bottom: 13px;
 }
+
 ul{
     float:left;
 }
@@ -64,7 +65,7 @@ thead{
 tbody{
     float:center;
     display: block;
-    height: 200px;
+    height: 195px;
     overflow-y: scroll;
     border-collapse: collapse;
     text-align: left;
@@ -88,4 +89,8 @@ td{
 
 ol{
     height: 10px;
+}
+
+.plays, .dates, .services{
+    display: none;
 }

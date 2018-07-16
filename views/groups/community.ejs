@@ -71,10 +71,10 @@
                         <div class="modal-body">
                             <div class="container">
                                 <ul class="nav nav-pills flex-column">
-                                    <li><a data-toggle="pill" href="#introduction_<%= community[i].name %>">學生組織介紹</a></li>
-                                    <li><a data-toggle="pill" href="#participation_<%= community[i].name %>">加入學生組織</a></li>
-                                    <li><a data-toggle="pill" href="#FB_<%= community[i].name %>">FB粉絲團</a></li>
-                                    <li><a data-toggle="pill" href="#activity_<%= community[i].name %>">活動剪影</a></li>
+                                    <li id="modal_button"><a data-toggle="pill" href="#introduction_<%= community[i].name %>">學生組織介紹</a></li>
+                                    <li id="modal_button"><a data-toggle="pill" href="#participation_<%= community[i].name %>">加入學生組織</a></li>
+                                    <li id="modal_button"><a data-toggle="pill" href="#FB_<%= community[i].name %>">FB粉絲團</a></li>
+                                    <li id="modal_button"><a data-toggle="pill" href="#activity_<%= community[i].name %>">活動剪影</a></li>
                                 </ul>
                                 <div class="tab-content">
                                     <div id="introduction_<%= community[i].name %>" class="tab-pane fade in">
@@ -91,7 +91,7 @@
                                     </div>
                                     <div id="activity_<%= community[i].name %>" class="tab-pane fade in">
                                         <h5>活動剪影</h5>
-                                        <p><%= community[i].picture %></p>
+                                        <p><%= community[i].picture[i] %></p>
                                     </div>
                                 </div>
                             </div> 

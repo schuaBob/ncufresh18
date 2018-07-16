@@ -9,7 +9,12 @@
         <% include ../layout/navbar %>
     </header>
     <main>
-        <h1><%= title %></h1>       
+        <h1><%= title %></h1>
+        <form method="post" enctype="multipart/form-data" action="/insert_img">
+          <input type="file" name="uploadingImg">
+          <button type="submit">上傳</button>
+        </form>      
+        
         <!-- 新增社團的Modal -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_club">新增/編輯社團</button><br></br>
         <div class="modal fade" id="add_club" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -161,16 +166,16 @@
                   </div>
                   <div class="modal-body">
                     <div class="container">
-                      <ul class="nav nav-pills flex-column">
-                        <li><a data-toggle="pill" href="#introduction_<%= club[i].name %>">社團介紹</a></li>
-                        <li><a data-toggle="pill" href="#participation_<%= club[i].name %>">加入社團</a></li>
-                        <li><a data-toggle="pill" href="#FB_<%= club[i].name %>">FB粉絲團</a></li>
-                        <li><a data-toggle="pill" href="#activity_<%= club[i].name %>">活動剪影</a></li>
+                      <ul class="nav nav-pills flex-column" >
+                        <li id="modal_button"><a data-toggle="pill" href="#introduction_<%= club[i].name %>">社團介紹</a></li>
+                        <li id="modal_button"><a data-toggle="pill" href="#participation_<%= club[i].name %>">加入社團</a></li>
+                        <li id="modal_button"><a data-toggle="pill" href="#FB_<%= club[i].name %>">FB粉絲團</a></li>
+                        <li id="modal_button"><a data-toggle="pill" href="#activity_<%= club[i].name %>">活動剪影</a></li>
                       </ul>
                       <div class="tab-content">
                           <div id="introduction_<%= club[i].name %>" class="tab-pane fade in">
                             <h5>社團介紹</h5>  
-                            <p><%= club[i].introduction %></p>  
+                            <p><%= club[i].introduction %></p>
                           </div>
                           <div id="participation_<%= club[i].name %>" class="tab-pane fade in">
                             <h5>加入社團</h5>
@@ -182,7 +187,7 @@
                           </div>
                           <div id="activity_<%= club[i].name %>" class="tab-pane fade in">
                             <h5>活動剪影</h5>
-                            <p><%= club[i].picture %></p>
+                            <p><%= club[i].activity %></p>
                             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
                                   <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -190,7 +195,7 @@
                                   <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                                 </ol>
                                 <div class="carousel-inner">
-                                  <!-- 輪播照片 //之後改成for迴圈 抓資料庫-->
+                                  <!-- 輪播照片 //之後改成for迴圈 or ajax 抓資料庫-->
                                   <div class="carousel-item active">
                                     <img class="d-block w-100" src="https://free.com.tw/blog/wp-content/uploads/2014/08/Placekitten480-g.jpg" alt="First slide">
                                   </div>
