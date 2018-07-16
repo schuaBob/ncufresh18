@@ -13,9 +13,10 @@ router.get('/', function(req, res, next) {
     if(err){return next(err)};
     //轉換時間欄位
     var Time = function(date) {
+      var year =date.getYear();
       var monthIndex = date.getMonth();
       var day = date.getDate();
-      var time = (++monthIndex) + '/' + day;
+      var time = (year+1900) + '/' + (++monthIndex) + '/' + day;
       return time;
     }
     res.render('qna/index',{
@@ -24,6 +25,25 @@ router.get('/', function(req, res, next) {
       Time:Time
     });
   }); 
+});
+//照時間排序
+router.get('/#time', function(req, res, next) {
+  Question.find().sort({CreateDate:'desc'}).exec(function(err, question,count){
+    if(err){return next(err)};
+    //轉換時間欄位
+    var Time = function(date) {
+      var year =date.getYear();
+      var monthIndex = date.getMonth();
+      var day = date.getDate();
+      var time = (year+1900) + '/' + (++monthIndex) + '/' + day;
+      return time;
+    }
+    res.render('qna/index',{
+      title:'新生Ｑ＆Ａ ｜ 新生知訊網',
+      question:question,
+      Time:Time
+    });
+  });
 });
 /*新增問題*/
 router.post('/addq',function(req,res,next){
@@ -71,24 +91,31 @@ router.post('/addq',function(req,res,next){
       }
       
     });
-    /*搜尋功能*/
-    router.get('/search',function(req,res,next){
-      //console.log(req.query);
-      if(req.query.keyword){
-        console.log(req.query.keyword);
-        Question.find({ $text: { $search: req.query.keyword } },function(err,result,count){
-          if(err){return next(err)};
-          console.log("測試用");
-          res.render('qna/search', { 
-            title: '新生Ｑ＆Ａ ｜ 新生知訊網',
-            result:result
-          });
-          /*res.json({
-            result:result
-          });*/
-        });
+/*搜尋功能*/
+router.get('/search',function(req,res,next){
+  //console.log(req.query);
+  if(req.query.keyword){
+    console.log(req.query.keyword);
+    //模糊查詢參數
+    var query={};
+    query['Title']=new RegExp(req.query.keyword);
+    Question.find(query ,function(err,question){
+      if(err){return next(err)};
+      //轉換時間欄位
+      var Time = function(date) {
+        var monthIndex = date.getMonth();
+        var day = date.getDate();
+        var time = (++monthIndex) + '/' + day;
+        return time;
       }
+      res.render('qna/index', { 
+        title: '新生Ｑ＆Ａ ｜ 新生知訊網',
+        question:question,
+        Time:Time
+      });
     });
+  }
+});
 /*紀錄點擊次數*/
 router.get('/:id', function(req, res, next) {
   if(mongoose.Types.ObjectId.isValid(req.params.id)){
@@ -152,8 +179,7 @@ router.get('/delete/:id',function(req,res,next){
               if(result!==null){
                       /*刪除*/
                       result.remove();
-                      res.redirect('/qna');
-                  
+                      res.json({ id: result._id });
               }
               else{
                   res.redirect('/qna');

@@ -1,45 +1,99 @@
+body{
+    background-color: #D3E6DD;
+}
 tbody{
     float:center;
     display: block;
     height: 300px;
     overflow-y: scroll;
     border-collapse: collapse;
-    font-family: Microsoft JhengHei;
+    font-family: Microsoft YaHei;
+    /* background-image: url(內頁捲軸.png);
+    background-size: cover; */
 }
 thead{
     display: block;
     text-align: center;
-    background-color: #b8daff;
-    font-family: Microsoft JhengHei;
+    font-family: Microsoft YaHei;
+    /* background-image: url(外框.png);
+    background-size: cover; */
 }
 table{
     margin:0 auto;
+    border-collapse: collapse;
+    border-spacing: 10px;
 }
 td{
     text-align: center;
-    width:80px;
+    width:120px;
 }
 th{
-    width:80px;
+    width:120px;
+}
+.nav-link{
+    color:black;
+    font-family: YouYuan;
 }
 #title{
     width:200px;
 }
-.ask{
-    float: right;
-    vertical-align: middle;
-    text-align: center;
-    position: fixed;
-
-}
 .classification{
-    margin: 35px;
+    margin: 20px;
 }
 .search{
     float: right;
+}
+.searchbtn{
+    background-size: cover;
+    background-color: transparent;
+    width: 30px; 
+    height: 30px;
 }
 .top{
     position: absolute;
     top:0px;
     background-color: rgb(196, 150, 233);
 }
+#answer{
+    width: 90%;
+    position: center;
+}
+.modal-title{
+    text-align: center;
+    font-family: Microsoft YaHei;
+    font-weight:bold;
+}
+.askQuestion{
+    background-image: url(我要發問.png);
+    background-size: cover;
+  }
+ .QA{
+    background-image: url(問題.png);
+    background-size: cover;
+    font-family: Microsoft YaHei;
+ }
+ form{
+    font-weight:bold;
+    font-family: Microsoft YaHei;
+ }
+ .askbutton{
+    width: 100px; 
+    height: 150px;
+    float: right;
+    vertical-align: middle;
+    position: absolute;
+    top:150px;
+    right:0;
+ }
+ .closemodal{
+    background-image: url(OK.png);
+    background-size: cover; 
+    max-width: 40%;
+	max-height: 40%;	
+ }
+ .close{
+    background-image: url(叉叉.png);
+    background-size: cover; 
+    max-width: 25%;
+	max-height: 25%;
+ }
