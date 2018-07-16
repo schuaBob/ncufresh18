@@ -1,9 +1,9 @@
 <script>
 
     $(document).ready(function(){
-        $(".plays").hide();
-        $(".dates").hide();
-        $(".services").hide();
+        // $(".plays").hide();
+        // $(".dates").hide();
+        // $(".services").hide();
         
 
         $(".learn").mousedown(function(){
@@ -34,7 +34,29 @@
             $(".dates").hide();
         });
 
-    
-  
+        /* club的方法太冗長,利用for迴圈縮減篇幅 */
+        let depart_type = [["文學院","literature"],["理學院","science"],["管理學院","management"],["工學院","engineering"],["資訊電機學院","csee"],["地球科學學院","earth"],["客家學院","hakka"],["生醫理工學院","chst"]]
+        /* 字串要分開打 */
+        for(let p = 0; p<8 ; p++){
+            $("."+depart_type[p][1]+"_button").mousedown(function(){
+                /* 設定show hide的情況 */
+                if(p==0){
+                    $("."+depart_type[p][1]+"_table").show();
+                    for(let q = p+1 ;q < 8 ; q++){
+                        $("."+depart_type[q][1]+"_table").hide();
+                    }
+                }
+                else{
+                    $("."+depart_type[p][1]+"_table").show();
+                    for(let m=0; m<p ; m++){
+                        $("."+depart_type[m][1]+"_table").hide();
+                    }
+                    for(let n=p+1; n<8 ; n++){
+                        $("."+depart_type[n][1]+"_table").hide();
+                    }
+                }
+            });
+        }
+        
     })
 </script>

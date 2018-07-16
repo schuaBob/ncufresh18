@@ -76,25 +76,20 @@
             </div>
           </div>
         </div>
-        <% let ffffffff  = ["文學院","理學院","管理學院","工學院","資訊電機學院","地球科學學院","客家學院","生醫理工學院"]%>
+        
+        <% let ffffffff  = [["文學院","literature"],["理學院","science"],["管理學院","management"],["工學院","engineering"],["資訊電機學院","csee"],["地球科學學院","earth"],["客家學院","hakka"],["生醫理工學院","chst"]]%>
         <!--左側按鈕-->
         <div class="btn-group-vertical">
-            <button class="literature" id="literature">文學院</button></br>
-            <button class="science" id="science">理學院</button></br>
-            <button class="management" id="management">管理學院</button></br>
-            <button class="engineering" id="engineering">工學院</button></br> 
-            <button class="csee" id="csee">資訊電機學院</button></br> 
-            <button class="earth" id="earth">地球科學學院</button></br> 
-            <button class="hakka" id="hakka">客家學院</button></br> 
-            <button class="chst" id="chst">生醫理工學院</button></br>
+          <% for(let p = 1; p<=8 ; p++) {%>
+            <button class="<%= ffffffff[p-1][1] %>_button"><%= ffffffff[p-1][0] %></button></br>
+          <%}%>
         </div>
-
         <!-- 根據按鈕選出相對類別 -->
           <%for (let q = 1 ;q<=8;q++){%>
-            <table>
+            <table class="<%= ffffffff[q-1][1] %>_table">
               <thead>
                 <tr>
-                  <th><%= ffffffff[q-1] %></th>
+                  <th><%= ffffffff[q-1][0] %></th>
                 </tr>
               </thead>
               <tbody>
@@ -126,12 +121,12 @@
                   <div class="modal-body">
                     <div class="container">
                       <ul class="nav nav-pills flex-column">
-                        <li><a data-toggle="pill" href="#introduction_<%= department[i].name %>">系所介紹</a></li>
-                        <li><a data-toggle="pill" href="#organization<%= department[i].name %>">系學會</a></li>
-                        <li><a data-toggle="pill" href="#activity_<%= department[i].name %>">系所活動</a></li>
-                        <li><a data-toggle="pill" href="#team<%= department[i].name %>">系隊</a></li>
-                        <li><a data-toggle="pill" href="#course<%= department[i].name %>">系上課程</a></li> <!-- 之後跟影音專區拿影片 -->
-                        <li><a data-toggle="pill" href="#lightning_round<%= department[i].name %>" data-src="https://www.youtube.com/embed/m4KG5G4nmjE">快問快答</a></li>
+                        <li id="modal_button"><a data-toggle="pill" href="#introduction_<%= department[i].name %>">系所介紹</a></li>
+                        <li id="modal_button"><a data-toggle="pill" href="#organization<%= department[i].name %>">系學會</a></li>
+                        <li id="modal_button"><a data-toggle="pill" href="#activity_<%= department[i].name %>">系所活動</a></li>
+                        <li id="modal_button"><a data-toggle="pill" href="#team<%= department[i].name %>">系隊</a></li>
+                        <li id="modal_button"><a data-toggle="pill" href="#course<%= department[i].name %>">系上課程</a></li> <!-- 之後跟影音專區拿影片 -->
+                        <li id="modal_button"><a data-toggle="pill" href="#lightning_round<%= department[i].name %>" data-src="https://www.youtube.com/embed/m4KG5G4nmjE">快問快答</a></li>
                       </ul>
                       <div class="tab-content">
                           <div id="introduction_<%= department[i].name %>" class="tab-pane fade in">

@@ -1,4 +1,4 @@
-li{ 
+#modal_button{ 
     border-style:outset;
     padding-top:13px; 
     padding-bottom: 13px;
@@ -23,6 +23,10 @@ button{
     border-bottom-right-radius: 40px;
     -webkit-transition-duration: 0.4s; 
     transition-duration: 0.4s;
+}
+button:hover {
+    background-color: rgb(43, 78, 233);
+    color: white;
 }
 
 h4{
@@ -69,3 +73,8 @@ td{
     height: 75%;
     margin-left: 20%;
 }
+
+.science_table, .management_table, .engineering_table, .csee_table, .earth_table, .hakka_table, .chst_table{
+    display: none;
+}
+
