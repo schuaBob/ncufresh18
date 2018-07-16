@@ -211,6 +211,120 @@ function quizFormat() {
     }    
 }
 
+Phaser.Text.prototype.advancedWordWrap = function (text) {
+    var context = this.context;
+    var wordWrapWidth = this.style.wordWrapWidth;
+    var output = '';
+    // (1) condense whitespace
+    // (2) split Chinese(easy to do this I add a space to every Chinese words)
+    // (3) split into lines
+    var lines = text
+        .replace(/ +/gi, ' ')
+        .replace(/([^\x00-\xff])/gi, '$1 ')
+        .split(/\r?\n/gi);
+    var linesCount = lines.length;
+    for (var i = 0; i < linesCount; i++) {
+        var line = lines[i];
+        var out = '';
+        // trim whitespace
+        line = line.replace(/^ *|\s*$/gi, '');
+        // if entire line is less than wordWrapWidth
+        // append the entire line and exit early
+        var lineWidth = context.measureText(line).width;
+    
+        if (lineWidth < wordWrapWidth)
+        {
+            //delete the space I had add to It
+            line = line.replace(/([^\x00-\xff])[\s]*/gi, '$1')
+            output += line + '\n';
+            continue;
+        }
+    
+        // otherwise, calculate new lines
+        var currentLineWidth = wordWrapWidth;
+    
+        // split into words
+        var words = line.split(' ');
+    
+        for (var j = 0; j < words.length; j++)
+        {
+            var word = words[j];
+            //Chinese don't need space But else need
+            if(/([^\x00-\xff])/gi.test(word)){
+                var wordWithSpace = word;
+            } else {
+                var wordWithSpace = word + ' ';
+            }
+            var wordWidth = context.measureText(wordWithSpace).width;
+    
+            if (wordWidth > currentLineWidth)
+            {
+                // break word
+                if (j === 0)
+                {
+                    // shave off letters from word until it's small enough
+                    var newWord = wordWithSpace;
+    
+                    while (newWord.length)
+                    {
+                        newWord = newWord.slice(0, -1);
+                        wordWidth = context.measureText(newWord).width;
+    
+                        if (wordWidth <= currentLineWidth)
+                        {
+                            break;
+                        }
+                    }
+    
+                    // if wordWrapWidth is too small for even a single
+                    // letter, shame user failure with a fatal error
+                    if (!newWord.length)
+                    {
+                        throw new Error('This text\'s wordWrapWidth setting is less than a single character!');
+                    }
+    
+                    // replace current word in array with remainder
+                    var secondPart = word.substr(newWord.length);
+    
+                    words[j] = secondPart;
+    
+                    // append first piece to output
+                    out += newWord;
+                }
+    
+                // if existing word length is 0, don't include it
+                var offset = (words[j].length) ? j : j + 1;
+    
+                // collapse rest of sentence
+                var remainder = words.slice(offset).join(' ')
+                // remove any trailing white space
+                .replace(/[ \n]*$/gi, '');
+    
+                // prepend remainder to next line
+                lines[i + 1] = remainder + ' ' + (lines[i + 1] || '');
+                linesCount = lines.length;
+    
+                break; // processing on this line
+    
+                // append word with space to output
+            }
+            else
+            {
+                out += wordWithSpace;
+                currentLineWidth -= wordWidth;
+            }
+        }
+    
+        // append processed line to output
+        output += out.replace(/[ \n]*$/gi, '') + '\n';
+    }
+    
+    // trim the end of the string
+    output = output.replace(/[\s|\n]*$/gi, '');
+    
+    return output;
+}
+
 // button + text = labelButton
 var LabelButton = function(rightOrWrong, game, x, y, key, label, callback, callbackContext, overFrame, outFrame, downFrame, upFrame) {
     Phaser.Button.call(this, game, x, y, key, callback, callbackContext, overFrame, outFrame, downFrame, upFrame)    
@@ -237,6 +351,32 @@ LabelButton.prototype.setLabel = function(label) {
 LabelButton.prototype.setRightOrWrong = function (rightOrWrong) {
     this.rightOrWrong = rightOrWrong
 }
+
+var LabelSprite = function(game, x, y, key, frame) {
+    Phaser.Sprite.call(this, game, x, y, key, frame)
+    this.anchor.setTo(0.5, 0.5)
+    this.label = new Phaser.Text(game, 0, 0)    
+    this.label.anchor.setTo(0.5)    
+    this.label.setStyle({
+        font: "30px Arial",
+        fill: "#000000", 
+        wordWrap: true, 
+        wordWrapWidth: this.width,
+        align: "left"
+    })
+    this.addChild(this.label)
+
+    game.add.existing(this)
+}
+LabelSprite.prototype = Object.create(Phaser.Sprite.prototype)
+LabelSprite.prototype.constructor = LabelSprite
+LabelSprite.prototype.setLabel = function(label) {
+    this.label.setText(label)
+}
+LabelSprite.prototype.setStyle = function (style) {
+    this.label.setStyle(style)
+}
+
 
 // 返回按鈕 event
 function btnBackClick(item) {
@@ -267,7 +407,7 @@ var states = {
             game.load.image('bonus3', 'images/+7s.png')
             game.load.image('bonus4', 'images/+20s.png')
             game.load.image('combo', 'images/combo.png')
-            game.load.spritesheet('question', 'images/question.png', 400, 200)
+            game.load.spritesheet('question', 'images/question.png', 400, 150)
             game.load.spritesheet('btnBack', 'images/back.png', 60, 60)
             game.load.spritesheet('blank', 'images/blank.png', 800, 600)
             game.load.spritesheet('testLeft', 'images/testleft.png', 100, 600)
@@ -296,7 +436,7 @@ var states = {
             }
 
             // format quiz
-            quizFormat()
+            // quizFormat()
         }
     },
     // 开始界面
@@ -382,25 +522,28 @@ var states = {
             btnBack.alignIn(cameraFocus, Phaser.TOP_RIGHT)
             
             // 問題框
-            var questionSprite = game.add.sprite(game.world.centerX + 100, game.world.centerY - 120, 'question')
-            questionSprite.anchor.setTo(0.5, 0.5)
+            // var questionSprite = game.add.sprite(game.world.centerX + 100, game.world.centerY - 120, 'question')
+            // questionSprite.anchor.setTo(0.5, 0.5)
 
+            var questionSprite = new LabelSprite(this.game, game.world.centerX + 100, game.world.centerY - 120, 'question')
             // 問題文字
-            var style = { 
-                font: "32px Courier",
-                fill: "#00ff44",
-                align: "center",
-                wordWrap: true,
-                wordWrapWidth: questionSprite.width
-            }
-            var questionText = game.add.text(0, 0, style)
-            questionText.alignIn(questionSprite, Phaser.LEFT_CENTER)
+            // var style = { 
+            //     font: "32px Courier",
+            //     fill: "#00ff44",
+            //     wordWrap: true,
+            //     wordWrapWidth: 10,
+            //     align: "center"
+            // }
+            // var questionText = game.add.text(0, 0)
+            // questionText.anchor.setTo(0.5, 0.5)
+            // questionSprite.addChild(questionText)
+            // questionText.alignIn(questionSprite, Phaser.TOP_LEFT, 0, -20)
 
             // 選擇按鈕
-            var btnChoiceA = new LabelButton(false, this.game, game.world.centerX + 100, game.world.centerY + 30, "btnChoice", "Choice A", inputDown) 
-            var btnChoiceB = new LabelButton(false, this.game, game.world.centerX + 100, game.world.centerY + 85, "btnChoice", "Choice B", inputDown) 
-            var btnChoiceC = new LabelButton(false, this.game, game.world.centerX + 100, game.world.centerY + 140, "btnChoice", "Choice C", inputDown) 
-            var btnChoiceD = new LabelButton(false, this.game, game.world.centerX + 100, game.world.centerY + 195, "btnChoice", "Choice D", inputDown) 
+            var btnChoiceA = new LabelButton(false, this.game, game.world.centerX + 100, game.world.centerY -10, "btnChoice", "Choice A", inputDown) 
+            var btnChoiceB = new LabelButton(false, this.game, game.world.centerX + 100, game.world.centerY + 50, "btnChoice", "Choice B", inputDown) 
+            var btnChoiceC = new LabelButton(false, this.game, game.world.centerX + 100, game.world.centerY + 110, "btnChoice", "Choice C", inputDown) 
+            var btnChoiceD = new LabelButton(false, this.game, game.world.centerX + 100, game.world.centerY + 170, "btnChoice", "Choice D", inputDown) 
 
             // 添加 combo
             var comboSprite = game.add.image(0, 0, 'combo')
@@ -424,13 +567,13 @@ var states = {
 
             // 選擇 bonus
             function choiceBonus(combo) {
-                if (combo == 1) {
+                if (combo == 5) {
                     return "bonus1"
-                } else if (combo == 2) {
+                } else if (combo == 10) {
                     return "bonus2"
-                } else if (combo == 3) {
+                } else if (combo == 20) {
                     return "bonus3"
-                } else if (combo == 4) {
+                } else if (combo == 50) {
                     return "bonus4"
                 } else {
                     return false
@@ -453,7 +596,7 @@ var states = {
             playUI.add(btnChoiceB)
             playUI.add(btnChoiceA)
             playUI.add(questionSprite)
-            playUI.add(questionText)
+            // playUI.add(questionText)
  
             playUI.alignIn(bg, Phaser.BOTTOM_CENTER)
             playUI.y -= 100
@@ -468,7 +611,12 @@ var states = {
             // 刷新題目
             function resetQuestionAndChoice(data) {
                 choiceState = 0
-                questionText.setText(data.q)
+                // console.log(data.q)
+                questionSprite.setLabel(data.q)
+                questionSprite.label.useAdvancedWrap = true;
+                questionSprite.label.autoRound = true;
+                questionSprite.label.updateText();
+                // questionText.setStyle({ font: "32px Arial", fill: "#ff0044", wordWrap: true, wordWrapWidth: questionSprite.width, align: "center"})
                 choices = [btnChoiceA, btnChoiceB, btnChoiceC, btnChoiceD]
                 console.log("correctIndex:" + data.correctIndex)
                 for (i = 0; i < choices.length; i++) {
