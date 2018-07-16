@@ -3,19 +3,17 @@
 <head>
     <% include ../layout/head %>
     <link href="../login/mdb.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
     <header>
         <% include ../layout/navbar %>
     </header>
     <main>
-        <span class="fa fa-sign-in"></span> 登入
+        <div id="er"></div>
         <div class="form-group">
-                <label>Email</label>
-                <input type="text" class="form-control" name="email" required>
-            </div>
-        <div >
-            <label>帳號：</label>
+            <img src="login.png" id="lg"><b id="w">登入</b><br>
+            <b id="word">帳號</b>
             <input type="text" class="form-control" name="email" required>
         </div>
     </main>

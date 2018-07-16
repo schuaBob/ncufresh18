@@ -1,0 +1,38 @@
+.form-group {
+    display: block ;
+    margin : auto ;
+    max-width: 35vw ;
+}
+#er {
+    display : block ;
+    margin : auto ;
+    height: 25vh;
+}
+#lg {
+    height: 1vw;
+    min-height: 15px ;
+    color: white ;
+}
+#w {
+    font-size : calc(15px + 0.5vw) ;
+    color: white ;
+}
+#word {
+    font-size : calc(20px + 1vw) ;
+    color: white ;
+}
+body {
+    background-image: url("背景.jpg") ;
+    background-size: cover ;
+}
+@media only screen and (max-width: 800px) {
+    body {
+        background-image: url("手機登錄背景.jpg") ;
+        background-size: cover ;
+    }
+    .form-group {
+        display: block ;
+        margin : auto ;
+        max-width: 65vw ;
+    }
+}
