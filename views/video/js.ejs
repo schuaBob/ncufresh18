@@ -64,7 +64,10 @@
         $(document).on("click",".video_item",function(event){
             $("#CDbox").css('background-image', 'url("background_'+$(this).attr("video")+'.png")');
             
-            
+            $(".video_item").removeClass("btn-outline-secondary");
+            $(".video_item").addClass("btn-outline-success");
+            $(this).removeClass("btn-outline-success");
+            $(this).addClass("btn-outline-secondary");
 
             if(this.id != "back"){
                 QAvideoplay = 0;
