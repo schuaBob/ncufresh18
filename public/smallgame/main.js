@@ -34,12 +34,12 @@ var temp = [
     { q: '132公車單程票價為何?', o: ['15','17','18','19'] , correctIndex:2},
     { q: '公用腳踏車叫甚麼?', o: ['小白','小黑','小黃','小綠'] , correctIndex:3},
     { q: '大一必修體育佔幾學分?', o: ['0','2','3','1'] , correctIndex:0},
-    { q: '請問中央大學沒有開設哪一堂語文課？', o: ['西班牙文','俄文','法文','德文'] , correctIndex:1},
-    { q: '請問中央大學有開設哪一堂語文課？', o: ['德文','俄文','義大利文','馬來文 '] , correctIndex:0},
-    { q: '中央大學哪一項運動沒有設置室內場館？', o: ['排球','籃球','桌球','網球'] , correctIndex:3},
-    { q: '中央大學的專業實驗劇場-黑盒子，位於哪裡？', o: ['志希館','人文社會科學大樓','工一館','管理二館'] , correctIndex:1},
+    { q: '請問中央大學沒有開設哪一堂語文課?', o: ['西班牙文','俄文','法文','德文'] , correctIndex:1},
+    { q: '請問中央大學有開設哪一堂語文課?', o: ['德文','俄文','義大利文','馬來文 '] , correctIndex:0},
+    { q: '中央大學哪一項運動沒有設置室內場館?', o: ['排球','籃球','桌球','網球'] , correctIndex:3},
+    { q: '中央大學的專業實驗劇場-黑盒子，位於哪裡?', o: ['志希館','人文社會科學大樓','工一館','管理二館'] , correctIndex:1},
     { q: '中央可以固定一段時間會有電影放映的地方在哪裡?', o: ['107電影院','108電影院','106電影院','105電影院'] , correctIndex:0},
-    { q: '若持中大證件到校內的小木屋鬆餅點餐，可打幾折？', o: ['10折','7折','5折','9折'] , correctIndex:3},
+    { q: '若持中大證件到校內的小木屋鬆餅點餐，可打幾折?', o: ['10折','7折','5折','9折'] , correctIndex:3},
     { q: '操場跑道的顏色為何?', o: ['藍色','紅色','黃色','白色'] , correctIndex:0},
     { q: '女生宿舍最貴的為哪棟?', o: ['女4','女14','女1','女2'] , correctIndex:1},
     { q: '中央大學的地址?', o: ['中央路300號','學央路300號','中大路300號','以上皆非'] , correctIndex:2},
@@ -78,8 +78,8 @@ var temp = [
     { q: '校內工讀哪個網站可以找到?', o: ['lms','中央資管網頁','portal','中央資工網頁'] , correctIndex:2},
     { q: '通識課程在畢業前應修滿幾學分?', o: ['18','20','15','14'] , correctIndex:3},
     { q: '全校有幾個學系?', o: ['22','33','44','55'] , correctIndex:0},
-    { q: '學生專用信箱web mail是由哪個單位負責管理的？', o: ['圖書館','電子計算中心','教務處','學務處'] , correctIndex:1},
-    { q: '中央大學語言中心位在哪一棟大樓？', o: ['志希館','地科院','綜教館','管理二館'] , correctIndex:2},
+    { q: '學生專用信箱web mail是由哪個單位負責管理的?', o: ['圖書館','電子計算中心','教務處','學務處'] , correctIndex:1},
+    { q: '中央大學語言中心位在哪一棟大樓?', o: ['志希館','地科院','綜教館','管理二館'] , correctIndex:2},
     { q: '中央大學宿舍網路單日(24小時)校外的上傳流量『加總』之後上限為?', o: ['沒限制','3GB','4GB','5GB'] , correctIndex:1},
     { q: '中央大學宿舍網路單日(24小時)校外的下載流量『加總』之後上限為?', o: ['沒限制','3GB','4GB','5GB'] , correctIndex:0},
     { q: '如果腳踏車壞了要去哪修?', o: ['找警衛伯伯','全家','家樂福','後門腳踏車店'] , correctIndex:3},
@@ -199,132 +199,6 @@ var temp = [
 
 var quiz = temp
 
-// 問題換行處理
-function quizFormat() {
-    for(i = 0; i < temp.length; i++) {
-        if (temp[i].q.length > 14) {
-            quiz[i].q = temp[i].q.insert(15, "\n")
-        } 
-        if (temp[i].q.length > 28) {
-            quiz[i].q = temp[i].q.insert(29, "\n")            
-        }
-    }    
-}
-
-Phaser.Text.prototype.advancedWordWrap = function (text) {
-    var context = this.context;
-    var wordWrapWidth = this.style.wordWrapWidth;
-    var output = '';
-    // (1) condense whitespace
-    // (2) split Chinese(easy to do this I add a space to every Chinese words)
-    // (3) split into lines
-    var lines = text
-        .replace(/ +/gi, ' ')
-        .replace(/([^\x00-\xff])/gi, '$1 ')
-        .split(/\r?\n/gi);
-    var linesCount = lines.length;
-    for (var i = 0; i < linesCount; i++) {
-        var line = lines[i];
-        var out = '';
-        // trim whitespace
-        line = line.replace(/^ *|\s*$/gi, '');
-        // if entire line is less than wordWrapWidth
-        // append the entire line and exit early
-        var lineWidth = context.measureText(line).width;
-    
-        if (lineWidth < wordWrapWidth)
-        {
-            //delete the space I had add to It
-            line = line.replace(/([^\x00-\xff])[\s]*/gi, '$1')
-            output += line + '\n';
-            continue;
-        }
-    
-        // otherwise, calculate new lines
-        var currentLineWidth = wordWrapWidth;
-    
-        // split into words
-        var words = line.split(' ');
-    
-        for (var j = 0; j < words.length; j++)
-        {
-            var word = words[j];
-            //Chinese don't need space But else need
-            if(/([^\x00-\xff])/gi.test(word)){
-                var wordWithSpace = word;
-            } else {
-                var wordWithSpace = word + ' ';
-            }
-            var wordWidth = context.measureText(wordWithSpace).width;
-    
-            if (wordWidth > currentLineWidth)
-            {
-                // break word
-                if (j === 0)
-                {
-                    // shave off letters from word until it's small enough
-                    var newWord = wordWithSpace;
-    
-                    while (newWord.length)
-                    {
-                        newWord = newWord.slice(0, -1);
-                        wordWidth = context.measureText(newWord).width;
-    
-                        if (wordWidth <= currentLineWidth)
-                        {
-                            break;
-                        }
-                    }
-    
-                    // if wordWrapWidth is too small for even a single
-                    // letter, shame user failure with a fatal error
-                    if (!newWord.length)
-                    {
-                        throw new Error('This text\'s wordWrapWidth setting is less than a single character!');
-                    }
-    
-                    // replace current word in array with remainder
-                    var secondPart = word.substr(newWord.length);
-    
-                    words[j] = secondPart;
-    
-                    // append first piece to output
-                    out += newWord;
-                }
-    
-                // if existing word length is 0, don't include it
-                var offset = (words[j].length) ? j : j + 1;
-    
-                // collapse rest of sentence
-                var remainder = words.slice(offset).join(' ')
-                // remove any trailing white space
-                .replace(/[ \n]*$/gi, '');
-    
-                // prepend remainder to next line
-                lines[i + 1] = remainder + ' ' + (lines[i + 1] || '');
-                linesCount = lines.length;
-    
-                break; // processing on this line
-    
-                // append word with space to output
-            }
-            else
-            {
-                out += wordWithSpace;
-                currentLineWidth -= wordWidth;
-            }
-        }
-    
-        // append processed line to output
-        output += out.replace(/[ \n]*$/gi, '') + '\n';
-    }
-    
-    // trim the end of the string
-    output = output.replace(/[\s|\n]*$/gi, '');
-    
-    return output;
-}
-
 // button + text = labelButton
 var LabelButton = function(rightOrWrong, game, x, y, key, label, callback, callbackContext, overFrame, outFrame, downFrame, upFrame) {
     Phaser.Button.call(this, game, x, y, key, callback, callbackContext, overFrame, outFrame, downFrame, upFrame)    
@@ -364,8 +238,9 @@ var LabelSprite = function(game, x, y, key, frame) {
         wordWrapWidth: this.width,
         align: "left"
     })
+    // this.label.alignIn(this, Phaser.CENTER)
     this.addChild(this.label)
-
+    
     game.add.existing(this)
 }
 LabelSprite.prototype = Object.create(Phaser.Sprite.prototype)
@@ -383,6 +258,21 @@ function btnBackClick(item) {
     game.state.start('main')
 }
 
+function chunk(str, n) {
+    var result = [];
+    for(i = 0; i < str.length; i += n) {
+        result.push(str.substr(i, n))
+    }
+    return result
+};
+
+function formatChinese(text, sprite) {
+    var fontSize = text.fontSize
+    var lineWidth = sprite.width
+    var context = text.text
+    var wrapWidth = Math.floor(lineWidth / fontSize)
+    text.setText(chunk(context, wrapWidth).join(' '))
+}
 
 // 遊戲主體長寬
 var width = 800
@@ -407,10 +297,10 @@ var states = {
             game.load.image('bonus3', 'images/+7s.png')
             game.load.image('bonus4', 'images/+20s.png')
             game.load.image('combo', 'images/combo.png')
+            game.load.image('squirrelGround', 'images/squirrel_ground.png')
             game.load.spritesheet('question', 'images/question.png', 400, 150)
             game.load.spritesheet('btnBack', 'images/back.png', 60, 60)
             game.load.spritesheet('blank', 'images/blank.png', 800, 600)
-            game.load.spritesheet('testLeft', 'images/testleft.png', 100, 600)
             
             // 添加進度提示
             var progressText = game.add.text(game.world.centerX, game.world.centerY, '0%', {
@@ -425,18 +315,16 @@ var states = {
             var deadLine = false
             setTimeout(function() {
                 deadLine = true
-            }, 3000)
+            }, 1000)
 
             function onLoad() {
                 if (deadLine) {
                     game.state.start('main')
                 } else {
-                    setTimeout(onLoad, 1000)
+                    setTimeout(onLoad, 500)
                 }
             }
 
-            // format quiz
-            // quizFormat()
         }
     },
     // 开始界面
@@ -504,9 +392,11 @@ var states = {
         this.create = function() {
             var combo = 0
             var score = 0
+            var remainTime = 60
+
             // 設置背景邊界
             game.world.setBounds(0, 0, 800, 2000);
-
+            
             // 背景
             var bg = game.add.image(0, 0, 'bg')
             bg.width = game.world.width     
@@ -516,35 +406,20 @@ var states = {
             game.physics.startSystem(Phaser.Physics.P2JS)
             var cameraFocus = game.add.sprite(game.world.centerX, game.world.centerY + 700, 'blank')
             game.physics.p2.enable(cameraFocus)
-
+            
             // 返回按鈕            
             var btnBack = game.add.button(0, 0, 'btnBack', btnBackClick)
             btnBack.alignIn(cameraFocus, Phaser.TOP_RIGHT)
             
-            // 問題框
-            // var questionSprite = game.add.sprite(game.world.centerX + 100, game.world.centerY - 120, 'question')
-            // questionSprite.anchor.setTo(0.5, 0.5)
-
-            var questionSprite = new LabelSprite(this.game, game.world.centerX + 100, game.world.centerY - 120, 'question')
-            // 問題文字
-            // var style = { 
-            //     font: "32px Courier",
-            //     fill: "#00ff44",
-            //     wordWrap: true,
-            //     wordWrapWidth: 10,
-            //     align: "center"
-            // }
-            // var questionText = game.add.text(0, 0)
-            // questionText.anchor.setTo(0.5, 0.5)
-            // questionSprite.addChild(questionText)
-            // questionText.alignIn(questionSprite, Phaser.TOP_LEFT, 0, -20)
-
+            // 問題
+            var questionSprite = new LabelSprite(this.game, game.world.centerX + 100, game.world.centerY - 130, 'question')
+            
             // 選擇按鈕
             var btnChoiceA = new LabelButton(false, this.game, game.world.centerX + 100, game.world.centerY -10, "btnChoice", "Choice A", inputDown) 
             var btnChoiceB = new LabelButton(false, this.game, game.world.centerX + 100, game.world.centerY + 50, "btnChoice", "Choice B", inputDown) 
             var btnChoiceC = new LabelButton(false, this.game, game.world.centerX + 100, game.world.centerY + 110, "btnChoice", "Choice C", inputDown) 
             var btnChoiceD = new LabelButton(false, this.game, game.world.centerX + 100, game.world.centerY + 170, "btnChoice", "Choice D", inputDown) 
-
+            
             // 添加 combo
             var comboSprite = game.add.image(0, 0, 'combo')
             comboSprite.alignTo(cameraFocus, Phaser.RIGHT_CENTER, -150, 15)
@@ -555,10 +430,34 @@ var states = {
             comboSprite.visible = false
             comboText.visible = false
 
+            // 剩餘時間
+            var remainTimeText = game.add.text(0, 0, remainTime.toString(), {
+                fontSize: "45px"
+            })
+            remainTimeText.alignIn(cameraFocus, Phaser.TOP_RIGHT, -100, -100)
+            var timer = game.time.create(false)
+            timer.loop(1000, function() {
+                remainTime--  
+                remainTimeText.setText(remainTime.toString())
+                if (remainTime === 0) {
+                    game.state.start('start')
+                    alert('遊戲結束')
+                }
+            }, this)
+            timer.start()
+            
             // 添加松鼠動畫， test
-            // var testLeft = game.add.sprite(0, 0, 'testLeft')
-            // testLeft.alignTo(cameraFocus, Phaser.LEFT_CENTER)
-
+            var squirrelGroup = game.add.group()
+            var squirrelGroupX = 10
+            var squirrelGroupY = 1250
+            function createSquirrel() {
+                squirrelGroupY -= 40
+                var temp = squirrelGroup.create(squirrelGroupX, squirrelGroupY, 'squirrelGround')
+                console.log(temp.height)
+                game.add.tween(temp).to({y: squirrelGroupY + 600}, 500, null, true, "Quart.easeOut");
+            }
+            // var squirrelLeft = game.add.sprite(-20, 1750, 'squirrelGround')
+            
             // 添加獎勵圖片
             var bonus1 = game.add.image(0, 0, 'bonus1');
             var bonus2 = game.add.image(0, 0, 'bonus2');
@@ -568,27 +467,32 @@ var states = {
             // 選擇 bonus
             function choiceBonus(combo) {
                 if (combo == 5) {
+                    remainTime += 2
                     return "bonus1"
                 } else if (combo == 10) {
+                    remainTime += 4
                     return "bonus2"
                 } else if (combo == 20) {
+                    remainTime += 8
                     return "bonus3"
                 } else if (combo == 50) {
+                    remainTime += 21
                     return "bonus4"
                 } else {
                     return false
                 }
             }
-
+            
             var otherUI = game.add.group()
             otherUI.add(btnBack)
             otherUI.add(comboSprite)
             otherUI.add(comboText)
+            otherUI.add(remainTimeText)
             otherUI.add(bonus1)
             otherUI.add(bonus2)
             otherUI.add(bonus3)
             otherUI.add(bonus4)
-
+            
             // 建立 playUI group
             var playUI = game.add.group()
             playUI.add(btnChoiceD)
@@ -596,11 +500,12 @@ var states = {
             playUI.add(btnChoiceB)
             playUI.add(btnChoiceA)
             playUI.add(questionSprite)
-            // playUI.add(questionText)
- 
-            playUI.alignIn(bg, Phaser.BOTTOM_CENTER)
+            console.log("playUI.x: " + playUI.x)
+            playUI.alignIn(bg, Phaser.BOTTOM_CENTER, 40)
+            console.log("playUI.x: " + playUI.width)
             playUI.y -= 100
-
+            
+            // 鏡頭移動到最底部
             game.camera.focusOnXY(600, 2000)
             
             // 打亂順序，每次題目不同
@@ -611,14 +516,13 @@ var states = {
             // 刷新題目
             function resetQuestionAndChoice(data) {
                 choiceState = 0
-                // console.log(data.q)
+                // 獲取 data 中的題目
                 questionSprite.setLabel(data.q)
-                questionSprite.label.useAdvancedWrap = true;
-                questionSprite.label.autoRound = true;
-                questionSprite.label.updateText();
-                // questionText.setStyle({ font: "32px Arial", fill: "#ff0044", wordWrap: true, wordWrapWidth: questionSprite.width, align: "center"})
+                // 中文換行處理
+                formatChinese(questionSprite.label, questionSprite)
                 choices = [btnChoiceA, btnChoiceB, btnChoiceC, btnChoiceD]
                 console.log("correctIndex:" + data.correctIndex)
+                // 設定正確選擇
                 for (i = 0; i < choices.length; i++) {
                     choices[i].setLabel(data.o[i])
                     if (i == data.correctIndex) {
@@ -637,6 +541,9 @@ var states = {
                     choiceState = 1
                     // 選擇正確
                     if (item.rightOrWrong) {
+                        // 添加松鼠一隻
+                        createSquirrel()
+
                         combo++
                         item.setLabel("Congratulations!")                    
                         var goal = choiceBonus(combo)
@@ -660,9 +567,9 @@ var states = {
                         }
                         
                         // 使用 tween 移動鏡頭
-                        if (game.camera.y >= 40) {
+                        if (squirrelGroupY <= 1050) {
                             console.log("game.camera.y: " + game.camera.y)
-                            game.add.tween(playUI).to({y: playUI.y - 40}, 500, null, true, "Quart.easeOut");
+                            game.add.tween(playUI).to({y: playUI.y -40}, 500, null, true, "Quart.easeOut");
                             game.add.tween(otherUI).to({y: otherUI.y - 40}, 500, null, true, "Quart.easeOut");
                             game.add.tween(game.camera).to({y: game.camera.y - 40}, 500, null, true, "Quart.easeOut");
                         }
@@ -679,7 +586,7 @@ var states = {
                         setTimeout(resetQuestionAndChoice, 1500, data[count])
                     } 
                 }
-
+                
                 // 更新 combo 顯示
                 comboText.setText(combo.toString())
                 if (combo == 0) {
@@ -688,15 +595,15 @@ var states = {
                 } else {
                     comboSprite.visible = true
                     comboText.visible = true
-
                 }
             }
-
+            
             // 第一次刷新題目
             resetQuestionAndChoice(data[count])
         }
     },
-
+    
+    
     // 排行榜
     rank: function() {
         this.create = function() {
@@ -721,14 +628,6 @@ var states = {
         }
     },
 
-    // 结束分數场景
-    over: function() {
-    	this.create = function() {
-        	// TO-DO
-            game.stage.backgroundColor = '#000'
-            alert('游戏结束!')
-        }
-    }
 }
 
 // 添加場景到遊戲中
