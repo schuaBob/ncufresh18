@@ -4,6 +4,7 @@
 <head>
     <% include ../layout/head %>
         <link rel="stylesheet" href="campus.css">
+
 </head>
 
 <body>
@@ -61,9 +62,9 @@
                                                 <span class=".picclose" aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <div class="modal-body imgcontent">
-                                            
-                                            
+                                        <div class="modal-body imgcontent" ooo="<%= result[i]['_id'] %>">
+
+
                                             <img id="output" width="300px" />
                                             <form class="picuploadform" action="/campus/insert_img/<%=result[i]['_id']%>" enctype="multipart/form-data" method="post">
                                                 <fieldset>
@@ -84,23 +85,39 @@
                                 </div>
                             </div>
                             <td>
-                                <button type="button" data-toggle="modal" data-target="#mapedit<%= i %>">編輯</button>
+                                <button type="button" data-toggle="modal" data-target="#mapedit<%= i %>" class="editpicposi" xxx="<%=result[i]['_id']%>">編輯</button>
                             </td>
                             <div id="mapedit<%= i %>" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="myModalTitle">Modal title</h5>
+                                            <h5 class="modal-title" id="myModalTitle">位置&大小</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <div class="modal-body">
-
-                                        </div>
-
-
+                                        <form action="/campus/saveposition/<%=result[i]['_id']%>" method="POST">
+                                            <div class="modal-body">
+                                                <label for="x_position">x軸</label>
+                                                <input type="text" name="x_position">
+                                                <br>
+                                                <label for="y_position">y軸</label>
+                                                <input type="text" name="y_position">
+                                                <br>
+                                                <label for="size">圖片大小</label>
+                                                <input type="text" name="size">
+                                                <br>
+                                                <div class="picspace">
+                                                    
+                                                    <img src="back2.png" alt="mainmap" width="100%">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary picclose" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">上傳</button>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -178,7 +195,9 @@
                             </div>
 
 
-                            <td><a href="delete/<%=result[i]['_id']%>">刪除</a></td>
+                            <td>
+                                <a href="delete/<%=result[i]['_id']%>">刪除</a>
+                            </td>
 
 
                         </tr>

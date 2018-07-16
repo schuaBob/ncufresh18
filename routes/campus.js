@@ -91,7 +91,7 @@ router.post("/insert_img/:id", function(req, res, next) {
       var readStream = fs.createReadStream(tmpPath);
       var writeStream = fs.createWriteStream(targetPath);
       readStream
-        .on("end", (err) => {
+        .on("end", err => {
           if (err) return next(err);
           console.log(fields);
           if (fields.imgtype === "0") {
@@ -100,7 +100,7 @@ router.post("/insert_img/:id", function(req, res, next) {
                 Buildpic: fileName
               })
               .exec(function(err, result) {
-                console.log(result)
+                console.log(result);
                 if (err) {
                   return next(err);
                 }
@@ -133,6 +133,16 @@ router.post("/insert_img/:id", function(req, res, next) {
     res.redirect("/campus/editElement");
   });
 });
+router.get("/picposition", function(req, res, next) {
+  elebuilding
+    .findById(req.query.id, { _id: 0, Buildpic: 1,X_position:1,Y_position:1,Size:1})
+    .exec(function(err, result) {
+      if (err) {
+        return next(err);
+      }
+      res.send(result);
+    });
+});
 
 router.get("/getimg", function(req, res, next) {
   elebuilding
@@ -145,24 +155,44 @@ router.get("/getimg", function(req, res, next) {
     });
   // res.redirect("/campus/editElement");
 });
-router.post("/deleimg",function(req,res,next) {
-  if(req.body.val==="0") {
-    elebuilding.findByIdAndUpdate(req.body.id,{
-      Buildpic : ""
-    }).exec(function(err) {
-      if(err) {
-        return next(err);
-      }
-    })
-  } else if(req.body.val==="1") {
-    elebuilding.findByIdAndUpdate(req.body.id, {
-      $pull:{Intropic:req.body.ipid}
-    }).exec(function(err) {
-      if(err) {
-        return next(err);
-      }
-    })
+router.post("/deleimg", function(req, res, next) {
+  if (req.body.val === "0") {
+    elebuilding
+      .findByIdAndUpdate(req.body.id, {
+        Buildpic: ""
+      })
+      .exec(function(err) {
+        if (err) {
+          return next(err);
+        }
+        res.send(true);
+        res.end();
+      });
+  } else if (req.body.val === "1") {
+    elebuilding
+      .findByIdAndUpdate(req.body.id, {
+        $pull: { Intropic: req.body.ipid }
+      })
+      .exec(function(err) {
+        if (err) {
+          return next(err);
+        }
+        res.send(true);
+        res.end();
+      });
   }
+});
+router.post("/saveposition/:id",function(req,res,next) {
+  elebuilding.findByIdAndUpdate(req.params.id,{
+    X_position : req.body.x_position,
+    Y_position : req.body.y_position,
+    Size : req.body.size
+  }).exec(function(err) {
+    if (err) {
+      return next(err)
+    }
+    res.redirect("/campus/editElement");
+  })
 })
 
 module.exports = router;

@@ -112,3 +112,10 @@ li {
 #content tbody tr:nth-child(odd) {
   background: #cccccc;
 }
+
+.posipic{
+  
+  
+  position: absolute;
+}
+
