@@ -1,8 +1,9 @@
-ul li{ 
+li{ 
     border-style:outset;
     padding-top:13px; 
     padding-bottom: 13px;
 }
+
 ul{
     float:left;
 }
@@ -10,32 +11,11 @@ ul{
 .btn-group-vertical{
     float:left;
     margin-left: 5%;
-    padding: 20px;
-}
-p{
-    margin-top: 2%;
-    margin-left: 30%;
-}
-h5{
-    margin-left: 20%;
 }
 
-.typelearn_name{
-    margin-left: 5%;
-}
-.typeplay_name{
-    margin-left: 5%;
-}
-.typedate_name{
-    margin-left: 5%;
-}
-.typeservice_name{
-    margin-left: 5%;
-}
 
-h4{
-    margin-top: 3%;
-    margin-left:68%;  
+.modal-body {
+    position:relative;
 }
 
 button{
@@ -44,9 +24,14 @@ button{
     -webkit-transition-duration: 0.4s; 
     transition-duration: 0.4s;
 }
-button:hover {
-    background-color: rgb(43, 78, 233);
-    color: white;
+
+h4{
+    margin-top: 3%;
+    margin-left:68%;  
+}
+
+h5{
+    margin-left: 20%;
 }
 
 table{
@@ -79,13 +64,8 @@ td{
     float: left;
 }
 
-#carouselExampleIndicators{
-    width: 40%;
-    height: 40%;
-    float: left;
-    margin-left: 10%;
-}
-
-ol{
-    height: 10px;
+.embed-responsive{
+    width: 75%;
+    height: 75%;
+    margin-left: 20%;
 }
