@@ -18,13 +18,12 @@
   margin-left: 15%;
   width: 70%;
 }
-main{
+main {
   max-height: 100%;
   width: 100%;
 }
 
 #sidebar_left {
-  
   background-color: lightblue;
   width: 15%;
   margin-left: 2.5%;
@@ -51,14 +50,12 @@ main{
   padding-left: 0;
   margin-top: 5%;
   margin-bottom: 5%;
-  
 }
 
-
 tbody {
-  display:block;
+  display: block;
   max-height: 350px;
-  overflow-y:scroll;
+  overflow-y: scroll;
 }
 thead td {
   padding-top: 5%;
@@ -69,39 +66,47 @@ tbody td {
   padding-top: 4%;
   padding-bottom: 4%;
   width: 20%;
-
 }
-thead, tbody tr {
-  display:table;
-  width:100%;
-  table-layout:fixed;
+thead,
+tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
 }
 thead {
-  width:100%; 
+  width: 100%;
 }
 table {
-  width:100%;
-
+  width: 100%;
 }
 li {
   list-style: none;
 }
 
-.modal-title-pic {
-  padding-left : 3%;
+.pic-title {
+  padding-left: 3%;
   padding-right: 3%;
   margin: 0;
 }
-.modal-title-pic:hover {
-  color: grey; 
+.pic-title:hover {
+  color: grey;
   cursor: pointer;
 }
-
-.buildpicc{
-  width: 100%;
+.saved {
+  max-width: 300px;
+  height: auto;
+  margin-right: auto;
+  margin-left: auto;
 }
-.intropic{
-  width: 100%;
+.picdele {
+  margin-right:auto;
+  margin-left: auto; 
+  padding: 3%;
+  display: block;
+  width: auto;
+}
+.pic{
+  width: 300px;
 }
 
 #content tbody tr:nth-child(odd) {

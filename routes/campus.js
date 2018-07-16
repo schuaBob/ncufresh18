@@ -91,16 +91,32 @@ router.post("/insert_img/:id", function(req, res, next) {
       var readStream = fs.createReadStream(tmpPath);
       var writeStream = fs.createWriteStream(targetPath);
       readStream
-        .on("end", err => {
+        .on("end", (err) => {
           if (err) return next(err);
-          elebuilding.findByIdAndUpdate(req.params.id, {
-            Buildpic : fileName 
-          }).exec(function(err,result) {
-            if (err) {
-              return next(err)
-            }
+          console.log(fields);
+          if (fields.imgtype === "0") {
+            elebuilding
+              .findByIdAndUpdate(req.params.id, {
+                Buildpic: fileName
+              })
+              .exec(function(err, result) {
+                console.log(result)
+                if (err) {
+                  return next(err);
+                }
+              });
+          } else if (fields.imgtype === "1") {
+            elebuilding
+              .findByIdAndUpdate(req.params.id, {
+                $push: { Intropic: fileName }
+              })
+              .exec(function(err, result) {
+                if (err) {
+                  return next(err);
+                }
+              });
+          }
 
-          })
           fs.unlink(tmpPath, () => {
             //把暫存的檔案刪除
             console.log(
@@ -117,17 +133,36 @@ router.post("/insert_img/:id", function(req, res, next) {
     res.redirect("/campus/editElement");
   });
 });
+
 router.get("/getimg", function(req, res, next) {
   elebuilding
-    .findById(req.query.id, { _id:0,Buildpic: 1, Intropic: 1 })
+    .findById(req.query.id, { _id: 0, Buildpic: 1, Intropic: 1 })
     .exec(function(err, result) {
       if (err) {
         return next(err);
       }
       res.send(result);
     });
- // res.redirect("/campus/editElement");
+  // res.redirect("/campus/editElement");
 });
-
+router.post("/deleimg",function(req,res,next) {
+  if(req.body.val==="0") {
+    elebuilding.findByIdAndUpdate(req.body.id,{
+      Buildpic : ""
+    }).exec(function(err) {
+      if(err) {
+        return next(err);
+      }
+    })
+  } else if(req.body.val==="1") {
+    elebuilding.findByIdAndUpdate(req.body.id, {
+      $pull:{Intropic:req.body.ipid}
+    }).exec(function(err) {
+      if(err) {
+        return next(err);
+      }
+    })
+  }
+})
 
 module.exports = router;
