@@ -3,6 +3,7 @@ var request = require('request');
 var life = require('../models/life/life');
 var router = express.Router();
 var formidable = require('formidable');
+fs = require('fs');
 // var apiKey = 'c7282145be089c1ab3c03aa2e2f7c5dd';
 
 var match_num = {
@@ -107,6 +108,14 @@ router.post('/changing', function(req, res, next){
   life.find({mainTitle: mainTitled}, function(err, result){
     if(err) return next(err);
     res.send(result[0].subTitle);
+  });
+});
+
+router.post('/uploadPic', function(req, res, next){
+  var form = new formidable.IncomingForm();
+  form.parse(req, function(error, fields, files){
+    fs.writeFileSync("public/life/test.png", fs.readFileSync(files.picture.path));
+    res.redirect('back');
   });
 });
 
