@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-/* 首頁 */
+/* home page */
 router.get('/', function(req, res, next) {
   res.render('index/index', { title: '首頁' });
 });
@@ -16,7 +16,7 @@ router.get('/register', function(req, res, next) {
   res.render('login/register', { title: '註冊' });
 });  
 
-/* register page */
+/* comingsoon page */
 router.get('/comingsoon', function(req, res, next) {
   res.render('comingsoon/index', { title: '倒數' });
 });  
