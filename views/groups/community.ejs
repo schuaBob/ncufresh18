@@ -10,6 +10,49 @@
     </header>
     <main>
         <h1><%= title %></h1>
+        <!-- 新增圖片按鈕 -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                新增圖片
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">新增圖片</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                <form method="post" enctype="multipart/form-data" action="cominsert_img">
+                    <div class="form-group">
+                    <input type="file" name="uploadingImg">
+                    <!-- 選擇圖片要放的位置 -->
+                    <label for="pic_type" class="form-control">圖片位置</label>
+                    <select name="pic_type" id="pic_type" class="form-control">
+                        <option value="1">其他學生組織介紹</option>
+                        <option value="2">活動剪影</option>
+                    </select>
+                    </div>
+                    <div class="form-group">
+                    <!-- 圖片所屬組織 -->
+                    <label for="community_id" class="form-control">其他學生組織</label>
+                    <select name="community_id" id="community_id" class="form-control">
+                        <% for(var i in community){%>
+                        <option value="<%= community[i]._id %>"><%= community[i].name %></option>
+                        <%}%>
+                    </select>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">上傳</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+            </div>
+        </div>
         <!-- 新增其他社團組織的Modal -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_community">新增/編輯學生組織</button><br></br>
         <div class="modal fade" id="add_community" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -91,7 +134,7 @@
                                     </div>
                                     <div id="activity_<%= community[i].name %>" class="tab-pane fade in">
                                         <h5>活動剪影</h5>
-                                        <p><%= community[i].picture[i] %></p>
+                                        <p><%= community[i].activity %></p>
                                     </div>
                                 </div>
                             </div> 

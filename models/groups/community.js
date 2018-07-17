@@ -5,8 +5,10 @@ var community = mongoose.Schema({
     introduction : String, // 社群介紹
     participation : String, // 加入社群
     FB : String, // FB粉絲團
-    picture : [String], // 活動剪影
-    
+    activity : String, // 活動剪影文字
+    intro_pic : [String], //介紹照片
+    act_pic : [String], //活動照片
+
 });
 
 module.exports = mongoose.model( 'community', community );
