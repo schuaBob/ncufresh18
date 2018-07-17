@@ -5,7 +5,9 @@ var department = require('../models/groups/department');
 var club = require('../models/groups/club');
 var community = require('../models/groups/community');
 var student = require('../models/groups/student');
-
+var mongoose = require('mongoose');
+var fs = require('fs');
+// var video = require('../models/video');
 
 /* 系所社團首頁 */
 router.get('/', function(req, res, next) {
@@ -14,11 +16,14 @@ router.get('/', function(req, res, next) {
 
 router.get('/department', function(req, res, next) {
   department.find({}).exec(function(err, department) {
-    res.render('groups/department', {
-      title: '系所 ',
-      user: req.user,
-      department: department,
-    });
+    // video.find({type:"2"}).sort({id:-1}).exec(function(err, video2) {
+      res.render('groups/department', {
+        title: '系所 ',
+        user: req.user,
+        department: department,
+        // QAvideo: video2,
+      });
+    // });
   });
 });
 
@@ -162,7 +167,8 @@ router.post('/edit_student', function(req, res, next) {
   });
 });
 
-router.post('/insert_img', (req, res, next) => {
+/* 社團新增圖片 */
+router.post('/clubinsert_img', (req, res, next) => {
   var form = new formidable.IncomingForm();
   form.parse(req, (err, fields, files) => {    //如果你的表單有不是file的欄位，他們會在fields裡面
     if (err) return next(err);
@@ -172,29 +178,210 @@ router.post('/insert_img', (req, res, next) => {
       var uploadedFile = files.uploadingImg;
       var tmpPath = uploadedFile.path;    //現在檔案被暫存在哪
       fileName = tempId + uploadedFile.name.substr(uploadedFile.name.lastIndexOf('.'));    //檔名=剛剛mongoose產生的亂數＋原始副檔名
-      var targetPath = './public/groups/' + fileName;    //我們希望檔案存在public下
+      var targetPath = './public/groups/img/' + fileName;    //我們希望檔案存在public下
 
       var readStream = fs.createReadStream(tmpPath)
       var writeStream = fs.createWriteStream(targetPath);
+      let type = fields.pic_type; /* 圖片要放置的位置 ,找fields裡面的pic_type ,不是req.body. */
       readStream.on("end", (err) => {
         if (err) return next(err);
         //搬完之後要做的事寫在這
-        new groupImg({
-          path: fileName,
-          updated_at: Date.now(),
-        }).save(function() {
-          res.redirect('/groups/club');
-        })
+        if(type === '1'){
+          club.findById(fields.club_id).exec(function(err,doc){
+            doc.intro_pic.push(fileName);
+            doc.save(function(err){
+              if (err){
+                return next(err);
+              }
+            })
+          })
+        }
+        else if(type === '2'){
+          club.findById(fields.club_id).exec(function(err,doc){
+            doc.act_pic.push(fileName);
+            doc.save(function(err){
+              if (err){
+                return next(err);
+              }
+            })
+          })
+        }
         console.log(fields);
         fs.unlink(tmpPath, () => {    //把暫存的檔案刪除
             console.log('File Uploaded to ' + targetPath + ' - ' + uploadedFile.size + ' bytes');
         });
       }).pipe(writeStream);
     }
-    res.redirect('/groups/index');
+    res.redirect('/groups/club');
+  });
+})
+
+/* 學生會新增圖片 */
+router.post('/studentinsert_img', (req, res, next) => {
+  var form = new formidable.IncomingForm();
+  form.parse(req, (err, fields, files) => {    //如果你的表單有不是file的欄位，他們會在fields裡面
+    if (err) return next(err);
+    var tempId = mongoose.Types.ObjectId();    //用mongoose幫我們生一組亂數
+    var fileName = "";
+    if (files.uploadingImg.name != "") {    //要是file那一欄有填
+      var uploadedFile = files.uploadingImg;
+      var tmpPath = uploadedFile.path;    //現在檔案被暫存在哪
+      fileName = tempId + uploadedFile.name.substr(uploadedFile.name.lastIndexOf('.'));    //檔名=剛剛mongoose產生的亂數＋原始副檔名
+      var targetPath = './public/groups/img/' + fileName;    //我們希望檔案存在public下
+
+      var readStream = fs.createReadStream(tmpPath)
+      var writeStream = fs.createWriteStream(targetPath);
+      let type = fields.pic_type; /* 圖片要放置的位置 ,找fields裡面的pic_type ,不是req.body. */
+      readStream.on("end", (err) => {
+        if (err) return next(err);
+        //搬完之後要做的事寫在這
+        if(type === '1'){
+          student.findById("5b4da8c24d334e6dfb47adb2").exec(function(err,doc){
+            doc.intro_pic.push(fileName);
+            doc.save(function(err){
+              if (err){
+                return next(err);
+              }
+            })
+          })
+        }
+        else if(type === '2'){
+          student.findById("5b4da8c24d334e6dfb47adb2").exec(function(err,doc){
+            doc.act_pic.push(fileName);
+            doc.save(function(err){
+              if (err){
+                return next(err);
+              }
+            })
+          })
+        }
+        console.log(fields);
+        fs.unlink(tmpPath, () => {    //把暫存的檔案刪除
+            console.log('File Uploaded to ' + targetPath + ' - ' + uploadedFile.size + ' bytes');
+        });
+      }).pipe(writeStream);
+    }
+    res.redirect('/groups/student');
+  });
+})
+
+/* 系所新增圖片 */
+router.post('/departinsert_img', (req, res, next) => {
+  var form = new formidable.IncomingForm();
+  form.parse(req, (err, fields, files) => {    //如果你的表單有不是file的欄位，他們會在fields裡面
+    if (err) return next(err);
+    var tempId = mongoose.Types.ObjectId();    //用mongoose幫我們生一組亂數
+    var fileName = "";
+    if (files.uploadingImg.name != "") {    //要是file那一欄有填
+      var uploadedFile = files.uploadingImg;
+      var tmpPath = uploadedFile.path;    //現在檔案被暫存在哪
+      fileName = tempId + uploadedFile.name.substr(uploadedFile.name.lastIndexOf('.'));    //檔名=剛剛mongoose產生的亂數＋原始副檔名
+      var targetPath = './public/groups/img/' + fileName;    //我們希望檔案存在public下
+
+      var readStream = fs.createReadStream(tmpPath)
+      var writeStream = fs.createWriteStream(targetPath);
+      let type = fields.pic_type; /* 圖片要放置的位置 ,找fields裡面的pic_type ,不是req.body. */
+      readStream.on("end", (err) => {
+        if (err) return next(err);
+        //搬完之後要做的事寫在這
+        if(type === '1'){
+          department.findById(fields.depart_id).exec(function(err,doc){
+            doc.intro_pic.push(fileName);
+            doc.save(function(err){
+              if (err){
+                return next(err);
+              }
+            })
+          })
+        }
+        else if(type === '2'){
+          department.findById(fields.depart_id).exec(function(err,doc){
+            doc.organ_pic.push(fileName);
+            doc.save(function(err){
+              if (err){
+                return next(err);
+              }
+            })
+          })
+        }
+        else if(type === '3'){
+          department.findById(fields.depart_id).exec(function(err,doc){
+            doc.act_pic.push(fileName);
+            doc.save(function(err){
+              if (err){
+                return next(err);
+              }
+            })
+          })
+        }
+        else if(type === '4'){
+          department.findById(fields.depart_id).exec(function(err,doc){
+            doc.team_pic.push(fileName);
+            doc.save(function(err){
+              if (err){
+                return next(err);
+              }
+            })
+          })
+        }
+        console.log(fields);
+        fs.unlink(tmpPath, () => {    //把暫存的檔案刪除
+            console.log('File Uploaded to ' + targetPath + ' - ' + uploadedFile.size + ' bytes');
+        });
+      }).pipe(writeStream);
+    }
+    res.redirect('/groups/department');
   });
 })
   
+/* 其他學生組織新增圖片 */
+router.post('/cominsert_img', (req, res, next) => {
+  var form = new formidable.IncomingForm();
+  form.parse(req, (err, fields, files) => {    //如果你的表單有不是file的欄位，他們會在fields裡面
+    if (err) return next(err);
+    var tempId = mongoose.Types.ObjectId();    //用mongoose幫我們生一組亂數
+    var fileName = "";
+    if (files.uploadingImg.name != "") {    //要是file那一欄有填
+      var uploadedFile = files.uploadingImg;
+      var tmpPath = uploadedFile.path;    //現在檔案被暫存在哪
+      fileName = tempId + uploadedFile.name.substr(uploadedFile.name.lastIndexOf('.'));    //檔名=剛剛mongoose產生的亂數＋原始副檔名
+      var targetPath = './public/groups/img/' + fileName;    //我們希望檔案存在public下
+
+      var readStream = fs.createReadStream(tmpPath)
+      var writeStream = fs.createWriteStream(targetPath);
+      let type = fields.pic_type; /* 圖片要放置的位置 ,找fields裡面的pic_type ,不是req.body. */
+      readStream.on("end", (err) => {
+        if (err) return next(err);
+        //搬完之後要做的事寫在這
+        if(type === '1'){
+          community.findById(fields.community_id).exec(function(err,doc){
+            doc.intro_pic.push(fileName);
+            doc.save(function(err){
+              if (err){
+                return next(err);
+              }
+            })
+          })
+        }
+        else if(type === '2'){
+          community.findById(fields.community_id).exec(function(err,doc){
+            doc.act_pic.push(fileName);
+            doc.save(function(err){
+              if (err){
+                return next(err);
+              }
+            })
+          })
+        }
+        console.log(fields);
+        fs.unlink(tmpPath, () => {    //把暫存的檔案刪除
+            console.log('File Uploaded to ' + targetPath + ' - ' + uploadedFile.size + ' bytes');
+        });
+      }).pipe(writeStream);
+    }
+    res.redirect('/groups/club');
+  });
+})
 
 
 

@@ -10,6 +10,51 @@
     </header>
     <main>
         <h1><%= title %></h1>
+        <!-- 新增圖片按鈕 -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+          新增圖片
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">新增圖片</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form method="post" enctype="multipart/form-data" action="departinsert_img">
+                  <div class="form-group">
+                    <input type="file" name="uploadingImg">
+                    <!-- 選擇圖片要放的位置 -->
+                    <label for="pic_type" class="form-control">圖片位置</label>
+                    <select name="pic_type" id="pic_type" class="form-control">
+                      <option value="1">系所介紹</option>
+                      <option value="2">系學會</option>
+                      <option value="3">系上活動</option>
+                      <option value="4">系隊</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <!-- 圖片所屬社團 -->
+                    <label for="depart_id" class="form-control">系所</label>
+                    <select name="depart_id" id="departid" class="form-control">
+                      <% for(var i in department){%>
+                        <option value="<%= department[i]._id %>"><%= department[i].name %></option>
+                      <%}%>
+                    </select>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">上傳</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
         
         <!-- 新增編輯button -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_department">新增/編輯系所</button><br></br>
@@ -62,10 +107,6 @@
                   <div class="form-group">
                     <label for="course" class="form-control">系上課程</label>
                     <textarea name="course" id="edit_course" rows="5" cols="55"></textarea></br>
-                  </div>
-                  <div class="form-group">
-                    <label for="lightning_round" class="form-control">快問快答</label>
-                    <textarea name="lightning_round" id="edit_lightning_round" rows="5" cols="55"></textarea></br>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
