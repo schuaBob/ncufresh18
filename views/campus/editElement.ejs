@@ -8,6 +8,41 @@
 </head>
 
 <body>
+        <div id="mapedit" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalTitle">位置&大小</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form class="editform">
+                    <div class="modal-body">
+                        <label for="x_position">x軸</label>
+                        <input type="text" name="x_position" value="">
+                        <br>
+                        <label for="y_position">y軸</label>
+                        <input type="text" name="y_position" value="">
+                        <br>
+                        <label for="size">圖片大小</label>
+                        <input type="text" name="size" value="">
+                        <br>
+                        <div class="picspace">
+                            
+                            <img src="back2.png" alt="mainmap" width="100%" id="mainmap2">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary picclose" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">上傳</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <header>
         <% include ../layout/navbar %>
     </header>
@@ -64,8 +99,8 @@
                                         </div>
                                         <div class="modal-body imgcontent" ooo="<%= result[i]['_id'] %>">
 
-
-                                            <img id="output" width="300px" />
+                                            
+                                            <img id="output" width="300px" >
                                             <form class="picuploadform" action="/campus/insert_img/<%=result[i]['_id']%>" enctype="multipart/form-data" method="post">
                                                 <fieldset>
                                                     <input type="file" name="uploadingImg" accept="image/*" onchange="loadFile(event)">
@@ -85,43 +120,9 @@
                                 </div>
                             </div>
                             <td>
-                                <button type="button" data-toggle="modal" data-target="#mapedit<%= i %>" class="editpicposi" xxx="<%=result[i]['_id']%>">編輯</button>
+                                <button type="button" data-toggle="modal" data-target="#mapedit" class="editpicposi" xxx="<%=result[i]['_id']%>">編輯</button>
                             </td>
-                            <div id="mapedit<%= i %>" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="myModalTitle">位置&大小</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <form action="/campus/saveposition/<%=result[i]['_id']%>" method="POST">
-                                            <div class="modal-body">
-                                                <label for="x_position">x軸</label>
-                                                <input type="text" name="x_position">
-                                                <br>
-                                                <label for="y_position">y軸</label>
-                                                <input type="text" name="y_position">
-                                                <br>
-                                                <label for="size">圖片大小</label>
-                                                <input type="text" name="size">
-                                                <br>
-                                                <div class="picspace">
-                                                    
-                                                    <img src="back2.png" alt="mainmap" width="100%">
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary picclose" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">上傳</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-
+                            
 
 
                             <td>

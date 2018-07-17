@@ -6,7 +6,13 @@ var mongoose = require("mongoose");
 var fs = require("fs");
 /* 校園導覽首頁 */
 router.get("/", function(req, res, next) {
-  res.render("campus/index", { title: "校園導覽" });
+  elebuilding.find({},{_id: 1,Buildpic:1,X_position:1,Y_position:1,Size:1}).exec(function(err,result) {
+    if(err) {
+      return next(err)
+    }
+    res.render("campus/index", { title: "校園導覽",result:result});
+    
+  })
 });
 router.get("/editElement", function(req, res, next) {
   elebuilding
@@ -16,7 +22,10 @@ router.get("/editElement", function(req, res, next) {
         _id: 1,
         Element_Name: 1,
         Type: 1,
-        Element_Intro: 1
+        Element_Intro: 1,
+        X_position :1,
+        Y_position: 1,
+        Size: 1
       }
     )
     .exec(function(err, result) {
@@ -37,7 +46,10 @@ router.post("/AddNew_element", function(req, res, next) {
             Type: req.body.elecategory,
             Element_Intro: req.body.eleintro,
             Buildpic: "",
-            Intropic: []
+            Intropic: [],
+            X_position:0,
+            Y_position:0,
+            Size:8
           }).save(function(err) {
             if (err) {
               return next(err);

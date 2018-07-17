@@ -1,5 +1,7 @@
 <script>
     $(document).ready(function () {
+        
+        console.log($('#map').height())
         var temp;
         var properties = null
         $("a[class^='Main_listele']").click(function () {
@@ -30,6 +32,7 @@
             //velocity
             $('#map').stop().animate(properties, 500)
         });
+        
     });
 
 </script>

@@ -90,6 +90,9 @@
 
         </div>
         <div class="Mainmap">
+            <%for (let i in result) {-%>
+                <img class="indexelepic" src="<%=result[i]['Buildpic']%>" alt="<%=result[i]['_id']%>" style="top: <%=result[i]['X_position']%>px;left: <%=result[i]['Y_position']%>px; width: <%=result[i]['Size']%>%;">
+            <%}-%>
             <img id="map" src="back2.png" width="75%">
         </div>
         <div class="Main_list">
@@ -132,6 +135,7 @@
     </footer>
     <% include ../layout/js %>
         <% include js %>
+        
 </body>
 
 </html>
