@@ -34,4 +34,27 @@
 
     $('.showDetail').on('click', function(e){
     });
+
+    $('.bigTitle').on('change', function(e){
+        e.preventDefault();
+        var choose = this.value;
+        $.ajax({
+            url:    "changing",
+            method: 'POST',
+            data:   {mainTitle : choose},
+            error: function(err){
+                alert("Some error occur");
+            },
+            success: function(data){
+                todo(data);
+            }
+        });
+        var todo = function(data){
+            $('.smallTitle').empty();
+            $('.smallTitle').append("<option value='default'>" + "請選擇" + "</option>")
+            for(var i=0 ; i<data.length ; i++){
+                $('.smallTitle').append("<option value="+ data[i] + ">" +  data[i] + "</option>")
+            }
+        }
+    });
 </script>

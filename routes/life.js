@@ -71,7 +71,7 @@ router.get('/entertainment', function(req, res, next){
   });
 });
 
-router.post('/edit', function(req, res, next){
+router.post('/editContent', function(req, res, next){
   var form = new formidable.IncomingForm();
   form.parse(req, function(err, fields, files){
     if(err) return next(err);
@@ -99,9 +99,17 @@ router.post('/editTitle', function(req, res, next){
       })
     }
   });
-  
   res.redirect('back');
 });
+
+router.post('/changing', function(req, res, next){
+  var mainTitled = req.body.mainTitle;
+  life.find({mainTitle: mainTitled}, function(err, result){
+    if(err) return next(err);
+    res.send(result[0].subTitle);
+  });
+});
+
 // router.post('/', function(req, res, next){
 //   let city = req.body.city;
 //   let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
