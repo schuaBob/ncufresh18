@@ -99,7 +99,7 @@ p{
     background-size: cover;
     font-family: Microsoft YaHei;
  }
- .submitQbtn{
+ .submitbtn{
     border-radius: 15px;
     background-color: #29ABE2;
     border-color: #29ABE2;
@@ -124,5 +124,6 @@ p{
 	max-height: 40%;	
  }
  .closebtn{
+    font-family: Microsoft YaHei;
     border-radius: 15px;
  }
