@@ -9,7 +9,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.locals.username = req.session.account ;
   res.locals.authenticated = req.session.logined;
-  Question.find().sort({Click:'desc'}).exec(function(err, question,count){
+  Question.find().sort({CreateDate:'desc'}).exec(function(err, question){
     if(err){return next(err)};
     //轉換時間欄位
     var Time = function(date) {
@@ -28,8 +28,29 @@ router.get('/', function(req, res, next) {
 });
 //照時間排序
 router.get('/#time', function(req, res, next) {
-  Question.find().sort({CreateDate:'desc'}).exec(function(err, question,count){
+  Question.find().sort({CreateDate:'desc'}).exec(function(err, question){
     if(err){return next(err)};
+    console.log("測試用");
+    //轉換時間欄位
+    var Time = function(date) {
+      var year =date.getYear();
+      var monthIndex = date.getMonth();
+      var day = date.getDate();
+      var time = (year+1900) + '/' + (++monthIndex) + '/' + day;
+      return time;
+    }
+    res.render('qna/index',{
+      title:'新生Ｑ＆Ａ ｜ 新生知訊網',
+      question:question,
+      Time:Time
+    });
+  });
+});
+//照人氣排序
+router.get('/#hot', function(req, res, next) {
+  Question.find().sort({Click:'desc'}).exec(function(err, question){
+    if(err){return next(err)};
+    console.log("測試用");
     //轉換時間欄位
     var Time = function(date) {
       var year =date.getYear();

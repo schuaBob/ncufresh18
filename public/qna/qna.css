@@ -2,6 +2,7 @@ body{
     background-color: #D3E6DD;
 }
 tbody{
+    background-color: white;
     float:center;
     display: block;
     height: 300px;
@@ -12,9 +13,12 @@ tbody{
     background-size: cover; */
 }
 thead{
+    line-height: 2;
     display: block;
     text-align: center;
     font-family: Microsoft YaHei;
+    color:#29ABE2;
+    background-color: white;
     /* background-image: url(外框.png);
     background-size: cover; */
 }
@@ -22,6 +26,10 @@ table{
     margin:0 auto;
     border-collapse: collapse;
     border-spacing: 10px;
+    width:60%
+}
+tr{
+    line-height: 2;
 }
 td{
     text-align: center;
@@ -34,7 +42,7 @@ th{
     color:black;
     font-family: YouYuan;
 }
-#title{
+.title{
     width:200px;
 }
 .classification{
@@ -43,16 +51,19 @@ th{
 .search{
     float: right;
 }
+p{
+    font-weight:bold;
+}
 .searchbtn{
-    background-size: cover;
-    background-color: transparent;
-    width: 30px; 
-    height: 30px;
+    background-image: url(搜尋.png);
+    background-size: cover; 
+    /* max-width: 20%;
+	max-height: 20%; */
+    /* background-color: transparent; */
 }
 .top{
     position: absolute;
     top:0px;
-    background-color: rgb(196, 150, 233);
 }
 #answer{
     width: 90%;
@@ -60,6 +71,7 @@ th{
 }
 .modal-title{
     text-align: center;
+    margin:0;
     font-family: Microsoft YaHei;
     font-weight:bold;
 }
@@ -77,13 +89,13 @@ th{
     font-family: Microsoft YaHei;
  }
  .askbutton{
-    width: 100px; 
-    height: 150px;
+    max-width: 35%;
+	max-height: 35%;
     float: right;
     vertical-align: middle;
     position: absolute;
-    top:150px;
-    right:0;
+    top:200px;
+    right:10px;
  }
  .closemodal{
     background-image: url(OK.png);
@@ -91,9 +103,9 @@ th{
     max-width: 40%;
 	max-height: 40%;	
  }
- .close{
+ /* .close{
     background-image: url(叉叉.png);
     background-size: cover; 
     max-width: 25%;
 	max-height: 25%;
- }
+ } */
