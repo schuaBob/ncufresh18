@@ -18,6 +18,7 @@ thead{
     text-align: center;
     font-family: Microsoft YaHei;
     color:#29ABE2;
+    font-size: 15pt;
     background-color: white;
     /* background-image: url(外框.png);
     background-size: cover; */
@@ -25,16 +26,22 @@ thead{
 table{
     margin:0 auto;
     border-collapse: collapse;
-    border-spacing: 10px;
-    width:60%
+    /* border-spacing: 10px; */
+    width:70%
 }
-tr{
-    line-height: 2;
+.Q{
+    line-height: 2.3;
+    border-bottom: 1.5px #29ABE2 solid;
 }
 td{
+    border-right: 1.5px black solid;
     text-align: center;
     width:120px;
 }
+/* td.title{
+    margin-left: 5px;
+    text-align: left;
+} */
 th{
     width:120px;
 }
@@ -55,11 +62,19 @@ p{
     font-weight:bold;
 }
 .searchbtn{
-    background-image: url(搜尋.png);
+    background: url(搜尋.png) 0 0 transparent;
+    border: medium none;
     background-size: cover; 
+    width: 30px;
+    height:30px;
+    color: transparent;
     /* max-width: 20%;
 	max-height: 20%; */
-    /* background-color: transparent; */
+    /* opacity: 0; */
+}
+#searchtext{
+    border-radius: 15px;
+    border-color: black;
 }
 .top{
     position: absolute;
@@ -84,6 +99,11 @@ p{
     background-size: cover;
     font-family: Microsoft YaHei;
  }
+ .submitQbtn{
+    border-radius: 15px;
+    background-color: #29ABE2;
+    border-color: #29ABE2;
+ }
  form{
     font-weight:bold;
     font-family: Microsoft YaHei;
@@ -103,9 +123,6 @@ p{
     max-width: 40%;
 	max-height: 40%;	
  }
- /* .close{
-    background-image: url(叉叉.png);
-    background-size: cover; 
-    max-width: 25%;
-	max-height: 25%;
- } */
+ .closebtn{
+    border-radius: 15px;
+ }

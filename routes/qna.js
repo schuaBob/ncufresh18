@@ -27,8 +27,10 @@ router.get('/', function(req, res, next) {
   }); 
 });
 //照時間排序
-router.get('/#time', function(req, res, next) {
-  Question.find().sort({CreateDate:'desc'}).exec(function(err, question){
+router.get('/time', function(req, res, next) {
+  res.locals.username = req.session.account ;
+  res.locals.authenticated = req.session.logined;
+  Question.find().sort({isTop:"desc",CreateDate:'desc'}).exec(function(err, question){
     if(err){return next(err)};
     console.log("測試用");
     //轉換時間欄位
@@ -47,8 +49,10 @@ router.get('/#time', function(req, res, next) {
   });
 });
 //照人氣排序
-router.get('/#hot', function(req, res, next) {
-  Question.find().sort({Click:'desc'}).exec(function(err, question){
+router.get('/hot', function(req, res, next) {
+  res.locals.username = req.session.account ;
+  res.locals.authenticated = req.session.logined;
+  Question.find().sort({isTop:"desc",Click:'desc'}).exec(function(err, question){
     if(err){return next(err)};
     console.log("測試用");
     //轉換時間欄位
@@ -77,11 +81,13 @@ router.post('/addq',function(req,res,next){
         Content: req.body.Content,
         Answer: "",
         CreateDate: Date.now(),
-        Click:0
-      }).save(function(err){
+        Click:0,
+        isTop:false
+      }).save(function(err,alert){
         if(err){
           return next(err);
         }
+        //alert("發送問題成功！");
         res.redirect('/qna');
       });
       
@@ -96,7 +102,7 @@ router.post('/addq',function(req,res,next){
         Question.findById(req.params.id).exec(function(err,result){
           if(err){return next(err)};
           //if(result.Username===res.locals.username||req.session.type==="admin"){
-            Question.update({_id:req.params.id}, {Answer:req.body.Answer},function(err){
+            Question.update({_id:req.params.id}, {Answer:req.body.Answer},{isTop:req.body.isTop},function(err){
               if(err)
               console.log('Fail to update article.');
               else
@@ -137,6 +143,8 @@ router.get('/search',function(req,res,next){
     });
   }
 });
+//文章置頂功能
+
 /*紀錄點擊次數*/
 router.get('/:id', function(req, res, next) {
   if(mongoose.Types.ObjectId.isValid(req.params.id)){
