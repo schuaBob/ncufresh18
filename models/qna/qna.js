@@ -7,7 +7,8 @@ var Question = mongoose.Schema({
     Content: String, //問題內容
     Answer:String,//問題的答案
     CreateDate: Date,//創立日期
-    Click: Number//點擊次數
+    Click: Number,//點擊次數
+    isTop: Boolean //是否置頂
 });
 
 module.exports = mongoose.model( 'Question', Question );

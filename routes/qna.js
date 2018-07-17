@@ -9,7 +9,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.locals.username = req.session.account ;
   res.locals.authenticated = req.session.logined;
-  Question.find().sort({Click:'desc'}).exec(function(err, question,count){
+  Question.find().sort({isTop:"desc",CreateDate:'desc'}).exec(function(err, question){
     if(err){return next(err)};
     //轉換時間欄位
     var Time = function(date) {
@@ -27,9 +27,34 @@ router.get('/', function(req, res, next) {
   }); 
 });
 //照時間排序
-router.get('/#time', function(req, res, next) {
-  Question.find().sort({CreateDate:'desc'}).exec(function(err, question,count){
+router.get('/time', function(req, res, next) {
+  res.locals.username = req.session.account ;
+  res.locals.authenticated = req.session.logined;
+  Question.find().sort({isTop:"desc",CreateDate:'desc'}).exec(function(err, question){
     if(err){return next(err)};
+    console.log("測試用");
+    //轉換時間欄位
+    var Time = function(date) {
+      var year =date.getYear();
+      var monthIndex = date.getMonth();
+      var day = date.getDate();
+      var time = (year+1900) + '/' + (++monthIndex) + '/' + day;
+      return time;
+    }
+    res.render('qna/index',{
+      title:'新生Ｑ＆Ａ ｜ 新生知訊網',
+      question:question,
+      Time:Time
+    });
+  });
+});
+//照人氣排序
+router.get('/hot', function(req, res, next) {
+  res.locals.username = req.session.account ;
+  res.locals.authenticated = req.session.logined;
+  Question.find().sort({isTop:"desc",Click:'desc'}).exec(function(err, question){
+    if(err){return next(err)};
+    console.log("測試用");
     //轉換時間欄位
     var Time = function(date) {
       var year =date.getYear();
@@ -56,11 +81,13 @@ router.post('/addq',function(req,res,next){
         Content: req.body.Content,
         Answer: "",
         CreateDate: Date.now(),
-        Click:0
+        Click:0,
+        isTop:false
       }).save(function(err){
         if(err){
           return next(err);
         }
+        // alert("發送問題成功！");
         res.redirect('/qna');
       });
       
@@ -75,7 +102,7 @@ router.post('/addq',function(req,res,next){
         Question.findById(req.params.id).exec(function(err,result){
           if(err){return next(err)};
           //if(result.Username===res.locals.username||req.session.type==="admin"){
-            Question.update({_id:req.params.id}, {Answer:req.body.Answer},function(err){
+            Question.update({_id:req.params.id}, {Answer:req.body.Answer},{isTop:req.body.isTop},function(err){
               if(err)
               console.log('Fail to update article.');
               else
@@ -116,6 +143,8 @@ router.get('/search',function(req,res,next){
     });
   }
 });
+//文章置頂功能
+
 /*紀錄點擊次數*/
 router.get('/:id', function(req, res, next) {
   if(mongoose.Types.ObjectId.isValid(req.params.id)){

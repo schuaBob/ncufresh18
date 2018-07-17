@@ -7,6 +7,7 @@
     <header>
         <% include ../layout/navbar %>
         <link rel='stylesheet' href='qna.css'>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
     </header>
     <main>
         <div>
@@ -26,7 +27,7 @@
                             <div class="modal-body">  
                                 <div class="form-group">
                                     <label for="validationServer01" class="col-form-label">標題：</label>
-                                    <input type="text" class="form-control title" name="Title" required="required">
+                                    <input type="text" class="form-control Qtitle" name="Title" required="required">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">類別：</label>
@@ -44,43 +45,25 @@
                                 <div class="g-recaptcha" data-sitekey="6LeJx2MUAAAAAILzJ8UKyyWzSw1gepCJ16fUoI1G"></div> 
                             </div> 
                             <div class="modal-footer">
-                                <input class="btn btn-primary submit" type="submit" value="提交問題">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>              
+                                <input class="btn btn-primary submitbtn" type="submit" value="送 出">
+                                <button type="button" class="btn btn-secondary closebtn" data-dismiss="modal">退 回</button>              
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <%/*成功提出問題的Modal*/%>
-            <div class="modal" id="confirmquestion" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <!-- <h5 class="modal-title">Modal title</h5> -->
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <p>成功提出問題</p>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary closemodal" data-dismiss="modal">Close</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
             <form class="search" action="/qna/search" method="get">
+                <button class="searchbtn" type="submit"></button>
                 <input id="searchtext" type="text" placeholder="輸入關鍵字" name="keyword"></input>
-                <img src="搜尋.png" class="searchbtn" type="submit button">
-                <!-- <input class="searchbtn" type="submit" value="搜尋"></input> -->
             </form>
-            <div class="classification">
+            <div class="classification">    
                     <ul class="nav justify-content-center nav-pills">
-                        <li class="nav-link"><p>排序</p></li>
-                        <li class="nav-link"><a class="nav-link" method="get" href="#time">時間</a></li>
-                        <li class="nav-link"><a class="nav-link" href="#hot">人氣</a></li>
-                        <li class="nav-link">類別</li>
+                        <li class="nav-link"><p class="nav-link">排序</p></li>
+                        <li class="nav-link"><a class="nav-link" method="get" href="/qna/time" role="button">時間</a></li>
+                        <li class="nav-link"><a class="nav-link" method="get" href="/qna/hot" role="button">人氣</a></li>
+                        <!-- <li class="nav-link"><a class="nav-link" method="get" href="#time" role="button">時間</a></li>
+                        <li class="nav-link"><a class="nav-link" method="get" href="#hot" role="button">人氣</a></li> -->
+                        <li class="nav-link"><p class="nav-link">分類</p></li>
                         <li class="nav-link"><a class="nav-link" href="#all">全部</a></li>
                         <li class="nav-link"><a class="nav-link" href="#校園生活">校園生活</a></li>
                         <li class="nav-link"><a class="nav-link" href="#學生事務">學生事務</a></li>
@@ -90,16 +73,16 @@
             </div>
             
         </div>
-        <table>
+        <table id="tabletable">
             <thead>
                 <tr>
-                    <th>類別</th>
-                    <th id="title">標題</th>
+                    <th>分類</th>
+                    <th class="title">標題</th>
                     <th>時間</th>
                     <th>人氣</th>
                     <%# /管理員頁面才有的 %>
                     <th>解答與否</th>
-                    <th>新增/編輯解答</th>
+                    <th>更改解答</th>
                     <th>刪除問題</th>
                     <%# /管理員頁面才有的 %>
                 </tr>
@@ -108,26 +91,26 @@
                 <% for(var i=0; i<question.length; i++) {%>
                     <tr id="<%= question[i].id %>" class="<%= question[i].id %> <%= question[i].Type %> Q">
                         <td><%= question[i].Type %></td>
-                        <td id="title" type="button" data-toggle="modal" data-target="#<%= question[i].id %>"><%= question[i].Title %></td>
+                        <td class="title" type="button" data-toggle="modal" data-target="#<%= question[i].id %>"><%= question[i].Title %></td>
                         <td><%= Time(question[i].CreateDate) %></td>
                         <td class="view" style="text-align: center"><%= question[i].Click %></td>
                         <%# /管理員頁面才有的 %>
                         <% if(question[i].Answer) {%>
-                            <td>是</td>
-                            <td type="button" data-toggle="modal" data-target="#<%= question[i].id %>-edit">編輯答案</td>
+                            <td class="admin">是</td>
+                            <td class="admin" type="button" data-toggle="modal" data-target="#<%= question[i].id %>-edit">編輯答案</td>
                         <%} 
                         else{%>
-                            <td>否</td>
-                            <td type="button"  data-toggle="modal" data-target="#<%= question[i].id %>-edit">新增答案</td>
+                            <td class="admin">否</td>
+                            <td class="admin" type="button"  data-toggle="modal" data-target="#<%= question[i].id %>-edit">新增答案</td>
                         <%} 
                         %>
-                        <td type="button" class="deleteQ" id="<%= question[i].id %>"><a method="get" href="/qna/delete/<%= question[i].id %>" role="button">刪除問題</a></td>
+                        <td type="button" class="deleteQ admin" id="<%= question[i].id %>"><a method="get" href="/qna/delete/<%= question[i].id %>" role="button">刪除問題</a></td>
                         <%# /管理員頁面才有的 %>
                     </tr>
                    
                         <%#顯示問題跟答案的Modal%>
-                        <div class="modal fade" id="<%= question[i].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
+                        <div class="modal fade bd-example-modal-lg" id="<%= question[i].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content QA">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel"><%= question[i].Title %></h5>
@@ -168,12 +151,12 @@
                                                     <textarea id="<%= i %>"  class="answer" required="required" name="Answer" rows="5"><%= question[i].Answer %></textarea>  
                                                 </div>
                                                 <div class="modal-body">
-                                                    <input class="checktop" id="<%= question[i].id %>" type="checkbox">將本文設為置頂</input>
+                                                    <input class="checktop" id="<%= question[i].id %>" type="checkbox" name="isTop">將本文設為置頂</input>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <input class="btn btn-primary submit" type="submit" value="更改答案">
+                                                    <input class="btn btn-primary submit submitbtn" type="submit" value="更改答案">
                                                     <button 
-                                                    <button type="button" class="btn btn-secondary closemodal" data-dismiss="modal">關閉</button>
+                                                    <button type="button" class="btn btn-secondary closebtn" data-dismiss="modal">關 閉</button>
                                                 </div>    
                                         </form>
                                     <%}
@@ -190,7 +173,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <input class="btn btn-primary submit" type="submit" value="送出答案"> 
-                                                <button type="button" class="btn btn-secondary closemodal" data-dismiss="modal">關閉</button>
+                                                <button type="button" class="btn btn-secondary closebtn" data-dismiss="modal">關 閉</button>
                                             </div>
                                         </form>      
                                     <%}
