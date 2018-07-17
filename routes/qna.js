@@ -9,7 +9,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.locals.username = req.session.account ;
   res.locals.authenticated = req.session.logined;
-  Question.find().sort({CreateDate:'desc'}).exec(function(err, question){
+  Question.find().sort({isTop:"desc",CreateDate:'desc'}).exec(function(err, question){
     if(err){return next(err)};
     //轉換時間欄位
     var Time = function(date) {
@@ -83,11 +83,11 @@ router.post('/addq',function(req,res,next){
         CreateDate: Date.now(),
         Click:0,
         isTop:false
-      }).save(function(err,alert){
+      }).save(function(err){
         if(err){
           return next(err);
         }
-        //alert("發送問題成功！");
+        // alert("發送問題成功！");
         res.redirect('/qna');
       });
       
