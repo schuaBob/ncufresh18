@@ -4,7 +4,10 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var session = require('express-session');
+var passport = require('passport');
+var expressValidator = require('express-validator');
+var LocalStrategy = require('passport-local').Strategy;
 
 var app = express();
 
