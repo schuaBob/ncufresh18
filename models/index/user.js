@@ -9,7 +9,7 @@ var UserSchema = mongoose.Schema({
     password: {
         type: String
     },
-    type: {
+    role: {
         type: String
     },
     name: {
@@ -21,7 +21,7 @@ var UserSchema = mongoose.Schema({
     score_high: {
         type: String
     },
-    img: {
+    avatar: {
         type: String, default: "profile.png" 
     }
 });

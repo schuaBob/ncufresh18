@@ -7,44 +7,53 @@ var bodyParser = require('body-parser');
 var app = express();
 
 //best-practice of security
-var helmet = require('helmet')
+const helmet = require('helmet')
 app.use(helmet())
 
 //database config
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/ncufresh18');
 
 //Passport
-var passport = require('passport');
+const passport = require('passport');
 app.use(passport.initialize());
 app.use(passport.session());
 
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+passport.deserializeUser(function(id, done) {
+  UserModel.findById(id, function(err, user) {
+      done(err, user);
+  })
+});
+
 //validator
-var expressValidator = require('express-validator');
+const expressValidator = require('express-validator');
 app.use(expressValidator({
-  errorFormatter: function(param, msg, value) {
-      var namespace = param.split('.')
-      , root    = namespace.shift()
+  errorFormatter: function (param, msg, value) {
+    var namespace = param.split('.')
+      , root = namespace.shift()
       , formParam = root;
 
-    while(namespace.length) {
+    while (namespace.length) {
       formParam += '[' + namespace.shift() + ']';
     }
     return {
-      param : formParam,
-      msg   : msg,
-      value : value
+      param: formParam,
+      msg: msg,
+      value: value
     };
   }
 }));
 
 //加入strict路由
-var router = express.Router({strict:true});
+var router = express.Router({ strict: true });
 router.all('*');
 
 //session
-var session = require('express-session');
+const session = require('express-session');
 app.use(session({
   secret: 'ThisIsNcuFresh18Speaking.',
   resave: true,
@@ -61,6 +70,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//Pages
 var index = require('./routes/index');
 var documents = require('./routes/documents');
 var qna = require('./routes/qna');
@@ -71,10 +81,6 @@ var smallgame = require('./routes/smallgame');
 var video = require('./routes/video');
 var personal = require('./routes/personal');
 var about = require('./routes/about');
-
-
-
-
 
 // 首頁
 app.use('/', index);
@@ -100,13 +106,13 @@ app.use('/about', about);
 // ckeditor uploader
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
-app.post('/uploader', multipartMiddleware, function(req, res, next) {
+app.post('/uploader', multipartMiddleware, function (req, res, next) {
   var fs = require('fs');
 
-  fs.readFile(req.files.upload.path, function(err, data) {
+  fs.readFile(req.files.upload.path, function (err, data) {
     if (err) return next(err);
     var newPath = __dirname + '/public/uploads/' + req.files.upload.name;
-    fs.writeFile(newPath, data, function(err) {
+    fs.writeFile(newPath, data, function (err) {
       if (err) return next(err);
 
       html = "";
@@ -124,14 +130,14 @@ app.post('/uploader', multipartMiddleware, function(req, res, next) {
 });
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

@@ -20,4 +20,17 @@ router.get('/register', function(req, res, next) {
 router.get('/comingsoon', function(req, res, next) {
   res.render('comingsoon/index', { title: '倒數' });
 });  
+
+//Passport isAuthenticated wrapper
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated())
+    res.redirect('/');
+  return next();
+}
+
+function isAdmin(req, res, next) {
+  if (req.isAuthenticated() && req.user.local.role === 'admin')
+    return next();
+  res.redirect('/');
+}
 module.exports = router;
