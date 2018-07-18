@@ -1,8 +1,21 @@
+.Admin_edit {
+  
+}
+h1 {
+  display: none;
+}
 .Main_list {
+  margin-left: 8%;
+  margin-right: 8%;
   position: relative;
-  bottom: 30px;
+  margin-bottom: 3%;
+  
+  
+  
 }
 #List_index {
+  width: 100%;
+  padding: 0;
   color: rebeccapurple;
   list-style: none;
   margin: 0;
@@ -10,13 +23,29 @@
 #List_index li {
   display: inline-block;
   position: relative;
-  margin-left: 30px;
-  margin-right: 30px;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  
 }
-
-.Mainmap #map {
+.Mainmap {
+  position: relative;
+  padding:0;
+  display: block;
+  width:auto;
+  height: auto;
+}
+.mapmove{
+  max-width: auto;
+  position: relative;
+  margin-right: 16%;
   margin-left: 15%;
-  width: 70%;
+  
+  
+}
+#map {
+  padding: 0;
+  margin: 0;
+  width: 100%;
 }
 main {
   max-height: 100%;
@@ -112,10 +141,14 @@ li {
 #content tbody tr:nth-child(odd) {
   background: #cccccc;
 }
+.picspace{
+  position: relative;
+}
 
 .posipic{
-  
-  
+  position: absolute;
+}
+.indexelepic{
   position: absolute;
 }
 

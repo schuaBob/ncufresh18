@@ -69,7 +69,7 @@
                                     </div>
 
                                     <!-- Multiple Radios (inline) -->
-                                    
+
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
                                         <button type="submit" class="btn btn-primary">儲存</button>
@@ -90,9 +90,17 @@
 
         </div>
         <div class="Mainmap">
-            <img id="map" src="back2.png" width="75%">
+            <div class="mapmove">
+                <%for (let i in result) {-%>
+                    <% if (result[i]['Buildpic'] != "") {-%>
+                        <img href="#" title="<%=result[i]['Element_Name']%>" class="indexelepic" src="<%=result[i]['Buildpic']%>" alt="<%=result[i]['_id']%>" style="top: <%=result[i]['X_position']%>%;left: <%=result[i]['Y_position']%>%; width: <%=result[i]['Size']%>%;">
+                    <%}-%>
+                <%}-%>
+
+                <img id="map" src="back2.png" width="75%">
+            </div>
         </div>
-        <div class="Main_list">
+        <div class="Main_list ">
             <ul id="List_index">
                 <li>
                     <a class="Main_listele1">系館</a>
@@ -104,7 +112,7 @@
                     <a class="Main_listele3">餐廳</a>
                 </li>
                 <li>
-                    <a class="Main_listele4">商店</a>
+                    <a class="Main_listele4">設施</a>
                 </li>
                 <li>
                     <a class="Main_listele5">住宿</a>
@@ -132,6 +140,7 @@
     </footer>
     <% include ../layout/js %>
         <% include js %>
+
 </body>
 
 </html>

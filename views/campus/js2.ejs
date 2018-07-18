@@ -1,35 +1,56 @@
 <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
 
 <script>
-    
+
+
     var loadFile = function (event) {
         var output = document.getElementById('output');
         output.src = URL.createObjectURL(event.target.files[0]);
     };
 
     $(document).ready(function () {
-        $('.editpicposi').click(function(event) {
-            
+        $('.editpicposi').click(function (event) {
+            //console.log($('#mainmap2').width())
+            var tempid = event.currentTarget.attributes.xxx.value
             $.ajax({
-                url:"picposition?id=" + event.currentTarget.attributes.xxx.value,
-                method:'GET',
-                error: function(err) {
+                url: "picposition?id=" + event.currentTarget.attributes.xxx.value,
+                method: 'GET',
+                error: function (err) {
                     alert("發生錯誤")
                 },
-                success: function(data) {
-                    console.log(data.Size)
+                success: function (data) {
+                    console.log(data)
+                    $('.editform').attr("action", "/campus/saveposition/" + tempid)
+                    $('.editform').attr("method", "POST")
                     if (data.Buildpic != "") {
-                        $('.picspace').prepend("<img class='posipic' src='/campus/"+data.Buildpic+"'width='"+data.Size+"%'>")
-                        $('.posipic').draggable();
+                        $('input[name="x_position"]').val(data.X_position)
+                        $('input[name="y_position"]').val(data.Y_position)
+                        $('input[name="size"]').val(data.Size)
+                        $('.picspace').prepend("<img class='posipic' src='/campus/" + data.Buildpic + "'width='" + data.Size + "%' style='top:" + data.X_position + "%; left:" + data.Y_position + "%;'>")
+                        $('.posipic').draggable({ containment: '.picspace' });
                         
+                        
+                        $('.posipic').mousemove(function () {
+                            console.log($('#mainmap2').width())
+                            console.log($('#mainmap2').height())
+                            $('input[name="x_position"]').val($('.posipic').position().top/$('#mainmap2').height()*100)
+                            $('input[name="y_position"]').val($('.posipic').position().left/$('#mainmap2').width()*100)
+                            
+                            
+                            
+                        })
+
+
                     }
                 }
             })
         })
-        $('.close').click(function() {
+
+        $('.close').click(function () {
             $('.posipic').remove()
-            
+
         })
+
 
         $('.picedit').click(function (event) {
 
@@ -48,25 +69,25 @@
                     if (data.Intropic.length != 0) {
 
                         for (let i = 0; i < data.Intropic.length; i++) {
-                            $('.imgcontent').prepend("<div class='saved intropic'><img class='pic' src='/campus/" + data.Intropic[i] + "'><a class='picdele' val='1' ipname='"+data.Intropic[i]+"'>Delete</a></div>")
+                            $('.imgcontent').prepend("<div class='saved intropic'><img class='pic' src='/campus/" + data.Intropic[i] + "'><a class='picdele' val='1' ipname='" + data.Intropic[i] + "'>Delete</a></div>")
                         }
-            
+
                     }
                     $('.picdele').click(function (event) {
                         console.log(event.currentTarget.attributes[2].value);
                         // console.log(this.closest('.modal-content').find('.imgcontent').data('ooo'))
                         var temp = $(this).parents(".imgcontent")[0].attributes.ooo.value
                         var temp2 = $(this)
-                        
+
                         $.ajax({
                             url: "deleimg",
                             method: "POST",
-                            data: { id: temp, val: event.currentTarget.attributes.val.value, ipid:  event.currentTarget.attributes.ipname.value},
+                            data: { id: temp, val: event.currentTarget.attributes.val.value, ipid: event.currentTarget.attributes.ipname.value },
                             error: function (err) {
 
                             },
                             success: function (data) {
-                                if (data === true){
+                                if (data === true) {
                                     temp2.parent().remove();
                                 }
                                 // $(this).siblings().remove()
@@ -82,7 +103,7 @@
             });
 
         })
-        
+
 
         $('.modal-title-buildpic').click(function () {
             $('.imgtype').attr('value', '0')
