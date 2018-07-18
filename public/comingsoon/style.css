@@ -5,24 +5,32 @@
     max-width: 80vw ;
     max-height: 50vh ;
     z-index: 1 ;
+    margin-bottom: max(0px, 25vmin - 15vw);
 }
 #made {
     margin : auto ;
     display : block ;
-    max-width: 25vw ;
+    max-width: 45vw ;
     max-height: 15vh ;
     z-index: 1 ;
 }
-main {
+body{
+    height: 100vh;
     background-image: url("百花川遮罩黑.png") ;
     background-position: center ;
     background-size: cover ;
-    min-height: 100vh;
 }
-#grid-counter {
+main{
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    margin: auto;
+    height: 100vmin;
+}
+
+#grid-counter{
     display: grid ;
-    grid-template-columns: repeat(6,2fr) ;
-    grid-template-rows: 10vw 8vw;
+    grid-template-columns: 2fr repeat(4, minmax(25vw,2fr)) 2fr;
+    grid-template-rows: 18vmin 10vmin;
 }
 #grid-block {
     color:  white ;
@@ -31,11 +39,11 @@ main {
 }
 
 .time {
-    font-size: 10vw ;
+    font-size: 18vmin ;
 }
 .num {
-    font-size: 5vw ;
+    font-size: 10vmin ;
 }
 p{
-    margin-bottom: 0px; 
+    margin-bottom: 0;
 }

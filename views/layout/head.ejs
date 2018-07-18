@@ -6,6 +6,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/bootstrap-4.1.1-dist/css/bootstrap.min.css">
+<script src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
 <script src="/bootstrap-4.1.1-dist/js/bootstrap.min.js"></script>
 
 <%_ /* ckeditor */ -%>
@@ -21,15 +22,36 @@
         top: 0;
         position: fixed;
         transition: top 0.3s;
+        z-index: 4000;
     }
     body {
         padding-top: 56px;
         padding-bottom: 8px;
     }
     footer {
-        position: absolute;left: 0;bottom: 0;width: 100%;overflow: hidden;text-align: center; background-color: rgba(0,0,0,.85);
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        overflow: hidden;
+        text-align: center;
+        background-color: rgba(0,0,0,.85);
     }
     .text-white {
         font-weight: bold;
+        cursor: pointer;
+    }
+    .footer-first-line, .footer-second-line, .footer-third-line {
+        color: white;
+    }
+    @media only screen and (max-width: 630px) {
+        .footer-first-line {
+            display: none;
+        }
+    }
+    @media only screen and (max-width: 300px) {
+        .footer-third-line {
+            display: none;
+        }
     }
 </style>
