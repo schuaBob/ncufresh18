@@ -1,0 +1,25 @@
+<script>
+    
+    $(document).ready(function(){
+    
+        CKEDITOR.replace('edit_introduction',{
+            filebrowserUploadUrl: '/uploader',
+        });
+
+        CKEDITOR.replace('edit_branch',{
+            filebrowserUploadUrl: '/uploader',
+        });
+
+        CKEDITOR.replace('edit_activity',{
+            filebrowserUploadUrl: '/uploader',
+        });
+
+        CKEDITOR.editorConfig = function (config){
+            config.enterMode = CKEDITOR.ENTER_BR;
+            config.autoParagraph = false;
+        };
+
+        
+        
+    })
+</script>

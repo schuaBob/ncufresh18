@@ -13,10 +13,46 @@ ul{
 }
 
 h5{
-    margin-left: 30%;
+    margin-left: 20%;
 }
 
-p{
+h6{
     margin-top: 2%;
-    margin-left: 30%;
+    margin-left: 25%;
+}
+
+#carouselExampleIndicators{
+    width: 40%;
+    height: 40%;
+    float: right;
+
+}
+
+/* 差一個s */
+#carouselExampleIndicator{
+    width: 40%;
+    height: 40%;
+    float: right;
+}
+
+
+
+body{
+    background-image: url(其他學生組織.png);
+    background-attachment: fixed;
+    background-position: right;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#bread{
+    opacity: 0.8;
+    width: 23%;
+}
+
+@media screen and (max-width: 600px){
+    body{
+        background-image: url(其他學生組織_手機板.png);
+        background-position: center;
+    }
 }

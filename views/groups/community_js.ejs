@@ -1,0 +1,23 @@
+<script>
+    $(document).ready(function(){
+
+        CKEDITOR.replace('add_introduction',{
+            filebrowserUploadUrl: '/uploader',
+        });
+        CKEDITOR.replace('add_participation',{
+            filebrowserUploadUrl: '/uploader',
+        });
+        CKEDITOR.replace('add_FB',{
+            filebrowserUploadUrl: '/uploader',
+        });
+        CKEDITOR.replace('add_activity',{
+            filebrowserUploadUrl: '/uploader',
+        });
+
+        CKEDITOR.editorConfig = function (config){
+            config.enterMode = CKEDITOR.ENTER_BR;
+            config.autoParagraph = false;
+        };
+
+    });
+</script>
