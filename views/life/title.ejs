@@ -4,14 +4,16 @@
             <% if (life[i].type == page) { %>
                 <div class="selectbar">
                     <img class="mainTitle" src="<%=num%>_<%=cnt%>_<%=page%>.png" alt="<%=life[i].mainTitle%>" />
-                    <div class="clk" id="<%=num%>_<%=cnt%>"></div>
                     <% if(life[i].subTitle.length != 0) { %>
+                        <div class="clk" id="<%=num%>_<%=cnt%>"></div>
                         <hr class="hide1" id="<%=num%>_<%=cnt%>_hr"/>
                         <ul class="hide1" id="<%=num%>_<%=cnt%>_sub">
                         <% for (var j=0 ; j<life[i].subTitle.length ; j++) { %>
-                            <li><a href="#" class="showDetail"><%= life[i].subTitle[j] %></a></li>
+                            <li><a href="#" class="showDetail" id="<%=life[i].mainTitle%>_<%=life[i].subTitle[j]%>"><%= life[i].subTitle[j] %></a></li>
                         <% } %>
                         </ul>
+                    <% } else { %>
+                        <div class="clk showDetail" id="<%=life[i].mainTitle%>_default"></div>
                     <% } %>
                 </div>
                 <% cnt = cnt + 1 %>

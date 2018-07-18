@@ -33,6 +33,20 @@
     });
 
     $('.showDetail').on('click', function(e){
+        e.preventDefault();
+        var info = this.id.split("_");
+        $.ajax({
+            url:    "showing",
+            method: "POST",
+            data:   {mainTitle: info[0], subTitle: info[1]},
+            error: function(err){
+                alert("Some error occur...");
+            },
+            success: function(data){
+                console.log(data);
+                $(".mySlides").append("<img src='" + data + "'>");
+            }
+        });
     });
 
     $('.bigTitle').on('change', function(e){
@@ -43,7 +57,7 @@
             method: 'POST',
             data:   {mainTitle : choose},
             error: function(err){
-                alert("Some error occur");
+                alert("Some error occur...");
             },
             success: function(data){
                 todo(data);

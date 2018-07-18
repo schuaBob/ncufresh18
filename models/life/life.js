@@ -6,4 +6,10 @@ var life = mongoose.Schema({
     type        : String
 });
 
+var picture = mongoose.Schema({
+    mainTitle   : String,
+    subTitle    : String,
+    path        : String
+})
+
 module.exports = mongoose.model('life', life);
