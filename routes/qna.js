@@ -2,6 +2,7 @@ var express = require('express');
 var mongoose=require('mongoose');
 require('../models/qna/qna');
 var Question=mongoose.model('Question');
+var Rule =mongoose.model('Rule');
 var router = express.Router();
 
 
@@ -9,42 +10,48 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.locals.username = req.session.account ;
   res.locals.authenticated = req.session.logined;
-  Question.find().sort({isTop:"desc",CreateDate:'desc'}).exec(function(err, question){
-    if(err){return next(err)};
-    //轉換時間欄位
-    var Time = function(date) {
-      var year =date.getYear();
-      var monthIndex = date.getMonth();
-      var day = date.getDate();
-      var time = (year+1900) + '/' + (++monthIndex) + '/' + day;
-      return time;
-    }
-    res.render('qna/index',{
-      title:'新生Ｑ＆Ａ ｜ 新生知訊網',
-      question:question,
-      Time:Time
-    });
-  }); 
+  Rule.find().sort({CreateDate:'asc'}).exec(function(err, rule){
+    Question.find().sort({CreateDate:'desc'}).exec(function(err, question){
+      if(err){return next(err)};
+      //轉換時間欄位
+      var Time = function(date) {
+        var year =date.getYear();
+        var monthIndex = date.getMonth();
+        var day = date.getDate();
+        var time = (year+1900) + '/' + (++monthIndex) + '/' + day;
+        return time;
+      }
+      res.render('qna/index',{
+        title:'新生Ｑ＆Ａ ｜ 新生知訊網',
+        rule:rule,
+        question:question,
+        Time:Time
+      });
+    }); 
+  });
 });
 //照時間排序
 router.get('/time', function(req, res, next) {
   res.locals.username = req.session.account ;
   res.locals.authenticated = req.session.logined;
-  Question.find().sort({isTop:"desc",CreateDate:'desc'}).exec(function(err, question){
-    if(err){return next(err)};
-    console.log("測試用");
-    //轉換時間欄位
-    var Time = function(date) {
-      var year =date.getYear();
-      var monthIndex = date.getMonth();
-      var day = date.getDate();
-      var time = (year+1900) + '/' + (++monthIndex) + '/' + day;
-      return time;
-    }
-    res.render('qna/index',{
-      title:'新生Ｑ＆Ａ ｜ 新生知訊網',
-      question:question,
-      Time:Time
+  Rule.find().sort({CreateDate:'asc'}).exec(function(err, rule){
+    Question.find().sort({Rule:"desc",CreateDate:'desc'}).exec(function(err, question){
+      if(err){return next(err)};
+      console.log("測試用");
+      //轉換時間欄位
+      var Time = function(date) {
+        var year =date.getYear();
+        var monthIndex = date.getMonth();
+        var day = date.getDate();
+        var time = (year+1900) + '/' + (++monthIndex) + '/' + day;
+        return time;
+      }
+      res.render('qna/index',{
+        title:'新生Ｑ＆Ａ ｜ 新生知訊網',
+        rule:rule,
+        question:question,
+        Time:Time
+      });
     });
   });
 });
@@ -52,23 +59,63 @@ router.get('/time', function(req, res, next) {
 router.get('/hot', function(req, res, next) {
   res.locals.username = req.session.account ;
   res.locals.authenticated = req.session.logined;
-  Question.find().sort({isTop:"desc",Click:'desc'}).exec(function(err, question){
+  Rule.find().sort({CreateDate:'asc'}).exec(function(err, rule){
     if(err){return next(err)};
-    console.log("測試用");
-    //轉換時間欄位
-    var Time = function(date) {
-      var year =date.getYear();
-      var monthIndex = date.getMonth();
-      var day = date.getDate();
-      var time = (year+1900) + '/' + (++monthIndex) + '/' + day;
-      return time;
-    }
-    res.render('qna/index',{
-      title:'新生Ｑ＆Ａ ｜ 新生知訊網',
-      question:question,
-      Time:Time
+    Question.find().sort({Click:'desc'}).exec(function(err, question){
+      if(err){return next(err)};
+      //console.log("測試用");
+      //轉換時間欄位
+      var Time = function(date) {
+        var year =date.getYear();
+        var monthIndex = date.getMonth();
+        var day = date.getDate();
+        var time = (year+1900) + '/' + (++monthIndex) + '/' + day;
+        return time;
+      }
+      res.render('qna/index',{
+        title:'新生Ｑ＆Ａ ｜ 新生知訊網',
+        rule:rule,
+        question:question,
+        Time:Time
+      });
     });
   });
+});
+//新增板規
+router.post('/addR',function(req,res,next){
+  if((req.body.Title)&&(req.body.Type)&&(req.body.Content)){
+    var temp = new Rule({
+      Title:req.body.Title,
+      Type:req.body.Type,
+      Content: req.body.Content,
+      CreateDate: Date.now(),
+      Click:0,
+    }).save(function(err){
+      if(err){
+        return next(err);
+      }
+      // alert("發送問題成功！");
+      res.redirect('/qna');
+    });
+    
+  }
+});
+//編輯板規
+router.post('/updateR/:id',function(req,res,next){
+  //if(result.Username===res.locals.username||req.session.type==="admin"){
+    if(mongoose.Types.ObjectId.isValid(req.params.id)){
+      Rule.findById(req.params.id).exec(function(err,result){
+        if(err){return next(err)};
+        Rule.update({_id:req.params.id}, {Content:req.body.Content},function(err){
+          if(err)
+              console.log('Fail to update answer.');
+          else
+              console.log('Done');
+        });
+    })   
+  //}
+    res.redirect('/qna');
+  }
 });
 /*新增問題*/
 router.post('/addq',function(req,res,next){
@@ -80,9 +127,7 @@ router.post('/addq',function(req,res,next){
         Type:req.body.Type,
         Content: req.body.Content,
         Answer: "",
-        CreateDate: Date.now(),
-        Click:0,
-        isTop:false
+        Click:0
       }).save(function(err){
         if(err){
           return next(err);
@@ -102,7 +147,7 @@ router.post('/addq',function(req,res,next){
         Question.findById(req.params.id).exec(function(err,result){
           if(err){return next(err)};
           //if(result.Username===res.locals.username||req.session.type==="admin"){
-            Question.update({_id:req.params.id}, {Answer:req.body.Answer},{isTop:req.body.isTop},function(err){
+            Question.update({_id:req.params.id}, {Answer:req.body.Answer},{CreateDate:Date.now()},function(err){
               if(err)
               console.log('Fail to update article.');
               else
@@ -148,48 +193,60 @@ router.get('/search',function(req,res,next){
 /*紀錄點擊次數*/
 router.get('/:id', function(req, res, next) {
   if(mongoose.Types.ObjectId.isValid(req.params.id)){
+    Rule.findById(req.params.id,function(err,rule){
+      if(err){return next(err)};
       Question.findById(req.params.id,function(err,question){
           if(err){return next(err)};
           //找不到的話
-          if(question===null){
+          if((question===null)&&(rule===null)){
             return next();
           }
-          //增加瀏覽次數
-          question.Click++;
-          //儲存瀏覽次數
-          question.save(function(err) {
-            if (err){return next(err);}
-            // 回傳 title, content, answer
-            res.json({
-              click:question.Click
+          else if((question!==null)&&(rule===null)){
+            question.Click++;
+            //儲存瀏覽次數
+            question.save(function(err) {
+              if (err){return next(err);}
+              // 回傳 title, content, answer
+              res.json({
+                click:question.Click
+              });
             });
-          });
-      })
+          }
+          else if((question===null)&&(rule!==null)){
+            rule.Click++;
+            //儲存瀏覽次數
+            rule.save(function(err) {
+              if (err){return next(err);}
+              // 回傳 title, content, answer
+              res.json({
+                click:rule.Click
+              });
+            });
+          }  
+      });
+    });
   }
   else{
     next();
   }
 });
-/*編輯答案*/
+/*編輯答案跟板規*/
 router.post('/update/:id',function(req,res,next){
-  if(req.body.Answer){
-      if(mongoose.Types.ObjectId.isValid(req.params.id)){
+    if(mongoose.Types.ObjectId.isValid(req.params.id)){
           Question.findById(req.params.id).exec(function(err,result){
-              if(err){return next(err)};
-              //if(result.Username===res.locals.username||req.session.type==="admin"){
+            if(err){return next(err)};
+            //if(result.Username===res.locals.username||req.session.type==="admin"){
+            if(req.body.Answer){
               Question.update({_id:req.params.id}, {Answer:req.body.Answer},function(err){
                 if(err)
                     console.log('Fail to update answer.');
                 else
                     console.log('Done');
               });
-              //}
+            }    
+            //}
           })   
           res.redirect('/qna');
-      }
-      else{
-          res.redirect('/qna');
-      }
   }
 });
 /*刪除問題*/

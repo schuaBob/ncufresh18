@@ -3,6 +3,38 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 <script>
 $(document).ready(() => {
+    if ($(window).width() < 800) {
+        var h=$(window).height()-30;
+        //手機板頁面樣式
+        //搜尋的位置
+        $(".search").css({"float":"left"});
+        // $(".classifiaction").css({"float":"left"});
+        $(".classification").hide();
+        $(".outOfTable").hide();
+        //管理員相關的功能隱藏起來
+        $(".admin").hide();
+        //文章列表樣式
+        $('table').css({"width":$(window).width()});
+        $('tbody').css({"height":$(window).height()-30});
+        //我要發問按鈕的位置
+        $(".askbutton").hide();//隱藏電腦版的我要發問按鈕
+    }
+    else{
+        //我要發問按鈕的位置
+        $(".askbutton2").hide();//隱藏手機版的我要發問按鈕
+        //搜尋的位置
+        $(".search").css({"float":"right"});
+        //文章列表樣式
+        $('table').css({"width":"70%"});
+        $('tbody').css({"height":"300px"});
+        $('td').css({"border-right":"1.5px black solid"});
+        //排序跟分類的按鈕
+        $(".classificationBtn").hide();
+        
+    }
+    $(".classificationBtn").on('click',function(){
+
+    });
     $("li a[href='#all']").css({"background-color":"#29ABE2","border-radius":"20px"});
     //只看單一分類
     $("li a[href='#校園生活']").on('click',function(){
@@ -101,11 +133,14 @@ $(document).ready(() => {
             }
         })
     })
-    //新增與編輯答案輸入答案的區域
-    CKEDITOR.editorConfig = function (config){
-        config.enterMode = CKEDITOR.ENTER_BR;
-        config.shiftEnterMode = CKEDITOR.ENTER_BR; 
-    };
+    //CKEDITOR
+    CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
+    CKEDITOR.config.shiftEnterMode = CKEDITOR.ENTER_BR; 
+    // CKEDITOR.editorConfig = function (config){
+    //     config.autoParagraph = false;
+    //     config.enterMode = CKEDITOR.ENTER_BR;
+    //     config.shiftEnterMode = CKEDITOR.ENTER_BR; 
+    // };
     $('.answer').each(function(e){
         CKEDITOR.replace(this.id,{
         filebrowserUploadUrl: '/uploader',
@@ -121,9 +156,10 @@ $(document).ready(() => {
           alert('刪除成功');
           //$('#modal-admin-answer').modal('hide');
           $('.' + res.id).remove();
-        }).fail(function(err) {
-          alert('發生錯誤: ' + err);
         })
+        // .fail(function(err) {
+        //   alert('發生錯誤: ' + err);
+        // })
       }
     });
 })         
