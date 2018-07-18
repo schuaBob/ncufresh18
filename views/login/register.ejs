@@ -11,7 +11,9 @@
     </header>
     <main>
         <div id="er"></div>
+        <form method="post" action="/register">
         <div class="form-group">
+            <input type="hidden" class="form-control" name="id" required>
             <img src="login/login.png" id="lg"><b id="w">註冊</b><br>
             <img src="login/姓名.png" id="pic">
             <input type="text" class="form-control" name="name" required>
@@ -21,6 +23,7 @@
             <input type="password" class="form-control" name="checkpassword" onkeyup="this.value=this.value.replace(/[^\w]/g,'');" required>
             <button id="btn">繼續</button>
         </div>
+        </form>
     </main>
     <footer>
         <% include ../layout/footer %>

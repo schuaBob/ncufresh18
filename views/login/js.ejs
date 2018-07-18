@@ -8,7 +8,7 @@
                 window.location = "https://portal.ncu.edu.tw/system/120" ;
             }
             else if(($("input").val().substr(0,3))==107){
-                window.location = "/register" ;
+                window.location = "/register?id="+document.getElementById("id").value;
             }
             else{
                 alert("U問題ㄛ") ;
@@ -25,7 +25,7 @@
                     window.location = "https://portal.ncu.edu.tw/system/120" ;
                 }
                 else if(($("input").val().substr(0,3))==107){
-                window.location = "/register" ;
+                    window.location = "/register?id="+document.getElementById("id").value;
                 }
                 else{
                     alert("U問題ㄛ") ;

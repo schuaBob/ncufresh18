@@ -1,4 +1,7 @@
 <script>
+    var url = new URL(window.location.href);
+    console.log(url.searchParams.get('id'));
+    $("input[name=id]").val(url.searchParams.get('id'))// = url.searchParams.get('id');
     $(document).on("click","#btn",function(event){
         var str = $("input[name=name]").val() ;
         var pw1 = $("input[name=password]").val() ;
