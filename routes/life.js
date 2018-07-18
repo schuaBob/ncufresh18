@@ -1,16 +1,30 @@
 var express = require('express');
 var request = require('request');
 var life = require('../models/life/life');
+var picture = require('../models/life/picture');
 var router = express.Router();
 var formidable = require('formidable');
+var multer = require('multer');
 fs = require('fs');
 // var apiKey = 'c7282145be089c1ab3c03aa2e2f7c5dd';
 
+var storage = multer.diskStorage({
+  destination: "public/life/subPicture/",
+  filename   : function(req, file, cb){
+    var rdm = '';
+    for(var i=0 ; i<10 ; i++) rdm += Math.floor((Math.random() * 10));
+    var fileName = req.body.mainTitle + "_" + req.body.subTitle + "_" + rdm + ".jpg";
+    cb(null, fileName);
+  }
+})
+
+var upload = multer({ storage: storage });
+
 var match_num = {
-  'food'           : 1,
+  'food'          : 1,
   'dorm'          : 2,
   'comm'          : 3,
-  'edu'           :  4,
+  'edu'           : 4,
   'entertainment' : 5 
 }
 
@@ -72,12 +86,22 @@ router.get('/entertainment', function(req, res, next){
   });
 });
 
-router.post('/editContent', function(req, res, next){
+router.post('/editPicture', upload.single('picture'), function(req, res, next){
   var form = new formidable.IncomingForm();
   form.parse(req, function(err, fields, files){
-    if(err) return next(err);
-    res.redirect('back');
+    var cuted = req.file.path.split("/"),
+        pathed = cuted[2] + "/" + cuted[3];
+    var newPicture = new picture({
+        mainTitle : req.body.mainTitle,
+        subTitle  : req.body.subTitle,
+        path      : pathed
+    }).save();
   });
+  res.redirect('back');
+});
+
+router.post('/editContent', function(req, res, next){
+
 });
 
 router.post('/editTitle', function(req, res, next){
@@ -111,14 +135,14 @@ router.post('/changing', function(req, res, next){
   });
 });
 
-router.post('/uploadPic', function(req, res, next){
-  var form = new formidable.IncomingForm();
-  form.parse(req, function(error, fields, files){
-    fs.writeFileSync("public/life/test.png", fs.readFileSync(files.picture.path));
-    res.redirect('back');
+router.post('/showing', function(req, res, next){
+  var mainTitled = req.body.mainTitle,
+      subTitled = req.body.subTitle;
+  picture.find({mainTitle: mainTitled, subTitle: subTitled}, function(err, result){
+    if(err) return next(err);
+    res.send(result);
   });
 });
-
 // router.post('/', function(req, res, next){
 //   let city = req.body.city;
 //   let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
