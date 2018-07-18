@@ -1,8 +1,8 @@
 //using mongoose to connect mongodb
 var mongoose = require('mongoose');
-
+var bcrypt = require('bcryptjs');
 //User Schema
-var UserSchema = mongoose.Schema({
+var userSchema = mongoose.Schema({
     id: {
         type: String
     },
@@ -28,3 +28,12 @@ var UserSchema = mongoose.Schema({
 
 //export User schema
 module.exports = mongoose.model('User', userSchema);
+
+export const createUser = (newUser, callback) => {
+    bcrypt.genSalt(10, function(err, salt) {
+      bcrypt.hash(newUser.password, salt, function(err, hash) {
+          newUser.password = hash;
+          newUser.save(callback);
+      });
+    });
+  }
