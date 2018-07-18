@@ -4,42 +4,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-var index = require('./routes/index');
-var documents = require('./routes/documents');
-var qna = require('./routes/qna');
-var campus = require('./routes/campus');
-var groups = require('./routes/groups');
-var life = require('./routes/life');
-var smallgame = require('./routes/smallgame');
-var video = require('./routes/video');
-var personal = require('./routes/personal');
-var about = require('./routes/about');
-
-//加入strict路由
-var router = express.Router({strict:true});
-router.all('*');
-
-//session
-var session = require('express-session');
-app.use(session({
-  secret: 'ThisIsNcuFresh18Speaking.',
-  resave: true,
-  saveUninitialized: false
-}));
+//best-practice of security
+var helmet = require('helmet')
+app.use(helmet())
 
 //database config
 var mongoose = require('mongoose');
@@ -69,6 +38,43 @@ app.use(expressValidator({
     };
   }
 }));
+
+//加入strict路由
+var router = express.Router({strict:true});
+router.all('*');
+
+//session
+var session = require('express-session');
+app.use(session({
+  secret: 'ThisIsNcuFresh18Speaking.',
+  resave: true,
+  saveUninitialized: false
+}));
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+var index = require('./routes/index');
+var documents = require('./routes/documents');
+var qna = require('./routes/qna');
+var campus = require('./routes/campus');
+var groups = require('./routes/groups');
+var life = require('./routes/life');
+var smallgame = require('./routes/smallgame');
+var video = require('./routes/video');
+var personal = require('./routes/personal');
+var about = require('./routes/about');
+
+
+
+
 
 // 首頁
 app.use('/', index);
