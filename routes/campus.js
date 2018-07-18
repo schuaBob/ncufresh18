@@ -6,7 +6,7 @@ var mongoose = require("mongoose");
 var fs = require("fs");
 /* 校園導覽首頁 */
 router.get("/", function(req, res, next) {
-  elebuilding.find({},{_id: 1,Buildpic:1,X_position:1,Y_position:1,Size:1}).exec(function(err,result) {
+  elebuilding.find({},{_id: 1, Element_Name:1,Type:1,Buildpic:1,X_position:1,Y_position:1,Size:1}).exec(function(err,result) {
     if(err) {
       return next(err)
     }

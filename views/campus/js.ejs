@@ -1,38 +1,47 @@
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
 <script>
     $(document).ready(function () {
-        
-        console.log($('#map').height())
         var temp;
         var properties = null
+        $('.indexelepic').tooltip();
+        
+            
+
+
+
         $("a[class^='Main_listele']").click(function () {
             if ($(this)[0] === temp) {
-                if ($('#map').hasClass('clicked')) {
+                if ($('.mapmove').hasClass('clicked')) {
                     properties = {
-                        'margin-left': '15%'
+                        'margin-right': '15%',
+                        'margin-left': '16%'
                     };
                     temp = $(this)[0];
-                    $('#map').removeClass('clicked')
-                    
+                    $('.mapmove').removeClass('clicked')
+
 
                 } else {
                     properties = {
-                        'margin-left': '2%'
+                        'margin-left': '2%',
+                        'margin-right': '29%'
                     };
                     temp = $(this)[0]
-                    $('#map').addClass('clicked')
-                    
+                    $('.mapmove').addClass('clicked')
+
                 }
             } else {
                 properties = {
-                    'margin-left': '2%'
+                    'margin-left': '2%',
+                    'margin-right': '29%'
+
                 };
-                $('#map').addClass('clicked')
+                $('.mapmove').addClass('clicked')
                 temp = $(this)[0];
             }
             //velocity
-            $('#map').stop().animate(properties, 500)
+            $('.mapmove').stop().velocity(properties, 500)
         });
-        
+
     });
 
 </script>
