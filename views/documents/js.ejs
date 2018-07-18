@@ -14,7 +14,8 @@
         
     
         //判斷是用電腦還手機
-        let x= $(window).width();  
+        let x= $(window).width(); 
+        //alert(x); 
         if(x>450){
             $("#t_close").show();
             $("#o_close").show();
@@ -76,7 +77,7 @@
         });
 
 
-        /*
+        
         $(".box").mousedown(function () {
             
             //抓按下按鈕的id
@@ -99,7 +100,7 @@
                     CKEDITOR.instances.edit_content.setData(data.content);
                 }
             });
-        });*/
+        });
 
         //使用者
         $(".box").mousedown(function () {
@@ -130,14 +131,14 @@
         
         //大學生研究生選擇
         $(".gra").mousedown(function () {
-            $("body").css("background-image","url('moonb.png')");
+            $("body").css("background-image","url('m_b.png')");
             $(".graduate").show();
             $(".undergraduate").hide();
            
 
         });
         $(".under").mousedown(function () {
-            $("body").css("background-image","url('test.jpg')");
+            $("body").css("background-image","url('s_b.png')");
             $(".graduate").hide();
             $(".undergraduate").show();
         });

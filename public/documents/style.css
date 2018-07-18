@@ -1,8 +1,19 @@
 body{
     font-family: 微軟正黑體,simsun, Comic Sans MS;
-    background-image:url("test.jpg");
+    background-image:url("s_b.png");
     background-size: cover;
+    height:auto; max-height:100%; max-width:100%; width:auto;
+    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 2s; /* Firefox < 16 */
+    -ms-animation: fadein 2s; /* Internet Explorer */
+    -o-animation: fadein 2s; /* Opera < 12.1 */
+    animation: fadein 2s;
 }
+
+
+
+
+
 
 .nav-item:hover  {
     background-color: #F8F8F8;
@@ -32,9 +43,46 @@ body{
 /*電腦大螢幕*/
 
 @media only screen and (min-width: 993px) {
+    #man{     
+        position:absolute;  
+        z-index:1;
+        bottom:2.5vh;
+        right:2vw;	  
+    }
+    #space{
+        position:absolute;  
+        bottom:2.5vh;
+        left:0 	
+    }
+    #man1{    
+        position:absolute;  
+        z-index:1;
+        bottom:3vh;
+        right:2vw;	   
+    }
+    #space1{
+        position:absolute;
+        bottom:0vh;
+        left:0	
+    }
+    #man {
+        height:30vh;  width:24vh;
+    }
+    #space {
+        height:45vh;  width:31vh;
+    }
+    #man1 {
+        height:28vh;  width:22vh;
+    }
+    #space1 {
+        height:48vh;  width:32vh;
+    }
+
+
 
     .grid {
         padding-top:2%;
+        padding-bottom :2%;
         display: grid;
         grid-auto-rows: 120px;
         grid-auto-columns:20%;
@@ -45,7 +93,7 @@ body{
       }
     /*給那些排版會莫名噴錯的*/
     .special{
-        margin-left:10%;      
+        margin-left:15%;      
     }
 
         /*一連串的grid排版*/
@@ -150,12 +198,48 @@ body{
 }
 /*點腦尺寸縮小，調字體，調長度*/   
 @media only screen and (min-width: 768px) and (max-width: 993px) {
+    #man{     
+        position:absolute;  
+        z-index:1;
+        bottom:3.5vh;
+        right:0vw;	  
+    }
+    #space{
+        position:absolute;  
+        bottom:3vh;
+        left:0 	
+    }
+    #man1{    
+        position:absolute;  
+        z-index:1;
+        bottom:3.6vh;
+        right:0vw;	   
+    }
+    #space1{
+        position:absolute;
+        bottom:1.5vh;
+        left:0	
+    }
+    #man {
+        height:25vh;  width:19vh;
+    }
+    #space {
+        height:42vh;  width:26vh;
+    }
+    #man1 {
+        height:25vh;  width:19vh;
+    }
+    #space1 {
+        height:42vh;  width:26vh;
+    }
+
         a{
             font-size: 18px;
         }
 
         .grid {
             padding-top:2%;
+            padding-bottom:2%;
             display: grid;
             grid-auto-rows: 100px;
             grid-auto-columns:21%;
@@ -164,7 +248,7 @@ body{
             grid-gap: 12px 12px;          
         }
         .special{
-            margin-left:8%;         
+            margin-left:14%;         
         }
         /*跟上面一樣，但不寫排版既沒了....找方法中*/
         .money {
@@ -265,16 +349,88 @@ body{
     
         
 }
+/*那兩隻....*/
+@media only screen and (min-width: 7478px) and (max-width: 0px){
+    #man{     
+        position:absolute;  
+        z-index:1;
+        bottom:3.5vh;
+        right:30vw;	  
+    }
+    #space{
+        position:absolute;  
+        bottom:3vh;
+        left:30vw; 	
+    }
+    #man1{    
+        position:absolute;  
+        z-index:1;
+        bottom:3.6vh;
+        right:30vw;	   
+    }
+    #space1{
+        position:absolute;
+        bottom:1.5vh;
+        left:30vw	
+    }
+    #man {
+        height:25vh;  width:19vh;
+    }
+    #space {
+        height:42vh;  width:26vh;
+    }
+    #man1 {
+        height:25vh;  width:19vh;
+    }
+    #space1 {
+        height:42vh;  width:26vh;
+    }
+}
  
 /*手機螢幕大小，新排版
 */
  @media only screen and (min-width: 0px) and (max-width: 768px){
-    a{
-     font-size: 15px;
+    #man{     
+        position:absolute;  
+        z-index:1;
+        bottom:10vh;
+        right:20vw;	  
     }
-    /*想讓他置中*/
+    #space{
+        position:absolute;  
+        bottom:5vh;
+        left:20vw; 	
+    }
+    #man1{    
+        position:absolute;  
+        z-index:1;
+        bottom:12vh;
+        right:20vw;	   
+    }
+    #space1{
+        position:absolute;
+        bottom:6vh;
+        left:20vw	
+    }
+    #man {
+        height:25vh;  width:19vh;
+    }
+    #space {
+        height:42vh;  width:26vh;
+    }
+    #man1 {
+        height:25vh;  width:19vh;
+    }
+    #space1 {
+        height:42vh;  width:26vh;
+    }
+    a{
+     font-size: 18px;
+    }
+  
     .grid {
         padding-top:35px;
+        padding-bottom:50%;
         display: grid;
         grid-auto-rows:70px;
         grid-auto-columns:30%;
@@ -484,9 +640,7 @@ a{
 }*/
 
 
-/*未修好!!!!
-不能偵測後才觸發
-為手機版設浮動按鈕固定下方*/
+/*為手機版設浮動按鈕固定下方*/
 @media only screen and (min-width: 0px) and (max-width: 530px){
     .modal {
         overflow: hidden;
