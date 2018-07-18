@@ -12,8 +12,8 @@ var storage = multer.diskStorage({
   destination: "public/life/subPicture/",
   filename   : function(req, file, cb){
     var rdm = '';
-    for(var i=0 ; i<10 ; i++) rdm += Math.floor((Math.random() * 10) + 1);
-    var fileName = req.body.mainTitle + "_" + req.body.subTitle + "_" + rdm + ".png";
+    for(var i=0 ; i<10 ; i++) rdm += Math.floor((Math.random() * 10));
+    var fileName = req.body.mainTitle + "_" + req.body.subTitle + "_" + rdm + ".jpg";
     cb(null, fileName);
   }
 })
@@ -91,14 +91,13 @@ router.post('/editPicture', upload.single('picture'), function(req, res, next){
   form.parse(req, function(err, fields, files){
     var cuted = req.file.path.split("/"),
         pathed = cuted[2] + "/" + cuted[3];
-    console.log(pathed);
     var newPicture = new picture({
         mainTitle : req.body.mainTitle,
         subTitle  : req.body.subTitle,
         path      : pathed
     }).save();
-    res.redirect('back');
   });
+  res.redirect('back');
 });
 
 router.post('/editContent', function(req, res, next){
@@ -141,7 +140,7 @@ router.post('/showing', function(req, res, next){
       subTitled = req.body.subTitle;
   picture.find({mainTitle: mainTitled, subTitle: subTitled}, function(err, result){
     if(err) return next(err);
-    res.send(result[0].path);
+    res.send(result);
   });
 });
 // router.post('/', function(req, res, next){

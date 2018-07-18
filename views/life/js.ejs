@@ -43,10 +43,17 @@
                 alert("Some error occur...");
             },
             success: function(data){
-                console.log(data);
-                $(".mySlides").append("<img src='" + data + "'>");
+                todo(data);
             }
         });
+        var todo = function(data){
+            $('.slideshow_container').empty();
+            $('.dot_container').empty();
+            for(var i=0 ; i<data.length ; i++){
+                $(".slideshow_container").append("<div class='mySlides'><img src='" + data[i].path + "'" + "class='picture'></div>");
+                $('.dot_container').append("<p class='dot'></p>");
+            }
+        }
     });
 
     $('.bigTitle').on('change', function(e){
@@ -71,4 +78,25 @@
             }
         }
     });
+
+    var ramSlideNum = 1;
+    
+    function plusSlides(n) {
+        showSlides(ramSlideNum += n);
+    }
+
+    function showSlides(n) {
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {ramSlideNum = 1}
+        if (n < 1) {ramSlideNum = slides.length}
+        for (var i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (var i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[ramSlideNum-1].style.display = "block";
+        dots[ramSlideNum-1].className += " active";
+    }
 </script>

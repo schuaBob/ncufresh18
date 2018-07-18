@@ -82,7 +82,7 @@ ul li{
 .selectArea{
     position: absolute;
     top: 8%;
-    left: 6%;
+    left: 10%;
 }
 .selectbar{
     position: relative;
@@ -106,15 +106,13 @@ ul li{
 }
 .hide1{
     opacity: 0;
-    background-color: #e0e0e0;
     -webkit-transition: opacity 0.5s ease-in-out;
     -moz-transition: opacity 0.5s ease-in-out;
      -o-transition: opacity 0.5s ease-in-out;
     transition: opacity 0.5s ease-in-out;
 }
 .show1{
-    background-color: #e0e0e0;
-    opacity: 100;
+    opacity: 1;
 }
 .select.afterClick{
     background-color: black;
@@ -138,11 +136,16 @@ ul li{
     top: 6%;
     left: 37.5%;
 }
+.picture{
+    position: absolute;
+    height: 100%;
+    top:0; bottom:0; left:0; right:0; margin:auto;
+    z-index: 1;
+}
 .slideshow_container{
     position: absolute;
     height: 90%;
     width: 100%;
-    background-color: #e0e0e0;
 }
 .prev, .next{
     cursor: pointer;
@@ -155,13 +158,14 @@ ul li{
     color: #e0e0e0;
     transition: 0.6s ease;
     border-radius: 3px 0 0 3px;
+    z-index: 2;
 }
 .next{
     right: 0;
     border-radius: 3px 0 0 3px;
 }
 .prev:hover, .next:hover {
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(100,100,100,0.8);
 }
 .dot_container{
     position: relative;
@@ -178,7 +182,7 @@ ul li{
     display: inline-block;
     transition: background-color 0.6s ease;
 }
-.dot:hover{
+.active .dot:hover{
     background-color: #717171;
 }
 .discribeArea{
@@ -198,4 +202,8 @@ ul li{
     width: 130px;
     height: 130px;
     z-index: 4000;
+}
+.selectbar a{
+    font-size: 25px;
+    text-align: center;
 }
