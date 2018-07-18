@@ -1,20 +1,45 @@
 <script>
     $(document).on("click","#btn",function(event){
-        if($("input[name=password]").val() === $("input[name=checkpassword]").val() ){
-            alert("讚ㄛ") ;
+        var str = $("input[name=name]").val() ;
+        var pw1 = $("input[name=password]").val() ;
+        var pw2 = $("input[name=checkpassword]").val() ;
+        if (str){
+            if (pw1){
+                if(pw1 === pw2){
+                    alert("讚ㄛ") ;
+                }
+                else {
+                    alert("低能?") ;
+                }
+            }
+            else{
+                alert("沒填密碼") ;
+            }
         }
         else {
-            alert("低能?") ;
+            alert("名字") ;
         }
     });
     $(document).on("keypress",function(event){
         if(event.keyCode === 13 ){
-            if($("input[name=password]").val() === $("input[name=checkpassword]").val() ){
-                alert("讚ㄛ") ;
-                console.log($("input[name=password]").val()) ;
+            var str = $("input[name=name]").val() ;
+            var pw1 = $("input[name=password]").val() ;
+            var pw2 = $("input[name=checkpassword]").val() ;
+            if (str){
+                if (pw1){
+                    if(pw1 === pw2){
+                        alert("讚ㄛ") ;
+                    }
+                    else {
+                        alert("低能?") ;
+                    }
+                }
+                else{
+                    alert("沒填密碼") ;
+                }
             }
-            else {
-                alert("低能?") ;
+            else{
+                alert("名字") ;
             }
         }
     });
