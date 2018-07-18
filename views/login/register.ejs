@@ -3,7 +3,7 @@
 <head>
     <% include ../layout/head %>
     <link href="../login/mdb.min.css" rel="stylesheet">
-    <link href="style2.css" rel="stylesheet">
+    <link href="login/style2.css" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -12,16 +12,20 @@
     <main>
         <div id="er"></div>
         <div class="form-group">
-            <img src="login.png" id="lg"><b id="w">註冊</b><br>
-            <b id="word">學號</b>
-            <input type="text" class="form-control" name="email" required>
-            <button>繼續</button>
+            <img src="login/login.png" id="lg"><b id="w">註冊</b><br>
+            <img src="login/姓名.png" id="pic">
+            <input type="text" class="form-control" name="name" required>
+            <img src="login/密碼.png" id="pic">
+            <input type="password" class="form-control" name="password" onkeyup="this.value=this.value.replace(/[^\w]/g,'');" required>
+            <img src="login/確認密碼.png" id="pic">
+            <input type="password" class="form-control" name="checkpassword" onkeyup="this.value=this.value.replace(/[^\w]/g,'');" required>
+            <button id="btn">繼續</button>
         </div>
     </main>
     <footer>
         <% include ../layout/footer %>
     </footer>
         <% include ../layout/js %>
-        <% include js %>
+        <% include rjs %>
 </body>
 </html>

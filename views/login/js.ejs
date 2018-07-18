@@ -1,18 +1,17 @@
 <script>
-    $(document).on("click","button",function(event){
+    $(document).on("click","#btn",function(event){
         if(($("input").val().length<9) || ($("input").val().length>9)){
             alert("ERROR") ;
         }
         else {
             if(($("input").val().substr(0,3))<107 && ($("input").val().substr(0,3))>100){
-                console.log("GOGOGO") ;
                 window.location = "https://portal.ncu.edu.tw/system/120" ;
             }
             else if(($("input").val().substr(0,3))==107){
                 window.location = "/register" ;
             }
             else{
-                alert("ERROR") ;
+                alert("U問題ㄛ") ;
             }
         }
     });
@@ -23,14 +22,13 @@
             }
             else {
                 if(($("input").val().substr(0,3))<107 && ($("input").val().substr(0,3))>100){
-                    console.log("GOGOGO") ;
                     window.location = "https://portal.ncu.edu.tw/system/120" ;
                 }
                 else if(($("input").val().substr(0,3))==107){
                 window.location = "/register" ;
                 }
                 else{
-                    alert("ERROR") ;
+                    alert("U問題ㄛ") ;
                 }
             }
         }
