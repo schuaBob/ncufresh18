@@ -1,0 +1,53 @@
+<script>
+    
+    $(document).ready(function(){
+
+
+        $(".learn").mousedown(function(){
+            $(".learns").show();
+            $(".plays").hide();
+            $(".dates").hide();
+            $(".services").hide();
+        });
+
+        $(".play").mousedown(function(){
+            $(".plays").show();
+            $(".learns").hide();
+            $(".dates").hide();
+            $(".services").hide();
+        });
+
+        $(".date").mousedown(function(){
+            $(".dates").show();
+            $(".learns").hide();
+            $(".plays").hide();
+            $(".services").hide();
+        });
+
+        $(".service").mousedown(function(){
+            $(".services").show();
+            $(".learns").hide();
+            $(".plays").hide();
+            $(".dates").hide();
+        });
+
+        CKEDITOR.replace('add_introduction',{
+            filebrowserUploadUrl: '/uploader',
+        });
+        CKEDITOR.replace('add_participation',{
+            filebrowserUploadUrl: '/uploader',
+        });
+        CKEDITOR.replace('add_FB',{
+            filebrowserUploadUrl: '/uploader',
+        });
+        CKEDITOR.replace('add_activity',{
+            filebrowserUploadUrl: '/uploader',
+        });
+
+        CKEDITOR.editorConfig = function (config){
+            config.enterMode = CKEDITOR.ENTER_BR;
+            config.autoParagraph = false;
+        };
+
+    });
+</script>

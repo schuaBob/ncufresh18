@@ -7,7 +7,7 @@ var community = require('../models/groups/community');
 var student = require('../models/groups/student');
 var mongoose = require('mongoose');
 var fs = require('fs');
-// var video = require('../models/video');
+var video = require('../models/video/video');
 
 /* 系所社團首頁 */
 router.get('/', function(req, res, next) {
@@ -16,14 +16,14 @@ router.get('/', function(req, res, next) {
 
 router.get('/department', function(req, res, next) {
   department.find({}).exec(function(err, department) {
-    // video.find({type:"2"}).sort({id:-1}).exec(function(err, video2) {
+    video.find({type:"2"}).sort({id:-1}).exec(function(err, video2) {
       res.render('groups/department', {
         title: '系所 ',
         user: req.user,
         department: department,
-        // QAvideo: video2,
+        QAvideo: video2,
       });
-    // });
+    });
   });
 });
 

@@ -1,0 +1,86 @@
+<script>
+    $(document).ready(function(){
+
+        /* club的方法太冗長,利用for迴圈縮減篇幅 */
+        let depart_type = [["文學院","literature"],["理學院","science"],["管理學院","management"],["工學院","engineering"],["資訊電機學院","csee"],["地球科學學院","earth"],["客家學院","hakka"],["生醫理工學院","chst"]]
+
+        //載入IFrame Player API code
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        var currentid ;
+
+        let player = Object();
+        function onYouTubeIframeAPIReady() {//此函數在IFrame Player API code 載入後將自動呼叫
+            $(".player").each(function(){
+                //console.log(this.id);
+                //console.log($(this));
+                let id=this.id;
+                player[id] = new YT.Player(id, {
+                    height: '390',
+                    width: '640',
+                    videoId: id, //Youtube ID
+                    enablejsapi: 1,
+                    origin: 'http://localhost:3000'
+
+                });
+            })
+        }
+
+        /* 字串要分開打 */
+        for(let p = 0; p<8 ; p++){
+            $("."+depart_type[p][1]+"_button").mousedown(function(){
+                /* 設定show hide的情況 */
+                if(p==0){
+                    $("."+depart_type[p][1]+"_table").show();
+                    for(let q = p+1 ;q < 8 ; q++){
+                        $("."+depart_type[q][1]+"_table").hide();
+                    }
+                }
+                else{
+                    $("."+depart_type[p][1]+"_table").show();
+                    for(let m=0; m<p ; m++){
+                        $("."+depart_type[m][1]+"_table").hide();
+                    }
+                    for(let n=p+1; n<8 ; n++){
+                        $("."+depart_type[n][1]+"_table").hide();
+                    }
+                }
+            });
+        }
+        CKEDITOR.replace('edit_introduction',{
+            filebrowserUploadUrl: '/uploader',
+        });
+
+        CKEDITOR.replace('edit_organization',{
+            filebrowserUploadUrl: '/uploader',
+        });
+
+        CKEDITOR.replace('edit_activity',{
+            filebrowserUploadUrl: '/uploader',
+        });
+
+        CKEDITOR.replace('edit_team',{
+            filebrowserUploadUrl: '/uploader',
+        });
+
+        CKEDITOR.replace('edit_course',{
+            filebrowserUploadUrl: '/uploader',
+        });
+
+        // $('.modal').on('hidden.bs.modal', function(){
+        //     var $iframe = $(this).find('iframe');
+        //     var videoSrc = $iframe.attr('src');
+        //     console.log(videoSrc);
+        //     $iframe.attr('src', '');
+        //     $iframe.attr('src', videoSrc);
+        // });
+       
+        CKEDITOR.editorConfig = function (config){
+            config.enterMode = CKEDITOR.ENTER_BR;
+            config.autoParagraph = false;
+        };
+
+    });
+</script>

@@ -78,3 +78,13 @@ td{
     display: none;
 }
 
+.CDplayer {
+    position: relative;
+    overflow: hidden;
+    margin-left: 15%;
+}
+
+#bread{
+    opacity: 0.8;
+    width: 23%;
+}

@@ -87,10 +87,22 @@ td{
     margin-left: 10%;
 }
 
-ol{
+/* ol{
     height: 10px;
-}
+} */
 
 .plays, .dates, .services{
     display: none;
+}
+
+#carouselExampleIndicator{
+    width: 40%;
+    height: 40%;
+    float: left;
+    margin-left: 10%;
+}
+
+#bread{
+    opacity: 0.8;
+    width: 23%;
 }
