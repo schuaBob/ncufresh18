@@ -277,10 +277,6 @@ var quiz = [
 // 遊戲主體長寬
 var width = 800
 var height = 600
-
-console.log(window.innerWidth)
-console.log(window.innerHeight)
-
 var game = new Phaser.Game(width, height, Phaser.CANVAS, 'game')
 
 var states = {
@@ -288,15 +284,17 @@ var states = {
     preload: function() {
     	this.preload = function() {
             // 手機屏幕適應             未完成！！！
-            if (!game.device.desktop) {
-                game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
-                game.scale.fullScreenscaleMode = Phaser.ScaleManager.EXACT_FIT
-                game.scale.pageAlignHorizontally = true
-                game.scale.pageAlignVertically = true
-            }
+            // if (!game.device.desktop) {
+            //     game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
+            //     game.scale.fullScreenscaleMode = Phaser.ScaleManager.EXACT_FIT
+            //     game.scale.pageAlignHorizontally = true
+            //     game.scale.pageAlignVertically = true
+            // }
             game.state.backgroundColor = '#000000'
             // 載入資源
             game.load.image('bg', 'images/background.png')
+            game.load.image('rankAlign', 'images/rank_align.png')
+            game.load.image('rankStage', 'images/rank_stage.png')
             game.load.image('squirrel','images/squirrel_start.png' )
             game.load.image('btnStart', 'images/button_start.png')
             game.load.image('btnRank', 'images/button_rank.png')
@@ -310,6 +308,16 @@ var states = {
             game.load.image('squirrelGround', 'images/squirrel_ground.png')
             game.load.image('gamerules', 'images/gamerules.png')
             game.load.image('remainTime', 'images/remaintime.png')
+            game.load.image('scoreStage', 'images/score_stage.png')
+            game.load.image('scoreRank', 'images/score_rank.png')
+            game.load.image('scoreQuit', 'images/score_quit.png')
+            game.load.image('scoreAgain', 'images/score_again.png')
+            game.load.image('cloud1', 'images/cloud1.png')
+            game.load.image('cloud2', 'images/cloud2.png')
+            game.load.image('cloud3', 'images/cloud3.png')
+            game.load.image('cloud4', 'images/cloud4.png')
+            game.load.image('cloud5', 'images/cloud5.png')
+            game.load.image('questionStage', 'images/question_stage.png')
             game.load.spritesheet('question', 'images/question.png', 400, 150)
             game.load.spritesheet('btnBack', 'images/back.png', 60, 60)
             game.load.spritesheet('blank', 'images/blank.png', width, height)
@@ -336,41 +344,36 @@ var states = {
                     setTimeout(onLoad, 500)
                 }
             }
-
         }
     },
+    
     // 开始界面
     main: function() {
         this.create = function() {
             // 設置背景邊界
-            game.world.setBounds(0, 0, 800, 2000);
+            game.world.setBounds(0, 0, 800, 3910);
             
             // 背景
             var bg = game.add.image(0, 0, 'bg')
-            bg.width = game.world.width
-            bg.height = game.world.height
             
             // 松鼠圖片
-            var squirrel = game.add.image(game.world.centerX - 200, game.world.centerY - 200, 'squirrel')
-            squirrel.alignIn(bg, Phaser.BOTTOM_CENTER, 0, -185)
+            var squirrel = game.add.image(game.world.centerX - 200, game.world.centerY - 200, 'squirrel').alignIn(bg, Phaser.BOTTOM_CENTER, 0, -185)
+            
             // 遊戲介紹圖片
-            var introduction = game.add.sprite(0, 0, 'gamerules')
-            introduction.alignIn(bg, Phaser.BOTTOM_CENTER)
+            var introduction = game.add.sprite(0, 0, 'gamerules').alignIn(bg, Phaser.BOTTOM_CENTER)
             introduction.visible = false
-
-            var btnBack = game.add.button(600, 1400, 'btnBack', btnBackClick)
+            var btnBack = game.add.button(600, 3400, 'btnBack', btnBackClick)
             btnBack.visible = false
+
+
             // 按鈕
             var buttonStart
             var buttonRank
             var buttonIntro
             
-            buttonStart = game.add.button(0, 0, 'btnStart', buttonForStart, this)
-            buttonRank = game.add.button(0, 0, 'btnRank', buttonForRank, this)
-            buttonIntro = game.add.button(0, 0, 'btnIntro', buttonForIntro, this)
-            buttonStart.alignTo(squirrel, Phaser.BOTTOM_CENTER, 0, -40)            
-            buttonRank.alignTo(buttonStart, Phaser.BOTTOM_CENTER, 0, 20)            
-            buttonIntro.alignTo(buttonRank, Phaser.BOTTOM_CENTER, 0, 20)            
+            buttonStart = game.add.button(0, 0, 'btnStart', buttonForStart, this).alignTo(squirrel, Phaser.BOTTOM_CENTER, 0, -40)            
+            buttonRank = game.add.button(0, 0, 'btnRank', buttonForRank, this).alignTo(buttonStart, Phaser.BOTTOM_CENTER, 0, 20)            
+            buttonIntro = game.add.button(0, 0, 'btnIntro', buttonForIntro, this).alignTo(buttonRank, Phaser.BOTTOM_CENTER, 0, 20)            
 
             // 按鈕綁定時間
             function buttonForStart() {
@@ -387,7 +390,13 @@ var states = {
                 btnBack.visible = true
             }
         
-            game.camera.focusOnXY(600, 2000)
+            var mainUI = game.add.group()
+            mainUI.add(squirrel)
+            mainUI.add(buttonStart)
+            mainUI.add(buttonRank)
+            mainUI.add(buttonIntro)
+
+            game.camera.focusOnXY(600, 3910)
         }
     },
     
@@ -396,10 +405,10 @@ var states = {
         this.create = function() {
             var combo = 0
             var score = 0
-            var remainTime = 600
+            var remainTime = 6000
             
             // 設置背景邊界
-            game.world.setBounds(0, 0, 800, 2000);
+            game.world.setBounds(0, 0, 800, 3910);
             
             // 背景
             var bg = game.add.image(0, 0, 'bg')
@@ -408,14 +417,14 @@ var states = {
             
             // 鏡頭區域
             game.physics.startSystem(Phaser.Physics.P2JS)
-            var cameraFocus = game.add.sprite(game.world.centerX, game.world.centerY + 700, 'blank')
+            var cameraFocus = game.add.sprite(game.world.centerX, game.world.centerY + 1700, 'blank')
             game.physics.p2.enable(cameraFocus)
             
             // 返回按鈕            
-            var btnBack = game.add.button(0, 0, 'btnBack', btnBackClick)
-            btnBack.alignIn(cameraFocus, Phaser.TOP_RIGHT, -10, -10)
+            var btnBack = game.add.button(0, 0, 'btnBack', btnBackClick).alignIn(cameraFocus, Phaser.TOP_RIGHT, -10, -10)
             
             // 問題
+            var questionStage = game.add.sprite(0, 0,'questionStage').alignIn(cameraFocus, Phaser.TOP_RIGHT, -10, -10)
             var questionSprite = new LabelSprite(this.game, game.world.centerX + 100, game.world.centerY - 130, 'question')
             
             // 選擇按鈕
@@ -425,42 +434,64 @@ var states = {
             var btnChoiceD = new LabelButton(false, this.game, game.world.centerX + 100, game.world.centerY + 170, "btnChoice", "Choice D", inputDown) 
             
             // 添加 combo
-            var comboSprite = game.add.image(0, 0, 'combo')
-            comboSprite.alignTo(cameraFocus, Phaser.RIGHT_CENTER, -130, 15)
+            var comboSprite = game.add.image(0, 0, 'combo').alignTo(cameraFocus, Phaser.RIGHT_CENTER, -130, 15)
             var comboText = game.add.text(0, 0, '0', {
                 fontSize: "45px"
-            })
-            comboText.alignTo(comboSprite, Phaser.BOTTOM_CENTER, 0, -10)
+            }).alignTo(comboSprite, Phaser.BOTTOM_CENTER, 0, -10)
             comboSprite.visible = false
             comboText.visible = false
 
             // 剩餘時間
-            var remainTimeSprite = game.add.sprite(0, 0, 'remainTime')
+            var remainTimeSprite = game.add.sprite(0, 0, 'remainTime').alignIn(cameraFocus, Phaser.TOP_RIGHT, -10, -100)
+
             var remainTimeText = game.add.text(0, 0, remainTime.toString(), {
                 fontSize: "45px"
-            })
-            remainTimeSprite.alignIn(cameraFocus, Phaser.TOP_RIGHT, -10, -100)
-            remainTimeText.alignTo(remainTimeSprite, Phaser.BOTTOM_CENTER)
+            }).alignTo(remainTimeSprite, Phaser.BOTTOM_CENTER)
+            
             var timer = game.time.create(false)
             timer.loop(1000, function() {
                 remainTime--  
                 remainTimeText.setText(remainTime.toString())
                 // 遊戲結束
                 if (remainTime === 0) {
-                    game.state.start('start')
+                    gameOver()
+                    timer.loop = false
                 }
             }, this)
             timer.start()
             
+            function gameOver() {
+                // 更新分數
+                scoreText.setText(score)
+
+                scoreUI.visible = true
+                scoreUI.alpha = 0
+                playUI.visible = false
+                otherUI.visible = false
+                squirrelGroup.visible = false
+                // 添加過渡效果
+                game.add.tween(scoreUI).to({
+                    alpha: 1
+                },1000, Phaser.Easing.Linear.None, true, 0, 0, false);    
+                game.add.tween(playUI).to({
+                    alpha: 0
+                },1000, Phaser.Easing.Linear.None, true, 0, 0, false);    
+                game.add.tween(otherUI).to({
+                    alpha: 0
+                },1000, Phaser.Easing.Linear.None, true, 0, 0, false);    
+                game.add.tween(squirrelGroup).to({
+                    alpha: 0
+                },1000, Phaser.Easing.Linear.None, true, 0, 0, false);    
+            }
+            
             // 添加松鼠動畫， test
             var squirrelGroup = game.add.group()
-            var squirrelGroupX = 10
-            var squirrelGroupY = 1250
+            var squirrelGroupX = 5
+            var squirrelGroupY = 3250
             function createSquirrel() {
                 squirrelGroupY -= 40
                 var temp = squirrelGroup.create(squirrelGroupX, squirrelGroupY, 'squirrelGround')
-                // console.log(temp.height)
-                game.add.tween(temp).to({y: squirrelGroupY + 600}, 500, null, true, "Quart.easeOut");
+                game.add.tween(temp).to({y: squirrelGroupY + 600}, 500, null, true, "Quart.easeOut")
             }
             
             // 添加獎勵圖片
@@ -469,26 +500,70 @@ var states = {
             var bonus3 = game.add.image(0, 0, 'bonus3');
             var bonus4 = game.add.image(0, 0, 'bonus4');
 
+            // 添加結算界面
+            var scoreStage = game.add.image(0, 0, 'scoreStage')
+            scoreStage.anchor.setTo(0.5, 0.5)
+            scoreStage.alignIn(cameraFocus, Phaser.CENTER, 0, -10)
+            scoreStage.width = 600
+            scoreStage.height = 450
+            scoreStage.bringToTop()
+            
+            var scoreRank = game.add.button(0, 0, 'scoreRank', scoreRankClick)
+            scoreRank.anchor.setTo(0.5, 0.5)
+            scoreRank.alignIn(scoreStage, Phaser.CENTER, 120, 131)
+
+            var scoreQuit = game.add.button(0, 0, 'scoreQuit', scoreQuitClick)
+            scoreQuit.anchor.setTo(0.5, 0.5)
+            scoreQuit.alignIn(scoreStage, Phaser.CENTER, -140, 130)
+
+            var scoreAgain = game.add.button(0, 0, 'scoreAgain', scoreAgainClick)
+            scoreAgain.anchor.setTo(0.5, 0.5)
+            scoreAgain.alignIn(scoreStage, Phaser.TOP_RIGHT, -20, -20)
+            scoreAgain.width = 100
+            scoreAgain.height = 100
+            
+            var scoreText = game.add.text(0, 0, '0' ,{fontSize: "50px"})
+            scoreText.anchor.setTo(0.5, 0.5)
+            scoreText.alignIn(scoreStage, Phaser.CENTER)
+            
+            function scoreAgainClick() {
+                game.state.start('start')
+            }
+            
+            function scoreQuitClick() {
+                game.state.start('main')
+            }
+            
+            function scoreRankClick() {
+                game.state.start('rank')
+            }
+            
             // 選擇 bonus
             function choiceBonus(combo) {
-                if (combo == 5) {
+                if (combo == 1) {
                     remainTime += 2
+                    score += 500
                     return "bonus1"
                 } else if (combo == 10) {
                     remainTime += 4
+                    score += 1000
                     return "bonus2"
                 } else if (combo == 20) {
                     remainTime += 8
+                    score += 2000
                     return "bonus3"
                 } else if (combo == 50) {
                     remainTime += 21
+                    score += 5000
                     return "bonus4"
                 } else {
                     return false
                 }
             }
             
+            // 建立 group
             var otherUI = game.add.group()
+            otherUI.add(questionStage)
             otherUI.add(btnBack)
             otherUI.add(comboSprite)
             otherUI.add(comboText)
@@ -499,18 +574,25 @@ var states = {
             otherUI.add(bonus3)
             otherUI.add(bonus4)
             
-            // 建立 playUI group
             var playUI = game.add.group()
             playUI.add(btnChoiceD)
             playUI.add(btnChoiceC)
             playUI.add(btnChoiceB)
             playUI.add(btnChoiceA)
             playUI.add(questionSprite)
-            playUI.alignIn(bg, Phaser.BOTTOM_CENTER, 40)
+            playUI.alignIn(bg, Phaser.BOTTOM_CENTER, 45)
             playUI.y -= 100
             
+            var scoreUI = game.add.group()
+            scoreUI.add(scoreStage)
+            scoreUI.add(scoreQuit)
+            scoreUI.add(scoreRank)
+            scoreUI.add(scoreAgain)
+            scoreUI.add(scoreText)
+            scoreUI.visible = false
+
             // 鏡頭移動到最底部
-            game.camera.focusOnXY(600, 2000)
+            game.camera.focusOnXY(600, 3910)
             
             // 打亂順序，每次題目不同
             var data = quiz.shuffle()
@@ -547,14 +629,15 @@ var states = {
                     if (item.rightOrWrong) {
                         // 添加松鼠一隻
                         createSquirrel()
-
-                        combo++
+                        // 加分， combo
+                        score += 100
+                        combo ++
                         item.setLabel("Congratulations!")                    
                         var goal = choiceBonus(combo)
 
                         // 顯示 bonus 效果
                         if (goal) {
-                            var bonus = game.add.image(game.camera.x + 640, game.camera.y + 170, goal)
+                            var bonus = game.add.image(game.camera.x + 640, game.camera.y + 225, goal)
                             bonus.alpha = 0
                             // 添加過渡效果
                             var showTween = game.add.tween(bonus).to({
@@ -570,21 +653,17 @@ var states = {
                         }
                         
                         // 使用 tween 移動鏡頭
-                        if (squirrelGroupY <= 1050 && game.camera.y >= 40) {
+                        if (squirrelGroupY <= 3020 && game.camera.y >= 40) {
                             game.add.tween(playUI).to({y: playUI.y -40}, 500, null, true, "Quart.easeOut");
                             game.add.tween(otherUI).to({y: otherUI.y - 40}, 500, null, true, "Quart.easeOut");
                             game.add.tween(game.camera).to({y: game.camera.y - 40}, 500, null, true, "Quart.easeOut");
+                            game.add.tween(scoreUI).to({y: scoreUI.y - 40}, 500, null, true, "Quart.easeOut");         
+                               
                         }
                         setTimeout(resetQuestionAndChoice, 500, data[count])
                     } else {
                         combo = 0
                         item.setLabel("you are wrong!")
-                        // if (game.camera.y <= 1360) {
-                        //     console.log("game.camera.y: " + game.camera.y)
-                        //     game.add.tween(playUI).to({y: playUI.y + 40}, 500, null, true, "Quart.easeOut");
-                        //     game.add.tween(otherUI).to({y: otherUI.y + 40}, 500, null, true, "Quart.easeOut");
-                        //     game.add.tween(game.camera).to({y: game.camera.y + 40}, 500, null, true, "Quart.easeOut");
-                        // }
                         setTimeout(resetQuestionAndChoice, 1500, data[count])
                     } 
                 }
@@ -603,6 +682,18 @@ var states = {
             // 第一次刷新題目
             resetQuestionAndChoice(data[count])
         }
+    },
+
+    rank: function () {
+        this.create = function () {
+            var rank = game.add.image(game.camera.x, game.camera.y, 'rankStage')
+            // var alignLine = game.add.group()
+            // var alignLineY = -44
+            // for(i = 0; i < 10; i++) {
+            //     alignLine.create(0, alignLineY, 'rankAlign')
+            //     alignLineY += 48
+            // }
+        }
     }
 }
 
@@ -614,6 +705,7 @@ Object.keys(states).map(function(key) {
 // 啟動遊戲
 game.state.start('preload')
 
+// 
 var url = 'http://localhost:3000/smallgame';
 var xmlHttp = null;
 function reqAjaxPost(info, type) {
