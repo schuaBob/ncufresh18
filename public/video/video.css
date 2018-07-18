@@ -121,7 +121,7 @@ iframe {
         margin: 0vw;
         position: absolute;
         top: 80vh;
-        left: 90vw;
+        /* left: 90vw; */
     }
 
     .video_item_title_allvideo  {
@@ -141,7 +141,7 @@ iframe {
     }
 
     .video_item_title_allvideo .video_item {
-        display: initial;
+        display: block;
         white-space: pre-line;
         padding: auto;
         overflow: auto;
@@ -152,31 +152,22 @@ iframe {
     }
 
     .video_item_title {
-        display: inline;
+        display: block;
         white-space: pre-line;
         position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        left:2vw;
+        width: 50vw;
         /* top: 5vh; */
         /* bottom: 3vh; */
         /* left: 30vw; */
-        margin: auto;
     }
 
-    
-
-    .item:hover {
-        transform: scale(1.1);
+    #scroll {
+        width: 100%;
     }
 
-
-    /* .video_item_longvideo {
-        margin-left: 5vw;
-    }
-    .video_item_lifevideo {
-        margin-left: 4vw;
-    } */
-    /* .video_item_QAvideo {
-        margin-left: 1vw;
-    } */
 
     /* .video_item_QAvideo_c1 {
         margin-left: 5vw;
@@ -199,10 +190,10 @@ iframe {
         margin-left: 7vw;
     } */
 
-    @media only screen and (min-width: 562px) {
+    @media only screen and (min-width: 978px) {
         #CDbox {
             position: relative;
-            left: 35vw;
+            left: 32vw;
             width: 40%;
             height: 23vw;
         }
@@ -211,37 +202,60 @@ iframe {
             
             font-size: 1.5vw;
             width: 11vw;
-            height: 8vh;
+            height: 55px;
         }
 
         
 
         .video_item_title {
-            /* position: absolute;
-            margin-left: auto;
-            margin-right: auto; */
-            left: 30vw;
+            /* position: absolute; */
+            
+            /* left: 19vw; */
             bottom: 3vh;
         }
     
 
         .item {
             margin: auto;
-            width: 10vw;
+            width: 6vw;
             height: auto;
+        }
+        .item:hover {
+            transform: scale(1.1);
         }
 
         td {
             padding: auto;
         }
+
+        .rotate {
+            left: 90vw;
+        }
+
+        /* .video_item_longvideo {
+            margin-left: 3.5vw;
+            margin-right: 3.5vw;
+        }
+        .video_item_QAvideo {
+            margin-left: 1vw;
+            margin-right:  1vw;
+        }
+        .video_item_lifevideo {
+            margin-left: 2.4vw;
+            margin-right: 2.4vw;
+        } */
+
+        
     }
 
-    @media only screen and (min-width: 414px)  and (max-width: 783px) {
+    @media only screen and (min-width: 414px)  and (max-width: 978px) {
         #CDbox {
             position: relative;
             left: 30vw;
-            width: 60%;
-            height: 34vw;
+            /* width: 60%;
+            height: 34vw; */
+            width: 465px;
+            height: 264px;
             
         }
 
@@ -253,22 +267,48 @@ iframe {
         }
 
         .video_item_title {
-            position: relative;
+            /* position: absolute; */
+            /* left: 20vw; */
+            /* left: 210px; */
+            bottom: 3vh;
+            /* position: relative;
             left: 10vw;
-            top: 10vh;
+            top: 10vh; */
         }
     
 
         .item {
-            margin: 0;
+            margin: auto;
             padding: 0%;
-            width: 95px;
+            /* width: 13vw; */
+            width: 70px;
             height: auto;
+            /* height: 116px; */
+        }
+        .item:hover {
+            transform: scale(1.05);
         }
 
         td {
             padding: 0;
         }
+
+        .rotate {
+            left: 5vw;
+        }
+
+        /* .video_item_longvideo {
+            margin-left: 3.3vw;
+            margin-right: 3.3vw;
+        }
+        .video_item_QAvideo {
+            margin-left: 0.5vw;
+            margin-right:  0.5vw;
+        }
+        .video_item_lifevideo {
+            margin-left: 2.1vw;
+            margin-right: 2.1vw;
+        } */
     }
 
     
@@ -278,6 +318,9 @@ iframe {
 
 /* 手機 */
 @media only screen and (min-width: 0px) and (max-width: 414px){
+    /* #scrolltd {
+        visibility: hidden;
+    } */
     .cellphone {
         display: initial;
     }
@@ -305,7 +348,7 @@ iframe {
         overflow: auto;
         position: absolute;
         top: 78vw;
-        left: 2vw;
+        left: 4vw;
         height: 40vh;
         writing-mode: vertical-lr;
         margin-top: auto;
@@ -324,10 +367,11 @@ iframe {
 
     .video_item_title {
         display: block;
-        overflow: auto;
+        overflow-y: auto;
+        /* -webkit-overflow-scrolling: touch; */
         position: absolute;
         top: 78vw;
-        left: 35vw; 
+        left: 35.5vw; 
         padding: 0;
         margin: 0;
         height: 33vh;
