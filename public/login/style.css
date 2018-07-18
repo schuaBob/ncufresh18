@@ -22,18 +22,18 @@
     color: white ;
 }
 #w {
-    font-size : calc(15px + 0.5vw) ;
+    height : calc(15px + 0.5vw) ;
     color: white ;
 }
-#word {
-    font-size : calc(20px + 1vw) ;
+#number {
+    height : calc(20px + 1vw) ;
     color: white ;
 }
 body {
     background-image: url("背景.png") ;
     background-size: cover ;
 }
-button {
+#btn {
     display: none ;
 }
 @media only screen and (max-width: 800px) {
@@ -53,7 +53,7 @@ button {
         max-width: 80vw ;
         padding: 18vh 5vw 18vh ;
     }
-    button {
+    #btn {
         display: block ;
         margin : auto ;
         padding: 1vh 5vw ;

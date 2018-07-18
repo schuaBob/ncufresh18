@@ -1,0 +1,21 @@
+<script>
+    $(document).on("click","#btn",function(event){
+        if($("input[name=password]").val() === $("input[name=checkpassword]").val() ){
+            alert("讚ㄛ") ;
+        }
+        else {
+            alert("低能?") ;
+        }
+    });
+    $(document).on("keypress",function(event){
+        if(event.keyCode === 13 ){
+            if($("input[name=password]").val() === $("input[name=checkpassword]").val() ){
+                alert("讚ㄛ") ;
+                console.log($("input[name=password]").val()) ;
+            }
+            else {
+                alert("低能?") ;
+            }
+        }
+    });
+</script>
