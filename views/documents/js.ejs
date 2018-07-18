@@ -4,16 +4,18 @@
 
 
         //showmodel全屏，偵測手機高度
-        let i =$(window).height();
-        let h =(i-80)+"px"
+        let y =$(window).height();
+        let h =(y-80)+"px"
+        let top= (y-80)+"px"
         //將css的變數取出
-        var bodyStyles = window.getComputedStyle(document.body);
-        //var fooBar = bodyStyles.getPropertyValue('--height'); //get
+            //var bodyStyles = window.getComputedStyle(document.body);
+            //var fooBar = bodyStyles.getPropertyValue('--height'); //get
         document.body.style.setProperty('--height', h);//set
+        
     
         //判斷是用電腦還手機
-        let y= $(window).width();    
-        if(y>450){
+        let x= $(window).width();  
+        if(x>450){
             $("#t_close").show();
             $("#o_close").show();
             $("#b_close").hide();
@@ -30,9 +32,9 @@
         //螢幕縮放偵測
         $(window).resize(function(){
             
-            let x= $(window).width();
+            let rx= $(window).width();
            
-            if(x>520){
+            if(rx>520){
                 $("#t_close").show();
                 $("#o_close").show();
                 $("#b_close").hide();
@@ -43,6 +45,11 @@
                 $("#b_close").show();
 
             }
+            //有人的手機長度會改嗎???
+            let ry =$(window).height();
+            let h =(ry-80)+"px";
+            document.body.style.setProperty('--height', h);//set
+
        })
 
         CKEDITOR.replace('add_text', {
@@ -51,23 +58,25 @@
         });
 
         //大學生研究生的動畫
-        $(".under").mousedown(function () {
-            $(".under").removeClass("small").addClass("big");
-            $(".gra").removeClass("big").addClass("small");
-        });
         $(".under").mouseover(function () {
             $(".gra").removeClass("big").addClass("small");
+
         });
         $(".gra").mouseover(function () {
             $(".under").removeClass("big").addClass("small");
         });
+        $(".under").mousedown(function () {
+            $(".under").removeClass("small").addClass("big");
+            $(".gra").removeClass("big").addClass("small");
+        });
+
         $(".gra").mousedown(function () {
             $(".gra").removeClass("small").addClass("big");
             $(".under").removeClass("big").addClass("small");
         });
 
 
-        
+        /*
         $(".box").mousedown(function () {
             
             //抓按下按鈕的id
@@ -90,7 +99,7 @@
                     CKEDITOR.instances.edit_content.setData(data.content);
                 }
             });
-        });
+        });*/
 
         //使用者
         $(".box").mousedown(function () {
@@ -121,12 +130,14 @@
         
         //大學生研究生選擇
         $(".gra").mousedown(function () {
-
+            $("body").css("background-image","url('moonb.png')");
             $(".graduate").show();
             $(".undergraduate").hide();
+           
 
         });
         $(".under").mousedown(function () {
+            $("body").css("background-image","url('test.jpg')");
             $(".graduate").hide();
             $(".undergraduate").show();
         });

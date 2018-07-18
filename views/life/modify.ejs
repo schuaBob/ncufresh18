@@ -1,6 +1,6 @@
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#labelModal">新增/修改項</button>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#contentModal">新增內容</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#contentModal" style="position: absolute; z-index: 1;">新增內容</button>
 <!-- Modal -->
 <div class="modal fade" id="labelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -46,32 +46,26 @@
         </button>
       </div>
       <div class="modal-body">
-            <form action="edit" method="POST" enctype="multipart/form-data">
+            <form action="editContent" method="POST">
                 <div class="form-group">
                         <label class="col-md-4 control-label" for="elecategory">大項</label>
                         <div class="col-md-6">
-                            <select class="form-control input-md">
-                                <option value="0">請選擇</option>
+                            <select class="form-control input-md bigTitle" name="mainTitle">
+                                <option value="default">請選擇</option>
                                 <% for(var i in life) { %>
                                     <% if(life[i].type == page) { %>
-                                        <option value="<%=i+1%>"><%=life[i].mainTitle%></option>
+                                        <option value="<%=life[i].mainTitle%>"><%=life[i].mainTitle%></option>
                                     <% } %>
                                 <% } %>
                             </select>
                         </div>
-                    </div>
+                </div>
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="elecategory">小項</label>
                     <div class="col-md-6">
-                        <select class="form-control input-md">
-                            <option value="0">請選擇</option>
+                        <select class="form-control input-md smallTitle" name="subTitle">
+                            <option value="default">請選擇</option>
                         </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="elecategory">圖片</label>
-                    <div class="col-md-12">
-                        <input type="file" class="form-control input-md" name="picture">
                     </div>
                 </div>
                 <div class="form-group">
@@ -80,9 +74,26 @@
                         <textarea class="form-control input-md" name="discription"></textarea>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="elecategory">圖片</label>
+                    <div class="col-md-12">
+                        <input type="file" class="form-control input-md" name="picture">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">上傳</button>
+                </div>
+            </form>
+            <form action="uploadPic" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="elecategory">圖片</label>
+                    <div class="col-md-12">
+                        <input type="file" class="form-control input-md" name="picture" multiple="multiple">
+                    </div>
+                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                    <button type="submit" class="btn btn-primary">儲存</button>
+                    <button type="submit" class="btn btn-primary">上傳</button>
                 </div>
             </form>
       </div>

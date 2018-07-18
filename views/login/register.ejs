@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../layout/head %>
+    <link href="../login/mdb.min.css" rel="stylesheet">
+    <link href="style2.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <% include ../layout/navbar %>
+    </header>
+    <main>
+        <div id="er"></div>
+        <div class="form-group">
+            <img src="login.png" id="lg"><b id="w">註冊</b><br>
+            <b id="word">學號</b>
+            <input type="text" class="form-control" name="email" required>
+            <button>繼續</button>
+        </div>
+    </main>
+    <footer>
+        <% include ../layout/footer %>
+    </footer>
+        <% include ../layout/js %>
+        <% include js %>
+</body>
+</html>

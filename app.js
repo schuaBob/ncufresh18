@@ -41,10 +41,34 @@ app.use(session({
   saveUninitialized: false
 }));
 
-// database config
+//database config
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/ncufresh18');
+
+//Passport
+var passport = require('passport');
+app.use(passport.initialize());
+app.use(passport.session());
+
+//validator
+var expressValidator = require('express-validator');
+app.use(expressValidator({
+  errorFormatter: function(param, msg, value) {
+      var namespace = param.split('.')
+      , root    = namespace.shift()
+      , formParam = root;
+
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+      value : value
+    };
+  }
+}));
 
 // 首頁
 app.use('/', index);

@@ -1,0 +1,66 @@
+.form-group {
+    display: block ;
+    margin : auto ;
+    max-width: 35vw ;
+}
+/* 輸入完時 */
+.form-control {
+    color: white ;
+}
+/* 在輸入時 */
+.form-control:focus {
+    color: white ;
+}
+#er {
+    display : block ;
+    margin : auto ;
+    height: 25vh;
+}
+#lg {
+    height: 1vw;
+    min-height: 15px ;
+    color: white ;
+}
+#w {
+    font-size : calc(15px + 0.5vw) ;
+    color: white ;
+}
+#word {
+    font-size : calc(20px + 1vw) ;
+    color: white ;
+}
+body {
+    background-image: url("背景.png") ;
+    background-size: cover ;
+}
+button {
+    display: none ;
+}
+@media only screen and (max-width: 800px) {
+    body {
+        background-image: url("手機登入背景.png") ;
+        background-size: cover ;
+    }#er {
+        display : block ;
+        margin : auto ;
+        height: 10vh;
+    }
+    .form-group {
+        background-color: rgba(82,65,123,0.52) ;
+        height: 65vh ;
+        display: block ;
+        margin : auto ;
+        max-width: 80vw ;
+        padding: 18vh 5vw 18vh ;
+    }
+    button {
+        display: block ;
+        margin : auto ;
+        padding: 1vh 5vw ;
+        background-color: rgb(255,108,183) ;
+        color: white ;
+        border: none ;
+        border-radius: 5vw;
+        right : 1vw ;
+    }
+}

@@ -1,10 +1,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src='https://www.google.com/recaptcha/api.js'></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 <script>
 $(document).ready(() => {
+    $("li a[href='#all']").css({"background-color":"#29ABE2","border-radius":"20px"});
     //只看單一分類
     $("li a[href='#校園生活']").on('click',function(){
-        $("li a[href='#校園生活']").css({"background-color":"#29ABE2"});
+        $("li a[href='#校園生活']").css({"background-color":"#29ABE2","border-radius":"20px"});
         $("li a[href='#學生事務']").css({"background-color":"transparent"});
         $("li a[href='#課程相關']").css({"background-color":"transparent"});
         $("li a[href='#其他']").css({"background-color":"transparent"});
@@ -13,7 +15,7 @@ $(document).ready(() => {
         $('tr.校園生活').fadeIn(500);
     });
     $("li a[href='#學生事務']").on('click',function(event){
-        $("li a[href='#學生事務']").css({"background-color":"#29ABE2"});
+        $("li a[href='#學生事務']").css({"background-color":"#29ABE2","border-radius":"20px"});
         $("li a[href='#校園生活']").css({"background-color":"transparent"});
         $("li a[href='#課程相關']").css({"background-color":"transparent"});
         $("li a[href='#其他']").css({"background-color":"transparent"});
@@ -22,7 +24,7 @@ $(document).ready(() => {
         $('tr.學生事務').fadeIn(500);
     });
     $("li a[href='#課程相關']").on('click',function(event){
-        $("li a[href='#課程相關']").css({"background-color":"#29ABE2"});
+        $("li a[href='#課程相關']").css({"background-color":"#29ABE2","border-radius":"20px"});
         $("li a[href='#校園生活']").css({"background-color":"transparent"});
         $("li a[href='#學生事務']").css({"background-color":"transparent"});
         $("li a[href='#其他']").css({"background-color":"transparent"});
@@ -31,7 +33,7 @@ $(document).ready(() => {
         $('tr.課程相關').fadeIn(500);
     });
     $("li a[href='#其他']").on('click',function(event){
-        $("li a[href='#其他']").css({"background-color":"#29ABE2"});
+        $("li a[href='#其他']").css({"background-color":"#29ABE2","border-radius":"20px"});
         $("li a[href='#校園生活']").css({"background-color":"transparent"});
         $("li a[href='#課程相關']").css({"background-color":"transparent"});
         $("li a[href='#學生事務']").css({"background-color":"transparent"});
@@ -40,30 +42,46 @@ $(document).ready(() => {
         $('tr.其他').fadeIn(500);
     });
     $("li a[href='#all']").on('click',function(event){
-        $("li a[href='#all']").css({"background-color":"#29ABE2"});
+        $("li a[href='#all']").css({"background-color":"#29ABE2","border-radius":"20px"});
         $("li a[href='#校園生活']").css({"background-color":"transparent"});
         $("li a[href='#課程相關']").css({"background-color":"transparent"});
         $("li a[href='#學生事務']").css({"background-color":"transparent"});
         $("li a[href='#其他']").css({"background-color":"transparent"});
         $('tr.Q').fadeIn(500);
     });
-    $("li a[href='#time']").on('click',function(event){
-        $("li a[href='#time']").css({"background-color":"#29ABE2"});
-        $("li a[href='#hot']").css({"background-color":"transparent"});
+    $("li a[href='/qna/time']").on('click',function(event){
+        $("li a[href='/qna/time']").css({"background-color":"#29ABE2","border-radius":"20px"});
+        $("li a[href='/qna/hot']").css({"background-color":"transparent"});
         $.ajax({
-            url:    "/qna/#time",
+            url:    "/qna/time",
             method:'GET',
             error: function(err){
                 //失敗要做的事
             },
             success: function(data){
+                $("li a[href='/qna/time']").css({"background-color":"#29ABE2","border-radius":"20px"});
+                $("li a[href='/qna/hot']").css({"background-color":"transparent"});
+                console.log("Done");
                 //成功要做的事
             }
         });
     });
-    $("li a[href='#hot']").on('click',function(event){
-        $("li a[href='#hot']").css({"background-color":"#29ABE2"});
-        $("li a[href='#time']").css({"background-color":"transparent"});
+    $("li a[href='/qna/hot']").on('click',function(event){
+        $("li a[href='/qna/hot']").css({"background-color":"#29ABE2","border-radius":"20px"});
+        $("li a[href='/qan/time']").css({"background-color":"transparent"});
+        $.ajax({
+            url:    "/qna/hot",
+            method:'GET',
+            error: function(err){
+                //失敗要做的事
+            },
+            success: function(data){
+                $("li a[href='/qna/hot']").css({"background-color":"#29ABE2","border-radius":"20px"});
+                $("li a[href='/qan/time']").css({"background-color":"transparent"});
+                console.log("Done");
+                //成功要做的事
+            }
+        });
     });
     //紀錄點擊次數
     $('tr').on('click',function(){
@@ -85,8 +103,8 @@ $(document).ready(() => {
     })
     //新增與編輯答案輸入答案的區域
     CKEDITOR.editorConfig = function (config){
-      config.enterMode = CKEDITOR.ENTER_BR;
-      config.autoParagraph = false;
+        config.enterMode = CKEDITOR.ENTER_BR;
+        config.shiftEnterMode = CKEDITOR.ENTER_BR; 
     };
     $('.answer').each(function(e){
         CKEDITOR.replace(this.id,{
@@ -108,16 +126,5 @@ $(document).ready(() => {
         })
       }
     });
-    //置頂功能
-    // $('.checktop').on('click',() =>{
-    //     console.log($('input.checktop').prop('checked'));
-    //     if($('input.checktop').prop('checked')){
-    //         console.log("測試用2");
-    //         //var id = this.id.split('-')[0];
-    //         var id = $(this).prop('id');
-    //         console.log($('tbody').find('#' + id));
-    //         $($('tbody').find('#' + id)).addClass('top');
-    //     }
-    // })
 })         
 </script>

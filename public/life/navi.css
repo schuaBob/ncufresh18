@@ -2,19 +2,24 @@
     position: fixed;
     right: 0px;
     width: 180px;
-    height: 500px;
-    background-color: white;
+    height: 440px;
     transform: translate(200px);
     transition: transform 1s ease;
-    z-index: 300;
 }
 
 .navBtn{
     position: absolute;
-    right: 100px;
+    right: 160px;
     display: block;
-    margin-top: 18%;
+    margin-top: 40%;
     z-index: 100;
+    width: 6.8cm;
+}
+
+.navSubBtn{
+    position: relative;
+    right: 30px;
+    width: 160px;
 }
 
 #sideNav.activeNav{
@@ -25,6 +30,16 @@
     overflow: auto;
 }
 
-ul li{
+sideNav ul li{
     font-size: 20px;
 }
+
+/*
+.navback{
+    position: absolute;
+    background-color: #FFFCD6;
+    opacity: 0.7;
+    width: 180px;
+    height: 440px;
+}
+*/
