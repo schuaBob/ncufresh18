@@ -1,15 +1,55 @@
 
 body{
-    background-image: url(系所社團背景.png);
-    background-attachment: fixed;
-    background-position: right;
+    background-image: url(系所背景4.png);
+    /* background-attachment: fixed; */
+    background-position:top right;
     background-size: cover;
     background-repeat: no-repeat;
+    width:100%;
+    height: 100%;
 }
 
 #all{
-    margin-left: 10%;
-    margin-top: 5%;
+    position: relative;
+    display: inline-block;
+    margin-top: 1%;
+}
+.index_title{
+    position: absolute;
+    width: 55%;
+    left: 14%;
+    bottom: 77%;
+}
+.index_club{
+    width: 43%;
+    left: 30%;
+    top: 34%;
+    position: absolute;
+}
+.index_student{
+    width: 40%;
+    left: 33%;
+    top: 44%;
+    position: absolute;
+
+}
+.index_department{
+    width: 55%;
+    left: 24%;
+    top: 56%;
+    position: absolute;
+
+}
+.index_community{
+    width: 45%;
+    left: 36.5%;
+    top: 65%;
+    position: absolute;
+}
+.side{
+    width:30vw;
+    position: relative;
+    float: left;    
 }
 
 @media screen and (max-width: 600px){

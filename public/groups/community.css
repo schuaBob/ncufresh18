@@ -3,9 +3,12 @@
 }
 
 #modal_button{ 
-    border-style:outset;
-    padding-top:13px; 
-    padding-bottom: 13px;
+    margin-top: 8px;
+    width: 110px;
+    padding-top:8px; 
+    padding-bottom: 8px;
+    border-radius: 10%;
+    text-align: center;
 }
 
 ul{
@@ -13,19 +16,41 @@ ul{
 }
 
 h5{
-    margin-left: 20%;
+    margin-left: 18%;
+    color: white;
+    font-size: 30px;
+}
+
+h3{
+    color: rgb(32, 243, 180);
+    font-size: 40px;
+    margin-left: 2%;
 }
 
 h6{
     margin-top: 2%;
-    margin-left: 25%;
+    margin-left: 18%;
+    border-left: 6px solid lightgreen;
+    border-bottom: 40px;
+    background-color: rgb(250, 250, 221);
+    font-size: 17px;
+    border-spacing:50px;
+    padding-left:10px; 
+    width: 100%;
+    word-wrap: break-word;
+    max-width: 550px;
+    max-height: 300px;
+    overflow-y: auto;
+    line-height: 26px;
+    letter-spacing: 1px;
 }
 
-#carouselExampleIndicators{
-    width: 40%;
-    height: 40%;
-    float: right;
 
+#carouselExampleIndicators{
+    max-width: 400px;
+    max-height: 300px;
+    float: left;
+    margin-left: 13%;
 }
 
 /* 差一個s */
@@ -50,9 +75,83 @@ body{
     width: 23%;
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 768px){
     body{
         background-image: url(其他學生組織_手機板.png);
         background-position: center;
     }
+    .modal{
+        margin-top: 5%;
+    }
+    .modal .modal-body {
+        height: var(--height);
+        overflow: auto;
+    }
+    #nav_a{
+        font-size: 8px;
+    }
+    #modal_button{ 
+        margin-top: 3px;
+        width: 110px;
+        border-radius: 10%;
+        text-align: center;
+    }
+    #nav_ul{
+        margin-top: 2%;
+        margin-left: 0%;
+        overflow-x: scroll;
+        
+    }
+    h5{
+        margin-left: 6%;
+        font-size: 20px;
+        margin-top:12%;
+    }
+    h6{
+        margin-top: 2%;
+        margin-left: 5%;
+        border-left: 6px solid lightgreen;
+        border-bottom: 38px;
+        background-color: rgb(250, 250, 221);
+        font-size: 14px;
+        border-spacing:50px;
+        padding-left:10px; 
+        width: 100%;
+        word-wrap: break-word;
+        max-width: 280px;
+        max-height: 300px;
+        overflow-y: auto;
+        line-height: 26px;
+        letter-spacing: 1px;
+    }
+    #carouselExampleIndicators{
+        max-width: 400px;
+        max-height: 300px;
+        float: left;
+        margin-left: 5%;
+    }
+
+    
+}
+
+.modal-content{
+    background-image: url(彈出視窗背景.png);
+}
+
+.modal{
+  margin-top: 5%;  
+}
+
+#nav_a{
+    font-size: 17px;
+    color: white;
+}
+
+#nav_ul{
+    margin-top: 5%;
+}
+
+#modal_button:hover{
+    box-shadow: 0 14px 20px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+
 }

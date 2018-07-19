@@ -10,7 +10,15 @@
     </header>
     <main>
         <h1><%= title %></h1>
-        
+        <!-- 麵包屑 -->
+        <nav aria-label="breadcrumb" id="bread">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/groups/student">學生會</a></li>
+              <li class="breadcrumb-item"><a href="/groups/department">系所</a></li>
+              <li class="breadcrumb-item active" aria-current="page">社團</li>
+              <li class="breadcrumb-item"><a href="/groups/community">其他學生組織</a></li>
+            </ol>
+        </nav>
         <!-- 新增圖片按鈕 -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
             新增圖片
@@ -106,15 +114,7 @@
             </div>
           </div>
         </div> 
-        <!-- 麵包屑 -->
-        <nav aria-label="breadcrumb" id="bread">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="/groups/student">學生會</a></li>
-              <li class="breadcrumb-item"><a href="/groups/department">系所</a></li>
-              <li class="breadcrumb-item active" aria-current="page">社團</li>
-              <li class="breadcrumb-item"><a href="/groups/community">其他學生組織</a></li>
-            </ol>
-        </nav>
+        
         <!--左側按鈕-->
         <div class="btn-group-vertical">
           <button class="learn" id="learn">學術性</button></br>
@@ -125,17 +125,17 @@
 
         <!-- 根據按鈕選出相對類別 -->
         <div class="learns">
-          <table>
-            <thead>
-              <tr>
-                <th>學術性社團</th>
+          <table id="menu">
+            <thead id="menu_head">
+              <tr id="menu_tr">
+                <th id ="menu_th">學術性社團</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id ="menu_body">
               <% for(var i in club) {%>
                 <% if(club[i].type == "1") {%>
                   <tr>
-                  <td><a href="#<%= club[i].name %> " data-toggle="modal" class="typelearn_name"
+                  <td id="menu_td"><a href="#<%= club[i].name %> " data-toggle="modal" class="typelearn_name"
                     data-target="#<%= club[i]._id %>">・<%= club[i].name %></a></td>
                   </tr>
                 <%}%>
@@ -144,17 +144,17 @@
           </table> 
         </div>
         <div class="plays">
-          <table>
-            <thead>
-              <tr>
-                <th>康樂性社團</th>
+          <table id="menu">
+            <thead id="menu_head">
+              <tr id ="menu_tr">
+                <th id="menu_th">康樂性社團</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="menu_body">
               <% for(var i in club) {%>
                 <% if(club[i].type == "2") {%>
                   <tr>
-                    <td><a href="#<%= club[i].name %> " data-toggle="modal" class="typeplay_name"
+                    <td id="menu_td"><a href="#<%= club[i].name %> " data-toggle="modal" class="typeplay_name"
                       data-target="#<%= club[i]._id %>">・<%= club[i].name %><br></a></td>
                   </tr>
                 <%}%>
@@ -163,17 +163,17 @@
           </table> 
         </div>
         <div class ="dates">
-          <table>
-            <thead>
-              <tr>
-                <th>聯誼性社團</th>
+          <table id="menu">
+            <thead id="menu_head">
+              <tr id="menu_tr">
+                <th id ="menu_th">聯誼性社團</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="menu_body">
               <% for(var i in club) {%>
                 <% if(club[i].type == "3") {%>
                   <tr>
-                    <td><a href="#<%= club[i].name %> " data-toggle="modal" class="typedate_name"
+                    <td id="menu_td"><a href="#<%= club[i].name %> " data-toggle="modal" class="typedate_name"
                       data-target="#<%= club[i]._id %>">・<%= club[i].name %><br></a></td>
                   </tr>
                 <%}%>
@@ -182,17 +182,17 @@
           </table> 
         </div>
         <div class="services">
-          <table>
-            <thead>
-              <tr>
-                <th>服務性社團</th>
+          <table id="menu">
+            <thead id="menu_head">
+              <tr id="menu_tr">
+                <th id="menu_th">服務性社團</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="menu_body">
               <% for(var i in club) {%>
                 <% if(club[i].type == "4") {%>
                   <tr>
-                    <td><a href="#<%= club[i].name %> " data-toggle="modal" class="typeservice_name"
+                    <td id="menu_td"><a href="#<%= club[i].name %> " data-toggle="modal" class="typeservice_name"
                       data-target="#<%= club[i]._id %>">・<%= club[i].name %><br></a></td>
                   </tr>
                 <%}%>
@@ -213,16 +213,17 @@
                   </div>
                   <div class="modal-body">
                     <div class="container">
-                      <ul class="nav nav-pills flex-column" >
-                        <li id="modal_button"><a data-toggle="pill" href="#introduction_<%= club[i].name %>">社團介紹</a></li>
-                        <li id="modal_button"><a data-toggle="pill" href="#participation_<%= club[i].name %>">加入社團</a></li>
-                        <li id="modal_button"><a data-toggle="pill" href="#FB_<%= club[i].name %>">FB粉絲團</a></li>
-                        <li id="modal_button"><a data-toggle="pill" href="#activity_<%= club[i].name %>">活動剪影</a></li>
+                      <ul class="nav nav-pills flex-column" id="nav_ul" >
+                        <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#introduction_<%= club[i].name %>">社團介紹</a></li>
+                        <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#participation_<%= club[i].name %>">加入社團</a></li>
+                        <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#FB_<%= club[i].name %>">FB粉絲團</a></li>
+                        <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#activity_<%= club[i].name %>">活動剪影</a></li>
                       </ul>
+                      <br>
                       <div class="tab-content">
                           <div id="introduction_<%= club[i].name %>" class="tab-pane fade in">
                             <h5>社團介紹</h5>  
-                            <p><%- club[i].introduction %></p>
+                            <h6><%- club[i].introduction %></h6>
                             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
                                   <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -252,15 +253,15 @@
                           </div>
                           <div id="participation_<%= club[i].name %>" class="tab-pane fade in">
                             <h5>加入社團</h5>
-                            <p><%- club[i].participation %></p>
+                            <h6><%- club[i].participation %></h6>
                           </div>
                           <div id="FB_<%= club[i].name %>" class="tab-pane fade in">
                             <h5>FB粉絲團</h5>
-                            <p><%- club[i].FB %></p>
+                            <h6><%- club[i].FB %></h6>
                           </div>
                           <div id="activity_<%= club[i].name %>" class="tab-pane fade in">
                             <h5>活動剪影</h5>
-                            <p><%- club[i].activity %></p>
+                            <h6><%- club[i].activity %></h6>
                             <div id="carouselExampleIndicator" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
                                   <li data-target="#carouselExampleIndicator" data-slide-to="0" class="active"></li>
