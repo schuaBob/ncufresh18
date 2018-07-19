@@ -2,6 +2,9 @@
     
     $(document).ready(function(){
 
+        let y =$(window).height();
+        let h =(y-65)+"px"
+        document.body.style.setProperty('--height', h);
 
         $(".learn").mousedown(function(){
             $(".learns").show();
@@ -49,5 +52,20 @@
             config.autoParagraph = false;
         };
 
+        $(window).resize(function(){
+            if($(window).width()<768){
+                $("#nav_ul").removeClass("flex-column");
+            }
+            else if($(window).width()>768){
+                $("#nav_ul").addClass("flex-column");
+            }
+        });
+
+        if($(window).width()<768){
+            $("#nav_ul").removeClass("flex-column");
+        }
+        else if($(window).width()>768){
+            $("#nav_ul").addClass("flex-column");
+        }
     });
 </script>

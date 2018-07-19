@@ -9,7 +9,15 @@
         <% include ../layout/navbar %>
     </header>
     <main>
-
+        <!-- 麵包屑 -->
+        <nav aria-label="breadcrumb" id="bread">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/groups/student">學生會</a></li>
+                <li class="breadcrumb-item"><a href="/groups/department">系所</a></li>
+                <li class="breadcrumb-item"><a href="/groups/club">社團</a></li>
+                <li class="breadcrumb-item active" aria-current="page">其他學生組織</li>
+            </ol>
+        </nav>
         <!-- 新增圖片按鈕 -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                 新增圖片
@@ -96,15 +104,7 @@
                 </div>
             </div> 
         </div>
-        <!-- 麵包屑 -->
-        <nav aria-label="breadcrumb" id="bread">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/groups/student">學生會</a></li>
-                <li class="breadcrumb-item"><a href="/groups/department">系所</a></li>
-                <li class="breadcrumb-item"><a href="/groups/club">社團</a></li>
-                <li class="breadcrumb-item active" aria-current="page">其他學生組織</li>
-            </ol>
-        </nav>
+        
         <!-- 按鈕 -->
         <% for(var i in community) { %>
             <div class="mainbutton">
@@ -122,12 +122,13 @@
                         </div>
                         <div class="modal-body">
                             <div class="container">
-                                <ul class="nav nav-pills flex-column">
-                                    <li id="modal_button"><a data-toggle="pill" href="#introduction_<%= community[i].name %>">學生組織介紹</a></li>
-                                    <li id="modal_button"><a data-toggle="pill" href="#participation_<%= community[i].name %>">加入學生組織</a></li>
-                                    <li id="modal_button"><a data-toggle="pill" href="#FB_<%= community[i].name %>">FB粉絲團</a></li>
-                                    <li id="modal_button"><a data-toggle="pill" href="#activity_<%= community[i].name %>">活動剪影</a></li>
+                                <ul class="nav nav-pills flex-column" id="nav_ul">
+                                    <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#introduction_<%= community[i].name %>">學生組織介紹</a></li>
+                                    <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#participation_<%= community[i].name %>">加入學生組織</a></li>
+                                    <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#FB_<%= community[i].name %>">FB粉絲團</a></li>
+                                    <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#activity_<%= community[i].name %>">活動剪影</a></li>
                                 </ul>
+                                <Br>
                                 <div class="tab-content">
                                     <div id="introduction_<%= community[i].name %>" class="tab-pane fade in">
                                         <h5>學生組織介紹</h5>  

@@ -171,36 +171,36 @@
                   </div>
                   <div class="modal-body">
                     <div class="container">
-                      <ul class="nav nav-pills flex-column">
-                        <li id="modal_button"><a data-toggle="pill" href="#introduction_<%= department[i].name %>">系所介紹</a></li>
-                        <li id="modal_button"><a data-toggle="pill" href="#organization<%= department[i].name %>">系學會</a></li>
-                        <li id="modal_button"><a data-toggle="pill" href="#activity_<%= department[i].name %>">系所活動</a></li>
-                        <li id="modal_button"><a data-toggle="pill" href="#team<%= department[i].name %>">系隊</a></li>
-                        <li id="modal_button"><a data-toggle="pill" href="#course<%= department[i].name %>">系上課程</a></li> <!-- 之後跟影音專區拿影片 -->
-                        <li id="modal_button"><a data-toggle="pill" href="#lightning_round<%= department[i].name %>">快問快答</a></li>
+                      <ul class="nav nav-pills flex-column" id="nav_ul">
+                        <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#introduction_<%= department[i].name %>">系所介紹</a></li>
+                        <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#organization_<%= department[i].name %>">系學會</a></li>
+                        <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#activity_<%= department[i].name %>">系所活動</a></li>
+                        <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#team_<%= department[i].name %>">系隊</a></li>
+                        <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#course_<%= department[i].name %>">系上課程</a></li> <!-- 之後跟影音專區拿影片 -->
+                        <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#lightning_round_<%= department[i].name %>">快問快答</a></li>
                       </ul>
                       <div class="tab-content">
                           <div id="introduction_<%= department[i].name %>" class="tab-pane fade in">
                             <h5>系所介紹</h5>  
-                            <p><%- department[i].introduction %></p>  
+                            <h6><%- department[i].introduction %></h6>  
                           </div>
-                          <div id="organization<%= department[i].name %>" class="tab-pane fade in">
+                          <div id="organization_<%= department[i].name %>" class="tab-pane fade in">
                             <h5>系學會</h5>
-                            <p><%- department[i].organization %></p>
+                            <h6><%- department[i].organization %></h6>
                           </div>
                           <div id="activity_<%= department[i].name %>" class="tab-pane fade in">
                             <h5>系所活動</h5>
-                            <p><%- department[i].activity_ %></p>
+                            <h6><%- department[i].activity %></h6>
                           </div>
-                          <div id="team<%= department[i].name %>" class="tab-pane fade in">
+                          <div id="team_<%= department[i].name %>" class="tab-pane fade in">
                             <h5>系隊</h5>
-                            <p><%- department[i].team %></p>
+                            <h6><%- department[i].team %></h6>
                           </div>
-                          <div id="course<%= department[i].name %>" class="tab-pane fade in">
+                          <div id="course_<%= department[i].name %>" class="tab-pane fade in">
                             <h5>系上課程</h5>
-                            <p><%- department[i].course %></p>
+                            <h6><%- department[i].course %></h6>
                           </div>
-                          <div id="lightning_round<%= department[i].name %>" class="tab-pane fade in">
+                          <div id="lightning_round_<%= department[i].name %>" class="tab-pane fade in">
                             <div class='CDplayer'><!--影片-->
                               <% for(let i = 0;　i<QAvideo.length;　i++){ %>
                                   <div id='<%= QAvideo[i].insert %>' class='player'></div>
