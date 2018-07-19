@@ -140,7 +140,6 @@ ul li{
     position: absolute;
     height: 100%;
     top:0; bottom:0; left:0; right:0; margin:auto;
-    z-index: 1;
 }
 .slideshow_container{
     position: absolute;
@@ -185,15 +184,25 @@ ul li{
 .active, .dot:hover{
     background-color: #717171;
 }
-.discribeArea{
+.describeArea{
     position: absolute;
     height: 11%;
     width: 50%;
     top: 36%;
     left: 37.5%;
-    background-color: white;
-    opacity: 0.5;
+    background-color: rgba(255, 255, 255, 0.5);
     border: solid;
+}
+.contentArea{
+    position: absolute;
+    height: 80%;
+    width: 96%;
+    top: 10%;
+    left: 2%;
+}
+.contentArea{
+    position: absolute;
+    z-index: 100;
 }
 .clk{
     position: relative;

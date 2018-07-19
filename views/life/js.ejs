@@ -44,13 +44,11 @@
                 alert("Some error occur...");
             },
             success: function(data){
-                todo(data);
-                slideNum = data.length;
-                ramSlideNum = Math.floor((Math.random() * slideNum) + 1);
-                showSlides(ramSlideNum);
+                putPic(data.res1);
+                putCont(data.res2);
             }
         });
-        var todo = function(data){
+        var putPic = function(data){
             $('.slideshow_container').empty();
             $('.dot_container').empty();
             for(var i=0 ; i<data.length ; i++){
@@ -61,6 +59,16 @@
             if(data.length > 0){
                 $(".pictureArea").append('<a class="prev" onclick="plusSlides(-1)">&#10094;</a> <a class="next" onclick="plusSlides(1)">&#10095;</a>')
             }
+            if(data.length > 0){
+                slideNum = data.length;
+                ramSlideNum = Math.floor((Math.random() * slideNum) + 1);
+                showSlides(ramSlideNum);
+            }
+        }
+        var putCont = function(data){
+            $(".describeArea").children(".contentArea").empty();
+            if(data != null)
+                $(".describeArea").children(".contentArea").append(data.content);
         }
     });
 
@@ -110,4 +118,12 @@
         slides[ramSlideNum-1].style.display = "block";
         dots[ramSlideNum-1].className += " active";
     }
+
+    CKEDITOR.replace('disc', {
+        filebrowserUploadUrl: '/uploader',
+    });
+    CKEDITOR.editorConfig = function (config){
+        config.enterMode = CKEDITOR.ENTER_BR;
+        config.autoParagraph = false;
+    };
 </script>
