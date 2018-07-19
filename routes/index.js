@@ -44,17 +44,17 @@ passport.deserializeUser(function (id, done) {
 /* home page */
 router.get('/', function (req, res, next) {
   //console.log(req);
-  res.render('index/index', { title: '首頁' });
+  res.render('index/index', { title: '首頁',req : req });
 });
 
 /* login page */
 router.get('/login', function (req, res, next) {
-  res.render('login/login', { title: '登入' });
+  res.render('login/login', { title: '登入',req : req  });
 });
 
 //Login step 2
 router.get('/password', function(req, res, next) {
-  res.render('login/password', { title: '登入' });
+  res.render('login/password', { title: '登入',req : req  });
 });
 
 router.post('/login', passport.authenticate('local', {
@@ -67,13 +67,13 @@ router.post('/login', passport.authenticate('local', {
 
 router.get('/logout', function(req, res, next){
   req.logout()
-  req.redirect('/');
+  res.redirect('/');
 })
 
 
 /* register page */
 router.get('/register', function (req, res, next) {
-  res.render('login/register', { title: '註冊' });
+  res.render('login/register', { title: '註冊',req : req  });
 });
 
 router.post('/register', function (req, res) {
