@@ -20,15 +20,6 @@ const passport = require('passport');
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-passport.deserializeUser(function(id, done) {
-  UserModel.findById(id, function(err, user) {
-      done(err, user);
-  })
-});
-
 //validator
 const expressValidator = require('express-validator');
 app.use(expressValidator({

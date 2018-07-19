@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 //User Schema
-var userSchema = mongoose.Schema({
+var UserSchema = mongoose.Schema({
     id: {
         type: String
     },
@@ -10,30 +10,29 @@ var userSchema = mongoose.Schema({
         type: String
     },
     role: {
-        type: String
+        type: String, default: "student"
     },
     name: {
         type: String
     },
     score_sum: {
-        type: String
+        type: Number,default: 0
     },
     score_high: {
-        type: String
+        type: Number, default: 0
     },
     avatar: {
         type: String, default: "profile.png" 
     }
 });
 
-//export User schema
-module.exports = mongoose.model('User', userSchema);
-
-export const createUser = (newUser, callback) => {
+let tmp = mongoose.model('User', UserSchema);
+tmp.createUser = (User, callback) => {
     bcrypt.genSalt(10, function(err, salt) {
-      bcrypt.hash(newUser.password, salt, function(err, hash) {
-          newUser.password = hash;
-          newUser.save(callback);
+      bcrypt.hash(User.password, salt, function(err, hash) {
+          User.password = hash;
+          User.save(callback);
       });
     });
-  }
+}
+module.exports = tmp;

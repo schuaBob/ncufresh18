@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var User = require('../models/index/user');
 
 /* home page */
 router.get('/', function(req, res, next) {
@@ -33,12 +34,23 @@ router.post('/register', function(req, res){
   if(errors){
     console.log(errors[0]);
   }
-  else{
-    console.log('Success');
+  else
+  {
+    let user = new User({
+      id: id,
+      name: name,
+      password: password
+    });
+    User.createUser(user, function(err, user){
+        if(err) throw err;
+        else console.log(id+" Created.");
+    });
+    res.redirect('/');
   }
 });
 
-/* comingsoon page */
+
+/* comingsoon */
 router.get('/comingsoon', function(req, res, next) {
   res.render('comingsoon/index', { title: '倒數' });
 });  
