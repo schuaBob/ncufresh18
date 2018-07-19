@@ -32,6 +32,7 @@
         });
     });
 
+    var slideNum = 0, ramSlideNum = 0;
     $('.showDetail').on('click', function(e){
         e.preventDefault();
         var info = this.id.split("_");
@@ -43,16 +44,31 @@
                 alert("Some error occur...");
             },
             success: function(data){
-                todo(data);
+                putPic(data.res1);
+                putCont(data.res2);
             }
         });
-        var todo = function(data){
+        var putPic = function(data){
             $('.slideshow_container').empty();
             $('.dot_container').empty();
             for(var i=0 ; i<data.length ; i++){
+                var j = i + 1;
                 $(".slideshow_container").append("<div class='mySlides'><img src='" + data[i].path + "'" + "class='picture'></div>");
-                $('.dot_container').append("<p class='dot'></p>");
+                $('.dot_container').append("<p class='dot' onclick='currentSlide(" + j + ")' ></p>");
             }
+            if(data.length > 0){
+                $(".pictureArea").append('<a class="prev" onclick="plusSlides(-1)">&#10094;</a> <a class="next" onclick="plusSlides(1)">&#10095;</a>')
+            }
+            if(data.length > 0){
+                slideNum = data.length;
+                ramSlideNum = Math.floor((Math.random() * slideNum) + 1);
+                showSlides(ramSlideNum);
+            }
+        }
+        var putCont = function(data){
+            $(".describeArea").children(".contentArea").empty();
+            if(data != null)
+                $(".describeArea").children(".contentArea").append(data.content);
         }
     });
 
@@ -72,17 +88,20 @@
         });
         var todo = function(data){
             $('.smallTitle').empty();
-            $('.smallTitle').append("<option value='default'>" + "請選擇" + "</option>")
+            $('.smallTitle').append("<option value='default'>" + "請選擇" + "</option>");
             for(var i=0 ; i<data.length ; i++){
-                $('.smallTitle').append("<option value="+ data[i] + ">" +  data[i] + "</option>")
+                $('.smallTitle').append("<option value="+ data[i] + ">" +  data[i] + "</option>");   
             }
         }
     });
 
-    var ramSlideNum = 1;
-    
     function plusSlides(n) {
         showSlides(ramSlideNum += n);
+    }
+
+    function currentSlide(n) {
+        ramSlideNum = n;
+        showSlides(ramSlideNum);
     }
 
     function showSlides(n) {
@@ -99,4 +118,12 @@
         slides[ramSlideNum-1].style.display = "block";
         dots[ramSlideNum-1].className += " active";
     }
+
+    CKEDITOR.replace('disc', {
+        filebrowserUploadUrl: '/uploader',
+    });
+    CKEDITOR.editorConfig = function (config){
+        config.enterMode = CKEDITOR.ENTER_BR;
+        config.autoParagraph = false;
+    };
 </script>
