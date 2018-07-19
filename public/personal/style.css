@@ -1,0 +1,14 @@
+.contain {
+    display: grid ;
+}
+#picture {
+    grid-column: 1 / span 4;
+    grid-row: 1;
+    height: 45vh ;
+}
+#writing {
+    background-color: aqua ;
+}
+#score {
+    background-color: blue ;
+}

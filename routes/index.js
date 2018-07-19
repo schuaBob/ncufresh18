@@ -11,6 +11,10 @@ router.get('/login', function(req, res, next) {
   res.render('login/login', { title: '登入' });
 });
 
+router.get('/password', function(req, res, next) {
+  res.render('login/password', { title: '登入2' });
+});
+
 /* register page */
 router.get('/register', function(req, res, next) {
   res.render('login/register', { title: '註冊' });

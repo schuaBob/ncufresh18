@@ -2,13 +2,31 @@
 <html>
 <head>
     <% include ../layout/head %>
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
     <header>
         <% include ../layout/navbar %>
     </header>
     <main>
-        <h1><%= title %></h1>
+        <div class="contain">
+            <div class="col-sm" id="picture">
+                <img src="預設封面.png" id="pic" >
+            </div>
+            <div class="col-sm" id="empty">
+            </div>
+            <div class="col-sm" id="score">
+
+            </div>
+            <div class="col-sm" id="writing">
+
+            </div>
+            <div class="col-sm" id="other">
+                    <button id="game">小遊戲</button><br>
+                    <button id="question">我要發問</button><br>
+                    <button id="sheet">問卷</button>
+            </div>
+        </div>
     </main>
     <footer>
         <% include ../layout/footer %>
