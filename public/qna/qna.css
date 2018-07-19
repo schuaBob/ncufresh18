@@ -1,3 +1,4 @@
+/* 背景顏色 */
 body{
     background-color: #D3E6DD;
 }
@@ -53,6 +54,7 @@ td{
 th{
     width:120px;
 }
+/* 排序與分類的連結 */
 .nav-link{
     color:black;
     font-family: YouYuan;
@@ -60,9 +62,21 @@ th{
 .title{
     width:200px;
 }
+/* 排序與分類 */
 .classification{
     margin: 20px;
 }
+/* 排序與分類的按鈕 */
+.classificationBtn{
+    background: url(排序.png);
+    background-size: cover;
+    float: right;
+    border: medium none;
+    width: 30px;
+    height:30px;
+    color: transparent;
+}
+/* 排序與分類文字 */
 p{
     font-weight:bold;
 }
@@ -84,22 +98,13 @@ p{
     border-color: black;
     background-color: #D3E6DD;
 }
-/* 排序的按鈕 */
-.classificationBtn{
-    float: right;
-    border: medium none;
-    background-size: cover; 
-    width: 30px;
-    height:30px;
-    color: transparent;
-}
 .top{
     position: absolute;
     top:0px;
 }
 #answer{
     width: 90%;
-    position: center;
+    margin: 0 auto;
 }
 /* modal標題欄 */
 .modal-title{
@@ -108,11 +113,17 @@ p{
     font-family: Microsoft YaHei;
     font-weight:bold;
 }
-/* 我要發問背景圖 */
+/* 發問modal的背景圖 */
 .postQuestionAndRule{
     background-image: url(我要發問.png);
     background-size: cover;
   }
+/* modal長寬設置 */
+.modal{
+    /* position: absolute;
+    z-index: 5; */
+    height:100%;
+}
 /* 問題與答案樣式 */
  .QA{
     background-image: url(問題.png);
@@ -146,8 +157,8 @@ p{
     float: right;
     vertical-align: middle;
     position: absolute;
-    top:250px;
-    right:10px;
+    top:280px;
+    right:20px;
  }
  /* 手機版的我要發問按鈕 */
  .askbutton2{
