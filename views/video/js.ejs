@@ -8,7 +8,8 @@
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    var x, n=0, nx=0, rotINT, rotate = 0, end = 1, currentid = "", currentcollege, QAvideoplay = 0;//currentid紀錄現在播到哪個影片
+    let x, n=0, nx=0, rotINT, rotate = 0, end = 1;
+    let currentid = "", currentcollege, currentbtnImg, lastbtnImg, currentbutton, QAvideoplay = 0;//currentid紀錄現在播到哪個影片
     //var allmove, move, moveINT, moveD = 0, i=0, moveend=1;
     //var player;
     //function onYouTubeIframeAPIReady() {player = new YT.Player('playser');}
@@ -44,12 +45,12 @@
                         player[currentid].pauseVideo();
                     }
                     //console.log(currentid);
-                    rotate = 1;
+                    //rotate = 1;
                 }
                 else{
                     $('.rotate').html('簡介');
                     
-                    rotate = 0;
+                    //rotate = 0;
                 }
                 rotateDIV()
             }
@@ -64,6 +65,38 @@
             }
         })
 
+        $('.video_item').mouseenter(function() {
+            if($(window).width()>=414){
+                // $('.sbtn').parent("td").css("display", "none");
+                // $('.sbtn').css("display", "none");
+                // $('.video_item_'+$(this).attr("video")).parent("td").css({"display": ""});
+                // console.log($('.video_item_'+$(this).attr("video")).css({"display": "block"}));
+                
+                // if($(this).attr("video") == "longvideo"){
+                //     for(let i = 1; i <= 5; i++){
+                //         console.log(".video_item_longvideo_"+ i);
+                //         console.log((i-1) *100);
+                        // $(".video_item_longvideo"+ i ).velocity({
+                        //     opacity:100
+                        // }, {
+                        //     duration: 100,
+                        //     delay: (i-1) *100
+                        // });
+                //     }
+                // }
+                // else if($(this).attr("video") == "QAvideo"){
+                //     for(let i = 1; i <= 8; i++){
+                        
+                //     }
+                // }
+                // else if($(this).attr("video") == "lifevideo"){
+                //     for(let i = 1; i <= 6; i++){
+                        
+                //     }
+                // }
+            }
+        })
+
         $(document).on("click",".video_item",function(event){
             
 
@@ -71,8 +104,8 @@
             
             if($(window).width()<414)
             {
-                $(".sbtn").removeClass("btn-outline-secondary-qq-click");
-                $(".sbtn").addClass("btn-outline-secondary-qq");
+                $(".sbtn").removeClass("btn-outline-item-click");
+                $(".sbtn").addClass("btn-outline-item");
 
                 // $(".video_item_title, #scroll").animate({
                 //     scrollTop: 100
@@ -82,28 +115,29 @@
                 //     }, 1000)
                 // });
 
-                // console.log($("#scroll")
-                //     .velocity("scroll", { duration: 20000, offset: 100 })
-                // )
-                $("#scroll").velocity("scroll", { 
-                    container: $("#scrolltable"), 
-                    duration: 500, 
-                    offset: 50, 
-                    complete:function(){
-                        $("#scroll").velocity("scroll", { 
-                            container: $("#scrolltable"), 
-                            duration: 1000, 
-                            offset: -50, 
-                        });
-                    } 
-                });
+                $("#scroll")
+                    .velocity("stop")
+                    .velocity("scroll", { 
+                        container: $("#scrolltable"), 
+                        duration: 500, 
+                        offset: 50, 
+                        complete:function(){
+                            $("#scroll").velocity("scroll", { 
+                                container: $("#scrolltable"), 
+                                duration: 1000, 
+                                offset: -50, 
+                            });
+                        } 
+                    });
                 
                 
                 
             }
-            else if($(window).width()<783) {
+            else {
 
             }
+
+            
 
             if(this.id != "back"){
                 QAvideoplay = 0;
@@ -112,10 +146,16 @@
                 if(currentid)
                     player[currentid].pauseVideo();
 
-                $(".video_item").removeClass("btn-outline-secondary-qq-click");
-                $(".video_item").addClass("btn-outline-info-qq");
-                $(this).removeClass("btn-outline-info-qq");
-                $(this).addClass("btn-outline-secondary-qq-click");
+                $(".video_item").removeClass("btn-outline-item-click");
+                $(".video_item").addClass("btn-outline-title");
+                $(this).removeClass("btn-outline-title");
+                $(this).addClass("btn-outline-item-click");
+
+                if(lastbtnImg && currentbtnImg && $(window).width()>=414){
+                    $(currentbutton).attr("src", lastbtnImg);
+                    console.log("if0 "+currentbtnImg + " last:" + lastbtnImg)
+                }
+                $(".sbtn").removeClass("up");
             }
             //$('.rotate').css("display", "none");
             //console.log($('.sbtn').parent("td"));
@@ -124,18 +164,45 @@
             //console.log($('.video_item_'+$(this).attr("video")).parent("td"));
             $('.video_item_'+$(this).attr("video")).parent("td").css({"display": ""});
             $('.video_item_'+$(this).attr("video")).css({"display": "block"});
+
+            // if($(this).attr("video") == "longvideo"){
+            //     for(let i = 1; i <= 5; i++){
+            //         console.log(".video_item_longvideo_"+ i);
+            //         console.log((i-1) *100);
+            //         $(".video_item_longvideo"+ i ).velocity({
+            //             opacity:1
+            //         }, {
+            //             duration: 100,
+            //             delay: (i-1) *100
+            //         });
+            //     }
+            // }
             
             $(document).on("click",".video_item_"+$(this).attr("video"),function(event){
                 if($(window).width()<414)
                 {
-                    $(".sbtn").removeClass("btn-outline-secondary-qq-click");
-                    $(".sbtn").addClass("btn-outline-secondary-qq");
-                    $(this).removeClass("btn-outline-secondary-qq");
-                    $(this).addClass("btn-outline-secondary-qq-click");
+                    $(".sbtn").removeClass("btn-outline-item-click");
+                    $(".sbtn").addClass("btn-outline-item");
+                    $(this).removeClass("btn-outline-item");
+                    $(this).addClass("btn-outline-item-click");
                 }
+                
+                if($(this).attr("college")!= currentcollege){
+                    if(lastbtnImg && currentbtnImg && $(window).width()>=414){
+                        $(currentbutton).attr("src", lastbtnImg);
+                        console.log("if1 "+currentbtnImg + " last:" + lastbtnImg)
+                    }
+                    $(".sbtn").removeClass("up");
+                }
+                
                 //console.log(this);
                 if($(this).attr("video") == "QAvideo"){
-                    
+                    // if($(window).width()>=414){
+                    //     lastbtnImg = $(this).attr("src");
+                    //     $(this).attr("src", currentbtnImg);
+                    //     console.log($(this).attr("class") + "if2 "+ currentbtnImg + " last:" + lastbtnImg)
+                    // }
+                    // $(currentbutton).addClass("up");
 
                     //console.log('QAvideo!');
                     $('.sbtn').parent("td").css("display", "none");
@@ -164,28 +231,91 @@
                         //console.log("QAvideoplay = 1");
                         if($(window).width()<414)
                         {   
-                            $(".sbtn").removeClass("btn-outline-secondary-qq-click");
-                            $(".sbtn").addClass("btn-outline-secondary-qq");
-                            $(this).removeClass("btn-outline-secondary-qq");
-                            $(this).addClass("btn-outline-secondary-qq-click");
+                            $(".sbtn").removeClass("btn-outline-item-click");
+                            $(".sbtn").addClass("btn-outline-item");
+                            $(this).removeClass("btn-outline-item");
+                            $(this).addClass("btn-outline-item-click");
                         }
+
+                        if(lastbtnImg && currentbtnImg &&  $(window).width()>=414 && this.id != "back"){
+                            $(currentbutton).attr("src", lastbtnImg);
+                            console.log("if3 "+ currentbtnImg + " last:" + lastbtnImg)
+                        }
+                        
+                        //console.log($(this).id);
+                        $(".sbtn").removeClass("up");
+                        if(this.id != "back"){
+                            if($(window).width()>=414){
+                                lastbtnImg = $(this).attr("src");
+                                $(this).velocity({
+                                    opacity:0
+                                }, {
+                                    duration: 500,
+                                    complete:function(){
+                                        $(this).attr("src", "button/1/起源盒.png");
+                                        $(this).addClass("up");
+                                        $(this).velocity({
+                                            opacity:1
+                                        }, {
+                                            duration: 300,
+                                        });
+                                    } 
+                                });
+                                // $(this).attr("src", "button/1/起源盒.png");
+                                currentbtnImg = $(this).attr("src");
+                                console.log("if4 "+ currentbtnImg + " last:" + lastbtnImg)
+                            }
+                            
+                            
+                            
+                            currentbutton = this;
+                            //console.log(currentbutton);
+                        }
+                        
+
                         QAvideoplay = 1;
                         $("#"+$(this).attr("ytID")).css("display", "block");
                     })
                 }
                 else{
+                    if($(window).width()>=414){
+                        lastbtnImg = $(this).attr("src");
+                        $(this).velocity({
+                            opacity:0
+                        }, {
+                            duration: 500,
+                            complete:function(){
+                                $(this).attr("src", "button/1/起源盒.png");
+                                $(this).addClass("up");
+                                $(this).velocity({
+                                    opacity:1
+                                }, {
+                                    duration: 300,
+                                });
+                            } 
+                        });
+                        // $(this).attr("src", "button/1/起源盒.png");
+                        currentbtnImg = $(this).attr("src");
+                        console.log("if5 "+ currentbtnImg + " last:" + lastbtnImg)
+                    }
+
+
+                    //$(this).addClass("up");
+                    currentbutton = this;
+                    currentcollege = "";
+
                     $("#"+$(this).attr("ytID")).css("display", "block");
                 }
                     
-                })
+            })
             
             
         })
 
 
         $(document).on("click",".ssbtn",function(event){
-            console.log(currentid);
-            console.log(player[currentid]);
+            // console.log(currentid);
+            // console.log(player[currentid]);
             if(currentid != ""){
                 player[currentid].pauseVideo();
             }
@@ -244,9 +374,11 @@
         }
         if (nx==180 || nx>=360)
         {
+            rotate = 1;
             clearInterval(rotINT)
             if (nx>=360){
                 nx=0
+                rotate = 0;
             }
             end = 1;
         }
