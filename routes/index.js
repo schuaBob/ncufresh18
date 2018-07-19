@@ -51,6 +51,7 @@ router.get('/login', function (req, res, next) {
   res.render('login/login', { title: '登入' });
 });
 
+<<<<<<< HEAD
 router.post('/login', passport.authenticate('local', {
   failureRedirect: '/login/login'
 }),
@@ -58,6 +59,11 @@ router.post('/login', passport.authenticate('local', {
     res.redirect('/');
   }
 );
+=======
+router.get('/password', function(req, res, next) {
+  res.render('login/password', { title: '登入2' });
+});
+>>>>>>> origin/password
 
 /* register page */
 router.get('/register', function (req, res, next) {
