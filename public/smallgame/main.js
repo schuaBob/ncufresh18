@@ -12,6 +12,7 @@ Array.prototype.shuffle = function() {
     return array;
 }
 
+// string 插入
 String.prototype.insert = function (index, string) {
     if (index > 0)
         return this.substring(0, index) + string + this.substring(index, this.length);
@@ -24,8 +25,8 @@ var LabelButton = function(rightOrWrong, game, x, y, key, label, callback, callb
     Phaser.Button.call(this, game, x, y, key, callback, callbackContext, overFrame, outFrame, downFrame, upFrame)    
     //Style how you wish...    
     this.style = {
-        'font': '30px Arial',
-        'fill': 'black'
+        'font': '25px Microsoft Yahei',
+        'fill': 'white'
     }    
     this.rightOrWrong = false
     this.anchor.setTo(0.5, 0.5)    
@@ -52,8 +53,8 @@ var LabelSprite = function(game, x, y, key, frame) {
     this.label = new Phaser.Text(game, 0, 0)    
     this.label.anchor.setTo(0.5)    
     this.label.setStyle({
-        font: "30px Arial",
-        fill: "#000000", 
+        font: "30px Microsoft Yahei",
+        fill: "#ffffff", 
         wordWrap: true, 
         wordWrapWidth: this.width,
         align: "left"
@@ -272,11 +273,47 @@ var quiz = [
     { q: '106學年度服務學習總共需要幾個小時才能畢業?', o: ['90小時','100小時','80小時','70小時'] , correctIndex:1},
     { q: '106學年度服務學習其中藝文時數占多少小時?', o: ['20小時','30小時','40小時','50小時'] , correctIndex:0},
     { q: '與中央大學服務學習相關資訊需去哪個網站查看?', o: ['lms','portal','國際事務處','中央大學服務學習網'] , correctIndex:3},
-  ];
+];
+
+// ajax 請求 
+var url = 'http://localhost:3000/smallgame';
+function setScore(score) {
+    $.ajax({
+        data: {score: score},
+        url: url + "/setScore",
+        // dataType: 'text',
+        cache: false,
+        timeout: 5000,
+        type: "post",
+        success: function(data) {
+            console.log(data)
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    })
+}
+
+function getScore() {
+    $.ajax({
+        url: url + "/getScore",
+        dataType: 'text',
+        cache: false,
+        timeout: 5000,
+        type: "get",
+        success: function(data) {
+            console.log(data)
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    })
+}
 
 // 遊戲主體長寬
 var width = 800
 var height = 600
+var score = 0
 var game = new Phaser.Game(width, height, Phaser.CANVAS, 'game')
 
 var states = {
@@ -294,12 +331,18 @@ var states = {
             // 載入資源
             game.load.image('bg', 'images/background.png')
             game.load.image('rankAlign', 'images/rank_align.png')
+            game.load.image('rankBubble', 'images/rank_bubble.png')
+            game.load.image('rankOne', 'images/rank_one.png')
+            game.load.image('rankAll', 'images/rank_all.png')
+            game.load.image('rankLeft', 'images/rank_left.png')
             game.load.image('rankStage', 'images/rank_stage.png')
             game.load.image('squirrel','images/squirrel_start.png' )
             game.load.image('btnStart', 'images/button_start.png')
             game.load.image('btnRank', 'images/button_rank.png')
             game.load.image('btnIntro', 'images/button_intro.png')
             game.load.image('btnChoice', 'images/button_choice.png')
+            game.load.image('btnChoiceR', 'images/button_choice_right.png')
+            game.load.image('btnChoiceW', 'images/button_choice_wrong.png')
             game.load.image('bonus1', 'images/+1s.png')
             game.load.image('bonus2', 'images/+3s.png')
             game.load.image('bonus3', 'images/+7s.png')
@@ -318,6 +361,7 @@ var states = {
             game.load.image('cloud4', 'images/cloud4.png')
             game.load.image('cloud5', 'images/cloud5.png')
             game.load.image('questionStage', 'images/question_stage.png')
+            game.load.image('quit', 'images/quit.png')
             game.load.spritesheet('question', 'images/question.png', 400, 150)
             game.load.spritesheet('btnBack', 'images/back.png', 60, 60)
             game.load.spritesheet('blank', 'images/blank.png', width, height)
@@ -404,8 +448,9 @@ var states = {
     start: function() {
         this.create = function() {
             var combo = 0
-            var score = 0
-            var remainTime = 6000
+            score = 0
+            var remainTime = 60
+            game.physics.startSystem(Phaser.Physics.P2JS)
             
             // 設置背景邊界
             game.world.setBounds(0, 0, 800, 3910);
@@ -416,7 +461,6 @@ var states = {
             bg.height = game.world.height
             
             // 鏡頭區域
-            game.physics.startSystem(Phaser.Physics.P2JS)
             var cameraFocus = game.add.sprite(game.world.centerX, game.world.centerY + 1700, 'blank')
             game.physics.p2.enable(cameraFocus)
             
@@ -434,10 +478,10 @@ var states = {
             var btnChoiceD = new LabelButton(false, this.game, game.world.centerX + 100, game.world.centerY + 170, "btnChoice", "Choice D", inputDown) 
             
             // 添加 combo
-            var comboSprite = game.add.image(0, 0, 'combo').alignTo(cameraFocus, Phaser.RIGHT_CENTER, -130, 15)
+            var comboSprite = game.add.image(0, 0, 'combo').alignTo(cameraFocus, Phaser.RIGHT_CENTER, -130, 40)
             var comboText = game.add.text(0, 0, '0', {
                 fontSize: "45px"
-            }).alignTo(comboSprite, Phaser.BOTTOM_CENTER, 0, -10)
+            }).alignTo(comboSprite, Phaser.BOTTOM_CENTER)
             comboSprite.visible = false
             comboText.visible = false
 
@@ -455,6 +499,7 @@ var states = {
                 // 遊戲結束
                 if (remainTime === 0) {
                     gameOver()
+                    setScore(score);
                     timer.loop = false
                 }
             }, this)
@@ -484,14 +529,14 @@ var states = {
                 },1000, Phaser.Easing.Linear.None, true, 0, 0, false);    
             }
             
-            // 添加松鼠動畫， test
+            // 添加松鼠動畫
             var squirrelGroup = game.add.group()
             var squirrelGroupX = 5
-            var squirrelGroupY = 3250
+            var squirrelGroupY = 3230
             function createSquirrel() {
                 squirrelGroupY -= 40
                 var temp = squirrelGroup.create(squirrelGroupX, squirrelGroupY, 'squirrelGround')
-                game.add.tween(temp).to({y: squirrelGroupY + 600}, 500, null, true, "Quart.easeOut")
+                game.add.tween(temp).to({y: squirrelGroupY + 600}, 1200, Phaser.Easing.Exponential.In, true)
             }
             
             // 添加獎勵圖片
@@ -501,30 +546,12 @@ var states = {
             var bonus4 = game.add.image(0, 0, 'bonus4');
 
             // 添加結算界面
-            var scoreStage = game.add.image(0, 0, 'scoreStage')
-            scoreStage.anchor.setTo(0.5, 0.5)
-            scoreStage.alignIn(cameraFocus, Phaser.CENTER, 0, -10)
-            scoreStage.width = 600
-            scoreStage.height = 450
+            var scoreStage = game.add.image(0, 0, 'scoreStage').alignIn(cameraFocus, Phaser.CENTER, 0, -60)
             scoreStage.bringToTop()
-            
-            var scoreRank = game.add.button(0, 0, 'scoreRank', scoreRankClick)
-            scoreRank.anchor.setTo(0.5, 0.5)
-            scoreRank.alignIn(scoreStage, Phaser.CENTER, 120, 131)
-
-            var scoreQuit = game.add.button(0, 0, 'scoreQuit', scoreQuitClick)
-            scoreQuit.anchor.setTo(0.5, 0.5)
-            scoreQuit.alignIn(scoreStage, Phaser.CENTER, -140, 130)
-
-            var scoreAgain = game.add.button(0, 0, 'scoreAgain', scoreAgainClick)
-            scoreAgain.anchor.setTo(0.5, 0.5)
-            scoreAgain.alignIn(scoreStage, Phaser.TOP_RIGHT, -20, -20)
-            scoreAgain.width = 100
-            scoreAgain.height = 100
-            
-            var scoreText = game.add.text(0, 0, '0' ,{fontSize: "50px"})
-            scoreText.anchor.setTo(0.5, 0.5)
-            scoreText.alignIn(scoreStage, Phaser.CENTER)
+            var scoreRank = game.add.button(0, 0, 'scoreRank', scoreRankClick).alignIn(scoreStage, Phaser.CENTER, 120, 131)
+            var scoreQuit = game.add.button(0, 0, 'scoreQuit', scoreQuitClick).alignIn(scoreStage, Phaser.CENTER, -140, 130)
+            var scoreAgain = game.add.button(0, 0, 'scoreAgain', scoreAgainClick).alignIn(scoreStage, Phaser.TOP_RIGHT, -50, -50)
+            var scoreText = game.add.text(0, 0, '0' ,{fontSize: "50px"}).alignIn(scoreStage, Phaser.CENTER)
             
             function scoreAgainClick() {
                 game.state.start('start')
@@ -542,19 +569,15 @@ var states = {
             function choiceBonus(combo) {
                 if (combo == 1) {
                     remainTime += 2
-                    score += 500
                     return "bonus1"
-                } else if (combo == 10) {
+                } else if (combo == 2) {
                     remainTime += 4
-                    score += 1000
                     return "bonus2"
-                } else if (combo == 20) {
+                } else if (combo == 3) {
                     remainTime += 8
-                    score += 2000
                     return "bonus3"
-                } else if (combo == 50) {
+                } else if (combo == 4) {
                     remainTime += 21
-                    score += 5000
                     return "bonus4"
                 } else {
                     return false
@@ -637,7 +660,7 @@ var states = {
 
                         // 顯示 bonus 效果
                         if (goal) {
-                            var bonus = game.add.image(game.camera.x + 640, game.camera.y + 225, goal)
+                            var bonus = game.add.image(game.camera.x + 655, game.camera.y + 270, goal)
                             bonus.alpha = 0
                             // 添加過渡效果
                             var showTween = game.add.tween(bonus).to({
@@ -654,10 +677,10 @@ var states = {
                         
                         // 使用 tween 移動鏡頭
                         if (squirrelGroupY <= 3020 && game.camera.y >= 40) {
-                            game.add.tween(playUI).to({y: playUI.y -40}, 500, null, true, "Quart.easeOut");
-                            game.add.tween(otherUI).to({y: otherUI.y - 40}, 500, null, true, "Quart.easeOut");
-                            game.add.tween(game.camera).to({y: game.camera.y - 40}, 500, null, true, "Quart.easeOut");
-                            game.add.tween(scoreUI).to({y: scoreUI.y - 40}, 500, null, true, "Quart.easeOut");         
+                            game.add.tween(playUI).to({y: playUI.y -40}, 1000, Phaser.Easing.Bounce.Out, true)
+                            game.add.tween(otherUI).to({y: otherUI.y - 40}, 1000, Phaser.Easing.Bounce.Out, true)
+                            game.add.tween(scoreUI).to({y: scoreUI.y - 40}, 1000, Phaser.Easing.Bounce.Out, true)         
+                            game.add.tween(game.camera).to({y: game.camera.y - 40}, 500, Phaser.Easing.Linear.None, true)
                                
                         }
                         setTimeout(resetQuestionAndChoice, 500, data[count])
@@ -687,12 +710,41 @@ var states = {
     rank: function () {
         this.create = function () {
             var rank = game.add.image(game.camera.x, game.camera.y, 'rankStage')
-            // var alignLine = game.add.group()
-            // var alignLineY = -44
-            // for(i = 0; i < 10; i++) {
-            //     alignLine.create(0, alignLineY, 'rankAlign')
-            //     alignLineY += 48
-            // }
+            var alignLine = game.add.group()
+            var alignLineY = 717
+            
+            // 切換按鈕
+            var rankOne = game.add.button(0, 0, 'rankOne', rankOneClick).alignIn(rank, Phaser.TOP_CENTER, -190, -30)
+            var rankAll = game.add.button(0, 0, 'rankAll', rankAllOnclick).alignIn(rank, Phaser.TOP_CENTER, 200, -30)
+
+            // 退出按鈕
+            var quit = game.add.button(0, 0, 'quit', quitRankClick).alignIn(rank, Phaser.TOP_RIGHT)
+            
+            // 左邊領獎台
+            var rankLeft = game.add.image(0, 0, 'rankLeft').alignIn(rank, Phaser.LEFT_CENTER, -20, 70)
+
+            // 右邊氣泡
+            for(i = 1; i < 8; i++) {
+                (function(i) {
+                    setTimeout(function () {
+                        var temp = alignLine.create(415, alignLineY, 'rankBubble')
+                        game.add.tween(temp).to({y: alignLineY - 600}, 1500, Phaser.Easing.Exponential.In, true)
+                        alignLineY += 68.5              
+                    },  i * 100)  })(i)
+            }
+
+            function quitRankClick() {
+                game.state.start('main')
+            }
+
+            function rankOneClick() {
+                
+            }
+
+            function rankAllOnclick() {
+                
+            }
+            getScore()
         }
     }
 }
@@ -704,26 +756,3 @@ Object.keys(states).map(function(key) {
 
 // 啟動遊戲
 game.state.start('preload')
-
-// 
-var url = 'http://localhost:3000/smallgame';
-var xmlHttp = null;
-function reqAjaxPost(info, type) {
-    $.ajax({
-        data: {info: info, type: type},
-        url: url + "/req_ajax",
-        dataType: 'json',
-        cache: false,
-        timeout: 5000,
-        type: type,
-        success: function(data) {
-            console.log(data)
-        },
-        error: function () {
-            alert("失敗！")
-        }
-    })
-}
-
-reqAjaxPost("client post", "post");
-reqAjaxPost("client post", "get");
