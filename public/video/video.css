@@ -1,3 +1,18 @@
+body{
+    background-image:url("background.png");
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+
+#CDbox {
+    background-color: rgba(255, 255, 255, 0.411);
+    background-image: url('CDbox.png');
+    background-size: 100%;
+    padding: 0vw;
+    margin: 0vw;
+}
+
 .picture {
     display: none;
     width:100%;
@@ -49,50 +64,52 @@ iframe {
     height: 100%;
 }
 
-.btn-outline-info-qq {
-    color: #17a2b8;
+
+
+.btn-outline-title {
+    color: #ffffff;
     background-color: transparent;
     background-image: none;
-    border-color: #17a2b8;
+    border-color: #ffffff;
   }
   
-/* .btn-outline-info-qq:hover {
+/* .btn-outline--title:hover {
     color: #fff;
     background-color: #17a2b8;
     border-color: #17a2b8;
 } */
   
-.btn-outline-info-qq-click {
-    color: #fff;
-    background-color: #17a2b8;
-    border-color: #17a2b8;
+.btn-outline-title-click {
+    color: rgb(231, 233, 94);
+    background-color: transparent;
+    border-color: rgb(231, 233, 94);
 }
 
-.btn-outline-secondary-qq {
-    color: #6c757d;
-    background-color: transparent;
+.btn-outline-item {
+    color: rgb(231, 233, 94);
+    background-color: rgba(0, 0, 0, 0.431);
     background-image: none;
-    border-color: #6c757d;
+    border-color: rgb(231, 233, 94);
   }
 
   
-  /* .btn-outline-secondary-qq:hover {
+  /* .btn-outline-item:hover {
     color: #fff;
     background-color: #6c757d;
     border-color: #6c757d;
   } */
   
-  .btn-outline-secondary-qq-click {
-    color: #fff;
-    background-color: #6c757d;
-    border-color: #6c757d;
+  .btn-outline-item-click {
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.431);
+    border-color: rgb(255, 255, 255);
   }
 
   #back {
-    color: #343a40;
-    background-color: transparent;
+    color: #92731e;
+    background-color: rgba(255, 255, 255, 0.349);
     background-image: none;
-    border-color: #343a40;
+    border-color: #e6b635;
   }
 
 /* 電腦 */
@@ -104,24 +121,14 @@ iframe {
         display: initial;
     }
 
-    #CDbox {
-        background-image: url('background.png');
-        background-size: 100%;
-        padding: 0vw;
-        margin: 0vw;
-        /* position: relative;
-        top: 5vh;
-        left: 35vw;
-        width: 40%;
-        height: 23vw; */
-        
+    .btn-outline-title, .btn-outline-item-click, #back {
+        border-radius: 50px;
     }
 
     .rotate {
         margin: 0vw;
         position: absolute;
         top: 80vh;
-        /* left: 90vw; */
     }
 
     .video_item_title_allvideo  {
@@ -129,7 +136,7 @@ iframe {
         overflow: auto;
         position: absolute;
         top: 15vh;
-        left: 0vw;
+        left: 3vw;
         writing-mode: vertical-lr;
         margin-top: auto;
         margin-bottom: auto;
@@ -146,56 +153,36 @@ iframe {
         padding: auto;
         overflow: auto;
         text-align: center;
-        /* font-size: 1.5vw;
-        width: 11vw;
-        height: 8vh; */
     }
 
     .video_item_title {
-        display: block;
+        vertical-align: middle;
+        display: table;
         white-space: pre-line;
         position: relative;
         margin-left: auto;
         margin-right: auto;
-        left:2vw;
-        width: 50vw;
-        /* top: 5vh; */
-        /* bottom: 3vh; */
-        /* left: 30vw; */
+        top: 10vh;
     }
 
-    #scroll {
-        width: 100%;
+    .up {
+        transform: translateY(5vh);
     }
 
-
-    /* .video_item_QAvideo_c1 {
-        margin-left: 5vw;
-    }
-    .video_item_QAvideo_c2 {
-        margin-left: 1vw;
-    }
-    .video_item_QAvideo_c3, .video_item_QAvideo_c4, .video_item_QAvideo_c5 {
-        margin-left: 2vw;
-    }
-    .video_item_QAvideo_c6, .video_item_QAvideo_c8 {
-        margin-left: 7vw;
-    }
-    .video_item_QAvideo_c7 {
-        margin-left: 10vw;
-    } */
-/* 
-
-    .streetInterview {
-        margin-left: 7vw;
+    /* .item {
+        opacity: 1;
     } */
 
-    @media only screen and (min-width: 978px) {
+    @media only screen and (min-width: 820px) {
         #CDbox {
             position: relative;
-            left: 32vw;
-            width: 40%;
-            height: 23vw;
+            /* left: 32vw; */
+            margin-left: auto; 
+            margin-right: auto; 
+            /* width: 40%;
+            height: 23vw; */
+            width: 465px;
+            height: 264px;
         }
 
         .video_item_title_allvideo .video_item {
@@ -207,21 +194,26 @@ iframe {
 
         
 
-        .video_item_title {
-            /* position: absolute; */
-            
-            /* left: 19vw; */
-            bottom: 3vh;
-        }
-    
+        /* .video_item_title {
+            left:2vw;
+        } */
+
 
         .item {
             margin: auto;
-            width: 6vw;
+            width: 80px;
             height: auto;
+            position: relative;
+            transition-property: bottom;
+            transition-duration: 0.5s;
+            bottom: 0;
         }
         .item:hover {
-            transform: scale(1.1);
+            transition-property: bottom;
+            transition-duration: 0.5s;
+            bottom:2vh;
+            /* transform: translateY(-2vh);
+            transform: scale(1.1); */
         }
 
         td {
@@ -232,28 +224,57 @@ iframe {
             left: 90vw;
         }
 
-        /* .video_item_longvideo {
-            margin-left: 3.5vw;
-            margin-right: 3.5vw;
+        .video_item_longvideo {
+            margin-left: 3vw;
+            margin-right: 3vw;
         }
         .video_item_QAvideo {
             margin-left: 1vw;
             margin-right:  1vw;
         }
         .video_item_lifevideo {
-            margin-left: 2.4vw;
-            margin-right: 2.4vw;
-        } */
+            margin-left: 2vw;
+            margin-right: 2vw;
+        }
 
+        .video_item_QAvideo_c1 {
+            margin-left: 4vw;
+            margin-right: 4vw;
+        }
+        .video_item_QAvideo_c2 {
+            margin-left: 1vw;
+            margin-right: 1vw;
+        }
+        .video_item_QAvideo_c3, .video_item_QAvideo_c4, .video_item_QAvideo_c5 {
+            margin-left: 2vw;
+            margin-right: 2vw;
+        }
+        .video_item_QAvideo_c6, .video_item_QAvideo_c8 {
+            margin-left: 4vw;
+            margin-right: 4vw;
+        }
+        .video_item_QAvideo_c7 {
+            margin-left: 10vw;
+            margin-right: 10vw;
+        }
+
+        #back {
+            position: absolute;
+            margin-bottom: 0;
+            margin-left: 3vw;
+        }
         
     }
 
-    @media only screen and (min-width: 414px)  and (max-width: 978px) {
+    @media only screen and (min-width: 414px)  and (max-width: 820px) {
+
         #CDbox {
             position: relative;
-            left: 30vw;
+            left: 140px;
             /* width: 60%;
             height: 34vw; */
+            margin-left: auto; 
+            margin-right: auto;
             width: 465px;
             height: 264px;
             
@@ -267,26 +288,26 @@ iframe {
         }
 
         .video_item_title {
-            /* position: absolute; */
-            /* left: 20vw; */
-            /* left: 210px; */
-            bottom: 3vh;
-            /* position: relative;
-            left: 10vw;
-            top: 10vh; */
+            left: 100px;
         }
     
 
         .item {
             margin: auto;
             padding: 0%;
-            /* width: 13vw; */
             width: 70px;
             height: auto;
-            /* height: 116px; */
+            position: relative;
+            transition-property: bottom;
+            transition-duration: 0.5s;
+            bottom: 0;
         }
         .item:hover {
-            transform: scale(1.05);
+            transition-property: bottom;
+            transition-duration: 0.5s;
+            bottom: 1vh;
+            /* transform: translateY(-1vh);
+            transform: scale(1.05); */
         }
 
         td {
@@ -297,7 +318,7 @@ iframe {
             left: 5vw;
         }
 
-        /* .video_item_longvideo {
+        .video_item_longvideo {
             margin-left: 3.3vw;
             margin-right: 3.3vw;
         }
@@ -308,7 +329,33 @@ iframe {
         .video_item_lifevideo {
             margin-left: 2.1vw;
             margin-right: 2.1vw;
-        } */
+        }
+
+        .video_item_QAvideo_c1 {
+            margin-left: 6vw;
+            margin-right: 6vw;
+        }
+        .video_item_QAvideo_c2 {
+            margin-left: 2vw;
+            margin-right: 2vw;
+        }
+        .video_item_QAvideo_c3, .video_item_QAvideo_c4, .video_item_QAvideo_c5 {
+            margin-left: 3.5vw;
+            margin-right: 3.5vw;
+        }
+        .video_item_QAvideo_c6, .video_item_QAvideo_c8 {
+            margin-left: 9vw;
+            margin-right: 9vw;
+        }
+        .video_item_QAvideo_c7 {
+            margin-left: 12vw;
+            margin-right: 12vw;
+        }
+
+        #back {
+            margin-bottom: 0%;
+            margin-left: 1vw;
+        }
     }
 
     
@@ -318,10 +365,11 @@ iframe {
 
 /* 手機 */
 @media only screen and (min-width: 0px) and (max-width: 414px){
-    /* #scrolltd {
-        visibility: hidden;
-    } */
-    .cellphone {
+    .btn-outline-title, .btn-outline-title-click, .btn-outline-item, .btn-outline-item-click, #back {
+        border-radius: 10px;
+    } 
+
+     .cellphone {
         display: initial;
     }
     .computer {
@@ -329,10 +377,6 @@ iframe {
     }
     
     #CDbox {
-        background-image: url('background.png');
-        background-size: 100%;
-        padding: 0vw;
-        margin:0;
         position: relative;
         /* top: 4vh; */
         /* bottom: 1vh; */
@@ -347,7 +391,7 @@ iframe {
         display: block;
         overflow: auto;
         position: absolute;
-        top: 78vw;
+        top: 80vw;
         left: 4vw;
         height: 40vh;
         writing-mode: vertical-lr;
@@ -360,9 +404,9 @@ iframe {
         white-space: pre-line;
         padding: auto;
         text-align: center;
-        font-size: 5vw;
+        font-size: 4vw;
         width: 30vw;
-        height: 11vh;
+        height: 12.5vh;
     }
 
     .video_item_title {
@@ -370,11 +414,11 @@ iframe {
         overflow-y: auto;
         /* -webkit-overflow-scrolling: touch; */
         position: absolute;
-        top: 78vw;
+        top: 80vw;
         left: 35.5vw; 
         padding: 0;
         margin: 0;
-        height: 33vh;
+        height: 37.5vh;
         writing-mode: vertical-lr;
     }
 
@@ -385,7 +429,7 @@ iframe {
         white-space: pre-line;
         padding: 0;
         text-align: center;
-        font-size: 5vw;
+        font-size: 4vw;
         width: 60vw;
         height: 10vh;
     }
