@@ -16,12 +16,12 @@ passport.use(new LocalStrategy({
     Users.findOne({ id: id }, function (err, user) {
       if (err) { return done(err); }
       if (!user) {
-        return done(null, false, console.log("user not find."));
+        return done(null, false, console.log("User not found"));
       }
       user.comparePassword(password, user.password, function (err, isMatch) {
         if (err) { return done(err); }
         if (isMatch) {
-          return done(null, user, console.log("Success Login"));
+          return done(null, user, console.log(user.name+" login Successfully"));
         }
         else {
           return done(null, false, console.log("Error Password"));
@@ -36,13 +36,14 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(function (id, done) {
-  User.findById(id, function (err, user) {
+  Users.findById(id, function (err, user) {
     done(err, user);
   });
 });
 
 /* home page */
 router.get('/', function (req, res, next) {
+  //console.log(req);
   res.render('index/index', { title: '首頁' });
 });
 
@@ -51,19 +52,24 @@ router.get('/login', function (req, res, next) {
   res.render('login/login', { title: '登入' });
 });
 
-<<<<<<< HEAD
+//Login step 2
+router.get('/password', function(req, res, next) {
+  res.render('login/password', { title: '登入' });
+});
+
 router.post('/login', passport.authenticate('local', {
-  failureRedirect: '/login/login'
+  failureRedirect: '/login'
 }),
   function (req, res) {
     res.redirect('/');
   }
 );
-=======
-router.get('/password', function(req, res, next) {
-  res.render('login/password', { title: '登入2' });
-});
->>>>>>> origin/password
+
+router.get('/logout', function(req, res, next){
+  req.logout()
+  req.redirect('/');
+})
+
 
 /* register page */
 router.get('/register', function (req, res, next) {
@@ -106,7 +112,7 @@ router.post('/register', function (req, res) {
 
 
 /* comingsoon */
-router.get('/comingsoon', function (req, res, next) {
+router.get('/comingsoon',isAdmin, function (req, res, next) {
   res.render('comingsoon/index', { title: '倒數' });
 });
 
@@ -118,7 +124,7 @@ function isLoggedIn(req, res, next) {
 }
 
 function isAdmin(req, res, next) {
-  if (req.isAuthenticated() && req.user.local.role === 'admin')
+  if (req.isAuthenticated() && req.user.role === 'admin')
     return next();
   res.redirect('/');
 }
