@@ -87,17 +87,17 @@ router.get('/entertainment', function(req, res, next){
 });
 
 router.post('/editPicture', upload.single('picture'), function(req, res, next){
-  var form = new formidable.IncomingForm();
-  form.parse(req, function(err, fields, files){
-    var cuted = req.file.path.split("/"),
-        pathed = cuted[2] + "/" + cuted[3];
-    var newPicture = new picture({
-        mainTitle : req.body.mainTitle,
-        subTitle  : req.body.subTitle,
-        path      : pathed
-    }).save();
+  var cuted = req.file.path.split("/"),
+      pathed = cuted[2] + "/" + cuted[3];
+  var newPicture = new picture({
+      mainTitle : req.body.mainTitle,
+      subTitle  : req.body.subTitle,
+      path      : pathed
+  }).save(function(err,doc){
+      if(err){ return next(err);}
+      console.log(doc);
+      res.redirect('back');
   });
-  res.redirect('back');
 });
 
 router.post('/editContent', function(req, res, next){
