@@ -10,7 +10,7 @@ router.get("/", function(req, res, next) {
     if(err) {
       return next(err)
     }
-    res.render("campus/index", { title: "校園導覽",result:result});
+    res.render("campus/index", { title: "校園導覽",result:result,user: req.user});
     
   })
 });
@@ -32,7 +32,7 @@ router.get("/editElement", function(req, res, next) {
       if (err) {
         return next(err);
       }
-      res.render("campus/editElement", { title: "編輯物件", result: result });
+      res.render("campus/editElement", { title: "編輯物件", result: result, user: req.user});
     });
 });
 router.post("/AddNew_element", function(req, res, next) {
