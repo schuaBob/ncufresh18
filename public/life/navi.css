@@ -2,9 +2,9 @@
     position: fixed;
     right: 0px;
     width: 180px;
-    height: 440px;
+    height: 440px; 
     transform: translate(200px);
-    transition: transform 1s ease;
+    transition: transform 1s ease; 
 }
 
 .navBtn{
