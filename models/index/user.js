@@ -9,6 +9,9 @@ var UserSchema = mongoose.Schema({
     password: {
         type: String
     },
+    unit: {
+        type: String
+    },
     //腳色
     role: {
         type: String, default: "student"
