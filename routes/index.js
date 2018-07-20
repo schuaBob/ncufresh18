@@ -28,7 +28,7 @@ passport.use(new LocalStrategy({
       user.comparePassword(password, user.password, function (err, isMatch) {
         if (err) { return done(err); }
         if (isMatch) {
-          return done(null, user, console.log(user.name+" login Successfully"));
+          return done(null, user, console.log(user.name + " login Successfully"));
         }
         else {
           return done(null, false, console.log("Error Password"));
@@ -51,27 +51,41 @@ passport.deserializeUser(function (id, done) {
 /* home page */
 router.get('/', function (req, res, next) {
   //console.log(req);
-  res.render('index/index', { title: '首頁',req : req });
+  res.render('index/index', { title: '首頁', req: req });
 });
 
 /* login page */
 router.get('/login', function (req, res, next) {
-  res.render('login/login', { title: '登入',req : req  });
+  res.render('login/login', { title: '登入', req: req });
 });
 
-//Login step 2
-router.get('/password', function(req, res, next) {
-  res.render('login/password', { title: '登入',req : req  });
+
+
+router.post('/login', function (req, res, next) {
+  let grade = req.body.id.substring(0, 3);
+  if (grade !== '107')
+    return res.redirect('auth/provider');
+  Users.findOne({ 'id': req.body.id }, function (err, obj) {
+      if (err) return res.redirect('/login');
+      //If found, login
+      if (obj && obj.password) {
+        res.redirect('password?id='+req.body.id);
+      }else{
+        res.redirect('register?id='+req.body.id);
+      }
+  })
 });
 
-router.post('/login', passport.authenticate('local', {
-  failureRedirect: '/login'
-}),
-  function (req, res) {
+
+
+router.get('/password', function (req, res, next) {
+  res.render('login/password', { title: '登入', req: req });
+});
+
+router.post('/password', passport.authenticate('local', {failureRedirect: '/login'}),
+  function (req, res,next) {
     res.redirect('/');
-  }
-);
-
+});
 
 //NCU OAuth2 登入  
 router.get('/auth/provider', function (req, res) {
@@ -87,7 +101,7 @@ router.get('/auth/provider/callback', function (req, res, next) {
   if (req.query.error || !req.query.code) {
     return res.redirect('/login');
   }
-  
+
   // Grab accessToken by exchangine code with NCU OAuth2
   // refer to https://github.com/NCU-CC/API-Documentation/blob/master/oauth-service/authorization_code.md
   request.post({
@@ -126,21 +140,21 @@ router.get('/auth/provider/callback', function (req, res, next) {
       //Parse JSON into object
       //refer to https://github.com/NCU-CC/API-Documentation/blob/master/personnel-service/v1/cards.md#structure
       personalObj = JSON.parse(info);
-     // console.log(personalObj);
+      // console.log(personalObj);
       // Find user in database , if not found create one
       //then always login;
 
-       Users.findOne({ 'id': personalObj.id}, function(err, obj) {
-       if (err) return next(err);
-       //If found, login
-         if (obj) {
-           req.login(obj, function(err) {
-             if (err) return next(err);
-             console.log(personalObj.name+' Login')
-             res.redirect('/');
-           });
-         } 
-         else {
+      Users.findOne({ 'id': personalObj.id }, function (err, obj) {
+        if (err) return next(err);
+        //If found, login
+        if (obj) {
+          req.login(obj, function (err) {
+            if (err) return next(err);
+            console.log(personalObj.id + ' Login')
+            res.redirect('/');
+          });
+        }
+        else {
           let user = new Users({
             id: personalObj.id,
             name: personalObj.name,
@@ -150,22 +164,22 @@ router.get('/auth/provider/callback', function (req, res, next) {
           Users.createUser(user, function (err, user) {
             if (err) return next(err);
             else {
-                    req.login(user, function(err) {
-                      if (err) return next(err);
-                      console.log(user.name + " Created.");
-                      console.log(personalObj.name+' Login')
-                      res.redirect('/');
-                    });
+              req.login(user, function (err) {
+                if (err) return next(err);
+                console.log(user.id + " Created.");
+                console.log(personalObj.id + ' Login')
+                res.redirect('/');
+              });
             }
           });
         }
-       });
+      });
     });
   });
 });
 
 
-router.get('/logout', function(req, res, next){
+router.get('/logout', function (req, res, next) {
   req.logout()
   res.redirect('/');
 })
@@ -173,7 +187,7 @@ router.get('/logout', function(req, res, next){
 
 /* register page */
 router.get('/register', function (req, res, next) {
-  res.render('login/register', { title: '註冊',req : req  });
+  res.render('login/register', { title: '註冊', req: req });
 });
 
 router.post('/register', function (req, res) {
@@ -191,28 +205,39 @@ router.post('/register', function (req, res) {
 
   let errors = req.validationErrors();
   if (errors) {
-    console.log(errors[0]);
+    return console.log(errors[0]);
   }
-  else {
-    let user = new Users({
-      id: id,
-      name: name,
-      password: password
-    });
-    //Create user in database
-    Users.createUser(user, function (err, user) {
-      if (err) return next(err);
-      else console.log(id + " Created.");
-    });
-    //Placeholder for login
+  Users.findOne({ 'id': id }, function (err, obj) {
+    if (err) {
+      res.redirect('login');
+      return next(err);
+    }
+    if(!obj)
+       return res.redirect('register?id=' + id);
+    if (obj.name !== name) {
+      return res.redirect('register?id=' + id);
+    }
+    //If found,try to login
+    else{
+        obj.password = password;
+      //Create password for the user in database
+      Users.createUser(obj, function (err, user) {
+        if (err) return next(err);
+        else console.log(id + " Created.");
+        req.login(user, function (err) {
+          if (err) return next(err);
+          console.log(obj.id + ' Login')
+          res.redirect('/');
+        });
+      });
 
-    res.redirect('/');
-  }
+    }
+  });
 });
 
 
 /* comingsoon */
-router.get('/comingsoon',isAdmin, function (req, res, next) {
+router.get('/comingsoon', isAdmin, function (req, res, next) {
   res.render('comingsoon/index', { title: '倒數' });
 });
 

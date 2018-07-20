@@ -50,4 +50,14 @@ tmp.createUser = (User, callback) => {
     });
 }
 
+//Function for add password
+tmp.addPassword = (User, callback) => {
+    bcrypt.genSalt(10, function(err, salt) {
+      bcrypt.hash(User.password, salt, function(err, hash) {
+          User.password = hash;
+          User.save(callback);
+      });
+    });
+}
+
 module.exports = tmp;
