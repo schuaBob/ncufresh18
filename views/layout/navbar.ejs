@@ -33,8 +33,8 @@
                 <a class="nav-link text-white" href="/personal">個人專區</a>
             </li>
             <li class="nav-item">
-                <%_ if (req.isAuthenticated()){ -%>
-                <a class="nav-link text-white" href="/logout"><% if (req.user.role === 'admin'){ %>管理登出<% }else{ %>登出<%}%></a>
+                <%_ if (user){ -%>
+                <a class="nav-link text-white" href="/logout"><% if (user.role === 'admin'){ %>管理登出<% }else{ %>登出<%}%></a>
                 <%_ }else{ -%>
                 <a class="nav-link text-white" href="/login">登入</a>
                 <%_ } -%>

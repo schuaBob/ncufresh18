@@ -44,17 +44,17 @@ passport.deserializeUser(function (id, done) {
 /* home page */
 router.get('/', function (req, res, next) {
   //console.log(req);
-  res.render('index/index', { title: '首頁',req : req });
+  res.render('index/index', { title: '首頁', user: req.user });
 });
 
 /* login page */
 router.get('/login', function (req, res, next) {
-  res.render('login/login', { title: '登入',req : req  });
+  res.render('login/login', { title: '登入', user: req.user  });
 });
 
 //Login step 2
 router.get('/password', function(req, res, next) {
-  res.render('login/password', { title: '登入',req : req  });
+  res.render('login/password', { title: '登入', user: req.user  });
 });
 
 router.post('/login', passport.authenticate('local', {
@@ -73,7 +73,7 @@ router.get('/logout', function(req, res, next){
 
 /* register page */
 router.get('/register', function (req, res, next) {
-  res.render('login/register', { title: '註冊',req : req  });
+  res.render('login/register', { title: '註冊', user: req.user  });
 });
 
 router.post('/register', function (req, res) {
@@ -112,7 +112,7 @@ router.post('/register', function (req, res) {
 
 
 /* comingsoon */
-router.get('/comingsoon',isAdmin, function (req, res, next) {
+router.get('/comingsoon', function (req, res, next) {
   res.render('comingsoon/index', { title: '倒數' });
 });
 
