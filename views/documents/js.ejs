@@ -5,8 +5,8 @@
 
         //showmodel全屏，偵測手機高度
         let y =$(window).height();
-        let h =(y-80)+"px"
-        let top= (y-80)+"px"
+        let h =(y-70)+"px";
+        //let top= (y-80)+"px"
         //將css的變數取出
             //var bodyStyles = window.getComputedStyle(document.body);
             //var fooBar = bodyStyles.getPropertyValue('--height'); //get
@@ -15,7 +15,7 @@
     
         //判斷是用電腦還手機
         let x= $(window).width(); 
-        //alert(x); 
+        //alert(x+"and"+y); 
         if(x>450){
             $("#t_close").show();
             $("#o_close").show();
@@ -66,18 +66,65 @@
         $(".gra").mouseover(function () {
             $(".under").removeClass("big").addClass("small");
         });
-        $(".under").mousedown(function () {
-            $(".under").removeClass("small").addClass("big");
-            $(".gra").removeClass("big").addClass("small");
+
+
+        $(".gra").mouseleave(function () {
+            if(gra==true){
+                $(".gra").removeClass("small").addClass("big");
+                $(".under").removeClass("big").addClass("small");
+            }else{
+                $(".under").removeClass("small").addClass("big");
+                $(".gra").removeClass("big").addClass("small");
+            }
         });
 
+        $(".under").mouseleave(function () {
+            if(under==true){
+                $(".under").removeClass("small").addClass("big");
+                $(".gra").removeClass("big").addClass("small");
+            }else{
+                $(".gra").removeClass("small").addClass("big");
+                $(".under").removeClass("big").addClass("small");
+            }
+        });
+        //預設為大學生
+        $(".graduate").hide();
+        $(".undergraduate").show();
+        var gra;
+        var under;
+        //大學生研究生選擇
         $(".gra").mousedown(function () {
+            /*tab字*/
+            $("a.nav-link").css("color","black");
+            /*不支援這方法，要另找，但我好累
+           $("a.nav-link:hover").css("background-color","red");*/
             $(".gra").removeClass("small").addClass("big");
             $(".under").removeClass("big").addClass("small");
+
+            gra=true;
+            under=false; 
+            $("body").css("background-image","url('m_b.png')");
+            $(".graduate").show();
+            $(".undergraduate").hide();
+           
+
         });
+        $(".under").mousedown(function () {
+            $("a.nav-link").css("color","black")
+            $(".nav-item:hover").css({"background-color":"#F8F8F8"," border-radius":"6px"});
+            $(".under").removeClass("small").addClass("big");
+            $(".gra").removeClass("big").addClass("small");
+            under=true;
+            gra=false;
+            $("body").css("background-image","url('s_b.png')");
+            $(".graduate").hide();
+            $(".undergraduate").show();
+        });
+       
 
 
-        
+
+       
         $(".box").mousedown(function () {
             
             //抓按下按鈕的id
@@ -104,6 +151,7 @@
 
         //使用者
         $(".box").mousedown(function () {
+            $("header").hide();
 
             let count = 0;
             let textid = this.id;
@@ -123,33 +171,30 @@
                 }
             });
         });
-
-
-        //預設為大學生
-        $(".graduate").hide();
-        $(".undergraduate").show();
-        
-        //大學生研究生選擇
-        $(".gra").mousedown(function () {
-            $("body").css("background-image","url('m_b.png')");
-            $(".graduate").show();
-            $(".undergraduate").hide();
-           
-
+        $("#t_close").mousedown(function () {
+            $("header").show();
         });
-        $(".under").mousedown(function () {
-            $("body").css("background-image","url('s_b.png')");
-            $(".graduate").hide();
-            $(".undergraduate").show();
+        $("#o_close").mousedown(function () {
+            $("header").show();
+        });        
+        $("#b_close").mousedown(function () {
+            $("header").show();
         });
-       
         
-       
 
-
-
-        
-        /*處理ckeditor與model相容的問題，之後發現刪除tabindex="-1"也可
+        /*modal出來時外面滾輪不會動*/
+        $(".modal").on('hide.bs.modal', function () {
+            $("body").css({
+                "overflow":"auto"
+            });
+         });
+        $(".modal").on('show.bs.modal', function () {
+            $("body").css({
+                "overflow":"hidden"
+            });
+         });
+              
+        /*處理ckeditor與modal相容的問題，之後發現刪除tabindex="-1"也可
         $('.modal').removeAttr('tabindex');
 
         $('.modal').focusout(function(){

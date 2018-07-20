@@ -3,29 +3,27 @@ body{
     background-image:url("s_b.png");
     background-size: cover;
     height:auto; max-height:100%; max-width:100%; width:auto;
-    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
-    -moz-animation: fadein 2s; /* Firefox < 16 */
-    -ms-animation: fadein 2s; /* Internet Explorer */
-    -o-animation: fadein 2s; /* Opera < 12.1 */
-    animation: fadein 2s;
+
 }
 
+/*背景先載入*/
+body::after{
+    position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
+    content:url(m_b.png) url(m_space2.png) url(m_man2.png)  ;
+}
 
+.nav-pills .nav-link {
+    border-radius: 6px;
+ }
 
-
-
-
+/*hover樣子*/ 
 .nav-item:hover  {
     background-color: #F8F8F8;
-    /*為了配合active後的樣子*/
-    border-radius: 6px;
-    border-color: #E7E7E7;
-    
-}
-.nav-pills .nav-link {
-   border-radius: 6px;
+    border-radius: 6px; 
 }
 
+
+/*點下去後的樣子*/
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link{
     color: #fff;
     background-color: #007bff;
@@ -35,13 +33,14 @@ body{
     background-color: grey;
 }
 
+/*show model 文字自動縮排*/
 #show_content{
     word-wrap:break-word;
 }
 
+/*底下一大段是響應式排版*/
 
 /*電腦大螢幕*/
-
 @media only screen and (min-width: 993px) {
     #man{     
         position:absolute;  
@@ -78,8 +77,6 @@ body{
         height:48vh;  width:32vh;
     }
 
-
-
     .grid {
         padding-top:2%;
         padding-bottom :2%;
@@ -94,6 +91,13 @@ body{
     /*給那些排版會莫名噴錯的*/
     .special{
         margin-left:15%;      
+    }
+    .p_ugly{
+        padding-top:2%;
+        margin-left:21%;
+        grid-auto-rows: 60px;
+        grid-auto-columns:15%;
+        grid-gap: 5%; 
     }
 
         /*一連串的grid排版*/
@@ -168,21 +172,19 @@ body{
     }
     
     
-/*大學生研究生*/
+    /*大學生研究生按鈕*/
     h2{
         text-align:center;
         font-size:40px;
         margin-top:2%;
         
     }
-    h2 a:hover{
+    h2 a:hover,h2 a:active{
         color: white;
-        position: relative; 
-        top: 1px;
-        left: 1px;
         text-decoration:none;
         font-size:40px;
     }
+    
 
     /*變大*/
     .big{
@@ -196,8 +198,10 @@ body{
     }
     
 }
-/*點腦尺寸縮小，調字體，調長度*/   
+
+/*電腦螢幕縮小，調字體，調長度*/   
 @media only screen and (min-width: 768px) and (max-width: 993px) {
+    
     #man{     
         position:absolute;  
         z-index:1;
@@ -250,7 +254,14 @@ body{
         .special{
             margin-left:14%;         
         }
-        /*跟上面一樣，但不寫排版既沒了....找方法中*/
+        .p_ugly{
+            padding-top:2%;
+            margin-left:21%;
+            grid-auto-rows: 60px;
+            grid-auto-columns:15%;
+            grid-gap: 5%; 
+        }
+        /*跟上面一樣，但不寫排版既沒了....可用less*/
         .money {
             grid-area: 1 / 1 / span 1 / span 1;
         }
@@ -320,7 +331,7 @@ body{
         .second{
             grid-area: 1 / 3 / span 2 / span 2;
         }
-        /*大學生研究生*/
+        
     h2{
         text-align:center;
         font-size:40px;
@@ -335,13 +346,10 @@ body{
         text-decoration:none;
         font-size:40px;
     }
-
-    /*變大*/
     .big{
         font-size:40px;
         color: white;
         font-weight: bold;
-
     }
     .small{
         font-size:30px;
@@ -349,88 +357,12 @@ body{
     
         
 }
-/*那兩隻....*/
-@media only screen and (min-width: 7478px) and (max-width: 0px){
-    #man{     
-        position:absolute;  
-        z-index:1;
-        bottom:3.5vh;
-        right:30vw;	  
-    }
-    #space{
-        position:absolute;  
-        bottom:3vh;
-        left:30vw; 	
-    }
-    #man1{    
-        position:absolute;  
-        z-index:1;
-        bottom:3.6vh;
-        right:30vw;	   
-    }
-    #space1{
-        position:absolute;
-        bottom:1.5vh;
-        left:30vw	
-    }
-    #man {
-        height:25vh;  width:19vh;
-    }
-    #space {
-        height:42vh;  width:26vh;
-    }
-    #man1 {
-        height:25vh;  width:19vh;
-    }
-    #space1 {
-        height:42vh;  width:26vh;
-    }
-}
- 
-/*手機螢幕大小，新排版
-*/
- @media only screen and (min-width: 0px) and (max-width: 768px){
-    #man{     
-        position:absolute;  
-        z-index:1;
-        bottom:10vh;
-        right:20vw;	  
-    }
-    #space{
-        position:absolute;  
-        bottom:5vh;
-        left:20vw; 	
-    }
-    #man1{    
-        position:absolute;  
-        z-index:1;
-        bottom:12vh;
-        right:20vw;	   
-    }
-    #space1{
-        position:absolute;
-        bottom:6vh;
-        left:20vw	
-    }
-    #man {
-        height:25vh;  width:19vh;
-    }
-    #space {
-        height:42vh;  width:26vh;
-    }
-    #man1 {
-        height:25vh;  width:19vh;
-    }
-    #space1 {
-        height:42vh;  width:26vh;
-    }
-    a{
-     font-size: 18px;
-    }
-  
+
+/*為了處理那兩隻的電腦螢幕新排版....*/
+@media only screen and (min-width: 475px) and (max-width: 768px){
     .grid {
         padding-top:35px;
-        padding-bottom:50%;
+        padding-bottom:40%;
         display: grid;
         grid-auto-rows:70px;
         grid-auto-columns:30%;
@@ -438,7 +370,44 @@ body{
         margin-left:4%;
         grid-gap: 10px 10px;    
     }
-
+    #man{     
+        position:absolute;  
+        z-index:1;
+        bottom:2vh;
+        right:15vw;	  
+    }
+    #space{
+        position:absolute;  
+        bottom:2vh;
+        left:15vw; 	
+    }
+    #man1{    
+        position:absolute;  
+        z-index:1;
+        bottom:2vh;
+        right:15vw;	   
+    }
+    #space1{
+        position:absolute;
+        bottom:0vh;
+        left:15vw	
+    }
+    #man {
+        height:25vh;  width:19vh;
+    }
+    #space {
+        height:36vh;  width:25vh;
+    }
+    #man1 {
+        height:25vh;  width:19vh;
+    }
+    #space1 {
+        height:36vh;  width:25vh;
+    }
+    a{
+     font-size: 15px;
+    }
+  
     .p_grid {
         padding-top:2%;
         display: grid;
@@ -462,6 +431,173 @@ body{
     }
 
     /*新grid排版*/
+    .p_money {
+        grid-area: 1 / 1 / span 1 / span 1;
+      }
+    .p_notice{
+        grid-area: 1/ 2 / span 2 / span 2;
+    }
+    .p_bike{
+        grid-area: 2 / 1 / span 1 / span 1;
+    }
+    .p_enter{
+        grid-area: 3 / 1 / span 2 / span 1;
+    }
+    .p_room {
+        grid-area: 3 / 2 / span 1 / span 1;
+    }
+    .p_solider{
+        grid-area: 3 / 3 / span 1 / span 1;
+    }
+    .p_control{
+        grid-area: 4 / 2 / span 1 / span 2;
+    }
+
+    .a {
+        grid-area: 1 / 1 / span 1 / span 1;
+      }
+    .b {
+        grid-area: 1 / 2 / span 1 / span 1;
+    }
+    .c{
+        grid-area:  2/ 1 / span 1 / span 2;
+    }
+    .d{
+        grid-area: 3 / 1 / span 1 / span 1;
+    }
+    .e{
+        grid-area: 3 / 2 / span 1 / span 1;
+    }
+    .a2 {
+        grid-area: 4 / 1 / span 1 / span 1;
+      }
+    .b2 {
+        grid-area: 4 / 2 / span 1 / span 1;
+    }
+    .c2{
+        grid-area:  5/ 1 / span 1 / span 2;
+    }
+    .d2{
+        grid-area: 6 / 2 / span 1 / span 1;
+    }
+    .e2{
+        grid-area: 6 / 1 / span 1 / span 1;
+    }
+    .introduce {
+        grid-area: 4 / 1 / span 1 / span 1;
+      }
+    .lms {
+        grid-area: 4/ 2 / span 2 / span 1;
+    }
+    .portal{
+        grid-area:  5/ 1 / span 2 / span 1;
+    }
+    .ask{
+        grid-area: 6 / 2 / span 1 / span 1;
+    }
+    .first{
+        grid-area: 1 /  1/ span 1 / span 2;
+    }
+    .second{
+        grid-area: 2 / 1 / span 1 / span 2;
+    }
+    h2{
+        text-align:center;
+        font-size:25px;
+        margin-top:2%;
+        
+    }
+    /*字體大小有修*/
+    h2 a:hover{
+        color: white;
+        position: relative; 
+        top: 1px;
+        left: 1px;
+        text-decoration:none;
+        font-size:30px;
+    }
+    .big{
+        font-size:30px;
+        color: white;
+        font-weight: bold;
+
+    }
+    .small{
+        font-size:25px;
+    }
+    
+}
+/*手機螢幕大小*/
+ @media only screen  and (max-width: 475px){
+    #man{     
+        position:absolute;  
+        z-index:1;
+        bottom:2vh;
+        right:15vw;	  
+    }
+    #space{
+        position:absolute;  
+        bottom:2vh;
+        left:15vw; 	
+    }
+    #man1{    
+        position:absolute;  
+        z-index:1;
+        bottom:2vh;
+        right:15vw;	   
+    }
+    #space1{
+        position:absolute;
+        bottom:0vh;
+        left:15vw	
+    }
+    #man {
+        height:25vh;  width:19vh;
+    }
+    #space {
+        height:36vh;  width:25vh;
+    }
+    #man1 {
+        height:25vh;  width:19vh;
+    }
+    #space1 {
+        height:36vh;  width:25vh;
+    }
+    a{
+     font-size: 15px;
+    }
+  
+    .grid {
+        padding-top:35px;
+        padding-bottom:75%;
+        display: grid;
+        grid-auto-rows:70px;
+        grid-auto-columns:30%;
+        align-content:center;
+        margin-left:4%;
+        grid-gap: 10px 10px;    
+    }
+    .p_grid {
+        padding-top:2%;
+        display: grid;
+        grid-auto-rows: 90px;
+        grid-auto-columns:45%;
+        align-content:center;
+        margin-left:6%;
+        grid-gap: 10px 10px;
+        
+    }
+    /*研究生新生周活動的排版*/
+    .p_ugly {
+        padding-top:5%;
+        display: grid;
+        grid-auto-rows: 90px;
+        grid-auto-columns:40%;
+        align-content:center;
+        margin-left:12%;
+        grid-gap: 10px 20px;
+        
+    }
     .p_money {
         grid-area: 1 / 1 / span 1 / span 1;
       }
@@ -563,6 +699,9 @@ body{
 
 
 
+
+
+
 /*每個按鈕*/
 .box {
   background-color: beige;
@@ -571,14 +710,18 @@ body{
   
 }
 
-
-
 #tab{
-    padding-top:2%;
-    
+    padding-top:2%;   
+}
+
+/*標題、tab字*/    
+a{
+    color:black;
+    text-decoration:none;
 }
 
 
+/*按鈕動畫圖片*/
 .child {
     height: 100%;
     width: 100%;
@@ -592,11 +735,20 @@ body{
     display: flex;
     justify-content: center; 
     align-items: center;
-    border-radius: 8px; 
-    
+    border-radius: 6px;     
 }
-/*
-.big {
+
+.parent:hover .child, .parent:focus .child {
+    -ms-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
+    text-decoration: none;
+}
+
+/*抓按鈕過大的bug*/
+.toomuch {
     height: 100%;
     width: 100%;
     background-size: cover;
@@ -609,39 +761,22 @@ body{
     display: flex;
     justify-content: center; 
     align-items: center;
+    border-radius: 6px;
     
-}*/
-
-    
-a{
-    color:black;
-    text-decoration:none;
-
 }
 
-/*!!!!!還要用一個抓按鈕過大的bug*/
-
-.parent:hover .child, .parent:focus .child {
-    -ms-transform: scale(1.1);
-    -moz-transform: scale(1.1);
-    -webkit-transform: scale(1.1);
-    -o-transform: scale(1.1);
-    transform: scale(1.1);
+.parent:hover .toomuch, .parent:focus .toomuch{
+    -ms-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    -o-transform: scale(1.05);
+    transform: scale(1.05);
     text-decoration: none;
 }
-/*
-.big:hover{
-    -ms-transform: scale(1.1);
-    -moz-transform: scale(1.1);
-    -webkit-transform: scale(1.1);
-    -o-transform: scale(1.1);
-    transform: scale(1.1);
-    text-decoration: none;
-}*/
 
 
 /*為手機版設浮動按鈕固定下方*/
-@media only screen and (min-width: 0px) and (max-width: 530px){
+@media only screen and (min-width: 0px) and (max-width: 475px){
     .modal {
         overflow: hidden;
     }
@@ -667,13 +802,22 @@ a{
 
 
 
-.bg1 {background-color: #CCCCCC;}
+.bg1{background-color: #CCCCCC;}
 .bg2{background-color: #FFCC99;}
 .bg3{background-color: #FFFFCC}
 .bg4{background-color: #99CCFF}
 .bg5{background-color: #CCFFCC}
 .bg6{background-color: #CCCCFF}
 .bg7{background-color: #FFCCCC}
-
+.bg34{background-color: #CC9966;}
+.bg35{background-color: #CC99CC;}
+.bg36{background-color: #CCCCCC}
+.bg37{background-color: #6699FF}
+.bg38{background-color: #FFFFCC}
+.bg39{background-color: #669999}
+.bg40{background-color: #9999CC}
+/*
+.bg4{background-image:url("s_man2.png");background-color: #FFCCCC}
+*/
 
 
