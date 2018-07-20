@@ -9,7 +9,7 @@
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
     let x, n=0, nx=0, rotINT, rotate = 0, end = 1;
-    let currentid = "", currentcollege, currentbtnImg, lastbtnImg, currentbutton, QAvideoplay = 0;//currentid紀錄現在播到哪個影片
+    let currentid = "", currentcollege, currentopacity, currentcdsrc, currentbtnImg, lastbtnImg, currentbutton, QAvideoplay = 0;//currentid紀錄現在播到哪個影片
     //var allmove, move, moveINT, moveD = 0, i=0, moveend=1;
     //var player;
     //function onYouTubeIframeAPIReady() {player = new YT.Player('playser');}
@@ -35,12 +35,21 @@
     
      
     
-
+    let rsrc
     $(document).ready(() => {
         $(document).on("click",".rotate",function(event){//旋轉唱片盒
             if(end == 1){//end記錄唱片盒轉完了沒
                 if(rotate == 0){
-                    $('.rotate').html('影片');
+                    if($(window).width<414){
+                        $(this).html('影片');
+                    }
+                    else {
+                        $(this).attr("src", "button/影片.png");
+                        $(this).attr("picture", "button/影片");
+
+                        rsrc = "button/影片";
+                    }
+                    
                     if(currentid != ""){
                         player[currentid].pauseVideo();
                     }
@@ -48,7 +57,14 @@
                     //rotate = 1;
                 }
                 else{
-                    $('.rotate').html('簡介');
+                    if($(window).width<414){
+                        $(this).html('簡介');
+                    }
+                    else {
+                        $(this).attr("src", "button/影片介紹.png");
+                        $(this).attr("picture", "button/影片介紹");
+                        rsrc = "button/影片介紹";
+                    }
                     
                     //rotate = 0;
                 }
@@ -65,37 +81,40 @@
             }
         })
 
-        $('.video_item').mouseenter(function() {
-            if($(window).width()>=414){
-                // $('.sbtn').parent("td").css("display", "none");
-                // $('.sbtn').css("display", "none");
-                // $('.video_item_'+$(this).attr("video")).parent("td").css({"display": ""});
-                // console.log($('.video_item_'+$(this).attr("video")).css({"display": "block"}));
-                
-                // if($(this).attr("video") == "longvideo"){
-                //     for(let i = 1; i <= 5; i++){
-                //         console.log(".video_item_longvideo_"+ i);
-                //         console.log((i-1) *100);
-                        // $(".video_item_longvideo"+ i ).velocity({
-                        //     opacity:100
-                        // }, {
-                        //     duration: 100,
-                        //     delay: (i-1) *100
-                        // });
-                //     }
-                // }
-                // else if($(this).attr("video") == "QAvideo"){
-                //     for(let i = 1; i <= 8; i++){
-                        
-                //     }
-                // }
-                // else if($(this).attr("video") == "lifevideo"){
-                //     for(let i = 1; i <= 6; i++){
-                        
-                //     }
-                // }
-            }
-        })
+
+        if($(window).width()>=414){
+            
+            $('.box').mouseenter(function() {
+                $(".bigCD_position_in").css("opacity", "0");
+
+                console.log($(this).attr("cd"));
+                $(".bigCD_position_in").attr("src", $(this).attr("cdsrc"));
+                $(".bigCD").attr("src", $(this).attr("cdsrc"));
+                $(".bigCD").removeClass("bigCD_stop");
+                $(".bigCD").addClass("bigCD_move");
+
+                $("."+$(this).attr("cd")).removeClass("cd");
+                $("."+$(this).attr("cd")).addClass("remove_cd");
+            }).mouseleave(function () {
+                //console.log(currentopacity);
+                $(".bigCD_position_in").css("opacity", currentopacity);
+                $(".bigCD_position_in").attr("src", currentcdsrc);
+
+                $(".bigCD").removeClass("bigCD_move");
+                $(".bigCD").addClass("bigCD_stop");
+
+                $("."+$(this).attr("cd")).addClass("cd");
+                $("."+$(this).attr("cd")).removeClass("remove_cd");
+            })
+            
+            $('.rotate').mouseenter(function() {
+                rsrc = $(this).attr("picture");
+                $(this).attr("src", rsrc+"1.png")
+            }).mouseleave(function () {
+                $(this).attr("src", rsrc+".png")
+            })
+        }
+        
 
         $(document).on("click",".video_item",function(event){
             
@@ -106,6 +125,9 @@
             {
                 $(".sbtn").removeClass("btn-outline-item-click");
                 $(".sbtn").addClass("btn-outline-item");
+
+                
+
 
                 // $(".video_item_title, #scroll").animate({
                 //     scrollTop: 100
@@ -133,8 +155,9 @@
                 
                 
             }
-            else {
-
+            else if(this.id != "back") {
+                $(".bigCD_position_in").css("opacity", "0");
+                currentopacity = 0;
             }
 
             
@@ -152,10 +175,12 @@
                 $(this).addClass("btn-outline-item-click");
 
                 if(lastbtnImg && currentbtnImg && $(window).width()>=414){
-                    $(currentbutton).attr("src", lastbtnImg);
+                    // $(currentbutton).attr("src", lastbtnImg);
                     console.log("if0 "+currentbtnImg + " last:" + lastbtnImg)
+                    //$("."+$(currentbutton).attr("cd")).css("visibility", "visible");
                 }
                 $(".sbtn").removeClass("up");
+                $(".sbtn").css("visibility", "visible");
             }
             //$('.rotate').css("display", "none");
             //console.log($('.sbtn').parent("td"));
@@ -189,10 +214,12 @@
                 
                 if($(this).attr("college")!= currentcollege){
                     if(lastbtnImg && currentbtnImg && $(window).width()>=414){
-                        $(currentbutton).attr("src", lastbtnImg);
+                        // $(currentbutton).attr("src", lastbtnImg);
                         console.log("if1 "+currentbtnImg + " last:" + lastbtnImg)
+                        //$(currentbutton).css("visibility", "visible");
                     }
                     $(".sbtn").removeClass("up");
+                    $(".sbtn").css("visibility", "visible");
                 }
                 
                 //console.log(this);
@@ -214,6 +241,7 @@
                     
                     if(QAvideoplay == 1){
                         $('.rotate').css('display', "block");
+                        
                     }
 
                     if((this.id != "back") && (currentcollege != $(this).attr("college"))){
@@ -238,32 +266,46 @@
                         }
 
                         if(lastbtnImg && currentbtnImg &&  $(window).width()>=414 && this.id != "back"){
-                            $(currentbutton).attr("src", lastbtnImg);
-                            console.log("if3 "+ currentbtnImg + " last:" + lastbtnImg)
+                            // $(currentbutton).attr("src", lastbtnImg);
+                            console.log("if3 "+ currentbtnImg + " last:" + lastbtnImg);
+                            //$(currentbutton).css("visibility", "visible");
                         }
                         
                         //console.log($(this).id);
-                        $(".sbtn").removeClass("up");
+                        
                         if(this.id != "back"){
+                            
                             if($(window).width()>=414){
-                                lastbtnImg = $(this).attr("src");
-                                $(this).velocity({
-                                    opacity:0
-                                }, {
-                                    duration: 500,
-                                    complete:function(){
-                                        $(this).attr("src", "button/1/起源盒.png");
-                                        $(this).addClass("up");
-                                        $(this).velocity({
-                                            opacity:1
-                                        }, {
-                                            duration: 300,
-                                        });
-                                    } 
-                                });
+                                // lastbtnImg = $(this).attr("src");
+                                // $(this).velocity("stop").velocity({
+                                //     opacity:0
+                                // }, {
+                                //     duration: 500,
+                                //     complete:function(){
+                                //         $(this).attr("src", "button/1/起源盒.png");
+                                //         $(this).addClass("up");
+                                //         $(this).velocity({
+                                //             opacity:1
+                                //         }, {
+                                //             duration: 300,
+                                //         });
+                                //     } 
+                                // });
+                                $(".sbtn").removeClass("up");
+                                $(".sbtn").css("visibility", "visible");
+
+                                $("."+$(this).attr("cd")).addClass("up");
+                                // console.log($(this).attr("class"));
+                                // let currentclass = $(this).attr("class")
+                                // $("."+currentclass).addClass("up");
                                 // $(this).attr("src", "button/1/起源盒.png");
-                                currentbtnImg = $(this).attr("src");
-                                console.log("if4 "+ currentbtnImg + " last:" + lastbtnImg)
+
+                                $("."+$(this).attr("cd")).css("visibility", "hidden");
+                                $(".bigCD_position_in").css("opacity", "1");
+                                currentopacity = 1;
+                                currentcdsrc = $(".bigCD").attr("src");
+                                // currentbtnImg = $(this).attr("src");
+                                // console.log("if4 "+ currentbtnImg + " last:" + lastbtnImg)
                             }
                             
                             
@@ -279,23 +321,29 @@
                 }
                 else{
                     if($(window).width()>=414){
-                        lastbtnImg = $(this).attr("src");
-                        $(this).velocity({
-                            opacity:0
-                        }, {
-                            duration: 500,
-                            complete:function(){
-                                $(this).attr("src", "button/1/起源盒.png");
-                                $(this).addClass("up");
-                                $(this).velocity({
-                                    opacity:1
-                                }, {
-                                    duration: 300,
-                                });
-                            } 
-                        });
+                        // lastbtnImg = $(this).attr("src");
+                        // $(this).velocity("stop").velocity({
+                        //     opacity:0
+                        // }, {
+                        //     duration: 500,
+                        //     complete:function(){
+                        //         $(this).attr("src", "button/1/起源盒.png");
+                        //         $(this).addClass("up");
+                        //         $(this).velocity({
+                        //             opacity:1
+                        //         }, {
+                        //             duration: 300,
+                        //         });
+                        //     } 
+                        // });
+
+                        $("."+$(this).attr("cd")).addClass("up");
                         // $(this).attr("src", "button/1/起源盒.png");
-                        currentbtnImg = $(this).attr("src");
+                        $("."+$(this).attr("cd")).css("visibility", "hidden");
+                        $(".bigCD_position_in").css("opacity", "1");
+                        currentopacity = 1;
+                        currentcdsrc = $(".bigCD").attr("src");
+                        // currentbtnImg = $(this).attr("src");
                         console.log("if5 "+ currentbtnImg + " last:" + lastbtnImg)
                     }
 
@@ -325,6 +373,8 @@
             $("#"+ $(this).attr('ytID')).css("display", "block");
             $(".picture").css("display", "none");
             $("."+ $(this).attr('ytID')).css("display", "block");
+
+            $("#CDbox").css("background-image", "none")
                 
         })
 
