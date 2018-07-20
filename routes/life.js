@@ -2,6 +2,7 @@ var express = require('express');
 var request = require('request');
 var life = require('../models/life/life');
 var picture = require('../models/life/picture');
+var description = require('../models/life/description');
 var router = express.Router();
 var formidable = require('formidable');
 var multer = require('multer');
@@ -87,21 +88,38 @@ router.get('/entertainment', function(req, res, next){
 });
 
 router.post('/editPicture', upload.single('picture'), function(req, res, next){
-  var form = new formidable.IncomingForm();
-  form.parse(req, function(err, fields, files){
-    var cuted = req.file.path.split("/"),
-        pathed = cuted[2] + "/" + cuted[3];
-    var newPicture = new picture({
-        mainTitle : req.body.mainTitle,
-        subTitle  : req.body.subTitle,
-        path      : pathed
-    }).save();
+  var cuted = req.file.path.split("/"),
+      pathed = cuted[2] + "/" + cuted[3];
+  var newPicture = new picture({
+      mainTitle : req.body.mainTitle,
+      subTitle  : req.body.subTitle,
+      path      : pathed
+  }).save(function(err,doc){
+      if(err){ return next(err);}
+      console.log(doc);
+      res.redirect('back');
   });
-  res.redirect('back');
 });
 
 router.post('/editContent', function(req, res, next){
-
+  console.log(req.body);
+  description.find({mainTitle: req.body.mainTitle, subTitle: req.body.subTitle}, function(err, result){
+    if(err) next(err);
+    if(result.length == 0){
+      var newDesc = new description({
+        mainTitle   :   req.body.mainTitle,
+        subTitle    :   req.body.subTitle,
+        content     :   req.body.description
+      }).save();
+    }
+    else{
+      description.update({mainTitle: req.body.mainTitle, subTitle: req.body.subTitle},
+                         {content: req.body.description}, function(err, result){
+          if(err) next(err);
+      })
+    }
+  });
+  res.redirect('back');
 });
 
 router.post('/editTitle', function(req, res, next){
@@ -140,7 +158,13 @@ router.post('/showing', function(req, res, next){
       subTitled = req.body.subTitle;
   picture.find({mainTitle: mainTitled, subTitle: subTitled}, function(err, result){
     if(err) return next(err);
-    res.send(result);
+    description.findOne({mainTitle: mainTitled, subTitle: subTitled}, function(err, result2){
+      if(err) return next(err);
+      let tobesend = Object();
+      tobesend.res1 = result;
+      tobesend.res2 = result2;
+      res.send(tobesend);
+    });
   });
 });
 // router.post('/', function(req, res, next){

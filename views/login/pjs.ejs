@@ -1,0 +1,13 @@
+<script>
+    var url = new URL(window.location.href);
+    console.log(url.searchParams.get('id'));
+    $("input[name=id]").val(url.searchParams.get('id'))// = url.searchParams.get('id');
+    $(document).on("keypress",function(event){
+        if(event.keyCode === 13 ){
+            $("form:first").submit();
+        }
+    });
+    $(document).on("click","#btn",function(event){
+        $("form:first").submit(); 
+    });
+</script>

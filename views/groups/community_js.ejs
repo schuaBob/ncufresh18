@@ -1,6 +1,10 @@
 <script>
     $(document).ready(function(){
 
+        let y =$(window).height();
+        let h =(y-65)+"px"
+        document.body.style.setProperty('--height', h);
+
         CKEDITOR.replace('add_introduction',{
             filebrowserUploadUrl: '/uploader',
         });
@@ -18,6 +22,21 @@
             config.enterMode = CKEDITOR.ENTER_BR;
             config.autoParagraph = false;
         };
+        
+        $(window).resize(function(){
+            if($(window).width()<768){
+                $("#nav_ul").removeClass("flex-column");
+            }
+            else if($(window).width()>768){
+                $("#nav_ul").addClass("flex-column");
+            }
+        });
 
+        if($(window).width()<768){
+            $("#nav_ul").removeClass("flex-column");
+        }
+        else if($(window).width()>768){
+            $("#nav_ul").addClass("flex-column");
+        }
     });
 </script>

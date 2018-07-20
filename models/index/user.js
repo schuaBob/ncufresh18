@@ -2,38 +2,49 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 //User Schema
-var userSchema = mongoose.Schema({
+var UserSchema = mongoose.Schema({
     id: {
         type: String
     },
     password: {
         type: String
     },
+    //腳色
     role: {
-        type: String
+        type: String, default: "student"
     },
     name: {
         type: String
     },
     score_sum: {
-        type: String
+        type: Number,default: 0
     },
     score_high: {
-        type: String
+        type: Number, default: 0
     },
+    //圖片
     avatar: {
         type: String, default: "profile.png" 
     }
 });
+//Schema method for checking user login password hash with Bcrypt
+UserSchema.methods.comparePassword = (password, hash, callback) => {
+    bcrypt.compare(password, hash, function(err, isMatch){
+       if(err) throw err;
+       callback(null, isMatch);
+    });
+}
+//A UserSchema instance
+let tmp = mongoose.model('User', UserSchema);
 
-//export User schema
-module.exports = mongoose.model('User', userSchema);
-
-export const createUser = (newUser, callback) => {
+//Function for user object instance
+tmp.createUser = (User, callback) => {
     bcrypt.genSalt(10, function(err, salt) {
-      bcrypt.hash(newUser.password, salt, function(err, hash) {
-          newUser.password = hash;
-          newUser.save(callback);
+      bcrypt.hash(User.password, salt, function(err, hash) {
+          User.password = hash;
+          User.save(callback);
       });
     });
-  }
+}
+
+module.exports = tmp;

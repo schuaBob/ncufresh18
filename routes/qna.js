@@ -171,58 +171,40 @@ router.get('/search',function(req,res,next){
     //模糊查詢參數
     var query={};
     query['Title']=new RegExp(req.query.keyword);
-    Question.find(query ,function(err,question){
+    Question.find(query ,function(err,question,rule){
       if(err){return next(err)};
       //轉換時間欄位
       var Time = function(date) {
+        var year=date.getYear();
         var monthIndex = date.getMonth();
         var day = date.getDate();
-        var time = (++monthIndex) + '/' + day;
+        var time = (year+1900) + '/' + (++monthIndex) + '/' + day;
         return time;
       }
+      var rule=0;
       res.render('qna/index', { 
         title: '新生Ｑ＆Ａ ｜ 新生知訊網',
         question:question,
+        rule:rule,
         Time:Time
       });
     });
   }
 });
-//文章置頂功能
 
-/*紀錄點擊次數*/
-router.get('/:id', function(req, res, next) {
+/*紀錄問題點擊次數*/
+router.get('/clickQ/:id', function(req, res, next) {
   if(mongoose.Types.ObjectId.isValid(req.params.id)){
-    Rule.findById(req.params.id,function(err,rule){
+    Question.findById(req.params.id,function(err,question){
       if(err){return next(err)};
-      Question.findById(req.params.id,function(err,question){
-          if(err){return next(err)};
-          //找不到的話
-          if((question===null)&&(rule===null)){
-            return next();
-          }
-          else if((question!==null)&&(rule===null)){
-            question.Click++;
-            //儲存瀏覽次數
-            question.save(function(err) {
-              if (err){return next(err);}
-              // 回傳 title, content, answer
-              res.json({
-                click:question.Click
-              });
-            });
-          }
-          else if((question===null)&&(rule!==null)){
-            rule.Click++;
-            //儲存瀏覽次數
-            rule.save(function(err) {
-              if (err){return next(err);}
-              // 回傳 title, content, answer
-              res.json({
-                click:rule.Click
-              });
-            });
-          }  
+       //增加瀏覽次數
+       question.Click++;
+       //儲存瀏覽次數
+      question.save(function(err) {
+         if (err){return next(err);}
+         res.json({
+           click:question.Click
+         });
       });
     });
   }
@@ -230,8 +212,28 @@ router.get('/:id', function(req, res, next) {
     next();
   }
 });
-/*編輯答案跟板規*/
-router.post('/update/:id',function(req,res,next){
+/*紀錄板規點擊次數*/
+router.get('/clickR/:id', function(req, res, next) {
+  if(mongoose.Types.ObjectId.isValid(req.params.id)){
+    Rule.findById(req.params.id,function(err,rule){
+      if(err){return next(err)};
+       //增加瀏覽次數
+       rule.Click++;
+       //儲存瀏覽次數
+      rule.save(function(err) {
+         if (err){return next(err);}
+         res.json({
+           click:rule.Click
+         });
+      });
+    });
+  }
+  else{
+    next();
+  }
+});
+/*編輯答案*/
+router.post('/updateA/:id',function(req,res,next){
     if(mongoose.Types.ObjectId.isValid(req.params.id)){
           Question.findById(req.params.id).exec(function(err,result){
             if(err){return next(err)};
@@ -249,8 +251,27 @@ router.post('/update/:id',function(req,res,next){
           res.redirect('/qna');
   }
 });
+/*編輯板規*/
+router.post('/updateR/:id',function(req,res,next){
+  if(mongoose.Types.ObjectId.isValid(req.params.id)){
+        Rule.findById(req.params.id).exec(function(err,result){
+          if(err){return next(err)};
+          //if(result.Username===res.locals.username||req.session.type==="admin"){
+          if(req.body.Content){
+            Rule.update({_id:req.params.id}, {Content:req.body.Content},function(err){
+              if(err)
+                  console.log('Fail to update answer.');
+              else
+                  console.log('Done');
+            });
+          }    
+          //}
+        })   
+        res.redirect('/qna');
+}
+});
 /*刪除問題*/
-router.get('/delete/:id',function(req,res,next){
+router.get('/deleteQ/:id',function(req,res,next){
   /*沒登入導向到登入頁面*/
   /*if(!req.session.logined){
       res.redirect('/signin');
@@ -258,19 +279,47 @@ router.get('/delete/:id',function(req,res,next){
   //else{
       /*確定傳進來的是不是有效ID*/
       if(mongoose.Types.ObjectId.isValid(req.params.id)){
-          /*確定這篇文章是他發的或他是管理員*/
-          Question.findById(req.params.id).exec(function(err,result){
-              if(err){return next(err)};
-              /*真的有這篇文章*/
-              if(result!==null){
-                      /*刪除*/
-                      result.remove();
-                      res.json({ id: result._id });
-              }
-              else{
-                  res.redirect('/qna');
-              }
-          })
+        /*確定這篇文章是他發的或他是管理員*/
+        Question.findById(req.params.id).exec(function(err,result){
+          if(err){return next(err)};
+          /*真的有這篇文章*/
+          if(result!==null){
+                  /*刪除*/
+                  result.remove();
+                  res.json({ id: result._id });
+          }
+          else{
+              res.redirect('/qna');
+          }
+        })
+      }
+      else{
+        return next(err);
+      }
+  //}
+});
+/*刪除板規*/
+router.get('/deleteR/:id',function(req,res,next){
+  /*沒登入導向到登入頁面*/
+  /*if(!req.session.logined){
+      res.redirect('/signin');
+  }*/
+  //else{
+      /*確定傳進來的是不是有效ID*/
+      if(mongoose.Types.ObjectId.isValid(req.params.id)){
+        /*確定這篇文章是他發的或他是管理員*/
+        Rule.findById(req.params.id).exec(function(err,result){
+          if(err){return next(err)};
+          /*真的有這篇文章*/
+          if(result!==null){
+                  /*刪除*/
+                  result.remove();
+                  res.json({ id: result._id });
+          }
+          else{
+              res.redirect('/qna');
+          }
+        })
       }
       else{
         return next(err);

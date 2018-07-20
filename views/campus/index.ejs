@@ -49,13 +49,12 @@
                                                 <option value="1">系館</option>
                                                 <option value="2">運動</option>
                                                 <option value="3">餐廳</option>
-                                                <option value="4">商店&amp;郵局&amp;銀行</option>
+                                                <option value="4">設施</option>
                                                 <option value="5">住宿</option>
                                                 <option value="6">行政</option>
-                                                <option value="7">圖書館</option>
-                                                <option value="8">藝文中心&amp;活動場地</option>
-                                                <option value="9">醫療&amp;緊急電話</option>
-                                                <option value="10">景點</option>
+                                                <option value="7">活動場地</option>
+                                                <option value="8">緊急醫療</option>
+                                                
                                             </select>
                                         </div>
                                     </div>
@@ -83,17 +82,25 @@
                     </div>
                 </div>
             </div>
-
+            
             <button>
                 <a href="editElement">編輯物件</a>
             </button>
-
+            
+        </div>
+        <div class="main_list_detail">
+            <ul>
+                <h3 class="listtitle"></h3>
+                <%for (let i in result) {-%>
+                <li class="elelist" val="<%=result[i]['Type']%>"><%=result[i]['Element_Name']%></li>
+                <%}-%>
+            </ul>
         </div>
         <div class="Mainmap">
             <div class="mapmove">
                 <%for (let i in result) {-%>
                     <% if (result[i]['Buildpic'] != "") {-%>
-                        <img href="#" title="<%=result[i]['Element_Name']%>" class="indexelepic" src="<%=result[i]['Buildpic']%>" alt="<%=result[i]['_id']%>" style="top: <%=result[i]['X_position']%>%;left: <%=result[i]['Y_position']%>%; width: <%=result[i]['Size']%>%;">
+                        <img href="#" title="<%=result[i]['Element_Name']%>" class="indexelepic type<%=result[i]['Type']%>" src="<%=result[i]['Buildpic']%>" alt="<%=result[i]['_id']%>" style="top: <%=result[i]['X_position']%>%;left: <%=result[i]['Y_position']%>%; width: <%=result[i]['Size']%>%;">
                     <%}-%>
                 <%}-%>
 
@@ -102,35 +109,29 @@
         </div>
         <div class="Main_list ">
             <ul id="List_index">
-                <li>
-                    <a class="Main_listele1">系館</a>
+                <li class="Main_listele1">
+                    系館
                 </li>
-                <li>
-                    <a class="Main_listele2">運動</a>
+                <li class="Main_listele2">
+                    運動
                 </li>
-                <li>
-                    <a class="Main_listele3">餐廳</a>
+                <li class="Main_listele3">
+                    餐廳
                 </li>
-                <li>
-                    <a class="Main_listele4">設施</a>
+                <li class="Main_listele4">
+                    設施
                 </li>
-                <li>
-                    <a class="Main_listele5">住宿</a>
+                <li class="Main_listele5">
+                    住宿
                 </li>
-                <li>
-                    <a class="Main_listele6">行政</a>
+                <li class="Main_listele6">
+                    行政
                 </li>
-                <li>
-                    <a class="Main_listele7">圖書館</a>
+                <li class="Main_listele7">
+                    活動場地
                 </li>
-                <li>
-                    <a class="Main_listele8">藝文活動</a>
-                </li>
-                <li>
-                    <a class="Main_listele9">醫療緊急</a>
-                </li>
-                <li>
-                    <a class="Main_listele10">景點</a>
+                <li class="Main_listele8">
+                    緊急醫療
                 </li>
             </ul>
         </div>

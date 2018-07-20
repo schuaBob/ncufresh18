@@ -2,13 +2,40 @@
 <html>
 <head>
     <% include ../layout/head %>
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
     <header>
         <% include ../layout/navbar %>
     </header>
     <main>
-        <h1><%= title %></h1>
+        <table>
+            <tr>
+                <div id="picture"></div>
+            </tr>
+            <tr>
+                <td>
+                    <div id="empty"></div>
+                </td>
+                <td>
+                    <div id="score"></div>
+                </td>
+                <td>
+                    <div id="writing"></div>
+                </td>
+                <td>
+                    <div id="box">
+                        <img src="小遊戲.png" id="btn">
+                    </div>
+                    <div id="box">
+                        <img src="我要發問.png" id="btn">
+                    </div>
+                    <div id="box">
+                        <img src="調查問卷.png" id="btn">
+                    </div>
+                </td>
+            </tr>
+        </table>
     </main>
     <footer>
         <% include ../layout/footer %>

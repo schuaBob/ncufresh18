@@ -1,8 +1,3 @@
-#modal_button{ 
-    border-style:outset;
-    padding-top:13px; 
-    padding-bottom: 13px;
-}
 
 ul{
     float:left;
@@ -13,12 +8,33 @@ ul{
     margin-left: 5%;
     padding: 20px;
 }
-p{
+h6{
     margin-top: 2%;
-    margin-left: 30%;
+    margin-left: 18%;
+    border-left: 6px solid lightgreen;
+    border-bottom: 40px;
+    background-color: rgb(250, 250, 221);
+    font-size: 17px;
+    border-spacing:50px;
+    padding-left:10px; 
+    width: 100%;
+    word-wrap: break-word;
+    max-width: 550px;
+    max-height: 300px;
+    overflow-y: auto;
+    line-height: 26px;
+    letter-spacing: 1px;
+}
+
+h3{
+    color: rgb(32, 243, 180);
+    font-size: 40px;
+    margin-left: 2%;
 }
 h5{
-    margin-left: 20%;
+    margin-left: 18%;
+    color: white;
+    font-size: 30px;
 }
 
 .typelearn_name{
@@ -50,19 +66,19 @@ button:hover {
     color: white;
 }
 
-table{
+#menu{
     float: right;
     background-color: papayawhip;
     margin-right: 20%;
     margin-top: 3%;
 }
 
-thead{
+#menu_head{
     text-align: center;
     font-size:20px;
 }
 
-tbody{
+#menu_body{
     float:center;
     display: block;
     height: 195px;
@@ -71,20 +87,20 @@ tbody{
     text-align: left;
 }
 
-table, th {
+#menu, #menu_th {
     border: 1px solid darkgray;
 }
 
-td{
+#menu_td{
     width:200px;
     float: left;
 }
 
 #carouselExampleIndicators{
-    width: 40%;
-    height: 40%;
+    max-width: 400px;
+    max-height: 300px;
     float: left;
-    margin-left: 10%;
+    margin-left: 18%;
 }
 
 /* ol{
@@ -96,8 +112,7 @@ td{
 }
 
 #carouselExampleIndicator{
-    width: 40%;
-    height: 40%;
+    
     float: left;
     margin-left: 10%;
 }
@@ -105,4 +120,87 @@ td{
 #bread{
     opacity: 0.8;
     width: 23%;
+}
+
+.modal-content{
+    background-image: url(彈出視窗背景.png);
+}
+
+.modal{
+  margin-top: 5%;  
+}
+
+#modal_button{ 
+    margin-top: 8px;
+    width: 90px;
+    padding-top:8px; 
+    padding-bottom: 8px;
+    border-radius: 10%;
+    text-align: center;
+}
+
+#nav_a{
+    font-size: 17px;
+    color: white;
+}
+
+#nav_ul{
+    margin-top: 8%;
+}
+
+#modal_button:hover{
+    box-shadow: 0 14px 20px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+
+}
+
+@media screen and (max-width: 768px){
+    .modal{
+        margin-top: 5%;
+    }
+    .modal .modal-body {
+        height: var(--height);
+        overflow: auto;
+    }
+    #nav_a{
+        font-size: 12px;
+    }
+    #modal_button{ 
+        margin-top: 3px;
+        width: 60px;
+        border-radius: 10%;
+        text-align: center;
+    }
+    #nav_ul{
+        margin-top: 2%;
+        margin-left: 18%;
+        overflow-x: scroll;
+    }
+    h5{
+        margin-left: 6%;
+        font-size: 15px;
+        margin-top:12%;
+    }
+    h6{
+        margin-top: 2%;
+        margin-left: 5%;
+        border-left: 6px solid lightgreen;
+        border-bottom: 40px;
+        background-color: rgb(250, 250, 221);
+        font-size: 14px;
+        border-spacing:50px;
+        padding-left:10px; 
+        width: 100%;
+        word-wrap: break-word;
+        max-width: 280px;
+        max-height: 300px;
+        overflow-y: auto;
+        line-height: 26px;
+        letter-spacing: 1px;
+    }
+    #carouselExampleIndicators{
+        max-width: 400px;
+        max-height: 300px;
+        float: left;
+        margin-left: 5%;
+    }
 }

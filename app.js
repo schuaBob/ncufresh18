@@ -15,20 +15,6 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/ncufresh18');
 
-//Passport
-const passport = require('passport');
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-passport.deserializeUser(function(id, done) {
-  UserModel.findById(id, function(err, user) {
-      done(err, user);
-  })
-});
-
 //validator
 const expressValidator = require('express-validator');
 app.use(expressValidator({
@@ -67,8 +53,14 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser("NcuFresh18"));
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+//Passport (MUST BEHIND VIEW ENGINE SETUP)
+const passport = require('passport');
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Pages
 var index = require('./routes/index');

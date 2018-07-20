@@ -68,7 +68,7 @@
                                 <option value="26大氣">快問快答-大氣科學學系</option>
                                 <option value="27客家">快問快答-客家語文暨社會科學學系</option>
                                 <option value="28生科">快問快答-生命科學系</option>
-                                <option value="28醫工">快問快答-生醫科學與工程學系</option>
+                                <option value="28生醫">快問快答-生醫科學與工程學系</option>
                                 <option value="3食">悠遊中大-食</option>
                                 <option value="3住">悠遊中大-住</option>
                                 <option value="3行">悠遊中大-行</option>
@@ -96,11 +96,11 @@
             </div>
             <div class="CDpicture"><!--介紹圖片-->
                 <% for(let i = 0;　i<video.length;　i++){ %>
-                    <img class="<%= video[i].insert %> picture"  src='<%= video[i].type %>/<%= video[i].title %>.jpg'>
+                    <img class="<%= video[i].insert %> picture"  src='<%= video[i].type %>/<%= video[i].title %>.png'>
                 <% } %>
             </div>
             </div>
-            <button type="button" class="rotate btn btn-outline-info-qq sbtn">簡介</button>
+            <button type="button" class="rotate btn-outline-title sbtn">簡介</button>
         </div>
        
 
@@ -110,13 +110,13 @@
 
         <table class="video_item_title_allvideo ">
             <td>
-                <button type="button" video="longvideo" class="video_item btn btn-outline-info-qq turn  longvideo">中大長劇</button>
+                <button type="button" video="longvideo" class="video_item btn-outline-title turn  longvideo">中大長劇</button>
             </td>
             <td>
-                <button type="button" video="QAvideo" class="video_item btn btn-outline-info-qq turn  QAvideo">快問快答</button>
+                <button type="button" video="QAvideo" class="video_item btn-outline-title turn  QAvideo">快問快答</button>
             </td>
             <td>
-                <button type="button"  video="lifevideo" class="video_item btn btn-outline-info-qq turn lifevideo">悠遊中大</button>
+                <button type="button"  video="lifevideo" class="video_item btn-outline-title turn lifevideo">悠遊中大</button>
             </td>
         </table>
 
@@ -124,28 +124,19 @@
         <div class="computer">
             <table class="video_item_title ">
                 <% for(let i = 0; i<longvideo.length; i++){ %>
-                    <td><img src="button/1/<%= longvideo[i].title %>.png" i=<%= i %> ytID='<%= longvideo[i].insert %>' class='item video_item_longvideo sbtn ssbtn turn'></td>
+                    <td><img src="button/1/<%= longvideo[i].title %>.png" i=<%= i %> ytID='<%= longvideo[i].insert %>' class='item video_item_longvideo video_item_longvideo_<%= i+1 %> sbtn ssbtn turn'></td>
                 <% } %>
                 <% for(let i = 0; i<QAvideo.length; i++){ %>
                     <td><img src="button/2/<%= QAvideo[i].title %>.png" video="QAvideo" i=<%= i %> href="#<%= QAvideo[i].title %>" ytID='<%= QAvideo[i].insert %>' class='item video_item_QAvideo_<%= QAvideo[i].college %> video_item_QAvideo_dep sbtn ssbtn turn'></td>
                 <% } %>
                 <% for(let i = 0; i<lifevideo.length; i++){ %>
-                    <td><img src="button/3/<%= lifevideo[i].title %>.png" video="lifevideo" i=<%= i %> ytID='<%= lifevideo[i].insert %>' class='item video_item_lifevideo sbtn ssbtn turn'></td>
+                    <td><img src="button/3/<%= lifevideo[i].title %>.png" video="lifevideo" i=<%= i %> ytID='<%= lifevideo[i].insert %>' class='item video_item_lifevideo  video_item_lifevideo_<%= i+1 %> sbtn ssbtn turn'></td>
                 <% } %>
 
                 <% for(let i = 1; i<9; i++){ %>
-                        <td><img src="button/c<%= i %>.png" video="QAvideo" class='item video_item_QAvideo sbtn turn' college='c<%= i %>'></td>
+                        <td><img src="button/c<%= i %>.png" video="QAvideo" class='item video_item_QAvideo  video_item_QAvideo_<%= i %> sbtn turn' college='c<%= i %>'></td>
                 <% } %>
-                <!-- <td><img src="button/c1.png" video="QAvideo" class='item video_item_QAvideo sbtn turn' college='c1'></td>
-                <td><img src="button/c2.png" video="QAvideo" class='item video_item_QAvideo sbtn turn' college='c2'></td>
-                <td><img src="button/c3.png" video="QAvideo" class='item video_item_QAvideo sbtn turn' college='c3'></td>
-                <td><img src="button/c4.png" video="QAvideo" class='item video_item_QAvideo sbtn turn' college='c4'></td>
-                <td><img src="button/c5.png" video="QAvideo" class='item video_item_QAvideo sbtn turn' college='c5'></td>
-                <td><img src="button/c6.png" video="QAvideo" class='item video_item_QAvideo sbtn turn' college='c6'></td>
-                <td><img src="button/c7.png" video="QAvideo" class='item video_item_QAvideo sbtn turn' college='c7'></td>
-                <td><img src="button/c8.png" video="QAvideo" class='item video_item_QAvideo sbtn turn' college='c8'></td> -->
-                
-                <td><button type="button" video="QAvideo" class="item video_item_QAvideo_c1 video_item_QAvideo_c2 video_item_QAvideo_c3 video_item_QAvideo_c4 video_item_QAvideo_c5 video_item_QAvideo_c6 video_item_QAvideo_c7 video_item_QAvideo_c8 sbtn video_item" id="back">返回</button></td>
+                <td><img src="button/返回.png" video="QAvideo" class="item video_item_QAvideo_c1 video_item_QAvideo_c2 video_item_QAvideo_c3 video_item_QAvideo_c4 video_item_QAvideo_c5 video_item_QAvideo_c6 video_item_QAvideo_c7 video_item_QAvideo_c8 sbtn video_item" id="back"></td>
             </table>
         </div>
 
@@ -154,27 +145,27 @@
             <table class="video_item_title" id="scrolltable">
                 <tbody id="scroll">
                     <tr>
-                        <!-- <td id="scrolltd"><button type='button' disabled class='video_item_QAvideo video_item_lifevideo item btn sbtn btn-outline-secondary-qq turn video_item_longvideo  video_item_QAvideo_c1 video_item_QAvideo_c2 video_item_QAvideo_c3 video_item_QAvideo_c4 video_item_QAvideo_c5 video_item_QAvideo_c6 video_item_QAvideo_c7 video_item_QAvideo_c8'>文學院</button></td> -->
+                        <!-- <td id="scrolltd"><button type='button' disabled class='video_item_QAvideo video_item_lifevideo item btn sbtn btn-outline-item turn video_item_longvideo  video_item_QAvideo_c1 video_item_QAvideo_c2 video_item_QAvideo_c3 video_item_QAvideo_c4 video_item_QAvideo_c5 video_item_QAvideo_c6 video_item_QAvideo_c7 video_item_QAvideo_c8'>文學院</button></td> -->
                         <% for(let i = 0; i<longvideo.length; i++){ %>
-                            <td><button i=<%= i %> type='button' ytID='<%= longvideo[i].insert %>' class='item video_item_longvideo btn sbtn ssbtn btn-outline-secondary-qq turn'><%= longvideo[i].title %></button></td>
+                            <td><button i=<%= i %> type='button' ytID='<%= longvideo[i].insert %>' class='item video_item_longvideo sbtn ssbtn btn-outline-item turn'><%= longvideo[i].title %></button></td>
                         <% } %>
                         <% for(let i = 0; i<QAvideo.length; i++){ %>
-                            <td><button i=<%= i %> type='button' href="#<%= QAvideo[i].title %>" ytID='<%= QAvideo[i].insert %>' class='item video_item_QAvideo_<%= QAvideo[i].college %> video_item_QAvideo_dep btn sbtn ssbtn btn-outline-secondary-qq turn'><%= QAvideo[i].title %></button></td>
+                            <td><button i=<%= i %> type='button' href="#<%= QAvideo[i].title %>" ytID='<%= QAvideo[i].insert %>' class='item video_item_QAvideo_<%= QAvideo[i].college %> video_item_QAvideo_dep sbtn ssbtn btn-outline-item turn'><%= QAvideo[i].title %></button></td>
                         <% } %>
                         <% for(let i = 0; i<lifevideo.length; i++){ %>
-                            <td><button i=<%= i %> type='button' ytID='<%= lifevideo[i].insert %>' class='item video_item_lifevideo btn sbtn ssbtn btn-outline-secondary-qq turn'><%= lifevideo[i].title %></button></td>
+                            <td><button i=<%= i %> type='button' ytID='<%= lifevideo[i].insert %>' class='item video_item_lifevideo sbtn ssbtn btn-outline-item turn'><%= lifevideo[i].title %></button></td>
                         <% } %>
     
-                        <td><button type='button' video="QAvideo" class='item video_item_QAvideo btn sbtn btn-outline-secondary-qq turn' college='c1'>文學院</button></td>
-                        <td><button type='button' video="QAvideo" class='item video_item_QAvideo btn sbtn btn-outline-secondary-qq turn' college='c2'>理學院</button></td>
-                        <td><button type='button' video="QAvideo" class='item video_item_QAvideo btn sbtn btn-outline-secondary-qq turn' college='c3'>工學院</button></td>
-                        <td><button type='button' video="QAvideo" class='item video_item_QAvideo btn sbtn btn-outline-secondary-qq turn' college='c4'>管理學院</button></td>
-                        <td><button type='button' video="QAvideo" class='item video_item_QAvideo btn sbtn btn-outline-secondary-qq turn' college='c5'>資訊電機學院</button></td>
-                        <td><button type='button' video="QAvideo" class='item video_item_QAvideo btn sbtn btn-outline-secondary-qq turn' college='c6'>地球科學學院</button></td>
-                        <td><button type='button' video="QAvideo" class='item video_item_QAvideo btn sbtn btn-outline-secondary-qq turn' college='c7'>客家學院</button></td>
-                        <td><button type='button' video="QAvideo" class='item video_item_QAvideo btn sbtn btn-outline-secondary-qq turn' college='c8'>生醫理工學院</button></td>
+                        <td><button type='button' video="QAvideo" class='item video_item_QAvideo sbtn btn-outline-item turn' college='c1'>文學院</button></td>
+                        <td><button type='button' video="QAvideo" class='item video_item_QAvideo sbtn btn-outline-item turn' college='c2'>理學院</button></td>
+                        <td><button type='button' video="QAvideo" class='item video_item_QAvideo sbtn btn-outline-item turn' college='c3'>工學院</button></td>
+                        <td><button type='button' video="QAvideo" class='item video_item_QAvideo sbtn btn-outline-item turn' college='c4'>管理學院</button></td>
+                        <td><button type='button' video="QAvideo" class='item video_item_QAvideo sbtn btn-outline-item turn' college='c5'>資訊電機學院</button></td>
+                        <td><button type='button' video="QAvideo" class='item video_item_QAvideo sbtn btn-outline-item turn' college='c6'>地球科學學院</button></td>
+                        <td><button type='button' video="QAvideo" class='item video_item_QAvideo sbtn btn-outline-item turn' college='c7'>客家學院</button></td>
+                        <td><button type='button' video="QAvideo" class='item video_item_QAvideo sbtn btn-outline-item turn' college='c8'>生醫理工學院</button></td>
                         
-                        <td><button type="button" video="QAvideo" class="item video_item_QAvideo_c1 video_item_QAvideo_c2 video_item_QAvideo_c3 video_item_QAvideo_c4 video_item_QAvideo_c5 video_item_QAvideo_c6 video_item_QAvideo_c7 video_item_QAvideo_c8 btn sbtn video_item" id="back">返回</button></td>
+                        <td><button type="button" video="QAvideo" class="item video_item_QAvideo_c1 video_item_QAvideo_c2 video_item_QAvideo_c3 video_item_QAvideo_c4 video_item_QAvideo_c5 video_item_QAvideo_c6 video_item_QAvideo_c7 video_item_QAvideo_c8 sbtn video_item" id="back">返回</button></td>
                     </tr>
                     
                 </tbody>
