@@ -6,7 +6,7 @@ var Document = require('../models/document/document');
 /* 新生必讀首頁 */
 router.get('/', function(req, res, next) {
  
-    res.render('documents/index', { title: '新生必讀',  });
+    res.render('documents/index', { title: '新生必讀',user:req.user  });
  // })
 });
 
@@ -32,7 +32,7 @@ router.post('/edit/:id', function(req, res, next) {
             console.log('Save to DB.');
     }); 
   
-res.redirect('/documents');
+
 });
 
 

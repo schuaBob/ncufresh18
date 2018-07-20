@@ -123,10 +123,10 @@
        
 
 
-
+    <%_ if (user && user.role === 'admin'){-%>
        
         $(".box").mousedown(function () {
-            
+            $("header").hide();
             //抓按下按鈕的id
             let count = 0;
             let textid = this.id;
@@ -147,7 +147,14 @@
                     CKEDITOR.instances.edit_content.setData(data.content);
                 }
             });
+
+            $("#save").click(function(){
+                $("#edit").modal("hide");
+                $("header").show();
+            });
+                            
         });
+    <%_ } -%>
 
         //使用者
         $(".box").mousedown(function () {
