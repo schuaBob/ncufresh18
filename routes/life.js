@@ -42,7 +42,7 @@ router.get('/', function(req, res, next){
           desc = weather.desc,
           humidity = weather.humidity;
       res.render('life/index', { title: '中大生活', temperature: temp, error: " ",
-                                 desc: desc, humidity: humidity});
+                                 desc: desc, humidity: humidity, user: req.user});
     }
   });
 });
@@ -51,7 +51,7 @@ router.get('/food', function(req, res, next){
   var type = req.url;
   type = type.substr(1);
   life.find({}, function(err, data){
-    res.render('life/food', { title: '食', life: data, page: type, num: match_num[type]});
+    res.render('life/food', { title: '食', life: data, page: type, num: match_num[type], user: req.user});
   });
 });
 
@@ -59,7 +59,7 @@ router.get('/dorm', function(req, res, next){
   var type = req.url;
   type = type.substr(1);
   life.find({}, function(err, data){
-     res.render('life/dorm', { title: '住', life: data, page: type, num: match_num[type]});
+     res.render('life/dorm', { title: '住', life: data, page: type, num: match_num[type], user: req.user});
    });
 });
 
@@ -67,7 +67,7 @@ router.get('/comm', function(req, res, next){
   var type = req.url;
   type = type.substr(1);
   life.find({}, function(err, data){
-    res.render('life/comm', { title: '行', life: data, page: type, num: match_num[type]});
+    res.render('life/comm', { title: '行', life: data, page: type, num: match_num[type], user: req.user});
   });
 });
 
@@ -75,7 +75,7 @@ router.get('/edu', function(req, res, next){
   var type = req.url;
   type = type.substr(1);
   life.find({}, function(err, data){
-    res.render('life/edu', { title: '育', life: data, page: type, num: match_num[type]});
+    res.render('life/edu', { title: '育', life: data, page: type, num: match_num[type], user: req.user});
   });
 });
 
@@ -83,7 +83,7 @@ router.get('/entertainment', function(req, res, next){
   var type = req.url;
   type = type.substr(1);
   life.find({}, function(err, data){
-    res.render('life/entertainment', { title: '樂', life: data, page: type, num: match_num[type]});
+    res.render('life/entertainment', { title: '樂', life: data, page: type, num: match_num[type], user: req.user});
   });
 });
 
