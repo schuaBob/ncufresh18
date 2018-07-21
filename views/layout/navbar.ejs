@@ -33,6 +33,7 @@
                 <a class="nav-link text-white" href="/personal">個人專區</a>
             </li>
             <li class="nav-item">
+                <%_ /* 就是這裡在雷 by Andre Lin */ -%>
                 <%_ if (user){ -%>
                 <a class="nav-link text-white" href="/logout"><% if (user.role === 'admin'){ %>管理登出<% }else{ %>登出<%}%></a>
                 <%_ }else{ -%>
