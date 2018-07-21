@@ -91,7 +91,7 @@ router.get('/delete_news/:id', (req, res, next) => {
 
 /* login page */
 router.get('/login', function (req, res, next) {
-  res.render('login/login', { title: '登入', req: req });
+  res.render('login/login', { title: '登入', user: req.user });
 });
 
 
