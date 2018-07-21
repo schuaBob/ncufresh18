@@ -8,6 +8,7 @@ const PORTAL_CLIENT_SECRET = "5e7a8fbddb8f00a3c4c46defd331d412733f08bf893a8194a2
 
 //User schema
 var Users = require('../models/index/user');
+var news = require('../models/index/news');
 
 //passport
 var passport = require('passport');
@@ -50,9 +51,43 @@ passport.deserializeUser(function (id, done) {
 
 /* home page */
 router.get('/', function (req, res, next) {
-  //console.log(req);
   res.render('index/index', { title: '首頁', user: req.user });
 });
+
+/* home page administer page */
+router.get('/index_admin', (req, res, next) => {
+  news.find().exec((err, result) => {
+    if (err) return next(err);
+    res.render("index/index_admin", { title : "編輯首頁的頁面", user : req.user, news : result});
+  })
+})
+
+/* add news */
+router.post('/add_news', (req, res, next) => {
+  new news({
+    time    : new Date(req.body.date),
+    title   : req.body.title,
+    content : req.body.content,
+  }).save((err) => {
+    if (err) return next(err);
+    res.redirect('index_admin');
+  })
+})
+
+/* edit news page */
+router.get('/edit_news/:id', (req, res, next) => {
+  res.render("index/edit_news", { title : "編輯最新消息頁面", user : req.user});
+})
+
+/* update latest-post */
+router.post('/edit_news/:id', (req, res, next) => {
+  res.redirect('index_admin');
+})
+
+/* delete latest-post */
+router.get('/delete_news/:id', (req, res, next) => {
+  res.redirect('index_admin');
+})
 
 /* login page */
 router.get('/login', function (req, res, next) {

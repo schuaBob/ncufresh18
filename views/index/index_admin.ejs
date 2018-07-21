@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../layout/head %>
+</head>
+<body>
+    <header>
+        <% include ../layout/navbar %>
+    </header>
+    <main>
+        <h1>管理最新消息</h1>
+        <table border="solid">
+            <thead>
+                <tr>
+                    <th>時間</th>
+                    <th>標題</th>
+                    <th>內容</th>
+                    <th>修改</th>
+                    <th>刪除</th>
+                </tr>
+            </thead>
+            <tbody>
+            <%_ for (let i = 0;i<news.length;i++){ -%>
+                <tr>
+                    <td><%= news[i].time %></td>
+                    <td><%= news[i].title %></td>
+                    <td><%= news[i].content %></td>
+                    <td><button>編輯</button></td>
+                    <td><button>刪除</button></td>
+                </tr>    
+            <%_ } -%>
+            </tbody>
+        </table>
+        <form action="add_news" method="post">
+            <label for="date">日期</label>
+            <input type="date" name="date" required><br>
+            <label for="title">標題</label>
+            <input type="text" name="title" required><br>
+            <label for="content">內文</label>
+            <textarea name="content" id="content" required></textarea>
+        </form>
+    </main>
+    <footer>
+        <% include ../layout/footer %>
+    </footer>
+    <% include ../layout/js %>
+    <script>
+        CKEDITOR.replace('content',{
+            filebrowserUploadUrl: '/uploader',
+        });
+        CKEDITOR.editorConfig = function (config){
+            config.enterMode = CKEDITOR.ENTER_BR;
+            config.autoParagraph = false;
+        };
+    </script>
+</body>
+</html>
