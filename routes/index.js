@@ -12,6 +12,8 @@ var Users = require('../models/index/user');
 var news = require('../models/index/news');
 var schedule = require('../models/index/schedule');
 
+var checkUser = require('./check-user');
+
 //passport
 var passport = require('passport');
 let LocalStrategy = require('passport-local').Strategy;
@@ -379,18 +381,5 @@ router.post('/register', function (req, res) {
 router.get('/comingsoon', function (req, res, next) {
   res.render('comingsoon/index', { title: '倒數' });
 });
-
-//Passport isAuthenticated wrapper
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated())
-    res.redirect('/');
-  return next();
-}
-
-function isAdmin(req, res, next) {
-  if (req.isAuthenticated() && req.user.role === 'admin')
-    return next();
-  res.redirect('/');
-}
 
 module.exports = router;
