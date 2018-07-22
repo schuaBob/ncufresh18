@@ -6,9 +6,13 @@ var request = require('request');
 const PORTAL_CLIENT_ID = "Nzc3NzY0MmYtMDM2Ny00MjJhLWIxZTAtYTJmYzFlMDQyYzY4";
 const PORTAL_CLIENT_SECRET = "5e7a8fbddb8f00a3c4c46defd331d412733f08bf893a8194a236fe915c57d11255e1b6c21567fe0c60647e1996a64cf1e6bd302163f18f978c23f0008356c5e7";
 
-//User schema
+var mongoose = require('mongoose');
+//schema
 var Users = require('../models/index/user');
 var news = require('../models/index/news');
+var schedule = require('../models/index/schedule');
+
+var checkUser = require('./check-user');
 
 //passport
 var passport = require('passport');
@@ -56,16 +60,24 @@ router.get('/', function (req, res, next) {
 
 /* home page administer page */
 router.get('/index_admin', (req, res, next) => {
-  news.find().exec((err, result) => {
-    if (err) return next(err);
-    res.render("index/index_admin", { title : "編輯首頁的頁面", user : req.user, news : result});
+  Promise.all([
+    news.find().exec(),
+    schedule.find().exec()
+  ]).then((result) => {
+    res.render("index/index_admin", { title : "編輯首頁的頁面", user : req.user, news : result[0], schedule : result[1]});
+  }).catch((err) => {
+    return next(err);
   })
 })
 
 /* add news */
 router.post('/add_news', (req, res, next) => {
+  let temp = new Date(req.body.time);
+  if (isNaN(temp.getTime())) {  // date is not valid
+    return res.redirect('index_admin');
+  }
   new news({
-    time    : new Date(req.body.date),
+    time    : temp,
     title   : req.body.title,
     content : req.body.content,
   }).save((err) => {
@@ -76,17 +88,111 @@ router.post('/add_news', (req, res, next) => {
 
 /* edit news page */
 router.get('/edit_news/:id', (req, res, next) => {
-  res.render("index/edit_news", { title : "編輯最新消息頁面", user : req.user});
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)){
+    return next();
+  }
+  news.findById(req.params.id).exec((err, result) => {
+    if(err) return next(err);
+    if(result){
+      res.render("index/edit_news", { title : "編輯最新消息頁面", user : req.user, news: result});
+    }else{
+      return next();
+    }
+  })
 })
 
-/* update latest-post */
+/* update news */
 router.post('/edit_news/:id', (req, res, next) => {
-  res.redirect('index_admin');
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)){
+    return next();
+  }
+  let temp = new Date(req.body.time);
+  if (isNaN(temp.getTime())) {  // date is not valid
+    return res.redirect('../index_admin');
+  }
+  news.findByIdAndUpdate(req.params.id, {
+    time    : temp,
+    title   : req.body.title,
+    content : req.body.content,
+  }).exec((err, result) => {
+    if(err) return next(err);
+    res.redirect('../index_admin');
+  })
 })
 
-/* delete latest-post */
+/* delete news */
 router.get('/delete_news/:id', (req, res, next) => {
-  res.redirect('index_admin');
+  if (mongoose.Types.ObjectId.isValid(req.params.id)){
+    news.findByIdAndRemove(req.params.id).exec((err) => {
+      if(err) return next(err);
+    })
+  }
+  res.redirect('../index_admin');
+})
+
+/* add schedule */
+router.post('/add_schedule', (req, res, next) => {
+  let temp = new Date(req.body.time);
+  if (isNaN(temp.getTime())) { // date is not valid
+    return res.redirect('index_admin');
+  }
+  new schedule({
+    time    : new Date(req.body.time),
+    content : []
+  }).save((err) => {
+    if (err) return next(err);
+    res.redirect('index_admin');
+  })
+})
+
+/* update schedule's content */
+router.post('/update_schedule_content/:id', (req, res, next) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)){
+    return next();
+  }
+  let content;
+  if (req.body.content){
+    if (Array.isArray(req.body.content)){
+      content = req.body.content;
+    }else{
+      content = [req.body.content];
+    }
+  }else{
+    content = [];
+  }
+  schedule.findByIdAndUpdate(req.params.id, {
+    content : content
+  }).exec((err, result) => {
+    if(err) return next(err);
+    res.redirect('../index_admin');
+  })
+})
+
+/* update schedule's time */
+router.post('/update_schedule_time/:id', (req, res, next) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)){
+    return next();
+  }
+  let temp = new Date(req.body.time);
+  if (isNaN(temp.getTime())) { // date is not valid
+    return res.redirect('index_admin');
+  }
+  schedule.findByIdAndUpdate(req.params.id, {
+    time : temp
+  }).exec((err, result) => {
+    if(err) return next(err);
+    res.redirect('../index_admin');
+  })
+})
+
+/* delete schedule */
+router.get('/delete_schedule/:id', (req, res, next) => {
+  if (mongoose.Types.ObjectId.isValid(req.params.id)){
+    schedule.findByIdAndRemove(req.params.id).exec((err) => {
+      if(err) return next(err);
+    })
+  }
+  res.redirect('../index_admin');
 })
 
 /* login page */
@@ -275,18 +381,5 @@ router.post('/register', function (req, res) {
 router.get('/comingsoon', function (req, res, next) {
   res.render('comingsoon/index', { title: '倒數' });
 });
-
-//Passport isAuthenticated wrapper
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated())
-    res.redirect('/');
-  return next();
-}
-
-function isAdmin(req, res, next) {
-  if (req.isAuthenticated() && req.user.role === 'admin')
-    return next();
-  res.redirect('/');
-}
 
 module.exports = router;

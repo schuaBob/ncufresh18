@@ -8,13 +8,57 @@
         <% include ../layout/navbar %>
     </header>
     <main>
+        <h1>管理近期日程</h1>
+        <table border="solid">
+            <thead>
+                <tr>
+                    <th>時間</th>
+                    <th>內容</th>
+                    <th>刪除</th>
+                </tr>
+            </thead>
+            <tbody>
+            <%_ for (let i = 0;i<schedule.length;i++){ -%>
+                <tr>
+                    <td>
+                        <form action="update_schedule_time/<%= schedule[i]._id %>" method="post">
+                            <input type="date" name="time" placeholder="ex: 2018-07-25" value="<%= schedule[i].time.toISOString().substring(0, 10) %>" required>
+                            <button type="submit">更新</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="update_schedule_content/<%= schedule[i]._id %>" method="post">
+                            <table>
+                                <tbody>
+                                <%_ for(let j = 0;j<schedule[i].content.length;j++){ -%>
+                                    <tr><td><input type="text" name="content" value="<%= schedule[i].content[j] %>"></td><td><button type="button" onclick="this.parentNode.parentNode.remove()">刪除此項</button></td></tr>
+                                <%_ } -%>
+                                </tbody>
+                            </table>
+                            <button type="button" onclick="var tr = document.createElement('tr'); var td1 = document.createElement('td'); var td2 = document.createElement('td'); var input = document.createElement('input'); input.setAttribute('type', 'text'); input.setAttribute('name', 'content'); var button = document.createElement('button'); button.setAttribute('type', 'button'); button.innerHTML = '刪除此項'; button.setAttribute('onclick', 'this.parentNode.parentNode.remove()'); td1.appendChild(input); td2.appendChild(button); tr.appendChild(td1); tr.appendChild(td2); this.parentNode.children[0].children[0].appendChild(tr);">新增欄位</button>
+                            <button type="submit">送出更新</button>
+                        </form>
+                    </td>
+                    <td><a href="delete_schedule/<%= schedule[i]._id %>"><button>刪除</button></a></td>
+                </tr>    
+            <%_ } -%>
+            </tbody>
+        </table>
+        <h3>新增近期日程</h3>
+        <form action="add_schedual" method="post">
+            <label for="date">日期：</label>
+            <input type="date" name="time" placeholder="ex: 2018-07-25" required><br>
+            <input type="submit">
+        </form>
+
+        <hr>
+
         <h1>管理最新消息</h1>
         <table border="solid">
             <thead>
                 <tr>
                     <th>時間</th>
                     <th>標題</th>
-                    <th>內容</th>
                     <th>修改</th>
                     <th>刪除</th>
                 </tr>
@@ -22,22 +66,24 @@
             <tbody>
             <%_ for (let i = 0;i<news.length;i++){ -%>
                 <tr>
-                    <td><%= news[i].time %></td>
+                    <td><%= news[i].time.getFullYear()%>/<%= news[i].time.getMonth()+1 %>/<%= news[i].time.getDate() %></td>
                     <td><%= news[i].title %></td>
-                    <td><%= news[i].content %></td>
-                    <td><button>編輯</button></td>
-                    <td><button>刪除</button></td>
+                    <td><a href="edit_news/<%= news[i]._id %>"><button>編輯</button></a></td>
+                    <td><a href="delete_news/<%= news[i]._id %>"><button>刪除</button></a></td>
                 </tr>    
             <%_ } -%>
             </tbody>
         </table>
+
+        <h3>新增最新消息</h3>
         <form action="add_news" method="post">
-            <label for="date">日期</label>
-            <input type="date" name="date" required><br>
-            <label for="title">標題</label>
+            <label for="date">日期：</label>
+            <input type="date" name="time" placeholder="ex: 2018-07-25" required><br>
+            <label for="title">標題：</label>
             <input type="text" name="title" required><br>
-            <label for="content">內文</label>
+            <label for="content">內文：</label>
             <textarea name="content" id="content" required></textarea>
+            <input type="submit">
         </form>
     </main>
     <footer>
