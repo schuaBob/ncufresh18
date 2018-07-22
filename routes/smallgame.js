@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* 小遊戲首頁 */
 router.get('/', function(req, res, next) {
-  res.render('smallgame/index', { title: '小遊戲' });
+  res.render('smallgame/index', { title: '小遊戲' ,user : req.user});
 });
 
 // 上傳分數
