@@ -6,6 +6,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var app = express();
 
+//We need compression
+var compression = require('compression');
+app.use(compression());
+
 //best-practice of security
 const helmet = require('helmet')
 app.use(helmet())
