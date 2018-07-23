@@ -11,130 +11,168 @@
         <% include ../layout/navbar %>
     </header>
     <main>
-        <h1>
-            <%= title %>
-        </h1>
-        <div class="Admin_edit">
-            <!-- modal button-->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">新增物件</button>
-            <!--modal-->
-            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">新增物件</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+        <%_ if (user && user.role === 'admin'){ -%>
+
+            <div class="Admin_edit">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#adminbutton">新增物件</button>
+                <button>
+                    <a href="editElement">編輯物件</a>
+                </button>
+
+                <div class="modal fade bd-example-modal-lg" id="adminbutton" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">新增物件</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal" action="/campus/AddNew_element" method="POST">
+                                    <fieldset>
+
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="elename">物件名稱</label>
+                                            <div class="col-md-6">
+                                                <input id="elename" name="elename" type="text" placeholder="請輸入" class="form-control input-md">
+
+                                            </div>
+                                        </div>
+
+                                        <!-- Select Basic -->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="elecategory">類別</label>
+                                            <div class="col-md-6">
+                                                <select id="elecategory" name="elecategory" class="form-control">
+                                                    <option value="0">請選擇</option>
+                                                    <option value="1">系館</option>
+                                                    <option value="2">運動</option>
+                                                    <option value="3">餐廳</option>
+                                                    <option value="4">設施</option>
+                                                    <option value="5">住宿</option>
+                                                    <option value="6">行政</option>
+                                                    <option value="7">活動場地</option>
+                                                    <option value="8">緊急醫療</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- Textarea -->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="eleintro">物件說明</label>
+                                            <div class="col-lg">
+                                                <textarea class="form-control" rows="8" cols="60" id="eleintro" name="eleintro"></textarea>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                            <button type="submit" class="btn btn-primary">儲存</button>
+                                        </div>
+
+
+                                    </fieldset>
+                                </form>
+
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <form class="form-horizontal" action="/campus/AddNew_element" method="POST">
-                                <fieldset>
+                    </div>
+                </div>
 
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label" for="elename">物件名稱</label>
-                                        <div class="col-md-6">
-                                            <input id="elename" name="elename" type="text" placeholder="請輸入" class="form-control input-md">
 
+            </div>
+            <%_ } -%>
+                <div class="main_list_detail collapse">
+                    <li class="listtitle">99</li>
+                    <ul>
+                        <%for (let i in result) {-%>
+                            <li class="elelist" val="<%=result[i]['Type']%>">
+                                <%=result[i]['Element_Name']%>
+                            </li>
+                            <%}-%>
+                    </ul>
+                </div>
+                <div class="Mainmap">
+                    <div class="mapmove">
+                        <%for (let i in result) {-%>
+                            <% if (result[i]['Buildpic'] != "") {-%>
+                                <img title="<%=result[i]['Element_Name']%>" class="indexelepic type<%=result[i]['Type']%>" src="<%=result[i]['Buildpic']%>"
+                                    alt="<%=result[i]['_id']%>" style="top: <%=result[i]['X_position']%>%;left: <%=result[i]['Y_position']%>%; width: <%=result[i]['Size']%>%;">
+                                <%}-%>
+                                    <%}-%>
+
+                                        <img id="map" src="back2.png" width="75%">
+                    </div>
+                </div>
+                <div class="Main_list ">
+                    <ul id="List_index">
+                        <li class="Main_listele1" val="1">
+                            系館
+                        </li>
+                        <li class="Main_listele2" val="2">
+                            運動
+                        </li>
+                        <li class="Main_listele3" val="3">
+                            餐廳
+                        </li>
+                        <li class="Main_listele4" val="4">
+                            設施
+                        </li>
+                        <li class="Main_listele5" val="5">
+                            住宿
+                        </li>
+                        <li class="Main_listele6" val="6">
+                            行政
+                        </li>
+                        <li class="Main_listele7" val="7">
+                            活動場地
+                        </li>
+                        <li class="Main_listele8" val="8">
+                            緊急醫療
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal fade" id="indexmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title"></h5>
+                            </div>
+                            <div class="modal-body">
+                                <div id="indexmodalcar">
+
+                                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                        <ol class="carousel-indicators">
+                                            
+                                        </ol>
+                                        <div class="carousel-inner">
+                                            
                                         </div>
+                                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
                                     </div>
+                                </div>
+                                <div id="indexmodalp">
+                                    <p></p>
 
-                                    <!-- Select Basic -->
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label" for="elecategory">類別</label>
-                                        <div class="col-md-6">
-                                            <select id="elecategory" name="elecategory" class="form-control">
-                                                <option value="0">請選擇</option>
-                                                <option value="1">系館</option>
-                                                <option value="2">運動</option>
-                                                <option value="3">餐廳</option>
-                                                <option value="4">設施</option>
-                                                <option value="5">住宿</option>
-                                                <option value="6">行政</option>
-                                                <option value="7">活動場地</option>
-                                                <option value="8">緊急醫療</option>
-                                                
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <!-- Textarea -->
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label" for="eleintro">物件說明</label>
-                                        <div class="col-lg">
-                                            <textarea class="form-control" rows="8" cols="60" id="eleintro" name="eleintro"></textarea>
-                                        </div>
-                                    </div>
-
-                                    <!-- Multiple Radios (inline) -->
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                                        <button type="submit" class="btn btn-primary">儲存</button>
-                                    </div>
-
-
-                                </fieldset>
-                            </form>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <button>
-                <a href="editElement">編輯物件</a>
-            </button>
-            
-        </div>
-        <div class="main_list_detail collapse">
-                <li class="listtitle">99</li>
-            <ul>
-                <%for (let i in result) {-%>
-                <li class="elelist collapse" val="<%=result[i]['Type']%>"><%=result[i]['Element_Name']%></li>
-                <%}-%>
-            </ul>
-        </div>
-        <div class="Mainmap">
-            <div class="mapmove">
-                <%for (let i in result) {-%>
-                    <% if (result[i]['Buildpic'] != "") {-%>
-                        <img href="#" title="<%=result[i]['Element_Name']%>" class="indexelepic type<%=result[i]['Type']%>" src="<%=result[i]['Buildpic']%>" alt="<%=result[i]['_id']%>" style="top: <%=result[i]['X_position']%>%;left: <%=result[i]['Y_position']%>%; width: <%=result[i]['Size']%>%;">
-                    <%}-%>
-                <%}-%>
-
-                <img id="map" src="back2.png" width="75%">
-            </div>
-        </div>
-        <div class="Main_list ">
-            <ul id="List_index">
-                <li class="Main_listele1" val="1">
-                    系館
-                </li>
-                <li class="Main_listele2" val="2">
-                    運動
-                </li>
-                <li class="Main_listele3" val="3">
-                    餐廳
-                </li>
-                <li class="Main_listele4" val="4">
-                    設施
-                </li>
-                <li class="Main_listele5" val="5">
-                    住宿
-                </li>
-                <li class="Main_listele6" val="6">
-                    行政
-                </li>
-                <li class="Main_listele7" val="7">
-                    活動場地
-                </li>
-                <li class="Main_listele8" val="8">
-                    緊急醫療
-                </li>
-            </ul>
-        </div>
     </main>
     <footer>
         <% include ../layout/footer %>

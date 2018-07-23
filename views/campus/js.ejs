@@ -16,111 +16,105 @@
         }, function () {
             $('.indexelepic').velocity({ scale: 1, boxShadowBlur: 0 }, 100)
         })
+        $('.indexelepic').click(function (event) {
+            $.ajax({
+                url: "indexmodal?id=" + event.currentTarget.attributes.alt.value,
+                method: "GET",
+                error: function (err) {
 
-        $('.Main_listele1').click(function () {
+                },
+                success: function (data) {
+                    $('#indexmodal .modal-title').text(data.Element_Name)
+                    $('#indexmodalp p').text(data.Element_Intro)
+                    for (let i = 0; i < data.Intropic.length; i++) {
+                        $('.carousel-indicators').append("<li data-target='#carouselExampleIndicators' data-slide-to='"+i+"'></li>")
+                        $('#carouselExampleIndicators .carousel-inner').append("<div class='carousel-item'><img class='d-block w-100' src='/campus/" + data.Intropic[i] + "'></div>")
+                    }
+                    $('.carousel-indicators li').first().addClass('active')
+                    $('#carouselExampleIndicators .carousel-inner div').first().addClass('active')
+                    $('#indexmodal').on('hide.bs.modal',function(e) {
+                        $('.carousel-indicators li').remove()
+                        $('#carouselExampleIndicators .carousel-inner .carousel-item').remove()
+                        $('#indexmodal').off('hide.bs.modal')
+                    })
+                    $('#indexmodal').modal('show')
+                    
+                }
+            })
+        })
 
-            $('.listtitle').text("系館")
-            $('.elelist').hide()
-            $("[val*='1']").show()
-        })
-        $('.Main_listele2').click(function () {
-            $('.listtitle').text("運動")
-            $('.elelist').hide()
-            $("[val*='2']").show()
-        })
-        $('.Main_listele3').click(function () {
-            $('.listtitle').text("餐廳")
-            $('.elelist').hide()
-            $("[val*='3']").show()
-        })
-        $('.Main_listele4').click(function () {
-            $('.listtitle').text("設施")
-            $('.elelist').hide()
-            $("[val*='4']").show()
-        })
-        $('.Main_listele5').click(function () {
-            $('.listtitle').text("住宿")
-            $('.elelist').hide()
-            $("[val*='5']").show()
-        })
-        $('.Main_listele6').click(function () {
-            $('.listtitle').text("行政")
-            $('.elelist').hide()
-            $("[val*='6']").show()
-        })
-        $('.Main_listele7').click(function () {
-            $('.listtitle').text("活動場地")
-            $('.elelist').hide()
-            $("[val*='7']").show()
-        })
-        $('.Main_listele8').click(function () {
-            console.log($(this))
-            $('.listtitle').text("緊急醫療")
-            $('.elelist').hide()
-            $("[val*='8']").show()
-        })
+
 
         $('#List_index li').click(function (event) {
-            console.log(event.currentTarget.attributes.val.value)
-            if ($(this)[0] === temp) {
-                if ($('.main_list_detail').hasClass('clicked')) {
-                    $('.main_list_detail').collapse('hide')
-                    $('.main_list_detail').removeClass('clicked')
-                } else {
-                    $('.main_list_detail').collapse('show')
-                    $('.main_list_detail').addClass('clicked')
+            $('.elelist').hide()
+            array1 = ["系館", "運動", "餐廳", "設施", "住宿", "行政", "活動場地", "緊急醫療"]
+            for (let i = 1; i <= 8; i++) {
+                if (event.currentTarget.attributes.val.value == i) {
 
-                }
+                    if ($(this)[0] === temp) {
+                        if ($('.main_list_detail').hasClass('clicked')) {
+                            console.log("1")
 
-                if ($('.mapmove').hasClass('clicked')) {
-                    properties = {
-                        'margin-right': '15%',
-                        'margin-left': '16%'
-                    };
-                    temp = $(this)[0];
-                    $('.mapmove').removeClass('clicked')
-                } else {
-                    properties = {
-                        'margin-left': '2%',
-                        'margin-right': '29%'
-                    };
-                    temp = $(this)[0]
-                    $('.mapmove').addClass('clicked')
-                }
-            } else {
-                $(".listtitle").collapse('hide')
-                $('.elelist').collapse('hide')
-                if ($('.main_list_detail').hasClass('clicked')) {
-                    
-                    array1 = ["系館", "運動", "餐廳", "設施", "住宿", "行政", "活動場地", "緊急醫療"]
-                    for (let i = 1; i <= 8; i++) {
-                        if (event.currentTarget.attributes.val.value === i) {
+                            $('.main_list_detail').stop().collapse('hide')
+                            $('.main_list_detail').removeClass('clicked')
 
-
+                        } else {
+                            console.log("2")
                             $('.listtitle').text(array1[i - 1])
-                            $('.listtitle').collapse('show')
-                            $('.elelist li[val=' + i + ']').collapse('show')
-
-
+                            $('.main_list_detail li[val=' + i + ']').show()
+                            $('.main_list_detail').stop().collapse('show')
                             $('.main_list_detail').addClass('clicked')
                         }
+
+
+                        if ($('.mapmove').hasClass('clicked')) {
+                            properties = {
+                                'margin-right': '15%',
+                                'margin-left': '16%'
+                            };
+
+                            $('.mapmove').removeClass('clicked')
+                        } else {
+                            properties = {
+                                'margin-left': '2%',
+                                'margin-right': '29%'
+                            };
+
+                            $('.mapmove').addClass('clicked')
+                        }
+                    } else {
+                        if ($('.main_list_detail').hasClass('clicked')) {
+                            console.log("3")
+                            $('.main_list_detail').stop().collapse('hide')
+                            $('.main_list_detail li[val=' + i + ']').show()
+                            $('.main_list_detail').on('hidden.bs.collapse', function () {
+                                $('.listtitle').text(array1[i - 1])
+                                $('.main_list_detail').stop().collapse('show')
+                                $('.main_list_detail').off('hidden.bs.collapse');
+                            })
+                            $('.main_list_detail').addClass('clicked')
+                        } else {
+                            console.log("4")
+                            $('.listtitle').text(array1[i - 1])
+                            $('.main_list_detail li[val=' + i + ']').show()
+                            $('.main_list_detail').stop().collapse('show')
+                            $('.main_list_detail').addClass('clicked')
+                        }
+                        properties = {
+                            'margin-left': '2%',
+                            'margin-right': '29%'
+                        };
+                        $('.mapmove').addClass('clicked')
+
+
+
                     }
 
-                } else {
-                    $('.main_list_detail').collapse('show')
-                    $('.main_list_detail').addClass('clicked')
                 }
-                properties = {
-                    'margin-left': '2%',
-                    'margin-right': '29%'
-
-                };
-                $('.mapmove').addClass('clicked')
-                temp = $(this)[0];
-
-            };
+            }
+            temp = $(this)[0];
+            console.log(temp);
             $('.mapmove').stop().velocity(properties, 500)
-
         })
     })
 
