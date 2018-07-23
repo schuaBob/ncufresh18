@@ -25,7 +25,8 @@ router.get('/', function(req, res, next) {
         title:'新生Ｑ＆Ａ ｜ 新生知訊網',
         rule:rule,
         question:question,
-        Time:Time
+        Time:Time,
+        user : req.user
       });
     }); 
   });

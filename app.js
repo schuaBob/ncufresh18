@@ -40,10 +40,16 @@ router.all('*');
 
 //session
 const session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 app.use(session({
   secret: 'ThisIsNcuFresh18Speaking.',
-  resave: true,
-  saveUninitialized: false
+  name: 'ncufresh.session.id',
+  resave: false,  /* 不要每次讀取就存回去一次 */
+  saveUninitialized: false, /* 除非做儲存的動作，不然不要為每個使用者都存session */
+  store: new MongoStore({ 
+    mongooseConnection: mongoose.connection,  
+    touchAfter: 24 * 3600   /* 沒動session的話，二十四小時之後再去動它 */
+  })
 }));
 
 // view engine setup

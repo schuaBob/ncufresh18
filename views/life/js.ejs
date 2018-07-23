@@ -36,19 +36,28 @@
     $('.showDetail').on('click', function(e){
         e.preventDefault();
         var info = this.id.split("_");
-        $.ajax({
-            url:    "showing",
-            method: "POST",
-            data:   {mainTitle: info[0], subTitle: info[1]},
-            error: function(err){
-                alert("Some error occur...");
-            },
-            success: function(data){
-                putPic(data.res1);
-                putCont(data.res2);
-            }
-        });
+        if(info[0] == "桃園景點"){
+            $('.descArea').empty();
+            $('pictureArea').empty();
+            $('.pictureArea').append("<img class='mapClass' src='map.png'>");
+        }
+        else{
+            $.ajax({
+                url:    "showing",
+                method: "POST",
+                data:   {mainTitle: info[0], subTitle: info[1]},
+                error: function(err){
+                    alert("Some error occur...");
+                },
+                success: function(data){
+                    putPic(data.res1);
+                    putCont(data.res2);
+                }
+            });
+        }
         var putPic = function(data){
+            $(".pictureArea").empty();
+            $(".pictureArea").append('<div class="slideshow_container"></div><div class="dot_container"></div>');
             $('.slideshow_container').empty();
             $('.dot_container').empty();
             for(var i=0 ; i<data.length ; i++){
@@ -57,15 +66,15 @@
                 $('.dot_container').append("<p class='dot' onclick='currentSlide(" + j + ")' ></p>");
             }
             if(data.length > 0){
-                $(".pictureArea").append('<a class="prev" onclick="plusSlides(-1)">&#10094;</a> <a class="next" onclick="plusSlides(1)">&#10095;</a>')
-            }
-            if(data.length > 0){
+                $(".pictureArea").append('<a class="prev" onclick="plusSlides(-1)">&#10094;</a> <a class="next" onclick="plusSlides(1)">&#10095;</a>');
                 slideNum = data.length;
                 ramSlideNum = Math.floor((Math.random() * slideNum) + 1);
                 showSlides(ramSlideNum);
             }
         }
         var putCont = function(data){
+            $(".descArea").empty();
+            $(".descArea").append("<div class='describeArea'> <div class='contentArea'></div></div>")
             $(".describeArea").children(".contentArea").empty();
             if(data != null)
                 $(".describeArea").children(".contentArea").append(data.content);
@@ -118,6 +127,13 @@
         slides[ramSlideNum-1].style.display = "block";
         dots[ramSlideNum-1].className += " active";
     }
+
+    $( document ).ready( function(){
+        $( '.middle a' ).each( function()
+        {
+            $( this ).attr( 'data-buzz' , $( this ).text() );
+        } );
+    } );
 
     CKEDITOR.replace('disc', {
         filebrowserUploadUrl: '/uploader',

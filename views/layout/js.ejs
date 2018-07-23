@@ -2,11 +2,14 @@
     var prevScrollpos = window.pageYOffset;
     window.onscroll = function() {
         var currentScrollPos = window.pageYOffset;
-        if (prevScrollpos > currentScrollPos) {
-            document.getElementById("Navbar").style.top = "0";
-        } else {
-            document.getElementById("Navbar").style.top = "-56px";
+        <%- /* 為了解決safari在超出邊界時currentScrollPos也會超出範圍的問題，這串又臭又長的if判斷式誕生了 */ _%>
+        if ((document.body.offsetHeight - window.innerHeight > currentScrollPos) && (currentScrollPos > 0)){
+            if (prevScrollpos > currentScrollPos) {
+                document.getElementById("Navbar").style.top = "0";
+            } else {
+                document.getElementById("Navbar").style.top = "-56px";
+            }
+            prevScrollpos = currentScrollPos;
         }
-        prevScrollpos = currentScrollPos;
     }
 </script>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../layout/head %>
+</head>
+<body>
+    <header>
+        <% include ../layout/navbar %>
+    </header>
+    <main>
+        <form action="<%= news._id %>" method="post">
+            <label for="date">日期：</label>
+            <input type="date" name="time" value="<%= news.time.toISOString().substring(0, 10) %>" required><br>
+            <label for="title">標題：</label>
+            <input type="text" name="title" value="<%= news.title %>" required><br>
+            <label for="content">內文：</label>
+            <textarea name="content" id="content" required><%= news.content %></textarea>
+            <input type="submit">
+        </form>
+    </main>
+    <footer>
+        <% include ../layout/footer %>
+    </footer>
+        <% include ../layout/js %>
+        <% include js %>
+    <script>
+        CKEDITOR.replace('content',{
+            filebrowserUploadUrl: '/uploader',
+        });
+        CKEDITOR.editorConfig = function (config){
+            config.enterMode = CKEDITOR.ENTER_BR;
+            config.autoParagraph = false;
+        };
+    </script>
+</body>
+</html>

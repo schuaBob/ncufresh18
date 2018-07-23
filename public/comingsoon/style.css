@@ -19,6 +19,9 @@ body{
     background-image: url("百花川遮罩黑.png") ;
     background-position: center ;
     background-size: cover ;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 main{
     position: absolute;
@@ -46,4 +49,18 @@ main{
 }
 p{
     margin-bottom: 0;
+}
+#block {
+    position : absolute ;
+    height: 20vh;
+    width: 8vw ;
+    bottom : 40vh ;
+    right : 0vw ;
+    z-index: 2;
+}
+#pic{
+    height: 8vh ;
+}
+#er{
+    height: 2vh ;
 }

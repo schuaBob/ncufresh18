@@ -9,6 +9,9 @@ var UserSchema = mongoose.Schema({
     password: {
         type: String
     },
+    unit: {
+        type: String
+    },
     //腳色
     role: {
         type: String, default: "student"
@@ -39,6 +42,16 @@ let tmp = mongoose.model('User', UserSchema);
 
 //Function for user object instance
 tmp.createUser = (User, callback) => {
+    bcrypt.genSalt(10, function(err, salt) {
+      bcrypt.hash(User.password, salt, function(err, hash) {
+          User.password = hash;
+          User.save(callback);
+      });
+    });
+}
+
+//Function for add password
+tmp.addPassword = (User, callback) => {
     bcrypt.genSalt(10, function(err, salt) {
       bcrypt.hash(User.password, salt, function(err, hash) {
           User.password = hash;

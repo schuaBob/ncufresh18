@@ -2,13 +2,14 @@
 var mongoose = require('mongoose');
 
 /**
- * schedule(行事曆)定義
- * date     date    日期
- * content  string  內容
+ * schedule定義
+ * 近期日程
+ * date     date        日期
+ * content  [string]    內容
  */
 var schedule = mongoose.Schema({
-    date    : Date,
-    content : String
+    time    :  Date,
+    content : [String]
 });
 
 module.exports = mongoose.model( 'schedule', schedule );

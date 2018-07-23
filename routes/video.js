@@ -40,6 +40,7 @@ router.get('/', function(req, res, next) {
         let video = video1.concat(video2).concat(video3);
         res.render('video/index', { 
           title: '影音專區',
+          user: req.user,
           longvideo: video1,
           QAvideo: video2,
           lifevideo: video3,
