@@ -9,9 +9,19 @@
         <% include ../layout/navbar %>
     </header>
     <main>
-        <h1><%= title %></h1>
+      <% let ffffffff  = [["文學院","literature"],["理學院","science"],["管理學院","management"],["工學院","engineering"],["資訊電機學院","csee"],["地球科學學院","earth"],["客家學院","hakka"],["生醫理工學院","chst"]]%>
+      
+      <div id="cellup">
+        <img src="系所社團畫框上_去被.png" class="sideup">
+        <img src="系所社團電子框上_去被.png" class="boxup">
+        <div class="buttonup" id="cellbut">
+          <% for(let p = 1; p<=8 ; p++) {%>
+            <button class="<%= ffffffff[p-1][1] %>_button"><%= ffffffff[p-1][0] %></button></br>
+          <%}%>
+        </div>
+      </div>
         <!-- 新增圖片按鈕 -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="update1">
           新增圖片
         </button>
         <!-- Modal -->
@@ -57,7 +67,7 @@
         </div>
         
         <!-- 新增編輯button -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_department">新增/編輯系所</button><br></br>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_department" id="update2">新增/編輯系所</button><br></br>
         <!--  新增編輯系所的Modal -->
         <div class="modal fade" id="add_department" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
@@ -127,16 +137,17 @@
               <li class="breadcrumb-item"><a href="/groups/community">其他學生組織</a></li>
           </ol>
         </nav>
-        <% let ffffffff  = [["文學院","literature"],["理學院","science"],["管理學院","management"],["工學院","engineering"],["資訊電機學院","csee"],["地球科學學院","earth"],["客家學院","hakka"],["生醫理工學院","chst"]]%>
         <!--左側按鈕-->
-        <div class="btn-group-vertical">
+        <div id="combut">
+          <img src="系所社團飛船修正版地底電子幕_去被.png" class="leftbox">
           <% for(let p = 1; p<=8 ; p++) {%>
-            <button class="<%= ffffffff[p-1][1] %>_button"><%= ffffffff[p-1][0] %></button></br>
+            <button class="<%= ffffffff[p-1][1] %>_button" id="but_<%= p %>"><%= ffffffff[p-1][0] %></button></br>
           <%}%>
-        </div>
+        </div>          
         <!-- 根據按鈕選出相對類別 -->
+        <!-- <div id="comtable"> -->
           <%for (let q = 1 ;q<=8;q++){%>
-            <table class="<%= ffffffff[q-1][1] %>_table">
+            <table class="<%= ffffffff[q-1][1] %>_table" id="table_<%= q %>">
               <thead>
                 <tr>
                   <th><%= ffffffff[q-1][0] %></th>
@@ -146,7 +157,7 @@
                 <% for(var i in department) {%>
                   <% if(department[i].type == q) {%>
                     <tr>
-                      <td><a href="#<%= department[i].name %> " data-toggle="modal" class="department_content"
+                      <td><a href="#<%= department[i].name %> " data-toggle="modal" class="department_content" id="tabletext"
                       data-target="#<%= department[i]._id %>">・<%= department[i].name %></a></td>
                     </tr>
                   <%}%>
@@ -154,10 +165,7 @@
               </tbody>
             </table>
           <% } %>
-        </div>
-          
-        
-
+        <!-- </div> -->
         <% for(var i in department){ %>
           <!-- 社團介紹 Modal -->                            
             <div class="modal fade bd-example-modal-lg" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id ="<%= department[i]._id %>"><!-- 根據資料庫id判斷modal內容 --> 
@@ -217,7 +225,10 @@
               </div>
             </div> 
         <%}%>                       
-        
+        <div id="celldown">
+          <img src="系所社團畫框下_去被.png" class="sidedown">
+          <img src="系所社團電子框下_去被.png" class="boxdown">
+        </div>
         
     </main>
     <footer>

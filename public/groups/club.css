@@ -1,4 +1,9 @@
-
+body{
+    background-image: url(社團飛船修正版海洋背景.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center; 
+}
 ul{
     float:left;
 }

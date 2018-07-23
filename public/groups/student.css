@@ -72,9 +72,10 @@ h6{
 #update{
     float: left;
 }
-#bread{
+.bread{
+    float:left;
+    width: 25%;
     opacity: 0.8;
-    width: 23%;
 }
 
 .modal{
@@ -85,42 +86,50 @@ h6{
     background-image: url(彈出視窗背景.png);
 }
 
-#stu_title{
-    position: relative;
-    display: inline-block;
-    margin-left: 65%;
-}
-.main{
-    width:23vw;
-    position: relative;
-    left:40%;
-    bottom: 15vh;
-}
 
+.main{
+    width:21vw;
+    position: relative;
+    float: right;
+}
 #stu_button{
     position: relative;
     display: inline-block;
-    margin-left: 40%;
+    margin-top: 9%;
+    margin-left: 59%;
 }
 .button_place{
     position: relative;
-    width: 20vw;
-    left: 93%;
-    bottom: 21vh;
+    float: right;
+    width: 17vw;
 }
+.stu_intro{
+    position: absolute;
+    width: 6vw;
+    left: 40%;
+    top: 15%;
+}
+.stu_branch{
+    position: absolute;
+    width: 11vw;
+    left: 32%;
+    top: 37%;
+}
+.stu_activity{
+    position: absolute;
+    width: 11vw;
+    left: 32%;
+    top: 57%;
+}
+
 
 
 @media screen and (max-width: 768px){
     body{
         background-image: url(學生會_手機板.png);
-        background-position: right;
+        background-position: top right;
     }
 
-    #vertical{
-        margin-left: 60%;
-        margin-top: 40%;
-        font-size: 10%;
-    }
     .modal{
         margin-top: 5%;
     }
@@ -179,6 +188,32 @@ h6{
         max-height: 300px;
         float: left;
         margin-left: 5%;
+    }
+    .bread{
+        float:left;
+        width: 12%;
+        opacity: 0.8;
+    }
+    #text{
+        font-size: 15px;
+    }
+    #cell_button{
+        float: right;
+        margin-top: 48%;
+        margin-right: 4%;
+    }
+    .stu_cell_intro{
+        width: 20vw;
+        
+    }
+    .stu_cell_branch{
+        width: 30vw;
+        margin-top: 18%;
+    }
+    .stu_cell_activity{
+        width: 30vw;
+        margin-top: 18%;
+        
     }
 }
 

@@ -1,0 +1,27 @@
+<script>
+    
+    $(document).ready(function(){
+        
+        $(window).resize(function(){
+            if($(window).width()<768){
+                $("#com_all").css("display", "none");
+
+            }
+            else if($(window).width()>768){
+                $("#cell_all").css("display", "none");
+
+            }
+        });
+
+        if($(window).width()<768){
+            $("#com_all").css("display", "none");
+        }
+        else if($(window).width()>768){
+            $("#cell_all").css("display", "none");
+        }
+
+        
+    })
+
+</script>
+    

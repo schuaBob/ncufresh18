@@ -7,41 +7,41 @@ body{
     background-repeat: no-repeat;
 }
 
-#all{
+#com_all{
     position: relative;
     display: inline-block;
     margin-top: 1%;
 }
 .index_title{
     position: absolute;
-    width: 55%;
-    left: 14%;
-    bottom: 77%;
+    width: 43%;
+    left: 17%;
+    bottom: 87%;
 }
 .index_club{
-    width: 43%;
-    left: 30%;
-    top: 34%;
+    width: 33%;
+    left: 36%;
+    top: 40%;
     position: absolute;
 }
 .index_student{
-    width: 40%;
-    left: 33%;
-    top: 44%;
+    width: 34%;
+    left: 36%;
+    top: 51%;
     position: absolute;
 
 }
 .index_department{
-    width: 55%;
-    left: 24%;
-    top: 56%;
+    width: 33%;
+    left: 36%;
+    top: 63%;
     position: absolute;
 
 }
 .index_community{
-    width: 45%;
-    left: 36.5%;
-    top: 65%;
+    width: 43%;
+    left: 36%;
+    top: 75%;
     position: absolute;
 }
 .side{
@@ -52,6 +52,74 @@ body{
 
 @media screen and (max-width: 768px){
     body{
-        background-image: url(系所社團_手機板.png);
+        background-image: url(系所社團_手機板背景.png);
     }
+    #cell_department{
+        position: relative;
+        display: inline-block;
+        margin-top: 13%;
+    }
+    .cell_department{
+        width: 52%;
+        position: relative;
+    }
+    .cell_department_text{
+        width: 23%;
+        position: absolute;
+        top: 45%;
+        left: 6%;
+    }
+
+    #cell_community{
+        position: relative;
+        display: inline-block; 
+        margin-right: 2%;
+        margin-top: 10%;
+    }
+    .cell_community{
+        width: 80%;
+        float: right;
+        position: relative;
+    }
+    .cell_community_text{
+        width: 44%;
+        right: 30%;
+        top: 21%;
+        position: absolute;
+    }
+
+    #cell_club{
+        position: relative;
+        display: inline-block;
+        margin-left: 15%;
+    }
+    .cell_club{
+        width: 67%;
+        position: relative;
+    }
+    .cell_club_text{
+        width: 25%;
+        left: 36%;
+        top: 38%;
+        position: absolute;
+    }
+
+    #cell_student{
+        position: relative;
+        display: inline-block;
+        margin-right: 5%;
+    }
+    .cell_student{
+        width: 60%;
+        position: relative;
+        float: right;
+    }
+    .cell_student_text{
+        width: 25%;
+        top: 28%;
+        right: 31%;
+        position: absolute;
+    }
+
+
 }

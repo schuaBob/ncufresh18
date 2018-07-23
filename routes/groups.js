@@ -22,7 +22,6 @@ router.get('/department', function(req, res, next) {
         user: req.user,
         department: department,
         QAvideo: video2,
-        user: req.user,
       });
     });
   });

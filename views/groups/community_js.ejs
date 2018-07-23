@@ -26,6 +26,7 @@
         $(window).resize(function(){
             if($(window).width()<768){
                 $("#nav_ul").removeClass("flex-column");
+                $("#com_button").css("display", "none");
             }
             else if($(window).width()>768){
                 $("#nav_ul").addClass("flex-column");
@@ -34,6 +35,8 @@
 
         if($(window).width()<768){
             $("#nav_ul").removeClass("flex-column");
+            $("#com_button").css("display", "none");
+
         }
         else if($(window).width()>768){
             $("#nav_ul").addClass("flex-column");

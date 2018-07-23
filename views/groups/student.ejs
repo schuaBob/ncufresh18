@@ -10,17 +10,46 @@
     </header>
     <main>
         <!-- 麵包屑 -->
-        <nav aria-label="breadcrumb" id="bread">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">學生會</li>
-                <li class="breadcrumb-item"><a href="/groups/department">系所</a></li>
-                <li class="breadcrumb-item"><a href="/groups/club">社團</a></li>
-                <li class="breadcrumb-item"><a href="/groups/community">其他學生組織</a></li>
-            </ol>
-        </nav>
-            
+        <div class="bread">
+            <nav aria-label="breadcrumb" id="bread">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" id="text" aria-current="page">學生會</li>
+                    <li class="breadcrumb-item" id="text"><a href="/groups/department">系所</a></li>
+                    <li class="breadcrumb-item" id="text"><a href="/groups/club">社團</a></li>
+                    <li class="breadcrumb-item" id="text"><a href="/groups/community">其他學生組織</a></li>
+                </ol>
+            </nav>
+        </div>
+        <div id="stu_title">
+            <img src="學生會標題_去被.png" class="main"><br>
+        </div>
+
+        <div id="stu_button">
+            <img src="圖片1.png" class="button_place">
+            <a data-toggle="modal" data-target="#intro">
+                <img class="stu_intro" src="/groups/簡介按鈕_去被.png">
+            </a>
+            <a data-toggle="modal" data-target="#branch">
+                <img class="stu_branch" src="/groups/部門介紹按鈕_去被.png">
+            </a>
+            <a data-toggle="modal" data-target="#activity">
+                <img class="stu_activity" src="/groups/活動剪影按鈕_去被.png">
+            </a>
+        </div>
+
+        <div id="cell_button">
+            <a data-toggle="modal" data-target="#intro">
+                <img class="stu_cell_intro" src="/groups/簡介按鈕_去被.png">
+            </a><br>
+            <a data-toggle="modal" data-target="#branch">
+                <img class="stu_cell_branch" src="/groups/部門介紹按鈕_去被.png">
+            </a><br>
+            <a data-toggle="modal" data-target="#activity">
+                <img class="stu_cell_activity" src="/groups/活動剪影按鈕_去被.png">
+            </a>
+        </div>
         <!-- 新增圖片按鈕 -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="update">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="update1">
             新增圖片
         </button>
         <!-- Modal -->
@@ -54,7 +83,7 @@
             </div>
         </div>
         <!-- edit Modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_student" id="update">編輯學生會介紹</button><br></br>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_student" id="update2">編輯學生會介紹</button><br></br>
         <div class="modal fade" id="edit_student" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -88,20 +117,9 @@
            </div>
         </div>
         
-        <div id="stu_title">
-            <img src="學生會標題_去被.png" class="main">
-        </div>
-        <div id="stu_button">
-            <img src="圖片1.png" class="button_place">
-        </div>
         
-        <% let student_button = [["intro","簡介"],["branch","部門介紹"],["activity","活動剪影"]] %>
-        <div class="btn-group-vertical" id="vertical">
-            <% for(let p=0; p<3; p++){%>
-                <button type="button" class="btn btn-outline-light" data-toggle="modal" 
-                data-target="#<%= student_button[p][0] %>"><%= student_button[p][1] %></button><br></br>
-            <%}%>
-        </div>
+        
+        
         <!-- 簡介 Modal -->
         <div class="modal fade bd-example-modal-lg " role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="intro">
             <div class="modal-dialog modal-lg" role="document">

@@ -26,17 +26,27 @@
         $(window).resize(function(){
             if($(window).width()<768){
                 $("#nav_ul").removeClass("flex-column");
+                $("#stu_title").css("display", "none");
+                $("#stu_button").css("display", "none");
+                
+
             }
             else if($(window).width()>768){
                 $("#nav_ul").addClass("flex-column");
+                $("#cell_button").css("display", "none");
             }
         });
 
         if($(window).width()<768){
             $("#nav_ul").removeClass("flex-column");
+            $("#stu_title").css("display", "none");
+            $("#stu_button").css("display", "none");
+            
         }
         else if($(window).width()>768){
             $("#nav_ul").addClass("flex-column");
+            $("#cell_button").css("display", "none");
+
         }
 
         

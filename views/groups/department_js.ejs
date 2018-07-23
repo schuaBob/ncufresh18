@@ -82,5 +82,29 @@
             config.autoParagraph = false;
         };
 
+        $(window).resize(function(){
+            if($(window).width()<768){
+                $("#update1").css("display", "none");
+                $("#update2").css("display", "none");
+                $("#combut").css("display", "none");
+            }
+            else if($(window).width()>768){
+                $("#cellup").css("display", "none");
+                $("#celldown").css("display", "none");
+
+            }
+        });
+
+        if($(window).width()<768){
+            $("#update1").css("display", "none");
+            $("#update2").css("display", "none");
+            $("#combut").css("display", "none");
+        }
+        else if($(window).width()>768){
+            $("#cellup").css("display", "none");
+            $("#celldown").css("display", "none");
+
+        }
+
     });
 </script>

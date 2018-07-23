@@ -1,24 +1,23 @@
-
+body{
+    background-image: url(系所飛船修正版地底背景.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center; 
+}
 ul{
     float:left;
 }
-
-.btn-group-vertical{
-    float:left;
-    margin-left: 5%;
-}
-
 
 .modal-body {
     position:relative;
 }
 
-button{
+/* button{
     border-top-left-radius: 40px;
     border-bottom-right-radius: 40px;
     -webkit-transition-duration: 0.4s; 
     transition-duration: 0.4s;
-}
+} */
 button:hover {
     background-color: rgb(43, 78, 233);
     color: white;
@@ -34,39 +33,41 @@ h5{
 }
 
 table{
+    background-image: url(系所社團飛船修正版地底背景2_去被.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left; 
     float: right;
-    background-color: papayawhip;
-    margin-right: 20%;
-    margin-top: 3%;
+    margin-right: 1%;
+    margin-top: 2%;
+    opacity: 0.7;
 }
 
 thead{
     text-align: center;
-    font-size:20px;
+    font-size:2.4vw;
+    color: white;
 }
 
 tbody{
     float:center;
     display: block;
-    height: 200px;
+    height: 50vh;
     overflow-y: scroll;
     border-collapse: collapse;
-    text-align: left;
-}
+    text-align: center;
+    margin-left: 15%;
+    margin-top: 5%;
+    width:28vw;
 
-table, th {
-    border: 1px solid darkgray;
 }
 
 td{
-    width:200px;
     float: left;
+    font-size: 1.5vw;
 }
-
-.embed-responsive{
-    width: 75%;
-    height: 75%;
-    margin-left: 20%;
+#tabletext{
+    color: white;
 }
 
 .science_table, .management_table, .engineering_table, .csee_table, .earth_table, .hakka_table, .chst_table{
@@ -145,4 +146,113 @@ h5{
 #modal_button:hover{
     box-shadow: 0 14px 20px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 
+}
+#combut{
+    position: relative;
+    display: inline-block;
+}
+.leftbox{
+    opacity: 0.7;
+    width: 33vw;
+    float: left;
+    position: relative;
+}
+#but_1, #but_2, #but_3, #but_4, #but_5, #but_6, #but_7, #but_8{
+    background-color: rgb(255, 255, 255, 0);
+    color: white;    
+    font-size: 1.5vw;
+    position: absolute;
+}
+#but_1{
+    top: 25%;
+    left: 20%;
+}
+#but_2{
+    top: 40%;
+    left: 20%;
+}
+#but_3{
+    top: 55%;
+    left: 20%;
+}
+#but_4{
+    top: 70%;
+    left: 20%;
+}
+#but_5{
+    top: 25%;
+    left: 50%;
+}
+#but_6{
+    top: 40%;
+    left: 50%;
+}
+#but_7{
+    top: 55%;
+    left: 50%;
+}
+#but_8{
+    top: 70%;
+    left: 50%;
+}
+/* #comtable{
+    position: relative;
+    display: inline-block;
+}
+.rightbox{
+    opacity: 0.7;
+    width: 33vw;
+    float: right;
+    left: 90%;
+    position: relative;
+}
+#table_1, #table_2, #table_3, #table_4, #table_5, #table_6, #table_7, #table_8{
+    position: absolute;
+    background-color: rgb(255, 255, 255, 0);
+    top: 20%;
+    left: 80%;
+}   */
+
+@media screen and (max-width: 768px){
+    body{
+        background-image: url(系所手機板背景.png);
+        background-position: center;
+    }
+    #up{
+        position: relative;
+        display: inline-block;
+        margin-left: 20%;
+    }
+    .sideup{
+        width: 80vw;
+        float: right;
+        position: relative;
+    }
+    .boxup{
+        width: 80vw;
+        position: absolute;
+        top: 10%;
+        right: 15%;
+        opacity: 0.7;
+    }
+    #cellbut{
+        margin-top: 2%;
+    }
+    #down{
+        position: relative;
+        display: inline-block;
+    }
+    .sidedown{
+        width: 80vw;
+        float: right;
+        position: relative;
+    }
+    .boxdown{
+        width: 80vw;
+        position: absolute;
+        bottom: 20%;
+        left: 15%;
+        opacity: 0.7;
+    }
+    
 }
