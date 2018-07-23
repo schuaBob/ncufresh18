@@ -22,5 +22,17 @@
     </footer>
         <% include ../layout/js %>
         <% include js %>
+    <script>
+        $(document).ready(function(){
+            var width = innerWidth;
+            if(width <= 850)
+                document.location.href = "/life/dorm_phone";
+            $(window).resize(function(){
+                width = innerWidth;
+                if(width <= 850)
+                    document.location.href = "/life/dorm_phone";
+            });
+        });
+    </script>
 </body>
 </html>

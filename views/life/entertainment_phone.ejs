@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../layout/head %>
+    <link rel=stylesheet type="text/css" href="../life/life_phone.css">
+</head>
+<body> 
+    <header>
+        <% include ../layout/navbar %>
+    </header>
+    <main>
+        <img class="icon" src="<%=page%>_icon.png"/>
+        <hr>
+        <div class="title"> 
+            <% for (var i in life) { %>
+                <% if (life[i].type == page) { %>
+                    <% if(life[i].subTitle.length != 0) { %>
+                        <select>
+                            <option value=""><%=life[i].mainTitle%></option>
+                            <% for(var j=0 ; j<life[i].subTitle.length ; j++) { %>
+                                <option value="<%=life[i].mainTitle%>_<%=life[i].subTitle[j]%>"><%=life[i].subTitle[j]%></option>
+                            <% } %>
+                        </select>
+                    <% } else { %>
+                        <a id="<%=life[i].mainTitle%>_default"> <%=life[i].mainTitle%></a>
+                    <% } %>  
+                    <br/>
+                <% } %>
+            <% } %>
+        </div>
+    </main>
+    <footer id="footered">
+        <% include ../layout/footer %>
+    </footer>
+        <% include ../layout/js %>
+        <% include js %>
+    <script>
+        $(document).ready(function(){
+            $(window).resize(function(){
+                var width = innerWidth;
+                if(width > 850){
+                    document.location.href = "/life/entertainment";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

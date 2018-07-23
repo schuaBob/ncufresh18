@@ -47,6 +47,23 @@ router.get('/', function(req, res, next){
   });
 });
 
+router.get('/index_phone', function(req, res, next){
+  let url = "https://works.ioa.tw/weather/api/weathers/81.json";
+  request(url, function(err, response, body){
+    if(err){
+      res.render('life/index_phone', { title: '中大生活', temperature: null, error: "Error, please try again later",
+                                 desc: " ", humidity: " "});
+    }else{
+      let weather = JSON.parse(body),
+          temp = weather.temperature,
+          desc = weather.desc,
+          humidity = weather.humidity;
+      res.render('life/index_phone', { title: '中大生活', temperature: temp, error: " ",
+                                 desc: desc, humidity: humidity, user: req.user});
+    }
+  });
+});
+
 router.get('/food', function(req, res, next){
   var type = req.url;
   type = type.substr(1);
@@ -54,6 +71,12 @@ router.get('/food', function(req, res, next){
     res.render('life/food', { title: '食', life: data, page: type, num: match_num[type], user: req.user});
   });
 });
+
+router.get('/food_phone', function(req, res, next){
+  life.find({}, function(err, data){
+    res.render('life/food_phone', { title: '食', life: data, page: 'food', num: match_num['food'], user: req.user});
+  });
+})
 
 router.get('/dorm', function(req, res, next){
   var type = req.url;
@@ -63,6 +86,12 @@ router.get('/dorm', function(req, res, next){
    });
 });
 
+router.get('/dorm_phone', function(req, res, next){
+  life.find({}, function(err, data){
+    res.render('life/dorm_phone', { title: '食', life: data, page: 'dorm', num: match_num['dorm'], user: req.user});
+  });
+})
+
 router.get('/comm', function(req, res, next){
   var type = req.url;
   type = type.substr(1);
@@ -70,6 +99,12 @@ router.get('/comm', function(req, res, next){
     res.render('life/comm', { title: '行', life: data, page: type, num: match_num[type], user: req.user});
   });
 });
+
+router.get('/comm_phone', function(req, res, next){
+  life.find({}, function(err, data){
+    res.render('life/comm_phone', { title: '食', life: data, page: 'comm', num: match_num['comm'], user: req.user});
+  });
+})
 
 router.get('/edu', function(req, res, next){
   var type = req.url;
@@ -79,6 +114,12 @@ router.get('/edu', function(req, res, next){
   });
 });
 
+router.get('/edu_phone', function(req, res, next){
+  life.find({}, function(err, data){
+    res.render('life/edu_phone', { title: '食', life: data, page: 'edu', num: match_num['edu'], user: req.user});
+  });
+})
+
 router.get('/entertainment', function(req, res, next){
   var type = req.url;
   type = type.substr(1);
@@ -86,6 +127,12 @@ router.get('/entertainment', function(req, res, next){
     res.render('life/entertainment', { title: '樂', life: data, page: type, num: match_num[type], user: req.user});
   });
 });
+
+router.get('/entertainment_phone', function(req, res, next){
+  life.find({}, function(err, data){
+    res.render('life/entertainment_phone', { title: '食', life: data, page: 'entertainment', num: match_num['entertainment'], user: req.user});
+  });
+})
 
 router.post('/editPicture', upload.single('picture'), function(req, res, next){
   var cuted = req.file.path.split("/"),
