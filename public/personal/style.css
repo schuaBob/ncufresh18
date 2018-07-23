@@ -1,40 +1,47 @@
+.space {
+    padding :10px ;
+}
 table {
-    padding :100px ;
+    position: relative;
+    z-index: 1 ;
+    top : 10px ;
 }
 #picture {
     background-image: url("預設封面.png") ;
     background-size: cover ;
     background-position: center ;
-    grid-column: 1 / span 4;
-    grid-row: 1;
-    height: 400px ;
-
+    height: 350px ;
+    width: 1500px ;
 }
 #empty {
     height: 300px ;
-    width: 500px ;
+    width: 350px ;
     background-color: white ;
 }
 #score {
     height: 300px ;
     width: 250px ;
-    background-color: blue ;
+    background-color: rgb(244, 209, 207) ;
 }
 #writing {
     height: 300px ;
     width: 550px ;
-    background-color: aqua ;
+    background-color: rgb(247, 233, 224) ;
 }
 #other {
     height: 300px ;
     width: 300px ;
 }
-#box {
-    height: 15vh ;
-    width : 14vw ;
-}
 #btn {
-    background-color: pink ;
-    margin : auto ;
-    height: 100px;
+    height: 87px;
+}
+#pic {
+    position: relative;
+    z-index: 2 ;
+    top : 250px ;
+    left : 100px ;
+    height: 200px ;
+    width : 200px ;
+    border-radius : 100px ;
+    border : 2px ;
 }
