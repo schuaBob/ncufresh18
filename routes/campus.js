@@ -206,5 +206,14 @@ router.post("/saveposition/:id",function(req,res,next) {
     res.redirect("/campus/editElement");
   })
 })
+router.get("/indexmodal",function(req,res,next) {
+  elebuilding.findById(req.query.id,{_id:0,Element_Name:1,Element_Intro:1,Intropic:1}).exec(function(err,result) {
+    if(err) {
+      return next(err)
+    }
+    console.log(result)
+    res.send(result)
+  })
+})
 
 module.exports = router;
