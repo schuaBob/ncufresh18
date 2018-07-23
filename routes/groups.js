@@ -22,6 +22,7 @@ router.get('/department', function(req, res, next) {
         user: req.user,
         department: department,
         QAvideo: video2,
+        user: req.user,
       });
     });
   });
@@ -31,7 +32,8 @@ router.get('/community', function(req, res, next) {
   community.find({}).exec(function(err, community) {
     res.render('groups/community', {
       title: '其他學生組織 ',
-      community: community,    
+      community: community,
+      user: req.user,    
     });
   });
 });
@@ -41,10 +43,10 @@ router.get('/student', function(req, res, next) {
     res.render('groups/student', {
       title: '學生會',
       student: student,
+      user: req.user,
     });
   });
 });
-
 
 
 /* 原本想用typelearn.play.date.service分類，後來不用那麼麻煩 */
@@ -61,6 +63,7 @@ router.get('/club', function(req, res, next) {
             typedate: club3,
             typeservice: club4,
             club: club,
+            user: req.user,
           });
         });
       });

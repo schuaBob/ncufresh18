@@ -1,5 +1,5 @@
 body{
-    background-image: url(學生會2.png);
+    background-image: url(學生會背景.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center; 
@@ -47,12 +47,7 @@ h6{
 }
 
 
-#vertical{
-    margin-left: 66%;
-    margin-top: 11%; 
-    font-size: 14px;
 
-}
 
 #carouselExampleIndicators{
     width: 650px;
@@ -88,6 +83,30 @@ h6{
 
 .modal-content{
     background-image: url(彈出視窗背景.png);
+}
+
+#stu_title{
+    position: relative;
+    display: inline-block;
+    margin-left: 65%;
+}
+.main{
+    width:23vw;
+    position: relative;
+    left:40%;
+    bottom: 15vh;
+}
+
+#stu_button{
+    position: relative;
+    display: inline-block;
+    margin-left: 40%;
+}
+.button_place{
+    position: relative;
+    width: 20vw;
+    left: 93%;
+    bottom: 21vh;
 }
 
 

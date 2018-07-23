@@ -5,8 +5,6 @@ body{
     background-position:top right;
     background-size: cover;
     background-repeat: no-repeat;
-    width:100%;
-    height: 100%;
 }
 
 #all{
@@ -52,7 +50,7 @@ body{
     float: left;    
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 768px){
     body{
         background-image: url(系所社團_手機板.png);
     }

@@ -1,5 +1,5 @@
 .mainbutton{
-    margin-left: 70%;
+    margin-left: 50%;
 }
 
 #modal_button{ 
@@ -61,11 +61,36 @@ h6{
 }
 
 
+#com_button{
+    position: relative;
+    display: inline-block;
+    margin-left: 40%;
+}
+
+.main{
+    width:26vw;
+    position: absolute;
+    right: 80%;
+}
+.astro{
+    width: 7vw;
+    left: 100%;
+    top: 75%;
+    position: absolute;
+}
+.box{
+    width:28vw;
+    position: relative;
+    left: 30%;
+    float: right;
+}
+
+
 
 body{
-    background-image: url(其他學生組織.png);
+    background-image: url(其他學生組織背景圖修正版.png);
     background-attachment: fixed;
-    background-position: right;
+    background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
 }
