@@ -1,13 +1,17 @@
+@import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
 /* 背景顏色 */
 body{
-    background-color: #D3E6DD;
+    /* background-color: #D3E6DD; */
+    background: url(背景.png);
+    background-size: cover;
+    overflow-y: scroll;
 }
 tbody{
     background-color: white;
     float:center;
     display: block;
     /* height: 300px; */
-    overflow-y: scroll;
+    
     border-collapse: collapse;
     font-family: Microsoft YaHei;
 }
@@ -25,6 +29,7 @@ thead{
 table{
     margin:0 auto;
     border-collapse: collapse;
+
     /* border-spacing: 10px; */
     z-index: 1;
 }
@@ -32,10 +37,18 @@ table{
 .outOfTable{
     left:150px;
     top:152px;
+    /* left:20%; */
+    /* top:152px; */
     height:342px;
-    float: left;
+    /* float: left; */
     z-index:2;
     position: absolute;
+    /* left:20vw; */
+}
+.notebook{
+    position: relative;
+    margin:0 auto;
+    
 }
 /* 問題合集 */
 .Q{
@@ -56,11 +69,20 @@ th{
 }
 /* 排序與分類的連結 */
 .nav-link{
-    color:black;
+    color:white;
     font-family: YouYuan;
 }
-.title{
+/* 問題標題欄寬度 */
+/* .title{
     width:200px;
+    width:60%;
+} */
+.article{
+    text-align: left;
+    /* margin:15px; */
+    margin-left: 5px;
+    font-family: Noto Sans TC;
+
 }
 /* 排序與分類 */
 .classification{
@@ -70,7 +92,7 @@ th{
 .classificationBtn{
     background: url(排序.png);
     background-size: cover;
-    float: right;
+    float: left;
     border: medium none;
     width: 30px;
     height:30px;
@@ -80,9 +102,13 @@ th{
 p{
     font-weight:bold;
 }
+ul{
+    height: 50px;
+}
 /* 搜尋按鈕 */
 .searchbtn{
     background: url(搜尋.png);
+    background-color: transparent;
     border: medium none;
     color: transparent;
     background-size: cover; 
@@ -94,9 +120,11 @@ p{
 }
 /* 搜尋輸入關鍵字欄 */
 #searchtext{
-    border-radius: 15px;
-    border-color: black;
-    background-color: #D3E6DD;
+    border-radius: 30px;
+    height: 30px;
+    border-color: white;
+    background-color: transparent;
+    vertical-align: center;
 }
 .top{
     position: absolute;
@@ -152,12 +180,13 @@ p{
  }
  /* 我要發問按鈕 */
  .askbutton{
-    max-width: 35%;
-    max-height: 35%;
+    max-width: 20%;
+    max-height: 20%;
     float: right;
     vertical-align: middle;
     position: absolute;
-    top:280px;
+    top:300px;
+    /* bottom: 35vw; */
     right:20px;
  }
  /* 手機版的我要發問按鈕 */
@@ -179,6 +208,9 @@ p{
  }
  /* OK按鈕 */
  .closemodal{
+    background-color: #29ABE2;
+    color: white;
+    font-family: Microsoft YaHei;
     background-image: url(OK.png);
     background-size: cover; 
     max-width: 40%;
