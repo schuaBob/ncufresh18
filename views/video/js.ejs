@@ -37,6 +37,16 @@
     
     let rsrc
     $(document).ready(() => {
+        $(window).on("orientationchange",function(){
+            if(window.orientation == 0) // Portrait
+            {
+                console.log("0");
+            }
+            else // Landscape
+            {
+                console.log("1");
+            }
+        });
         $(document).on("click",".rotate",function(event){//旋轉唱片盒
             if(end == 1){//end記錄唱片盒轉完了沒
                 if(rotate == 0){
@@ -75,7 +85,14 @@
 
         $(document).on("click",".turn",function(event){
             if(rotate==1){//每個按鍵都唱片盒轉回正面
-                $('.rotate').html('簡介');
+                if($(window).width<414){
+                    $(".rotate").html('簡介');
+                }
+                else {
+                    $(".rotate").attr("src", "button/影片介紹.png");
+                    $(".rotate").attr("picture", "button/影片介紹");
+                    rsrc = "button/影片介紹";
+                }
                 rotate = 0;
                 rotateDIV()
             }
