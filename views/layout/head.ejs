@@ -1,19 +1,20 @@
 <title><%= title %></title>
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-
-<%_ /* bootstrap */ -%>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<%_ /* bootstrap and JQuery */ -%>
+<script src="/js/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/bootstrap-4.1.1-dist/css/bootstrap.min.css">
-<script src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
+<script src="/js/popper.min.js"></script>
 <script src="/bootstrap-4.1.1-dist/js/bootstrap.min.js"></script>
-
 <%_ /* ckeditor */ -%>
 <script src="/ckeditor/ckeditor.js"></script>
-
 <style>
+    <%_ /* 全域思源黑體 */ -%>
+    @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+    * {
+        font-family: 'Noto Sans TC', sans-serif;
+    }
     html {
         position: relative;
         min-height: 100%;
@@ -29,7 +30,7 @@
     body {
         padding-top: 56px;
         padding-bottom: 24px;
-        /* overscroll-behavior-y: none; 這真的不知道該加還是不加ＱＱ */
+        <%_ /* overscroll-behavior-y: none; 這真的不知道該加還是不加ＱＱ */ -%>
     }
     footer {
         position: absolute;
