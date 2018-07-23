@@ -1,6 +1,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
 <script>
 $(document).ready(() => {
     if ($(window).width() < 800) {
@@ -19,7 +20,7 @@ $(document).ready(() => {
         $(".admin").hide();
         //文章列表樣式
         $('table').css({"width":$(window).width()});
-        $('tbody').css({"height":$(window).height()-30});
+        //$('tbody').css({"height":$(window).height()-30});
         //modal的樣式
         // $(".modal").css({"height":$(window).height()});
         //我要發問按鈕的位置
@@ -33,7 +34,7 @@ $(document).ready(() => {
         $(".search").css({"float":"right"});
         //文章列表樣式
         $('table').css({"width":"70%"});
-        $('tbody').css({"height":"300px"});
+        //$('tbody').css({"height":"300px"});
         $('td').css({"border-right":"1.5px black solid"});
         //排序跟分類的按鈕
         $(".classificationBtn").hide();
@@ -44,102 +45,108 @@ $(document).ready(() => {
     //預設分類
     if ($(window).width() < 800) {
         $("li a[href='#all']").css({"color":"#29ABE2","font-weight":"bold"});
+        $("li a[href='/qna/time']").css({"color":"#29ABE2","font-weight":"bold"});
     }
     else{
         $("li a[href='#all']").css({"background-color":"#29ABE2","border-radius":"20px"});
+        $("li a[href='/qna/time']").css({"background-color":"#29ABE2","border-radius":"20px"});
     }
     //只看單一分類
-    $("li a[href='#校園生活']").on('click',function(){
-        if ($(window).width() < 800) {
-            $("li a[href='#校園生活']").css({"color":"#29ABE2","font-weight":"bold"});
-            $("li a[href='#學生事務']").css({"color":"black","font-weight":"normal"});
-            $("li a[href='#課程相關']").css({"color":"black","font-weight":"normal"});
-            $("li a[href='#其他']").css({"color":"black","font-weight":"normal"});
+    $("li a[href='#school'], li a[href='#student'], li a[href='#class'], li a[href='#others'], li a[href='#all']").on('click', function(event) {
+        event.preventDefault();
+        // Store hash
+        var hash = this.hash;
+        if(hash==="#all"){
+            if ($(window).width() < 800) {
+            $("li a[href='#all']").css({"color":"#29ABE2","font-weight":"bold"});
+            $("li a[href='#student']").css({"color":"black","font-weight":"normal"});
+            $("li a[href='#class']").css({"color":"black","font-weight":"normal"});
+            $("li a[href='#others']").css({"color":"black","font-weight":"normal"});
+            $("li a[href='#school']").css({"color":"black","font-weight":"normal"});
+        }
+        else{
+            $("li a[href='#all']").css({"background-color":"#29ABE2","border-radius":"20px"});
+            $("li a[href='#student']").css({"background-color":"transparent"});
+            $("li a[href='#class']").css({"background-color":"transparent"});
+            $("li a[href='#others']").css({"background-color":"transparent"});
+            $("li a[href='#school']").css({"background-color":"transparent"});
+        }
+        $('tr.Q').fadeIn(500);
+        }
+        else if(hash==="#school"){
+            if ($(window).width() < 800) {
+            $("li a[href='#school']").css({"color":"#29ABE2","font-weight":"bold"});
+            $("li a[href='#student']").css({"color":"black","font-weight":"normal"});
+            $("li a[href='#class']").css({"color":"black","font-weight":"normal"});
+            $("li a[href='#others']").css({"color":"black","font-weight":"normal"});
             $("li a[href='#all']").css({"color":"black","font-weight":"normal"});
         }
         else{
-            $("li a[href='#校園生活']").css({"background-color":"#29ABE2","border-radius":"20px"});
-            $("li a[href='#學生事務']").css({"background-color":"transparent"});
-            $("li a[href='#課程相關']").css({"background-color":"transparent"});
-            $("li a[href='#其他']").css({"background-color":"transparent"});
+            $("li a[href='#school']").css({"background-color":"#29ABE2","border-radius":"20px"});
+            $("li a[href='#student']").css({"background-color":"transparent"});
+            $("li a[href='#class']").css({"background-color":"transparent"});
+            $("li a[href='#others']").css({"background-color":"transparent"});
             $("li a[href='#all']").css({"background-color":"transparent"});
         }
         $('tr.Q').hide();
         $('tr.校園生活').fadeIn(500);
-        
-    });
-    $("li a[href='#學生事務']").on('click',function(event){
-        if ($(window).width() < 800) {
+        }
+        else if(hash==="#student"){
+            if ($(window).width() < 800) {
             //手機版樣式
-            $("li a[href='#學生事務']").css({"color":"#29ABE2","font-weight":"bold"});
-            $("li a[href='#校園生活']").css({"color":"black","font-weight":"normal"});
-            $("li a[href='#課程相關']").css({"color":"black","font-weight":"normal"});
-            $("li a[href='#其他']").css({"color":"black","font-weight":"normal"});
+            $("li a[href='#student']").css({"color":"#29ABE2","font-weight":"bold"});
+            $("li a[href='#school']").css({"color":"black","font-weight":"normal"});
+            $("li a[href='#class']").css({"color":"black","font-weight":"normal"});
+            $("li a[href='#others']").css({"color":"black","font-weight":"normal"});
             $("li a[href='#all']").css({"color":"black","font-weight":"normal"});
         }
         else{
             //電腦版樣式
-            $("li a[href='#學生事務']").css({"background-color":"#29ABE2","border-radius":"20px"});
-            $("li a[href='#校園生活']").css({"background-color":"transparent"});
-            $("li a[href='#課程相關']").css({"background-color":"transparent"});
-            $("li a[href='#其他']").css({"background-color":"transparent"});
+            $("li a[href='#student']").css({"background-color":"#29ABE2","border-radius":"20px"});
+            $("li a[href='#school']").css({"background-color":"transparent"});
+            $("li a[href='#class']").css({"background-color":"transparent"});
+            $("li a[href='#others']").css({"background-color":"transparent"});
             $("li a[href='#all']").css({"background-color":"transparent"});
         }
         $('tr.Q').hide();
         $('tr.學生事務').fadeIn(500);
-    });
-    $("li a[href='#課程相關']").on('click',function(event){
-        if ($(window).width() < 800) {
-            $("li a[href='#課程相關']").css({"color":"black","font-weight":"bold"});
-            $("li a[href='#學生事務']").css({"color":"#29ABE2","font-weight":"normal"});
-            $("li a[href='#校園生活']").css({"color":"black","font-weight":"normal"});
-            $("li a[href='#其他']").css({"color":"black","font-weight":"normal"});
+        }
+        else if(hash==="#class"){
+            if ($(window).width() < 800) {
+            $("li a[href='#class']").css({"color":"black","font-weight":"bold"});
+            $("li a[href='#student']").css({"color":"#29ABE2","font-weight":"normal"});
+            $("li a[href='#school']").css({"color":"black","font-weight":"normal"});
+            $("li a[href='#others']").css({"color":"black","font-weight":"normal"});
             $("li a[href='#all']").css({"color":"black","font-weight":"normal"});
         }
         else{
-            $("li a[href='#課程相關']").css({"background-color":"#29ABE2","border-radius":"20px"});
-            $("li a[href='#學生事務']").css({"background-color":"transparent"});
-            $("li a[href='#校園生活']").css({"background-color":"transparent"});
-            $("li a[href='#其他']").css({"background-color":"transparent"});
+            $("li a[href='#class']").css({"background-color":"#29ABE2","border-radius":"20px"});
+            $("li a[href='#student']").css({"background-color":"transparent"});
+            $("li a[href='#school']").css({"background-color":"transparent"});
+            $("li a[href='#others']").css({"background-color":"transparent"});
             $("li a[href='#all']").css({"background-color":"transparent"});
         }
         $('tr.Q').hide();
         $('tr.課程相關').fadeIn(500);
-    });
-    $("li a[href='#其他']").on('click',function(event){
-        if ($(window).width() < 800) {
-            $("li a[href='#其他']").css({"color":"#29ABE2","font-weight":"bold"});
-            $("li a[href='#學生事務']").css({"color":"black","font-weight":"normal"});
-            $("li a[href='#課程相關']").css({"color":"black","font-weight":"normal"});
-            $("li a[href='#校園生活']").css({"color":"black","font-weight":"normal"});
-            $("li a[href='#all']").css({"color":"black","font-weight":"normal"});
         }
-        else{
-            $("li a[href='#其他']").css({"background-color":"#29ABE2","border-radius":"20px"});
-            $("li a[href='#學生事務']").css({"background-color":"transparent"});
-            $("li a[href='#課程相關']").css({"background-color":"transparent"});
-            $("li a[href='#校園生活']").css({"background-color":"transparent"});
-            $("li a[href='#all']").css({"background-color":"transparent"});
-        }
-        $('tr.Q').hide();
-        $('tr.其他').fadeIn(500);
-    });
-    $("li a[href='#all']").on('click',function(event){
-        if ($(window).width() < 800) {
-            $("li a[href='#all']").css({"color":"#29ABE2","font-weight":"bold"});
-            $("li a[href='#學生事務']").css({"color":"black","font-weight":"normal"});
-            $("li a[href='#課程相關']").css({"color":"black","font-weight":"normal"});
-            $("li a[href='#其他']").css({"color":"black","font-weight":"normal"});
-            $("li a[href='#校園生活']").css({"color":"black","font-weight":"normal"});
-        }
-        else{
-            $("li a[href='#all']").css({"background-color":"#29ABE2","border-radius":"20px"});
-            $("li a[href='#學生事務']").css({"background-color":"transparent"});
-            $("li a[href='#課程相關']").css({"background-color":"transparent"});
-            $("li a[href='#其他']").css({"background-color":"transparent"});
-            $("li a[href='#校園生活']").css({"background-color":"transparent"});
-        }
-        $('tr.Q').fadeIn(500);
+        else if(hash==="#others"){
+            if ($(window).width() < 800) {
+                $("li a[href='#others']").css({"color":"#29ABE2","font-weight":"bold"});
+                $("li a[href='#student']").css({"color":"black","font-weight":"normal"});
+                $("li a[href='#class']").css({"color":"black","font-weight":"normal"});
+                $("li a[href='#school']").css({"color":"black","font-weight":"normal"});
+                $("li a[href='#all']").css({"color":"black","font-weight":"normal"});
+            }
+            else{
+                $("li a[href='#others']").css({"background-color":"#29ABE2","border-radius":"20px"});
+                $("li a[href='#student']").css({"background-color":"transparent"});
+                $("li a[href='#class']").css({"background-color":"transparent"});
+                $("li a[href='#school']").css({"background-color":"transparent"});
+                $("li a[href='#all']").css({"background-color":"transparent"});
+            }
+            $('tr.Q').hide();
+            $('tr.其他').fadeIn(500);
+        }      
     });
     //排序判別
     var url = new URL(window.location.href);
@@ -147,12 +154,12 @@ $(document).ready(() => {
         if ($(window).width() < 800) {
             //手機版排序按鈕動畫
             $("li a[href='/qna/hot']").css({"color":"#29ABE2","font-weight":"bold"});
-            $("li a[href='/qan/time']").css({"color":"black","font-weight":"normal"});
+            $("li a[href='/qna/time']").css({"color":"black","font-weight":"normal"});
         }
         else{
             //電腦版排序按鈕動畫
             $("li a[href='/qna/hot']").css({"background-color":"#29ABE2","border-radius":"20px"});
-            $("li a[href='/qan/time']").css({"background-color":"transparent"});
+            $("li a[href='/qna/time']").css({"background-color":"transparent"});
         }
         
     }
@@ -160,7 +167,7 @@ $(document).ready(() => {
         if ($(window).width() < 800) {
             //手機版排序按鈕動畫
             $("li a[href='/qna/time']").css({"color":"#29ABE2","font-weight":"bold"});
-            $("li a[href='/qan/hot']").css({"color":"black","font-weight":"normal"});
+            $("li a[href='/qna/hot']").css({"color":"black","font-weight":"normal"});
         }
         else{
             //電腦版排序按鈕動畫
@@ -168,6 +175,15 @@ $(document).ready(() => {
             $("li a[href='/qna/hot']").css({"background-color":"transparent"});
         }
     }
+    //人氣與時間排序
+    $("li a[href='/qna/hot']").on("click",function(){
+        $.ajax({
+            url:    "/qna/hot",
+            method:'GET',
+        }).done(function(res) {
+            console.log("測試用");
+        });
+    });
     //紀錄問題點擊次數
     $(".titleQ").on('click',function(){
         //var id = $(this).prop('id');
@@ -246,5 +262,70 @@ $(document).ready(() => {
         // })
       }
     });
+  
 })         
+</script>
+<script>
+    //人氣跟時間的排序(list.js)
+    var options = {
+        valueNames: [ 'time', 'hot' ]
+    };
+    var userList = new List('select111', options);
+    //預設排序是時間
+    userList.sort("time",{
+        order:'desc'
+        // sortFunction: function (a, b) {
+        //     var top=$("td.topT");
+            
+        // //     if ((a.time === top) != (b.time === top)) {
+        // //         return a.time === top ? 1 : -1;
+        // //     }
+        // //     return a.time > b.time ? 1 : 0;
+        // //            //a.time < b.time ? -1 : 0;
+        //     if (a.time === b.time) {
+        //         // a and b are considered equal, the order is okay
+        //         return 0;   
+        //     }
+
+        //     if (a.time === top) {
+        //         // "NEW" is considered larger than every other value, the order is wrong
+        //         return 1;
+        //     }
+
+        //     // Correct order if b equals "NEW", otherwise lexicographical comparison
+        //     return b.time === top ? -1 : (a.time > b.time ? 1 : -1);
+
+        //  }
+    });
+    userList.sort("hot",{
+        order:'desc',
+        // sortFunction: function (a, b) {
+            // var top= $("td.topH").val();
+            // console.log(top);
+            // console.log($(a).find('.view'));
+            // if (($(a).find('.view')=== top) != ($(b).find('.view')=== top)) {
+                
+            //     return $(a).find('.view') === top ? 1 : -1;
+            // }
+            // return a.hot > b.hot ? 1 : 
+            //        a.hot < b.hot ? -1 : 0;
+
+        //     var id = $(this).prop('id');
+        //     var view=$('.' + id).find('.view');
+        //     console.log(view);
+        //     if (a.view === top) {
+        //         // a and b are considered equal, the order is okay
+        //         return 1;   
+        //     }
+
+        //     else if (b.view === top) {
+        //         // "NEW" is considered larger than every other value, the order is wrong
+        //         return -1;
+        //     }
+
+        //     // Correct order if b equals "NEW", otherwise lexicographical comparison
+        //     return a.view-b.view;
+
+        //}
+    });
 </script>
