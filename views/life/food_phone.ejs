@@ -4,30 +4,34 @@
     <% include ../layout/head %>
     <link rel=stylesheet type="text/css" href="../life/life_phone.css">
 </head>
-<body> 
+<body style="height: 100vh;"> 
     <header>
         <% include ../layout/navbar %>
     </header>
-    <main>
-        <img class="icon" src="<%=page%>_icon.png"/>
-        <hr>
-        <div class="title"> 
-            <% for (var i in life) { %>
-                <% if (life[i].type == page) { %>
-                    <% if(life[i].subTitle.length != 0) { %>
-                        <select>
-                            <option value=""><%=life[i].mainTitle%></option>
-                            <% for(var j=0 ; j<life[i].subTitle.length ; j++) { %>
-                                <option value="<%=life[i].mainTitle%>_<%=life[i].subTitle[j]%>"><%=life[i].subTitle[j]%></option>
-                            <% } %>
-                        </select>
-                    <% } else { %>
-                        <a id="<%=life[i].mainTitle%>_default"> <%=life[i].mainTitle%></a>
-                    <% } %>  
-                    <br/>
+    <main style="height: 100vh;">
+        <div class="selectPart">
+            <img class="icon" src="<%=page%>_icon.png"/>
+            <hr>
+            <div class="title"> 
+                <% for (var i in life) { %>
+                    <% if (life[i].type == page) { %>
+                        <% if(life[i].subTitle.length != 0) { %>
+                            <select class="showDetail_phone2" >
+                                <option value=""><%=life[i].mainTitle%></option>
+                                <% for(var j=0 ; j<life[i].subTitle.length ; j++) { %>
+                                    <option value="<%=life[i].mainTitle%>_<%=life[i].subTitle[j]%>"><%=life[i].subTitle[j]%></option>
+                                <% } %>
+                            </select>
+                        <% } else { %>
+                            <a class="showDetail_phone" id="<%=life[i].mainTitle%>_default"> <%=life[i].mainTitle%></a>
+                        <% } %>  
+                        <br/>
+                    <% } %>
                 <% } %>
-            <% } %>
+            </div>
         </div>
+        <div class="pictureArea"></div>
+        <div class="descArea"></div>
     </main>
     <footer id="footered">
         <% include ../layout/footer %>

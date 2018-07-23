@@ -4,11 +4,11 @@
     <% include ../layout/head %>
     <link rel=stylesheet type="text/css" href="../life/life_phone.css">
 </head>
-<body> 
+<body style="height: 100vh;"> 
     <header>
         <% include ../layout/navbar %>
     </header>
-    <main>
+    <main style="height: 100vh;">
         <div class="middle">
             <a href="/life/food">食</a> <br /> 
             <a href="/life/dorm">住</a> <br />
@@ -26,9 +26,8 @@
         $(document).ready(function(){
             $(window).resize(function(){
                 var width = innerWidth;
-                if(width > 850){
+                if(width > 850)
                     document.location.href = "/life";
-                }
             });
         });
     </script>
