@@ -1,14 +1,19 @@
-body{
-    /* background-image:url("background.png"); */
+
+ @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
+ * {
+     font-family: 'Noto Sans TC';
+ }
+
+/* body{
     background-size: cover;
     width: 100%;
     height: 100%;
-}
-
+} */
 
 #CDbox {
     top: 6vh;
     background-color: rgba(255, 255, 255, 0.411);
+    background-position: center;
     background-image: url('CDbox.png');
     background-size: 100%;
     padding: 0vw;
@@ -28,9 +33,9 @@ body{
     -ms-filter: "FlipV";
 }
 
-.item {
+/* .item {
     top: 6vh;
-}
+} */
 
 iframe {
     display: none;
@@ -116,13 +121,13 @@ iframe {
     border-color: rgb(255, 255, 255);
   }
 
-  #back {
+  /* #back {
     color: #af8b27;
     background-color: rgba(0, 0, 0, 0.123);
     background-image: none;
     border-color: rgba(231, 233, 94, 0.637);
     
-  }
+  } */
 
 /* 電腦 */
 @media only screen and (min-width: 414px) {
@@ -137,7 +142,9 @@ iframe {
     }
 
     body{
+        
         background-image:url("background.png");
+        background-repeat: no-repeat;
     }
     .bigCD_position_in, .bigCD_position_out {
         opacity: 0;
@@ -146,15 +153,6 @@ iframe {
         display: inline;
     }
 
-    
-    /* .bigCD, .bigCD_position {
-        z-index: -1;
-        height: 264px;
-        width: auto;
-        position: absolute;
-        left: 65vw;
-        bottom: 38vh;
-    } */
     .cellphone {
         display: none;
     }
@@ -163,7 +161,8 @@ iframe {
     }
 
     .btn-outline-title, .btn-outline-item-click {
-        border-radius: 50px;
+        /* border-radius: 50px; */
+        border-radius: 1px;
     }
 
     .rotate {
@@ -204,8 +203,7 @@ iframe {
         position: relative;
         margin-left: auto;
         margin-right: auto;
-        /* top: 10vh; */
-        top: 15vh;
+        top: 10vh;
     }
 
     .item {
@@ -217,12 +215,14 @@ iframe {
     }
 
     #back {
+        background-color: rgba(240, 248, 255, 0);
         position: absolute;
         border-radius: 5px;
         /* bottom: 0; */
         top: 14vh;
     }
     #back:hover {
+        background-color: rgba(240, 248, 255, 0);
         transform: scale(1.2);
     }
 
@@ -234,6 +234,13 @@ iframe {
         bottom: 1vh
     }
 
+    .cd_col {
+        position: absolute;
+        z-index: -1;
+        
+        /* bottom: 6vh; */
+    }
+
     .cd {
         position: absolute;
         z-index: -1;
@@ -241,7 +248,8 @@ iframe {
         -moz-transition: bottom 1s, opacity 0.5s ease-out;/* FireFox 16.0  */
         -o-transition: bottom 1s, opacity 0.5s ease-out;/* Opera 12.1   */
         transition: bottom 1s, opacity 0.5s ease-out;
-        opacity: 1;
+        /* opacity: 1; */
+        opacity: 0.7;
         bottom: 10vh;
     }
     .cd:hover {
@@ -264,26 +272,42 @@ iframe {
     }
 
     .video_item_QAvideo {
-        transform: scale(1.05);
-        position: relative;
+        /* transform: scale(1.05) translateY(4vh); */
+        /* position: relative; */
         
     }
     .video_item_QAvideo:hover {
         transform: scale(1.1);
     }
 
-    /* .item {
-        opacity: 1;
-        transition-property: all;
-        transition-duration: 2s;
+    .video_item_QAvideo_col {
+        background-color: rgba(255, 255, 255, 0);
+        position: relative;
+        /* transform: translateY(-8vh)  scale(1.05);*/
+        opacity: 0.9;
     }
-    .item:hover {
-        opacity: 0;
-        transition-property: all;
-        transition-duration: 2s;
-    } */
+    .video_item_QAvideo_col:hover {
+        background-color: black;
+        position: relative;
+        /* transform: translateY(-8vh) scale(1.1);*/ 
+        opacity: 1;
+    }
+
+    .box {
+        opacity: 0.8;
+    }
+    .box:hover {
+        opacity: 1;
+    }
 
     @media only screen and (min-width: 820px) {
+        body{
+            background-position-x: center;
+            background-size: cover;
+            width: 100%;
+            height: 100%;
+        }
+
         .bigCD_position_out {
             left: 65vw;
         }
@@ -292,11 +316,12 @@ iframe {
         }
         .bigCD, .bigCD_position_in, .bigCD_position_out {
             z-index: -1;
-            height: 264px;
+            height: 260px;
             width: auto;
             position: absolute;
             /* left: 65vw; */
-            top: 94px;
+            top: 57px;
+            transform: translateY(6vh);
         }
         .bigCD_stop {
             -webkit-transition: left 1s, opacity 0.5s ease-out; /* Safari */
@@ -322,8 +347,10 @@ iframe {
             margin-right: auto; 
             /* width: 40%;
             height: 23vw; */
-            width: 465px;
-            height: 264px;
+            width: 77vh;
+            height: 44vh;
+            /* width: 465px;
+            height: 264px; */
         }
 
         .video_item_title_allvideo .video_item {
@@ -333,36 +360,15 @@ iframe {
             height: 55px;
         }
 
-        
-
-        /* .video_item_title {
-            left:2vw;
-        } */
-
-
         .item {
             margin: auto;
-            width: 80px;
+            width: 13vh;
             height: auto;
             /* position: relative; */
             
 
         }
-        .item:hover {
-            /*-webkit-transition: bottom 0.5, opacity 1s;  Safari */
-            /* -moz-transition: bottom 0.5s, opacity 1s;FireFox 16.0  */
-            /* -o-transition: bottom 0.5s, opacity 1s;Opera 12.1   */
-            /* transition: bottom 0.5s, opacity 1s;
-            opacity: 0; */
-            /* transition-property: bottom;
-            transition-duration: 0.5s; */
-            /* bottom:1vh; */
-            /* -ms-transform: translateY(-1vh);; IE 9 */
-            /* -webkit-transform: translateY(-1vh);
-            transform: translateY(-1vh);
-            transform: scale(1.1); */
-        }
-
+        
         td {
             padding: auto;
         }
@@ -370,8 +376,8 @@ iframe {
         .rotate {
             width: 13vw;
             height: auto;
-            top: 40vh;
-            right: 3vw;
+            top: 55vh;
+            right: 1vw;
         }
         .rotate:hover {
             transform: scale(1.1);
@@ -419,7 +425,7 @@ iframe {
         
     }
 
-    @media only screen and (min-width: 414px)  and (max-width: 820px) {
+    @media only screen and (min-width: 415px)  and (max-width: 820px) {
         .bigCD_position_out {
             left: 605px;
             -webkit-transform: translateX(20vw);
@@ -478,8 +484,6 @@ iframe {
         #CDbox {
             position: relative;
             left: 140px;
-            /* width: 60%;
-            height: 34vw; */
             margin-left: auto; 
             margin-right: auto;
             width: 465px;
@@ -504,32 +508,8 @@ iframe {
             padding: 0%;
             width: 70px;
             height: auto;
-            /* position: relative; */
-            /*-webkit-transition: bottom 0.5s, opacity 1s;  Safari */
-            /*-moz-transition: bottom 0.5s, opacity 1s; FireFox 16.0  */
-            /*-o-transition: bottom 0.5s, opacity 1s; Opera 12.1   */
-            /* transition: bottom 0.5s, opacity 1s;
-            opacity: 1;
-            transition-property: bottom;
-            transition-duration: 0.5s;
-            bottom: 0; */
         }
-        .item:hover {
-            /*-webkit-transition: bottom 0.5s, opacity 1s;  Safari */
-            /* -moz-transition: bottom 0.5s, opacity 1s;FireFox 16.0  */
-            /* -o-transition: bottom 0.5s, opacity 1s;Opera 12.1   */
-            /* transition: bottom 0.5s, opacity 1s;
-
-            opacity: 0; */
-            /*-ms-transform: translateY(-1vh);;  IE 9 */
-            /* -webkit-transform:translateY(-1vh);
-            transform: translateY(-1vh);
-            transition-property: bottom;
-            transition-duration: 0.5s; */
-           /*  bottom: 1vh;
-            transform: translateY(-1vh);
-            transform: scale(1.05); */
-        }
+    
 
         td {
             padding: 0;
@@ -538,6 +518,9 @@ iframe {
         .rotate {
             bottom: 25vh;
             left: 10vw;
+        }
+        .rotate:hover {
+            transform: scale(1.1);
         }
 
         .video_item_longvideo {
@@ -578,6 +561,40 @@ iframe {
             margin-bottom: 0%;
             margin-left: 1vw;
         }
+
+        .rotate {
+            width: 15vw;
+            height: auto;
+            top: 65vh;
+            left: 5vw;
+        }
+
+        /* 手機橫向 */
+        @media only screen and (max-height: 415px) {
+            body{
+                background-size: cover;
+                width: 980px;
+                height: 560px;
+            } 
+        }
+
+        /* 電腦 */
+        @media only screen and (min-height: 415px) and (max-height: 900px) {
+            body{
+                background-size: cover;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        /* 平板 */
+        @media only screen and (min-height: 900px) {
+            body{
+                background-size: cover;
+                height: 1430px;
+            } 
+        }
+        
     }
 
     
@@ -589,6 +606,10 @@ iframe {
 @media only screen and (min-width: 0px) and (max-width: 414px){
     body{
         background-image:url("background_cel.png");
+        background-size: cover;
+        background-repeat: repeat;
+        width: 100%;
+        /* height: 100%; */
     }
     .btn-outline-title, .btn-outline-title-click, .btn-outline-item, .btn-outline-item-click, #back {
         border-radius: 1px;
@@ -671,20 +692,31 @@ iframe {
         left: 85vw; 
         /* bottom: 61vw; */
     }
+    
+    #back {
+        color: #af8b27;
+        background-color: rgba(0, 0, 0, 0.123);
+        background-image: none;
+        border-color: rgba(231, 233, 94, 0.637);
+        
+      }
 
     @media only screen and (width: 320px) and (height: 568px){
         .rotate {
             top: 19vw;
         }
-
-        
+        body{
+            height: 100%;
+        }
     }
     @media only screen and (width: 414px) and (height: 736px){
         .rotate {
             top: 15vw;
         }
 
-        
+        body{
+            height: 830px;
+        }
     }
 
     
