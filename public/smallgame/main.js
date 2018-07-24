@@ -276,7 +276,7 @@ var quiz = [
 ];
 
 // ajax 請求 
-var url ='http://' + window.location.host + '/smallgame';
+var url = '/smallgame';
 console.log(url)
 function setScore(score) {
     $.ajax({
