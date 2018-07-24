@@ -10,32 +10,29 @@
 
     let x, n=0, nx=0, rotINT, rotate = 0, end = 1;
     let currentid = "", currentcollege, currentopacity, currentcdsrc, currentbtnImg, lastbtnImg, currentbutton, QAvideoplay = 0;//currentid紀錄現在播到哪個影片
-    //var allmove, move, moveINT, moveD = 0, i=0, moveend=1;
-    //var player;
-    //function onYouTubeIframeAPIReady() {player = new YT.Player('playser');}
-    //初始影片
+    let rsrc;
     
     //let aaa = JSON.parse(<%= %>);
-        let player = Object();
-        function onYouTubeIframeAPIReady() {//此函數在IFrame Player API code 載入後將自動呼叫
-            $(".player").each(function(){
-                //console.log(this.id);
-                //console.log($(this));
-                let id=this.id;
-                player[id] = new YT.Player(id, {
-                    height: '390',
-                    width: '640',
-                    videoId: id, //Youtube ID
-                    enablejsapi: 1,
-                    origin: 'http://localhost:3000'
+    let player = Object();
+    function onYouTubeIframeAPIReady() {//此函數在IFrame Player API code 載入後將自動呼叫
+        $(".player").each(function(){
+            //console.log(this.id);
+            //console.log($(this));
+            let id=this.id;
+            player[id] = new YT.Player(id, {
+                height: '390',
+                width: '640',
+                videoId: id, //Youtube ID
+                enablejsapi: 1,
+                origin: 'http://localhost:3000'
 
-                });
-            })
-        }
+            });
+        })
+    }
     
      
     
-    let rsrc
+   
     $(document).ready(() => {
         $(window).on("orientationchange",function(){
             if(window.orientation == 0) // Portrait
@@ -47,6 +44,42 @@
                 console.log("1");
             }
         });
+
+        $(document).on("click",".button",function(event){
+            $(".man_right_div").css("display","none");
+            $(".man_left_div").css("display","none");
+
+            $(".man_up").removeClass("man_up_out")
+            $(".man_up").addClass("man_up_in")
+        });
+        
+        let man = 0;
+        $('.man').mouseenter(function() {
+            console.log(man);
+            if(man == 0){
+                $(".man_right").removeClass("man_right_in")
+                $(".man_right").addClass("man_right_out")
+
+                $(".man_left").removeClass("man_left_out")
+                $(".man_left").addClass("man_left_in")
+            }
+            else{
+                $(".man_right").removeClass("man_right_out")
+                $(".man_right").addClass("man_right_in")
+
+                $(".man_left").removeClass("man_left_in")
+                $(".man_left").addClass("man_left_out")
+            }
+        }).mouseleave(function () {
+            if(man == 0){
+                man = 1;
+            }
+            else{
+                man = 0;
+            }
+        })
+        
+
         $(document).on("click",".rotate",function(event){//旋轉唱片盒
             if(end == 1){//end記錄唱片盒轉完了沒
                 if(rotate == 0){
@@ -99,13 +132,29 @@
         })
 
 
-        if($(window).width()>=414){
-            
+        if($(window).width()>=414 && window.orientation != 90 && window.orientation != -90 && window.orientation != 0){
+            console.log($(this).attr("ytID"));
+            $('.button').mouseenter(function() {
+                if(currentid){
+                    console.log(typeof(player[currentid].pauseVideo));
+                    if(typeof(player[currentid].pauseVideo) == "function"){
+                        $(this).removeClass("button_wait");
+                        $(this).addClass("button");
+                    }
+                    else {
+                        $(this).removeClass("button");
+                        $(this).addClass("button_wait");
+                    }
+                }
+            }).mouseleave(function () {
+                
+            })
+
             $('.box').mouseenter(function() {
                 $(".bigCD_position_in").css("opacity", "0");
 
                 console.log($(this).attr("cd"));
-                $(".bigCD_position_in").attr("src", $(this).attr("cdsrc"));
+                //$(".bigCD_position_in").attr("src", $(this).attr("cdsrc"));
                 $(".bigCD").attr("src", $(this).attr("cdsrc"));
                 $(".bigCD").removeClass("bigCD_stop");
                 $(".bigCD").addClass("bigCD_move");
@@ -115,7 +164,6 @@
             }).mouseleave(function () {
                 //console.log(currentopacity);
                 $(".bigCD_position_in").css("opacity", currentopacity);
-                $(".bigCD_position_in").attr("src", currentcdsrc);
 
                 $(".bigCD").removeClass("bigCD_move");
                 $(".bigCD").addClass("bigCD_stop");
@@ -142,17 +190,6 @@
             {
                 $(".sbtn").removeClass("btn-outline-item-click");
                 $(".sbtn").addClass("btn-outline-item");
-
-                
-
-
-                // $(".video_item_title, #scroll").animate({
-                //     scrollTop: 100
-                // }, 500, function(){
-                //     $(".video_item_title, #scroll").animate({
-                //         scrollTop: 0
-                //     }, 1000)
-                // });
 
                 $("#scroll")
                     .velocity("stop")
@@ -192,34 +229,20 @@
                 $(this).addClass("btn-outline-item-click");
 
                 if(lastbtnImg && currentbtnImg && $(window).width()>=414){
-                    // $(currentbutton).attr("src", lastbtnImg);
                     console.log("if0 "+currentbtnImg + " last:" + lastbtnImg)
-                    //$("."+$(currentbutton).attr("cd")).css("visibility", "visible");
                 }
-                $(".sbtn").removeClass("up");
                 $(".sbtn").css("visibility", "visible");
             }
-            //$('.rotate').css("display", "none");
-            //console.log($('.sbtn').parent("td"));
             $('.sbtn').parent("td").css("display", "none");
             $('.sbtn').css("display", "none");
-            //console.log($('.video_item_'+$(this).attr("video")).parent("td"));
+            
+            $(".bigCD_position_in").css("opacity", "0");
+            $(".man_up").removeClass("man_up_out");
+            $(".man_up").addClass("man_up_in");
+            currentopacity = 0;
             $('.video_item_'+$(this).attr("video")).parent("td").css({"display": ""});
             $('.video_item_'+$(this).attr("video")).css({"display": "block"});
 
-            // if($(this).attr("video") == "longvideo"){
-            //     for(let i = 1; i <= 5; i++){
-            //         console.log(".video_item_longvideo_"+ i);
-            //         console.log((i-1) *100);
-            //         $(".video_item_longvideo"+ i ).velocity({
-            //             opacity:1
-            //         }, {
-            //             duration: 100,
-            //             delay: (i-1) *100
-            //         });
-            //     }
-            // }
-            
             $(document).on("click",".video_item_"+$(this).attr("video"),function(event){
                 if($(window).width()<414)
                 {
@@ -231,24 +254,14 @@
                 
                 if($(this).attr("college")!= currentcollege){
                     if(lastbtnImg && currentbtnImg && $(window).width()>=414){
-                        // $(currentbutton).attr("src", lastbtnImg);
                         console.log("if1 "+currentbtnImg + " last:" + lastbtnImg)
-                        //$(currentbutton).css("visibility", "visible");
                     }
-                    $(".sbtn").removeClass("up");
                     $(".sbtn").css("visibility", "visible");
                 }
                 
                 //console.log(this);
                 if($(this).attr("video") == "QAvideo"){
-                    // if($(window).width()>=414){
-                    //     lastbtnImg = $(this).attr("src");
-                    //     $(this).attr("src", currentbtnImg);
-                    //     console.log($(this).attr("class") + "if2 "+ currentbtnImg + " last:" + lastbtnImg)
-                    // }
-                    // $(currentbutton).addClass("up");
-
-                    //console.log('QAvideo!');
+                     //console.log('QAvideo!');
                     $('.sbtn').parent("td").css("display", "none");
                     $('.sbtn').css("display", "none");
                     $(".video_item_QAvideo_"+ $(this).attr('college')).parent("td").css("display", "");
@@ -258,6 +271,11 @@
                     
                     if(QAvideoplay == 1){
                         $('.rotate').css('display', "block");
+                        $(".man_up").removeClass("man_up_in");
+                        $(".man_up").addClass("man_up_out");
+
+                        $(".bigCD_position_in").css("opacity", "1");
+                        currentopacity = 1;
                         
                     }
 
@@ -283,9 +301,7 @@
                         }
 
                         if(lastbtnImg && currentbtnImg &&  $(window).width()>=414 && this.id != "back"){
-                            // $(currentbutton).attr("src", lastbtnImg);
                             console.log("if3 "+ currentbtnImg + " last:" + lastbtnImg);
-                            //$(currentbutton).css("visibility", "visible");
                         }
                         
                         //console.log($(this).id);
@@ -293,35 +309,16 @@
                         if(this.id != "back"){
                             
                             if($(window).width()>=414){
-                                // lastbtnImg = $(this).attr("src");
-                                // $(this).velocity("stop").velocity({
-                                //     opacity:0
-                                // }, {
-                                //     duration: 500,
-                                //     complete:function(){
-                                //         $(this).attr("src", "button/1/起源盒.png");
-                                //         $(this).addClass("up");
-                                //         $(this).velocity({
-                                //             opacity:1
-                                //         }, {
-                                //             duration: 300,
-                                //         });
-                                //     } 
-                                // });
-                                $(".sbtn").removeClass("up");
                                 $(".sbtn").css("visibility", "visible");
 
                                 $("."+$(this).attr("cd")).addClass("up");
-                                // console.log($(this).attr("class"));
-                                // let currentclass = $(this).attr("class")
-                                // $("."+currentclass).addClass("up");
-                                // $(this).attr("src", "button/1/起源盒.png");
 
                                 $("."+$(this).attr("cd")).css("visibility", "hidden");
                                 $(".bigCD_position_in").css("opacity", "1");
                                 currentopacity = 1;
                                 currentcdsrc = $(".bigCD").attr("src");
-                                // currentbtnImg = $(this).attr("src");
+                                $(".bigCD_position_in").attr("src", $(this).attr("cdsrc"));
+                                console.log("currentcdsrc1:"+currentcdsrc);
                                 // console.log("if4 "+ currentbtnImg + " last:" + lastbtnImg)
                             }
                             
@@ -330,42 +327,23 @@
                             currentbutton = this;
                             //console.log(currentbutton);
                         }
-                        
-
-                        QAvideoplay = 1;
-                        $("#"+$(this).attr("ytID")).css("display", "block");
+                        //console.log(QAvideoplay);
+                        if($(this).attr("ytID")){
+                            QAvideoplay = 1;
+                            $("#"+$(this).attr("ytID")).css("display", "block");
+                        }
                     })
                 }
                 else{
                     if($(window).width()>=414){
-                        // lastbtnImg = $(this).attr("src");
-                        // $(this).velocity("stop").velocity({
-                        //     opacity:0
-                        // }, {
-                        //     duration: 500,
-                        //     complete:function(){
-                        //         $(this).attr("src", "button/1/起源盒.png");
-                        //         $(this).addClass("up");
-                        //         $(this).velocity({
-                        //             opacity:1
-                        //         }, {
-                        //             duration: 300,
-                        //         });
-                        //     } 
-                        // });
-
-                        $("."+$(this).attr("cd")).addClass("up");
-                        // $(this).attr("src", "button/1/起源盒.png");
                         $("."+$(this).attr("cd")).css("visibility", "hidden");
                         $(".bigCD_position_in").css("opacity", "1");
                         currentopacity = 1;
                         currentcdsrc = $(".bigCD").attr("src");
-                        // currentbtnImg = $(this).attr("src");
-                        console.log("if5 "+ currentbtnImg + " last:" + lastbtnImg)
+                        $(".bigCD_position_in").attr("src", $(this).attr("cdsrc"));
+                        console.log("currentcdsrc2:"+currentcdsrc);
                     }
 
-
-                    //$(this).addClass("up");
                     currentbutton = this;
                     currentcollege = "";
 
@@ -386,6 +364,10 @@
             }
             currentid = $(this).attr('ytID');
             $('.rotate').css('display', "block");
+            $(".man_up").removeClass("man_up_in");
+            $(".man_up").addClass("man_up_out");
+            $(".bigCD_position_in").css("opacity", "1");
+            currentopacity = 1;
             $("iframe").css("display", "none");
             $("#"+ $(this).attr('ytID')).css("display", "block");
             $(".picture").css("display", "none");
@@ -398,8 +380,14 @@
         $(document).on("click","#back",function(event){
             //console.log("if QAvideoplay?");
             //console.log(QAvideoplay);
-            if(QAvideoplay == 1)
+            if(QAvideoplay == 1){
                 $('.rotate').css('display', "block");
+                $(".man_up").removeClass("man_up_in");
+                $(".man_up").addClass("man_up_out");
+                $(".bigCD_position_in").css("opacity", "1");
+                currentopacity = 1;
+            }
+                
                 
         })
 
@@ -450,31 +438,5 @@
             end = 1;
         }
     }
-
     
-
-    // function startMove()
-    // {
-    //     moveD=moveD+1
-    //     move.style.transform="translateX(" + moveD + "vw)"
-    //     move.style.webkitTransform="translateX(" + moveD + "vw)"
-    //     move.style.OTransform="translateX(" + moveD + "vw)"
-    //     move.style.MozTransform="translateX(" + moveD + "vw)"
-        
-    //     if (moveD == (4-i)*20)
-    //     {
-    //         console.log(moveD);
-    //         clearInterval(moveINT)
-    //         moveD = 0;
-    //         moveend = 1;
-    //         i++;
-    //     }
-    // }
-
-    
-
-    
-
-    
-       
 </script>
