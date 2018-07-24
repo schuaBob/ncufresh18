@@ -2,59 +2,13 @@
 <html>
 <head>
     <% include ../layout/head %>
-    <link rel=stylesheet type="text/css" href="life.css">
 </head>
 <body>
-    <header>
-        <% include ../layout/navbar %>
-    </header>
-    <main style="background-image: url('mainBackground.png'); background-repeat: no-repeat;  background-size:cover; background-attachment: fixed; height: 100vw;">
-        <div class="weather_info">
-            <p> 中壢區 </p>
-            <p style="font-size:1.5cm;"> <%= temperature %> °C</p>
-            <hr />
-            <p> <%= desc %> </p>
-            <p> 濕度 <%= humidity %></p>
-        </div>
-        <% include weather-sunnyCSS %>
-        <!-- <img class="sunray" src="sunray.png" /> -->
-        <!-- <div class="sun"></div> -->
-        <% if(desc == '晴') { %> 
-        <% } %>
-        <% if(desc == '陰') { %>
-        <% } %>
-        <% if(desc == '雨') { %> 
-        <% } %>
-        <% if(desc == '多雲') { %>
-        <% } %>
-        <% if(desc == '午後短暫雷陣') { %>
-        <% } %>
-
-        <div id="circle"></div>
-        <div id="circle_small"></div>
-        <div class="middle">
-            <a href="/life/food">食</a> <br /> 
-            <a href="/life/dorm">住</a> <br />
-            <a href="/life/comm">行</a> <br /> 
-            <a href="/life/edu">育</a> <br />
-            <a href="/life/entertainment">樂</a> <br /> 
-        </div>
-    </main>
-    <footer id="footered">
-        <% include ../layout/footer %>
-    </footer>
-        <% include ../layout/js %>
-        <% include js %>
     <script>
         $(document).ready(function(){
             var width = innerWidth;
-            if(width <= 850)
-                document.location.href = "/life/index_phone";
-            $(window).resize(function(){
-                width = innerWidth;
-                if(width <= 850)
-                    document.location.href = "/life/index_phone";
-            });
+            if(width <= 850) document.location.href = "/life/index_phone";
+            else document.location.href = "/life/index_com";
         });
     </script>
 </body>
