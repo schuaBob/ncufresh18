@@ -4,20 +4,22 @@
         
         $(window).resize(function(){
             if($(window).width()<768){
-                $("#com_all").css("display", "none");
-
+                $("#com_all").hide();
+                $("#cell_all").show();
             }
             else if($(window).width()>768){
-                $("#cell_all").css("display", "none");
-
+                $("#cell_all").hide();
+                $("#com_all").show();
             }
         });
 
         if($(window).width()<768){
-            $("#com_all").css("display", "none");
+            $("#com_all").hide();
+            $("#cell_all").show();
         }
         else if($(window).width()>768){
-            $("#cell_all").css("display", "none");
+            $("#cell_all").hide();
+            $("#com_all").show();
         }
 
         

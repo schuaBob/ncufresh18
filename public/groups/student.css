@@ -72,10 +72,23 @@ h6{
 #update{
     float: left;
 }
-.bread{
+#bread{
     float:left;
     width: 25%;
+}
+#breadcru{
+    background-color: black;
     opacity: 0.8;
+}
+#text_at{
+    color: rgb(0, 162, 255);
+    opacity: 1;
+    font-size: 1.3vw;
+}
+#text{
+    opacity: 1;
+    color: white;
+    font-size: 1.3vw;
 }
 
 .modal{
@@ -101,23 +114,24 @@ h6{
 .button_place{
     position: relative;
     float: right;
-    width: 17vw;
+    width: 20vw;
 }
 .stu_intro{
     position: absolute;
-    width: 6vw;
+    width: 7vw;
     left: 40%;
     top: 15%;
 }
+
 .stu_branch{
     position: absolute;
-    width: 11vw;
+    width: 12vw;
     left: 32%;
     top: 37%;
 }
 .stu_activity{
     position: absolute;
-    width: 11vw;
+    width: 12vw;
     left: 32%;
     top: 57%;
 }
@@ -199,20 +213,19 @@ h6{
     }
     #cell_button{
         float: right;
-        margin-top: 48%;
+        margin-top: 46.5%;
         margin-right: 4%;
     }
     .stu_cell_intro{
         width: 20vw;
-        
     }
     .stu_cell_branch{
         width: 30vw;
-        margin-top: 18%;
+        margin-top: 10%;
     }
     .stu_cell_activity{
         width: 30vw;
-        margin-top: 18%;
+        margin-top: 10%;
         
     }
 }
