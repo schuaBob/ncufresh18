@@ -4,6 +4,7 @@
 <head>
     <% include ../layout/head %>
         <link rel="stylesheet" href="campus.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
@@ -92,7 +93,7 @@
                     <li class="listtitle">99</li>
                     <ul>
                         <%for (let i in result) {-%>
-                            <li class="elelist" val="<%=result[i]['Type']%>">
+                            <li class="elelist" idconnect="<%=result[i]['_id']%>" val="<%=result[i]['Type']%>">
                                 <%=result[i]['Element_Name']%>
                             </li>
                             <%}-%>
@@ -102,12 +103,12 @@
                     <div class="mapmove">
                         <%for (let i in result) {-%>
                             <% if (result[i]['Buildpic'] != "") {-%>
-                                <img title="<%=result[i]['Element_Name']%>" class="indexelepic type<%=result[i]['Type']%>" src="<%=result[i]['Buildpic']%>"
+                                <img title="<%=result[i]['Element_Name']%>" val="<%=result[i]['Type']%>" class="indexelepic" src="<%=result[i]['Buildpic']%>"
                                     alt="<%=result[i]['_id']%>" style="top: <%=result[i]['X_position']%>%;left: <%=result[i]['Y_position']%>%; width: <%=result[i]['Size']%>%;">
                                 <%}-%>
                                     <%}-%>
 
-                                        <img id="map" src="back2.png" width="75%">
+                                        <img id="map" src="back2.png">
                     </div>
                 </div>
                 <div class="Main_list ">
@@ -143,16 +144,20 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title"></h5>
+                                <span>
+                                    <i class="material-icons">highlight_off</i>
+
+                                </span>
                             </div>
                             <div class="modal-body">
                                 <div id="indexmodalcar">
 
                                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                         <ol class="carousel-indicators">
-                                            
+
                                         </ol>
                                         <div class="carousel-inner">
-                                            
+
                                         </div>
                                         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
