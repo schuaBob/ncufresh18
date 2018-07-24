@@ -8,15 +8,7 @@
     <header>
         <% include ../layout/navbar %>
     </header>
-    <main style="background-image: url('mainBackground.png'); background-repeat: no-repeat;  background-size:cover; background-attachment: fixed; height: 100vw;">
-        <div class="weather_info">
-            <p> 中壢區 </p>
-            <p style="font-size:1.5cm;"> <%= temperature %> °C</p>
-            <hr />
-            <p> <%= desc %> </p>
-            <p> 濕度 <%= humidity %></p>
-        </div>
-
+    <main style="background-image: url('background2.png'); background-repeat: no-repeat;  background-size:cover; background-attachment: fixed; height: 100vw; opacity: 0.85;">
         <div id="circle"></div>
         <div id="circle_small"></div>
         <div class="middle">
@@ -25,7 +17,7 @@
             <a href="/life/comm">行</a> <br /> 
             <a href="/life/edu">育</a> <br />
             <a href="/life/entertainment">樂</a> <br /> 
-        </div>
+        </div> 
     </main>
     <footer id="footered">
         <% include ../layout/footer %>
