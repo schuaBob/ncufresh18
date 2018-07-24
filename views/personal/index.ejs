@@ -9,20 +9,21 @@
         <% include ../layout/navbar %>
     </header>
     <main>
+        <div id="canvas"></div>
         <table>
-            <tr class='space'> 
-                
-                <div id="picture"><img src="10ve.jpg" id="pic"></div>
-            </tr>
             <tr>
                 <td class='space'>
                     <div id="empty"></div>
                 </td>
                 <td class='space'>
-                    <div id="score"></div>
+                    <div id="score">
+                        <p id="w1"> 遊戲紀錄</p>
+                    </div>
                 </td>
                 <td class='space'>
-                    <div id="writing"></div>
+                    <div id="writing">
+                        <p id="w2"> 發問紀錄</p>
+                    </div>
                 </td>
                 <td class='space'>
                     <div class='space'>
@@ -32,11 +33,16 @@
                         <a href="/qna"><img src="我要發問.png" id="btn"></a>
                     </div>
                     <div class='space'>
-                        <a href="/smallgame"><img src="調查問卷.png" id="btn"></a>
+                        <a href="https://goo.gl/forms/3Xk8HAkeKQiodR7r1"><img src="調查問卷.png" id="btn"></a>
                     </div>
                 </td>
             </tr>
         </table>
+        <div id="box">
+            <img src="預設頭貼.png" id="pic">
+            <h2 id="namae">陳鉅仁</h2>
+            <h5 id="number">105502543</h5>
+        </div>
     </main>
     <footer>
         <% include ../layout/footer %>
