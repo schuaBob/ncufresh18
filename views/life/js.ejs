@@ -147,10 +147,11 @@
             },
             success: function(data){
                 $(".selectPart").css("visibility", "hidden");
+                $(".backenArrow").css("visibility", "visible");
                 $(".pictureArea").css("visibility", "visible");
                 $(".descArea").css("visibility", "visible");
-                putPic2(data.res1);
-                putCont2(data.res2);
+                putPic_phone(data.res1);
+                putCont_phone(data.res2);
             }
         });
     });
@@ -167,15 +168,16 @@
             },
             success: function(data){
                 $(".selectPart").css("visibility", "hidden");
+                $(".backenArrow").css("visibility", "visible");
                 $(".pictureArea").css("visibility", "visible");
                 $(".descArea").css("visibility", "visible");
-                putPic2(data.res1);
-                putCont2(data.res2);
+                putPic_phone(data.res1);
+                putCont_phone(data.res2);
             }
         });        
     });
 
-    var putPic2 = function(data){
+    var putPic_phone = function(data){
         $(".pictureArea").empty();
         $(".pictureArea").append('<div class="slideshow_container"></div>');
         $('.slideshow_container').empty();
@@ -188,14 +190,22 @@
             showSlides(ramSlideNum);
         }
     }
-    var putCont2 = function(data){
-        console.log(data.content);
+    var putCont_phone = function(data){
         $(".descArea").empty();
         $(".descArea").append("<div class='describeArea'> <div class='contentArea'></div></div>")
         $(".describeArea").children(".contentArea").empty();
         if(data != null)
             $(".describeArea").children(".contentArea").append(data.content);
     }
+
+    $(".backenArrow").on("click", function(e){
+        e.preventDefault();
+        $(".selectPart").css("visibility", "visible");
+        $(".pictureArea").css("visibility", "hidden");
+        $(".descArea").css("visibility", "hidden");
+        $(".backenArrow").css("visibility", "hidden");
+    });
+
     CKEDITOR.replace('disc', {
         filebrowserUploadUrl: '/uploader',
     });

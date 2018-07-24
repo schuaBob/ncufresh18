@@ -105,3 +105,18 @@ hr{
     height: 23vh;
     background-color: rgba(255, 255, 255, 0.5);
 }
+.backenArrow{
+    position: absolute;
+    top: 10vh;
+    height: 4vh;
+    width: 12vw;
+    visibility: hidden;
+    z-index: 3;
+}
+.expendImg{
+    position: absolute;
+    bottom: 5vh;
+    right: 2vw;
+    height: 6vh;
+    width: 12vw;
+}
