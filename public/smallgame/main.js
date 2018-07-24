@@ -23,7 +23,6 @@ String.prototype.insert = function (index, string) {
 // button + text = labelButton
 var LabelButton = function(rightOrWrong, game, x, y, key, label, callback, callbackContext, overFrame, outFrame, downFrame, upFrame) {
     Phaser.Button.call(this, game, x, y, key, callback, callbackContext, overFrame, outFrame, downFrame, upFrame)    
-    //Style how you wish...    
     this.style = {
         'font': '25px Microsoft Yahei',
         'fill': 'white'
@@ -37,13 +36,14 @@ var LabelButton = function(rightOrWrong, game, x, y, key, label, callback, callb
     this.setLabel(label)
     //adds button to game
     game.add.existing(this)
+    // return this
 }
 LabelButton.prototype = Object.create(Phaser.Button.prototype)
 LabelButton.prototype.constructor = LabelButton
 LabelButton.prototype.setLabel = function(label) {
     this.label.setText(label)
 }
-LabelButton.prototype.setRightOrWrong = function (rightOrWrong) {
+LabelButton.prototype.setRightOrWrong = function(rightOrWrong) {
     this.rightOrWrong = rightOrWrong
 }
 
@@ -276,8 +276,8 @@ var quiz = [
 ];
 
 // ajax 請求 
-var url = 'http://localhost:3000/smallgame';
-
+var url ='http://' + window.location.host + '/smallgame';
+console.log(url)
 function setScore(score) {
     $.ajax({
         data: {score: score},
@@ -306,12 +306,12 @@ var states = {
     preload: function() {
     	this.preload = function() {
             // 手機屏幕適應             未完成！！！
-            // if (!game.device.desktop) {
-            //     game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
-            //     game.scale.fullScreenscaleMode = Phaser.ScaleManager.EXACT_FIT
-            //     game.scale.pageAlignHorizontally = true
-            //     game.scale.pageAlignVertically = true
-            // }
+            if (!game.device.desktop) {
+                game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
+                game.scale.fullScreenscaleMode = Phaser.ScaleManager.EXACT_FIT
+                game.scale.pageAlignHorizontally = true
+                game.scale.pageAlignVertically = true
+            }
             game.state.backgroundColor = '#000000'
             // 載入資源
             game.load.image('bg', 'images/background.png')
@@ -322,18 +322,18 @@ var states = {
             game.load.image('rankLeft', 'images/rank_left.png')
             game.load.image('rankStage', 'images/rank_stage.png')
             game.load.image('squirrel','images/squirrel_start.png' )
+            game.load.image('dust', 'images/dust.png')
             game.load.image('btnStart', 'images/button_start.png')
             game.load.image('btnRank', 'images/button_rank.png')
             game.load.image('btnIntro', 'images/button_intro.png')
-            game.load.image('btnChoice', 'images/button_choice.png')
-            game.load.image('btnChoiceR', 'images/button_choice_right.png')
-            game.load.image('btnChoiceW', 'images/button_choice_wrong.png')
+            game.load.spritesheet('btnChoice', 'images/button.png', 400, 40)
             game.load.image('bonus1', 'images/+1s.png')
             game.load.image('bonus2', 'images/+3s.png')
             game.load.image('bonus3', 'images/+7s.png')
             game.load.image('bonus4', 'images/+20s.png')
             game.load.image('combo', 'images/combo.png')
-            game.load.image('squirrelGround', 'images/squirrel_ground_1.png')
+            game.load.spritesheet('squirrelGround', 'images/squirrel_ground.png', 220, 109)
+            game.load.spritesheet('squirrelSky', 'images/squirrel_sky.png', 220, 133)
             game.load.image('gamerules', 'images/gamerules.png')
             game.load.image('remainTime', 'images/remaintime.png')
             game.load.image('scoreStage', 'images/score_stage.png')
@@ -350,6 +350,8 @@ var states = {
             game.load.image('question', 'images/question.png')
             game.load.spritesheet('btnBack', 'images/back.png', 60, 60)
             game.load.spritesheet('blank', 'images/blank.png', width, height)
+
+            game.load.spritesheet('cute', 'images/cute/cute.png', 200, 213)
             
             // 添加進度提示
             var progressText = game.add.text(game.world.centerX, game.world.centerY, '0%', {
@@ -394,6 +396,14 @@ var states = {
             var btnBack = game.add.button(600, 3400, 'btnBack', btnBackClick)
             btnBack.visible = false
 
+            // 血小板
+            var cuteGroup = game.add.group()
+            var cute1 = cuteGroup.create(0, 0, 'cute').alignIn(bg, Phaser.BOTTOM_RIGHT)
+            var cute2 = cuteGroup.create(0, 0, 'cute').alignIn(bg, Phaser.BOTTOM_LEFT)
+            cute1.animations.add('jump')
+            cute1.play('jump', 15, true)
+            cute2.animations.add('jump')
+            cute2.play('jump', 15, true)
 
             // 按鈕
             var buttonStart
@@ -404,7 +414,7 @@ var states = {
             buttonRank = game.add.button(0, 0, 'btnRank', buttonForRank, this).alignTo(buttonStart, Phaser.BOTTOM_CENTER, 0, 20)            
             buttonIntro = game.add.button(0, 0, 'btnIntro', buttonForIntro, this).alignTo(buttonRank, Phaser.BOTTOM_CENTER, 0, 20)            
 
-            // 按鈕綁定時間
+            // 按鈕綁定事件
             function buttonForStart() {
                 game.state.start('start')
             }
@@ -434,7 +444,7 @@ var states = {
         this.create = function() {
             var combo = 0
             score = 0
-            var remainTime = 3
+            var remainTime = 60
             game.physics.startSystem(Phaser.Physics.P2JS)
             
             // 設置背景邊界
@@ -457,16 +467,15 @@ var states = {
             var questionSprite = new LabelSprite(this.game, game.world.centerX + 100, game.world.centerY - 130, 'question')
             
             // 選擇按鈕
-            var btnChoiceA = new LabelButton(false, this.game, game.world.centerX + 100, game.world.centerY -10, "btnChoice", "Choice A", inputDown) 
-            var btnChoiceB = new LabelButton(false, this.game, game.world.centerX + 100, game.world.centerY + 50, "btnChoice", "Choice B", inputDown) 
-            var btnChoiceC = new LabelButton(false, this.game, game.world.centerX + 100, game.world.centerY + 110, "btnChoice", "Choice C", inputDown) 
-            var btnChoiceD = new LabelButton(false, this.game, game.world.centerX + 100, game.world.centerY + 170, "btnChoice", "Choice D", inputDown) 
-            
+            var btnChoiceA = new LabelButton(false, this.game, game.world.centerX + 100, game.world.centerY -10, "btnChoice", "Choice A", inputDown, this) 
+            var btnChoiceB = new LabelButton(false, this.game, game.world.centerX + 100, game.world.centerY + 50, "btnChoice", "Choice B", inputDown, this) 
+            var btnChoiceC = new LabelButton(false, this.game, game.world.centerX + 100, game.world.centerY + 110, "btnChoice", "Choice C", inputDown, this) 
+            var btnChoiceD = new LabelButton(false, this.game, game.world.centerX + 100, game.world.centerY + 170, "btnChoice", "Choice D", inputDown, this) 
+            var btnChoices = [btnChoiceA, btnChoiceB, btnChoiceC, btnChoiceD]
+
             // 添加 combo
-            var comboSprite = game.add.image(0, 0, 'combo').alignTo(cameraFocus, Phaser.RIGHT_CENTER, -130, 40)
-            var comboText = game.add.text(0, 0, '0', {
-                font: "45px Microsoft Yahei"
-            })
+            var comboSprite = game.add.image(0, 0, 'combo').alignTo(cameraFocus, Phaser.RIGHT_CENTER, -140, 40)
+            var comboText = game.add.text(0, 0, '0', {font: "45px Microsoft Yahei"})
             comboText.anchor.setTo(0.5, 0.5)
             comboText.alignTo(comboSprite, Phaser.BOTTOM_CENTER)
             comboSprite.visible = false
@@ -474,10 +483,7 @@ var states = {
 
             // 剩餘時間
             var remainTimeSprite = game.add.sprite(0, 0, 'remainTime').alignIn(cameraFocus, Phaser.TOP_RIGHT, -10, -100)
-
-            var remainTimeText = game.add.text(0, 0, remainTime.toString(), {
-                font: "45px Microsoft Yahei"
-            })
+            var remainTimeText = game.add.text(0, 0, remainTime.toString(), {font: "45px Microsoft Yahei"})
             remainTimeText.anchor.setTo(0.5, 0.5)
             remainTimeText.alignTo(remainTimeSprite, Phaser.BOTTOM_CENTER, -10)
             
@@ -522,10 +528,33 @@ var states = {
             var squirrelGroup = game.add.group()
             var squirrelGroupX = 5
             var squirrelGroupY = 3230
-            function createSquirrel() {
-                squirrelGroupY -= 40
-                var temp = squirrelGroup.create(squirrelGroupX, squirrelGroupY, 'squirrelGround')
-                game.add.tween(temp).to({y: squirrelGroupY + 600}, 1200, Phaser.Easing.Exponential.In, true)
+            function createSquirrel(tempY) {
+                // 墜落動畫
+                var fallAnimation = game.add.sprite(squirrelGroupX, game.camera.y - 220, 'squirrelSky', 0)
+                fallAnimation.animations.add('falldown')
+                fallAnimation.play('falldown', 15, true)
+                
+                // 墜落效果
+                var fallTween = game.add.tween(fallAnimation).to({y: tempY + 550}, 2500, Phaser.Easing.Exponential.In, true)
+                fallTween.onComplete.add(function() {
+                    // 隨機松鼠落地圖
+                    var groundAnimation = squirrelGroup.create(squirrelGroupX, tempY + 600, 'squirrelGround', 0)
+                    var random = Math.floor(Math.random() * 3)
+                    groundAnimation.frame = random
+                    // 灰塵特效
+                    var dust = squirrelGroup.create(squirrelGroupX - 50, tempY + 630, 'dust')
+                    dust.alpha = 0
+                    var dustTween1 = game.add.tween(dust).from({alpha: 1}, 1000, Phaser.Easing.Exponential.In, true)
+                    game.add.tween(dust.scale).to({x: 1.5, y: 1.5}, 2000, Phaser.Easing.Linear.None, true)
+                    dustTween1.onComplete.add(function() {
+                        var dustTween2 = game.add.tween(dust).to({alpha: 0}, 1200, Phaser.Easing.Exponential.In, true)
+                        dustTween2.onComplete.add(function() {
+                            dust.kill()
+                        })
+                    })
+                    
+                    fallAnimation.kill()
+                })
             }
             
             // 添加獎勵圖片
@@ -560,16 +589,16 @@ var states = {
             
             // 選擇 bonus
             function choiceBonus(combo) {
-                if (combo == 1) {
+                if (combo == 5) {
                     remainTime += 2
                     return "bonus1"
-                } else if (combo == 2) {
+                } else if (combo == 10) {
                     remainTime += 4
                     return "bonus2"
-                } else if (combo == 3) {
+                } else if (combo == 20) {
                     remainTime += 8
                     return "bonus3"
-                } else if (combo == 4) {
+                } else if (combo == 50) {
                     remainTime += 21
                     return "bonus4"
                 } else {
@@ -616,7 +645,12 @@ var states = {
             var choiceState = 0
             
             // 刷新題目
-            function resetQuestionAndChoice(data) {
+            function resetQuestionAndChoice(data, item = undefined) {
+                // 重置選項顏色
+                for (i = 0, len = btnChoices.length; i < len; i++) {
+                    btnChoices[i].frame = 0
+                }
+
                 choiceState = 0
                 // 獲取 data 中的題目
                 questionSprite.setLabel(data.q)
@@ -634,23 +668,29 @@ var states = {
                     }
                 }
             }
-            
-            // 按下按鈕 event, 
+
+            function addQuake() {
+                var quake = game.add.tween(game.camera).to({ x: game.camera.x - 100}, 1000, Phaser.Easing.Bounce.InOut, true, 1000, 4, true);
+            }
+
+            // 按下按鈕 event 
             function inputDown(item) {
-                count++
                 // choiceState 判斷一次答題是否點擊多次
                 if (!choiceState) {
+                    count++
                     choiceState = 1
                     // 選擇正確
-                    if (item.rightOrWrong) {
+                    if (item.rightOrWrong === true) {
                         // 添加松鼠一隻
-                        createSquirrel()
-                        // 加分， combo
+                        squirrelGroupY -= 40
+                        createSquirrel(squirrelGroupY)
+                        // 加分, combo
                         score += 100
-                        combo ++
-                        item.setLabel("Congratulations!")                    
+                        combo++
                         var goal = choiceBonus(combo)
-
+                        // 選項顏色反饋, 變綠
+                        item.frame = 2                    
+                        
                         // 顯示 bonus 效果
                         if (goal) {
                             var bonus = game.add.image(game.camera.x + 655, game.camera.y + 270, goal)
@@ -675,11 +715,18 @@ var states = {
                             game.add.tween(scoreUI).to({y: scoreUI.y - 40}, 1000, Phaser.Easing.Bounce.Out, true)         
                             game.add.tween(game.camera).to({y: game.camera.y - 40}, 500, Phaser.Easing.Linear.None, true)
                         }
-                        setTimeout(resetQuestionAndChoice, 500, data[count])
+                        setTimeout(resetQuestionAndChoice, 500, data[count], item)
                     } else {
                         combo = 0
-                        item.setLabel("you are wrong!")
-                        setTimeout(resetQuestionAndChoice, 1500, data[count])
+                        item.frame = 1
+                        // 屏幕抖動效果
+                        game.add.tween(game.camera).to({ y: game.camera.y - 5}, 50, Phaser.Easing.Bounce.InOut, true, 100, 4, true);
+                        for (i = 0, len = btnChoices.length; i < len; i++) {
+                            if (btnChoices[i].rightOrWrong) {
+                                btnChoices[i].frame = 2
+                            }
+                        }
+                        setTimeout(resetQuestionAndChoice, 1500, data[count], item)
                     } 
                 }
                 
@@ -741,8 +788,9 @@ var states = {
                             game.add.tween(temp).from({alpha: 0}, 1500, Phaser.Easing.Exponential.In, true);
                             game.add.tween(rankLine).from({alpha: 0}, 1500, Phaser.Easing.Exponential.In, true);    
                             alignLineY += 68.5;
-                        },  i * 100) })(i)
-                    }
+                        },  i * 100) 
+                    })(i)
+                }
             }
             
             function getScore(type) {
@@ -753,7 +801,7 @@ var states = {
                     cache: false,
                     type: "get",
                     success: function(data) {
-                        console.log(data)
+                        console.log(url)
                         if (type === 'sum') {
                             createBubble(JSON.parse(data), 'sum')
                         } else {
@@ -772,25 +820,21 @@ var states = {
             
             function rankHighClick() {
                 rankClick = 0
-                // alignLine.removeAll()
                 game.state.start('rank')
             }
             
             function rankSumOnclick() {
                 rankClick = 1
-                // alignLine.removeAll()
                 game.state.start('rank')
             }
             
             // 判斷進入 rank 界面之後顯示單次還是累計 rank
-            // 切換按鈕
             var rankHigh
             var rankSum
             if (rankClick === 1) {
                 rankHigh = game.add.button(0, 0, 'rankOne', rankHighClick, this, 1, 2, 0, 0).alignIn(rank, Phaser.TOP_CENTER, -190, -30)
                 rankSum = game.add.button(0, 0, 'rankAll', rankSumOnclick, this, 2, 2, 2, 2).alignIn(rank, Phaser.TOP_CENTER, 200, -30)    
                 getScore('sum')
-                
             } else {
                 rankHigh = game.add.button(0, 0, 'rankOne', rankHighClick, this, 0, 0, 0, 0).alignIn(rank, Phaser.TOP_CENTER, -190, -30)
                 rankSum = game.add.button(0, 0, 'rankAll', rankSumOnclick, this, 0, 1, 2, 2).alignIn(rank, Phaser.TOP_CENTER, 200, -30)    
