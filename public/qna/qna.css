@@ -33,50 +33,46 @@ table{
     /* border-spacing: 10px; */
     z-index: 1;
 }
-/* table的外框 */
-.outOfTable{
-    left:150px;
-    top:152px;
-    /* left:20%; */
-    /* top:152px; */
-    height:342px;
-    /* float: left; */
-    z-index:2;
-    position: absolute;
-    /* left:20vw; */
-}
-.notebook{
-    position: relative;
-    margin:0 auto;
-    
+/* 只有電腦版出現的 */
+@media only screen and (min-width:600px){
+    /* table的外框 */
+    tr::before{
+        content:"";
+        display: inline-block;
+        background-image:url(外框.png);
+        background-size:cover;
+        width: 50px;
+        height: 50px;
+    }
+    .nav-link{
+        color:white;
+    }
 }
 /* 問題合集 */
 .Q{
     line-height: 2.3;
-    border-bottom: 1.5px #29ABE2 solid;
+    /* border-bottom: 1.5px #29ABE2 solid; */
 }
 /* 板規合集 */
 .R{
     line-height: 2.3;
-    border-bottom: 1.5px #29ABE2 solid;
+    /* border-bottom: 1.5px #29ABE2 solid; */
 }
 td{
     text-align: center;
     width:120px;
+    border-bottom: 1.5px #29ABE2 solid;
 }
 th{
     width:120px;
 }
 /* 排序與分類的連結 */
 .nav-link{
-    color:white;
     font-family: YouYuan;
 }
-/* 問題標題欄寬度 */
-/* .title{
-    width:200px;
-    width:60%;
-} */
+li{
+    height:40px;
+}
 .article{
     text-align: left;
     /* margin:15px; */
@@ -86,34 +82,50 @@ th{
 }
 /* 排序與分類 */
 .classification{
-    margin: 20px;
+    margin: 10px;
 }
 /* 排序與分類的按鈕 */
 .classificationBtn{
-    background: url(排序.png);
+    background: url(排序2.png);
     background-size: cover;
     float: left;
     border: medium none;
-    width: 30px;
-    height:30px;
+    width: 20px;
+    height:20px;
     color: transparent;
+    margin-top:5px;
 }
+
 /* 排序與分類文字 */
 p{
     font-weight:bold;
 }
-ul{
-    height: 50px;
+/* 手機板介面 */
+@media only screen and (max-width:600px){
+    table{
+        font-size:12px;
+    }
+    thead{
+        font-size:14px;
+    }
+    .nav-link{
+        color:black;
+    }
+    .classification{
+        position: absolute;
+        z-index: 5000;
+    }
 }
 /* 搜尋按鈕 */
 .searchbtn{
-    background: url(搜尋.png);
+    background: url(搜尋2.png);
     background-color: transparent;
     border: medium none;
     color: transparent;
     background-size: cover; 
-    width: 30px;
-    height:30px;
+    width: 20px;
+    height:20px;
+    margin-top:5px;
 }
 .search{
     display: inline;
@@ -122,13 +134,11 @@ ul{
 #searchtext{
     border-radius: 30px;
     height: 30px;
+    width:150px;
     border-color: white;
+    color:white;
     background-color: transparent;
     vertical-align: center;
-}
-.top{
-    position: absolute;
-    top:0px;
 }
 #answer{
     width: 90%;
@@ -136,7 +146,6 @@ ul{
 }
 /* modal標題欄 */
 .modal-title{
-    text-align: center;
     margin:0;
     font-family: Microsoft YaHei;
     font-weight:bold;
@@ -148,15 +157,22 @@ ul{
   }
 /* modal長寬設置 */
 .modal{
-    /* position: absolute;
-    z-index: 5; */
+    position: absolute;
+    z-index: 5000;
     height:100%;
+}
+.modal-body{
+    margin-left:20px;
 }
 /* 問題與答案樣式 */
  .QA{
     background-image: url(問題.png);
     background-size: cover;
     font-family: Microsoft YaHei;
+ }
+ .blueLetter{
+    display: inline;
+    color: #29ABE2;
  }
  /* 送出問題與答案鈕 */
 .submitbtn{
@@ -180,14 +196,15 @@ ul{
  }
  /* 我要發問按鈕 */
  .askbutton{
-    max-width: 20%;
-    max-height: 20%;
+    background: url(發問按鈕1.png);
+    background-size: cover;
+    width:130px;
+    height:180px;
     float: right;
     vertical-align: middle;
-    position: absolute;
-    top:300px;
-    /* bottom: 35vw; */
-    right:20px;
+    position: fixed;
+    bottom: 10vw;
+    right:15px;
  }
  /* 手機版的我要發問按鈕 */
  .askbutton2{
@@ -206,15 +223,25 @@ ul{
     bottom: 16vw;
     right:15px;
  }
+ /* 回到頁面最頂端按鈕 */
+ .goTop{
+    background: url(移至頂端.png);
+    background-size: 100%;
+    border-color: transparent;
+    width:139px;
+    height:37px;
+    position: fixed;
+    bottom: 5vw;
+    right:15px;
+ }
  /* OK按鈕 */
  .closemodal{
     background-color: #29ABE2;
     color: white;
     font-family: Microsoft YaHei;
-    background-image: url(OK.png);
-    background-size: cover; 
-    max-width: 40%;
-	max-height: 40%;	
+    border-color: #29ABE2;
+    border-radius: 20px;
+    font-weight:bold;
  }
  /* 關閉按鈕 */
  .closebtn{

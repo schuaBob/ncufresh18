@@ -34,10 +34,7 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">類別：</label>
                                             <select class="form-control type" name="Type" required="required">
-                                                <option>校園生活</option>
-                                                <option>學生事務</option>
-                                                <option>課程相關</option>
-                                                <option>其他</option>
+                                                <option>板規</option>
                                             </select>
                                     </div>
                                     <div class="form-group">
@@ -53,8 +50,11 @@
                         </div>
                     </div>
                 </div>
-            <img src="發問按鈕.png" type="button" class="askbutton" data-toggle="modal" data-target="#askQuestion">
+            <%/*我要發問的按鈕*/%>
+            <button class="btn askbutton"  data-toggle="modal" data-target="#askQuestion"></button>
             <button class="btn btn-primary askbutton2" data-toggle="modal" data-target="#askQuestion">+</button>
+            <%/*回到頁面最頂端的按鈕*/%>
+            <button type="button" class="btn goTop"></button>
             <%/*新增問題modal*/%>
             <div class="modal fade" id="askQuestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -100,37 +100,33 @@
                 <div class="input-group">
                     <input class="form-control form-control-sm" type="search" id="searchtext" placeholder="輸入關鍵字" name="keyword" ></input>
                     <div class="input-group-append">
-                            <button class=" searchbtn" type="submit" style="float: center;"></button>
+                            <button class="searchbtn" type="submit"></button>
+
                         </span>
                     </div>    
                 </div>
             </form>
         <div id="select111">
             <%/*展開排序與分類的按鈕*/%>
-            <a class="dropdown-toggle classificationBtn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                <a class="dropdown-toggle classificationBtn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+
             <%/*排序與分類的按鈕*/%>
             <div class="classification">  
                 <ul class="nav justify-content-center nav-pills">
-                    <li ><p class="nav-link">排序</p></li>
-                    <!-- <li ><a class="nav-link time" method="get" href="#time" data-sort="time" role="button">時間</a></li>
-                    <li ><a class="nav-link hot" method="get" href="#hot" data-sort="hot" role="button">人氣</a></li> -->
-                    <!-- <li ><button class="nav-link sort" data-sort="time">時間</button></li>
-                    <li ><button class="nav-link sort" data-sort="hot">人氣</button></li> -->
-                    <li ><li class="nav-link sort" data-sort="time" data-order="desc" role="button" >時間</button></li>
-                    <li ><li class="nav-link sort" data-sort="hot" data-order="desc" role="button">人氣</button></li>
+                    <li ><p class="nav-link">　排序　</p></li>
+                    <li ><div class="nav-link sort Time" data-sort="time" data-order="desc" role="button" >　時間　</button></li>
+                    <li><div class="nav-link sort Hot" data-sort="hot" data-order="desc" role="button">　人氣　</button></li>
                     
                     <li ><a class="nav-link"><br></a></li>
-                    <li><p class="nav-link">分類</p></li>
-                    <li ><a class="nav-link" href="#all">全部</a></li>
+                    <li><p class="nav-link">　分類　</p></li>
+                    <li ><a class="nav-link" href="#all">　全部　</a></li>
                     <li ><a class="nav-link" href="#school">校園生活</a></li>
                     <li ><a class="nav-link" href="#student">學生事務</a></li>
                     <li ><a class="nav-link" href="#class">課程相關</a></li>
-                    <li ><a class="nav-link" href="#others">其他</a></li>
+                    <li ><a class="nav-link" href="#others">　其他　</a></li>
                         
                 </ul>
         </div>
-        <!-- <div class="notebook"> -->
-            <img src="外框.png" class="outOfTable">
             <table id="tabletable">
                 
                 <thead>
@@ -157,14 +153,14 @@
                     <tbody class="list">
                     <% for(var j=0;j<rule.length;j++){%>
                         <tr id="<%= rule[j].id %>" class="<%= rule[j].id %> R">
-                            <td><%= question[j].Type %></td>
+                            <td><%= rule[j].Type %></td>
                             <td class="titleR title" id="<%= rule[j].id %>" type="button" data-toggle="modal" data-target="#<%= rule[j].id %>">
                                 <div class="article"><%= rule[j].Title %></div>
                             </td>
-                            <td ><%= Time(rule[j].CreateDate) %></td>
-                            <td class="view" style="text-align: center"><%= rule[j].Click %></td>
+                            <td class="time topT"><%= Time(rule[j].CreateDate) %></td>
+                            <td class="view hot" style="text-align: center"><%= rule[j].Click %></td>
                             <%if(user &&　user.role==="admin"){%>
-                                <td class="admin">無解答</td>
+                                <td class="admin ans">無解答</td>
                                 <td class="admin" data-toggle="modal" data-target="#<%= rule[j].id %>-edit">編輯板規</td>
                                 <td class="deleteR admin" id="<%= rule[j].id %>"><a method="get" href="/qna/deleteR/<%= rule[j].id %>" role="button">刪除板規</a></td>
                                 <%}%>
@@ -182,7 +178,7 @@
                                         <div class="modal-body"><%= rule[j].Content %></div>
                                         <div class="modal-body"></div>
                                         <div class="modal-footer">
-                                            <img src="OK.png" type="button" class="closemodal" data-dismiss="modal" >
+                                            <button type="button" class="btn btn-primary closemodal" data-dismiss="modal">　O K　</button>
                                         </div>
                                     </div>
                                 </div>
@@ -240,11 +236,11 @@
                             <%# /管理員頁面才有的 %>
                             <%if(user && user.role==="admin"){%>
                                 <% if(question[i].Answer) {%>
-                                    <td class="admin">是</td>
+                                    <td class="admin ans">是</td>
                                     <td class="admin" type="button" data-toggle="modal" data-target="#<%= question[i].id %>-edit">編輯答案</td>
                                 <%} 
                                 else{%>
-                                    <td class="admin">否</td>
+                                    <td class="admin ans">否</td>
                                     <td class="admin" type="button"  data-toggle="modal" data-target="#<%= question[i].id %>-edit">新增答案</td>
                                 <%} 
                                 %>
@@ -254,23 +250,21 @@
                         </tr>
                        
                             <%#顯示問題跟答案的Modal%>
-                            <div class="modal fade bd-example-modal-lg" id="<%= question[i].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade bd-example-modal-lg" id="<%= question[i].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content QA">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel"><%= question[i].Title %></h5>
+                                            <h5 class="modal-title" id="exampleModalLongTitle"><%= question[i].Title %></h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <div class="modal-body"><h5>Question</h5></div>
+                                        <div class="modal-body"><h5 class="blueLetter">Q</h5><h5 style="display: inline">uestion</h5></div>
                                         <div class="modal-body"><%= question[i].Content %></div>
-                                        <div class="modal-body"><h5>Answer</h5></div>
+                                        <div class="modal-body"><h5 class="blueLetter">A</h5><h5 style="display: inline">nswer</h5></div>
                                         <div class="modal-body"><%= question[i].Answer %></div>
-                                        <div class="modal-body"></div>
                                         <div class="modal-footer">
-                                            <img src="OK.png" type="button" class="closemodal" data-dismiss="modal" >
-                                            <!-- <button type="button" class="btn btn-primary closemodal" data-dismiss="modal">OK</button> -->
+                                            <button type="button" class="btn btn-primary closemodal" data-dismiss="modal">　O K　</button>
                                         </div>
                                     </div>
                                 </div>
