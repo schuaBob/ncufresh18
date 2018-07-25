@@ -10,7 +10,7 @@
 
     $(document).ready(function () {
         $('.editpicposi').click(function (event) {
-            //console.log($('#mainmap2').width())
+            
             var tempid = event.currentTarget.attributes.xxx.value
             $.ajax({
                 url: "picposition?id=" + event.currentTarget.attributes.xxx.value,
@@ -35,10 +35,12 @@
                             console.log($('#mainmap2').height())
                             $('input[name="x_position"]').val($('.posipic').position().top / $('#mainmap2').height() * 100)
                             $('input[name="y_position"]').val($('.posipic').position().left / $('#mainmap2').width() * 100)
-
-
-
                         })
+                        $('#mapedit').on('hide.bs.modal', function (e) {
+                        
+                        $('.posipic').remove()
+                        $('#mapedit').off('hide.bs.modal')
+                    })
 
 
                     }
