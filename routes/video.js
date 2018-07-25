@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var video = require('../models/video/video');
+var checkuser = require('./check-user');
 
 /* 影音專區首頁 */
 router.get('/', function(req, res, next) {
@@ -53,7 +54,7 @@ router.get('/', function(req, res, next) {
 
 
 
-router.post('/add', function(req, res, next){
+router.post('/add', checkuser.isAdmin, function(req, res, next){
   let college, type, title;
   type = req.body.title[0];
   if(type === '1' || type === '3'){//中大長劇or悠遊中大
@@ -100,11 +101,6 @@ router.post('/add', function(req, res, next){
 })
 
 
-/*
-function isAdmin(req, res, next) {
-  if (req.isAuthenticated() && req.user.local.accountType === 'admin')
-    return next();
-  res.redirect('/');
-}*/
+
 
 module.exports = router;
