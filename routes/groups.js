@@ -19,9 +19,10 @@ router.get('/department', function(req, res, next) {
     video.find({type:"2"}).sort({id:-1}).exec(function(err, video2) {
       res.render('groups/department', {
         title: '系所 ',
-        user: req.user,
         department: department,
-        QAvideo: video2,
+        QAvideo: video2,       
+        user: req.user,
+
       });
     });
   });

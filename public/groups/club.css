@@ -8,11 +8,6 @@ ul{
     float:left;
 }
 
-.btn-group-vertical{
-    float:left;
-    margin-left: 5%;
-    padding: 20px;
-}
 h6{
     margin-top: 2%;
     margin-left: 18%;
@@ -42,7 +37,25 @@ h5{
     font-size: 30px;
 }
 
-.typelearn_name{
+#bread{
+    float:left;
+    width: 25%;
+}
+#breadcru{
+    background-color: black;
+    opacity: 0.8;
+}
+#text_at{
+    color: rgb(0, 162, 255);
+    opacity: 1;
+    font-size: 1.3vw;
+}
+#text{
+    opacity: 1;
+    color: white;
+    font-size: 1.3vw;
+}
+/* .typelearn_name{
     margin-left: 5%;
 }
 .typeplay_name{
@@ -53,52 +66,60 @@ h5{
 }
 .typeservice_name{
     margin-left: 5%;
-}
+} */
 
 h4{
     margin-top: 3%;
     margin-left:68%;  
 }
 
-button{
+/* button{
     border-top-left-radius: 40px;
     border-bottom-right-radius: 40px;
     -webkit-transition-duration: 0.4s; 
     transition-duration: 0.4s;
-}
+} */
 button:hover {
     background-color: rgb(43, 78, 233);
     color: white;
 }
 
-#menu{
+table{
+    background-image: url(系所社團飛船修正版地底背景2_去被.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left; 
     float: right;
-    background-color: papayawhip;
-    margin-right: 20%;
-    margin-top: 3%;
+    margin-right: 3%;
+    margin-top: 12%;
+    opacity: 0.7;
 }
 
-#menu_head{
+thead{
     text-align: center;
-    font-size:20px;
+    font-size:2.4vw;
+    color: white;
 }
 
-#menu_body{
+tbody{
     float:center;
     display: block;
-    height: 195px;
+    height: 40vh;
     overflow-y: scroll;
     border-collapse: collapse;
-    text-align: left;
+    text-align: center;
+    margin-left: 15%;
+    margin-top: 5%;
+    width:29vw;
+
 }
 
-#menu, #menu_th {
-    border: 1px solid darkgray;
-}
-
-#menu_td{
-    width:200px;
+td{
     float: left;
+    font-size: 1.8vw;
+}
+#tabletext{
+    color: white;
 }
 
 #carouselExampleIndicators{
@@ -122,13 +143,11 @@ button:hover {
     margin-left: 10%;
 }
 
-#bread{
-    opacity: 0.8;
-    width: 23%;
-}
+
 
 .modal-content{
     background-image: url(彈出視窗背景.png);
+    
 }
 
 .modal{
@@ -157,8 +176,57 @@ button:hover {
     box-shadow: 0 14px 20px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 
 }
+#combut{
+    position: relative;
+    display: inline-block;
+    margin-top: 10%;
+    transform: translateX(-23vw);
 
+}
+.leftbox{
+    opacity: 0.7;
+    width: 30vw;
+    float: left;
+    position: relative;
+}
+
+#learn, #play, #date, #service{
+    background-color: rgb(255, 255, 255, 0);
+    color: white;    
+    font-size: 2.4vw;
+    position: absolute;
+    border-radius: 1vh;
+}
+
+#learn{
+    top: 20%;
+    left: 25%;
+}
+#play{
+    top: 38%;
+    left: 35%;
+}
+#date{
+    top: 56%;
+    left: 45%;
+}
+#service{
+    top: 74%;
+    left: 55%;
+}
 @media screen and (max-width: 768px){
+    body{
+        background-image: url(社團手機板背景.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center; 
+    }
+    #cellup{
+        position: relative;
+        display: inline-block;
+        margin-left: 7%;
+        margin-top: 10%;
+    }
     .modal{
         margin-top: 5%;
     }

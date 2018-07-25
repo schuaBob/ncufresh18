@@ -55,17 +55,28 @@
         $(window).resize(function(){
             if($(window).width()<768){
                 $("#nav_ul").removeClass("flex-column");
+                $("#combut").hide();
+                $("#bread").hide();
+                $("#cellup").show();
             }
             else if($(window).width()>768){
                 $("#nav_ul").addClass("flex-column");
+                $("#combut").show();
+                $("#cellup").hide();
+
             }
         });
 
         if($(window).width()<768){
             $("#nav_ul").removeClass("flex-column");
+            $("#combut").hide();
+            $("#bread").hide();
+
         }
         else if($(window).width()>768){
             $("#nav_ul").addClass("flex-column");
+            $("#combut").show();
+
         }
     });
 </script>

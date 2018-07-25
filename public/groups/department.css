@@ -4,14 +4,31 @@ body{
     background-size: cover;
     background-position: center; 
 }
-ul{
-    float:left;
-}
+
 
 .modal-body {
     position:relative;
 }
 
+
+#bread{
+    float:left;
+    width: 25%;
+}
+#breadcru{
+    background-color: black;
+    opacity: 0.8;
+}
+#text_at{
+    color: rgb(0, 162, 255);
+    opacity: 1;
+    font-size: 1.3vw;
+}
+#text{
+    opacity: 1;
+    color: white;
+    font-size: 1.3vw;
+}
 /* button{
     border-top-left-radius: 40px;
     border-bottom-right-radius: 40px;
@@ -38,8 +55,8 @@ table{
     background-size: cover;
     background-position: left; 
     float: right;
-    margin-right: 1%;
-    margin-top: 2%;
+    margin-right: 3%;
+    margin-top: 12%;
     opacity: 0.7;
 }
 
@@ -52,19 +69,19 @@ thead{
 tbody{
     float:center;
     display: block;
-    height: 50vh;
+    height: 40vh;
     overflow-y: scroll;
     border-collapse: collapse;
     text-align: center;
     margin-left: 15%;
     margin-top: 5%;
-    width:28vw;
+    width:29vw;
 
 }
 
 td{
     float: left;
-    font-size: 1.5vw;
+    font-size: 1.7vw;
 }
 #tabletext{
     color: white;
@@ -80,10 +97,6 @@ td{
     margin-left: 15%;
 }
 
-#bread{
-    opacity: 0.8;
-    width: 23%;
-}
       
 
 h6{
@@ -150,11 +163,14 @@ h5{
 #combut{
     position: relative;
     display: inline-block;
+    margin-top: 10%;
+    transform: translateX(-23vw);
+    
 }
 .leftbox{
-    opacity: 0.7;
-    width: 33vw;
     float: left;
+    opacity: 0.7;
+    width: 30vw;
     position: relative;
 }
 #but_1, #but_2, #but_3, #but_4, #but_5, #but_6, #but_7, #but_8{
@@ -218,41 +234,100 @@ h5{
         background-image: url(系所手機板背景.png);
         background-position: center;
     }
-    #up{
+    #cellup{
         position: relative;
         display: inline-block;
-        margin-left: 20%;
+        margin-left: 7%;
+        margin-top: 10%;
+
     }
     .sideup{
-        width: 80vw;
-        float: right;
-        position: relative;
+        width: 65vw;
+        position: absolute;
+        left: 33%;
+        bottom: 25%;
+        float:left;
     }
     .boxup{
-        width: 80vw;
-        position: absolute;
-        top: 10%;
-        right: 15%;
-        opacity: 0.7;
-    }
-    #cellbut{
-        margin-top: 2%;
-    }
-    #down{
+        float: left;
         position: relative;
-        display: inline-block;
+        width: 87vw;
+        opacity: 0.7;
     }
     .sidedown{
-        width: 80vw;
-        float: right;
-        position: relative;
+        width:65vw;
     }
-    .boxdown{
-        width: 80vw;
+    #butcell_1, #butcell_2, #butcell_3, #butcell_4, #butcell_5, #butcell_6, #butcell_7, #butcell_8{
+        background-color: rgb(255, 255, 255, 0);
+        color: white;    
+        font-size: 4.5vw;
         position: absolute;
-        bottom: 20%;
-        left: 15%;
+    }
+    #butcell_1{
+        top: 16%;
+        right:60%;
+    }
+    #butcell_2{
+        top: 36%;
+        right: 60%;
+    }
+    #butcell_3{
+        top: 56%;
+        right: 60%;
+    }
+    #butcell_4{
+        top: 76%;
+        right: 60%;
+    }
+    #butcell_5{
+        top: 16%;
+        right:15%;
+    }
+    #butcell_6{
+        top: 36%;
+        right:15%;
+
+    }
+    #butcell_7{
+        top: 56%;
+        right:15%;
+
+    }
+    #butcell_8{
+        top: 76%;
+        right:15%;
+    }
+
+    table{
+        background-size: cover;
+        background-position: left; 
+        margin-top: 16%;
+        margin-right: 8%;
         opacity: 0.7;
     }
+    thead{
+        text-align: center;
+        font-size:10vw;
+        color: white;
+    }
     
+    tbody{
+        float:center;
+        display: block;
+        height: 35vh;
+        overflow-y: scroll;
+        overflow-x: scroll;
+        border-collapse: collapse;
+        text-align: center;
+        margin-left: 10%;
+        margin-top: 5%;
+        width:80vw;
+    }
+    td{
+        float: left;
+        font-size: 6vw;
+    }
+    #tabletext{
+        color: white;
+    }
 }

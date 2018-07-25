@@ -4,7 +4,7 @@
         let y =$(window).height();
         let h =(y-65)+"px"
         document.body.style.setProperty('--height', h);
-
+        
         CKEDITOR.replace('add_introduction',{
             filebrowserUploadUrl: '/uploader',
         });
@@ -22,24 +22,74 @@
             config.enterMode = CKEDITOR.ENTER_BR;
             config.autoParagraph = false;
         };
-        
+
+        let com = ["com_1","com_2","com_3","com_4","com_5","com_6","com_7","com_8"]
+        let cell = ["cell_1","cell_2","cell_3","cell_4","cell_5","cell_6","cell_7","cell_8"]
         $(window).resize(function(){
             if($(window).width()<768){
                 $("#nav_ul").removeClass("flex-column");
-                $("#com_button").css("display", "none");
+                $(".box").hide();
+                $(".main").hide();
+                $(".astro").hide();
+                $(".cell_box").show();
+                $(".cell_alien").show();
+                $(".cell_astro").show();
+                $("#bread").hide();
+                for(let p=0;p<8;p++){
+                    $("."+com[p]).hide();
+                }
+                for(let q=0;q<8;q++){
+                    $("."+cell[q]).show();
+                }
             }
             else if($(window).width()>768){
                 $("#nav_ul").addClass("flex-column");
+                $(".box").show();
+                $(".main").show();
+                $(".astro").show();
+                $(".cell_box").hide();
+                $(".cell_alien").hide();
+                $(".cell_astro").hide();
+                for(let p=0;p<8;p++){
+                    $("."+com[p]).show();
+                }
+                for(let q=0;q<8;q++){
+                    $("."+cell[q]).hide();
+                }
             }
         });
 
         if($(window).width()<768){
             $("#nav_ul").removeClass("flex-column");
-            $("#com_button").css("display", "none");
+            $(".box").hide();
+            $(".main").hide();
+            $(".astro").hide();
+            $(".cell_box").show();
+            $(".cell_alien").show();
+            $(".cell_astro").show();
+            $("#bread").hide();
+            for(let p=0;p<8;p++){
+                $("."+com[p]).hide();
+            }
+            for(let q=0;q<8;q++){
+                $("."+cell[q]).show();
+            }
 
         }
         else if($(window).width()>768){
             $("#nav_ul").addClass("flex-column");
+            $(".box").show();
+            $(".main").show();
+            $(".astro").show();
+            $(".cell_box").hide();
+            $(".cell_alien").hide();
+            $(".cell_astro").hide();
+            for(let p=0;p<8;p++){
+                $("."+com[p]).show();
+            }
+            for(let q=0;q<8;q++){
+                $("."+cell[q]).hide();
+            }
         }
     });
 </script>

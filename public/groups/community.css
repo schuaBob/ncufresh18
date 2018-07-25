@@ -1,6 +1,3 @@
-.mainbutton{
-    margin-left: 50%;
-}
 
 #modal_button{ 
     margin-top: 8px;
@@ -60,15 +57,15 @@ h6{
     float: right;
 }
 
-
 #com_button{
     position: relative;
     display: inline-block;
-    margin-left: 40%;
+    margin-left: 12%;
+    margin-top: 6%;
 }
 
 .main{
-    width:26vw;
+    width:28vw;
     position: absolute;
     right: 80%;
 }
@@ -79,10 +76,76 @@ h6{
     position: absolute;
 }
 .box{
-    width:28vw;
+    width:32vw;
     position: relative;
     left: 30%;
     float: right;
+}
+.com_1{
+    width: 16vw;
+    position: absolute;
+    left: 65%;
+    top:11.5%;
+}
+.com_2{
+    width: 9vw;
+    position: absolute;
+    left: 45%;
+    top:26%;
+}
+.com_3{
+    width: 15vw;
+    position: absolute;
+    left: 45%;
+    top:40%;
+}
+.com_4{
+    width: 6.5vw;
+    position: absolute;
+    left: 95%;
+    top:39%;
+}
+.com_5{
+    width: 10vw;
+    position: absolute;
+    left: 44%;
+    top:53%;
+}
+.com_6{
+    width: 11.5vw;
+    position: absolute;
+    left: 80%;
+    top:54%;
+}
+.com_7{
+    width: 15vw;
+    position: absolute;
+    left: 46%;
+    top:65.5%;
+}
+.com_8{
+    width: 16vw;
+    position: absolute;
+    left: 50%;
+    top:76%;
+}
+#bread{
+    float:left;
+    width: 25%;
+}
+#breadcru{
+    background-color: black;
+    opacity: 0.8;
+}
+#text_at{
+    color: rgb(0, 162, 255);
+    opacity: 1;
+    font-size: 1.3vw;
+}
+#text{
+    opacity: 1;
+    color: white;
+    font-size: 1.3vw;
 }
 
 
@@ -95,16 +158,9 @@ body{
     background-repeat: no-repeat;
 }
 
-#bread{
-    opacity: 0.8;
-    width: 23%;
-}
 
 @media screen and (max-width: 768px){
-    body{
-        background-image: url(其他學生組織_手機板.png);
-        background-position: center;
-    }
+    
     .modal{
         margin-top: 5%;
     }
@@ -156,6 +212,78 @@ body{
         margin-left: 5%;
     }
 
+    #cell_button{
+        position: relative;
+        display: inline-block;
+        margin-left: 5%;
+    }
+    .cell_box{
+        width: 90vw;
+        position: relative;
+        float:right;
+    }
+    .cell_astro{
+        width: 23vw;
+        right: 0%;
+        top: 77%;
+        position: absolute;
+    }
+    
+    .cell_alien{
+        width:35vw;
+        position: absolute;
+        top:75%;
+        right: 72%;
+    }
+
+    .cell_1{
+        width: 44vw;
+        position: absolute;
+        right: 16%;
+        top:18%;
+    }
+    .cell_2{
+        width: 23vw;
+        position: absolute;
+        left: 15%;
+        top: 32%;
+    }
+    .cell_3{
+        width: 42vw;
+        position: absolute;
+        left: 15%;
+        top: 44%;
+    }
+    .cell_4{
+        width: 20vw;
+        position: absolute;
+        right: 13%;
+        top: 42.5%;
+    }
+    .cell_5{
+        width: 30vw;
+        position: absolute;
+        left: 13%;
+        top:55%;
+    }
+    .cell_6{
+        width: 34vw;
+        position: absolute;
+        right: 13%;
+        top: 56%;
+    }
+    .cell_7{
+        width: 46vw;
+        position: absolute;
+        left: 14%;
+        top: 66%;
+    }
+    .cell_8{
+        width: 48vw;
+        position: absolute;
+        left: 21.5%;
+        top:76%;
+    }
     
 }
 

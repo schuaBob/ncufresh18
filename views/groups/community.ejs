@@ -11,18 +11,21 @@
     <main>
         <!-- 麵包屑 -->
         <nav aria-label="breadcrumb" id="bread">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/groups/student">學生會</a></li>
-                <li class="breadcrumb-item"><a href="/groups/department">系所</a></li>
-                <li class="breadcrumb-item"><a href="/groups/club">社團</a></li>
-                <li class="breadcrumb-item active" aria-current="page">其他學生組織</li>
+            <ol class="breadcrumb" id="breadcru">
+                <li class="breadcrumb-item"><a href="/groups/student" id="text">學生會</a></li>
+                <li class="breadcrumb-item"><a href="/groups/department" id="text">系所</a></li>
+                <li class="breadcrumb-item"><a href="/groups/club" id="text">社團</a></li>
+                <li class="breadcrumb-item active" aria-current="page" id="text_at">其他學生組織</li>
             </ol>
         </nav>
-        
+        <!-- 要只讓管理員看到的東西 -->
+        <%_ if (user && user.role === 'admin'){ -%>
+            
         <!-- 新增圖片按鈕 -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                 新增圖片
         </button>
+        <%_ } -%>
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -63,7 +66,10 @@
             </div>
         </div>
         <!-- 新增其他社團組織的Modal -->
+        <%_ if (user && user.role === 'admin'){ -%>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_community">新增/編輯學生組織</button><br></br>
+        <%_ } -%>
+
         <div class="modal fade" id="add_community" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -105,19 +111,69 @@
                 </div>
             </div> 
         </div>
-        
+       
         <div id="com_button">
             <img src="其他學生組織手機板1_去被.png" class="box">
             <img src="其他學生組織4去被.png" class="main">
             <img src="太空人抬頭_去被.png" class="astro">
+            <a data-toggle="modal" data-target="#中央資管大數據暨程式設計研究社">
+                <img class="com_1" src="/groups/中央資管大數據暨程式設計研究社_去被.png">
+            </a>
+            <a data-toggle="modal" data-target="#耕新報">
+                <img class="com_2" src="/groups/耕新報_去被.png">
+            </a>
+            <a data-toggle="modal" data-target="#小中大電視台">
+                <img class="com_3" src="/groups/小中大電視台_去被.png">
+            </a>
+            <a data-toggle="modal" data-target="#創遊">
+                <img class="com_4" src="/groups/創遊_去被.png">
+            </a>
+            <a data-toggle="modal" data-target="#松濤電台">
+                <img class="com_5" src="/groups/松濤電台_去被.png">
+            </a>
+            <a data-toggle="modal" data-target="#NCU_Green">
+                <img class="com_6" src="/groups/NCU_Green_去被.png">
+            </a>
+            <a data-toggle="modal" data-target="#新生知訊網">
+                <img class="com_7" src="/groups/新生知訊網_去被.png">
+            </a>
+            <a data-toggle="modal" data-target="#小松鼠志工隊">
+                <img class="com_8" src="/groups/小松鼠志工隊_去被.png">
+            </a>
         </div>
-        <!-- 按鈕 -->
-        <% for(var i in community) { %>
-            <div class="mainbutton">
-                <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#<%= community[i]._id %>"><%= community[i].name %></button><br></br>
-            </div>
+
+        <div id="cell_button">
+            <img src="其他學生組織正式手機板面板_去被.png" class="cell_box">
+            <img src="太空人抬頭_去被.png" class="cell_astro">
+            <img src="地底外星人_去被.png" class="cell_alien">
+            <a data-toggle="modal" data-target="#中央資管大數據暨程式設計研究社">
+                <img class="cell_1" src="/groups/中央資管大數據暨程式設計研究社_去被.png">
+            </a>
+            <a data-toggle="modal" data-target="#耕新報">
+                <img class="cell_2" src="/groups/耕新報_去被.png">
+            </a>
+            <a data-toggle="modal" data-target="#小中大電視台">
+                <img class="cell_3" src="/groups/小中大電視台_去被.png">
+            </a>
+            <a data-toggle="modal" data-target="#創遊">
+                <img class="cell_4" src="/groups/創遊_去被.png">
+            </a>
+            <a data-toggle="modal" data-target="#松濤電台">
+                <img class="cell_5" src="/groups/松濤電台_去被.png">
+            </a>
+            <a data-toggle="modal" data-target="#NCU_Green">
+                <img class="cell_6" src="/groups/NCU_Green_去被.png">
+            </a>
+            <a data-toggle="modal" data-target="#新生知訊網">
+                <img class="cell_7" src="/groups/新生知訊網_去被.png">
+            </a>
+            <a data-toggle="modal" data-target="#小松鼠志工隊">
+                <img class="cell_8" src="/groups/小松鼠志工隊_去被.png">
+            </a>
+        </div>
+        <% for(var i in community) { %>    
             <!-- 社團介紹 Modal -->
-            <div class="modal fade bd-example-modal-lg " role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id ="<%= community[i]._id %>">  <!-- 根據資料庫id判斷modal內容 -->
+            <div class="modal fade bd-example-modal-lg " role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id ="<%= community[i].name %>">  <!-- 根據資料庫id判斷modal內容 -->
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -214,6 +270,7 @@
                 </div>
             </div> 
         <% } %>
+        
     </main>
     <footer>
         <% include ../layout/footer %>
