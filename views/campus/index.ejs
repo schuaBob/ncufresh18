@@ -8,10 +8,10 @@
 </head>
 
 <body>
-    <header>
+    <header id="campusheader ">
         <% include ../layout/navbar %>
     </header>
-    <main>
+    <main id="campusmain">
         <%_ if (user && user.role === 'admin'){ -%>
 
             <div class="Admin_edit">
@@ -90,7 +90,7 @@
             </div>
             <%_ } -%>
                 <div class="main_list_detail collapse">
-                    <li class="listtitle">99</li>
+                    <li id="listtitle">99</li>
                     <ul>
                         <%for (let i in result) {-%>
                             <li class="elelist" idconnect="<%=result[i]['_id']%>" val="<%=result[i]['Type']%>">
@@ -99,7 +99,7 @@
                             <%}-%>
                     </ul>
                 </div>
-                <div class="Mainmap">
+                
                     <div class="mapmove">
                         <%for (let i in result) {-%>
                             <% if (result[i]['Buildpic'] != "") {-%>
@@ -110,35 +110,33 @@
 
                                         <img id="map" src="back2.png">
                     </div>
-                </div>
-                <div class="Main_list ">
+                
                     <ul id="List_index">
                         <li class="Main_listele1" val="1">
-                            系館
+                            <img src="list1.png" alt="">
                         </li>
                         <li class="Main_listele2" val="2">
-                            運動
+                            <img src="list2.png" alt="">
                         </li>
                         <li class="Main_listele3" val="3">
-                            餐廳
+                            <img src="list3.png" alt="">
                         </li>
                         <li class="Main_listele4" val="4">
-                            設施
+                            <img src="list4.png" alt="">
                         </li>
                         <li class="Main_listele5" val="5">
-                            住宿
+                            <img src="list5.png" alt="">
                         </li>
                         <li class="Main_listele6" val="6">
-                            行政
+                            <img src="list6.png" alt="">
                         </li>
                         <li class="Main_listele7" val="7">
-                            活動場地
+                            <img src="list7.png" alt="">
                         </li>
                         <li class="Main_listele8" val="8">
-                            緊急醫療
+                            <img src="list8.png" alt="">
                         </li>
                     </ul>
-                </div>
                 <div class="modal fade" id="indexmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -179,7 +177,7 @@
                     </div>
                 </div>
     </main>
-    <footer>
+    <footer id="campusfooter">
         <% include ../layout/footer %>
     </footer>
     <% include ../layout/js %>
