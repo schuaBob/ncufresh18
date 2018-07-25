@@ -23,7 +23,27 @@ h3{
     font-size: 40px;
     margin-left: 2%;
 }
+.modal-content{
+    background-image: url(彈出視窗背景.png);
+}
 
+.modal{
+  margin-top: 5%;  
+}
+
+#nav_a{
+    font-size: 20px;
+    color: white;
+}
+
+#nav_ul{
+    margin-top: 5%;
+}
+
+#modal_button:hover{
+    box-shadow: 0 14px 20px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+
+}
 h6{
     margin-top: 2%;
     margin-left: 18%;
@@ -131,7 +151,7 @@ h6{
 }
 #bread{
     float:left;
-    width: 25%;
+    width: 25vw;
 }
 #breadcru{
     background-color: black;
@@ -162,31 +182,33 @@ body{
 @media screen and (max-width: 768px){
     
     .modal{
-        margin-top: 5%;
+        z-index: 4100;
+        margin-top: 0%;
     }
     .modal .modal-body {
         height: var(--height);
         overflow: auto;
     }
     #nav_a{
-        font-size: 8px;
+        font-size: 12px;
+    }
+    #nav_ul{
+        margin-top: 0%;
+        margin-left: 12%;
+        flex-wrap: nowrap;
+    }
+    #scroll_nav{
+        overflow-x: scroll;
     }
     #modal_button{ 
         margin-top: 3px;
-        width: 110px;
+        width: 100px;
         border-radius: 10%;
         text-align: center;
-    }
-    #nav_ul{
-        margin-top: 2%;
-        margin-left: 0%;
-        overflow-x: scroll;
-        
     }
     h5{
         margin-left: 6%;
         font-size: 20px;
-        margin-top:12%;
     }
     h6{
         margin-top: 2%;
@@ -216,95 +238,91 @@ body{
         position: relative;
         display: inline-block;
         margin-left: 5%;
-    }
+     }
     .cell_box{
-        width: 90vw;
+        width: 80vw;
         position: relative;
         float:right;
     }
     .cell_astro{
-        width: 23vw;
+        width: 19vw;
         right: 0%;
-        top: 77%;
+        top: 75%;
         position: absolute;
     }
     
     .cell_alien{
-        width:35vw;
+        width:29vw;
         position: absolute;
-        top:75%;
-        right: 72%;
+        top:72%;
+        right: 74%;
     }
 
     .cell_1{
         width: 44vw;
         position: absolute;
-        right: 16%;
+        right: 13%;
         top:18%;
     }
     .cell_2{
         width: 23vw;
         position: absolute;
-        left: 15%;
+        left: 14%;
         top: 32%;
     }
     .cell_3{
-        width: 42vw;
+        width: 40vw;
         position: absolute;
-        left: 15%;
+        left: 13%;
         top: 44%;
     }
     .cell_4{
-        width: 20vw;
+        width: 17vw;
         position: absolute;
-        right: 13%;
-        top: 42.5%;
+        right: 14%;
+        top: 43%;
     }
     .cell_5{
-        width: 30vw;
+        width: 27.5vw;
         position: absolute;
-        left: 13%;
-        top:55%;
+        left: 12%;
+        top:56%;
     }
     .cell_6{
-        width: 34vw;
+        width: 31vw;
         position: absolute;
-        right: 13%;
-        top: 56%;
+        right: 12%;
+        top: 56.5%;
     }
     .cell_7{
-        width: 46vw;
+        width: 43vw;
         position: absolute;
         left: 14%;
         top: 66%;
     }
     .cell_8{
-        width: 48vw;
+        width: 46vw;
         position: absolute;
-        left: 21.5%;
+        left: 19%;
         top:76%;
+    }
+    /* 麵包屑 */
+    #bread{
+        float:left;
+        width: 10%;
+        opacity: 0.8;
+    }
+    #text{
+        font-size: 3.5vw;
+    }
+    #text_at{
+        font-size: 3.8vw;
+        float: left;
+        text-align: center;
+    }
+    .breadcrumb {
+        padding: .75rem 0.5rem;
     }
     
 }
 
-.modal-content{
-    background-image: url(彈出視窗背景.png);
-}
-
-.modal{
-  margin-top: 5%;  
-}
-
-#nav_a{
-    font-size: 17px;
-    color: white;
-}
-
-#nav_ul{
-    margin-top: 5%;
-}
-
-#modal_button:hover{
-    box-shadow: 0 14px 20px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-
-}

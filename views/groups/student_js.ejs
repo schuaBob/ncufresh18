@@ -5,6 +5,8 @@
         let y =$(window).height();
         let h =(y-65)+"px"
         document.body.style.setProperty('--height', h);
+        
+        <%_ if (user && user.role === 'admin'){ -%>
 
         CKEDITOR.replace('edit_introduction',{
             filebrowserUploadUrl: '/uploader',
@@ -22,35 +24,24 @@
             config.enterMode = CKEDITOR.ENTER_BR;
             config.autoParagraph = false;
         };
-
+        <%_ } -%> 
         $(window).resize(function(){
             if($(window).width()<768){
                 $("#nav_ul").removeClass("flex-column");
-                $("#stu_title").hide();
-                $("#stu_button").hide();
-                $("#cell_button").show();
+                
 
             }
             else if($(window).width()>768){
                 $("#nav_ul").addClass("flex-column");
-                $("#cell_button").hide();
-                $("#stu_button").show();
-                $("#stu_title").show();
             }
         });
 
         if($(window).width()<768){
             $("#nav_ul").removeClass("flex-column");
-            $("#stu_title").hide();
-            $("#stu_button").hide();
-            $("#cell_button").show();
             
         }
         else if($(window).width()>768){
             $("#nav_ul").addClass("flex-column");
-            $("#cell_button").hide();
-            $("#stu_button").show();
-            $("#stu_title").show();
         }
         
         

@@ -9,7 +9,7 @@
         <% include ../layout/navbar %>
     </header>
     <main>
-        <!-- <div id="cellup">
+        <div id="cellup">
           <img src="系所社團畫框上_去被.png" class="sideup">
           <img src="系所社團電子框上_去被.png" class="boxup">
           <div class="buttonup" id="cellbut">
@@ -18,7 +18,7 @@
             <button class="date" id="date">聯誼性</button>
             <button class="service" id="service">服務性</button> 
           </div>
-        </div> -->
+        </div>
         <!-- 麵包屑 -->
         <nav aria-label="breadcrumb" id="bread">
             <ol class="breadcrumb" id="breadcru">
@@ -34,7 +34,6 @@
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">         
             新增圖片
         </button>
-        <%_ } -%> 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
@@ -75,9 +74,7 @@
           </div>
         </div>
         <!-- 新增社團的Modal -->
-        <%_ if (user && user.role === 'admin'){ -%>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_club">新增/編輯社團</button><br></br>
-        <%_ } -%> 
         <div class="modal fade" id="add_club" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -128,7 +125,7 @@
             </div>
           </div>
         </div> 
-      
+        <%_ } -%> 
         <!--左側按鈕-->
         <div id="combut">
             <img src="系所社團飛船修正版地底電子幕_去被.png" class="leftbox">
@@ -220,12 +217,14 @@
                   </div>
                   <div class="modal-body">
                     <div class="container">
-                      <ul class="nav nav-pills flex-column" id="nav_ul" >
-                        <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#introduction_<%= club[i].name %>">社團介紹</a></li>
-                        <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#participation_<%= club[i].name %>">加入社團</a></li>
-                        <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#FB_<%= club[i].name %>">FB粉絲團</a></li>
-                        <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#activity_<%= club[i].name %>">活動剪影</a></li>
-                      </ul>
+                      <div id="scroll_nav">
+                        <ul class="nav nav-pills flex-column" id="nav_ul" >
+                          <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#introduction_<%= club[i].name %>">社團介紹</a></li>
+                          <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#participation_<%= club[i].name %>">加入社團</a></li>
+                          <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#FB_<%= club[i].name %>">FB粉絲團</a></li>
+                          <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#activity_<%= club[i].name %>">活動剪影</a></li>
+                        </ul>
+                      </div>
                       <br>
                       <div class="tab-content">
                           <div id="introduction_<%= club[i].name %>" class="tab-pane fade in">
@@ -306,6 +305,7 @@
               </div>
             </div> 
         <%}%>                       
+        <img src="系所社團畫框下_去被.png" class="sidedown">
 
     </main>
     <footer>

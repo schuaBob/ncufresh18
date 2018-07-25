@@ -49,6 +49,8 @@
                 }
             });
         }
+        <%_ if (user && user.role === 'admin'){ -%>
+
         CKEDITOR.replace('edit_introduction',{
             filebrowserUploadUrl: '/uploader',
         });
@@ -68,7 +70,7 @@
         CKEDITOR.replace('edit_course',{
             filebrowserUploadUrl: '/uploader',
         });
-
+        <%_ } -%> 
         // $('.modal').on('hidden.bs.modal', function(){
         //     var $iframe = $(this).find('iframe');
         //     var videoSrc = $iframe.attr('src');
@@ -84,13 +86,14 @@
 
         $(window).resize(function(){
             if($(window).width()<768){
+                $("#nav_ul").removeClass("flex-column");
                 $("#cellup").show();
-                $(".bread").hide();
                 $("#combut").hide();
                 $(".sidedown").show();
-
+                
             }
             else if($(window).width()>768){
+                $("#nav_ul").addClass("flex-column");
                 $("#cellup").hide();
                 $(".sidedown").hide();
                 $("#combut").show();
@@ -99,13 +102,14 @@
         });
 
         if($(window).width()<768){
+            $("#nav_ul").removeClass("flex-column");
             $("#cellup").show();
             $("#combut").hide();
-            $(".bread").hide();
             $(".sidedown").show();
 
         }
         else if($(window).width()>768){
+            $("#nav_ul").addClass("flex-column");
             $("#cellup").hide();
             $("#combut").show();
             $(".sidedown").hide();

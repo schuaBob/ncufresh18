@@ -8,6 +8,7 @@ var student = require('../models/groups/student');
 var mongoose = require('mongoose');
 var fs = require('fs');
 var video = require('../models/video/video');
+var checkuser = require('./check-user');
 
 /* 系所社團首頁 */
 router.get('/', function(req, res, next) {
@@ -73,7 +74,7 @@ router.get('/club', function(req, res, next) {
 
 
 /*新增編輯社團 */
-router.post('/add_club', function(req, res, next) {
+router.post('/add_club', checkuser.isAdmin,function(req, res, next) {
   let typenum = req.body.type[0];
   name = req.body.name;
   club.find({name: name}, function(err, data) {
@@ -101,7 +102,7 @@ router.post('/add_club', function(req, res, next) {
 });
 
 /* 新增編輯其他學生組織 */
-router.post('/add_community', function(req, res, next) {
+router.post('/add_community', checkuser.isAdmin,function(req, res, next) {
   name = req.body.name;
   community.find({name: name}, function(err, data) {
     if (data.length == 0) {
@@ -125,7 +126,7 @@ router.post('/add_community', function(req, res, next) {
 });
 
 /* 新增編輯系所 */
-router.post('/add_department', function(req, res, next) {
+router.post('/add_department',checkuser.isAdmin, function(req, res, next) {
   let typenum = req.body.type[0];
   name = req.body.name;
   college = req.body.type.slice(1);
@@ -156,7 +157,7 @@ router.post('/add_department', function(req, res, next) {
   
 
 /* 學生會只有一項需要編輯所以直接update就可 */
-router.post('/edit_student', function(req, res, next) {
+router.post('/edit_student', checkuser.isAdmin, function(req, res, next) {
   student.update({
     introduction: req.body.introduction,
     branch: req.body.branch,
@@ -171,7 +172,7 @@ router.post('/edit_student', function(req, res, next) {
 });
 
 /* 社團新增圖片 */
-router.post('/clubinsert_img', (req, res, next) => {
+router.post('/clubinsert_img', checkuser.isAdmin, (req, res, next) => {
   var form = new formidable.IncomingForm();
   form.parse(req, (err, fields, files) => {    //如果你的表單有不是file的欄位，他們會在fields裡面
     if (err) return next(err);
@@ -220,7 +221,7 @@ router.post('/clubinsert_img', (req, res, next) => {
 })
 
 /* 學生會新增圖片 */
-router.post('/studentinsert_img', (req, res, next) => {
+router.post('/studentinsert_img',  checkuser.isAdmin,(req, res, next) => {
   var form = new formidable.IncomingForm();
   form.parse(req, (err, fields, files) => {    //如果你的表單有不是file的欄位，他們會在fields裡面
     if (err) return next(err);
@@ -269,7 +270,7 @@ router.post('/studentinsert_img', (req, res, next) => {
 })
 
 /* 系所新增圖片 */
-router.post('/departinsert_img', (req, res, next) => {
+router.post('/departinsert_img',  checkuser.isAdmin,(req, res, next) => {
   var form = new formidable.IncomingForm();
   form.parse(req, (err, fields, files) => {    //如果你的表單有不是file的欄位，他們會在fields裡面
     if (err) return next(err);
@@ -338,7 +339,7 @@ router.post('/departinsert_img', (req, res, next) => {
 })
   
 /* 其他學生組織新增圖片 */
-router.post('/cominsert_img', (req, res, next) => {
+router.post('/cominsert_img',  checkuser.isAdmin, (req, res, next) => {
   var form = new formidable.IncomingForm();
   form.parse(req, (err, fields, files) => {    //如果你的表單有不是file的欄位，他們會在fields裡面
     if (err) return next(err);

@@ -37,23 +37,11 @@
             </a>
         </div>
 
-        <div id="cell_button">
-            <a data-toggle="modal" data-target="#intro">
-                <img class="stu_cell_intro" src="/groups/簡介按鈕_去被.png">
-            </a><br>
-            <a data-toggle="modal" data-target="#branch">
-                <img class="stu_cell_branch" src="/groups/部門介紹按鈕_去被.png">
-            </a><br>
-            <a data-toggle="modal" data-target="#activity">
-                <img class="stu_cell_activity" src="/groups/活動剪影按鈕_去被.png">
-            </a>
-        </div>
         <%_ if (user && user.role === 'admin'){ -%>
         <!-- 新增圖片按鈕 -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="update1">
             新增圖片
         </button>
-        <%_ } -%>
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -85,9 +73,7 @@
             </div>
         </div>
         <!-- edit Modal -->
-        <%_ if (user && user.role === 'admin'){ -%>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_student" id="update2">編輯學生會介紹</button><br></br>
-        <%_ } -%>
         <div class="modal fade" id="edit_student" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -120,10 +106,8 @@
             </div>
            </div>
         </div>
-        
-        
-        
-        
+        <%_ } -%>
+
         <!-- 簡介 Modal -->
         <div class="modal fade bd-example-modal-lg " role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="intro">
             <div class="modal-dialog modal-lg" role="document">

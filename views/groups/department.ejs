@@ -10,35 +10,30 @@
     </header>
     <main>
       <% let ffffffff  = [["文學院","literature"],["理學院","science"],["管理學院","management"],["工學院","engineering"],["資訊電機學院","csee"],["地球科學學院","earth"],["客家學院","hakka"],["生醫理工學院","chst"]]%>
-      <div id="cellup">
-          <img src="系所社團畫框上_去被.png" class="sideup">
-          <img src="系所社團電子框上_去被.png" class="boxup">
-          <div class="buttonup" id="cellbut">
-            <% for(let p = 1; p<=8 ; p++) {%>
-              <button class="<%= ffffffff[p-1][1] %>_button" id="butcell_<%= p %>"><%= ffffffff[p-1][0] %></button></br>
-            <%}%>
-          </div>
-        </div>
       <!-- 麵包屑 -->
-      <div class="bread">
-        <nav aria-label="breadcrumb" id="bread">
-              <ol class="breadcrumb" id="breadcru">
+      <nav aria-label="breadcrumb" id="bread">
+          <ol class="breadcrumb" id="breadcru">
             <li class="breadcrumb-item" ><a href="/groups/student" id="text">學生會</a></li>
             <li class="breadcrumb-item active" aria-current="page" id="text_at">系所</li>
             <li class="breadcrumb-item"><a href="/groups/club" id="text">社團</a></li>
             <li class="breadcrumb-item"><a href="/groups/community" id="text">其他學生組織</a></li>
           </ol>
-        </nav>
+      </nav>
+      <div id="cellup">
+        <img src="系所社團畫框上_去被.png" class="sideup">
+        <img src="系所社團電子框上_去被.png" class="boxup">
+        <div class="buttonup" id="cellbut">
+          <% for(let p = 1; p<=8 ; p++) {%>
+            <button class="<%= ffffffff[p-1][1] %>_button" id="butcell_<%= p %>"><%= ffffffff[p-1][0] %></button>
+          <%}%>
+        </div>
       </div>
 
-      
-      
       <%_ if (user && user.role === 'admin'){ -%>
         <!-- 新增圖片按鈕 -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="update1">
           新增圖片
         </button>
-        <%_ } -%> 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
@@ -81,11 +76,8 @@
           </div>
         </div>
         
-        <%_ if (user && user.role === 'admin'){ -%>
         <!-- 新增編輯button -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_department" id="update2">新增/編輯系所</button><br></br>
-        <%_ } -%> 
-
         <!--  新增編輯系所的Modal -->
         <div class="modal fade" id="add_department" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
@@ -145,8 +137,8 @@
             </div>
           </div>
         </div>
-       
-        
+        <%_ } -%> 
+  
         <!--左側按鈕-->
         <div id="combut">
           <img src="系所社團飛船修正版地底電子幕_去被.png" class="leftbox">
@@ -155,7 +147,6 @@
           <%}%>
         </div>          
         <!-- 根據按鈕選出相對類別 -->
-        <!-- <div id="comtable"> -->
           <%for (let q = 1 ;q<=8;q++){%>
             <table class="<%= ffffffff[q-1][1] %>_table" id="table_<%= q %>">
               <thead>
@@ -175,7 +166,6 @@
               </tbody>
             </table>
           <% } %>
-        <!-- </div> -->
         <% for(var i in department){ %>
           <!-- 社團介紹 Modal -->                            
             <div class="modal fade bd-example-modal-lg" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id ="<%= department[i]._id %>"><!-- 根據資料庫id判斷modal內容 --> 
@@ -189,14 +179,16 @@
                   </div>
                   <div class="modal-body">
                     <div class="container">
-                      <ul class="nav nav-pills flex-column" id="nav_ul">
-                        <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#introduction_<%= department[i].name %>">系所介紹</a></li>
-                        <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#organization_<%= department[i].name %>">系學會</a></li>
-                        <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#activity_<%= department[i].name %>">系所活動</a></li>
-                        <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#team_<%= department[i].name %>">系隊</a></li>
-                        <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#course_<%= department[i].name %>">系上課程</a></li> <!-- 之後跟影音專區拿影片 -->
-                        <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#lightning_round_<%= department[i].name %>">快問快答</a></li>
-                      </ul>
+                      <div id="scroll_nav">
+                        <ul class="nav nav-pills flex-column" id="nav_ul">
+                          <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#introduction_<%= department[i].name %>">系所介紹</a></li>
+                          <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#organization_<%= department[i].name %>">系學會</a></li>
+                          <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#activity_<%= department[i].name %>">系所活動</a></li>
+                          <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#team_<%= department[i].name %>">系隊</a></li>
+                          <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#course_<%= department[i].name %>">系上課程</a></li> <!-- 之後跟影音專區拿影片 -->
+                          <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#lightning_round_<%= department[i].name %>">快問快答</a></li>
+                        </ul>
+                      </div>
                       <div class="tab-content">
                           <div id="introduction_<%= department[i].name %>" class="tab-pane fade in">
                             <h5>系所介紹</h5>  
