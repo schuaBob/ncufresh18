@@ -2,20 +2,22 @@
 <html>
 <head>
     <% include ../layout/head %>
-    <link rel=stylesheet type="text/css" href="../life/life_phone.css">
+    <link rel=stylesheet type="text/css" href="life.css">
 </head>
-<body style="height: 100vh;"> 
+<body>
     <header>
         <% include ../layout/navbar %>
     </header>
-    <main style="height: 100vh;">
+    <main style="background-image: url('background2.png'); background-repeat: no-repeat;  background-size:cover; background-attachment: fixed; height: 100vw; opacity: 0.85;">
+        <div id="circle"></div>
+        <div id="circle_small"></div>
         <div class="middle">
             <a href="/life/food">食</a> <br /> 
             <a href="/life/dorm">住</a> <br />
             <a href="/life/comm">行</a> <br /> 
             <a href="/life/edu">育</a> <br />
             <a href="/life/entertainment">樂</a> <br /> 
-        </div>
+        </div> 
     </main>
     <footer id="footered">
         <% include ../layout/footer %>
@@ -24,10 +26,13 @@
         <% include js %>
     <script>
         $(document).ready(function(){
+            var width = innerWidth;
+            if(width <= 850)
+                document.location.href = "/life/index_phone";
             $(window).resize(function(){
-                var width = innerWidth;
-                if(width > 850)
-                    document.location.href = "/life";
+                width = innerWidth;
+                if(width <= 850)
+                    document.location.href = "/life/index_phone";
             });
         });
     </script>

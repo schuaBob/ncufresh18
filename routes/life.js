@@ -29,111 +29,111 @@ var match_num = {
   'entertainment' : 5 
 }
 
-/* 中大生活首頁 */
+/*-------------------------中大生活首頁----------------------------*/
 router.get('/', function(req, res, next){
+  res.render('life/index', {title: '中大生活', user: req.user});
+});
+/* 天氣 */
+/*
+router.get('/index_com', function(req, res, next){
   let url = "https://works.ioa.tw/weather/api/weathers/81.json";
   request(url, function(err, response, body){
     if(err){
-      res.render('life/index', { title: '中大生活', temperature: null, error: "Error, please try again later",
+      res.render('life/index_com', { title: '中大生活', temperature: null, error: "Error, please try again later",
                                  desc: " ", humidity: " "});
     }else{
       let weather = JSON.parse(body),
           temp = weather.temperature,
           desc = weather.desc,
           humidity = weather.humidity;
-      res.render('life/index', { title: '中大生活', temperature: temp, error: " ",
+      res.render('life/index_com', { title: '中大生活', temperature: temp, error: " ",
                                  desc: desc, humidity: humidity, user: req.user});
     }
   });
 });
+*/
+
+router.get('/index_com', function(req, res, next){
+  res.render('life/index_com', {title: '中大生活', user: req.user});
+})
 
 router.get('/index_phone', function(req, res, next){
-  let url = "https://works.ioa.tw/weather/api/weathers/81.json";
-  request(url, function(err, response, body){
-    if(err){
-      res.render('life/index_phone', { title: '中大生活', temperature: null, error: "Error, please try again later",
-                                 desc: " ", humidity: " "});
-    }else{
-      let weather = JSON.parse(body),
-          temp = weather.temperature,
-          desc = weather.desc,
-          humidity = weather.humidity;
-      res.render('life/index_phone', { title: '中大生活', temperature: temp, error: " ",
-                                 desc: desc, humidity: humidity, user: req.user});
-    }
-  });
+  res.render('life/phone/index_phone', {title: '中大生活', user: req.user});
 });
 
+/*-------------------------網頁版分頁-------------------------*/
 router.get('/food', function(req, res, next){
   var type = req.url;
   type = type.substr(1);
   life.find({}, function(err, data){
-    res.render('life/food', { title: '食', life: data, page: type, num: match_num[type], user: req.user});
+    res.render('life/food', { title: '中大生活', life: data, page: type, num: match_num[type], user: req.user});
   });
 });
-
-router.get('/food_phone', function(req, res, next){
-  life.find({}, function(err, data){
-    res.render('life/food_phone', { title: '食', life: data, page: 'food', num: match_num['food'], user: req.user});
-  });
-})
 
 router.get('/dorm', function(req, res, next){
   var type = req.url;
   type = type.substr(1);
   life.find({}, function(err, data){
-     res.render('life/dorm', { title: '住', life: data, page: type, num: match_num[type], user: req.user});
+     res.render('life/dorm', { title: '中大生活', life: data, page: type, num: match_num[type], user: req.user});
    });
 });
-
-router.get('/dorm_phone', function(req, res, next){
-  life.find({}, function(err, data){
-    res.render('life/dorm_phone', { title: '食', life: data, page: 'dorm', num: match_num['dorm'], user: req.user});
-  });
-})
 
 router.get('/comm', function(req, res, next){
   var type = req.url;
   type = type.substr(1);
   life.find({}, function(err, data){
-    res.render('life/comm', { title: '行', life: data, page: type, num: match_num[type], user: req.user});
+    res.render('life/comm', { title: '中大生活', life: data, page: type, num: match_num[type], user: req.user});
   });
 });
-
-router.get('/comm_phone', function(req, res, next){
-  life.find({}, function(err, data){
-    res.render('life/comm_phone', { title: '食', life: data, page: 'comm', num: match_num['comm'], user: req.user});
-  });
-})
 
 router.get('/edu', function(req, res, next){
   var type = req.url;
   type = type.substr(1);
   life.find({}, function(err, data){
-    res.render('life/edu', { title: '育', life: data, page: type, num: match_num[type], user: req.user});
+    res.render('life/edu', { title: '中大生活', life: data, page: type, num: match_num[type], user: req.user});
   });
 });
-
-router.get('/edu_phone', function(req, res, next){
-  life.find({}, function(err, data){
-    res.render('life/edu_phone', { title: '食', life: data, page: 'edu', num: match_num['edu'], user: req.user});
-  });
-})
 
 router.get('/entertainment', function(req, res, next){
   var type = req.url;
   type = type.substr(1);
   life.find({}, function(err, data){
-    res.render('life/entertainment', { title: '樂', life: data, page: type, num: match_num[type], user: req.user});
+    res.render('life/entertainment', { title: '中大生活', life: data, page: type, num: match_num[type], user: req.user});
   });
 });
 
-router.get('/entertainment_phone', function(req, res, next){
+/*-------------------------手機版分頁-------------------------*/
+router.get('/food_phone', function(req, res, next){
   life.find({}, function(err, data){
-    res.render('life/entertainment_phone', { title: '食', life: data, page: 'entertainment', num: match_num['entertainment'], user: req.user});
+    res.render('life/phone/food_phone', { title: '中大生活', life: data, page: 'food', num: match_num['food'], user: req.user});
   });
 })
 
+router.get('/dorm_phone', function(req, res, next){
+  life.find({}, function(err, data){
+    res.render('life/phone/dorm_phone', { title: '中大生活', life: data, page: 'dorm', num: match_num['dorm'], user: req.user});
+  });
+})
+
+router.get('/comm_phone', function(req, res, next){
+  life.find({}, function(err, data){
+    res.render('life/phone/comm_phone', { title: '中大生活', life: data, page: 'comm', num: match_num['comm'], user: req.user});
+  });
+})
+
+router.get('/edu_phone', function(req, res, next){
+  life.find({}, function(err, data){
+    res.render('life/phone/edu_phone', { title: '中大生活', life: data, page: 'edu', num: match_num['edu'], user: req.user});
+  });
+})
+
+router.get('/entertainment_phone', function(req, res, next){
+  life.find({}, function(err, data){
+    res.render('life/phone/entertainment_phone', { title: '中大生活', life: data, page: 'entertainment', num: match_num['entertainment'], user: req.user});
+  });
+})
+
+/*-------------------------後台-------------------------*/
 router.post('/editPicture', upload.single('picture'), function(req, res, next){
   var cuted = req.file.path.split("/"),
       pathed = cuted[2] + "/" + cuted[3];
@@ -200,6 +200,7 @@ router.post('/changing', function(req, res, next){
   });
 });
 
+/*-------------------------抓細項內容-------------------------*/
 router.post('/showing', function(req, res, next){
   var mainTitled = req.body.mainTitle,
       subTitled = req.body.subTitle;
@@ -214,24 +215,6 @@ router.post('/showing', function(req, res, next){
     });
   });
 });
-// router.post('/', function(req, res, next){
-//   let city = req.body.city;
-//   let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
-//   request(url, function(err, response, body){
-//     if(err){
-//       res.render('life/index', { title: '中大生活', weather: null, error: "Error, please try again"});
-//     }
-//     else{
-//       let weather = JSON.parse(body);
-//       if(weather.main == undefined){
-//         res.render('life/index', { title: '中大生活', weather: null, error: "Error, please try again"});
-//       }else{
-//         let weatherText = `It's ${weather.main.temp} degrees in ${weather.name}!`;
-//         res.render('life/index', { title: '中大生活', weather: weatherText, error: null});
-//       }
-//     }
-//   });
-// });
 
 module.exports = router;
 

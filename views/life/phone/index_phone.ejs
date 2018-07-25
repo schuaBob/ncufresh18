@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../../layout/head %>
+    <link rel=stylesheet type="text/css" href="../life/life_phone.css">
+</head>
+<body style="height: 100vh;"> 
+    <header>
+        <% include ../../layout/navbar %>
+    </header>
+    <main style="background-image: url('background2.png'); background-repeat: no-repeat;  background-size:cover; background-attachment: fixed; height: 90vh; opacity: 0.85;">
+        <div id="circle"></div>
+        <div id="circle_small"></div>
+        <div class="middle">
+            <a href="/life/food_phone">食</a> <br /> 
+            <a href="/life/dorm_phone">住</a> <br />
+            <a href="/life/comm_phone">行</a> <br /> 
+            <a href="/life/edu_phone">育</a> <br />
+            <a href="/life/entertainment_phone">樂</a> <br /> 
+        </div>
+    </main>
+    <footer>
+        <% include ../../layout/footer %>
+    </footer>
+        <% include ../../layout/js %>
+        <% include ../js %>
+    <script>
+        $(document).ready(function(){
+            $(window).resize(function(){
+                var width = innerWidth;
+                if(width > 850)
+                    document.location.href = "/life";
+            });
+        });
+    </script>
+</body>
+</html>

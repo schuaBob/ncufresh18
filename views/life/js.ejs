@@ -4,29 +4,41 @@
         e.preventDefault();
     });
 
+    $(document).ready(function(){
+        var ifHide = 1;
+        $('.hide2').slideUp();
+        $('.expendImg').click(function(){
+            if(ifHide == 1){
+                $('#downNav').slideDown();
+                $('#downNav').addClass("show2");
+                $('#downNav').removeClass("hide2");
+                ifHide = (ifHide + 1) % 2;
+            }
+            else{
+                $('#downNav').slideUp();
+                $('#downNav').addClass("hide2");
+                $('#downNav').removeClass("show2");
+                ifHide = (ifHide + 1) % 2;
+            }
+        });
+    });
+
     $(document).ready(function(){ 
         var ifHide = 1;
         $('.hide1').slideUp();
         $('.clk').click(function(){
             var id = $(this).attr("id"),
-                sub_id = "#" + id + "_sub",
-                sub_hr = "#" + id + "_hr";
+                sub_id = "#" + id + "_sub";
             if(ifHide == 1){
                 $(sub_id).slideDown();
                 $(sub_id).addClass("show1");
                 $(sub_id).removeClass("hide1");
-                $(sub_hr).slideDown();
-                $(sub_hr).addClass("show1");
-                $(sub_hr).removeClass("hide1");
                 ifHide = (ifHide + 1) % 2;
             }
             else{
                 $(sub_id).slideUp();
                 $(sub_id).addClass("hide1");
                 $(sub_id).removeClass("show1");
-                $(sub_hr).slideUp();
-                $(sub_hr).addClass("hide1");
-                $(sub_hr).removeClass("show1");
                 ifHide = (ifHide + 1) % 2;
             }
         });
@@ -38,7 +50,7 @@
         var info = this.id.split("_");
         if(info[0] == "桃園景點"){
             $('.descArea').empty();
-            $('pictureArea').empty();
+            $('.pictureArea').empty();
             $('.pictureArea').append("<img class='mapClass' src='map.png'>");
         }
         else{
@@ -147,10 +159,11 @@
             },
             success: function(data){
                 $(".selectPart").css("visibility", "hidden");
+                $(".backenArrow").css("visibility", "visible");
                 $(".pictureArea").css("visibility", "visible");
                 $(".descArea").css("visibility", "visible");
-                putPic2(data.res1);
-                putCont2(data.res2);
+                putPic_phone(data.res1);
+                putCont_phone(data.res2);
             }
         });
     });
@@ -167,15 +180,16 @@
             },
             success: function(data){
                 $(".selectPart").css("visibility", "hidden");
+                $(".backenArrow").css("visibility", "visible");
                 $(".pictureArea").css("visibility", "visible");
                 $(".descArea").css("visibility", "visible");
-                putPic2(data.res1);
-                putCont2(data.res2);
+                putPic_phone(data.res1);
+                putCont_phone(data.res2);
             }
         });        
     });
 
-    var putPic2 = function(data){
+    var putPic_phone = function(data){
         $(".pictureArea").empty();
         $(".pictureArea").append('<div class="slideshow_container"></div>');
         $('.slideshow_container').empty();
@@ -188,14 +202,24 @@
             showSlides(ramSlideNum);
         }
     }
-    var putCont2 = function(data){
-        console.log(data.content);
+    var putCont_phone = function(data){
         $(".descArea").empty();
         $(".descArea").append("<div class='describeArea'> <div class='contentArea'></div></div>")
         $(".describeArea").children(".contentArea").empty();
         if(data != null)
             $(".describeArea").children(".contentArea").append(data.content);
     }
+
+    $(".backenArrow").on("click", function(e){
+        e.preventDefault();
+        $(".selectPart").css("visibility", "visible");
+        $(".pictureArea").css("visibility", "hidden");
+        $(".descArea").css("visibility", "hidden");
+        $(".backenArrow").css("visibility", "hidden");
+        $(".pictureArea").empty();
+        $(".descArea").empty();
+    });
+
     CKEDITOR.replace('disc', {
         filebrowserUploadUrl: '/uploader',
     });
