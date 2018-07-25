@@ -1,6 +1,5 @@
 <script>
     var url = new URL(window.location.href);
-    console.log(url.searchParams.get('id'));
     document.getElementsByName('password')[0].focus() ;
     $("input[name=id]").val(url.searchParams.get('id'))// = url.searchParams.get('id');
     $(document).on("keypress",function(event){
@@ -11,4 +10,9 @@
     $(document).on("click","#btn",function(event){
         $("form:first").submit(); 
     });
+    $("#num").popover({
+        content: "密碼有誤" 
+    })
+    $("#num").popover('show') 
+    $("#num").focus() ;
 </script>

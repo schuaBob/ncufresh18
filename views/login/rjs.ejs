@@ -1,50 +1,15 @@
 <script>
     var url = new URL(window.location.href);
-    console.log(url.searchParams.get('id'));
     document.getElementsByName('name')[0].focus()
     $("input[name=id]").val(url.searchParams.get('id'))// = url.searchParams.get('id');
-    $(document).on("click","#btn",function(event){
-        var str = $("input[name=name]").val() ;
-        var pw1 = $("input[name=password]").val() ;
-        var pw2 = $("input[name=checkpassword]").val() ;
-        if (str){
-            if (pw1){
-                if(pw1 === pw2){
-                    alert("讚ㄛ") ;
-                }
-                else {
-                    alert("低能?") ;
-                }
-            }
-            else{
-                alert("沒填密碼") ;
-            }
-        }
-        else {
-            alert("名字") ;
-        }
-    });
-    $(document).on("keypress",function(event){
-        if(event.keyCode === 13 ){
-            var str = $("input[name=name]").val() ;
-            var pw1 = $("input[name=password]").val() ;
-            var pw2 = $("input[name=checkpassword]").val() ;
-            if (str){
-                if (pw1){
-                    if(pw1 === pw2){
-                        alert("讚ㄛ") ;
-                    }
-                    else {
-                        alert("低能?") ;
-                    }
-                }
-                else{
-                    alert("沒填密碼") ;
-                }
-            }
-            else{
-                alert("名字") ;
-            }
-        }
-    });
+    $("input[name=id]").focus() ;
+    
+    $("input[name=name]").popover({
+        content: "名字有誤" 
+    })
+    $("input[name=name]").popover('show') 
+    $("input[name=checkpassword]").popover({
+        content: "兩次輸入密碼不同" 
+    })
+    $("input[name=checkpassword]").popover('show') 
 </script>

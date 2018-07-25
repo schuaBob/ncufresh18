@@ -1,8 +1,14 @@
 <script>
-    $(document).on("click","#btn",function(event){
-        if($("input").val().length!==9){
-            alert("ERROR") ;
-
+    function checkname() {
+        name = $("#num").val();
+        if(name.length !== 9){
+            $("#num").popover({
+                content: "長度有誤" 
+            })
+            $("#num").popover('show') ;
+            return false ;
         }
-    });
+        return true ;
+    }
+    $("#num").focus() ;
 </script>
