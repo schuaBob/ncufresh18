@@ -44,9 +44,80 @@ table{
         width: 50px;
         height: 50px;
     }
+    /* 分類排序的顏色 */
     .nav-link{
         color:white;
     }
+    /* 回到頁面最頂端按鈕 */
+    .goTop{
+        background: url(移至頂端2.png);
+        background-size: 60px 60px;
+        border-color: transparent;
+        border-radius: 50%;
+        width: 60px;
+        height:60px;
+        position: fixed;
+        bottom: 3vw;
+        right:50px;
+    }
+    /* 搜尋的位置 */
+    .search{
+        float:right;
+    }
+    /* 電腦版我要發問按鈕 */
+    .askbutton{
+        background: url(發問按鈕1.png);
+        background-size: cover;
+        width:130px;
+        height:180px;
+        float: right;
+        vertical-align: middle;
+        position: fixed;
+        bottom: 10vw;
+        right:15px;
+    }
+}
+/* 只有手機板介面出現的 */
+@media only screen and (max-width:600px){
+    table{
+        font-size:12px;
+    }
+    thead{
+        font-size:14px;
+    }
+    .nav-link{
+        color:black;
+    }
+    .classification{
+        position: absolute;
+        z-index: 5000;
+    }
+    /* 回到頁面最頂端按鈕 */
+    .goTop{
+        background: url(移至頂端3.png);
+        background-size: 40px 40px;
+        border-color: transparent;
+        border-radius: 50%;
+        width: 40px;
+        height:40px;
+        position: fixed;
+        bottom: 5vw;
+        right:10px;
+    }
+    /* 手機版的我要發問按鈕 */
+    .askbutton{
+        background: url(手機發問2.png);
+        background-size: 40px 40px;
+        border-radius: 50%;
+        width: 40px;
+        height:40px;
+        color: white;
+        border-color: white;
+        position: fixed;
+        bottom: 21vw;
+        right:10px;
+    }
+    
 }
 /* 問題合集 */
 .Q{
@@ -80,6 +151,11 @@ li{
     font-family: Noto Sans TC;
 
 }
+/* 排序的按鈕 */
+.clbtn{
+    background: transparent;
+    border-color: transparent;
+}
 /* 排序與分類 */
 .classification{
     margin: 10px;
@@ -100,32 +176,18 @@ li{
 p{
     font-weight:bold;
 }
-/* 手機板介面 */
-@media only screen and (max-width:600px){
-    table{
-        font-size:12px;
-    }
-    thead{
-        font-size:14px;
-    }
-    .nav-link{
-        color:black;
-    }
-    .classification{
-        position: absolute;
-        z-index: 5000;
-    }
-}
 /* 搜尋按鈕 */
 .searchbtn{
     background: url(搜尋2.png);
+    background-size: 20px 15px;
     background-color: transparent;
     border: medium none;
     color: transparent;
     background-size: cover; 
     width: 20px;
-    height:20px;
+    height:25px;
     margin-top:5px;
+    margin-left: 5px;
 }
 .search{
     display: inline;
@@ -157,12 +219,12 @@ p{
   }
 /* modal長寬設置 */
 .modal{
-    position: absolute;
     z-index: 5000;
     height:100%;
 }
 .modal-body{
     margin-left:20px;
+    margin-right:20px;
 }
 /* 問題與答案樣式 */
  .QA{
@@ -173,6 +235,7 @@ p{
  .blueLetter{
     display: inline;
     color: #29ABE2;
+    font-weight:bold;
  }
  /* 送出問題與答案鈕 */
 .submitbtn{
@@ -193,46 +256,6 @@ p{
  form{
     font-weight:bold;
     font-family: Microsoft YaHei;
- }
- /* 我要發問按鈕 */
- .askbutton{
-    background: url(發問按鈕1.png);
-    background-size: cover;
-    width:130px;
-    height:180px;
-    float: right;
-    vertical-align: middle;
-    position: fixed;
-    bottom: 10vw;
-    right:15px;
- }
- /* 手機版的我要發問按鈕 */
- .askbutton2{
-    border-radius: 50%;
-    width: 60px;
-    height:60px;
-    color: white;
-    background-color: #29ABE2;
-    border-color: #29ABE2;
-    font-family: Microsoft YaHei;
-    text-align: center;
-    vertical-align: baseline;
-    font-size: 32px;
-    font-weight:bold;
-    position: fixed;
-    bottom: 16vw;
-    right:15px;
- }
- /* 回到頁面最頂端按鈕 */
- .goTop{
-    background: url(移至頂端.png);
-    background-size: 100%;
-    border-color: transparent;
-    width:139px;
-    height:37px;
-    position: fixed;
-    bottom: 5vw;
-    right:15px;
  }
  /* OK按鈕 */
  .closemodal{

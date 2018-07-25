@@ -24,14 +24,12 @@ $(document).ready(() => {
         //modal的樣式
         $(".modal").css({"height":h});
         //我要發問按鈕的位置
-        $(".askbutton").hide();//隱藏電腦版的我要發問按鈕
+        // $(".askbutton").hide();//隱藏電腦版的我要發問按鈕
     }
     else if(w>600){
         //電腦版頁面樣式
         //我要發問按鈕的位置
         $(".askbutton2").hide();//隱藏手機版的我要發問按鈕
-        //搜尋的位置
-        $(".search").css({"float":"right"});
         //文章列表樣式
         $('table').css({"width":"70%"});
         //$('tbody').css({"height":"300px"});
@@ -46,16 +44,16 @@ $(document).ready(() => {
         $("li a[href='#all']").css({"color":"#29ABE2","font-weight":"bold"});
         $("li a[href='/qna/time']").css({"color":"#29ABE2","font-weight":"bold"});
         //排序按鈕動畫
-        $("div.Time").css({"color":"#29ABE2","font-weight":"bold"});
-        $("div.Hot").css({"color":"black","font-weight":"normal"});
+        $(".Time").css({"color":"#29ABE2","font-weight":"bold"});
+        $(".Hot").css({"color":"black","font-weight":"normal"});
     }
     else{
         //分類按鈕動畫
         $("li a[href='#all']").css({"background-color":"#29ABE2","border-radius":"20px"});
         $("li a[href='/qna/time']").css({"background-color":"#29ABE2","border-radius":"20px"});
         //排序按鈕動畫
-        $("div.Time").css({"background-color":"#29ABE2","border-radius":"20px"});
-         $("div.Hot").css({"background-color":"transparent"});
+        $(".Time").css({"background-color":"#29ABE2","border-radius":"20px"});
+         $(".Hot").css({"background-color":"transparent"});
     }
     //只看單一分類
     $("li a[href='#school'], li a[href='#student'], li a[href='#class'], li a[href='#others'], li a[href='#all']").on('click', function(event) {
@@ -150,8 +148,8 @@ $(document).ready(() => {
                 $("li a[href='#school']").css({"background-color":"transparent"});
                 $("li a[href='#all']").css({"background-color":"transparent"});
             }
-            $('tr.Q').hide();
-            $('tr.其他').fadeIn(500);
+        $('tr.Q').hide();
+        $('tr.其他').fadeIn(500);
         }      
     });
     //人氣與時間的排序(list.js)
@@ -163,53 +161,55 @@ $(document).ready(() => {
     $(".Hot").on('click',function(){
         if (w < 600) {
             //手機版排序按鈕動畫
-            $("div.Hot").css({"color":"#29ABE2","font-weight":"bold"});
-            $("div.Time").css({"color":"black","font-weight":"normal"});
+            $(".Hot").css({"color":"#29ABE2","font-weight":"bold"});
+            $(".Time").css({"color":"black","font-weight":"normal"});
         }
         else{
             //電腦版排序按鈕動畫
-            $("div.Hot").css({"background-color":"#29ABE2","border-radius":"20px"});
-            $("div.Time").css({"background-color":"transparent"});
+            $(".Hot").css({"background-color":"#29ABE2","border-radius":"20px"});
+            $(".Time").css({"background-color":"transparent"});
         }
         //人氣的排序(list.js)
         userList.sort("hot",{
             order:'desc',
             sortFunction: function (a, b) {
                 console.log(a._values.hot);
-                var Aobjs = $(a.elm).find('.ans');
-                var Bobjs = $(b.elm).find('.ans');
-                if ((Aobjs[0].innerHTML === "無解答") != (Bobjs[0].innerHTML === "無解答")) {
-                    return Aobjs[0].innerHTML === "無解答"  ? 1 : -1;
+                var Aobjs = $(a.elm).find('.type');
+                var Bobjs = $(b.elm).find('.type');
+                var Aview = $(a.elm).find('.view');
+                var Bview = $(b.elm).find('.view');
+                if ((Aobjs[0].innerHTML === "板規") != (Bobjs[0].innerHTML === "板規")) {
+                    return Aobjs[0].innerHTML === "板規"  ? 1 : -1;
                 }
                 else{
-                    return (a._values.hot -  b._values.hot)>0 ? 1 : 
-                            (a._values.hot - b._values.hot)<0 ? -1 : 0;
+                    return (Aview[0].innerHTML -  Bview[0].innerHTML)>0 ? 1 : 
+                            (Aview[0].innerHTML - Bview[0].innerHTML)<0 ? -1 : 0;
     
                 }
     
-         }
+            }
         });
     });
     $(".Time").on('click',function(){
         if (w < 600) {
             //手機版排序按鈕動畫
-            $("div.Time").css({"color":"#29ABE2","font-weight":"bold"});
-            $("div.Hot").css({"color":"black","font-weight":"normal"});
+            $(".Time").css({"color":"#29ABE2","font-weight":"bold"});
+            $(".Hot").css({"color":"black","font-weight":"normal"});
         }
         else{
             //電腦版排序按鈕動畫
-            $("div.Time").css({"background-color":"#29ABE2","border-radius":"20px"});
-            $("div.Hot").css({"background-color":"transparent"});
+            $(".Time").css({"background-color":"#29ABE2","border-radius":"20px"});
+            $(".Hot").css({"background-color":"transparent"});
         }
         //時間的排序(list.js)
         userList.sort("time",{
             order:'desc',
             sortFunction: function (a, b) {
                 console.log(a._values.time);
-                var Aobjs = $(a.elm).find('.ans');
-                var Bobjs = $(b.elm).find('.ans');
-                if ((Aobjs[0].innerHTML === "無解答") != (Bobjs[0].innerHTML === "無解答")) {
-                    return Aobjs[0].innerHTML === "無解答"  ? 1 : -1;
+                var Aobjs = $(a.elm).find('.type');
+                var Bobjs = $(b.elm).find('.type');
+                if ((Aobjs[0].innerHTML === "板規") != (Bobjs[0].innerHTML === "板規")) {
+                    return Aobjs[0].innerHTML === "板規"  ? 1 : -1;
                 }
                 else{
                     return (a._values.time -  b._values.time)>0 ? 1 : 
@@ -226,17 +226,20 @@ $(document).ready(() => {
             scrollTop:0
         },300);
     });
-    //滑鼠移動到我要發問按鈕上面會換圖案
-    $('.askbutton').on('mouseover', function(){
-        $(this).css({'background':'url(發問按鈕2.png)','background-size':'cover'});
-    });
-    $('.askbutton').on('mouseout', function(){
-        $(this).css({'background':'url(發問按鈕1.png)','background-size':'cover'});
-    });
+    if(w>600){
+        //滑鼠移動到我要發問按鈕上面會換圖案
+        $('.askbutton').on('mouseover', function(){
+            $(this).css({'background':'url(發問按鈕2.png)','background-size':'cover'});
+        });
+        $('.askbutton').on('mouseout', function(){
+            $(this).css({'background':'url(發問按鈕1.png)','background-size':'cover'});
+        });
+    }
     //紀錄問題點擊次數
     $(".titleQ").on('click',function(){
         //var id = $(this).prop('id');
         var id = this.id.split('-')[0];
+        $('#'+id).modal('show');
         $.ajax({
             url: '/qna/clickQ/' + id,
             method: 'GET',
@@ -256,6 +259,7 @@ $(document).ready(() => {
     $(".titleR").on('click',function(){
         //var id = $(this).prop('id');
         var id = this.id.split('-')[0];
+        $('#'+id).modal('show');
         $.ajax({
             url: '/qna/clickR/' + id,
             method: 'GET',

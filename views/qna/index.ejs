@@ -12,7 +12,7 @@
         <div>
             <%/*新增板規的按鈕*/%>
             <%if(user && user.role==="admin"){%>
-                <button class="btn btn-primary addRulebtn admin" data-toggle="modal" data-target="#addRule">新增板規</button>
+                <button class="btn addRulebtn admin" data-toggle="modal" data-target="#addRule">新增板規</button>
                 <%}%>
             <%/*新增板規modal*/%>
             <div class="modal fade" id="addRule" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -44,7 +44,7 @@
                                 </div> 
                                 <div class="modal-footer">
                                     <input class="btn btn-primary submitbtn" type="submit" value="送 出">
-                                    <button type="button" class="btn btn-secondary closebtn" data-dismiss="modal">退 回</button>              
+                                    <button type="button" class="btn btn-secondary closebtn" data-dismiss="modal">返 回</button>              
                                 </div>
                             </form>
                         </div>
@@ -52,7 +52,6 @@
                 </div>
             <%/*我要發問的按鈕*/%>
             <button class="btn askbutton"  data-toggle="modal" data-target="#askQuestion"></button>
-            <button class="btn btn-primary askbutton2" data-toggle="modal" data-target="#askQuestion">+</button>
             <%/*回到頁面最頂端的按鈕*/%>
             <button type="button" class="btn goTop"></button>
             <%/*新增問題modal*/%>
@@ -89,7 +88,7 @@
                             </div> 
                             <div class="modal-footer">
                                 <input class="btn btn-primary submitbtn" type="submit" value="送 出">
-                                <button type="button" class="btn btn-secondary closebtn" data-dismiss="modal">退 回</button>              
+                                <button type="button" class="btn btn-secondary closebtn" data-dismiss="modal">返 回</button>              
                             </div>
                         </form>
                     </div>
@@ -100,7 +99,7 @@
                 <div class="input-group">
                     <input class="form-control form-control-sm" type="search" id="searchtext" placeholder="輸入關鍵字" name="keyword" ></input>
                     <div class="input-group-append">
-                            <button class="searchbtn" type="submit"></button>
+                            <button class="btn searchbtn" type="submit"></button>
 
                         </span>
                     </div>    
@@ -114,8 +113,8 @@
             <div class="classification">  
                 <ul class="nav justify-content-center nav-pills">
                     <li ><p class="nav-link">　排序　</p></li>
-                    <li ><div class="nav-link sort Time" data-sort="time" data-order="desc" role="button" >　時間　</button></li>
-                    <li><div class="nav-link sort Hot" data-sort="hot" data-order="desc" role="button">　人氣　</button></li>
+                    <li ><button class="btn nav-link sort Time clbtn" data-sort="time" data-order="desc" >　時間　</button></li>
+                    <li><button class="btn nav-link sort Hot clbtn" data-sort="hot" data-order="desc">　人氣　</button></li>
                     
                     <li ><a class="nav-link"><br></a></li>
                     <li><p class="nav-link">　分類　</p></li>
@@ -136,7 +135,7 @@
                             <th style="width:200px">標題</th>
                             <%}
                             else{%>
-                            <th style="width: 60%">標題</th>
+                            <th style="width: 600px">標題</th>
                             <%}
                         %>
                         <th>時間</th>
@@ -153,14 +152,22 @@
                     <tbody class="list">
                     <% for(var j=0;j<rule.length;j++){%>
                         <tr id="<%= rule[j].id %>" class="<%= rule[j].id %> R">
-                            <td><%= rule[j].Type %></td>
-                            <td class="titleR title" id="<%= rule[j].id %>" type="button" data-toggle="modal" data-target="#<%= rule[j].id %>">
-                                <div class="article"><%= rule[j].Title %></div>
-                            </td>
+                            <td class="type"><%= rule[j].Type %></td>
+                            <%if(user && user.role==="admin"){%>
+                                <td class="titleR title" id="<%= rule[j].id %>" style="width:200px">
+                                    <div class="article"><%= rule[j].Title %></div>
+                                </td>
+                                <%}
+                                else{%>
+                                    <td class="titleR title" id="<%= rule[j].id %>" style="width:60%">
+                                        <div class="article"><%= rule[j].Title %></div>
+                                    </td>
+                                    <%}
+                                %>
                             <td class="time topT"><%= Time(rule[j].CreateDate) %></td>
                             <td class="view hot" style="text-align: center"><%= rule[j].Click %></td>
                             <%if(user &&　user.role==="admin"){%>
-                                <td class="admin ans">無解答</td>
+                                <td class="admin">無解答</td>
                                 <td class="admin" data-toggle="modal" data-target="#<%= rule[j].id %>-edit">編輯板規</td>
                                 <td class="deleteR admin" id="<%= rule[j].id %>"><a method="get" href="/qna/deleteR/<%= rule[j].id %>" role="button">刪除板規</a></td>
                                 <%}%>
@@ -211,14 +218,14 @@
                     <%}%>
                     <% for(var i=0; i<question.length; i++) {%>
                         <tr id="<%= question[i].id %>" class="<%= question[i].id %> <%= question[i].Type %> Q">
-                            <td><%= question[i].Type %></td>
+                            <td class="type"><%= question[i].Type %></td>
                             <%if(user && user.role==="admin"){%>
-                                <td class="titleQ title" style="width:200px" id="<%= question[i].id %>" type="button" data-toggle="modal" data-target="#<%= question[i].id %>">
+                                <td class="titleQ title" style="width:200px" id="<%= question[i].id %>">
                                     <div class="article"><%= question[i].Title %></div>
                                 </td>
                                 <%}
                                 else{%>
-                                    <td class="titleQ title" style="width:60%" id="<%= question[i].id %>" type="button" data-toggle="modal" data-target="#<%= question[i].id %>">
+                                    <td class="titleQ title" style="width:60%" id="<%= question[i].id %>">
                                         <div class="article"><%= question[i].Title %></div>
                                     </td>
                                 <%}
@@ -237,14 +244,14 @@
                             <%if(user && user.role==="admin"){%>
                                 <% if(question[i].Answer) {%>
                                     <td class="admin ans">是</td>
-                                    <td class="admin" type="button" data-toggle="modal" data-target="#<%= question[i].id %>-edit">編輯答案</td>
+                                    <td class="admin"  data-toggle="modal" data-target="#<%= question[i].id %>-edit">編輯答案</td>
                                 <%} 
                                 else{%>
                                     <td class="admin ans">否</td>
-                                    <td class="admin" type="button"  data-toggle="modal" data-target="#<%= question[i].id %>-edit">新增答案</td>
+                                    <td class="admin"  data-toggle="modal" data-target="#<%= question[i].id %>-edit">新增答案</td>
                                 <%} 
                                 %>
-                                <td type="button" class="deleteQ admin" id="<%= question[i].id %>"><a method="get" href="/qna/deleteQ/<%= question[i].id %>" role="button">刪除問題</a></td>
+                                <td  class="deleteQ admin" id="<%= question[i].id %>"><a method="get" href="/qna/deleteQ/<%= question[i].id %>" role="button">刪除問題</a></td>
                             <%}%>
                             <%# /管理員頁面才有的 %>
                         </tr>
@@ -259,9 +266,9 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <div class="modal-body"><h5 class="blueLetter">Q</h5><h5 style="display: inline">uestion</h5></div>
+                                        <div class="modal-body"><h5 class="blueLetter">Q</h5><h5 style="display: inline;font-weight:bold;">uestion</h5></div>
                                         <div class="modal-body"><%= question[i].Content %></div>
-                                        <div class="modal-body"><h5 class="blueLetter">A</h5><h5 style="display: inline">nswer</h5></div>
+                                        <div class="modal-body"><h5 class="blueLetter">A</h5><h5 style="display: inline;font-weight:bold;">nswer</h5></div>
                                         <div class="modal-body"><%= question[i].Answer %></div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-primary closemodal" data-dismiss="modal">　O K　</button>

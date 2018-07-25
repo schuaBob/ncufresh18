@@ -6,27 +6,42 @@
 <body>
     <header>
         <% include ../layout/navbar %>
+        <link rel='stylesheet' href='about.css'>
+        <link rel="stylesheet" type="text/css" href="fullPage.js-master/src/fullpage.css" >
+        <script src='fullPage.js-master/dist/fullpage.min.js'></script> 
     </header>
     <main>
         <h1><%= title %></h1>
+        <!-- <img src="太空電梯上_去被.png" style="float: left;">
+        <img src="太空電梯下_去被.png" style="float: left;"> -->
         <%/*側導覽列*/%>
-        <ul id="sidenav" class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="#">行銷企劃組</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">程式設計組</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">'網頁美工組</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">媒體影音組</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">執行組</a>
-            </li>
-          </ul>
+        <!-- <button class="btn btn-secondary dropdown-toggle nav-toggle-btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button> -->
+        <!-- <div id="sideNav" class="dropdown">
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
+                  <button class="dropdown-item slide" data-anchor="markting" type="button">行銷企劃組</button>
+                  <button class="dropdown-item slide" data-anchor="programming" type="button">程式設計組</button>
+                  <button class="dropdown-item slide" data-anchor="art" type="button">網頁美工組</button>
+                  <button class="dropdown-item slide" data-anchor="video" type="button">媒體影音組</button>
+                  <button class="dropdown-item slide" data-anchor="ceo" type="button">執行組</button>
+                </div>
+        </div> -->
+        <div id="sideNav">
+            <button class="btn btn-secondary nav-toggle-btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
+            <ul id="navi">
+                    <button class="dropdown-item slide" data-anchor="markting" type="button">行銷企劃組</button>
+                    <button class="dropdown-item slide" data-anchor="programming" type="button">程式設計組</button>
+                    <button class="dropdown-item slide" data-anchor="art" type="button">網頁美工組</button>
+                    <button class="dropdown-item slide" data-anchor="video" type="button">媒體影音組</button>
+                    <button class="dropdown-item slide" data-anchor="ceo" type="button">執行組</button>
+            </ul>
+        </div>
+        <div id="fullpage" >
+                <div class="section">行銷企劃組</div>
+                <div class="section">程式設計組</div>
+                <div class="section">網頁美工組</div>
+                <div class="section">媒體影音組</div>
+                <div class="section">執行組</div>
+            </div>
     </main>
     <footer>
         <% include ../layout/footer %>
