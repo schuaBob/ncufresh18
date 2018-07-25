@@ -35,7 +35,7 @@ main{
     grid-template-columns: 2fr repeat(4, minmax(25vw,2fr)) 2fr;
     grid-template-rows: 18vmin 10vmin;
 }
-#grid-block {
+#grid-block p{
     color:  white ;
     text-align: center;
     font-family: 'Itim', cursive ;
