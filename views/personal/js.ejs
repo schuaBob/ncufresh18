@@ -1,4 +1,23 @@
 <script>
-    $("h2").innerHTML = req.user.name ;
-    $("h5").innerHTML = req.user.id ;
+    $("h2").innerHTML = user.name ;
+    $("h5").innerHTML = user.id ;
+/*
+     $.ajax({
+        data: {id: },
+        url: url + "/getScore",
+        dataType: 'text',
+        cache: false,
+        type: "get",
+        success: function(data) {
+            console.log(url)
+            if (type === 'sum') {
+                createBubble(JSON.parse(data), 'sum')
+            } else {
+                createBubble(JSON.parse(data), 'high')
+            }
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    })*/
 </script>
