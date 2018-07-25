@@ -1,47 +1,78 @@
 .space {
-    padding :10px ;
+    padding :1vh ;
 }
 table {
     position: relative;
     z-index: 1 ;
-    top : 10px ;
-}
-#picture {
-    background-image: url("預設封面.png") ;
-    background-size: cover ;
-    background-position: center ;
-    height: 350px ;
-    width: 1500px ;
 }
 #empty {
-    height: 300px ;
-    width: 350px ;
+    height: 40vh ;
+    width: 25vw ;
     background-color: white ;
 }
 #score {
-    height: 300px ;
-    width: 250px ;
+    height: 40vh ;
+    width: 17vw ;
     background-color: rgb(244, 209, 207) ;
 }
 #writing {
-    height: 300px ;
-    width: 550px ;
+    height: 40vh ;
+    width: 35vw ;
     background-color: rgb(247, 233, 224) ;
 }
-#other {
-    height: 300px ;
-    width: 300px ;
-}
 #btn {
-    height: 87px;
+    height: 12vh ;
 }
 #pic {
-    position: relative;
+    height: 24vh ;
+    width : 24vh ;
+    border-radius : 12vh ;
+    border-width: 10px;
+    border-color: white ;
+    border-style: solid;
+}
+#box {
+    position: absolute;
     z-index: 2 ;
-    top : 250px ;
-    left : 100px ;
-    height: 200px ;
-    width : 200px ;
-    border-radius : 100px ;
-    border : 2px ;
+    width : 24vh ;
+    top : 40vh ;
+    left : 7vw ;
+}
+#namae {
+    text-align:center;
+}
+#number {
+    text-align:center;
+}
+#bighead {
+    top:15vh;
+}
+#bground {
+    top:15vh;
+}
+#w1 {
+    position: relative;
+    color: rgb(170, 33, 63) ;
+    top : 3px ;
+    left : 10px ;
+    font-size: 5vh ;
+}
+#w2 {
+    position: relative;
+    color : rgb(203, 138 , 120) ;
+    top : 3px ;
+    left : 10px ;
+    font-size: 5vh ;
+}
+#canvas {
+    background-image : url("預設封面.png") ;
+    background-position: center ;
+    background-size: cover ;
+    position: relative;
+    z-index: 1 ;
+    height: 45vh ;
+    width: 99vw ;
+}
+#pic:hover {
+    opacity: 0.5 ;
 }
