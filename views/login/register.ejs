@@ -3,7 +3,7 @@
 <head>
     <% include ../layout/head %>
     <link href="../login/mdb.min.css" rel="stylesheet">
-    <link href="login/style2.css" rel="stylesheet">
+    <link href="../login/style2.css" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -14,12 +14,12 @@
         <form method="post" action="/register">
         <div class="form-group">
             <input type="hidden" class="form-control" name="id" required>
-            <img src="login/login.png" id="lg"><img src="login/註冊.png" id="w"><br>
-            <img src="login/姓名.png" id="pic">
+            <img src="../login/login.png" id="lg"><img src="../login/註冊.png" id="w"><br>
+            <img src="../login/姓名.png" id="pic">
             <input type="text" class="form-control" name="name" required>
-            <img src="login/密碼.png" id="pic">
+            <img src="../login/密碼.png" id="pic">
             <input type="password" class="form-control" name="password" onkeyup="this.value=this.value.replace(/[^\w]/g,'');" required>
-            <img src="login/確認密碼.png" id="pic">
+            <img src="../login/確認密碼.png" id="pic">
             <input type="password" class="form-control" name="checkpassword" onkeyup="this.value=this.value.replace(/[^\w]/g,'');" required>
             <button id="btn">繼續</button>
         </div>
