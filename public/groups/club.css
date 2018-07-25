@@ -1,5 +1,5 @@
 body{
-    background-image: url(社團飛船修正版海洋背景.png);
+    background-image: url(系所社團飛船修正版海洋背景.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center; 
@@ -14,9 +14,9 @@ h6{
     border-left: 6px solid lightgreen;
     border-bottom: 40px;
     background-color: rgb(250, 250, 221);
-    font-size: 17px;
+    font-size: 1.1vw;
     border-spacing:50px;
-    padding-left:10px; 
+    padding-left:1vw; 
     width: 100%;
     word-wrap: break-word;
     max-width: 550px;
@@ -39,7 +39,7 @@ h5{
 
 #bread{
     float:left;
-    width: 25%;
+    width: 25vw;
 }
 #breadcru{
     background-color: black;
@@ -91,8 +91,8 @@ table{
     background-position: left; 
     float: right;
     margin-right: 3%;
-    margin-top: 12%;
-    opacity: 0.7;
+    margin-top: 13%;
+    opacity: 0.8;
 }
 
 thead{
@@ -138,12 +138,11 @@ td{
 }
 
 #carouselExampleIndicator{
-    
+    max-width: 400px;
+    max-height: 300px;
     float: left;
-    margin-left: 10%;
+    margin-left: 18%;
 }
-
-
 
 .modal-content{
     background-image: url(彈出視窗背景.png);
@@ -151,7 +150,7 @@ td{
 }
 
 .modal{
-  margin-top: 5%;  
+  margin-top: 3%;  
 }
 
 #modal_button{ 
@@ -193,49 +192,74 @@ td{
 #learn, #play, #date, #service{
     background-color: rgb(255, 255, 255, 0);
     color: white;    
-    font-size: 2.4vw;
+    font-size: 2.6vw;
     position: absolute;
     border-radius: 1vh;
+    border-color: rgb(112, 241, 250);
 }
 
 #learn{
-    top: 20%;
-    left: 25%;
+    top: 13%;
+    left: 24%;
 }
 #play{
-    top: 38%;
-    left: 35%;
+    top: 33%;
+    left: 34%;
 }
 #date{
-    top: 56%;
-    left: 45%;
+    top: 53%;
+    left: 44%;
 }
 #service{
-    top: 74%;
-    left: 55%;
+    top: 73%;
+    left: 54%;
 }
-@media screen and (max-width: 768px){
+@media screen and (min-width: 767px) and (max-width: 992px){
+    h6{
+        width:75%;
+    }
+    #carouselExampleIndicators{
+        max-width: 300px;
+        max-height: 250px;
+        float: left;
+        margin-left: 21%;
+    }
+    #carouselExampleIndicator{
+        max-width: 300px;
+        max-height: 250px;
+        float: left;
+        margin-left: 21%;
+    }
+}
+
+@media only screen and (max-width: 768px){
     body{
         background-image: url(社團手機板背景.png);
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center; 
     }
-    #cellup{
-        position: relative;
-        display: inline-block;
-        margin-left: 7%;
-        margin-top: 10%;
+    h3{
+        font-size: 30px;
     }
     .modal{
-        margin-top: 5%;
+        z-index: 4100;
+        margin-top: 0%;
     }
-    .modal .modal-body {
+    /* .modal .modal-body {
         height: var(--height);
         overflow: auto;
-    }
+    } */
     #nav_a{
         font-size: 12px;
+    }
+    #nav_ul{
+        margin-top: 0%;
+        margin-left: 30%;
+        flex-wrap: nowrap;
+    }
+    #scroll_nav{
+        overflow-x: scroll;
     }
     #modal_button{ 
         margin-top: 3px;
@@ -243,15 +267,10 @@ td{
         border-radius: 10%;
         text-align: center;
     }
-    #nav_ul{
-        margin-top: 2%;
-        margin-left: 18%;
-        overflow-x: scroll;
-    }
+
     h5{
         margin-left: 6%;
         font-size: 15px;
-        margin-top:12%;
     }
     h6{
         margin-top: 2%;
@@ -276,4 +295,109 @@ td{
         float: left;
         margin-left: 5%;
     }
+    #carouselExampleIndicator{
+        max-width: 400px;
+        max-height: 300px;
+        float: left;
+        margin-left: 5%;
+    }
+
+    #cellup{
+        position: relative;
+        display: inline-block;
+        margin-left: 4%;
+        margin-top: 10%;
+
+    }
+    .sideup{
+        width: 65vw;
+        position: absolute;
+        left: 26%;
+        bottom: 19%;
+        float: left;
+    }
+    .boxup{
+        position: relative;
+        width: 80vw;
+        opacity: 0.7;
+    }
+    .sidedown{
+        width:55vw;
+        float: left;
+        margin-bottom: 6%;
+    }
+
+    #learn, #play, #date, #service{
+        background-color: rgb(255, 255, 255, 0);
+        color: white;    
+        font-size: 6vw;
+        position: absolute;
+    }
+    #learn{
+        top: 25%;
+        left: 15%;
+    }
+    #play{
+        top: 55%;
+        left: 15%;
+    }
+    #date{
+        top: 25%;
+        left: 55%;
+    }
+    #service{
+        top: 55%;
+        left: 55%;
+    }
+    table{
+        background-size: cover;
+        background-position: left; 
+        margin-top: 16%;
+        margin-right: 6%;
+        opacity: 0.7;
+        float: right;
+    }
+    thead{
+        text-align: center;
+        font-size:9vw;
+        color: white;
+    }
+    
+    tbody{
+        float:center;
+        display: block;
+        height: 35vh;
+        overflow-y: scroll;
+        overflow-x: scroll;
+        border-collapse: collapse;
+        text-align: center;
+        margin-left: 10%;
+        margin-top: 5%;
+        width:80vw;
+    }
+    td{
+        float: left;
+        font-size: 6vw;
+    }
+    #tabletext{
+        color: white;
+    }
+    /* 麵包屑 */
+    #bread{
+        float:left;
+        width: 10%;
+        opacity: 0.8;
+    }
+    #text{
+        font-size: 3.5vw;
+    }
+    #text_at{
+        font-size: 3.8vw;
+        float: left;
+        text-align: center;
+    }
+    .breadcrumb {
+        padding: .75rem 0.5rem;
+    }
+    
 }

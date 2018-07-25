@@ -33,48 +33,57 @@
             $(".plays").hide();
             $(".dates").hide();
         });
+        <%_ if (user && user.role === 'admin'){ -%>
+            CKEDITOR.replace('add_introduction',{
+                filebrowserUploadUrl: '/uploader',
+            });
+            CKEDITOR.replace('add_participation',{
+                filebrowserUploadUrl: '/uploader',
+            });
+            CKEDITOR.replace('add_FB',{
+                filebrowserUploadUrl: '/uploader',
+            });
+            CKEDITOR.replace('add_activity',{
+                filebrowserUploadUrl: '/uploader',
+            });
 
-        CKEDITOR.replace('add_introduction',{
-            filebrowserUploadUrl: '/uploader',
-        });
-        CKEDITOR.replace('add_participation',{
-            filebrowserUploadUrl: '/uploader',
-        });
-        CKEDITOR.replace('add_FB',{
-            filebrowserUploadUrl: '/uploader',
-        });
-        CKEDITOR.replace('add_activity',{
-            filebrowserUploadUrl: '/uploader',
-        });
-
-        CKEDITOR.editorConfig = function (config){
-            config.enterMode = CKEDITOR.ENTER_BR;
-            config.autoParagraph = false;
-        };
-
+            CKEDITOR.editorConfig = function (config){
+                config.enterMode = CKEDITOR.ENTER_BR;
+                config.autoParagraph = false;
+            };
+        <%_ } -%> 
         $(window).resize(function(){
             if($(window).width()<768){
                 $("#nav_ul").removeClass("flex-column");
-                $("#combut").hide();
-                $("#bread").hide();
                 $("#cellup").show();
+                $(".bread").hide();
+                $("#combut").hide();
+                $(".sidedown").show();
+                
             }
             else if($(window).width()>768){
                 $("#nav_ul").addClass("flex-column");
                 $("#combut").show();
                 $("#cellup").hide();
+                $(".sidedown").hide();
+                $("#combut").show();
 
             }
         });
 
         if($(window).width()<768){
             $("#nav_ul").removeClass("flex-column");
+            $("#cellup").show();
+            $(".bread").hide();
             $("#combut").hide();
-            $("#bread").hide();
-
+            $(".sidedown").show();
+            
         }
         else if($(window).width()>768){
             $("#nav_ul").addClass("flex-column");
+            $("#combut").show();
+            $("#cellup").hide();
+            $(".sidedown").hide();
             $("#combut").show();
 
         }

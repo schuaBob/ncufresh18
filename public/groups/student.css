@@ -74,7 +74,7 @@ h6{
 }
 #bread{
     float:left;
-    width: 25%;
+    width: 25vw;
 }
 #breadcru{
     background-color: black;
@@ -140,12 +140,13 @@ h6{
 
 @media screen and (max-width: 768px){
     body{
-        background-image: url(學生會_手機板.png);
-        background-position: top right;
+        background-image: url(學生會手機板正式背景.png);
+        background-position: left;
     }
 
     .modal{
-        margin-top: 5%;
+        z-index: 4100;
+        margin-top: 0%;
     }
     .modal .modal-body {
         height: var(--height);
@@ -171,7 +172,7 @@ h6{
         margin-top:12%;
     }
     h6{
-        margin-top: 2%;
+        margin-top: 8%;
         margin-left: 5%;
         border-left: 6px solid lightgreen;
         border-bottom: 40px;
@@ -203,30 +204,56 @@ h6{
         float: left;
         margin-left: 5%;
     }
-    .bread{
+    /* 麵包屑 */
+    #bread{
         float:left;
-        width: 12%;
+        width: 10%;
         opacity: 0.8;
     }
     #text{
-        font-size: 15px;
+        font-size: 3.5vw;
     }
-    #cell_button{
+    #text_at{
+        font-size: 3.8vw;
+        float: left;
+        text-align: center;
+    }
+    .breadcrumb {
+        padding: .75rem 0.5rem;
+    }
+    /* Modal按鈕 */
+    #stu_button{
+        position: relative;
+        display: inline-block;
+        margin-top: 15%;
+        margin-left: 40%;
+    }
+    .button_place{
+        position: relative;
         float: right;
-        margin-top: 46.5%;
-        margin-right: 4%;
+        width: 45vw;
     }
-    .stu_cell_intro{
-        width: 20vw;
+    .stu_intro{
+        position: absolute;
+        width: 18vw;
+        left: 38%;
+        top: 13%;
     }
-    .stu_cell_branch{
-        width: 30vw;
-        margin-top: 10%;
+    
+    .stu_branch{
+        position: absolute;
+        width: 28vw;
+        left: 32%;
+        top: 37%;
     }
-    .stu_cell_activity{
-        width: 30vw;
-        margin-top: 10%;
-        
+    .stu_activity{
+        position: absolute;
+        width: 28vw;
+        left: 32%;
+        top: 57%;
+    }
+    .main{
+        width:45vw;
     }
 }
 
