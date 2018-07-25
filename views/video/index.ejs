@@ -103,10 +103,10 @@
             </div>
             </div>
             <div class="computer">
-                <img src="button/影片介紹.png" picture="button/影片介紹" class="rotate sbtn">
+                <img src="button/影片介紹.png" picture="button/影片介紹" class="rotate sbtn button">
             </div>
             <div class="cellphone">
-                <button class="rotate btn-outline-title sbtn">簡介</button>
+                <button class="rotate btn-outline-title sbtn button">簡介</button>
             </div>
         </div>
        
@@ -117,13 +117,13 @@
 
         <table class="video_item_title_allvideo ">
             <td>
-                <button type="button" video="longvideo" class="video_item btn-outline-title turn  longvideo">中大長劇</button>
+                <button type="button" video="longvideo" class="video_item btn-outline-title turn  longvideo button">中大長劇</button>
             </td>
             <td>
-                <button type="button" video="QAvideo" class="video_item btn-outline-title turn  QAvideo">快問快答</button>
+                <button type="button" video="QAvideo" class="video_item btn-outline-title turn  QAvideo button">快問快答</button>
             </td>
             <td>
-                <button type="button"  video="lifevideo" class="video_item btn-outline-title turn lifevideo">悠遊中大</button>
+                <button type="button"  video="lifevideo" class="video_item btn-outline-title turn lifevideo button">悠遊中大</button>
             </td>
         </table>
 
@@ -132,24 +132,29 @@
         <img src="button/1/光碟.png" class="bigCD_position_in">
         <img src="button/1/光碟.png" class="bigCD_position_out">
         <div class="computer">
+            <div class="man_up_div"><img src="太空人_倒.png" class="man_up man_up_out"></div>
+            <div class="man_right_div"><img src="太空人_側.png" class="man_right man_right_in man"></div>
+            <div class="man_left_div"><img src="太空人_正.png" class="man_left man_left_out man"></div>
+                
+                
             <table class="video_item_title ">
                 <% for(let i = 0; i<longvideo.length; i++){ %>
-                    <td><img src="button/1/光碟.png" video="longvideo" i=<%= i %> ytID='<%= longvideo[i].insert %>' class='cd item video_item_longvideo video_item_longvideo_<%= i+1 %> sbtn ssbtn turn <%= longvideo[i].title %>_cd'><img cd="<%= longvideo[i].title %>_cd" cdsrc="button/1/光碟.png" src="button/1/<%= longvideo[i].title %>.png" video="longvideo" i=<%= i %> ytID='<%= longvideo[i].insert %>' class='box item video_item_longvideo video_item_longvideo_<%= i+1 %> sbtn ssbtn turn'></td>
+                    <td><img src="button/1/光碟.png" video="longvideo" i=<%= i %> ytID='<%= longvideo[i].insert %>' class='cd item video_item_longvideo video_item_longvideo_<%= i+1 %> sbtn ssbtn turn <%= longvideo[i].title %>_cd'><img cd="<%= longvideo[i].title %>_cd" cdsrc="button/1/光碟.png" src="button/1/<%= longvideo[i].title %>.png" video="longvideo" i=<%= i %> ytID='<%= longvideo[i].insert %>' class='box item video_item_longvideo video_item_longvideo_<%= i+1 %> sbtn ssbtn turn button'></td>
                 <% } %>
                 <% for(let i = 0; i<QAvideo.length; i++){ %>
-                    <td><img src="button/2/<%= QAvideo[i].college %>光碟.png" video="QAvideo" i=<%= i %> ytID='<%= QAvideo[i].insert %>' class='cd item video_item_QAvideo_<%= QAvideo[i].college %> video_item_QAvideo_dep sbtn ssbtn turn <%= QAvideo[i].title %>_cd'><img cd="<%= QAvideo[i].title %>_cd" cdsrc="button/2/<%= QAvideo[i].college %>光碟.png" src="button/2/<%= QAvideo[i].title %>.png" video="QAvideo" i=<%= i %> ytID='<%= QAvideo[i].insert %>' class='box item video_item_QAvideo_<%= QAvideo[i].college %> video_item_QAvideo_dep sbtn ssbtn turn'></td>
+                    <td><img src="button/2/<%= QAvideo[i].college %>光碟.png" video="QAvideo" i=<%= i %> ytID='<%= QAvideo[i].insert %>' class='cd item video_item_QAvideo_<%= QAvideo[i].college %> video_item_QAvideo_dep sbtn ssbtn turn <%= QAvideo[i].title %>_cd'><img cd="<%= QAvideo[i].title %>_cd" cdsrc="button/2/<%= QAvideo[i].college %>光碟.png" src="button/2/<%= QAvideo[i].title %>.png" video="QAvideo" i=<%= i %> ytID='<%= QAvideo[i].insert %>' class='box item video_item_QAvideo_<%= QAvideo[i].college %> video_item_QAvideo_dep sbtn ssbtn turn button'></td>
                 <% } %>
                 <% for(let i = 0; i<lifevideo.length; i++){ %>
-                    <td><img src="button/3/<%= lifevideo[i].title %>光碟.png" video="lifevideo" i=<%= i %> ytID='<%= lifevideo[i].insert %>' class='cd item video_item_lifevideo  video_item_lifevideo_<%= i+1 %> sbtn ssbtn turn <%= lifevideo[i].title %>_cd'><img cd="<%= lifevideo[i].title %>_cd" cdsrc="button/3/<%= lifevideo[i].title %>光碟.png" src="button/3/<%= lifevideo[i].title %>.png" video="lifevideo" i=<%= i %> ytID='<%= lifevideo[i].insert %>' class='box item video_item_lifevideo  video_item_lifevideo_<%= i+1 %> sbtn ssbtn turn'></td>
+                    <td><img src="button/3/<%= lifevideo[i].title %>光碟.png" video="lifevideo" i=<%= i %> ytID='<%= lifevideo[i].insert %>' class='cd item video_item_lifevideo  video_item_lifevideo_<%= i+1 %> sbtn ssbtn turn <%= lifevideo[i].title %>_cd'><img cd="<%= lifevideo[i].title %>_cd" cdsrc="button/3/<%= lifevideo[i].title %>光碟.png" src="button/3/<%= lifevideo[i].title %>.png" video="lifevideo" i=<%= i %> ytID='<%= lifevideo[i].insert %>' class='box item video_item_lifevideo  video_item_lifevideo_<%= i+1 %> sbtn ssbtn turn button'></td>
                 <% } %>
 
                 <% for(let i = 1; i<9; i++){ %>
                     <td>
-                        <img src="button/c<%= i %>光碟.png" video="QAvideo" class='cd_col item video_item_QAvideo  video_item_QAvideo_<%= i %> sbtn turn' college='c<%= i %>'>
-                        <img src="button/c<%= i %>.png" video="QAvideo" class='item video_item_QAvideo  video_item_QAvideo_<%= i %> sbtn turn video_item_QAvideo_col' college='c<%= i %>'>
+                        <!-- <img src="button/c<%= i %>光碟.png" video="QAvideo" class='cd_col item video_item_QAvideo  video_item_QAvideo_<%= i %> sbtn turn' college='c<%= i %>'> -->
+                        <img src="button/c<%= i %>.png" video="QAvideo" class='video_item_QAvideo_col item video_item_QAvideo  video_item_QAvideo_<%= i %> sbtn turn button' college='c<%= i %>'>
                     </td>
                 <% } %>
-                <td><img src="button/返回.png" video="QAvideo" class="item video_item_QAvideo_c1 video_item_QAvideo_c2 video_item_QAvideo_c3 video_item_QAvideo_c4 video_item_QAvideo_c5 video_item_QAvideo_c6 video_item_QAvideo_c7 video_item_QAvideo_c8 sbtn video_item" id="back"></td>
+                <td><img src="button/返回.png" video="QAvideo" class="item video_item_QAvideo_c1 video_item_QAvideo_c2 video_item_QAvideo_c3 video_item_QAvideo_c4 video_item_QAvideo_c5 video_item_QAvideo_c6 video_item_QAvideo_c7 video_item_QAvideo_c8 sbtn video_item button" id="back"></td>
             </table>
         </div>
 
