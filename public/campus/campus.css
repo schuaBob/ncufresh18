@@ -177,8 +177,8 @@ body {
 }
 main{
   
-  margin-top: calc((100vh - 176px - 69vw*996/2000)/2);
-  margin-bottom: calc((100vh - 176px - 69vw*996/2000)/2);
+  padding-top: calc((100vh - 176px - 69vw*996/2000)/2);
+  padding-bottom: calc((100vh - 176px - 69vw*996/2000)/2);
 
  
 }
