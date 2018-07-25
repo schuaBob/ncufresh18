@@ -36,7 +36,7 @@
                             </div>
                             <div class="modal-body">
                                 <!--<input name="introduce" type="file" class="form-control-file" id="exampleFormControlFile1">-->
-                                <p class="alert">*請按照順序上傳!!!</p>
+                                <!-- <p class="alert">*請按照順序上傳!!!</p> -->
                                 <input  name="insert" class="form-control" type="text" placeholder="輸入影片ID(youtube網址最後面的'='之後那串)">
                                 <select name="title" class="form-control">
                                     <option disabled selected>請選擇</option>
@@ -75,7 +75,8 @@
                                     <option value="3行">悠遊中大-行</option>
                                     <option value="3育">悠遊中大-育</option>
                                     <option value="3樂">悠遊中大-樂</option>
-                                    <option value="3中央知多少">悠遊中大-中央知多少</option>
+                                    <option value="3中央知多少上">悠遊中大-中央知多少上</option>
+                                    <option value="3中央知多少下">悠遊中大-中央知多少下</option>
                                 </select>
                             </div>
                             <div class="modal-footer">
@@ -103,7 +104,7 @@
             </div>
             </div>
             <div class="computer">
-                <img src="button/影片介紹.png" picture="button/影片介紹" class="rotate sbtn button">
+                <img src="button/影片介紹.png" picture="button/影片介紹" class="rotate sbtn button rotate_out">
             </div>
             <div class="cellphone">
                 <button class="rotate btn-outline-title sbtn button">簡介</button>
@@ -139,13 +140,13 @@
                 
             <table class="video_item_title ">
                 <% for(let i = 0; i<longvideo.length; i++){ %>
-                    <td><img src="button/1/光碟.png" video="longvideo" i=<%= i %> ytID='<%= longvideo[i].insert %>' class='cd item video_item_longvideo video_item_longvideo_<%= i+1 %> sbtn ssbtn turn <%= longvideo[i].title %>_cd'><img cd="<%= longvideo[i].title %>_cd" cdsrc="button/1/光碟.png" src="button/1/<%= longvideo[i].title %>.png" video="longvideo" i=<%= i %> ytID='<%= longvideo[i].insert %>' class='box item video_item_longvideo video_item_longvideo_<%= i+1 %> sbtn ssbtn turn button'></td>
+                    <td><img src="button/1/光碟.png" video="longvideo" i=<%= i %> ytID='<%= longvideo[i].insert %>' class='cd item video_item_longvideo sbtn ssbtn turn <%= longvideo[i].title %>_cd'><img cd="<%= longvideo[i].title %>_cd" cdsrc="button/1/光碟.png" src="button/1/<%= longvideo[i].title %>.png" video="longvideo" i=<%= i %> ytID='<%= longvideo[i].insert %>' class='box item video_item_longvideo video_item_longvideo_<%= i+1 %> sbtn ssbtn turn button'></td>
                 <% } %>
                 <% for(let i = 0; i<QAvideo.length; i++){ %>
-                    <td><img src="button/2/<%= QAvideo[i].college %>光碟.png" video="QAvideo" i=<%= i %> ytID='<%= QAvideo[i].insert %>' class='cd item video_item_QAvideo_<%= QAvideo[i].college %> video_item_QAvideo_dep sbtn ssbtn turn <%= QAvideo[i].title %>_cd'><img cd="<%= QAvideo[i].title %>_cd" cdsrc="button/2/<%= QAvideo[i].college %>光碟.png" src="button/2/<%= QAvideo[i].title %>.png" video="QAvideo" i=<%= i %> ytID='<%= QAvideo[i].insert %>' class='box item video_item_QAvideo_<%= QAvideo[i].college %> video_item_QAvideo_dep sbtn ssbtn turn button'></td>
+                    <td><img src="button/2/<%= QAvideo[i].college %>光碟.png" video="QAvideo" i=<%= i %> ytID='<%= QAvideo[i].insert %>' class='cd disable item video_item_QAvideo_<%= QAvideo[i].college %> video_item_QAvideo_dep sbtn ssbtn turn <%= QAvideo[i].title %>_cd'><img cd="<%= QAvideo[i].title %>_cd" cdsrc="button/2/<%= QAvideo[i].college %>光碟.png" src="button/2/<%= QAvideo[i].title %>.png" video="QAvideo" i=<%= i %> ytID='<%= QAvideo[i].insert %>' class='box item video_item_QAvideo_<%= QAvideo[i].college %> video_item_QAvideo_dep sbtn ssbtn turn button'></td>
                 <% } %>
                 <% for(let i = 0; i<lifevideo.length; i++){ %>
-                    <td><img src="button/3/<%= lifevideo[i].title %>光碟.png" video="lifevideo" i=<%= i %> ytID='<%= lifevideo[i].insert %>' class='cd item video_item_lifevideo  video_item_lifevideo_<%= i+1 %> sbtn ssbtn turn <%= lifevideo[i].title %>_cd'><img cd="<%= lifevideo[i].title %>_cd" cdsrc="button/3/<%= lifevideo[i].title %>光碟.png" src="button/3/<%= lifevideo[i].title %>.png" video="lifevideo" i=<%= i %> ytID='<%= lifevideo[i].insert %>' class='box item video_item_lifevideo  video_item_lifevideo_<%= i+1 %> sbtn ssbtn turn button'></td>
+                    <td><img src="button/3/<%= lifevideo[i].title %>光碟.png"  video="lifevideo" i=<%= i %> ytID='<%= lifevideo[i].insert %>' class='cd disable item video_item_lifevideo sbtn ssbtn turn <%= lifevideo[i].title %>_cd'><img cd="<%= lifevideo[i].title %>_cd" cdsrc="button/3/<%= lifevideo[i].title %>光碟.png" src="button/3/<%= lifevideo[i].title %>.png" video="lifevideo" i=<%= i %> ytID='<%= lifevideo[i].insert %>' class='box item video_item_lifevideo  video_item_lifevideo_<%= i+1 %> sbtn ssbtn turn button'></td>
                 <% } %>
 
                 <% for(let i = 1; i<9; i++){ %>

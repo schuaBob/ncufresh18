@@ -4,7 +4,7 @@ var video = mongoose.Schema({
     title: {type : String, unique :true},
     type: String,//中大長劇or悠遊中大 or快問快答
     college: String,//學院(1~8)
-    insert: String, //youtubeID
+    insert: {type : String, unique :true} //youtubeID
     //introduce: String //影片介紹圖片
 });
 
