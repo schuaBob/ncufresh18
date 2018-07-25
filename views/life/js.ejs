@@ -23,23 +23,27 @@
         });
     });
 
+    var last_slide_id = 0;
     $(document).ready(function(){ 
-        var ifHide = 1;
         $('.hide1').slideUp();
         $('.clk').click(function(){
             var id = $(this).attr("id"),
                 sub_id = "#" + id + "_sub";
-            if(ifHide == 1){
+            if($(sub_id).attr('class') == "hide1"){
+                if(last_slide_id != 0){
+                    $(last_slide_id).slideUp();
+                    $(last_slide_id).addClass("hide1");
+                    $(last_slide_id).removeClass("show1");
+                }
                 $(sub_id).slideDown();
                 $(sub_id).addClass("show1");
                 $(sub_id).removeClass("hide1");
-                ifHide = (ifHide + 1) % 2;
+                last_slide_id = sub_id;
             }
             else{
                 $(sub_id).slideUp();
                 $(sub_id).addClass("hide1");
                 $(sub_id).removeClass("show1");
-                ifHide = (ifHide + 1) % 2;
             }
         });
     });
@@ -48,25 +52,27 @@
     $('.showDetail').on('click', function(e){
         e.preventDefault();
         var info = this.id.split("_");
-        if(info[0] == "桃園景點"){
-            $('.descArea').empty();
-            $('.pictureArea').empty();
-            $('.pictureArea').append("<img class='mapClass' src='map.png'>");
-        }
-        else{
-            $.ajax({
-                url:    "showing",
-                method: "POST",
-                data:   {mainTitle: info[0], subTitle: info[1]},
-                error: function(err){
-                    alert("Some error occur...");
-                },
-                success: function(data){
-                    putPic(data.res1);
-                    putCont(data.res2);
-                }
-            });
-        }
+        // if(info[0] == "桃園景點"){
+        //     $('.descArea').empty();
+        //     $('.pictureArea').empty();
+        //     $('.pictureArea').append("<img class='mapClass' src='map.png'>");
+        // }
+        $(".show1").slideUp();
+        $(".show1").addClass("hide1");
+        $(".show1").removeClass("show1");
+        $.ajax({
+            url:    "showing",
+            method: "POST",
+            data:   {mainTitle: info[0], subTitle: info[1]},
+            error: function(err){
+                alert("Some error occur...");
+            },
+            success: function(data){
+                putPic(data.res1);
+                putCont(data.res2);
+            }
+        });
+        
         var putPic = function(data){
             $(".pictureArea").empty();
             $(".pictureArea").append('<div class="slideshow_container"></div><div class="dot_container"></div>');
@@ -219,12 +225,4 @@
         $(".pictureArea").empty();
         $(".descArea").empty();
     });
-
-    CKEDITOR.replace('disc', {
-        filebrowserUploadUrl: '/uploader',
-    });
-    CKEDITOR.editorConfig = function (config){
-        config.enterMode = CKEDITOR.ENTER_BR;
-        config.autoParagraph = false;
-    };
 </script>

@@ -143,13 +143,11 @@ router.post('/editPicture', upload.single('picture'), function(req, res, next){
       path      : pathed
   }).save(function(err,doc){
       if(err){ return next(err);}
-      console.log(doc);
       res.redirect('back');
   });
 });
 
 router.post('/editContent', function(req, res, next){
-  console.log(req.body);
   description.find({mainTitle: req.body.mainTitle, subTitle: req.body.subTitle}, function(err, result){
     if(err) next(err);
     if(result.length == 0){
