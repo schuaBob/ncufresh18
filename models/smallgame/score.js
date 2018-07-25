@@ -1,9 +1,22 @@
 var mongoose = require('mongoose');
 
 var UserScore = mongoose.Schema({
-    username: {
-        type: String,
-        index: true
+    id: {
+        type: String
     },
-    score: 
+    name: {
+        type: String,
+    },
+    score_sum: {
+        type: Number,default: 0
+    },
+    score_high: {
+        type: Number, default: 0
+    },
+    //圖片
+    avatar: {
+        type: String, default: "profile.png" 
+    }
 });
+
+module.exports = mongoose.model('UserScore', UserScore)
