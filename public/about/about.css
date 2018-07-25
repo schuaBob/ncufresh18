@@ -1,0 +1,48 @@
+h1{
+    position: absolute;
+    left:300px;
+    top:100px;
+}
+#sideNav {
+    
+    /* width: 200px; */
+    z-index: 1000;
+    /* position: fixed; */
+    /* transform: translate(-200px); */
+    background-color: rgba(77, 192, 199, 0.2);
+}
+
+.nav-toggle-btn {
+    transform: translate(-50px);
+    top:100px;
+    z-index: 1000;
+    display: block;
+    position: absolute;
+    transition: transform 1s ease;
+}
+
+/* #sideNav.active-nav {
+    transform: translate(100px);
+
+} */
+.nav-toggle-btn.active-nav{
+    transform: translate(1px);
+}
+/* .dropdown-menu{
+    transition: transform 1s ease;
+} */
+.dropdown-menu.active-nav{
+    position: absolute;
+    /* left:100px; */
+}
+#navi {
+    left:-50px;
+    position: absolute;
+    top:150px;
+    overflow: auto;
+    background-color: rgba(255, 255, 255, 0);
+}
+#fullpage{
+    float: right;
+    left:200px;
+}

@@ -1,5 +1,32 @@
 <script>
-    $(document).ready(() => {
-
+$(document).ready(() => {
+    $('#fullpage').fullpage({
+		//options here
+		autoScrolling:true,
+		scrollHorizontally: true
     });
+    $.fn.fullpage.setAllowScrolling(false);
+    new fullpage('#fullpage', {
+        navigation: true,
+        responsiveWidth: 700,
+        anchors: ['markting', 'programming', 'art', 'video', 'ceo'],
+        parallax: true,
+        onLeave: function(origin, destination, direction){
+            console.log("Leaving section" + origin.index);
+        },
+    });
+    if($("#position").position()===-50){
+        $('#navi').hide();
+
+    }
+    $('.nav-toggle-btn').on('click', function(e) {
+        $('.dropdown-menu').toggleClass('active-nav');
+        $('.nav-toggle-btn').toggleClass('active-nav');
+        if($('.nav-toggle-btn.active')){
+            $('#navi').fadeIn(500);
+        }
+
+        e.preventDefault();
+    });
+});
 </script> 
