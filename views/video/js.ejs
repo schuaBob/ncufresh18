@@ -10,7 +10,7 @@
 
     let x, n=0, nx=0, rotINT, rotate = 0, end = 1;
     let currentid = "", currentcollege, currentopacity, currentcdsrc, currentbtnImg, lastbtnImg, currentbutton, QAvideoplay = 0;//currentid紀錄現在播到哪個影片
-    let rsrc;
+    let rsrc, index = 1;
     
     //let aaa = JSON.parse(<%= %>);
     let player = Object();
@@ -34,28 +34,33 @@
     
    
     $(document).ready(() => {
-        $(window).on("orientationchange",function(){
-            if(window.orientation == 0) // Portrait
-            {
-                console.log("0");
-            }
-            else // Landscape
-            {
-                console.log("1");
-            }
-        });
 
+        // $(window).on("orientationchange",function(){
+        //     if(window.orientation == 0) // Portrait
+        //     {
+        //         console.log("0");
+        //     }
+        //     else // Landscape
+        //     {
+        //         console.log("1");
+        //     }
+        // });
+
+        
         $(document).on("click",".button",function(event){
-            $(".man_right_div").css("display","none");
-            $(".man_left_div").css("display","none");
+            if(index == 1){
+                $(".man_right_div").css("display","none");
+                $(".man_left_div").css("display","none");
 
-            $(".man_up").removeClass("man_up_out")
-            $(".man_up").addClass("man_up_in")
+                $(".man_up").removeClass("man_up_out")
+                $(".man_up").addClass("man_up_in")
+            }
+            index = 0;
         });
         
         let man = 0;
         $('.man').mouseenter(function() {
-            console.log(man);
+            //console.log(man);
             if(man == 0){
                 $(".man_right").removeClass("man_right_in")
                 $(".man_right").addClass("man_right_out")
@@ -133,10 +138,10 @@
 
 
         if($(window).width()>=414 && window.orientation != 90 && window.orientation != -90 && window.orientation != 0){
-            console.log($(this).attr("ytID"));
+            //console.log($(this).attr("ytID"));
             $('.button').mouseenter(function() {
                 if(currentid){
-                    console.log(typeof(player[currentid].pauseVideo));
+                    //console.log(typeof(player[currentid].pauseVideo));
                     if(typeof(player[currentid].pauseVideo) == "function"){
                         $(this).removeClass("button_wait");
                         $(this).addClass("button");
@@ -151,9 +156,10 @@
             })
 
             $('.box').mouseenter(function() {
+                // console.log(this);
                 $(".bigCD_position_in").css("opacity", "0");
 
-                console.log($(this).attr("cd"));
+                //console.log($(this).attr("cd"));
                 //$(".bigCD_position_in").attr("src", $(this).attr("cdsrc"));
                 $(".bigCD").attr("src", $(this).attr("cdsrc"));
                 $(".bigCD").removeClass("bigCD_stop");
@@ -183,7 +189,7 @@
 
         $(document).on("click",".video_item",function(event){
             
-
+            // console.log("2");
             $("#CDbox").css('background-image', 'url("background_'+$(this).attr("video")+'.png")');
             
             if($(window).width()<414)
@@ -228,9 +234,6 @@
                 $(this).removeClass("btn-outline-title");
                 $(this).addClass("btn-outline-item-click");
 
-                if(lastbtnImg && currentbtnImg && $(window).width()>=414){
-                    console.log("if0 "+currentbtnImg + " last:" + lastbtnImg)
-                }
                 $(".sbtn").css("visibility", "visible");
             }
             $('.sbtn').parent("td").css("display", "none");
@@ -253,17 +256,17 @@
                 }
                 
                 if($(this).attr("college")!= currentcollege){
-                    if(lastbtnImg && currentbtnImg && $(window).width()>=414){
-                        console.log("if1 "+currentbtnImg + " last:" + lastbtnImg)
-                    }
                     $(".sbtn").css("visibility", "visible");
                 }
                 
-                //console.log(this);
                 if($(this).attr("video") == "QAvideo"){
                      //console.log('QAvideo!');
                     $('.sbtn').parent("td").css("display", "none");
                     $('.sbtn').css("display", "none");
+                    $(".bigCD_position_in").css("opacity", "0");
+                    currentopacity = 0;
+                    $(".man_up").removeClass("man_up_out");
+                    $(".man_up").addClass("man_up_in");
                     $(".video_item_QAvideo_"+ $(this).attr('college')).parent("td").css("display", "");
                     $(".video_item_QAvideo_"+ $(this).attr('college')).css("display", "block");
                 
@@ -271,6 +274,9 @@
                     
                     if(QAvideoplay == 1){
                         $('.rotate').css('display', "block");
+                        $(".rotate").removeClass("rotate_out");
+                        $(".rotate").addClass("rotate_in");
+
                         $(".man_up").removeClass("man_up_in");
                         $(".man_up").addClass("man_up_out");
 
@@ -278,10 +284,10 @@
                         currentopacity = 1;
                         
                     }
-
+                    // console.log(this);
                     if((this.id != "back") && (currentcollege != $(this).attr("college"))){
-                        //console.log("QAvideoplay = 0");
                         QAvideoplay = 0;
+                        // console.log("2");
                         $("#CDbox").css('background-image', 'url("background_'+$(this).attr("college")+'.png")');
                         $("iframe").css("display", "none");
                         $(".picture").css("display", "none");
@@ -291,17 +297,12 @@
                     currentcollege = $(this).attr("college");
                 
                     $(document).on("click",".video_item_QAvideo_"+ $(this).attr('college'),function(event){
-                        //console.log("QAvideoplay = 1");
                         if($(window).width()<414)
                         {   
                             $(".sbtn").removeClass("btn-outline-item-click");
                             $(".sbtn").addClass("btn-outline-item");
                             $(this).removeClass("btn-outline-item");
                             $(this).addClass("btn-outline-item-click");
-                        }
-
-                        if(lastbtnImg && currentbtnImg &&  $(window).width()>=414 && this.id != "back"){
-                            console.log("if3 "+ currentbtnImg + " last:" + lastbtnImg);
                         }
                         
                         //console.log($(this).id);
@@ -311,14 +312,14 @@
                             if($(window).width()>=414){
                                 $(".sbtn").css("visibility", "visible");
 
-                                $("."+$(this).attr("cd")).addClass("up");
+                                //$("."+$(this).attr("cd")).addClass("up");
 
                                 $("."+$(this).attr("cd")).css("visibility", "hidden");
                                 $(".bigCD_position_in").css("opacity", "1");
                                 currentopacity = 1;
                                 currentcdsrc = $(".bigCD").attr("src");
                                 $(".bigCD_position_in").attr("src", $(this).attr("cdsrc"));
-                                console.log("currentcdsrc1:"+currentcdsrc);
+                                // console.log("currentcdsrc1:"+currentcdsrc);
                                 // console.log("if4 "+ currentbtnImg + " last:" + lastbtnImg)
                             }
                             
@@ -326,6 +327,9 @@
                             
                             currentbutton = this;
                             //console.log(currentbutton);
+                        }
+                        else if(QAvideoplay == 1){
+                            $("#CDbox").css('background-image', 'none');
                         }
                         //console.log(QAvideoplay);
                         if($(this).attr("ytID")){
@@ -341,7 +345,7 @@
                         currentopacity = 1;
                         currentcdsrc = $(".bigCD").attr("src");
                         $(".bigCD_position_in").attr("src", $(this).attr("cdsrc"));
-                        console.log("currentcdsrc2:"+currentcdsrc);
+                        // console.log("currentcdsrc2:"+currentcdsrc);
                     }
 
                     currentbutton = this;
@@ -364,6 +368,9 @@
             }
             currentid = $(this).attr('ytID');
             $('.rotate').css('display', "block");
+            $(".rotate").removeClass("rotate_out");
+            $(".rotate").addClass("rotate_in");
+
             $(".man_up").removeClass("man_up_in");
             $(".man_up").addClass("man_up_out");
             $(".bigCD_position_in").css("opacity", "1");
@@ -382,6 +389,8 @@
             //console.log(QAvideoplay);
             if(QAvideoplay == 1){
                 $('.rotate').css('display', "block");
+                $(".rotate").removeClass("rotate_out");
+                $(".rotate").addClass("rotate_in");
                 $(".man_up").removeClass("man_up_in");
                 $(".man_up").addClass("man_up_out");
                 $(".bigCD_position_in").css("opacity", "1");
