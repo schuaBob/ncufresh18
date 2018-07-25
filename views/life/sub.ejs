@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../layout/head %>
+    <link rel=stylesheet type="text/css" href="../life/life.css">
+</head>
+<body> 
+    <header>
+        <% include ../layout/navbar %>
+    </header>
+    <main style="background-image: url('backstar.png'); background-repeat: no-repeat;  background-size:cover; background-attachment: fixed; height: 100vw;">
+        <%_ if (user && user.role === 'admin'){ -%>
+            <% include modify %>
+        <%_ } -%>
+        <% include title %>
+        <% include content %>
+        <% include navi %>
+    </main>
+    <footer id="footered">
+        <% include ../layout/footer %>
+    </footer>
+        <% include ../layout/js %>
+        <% include js %>
+    <script>
+        $(document).ready(function(){
+            var width = innerWidth;
+            if(width <= 850)
+                document.location.href = "/life/" + page  + "_phone";
+            $(window).resize(function(){
+                width = innerWidth;
+                if(width <= 850)
+                    document.location.href = "/life/" + page  + "_phone";
+            });
+        });
+    </script>
+</body>
+</html>

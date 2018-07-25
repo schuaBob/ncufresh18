@@ -6,6 +6,7 @@ var description = require('../models/life/description');
 var router = express.Router();
 var formidable = require('formidable');
 var multer = require('multer');
+var checkuser = require('./check-user');
 fs = require('fs');
 // var apiKey = 'c7282145be089c1ab3c03aa2e2f7c5dd';
 
@@ -66,7 +67,7 @@ router.get('/food', function(req, res, next){
   var type = req.url;
   type = type.substr(1);
   life.find({}, function(err, data){
-    res.render('life/food', { title: '中大生活', life: data, page: type, num: match_num[type], user: req.user});
+    res.render('life/sub', { title: '中大生活', life: data, page: type, num: match_num[type], user: req.user});
   });
 });
 
@@ -74,7 +75,7 @@ router.get('/dorm', function(req, res, next){
   var type = req.url;
   type = type.substr(1);
   life.find({}, function(err, data){
-     res.render('life/dorm', { title: '中大生活', life: data, page: type, num: match_num[type], user: req.user});
+     res.render('life/sub', { title: '中大生活', life: data, page: type, num: match_num[type], user: req.user});
    });
 });
 
@@ -82,7 +83,7 @@ router.get('/comm', function(req, res, next){
   var type = req.url;
   type = type.substr(1);
   life.find({}, function(err, data){
-    res.render('life/comm', { title: '中大生活', life: data, page: type, num: match_num[type], user: req.user});
+    res.render('life/sub', { title: '中大生活', life: data, page: type, num: match_num[type], user: req.user});
   });
 });
 
@@ -90,7 +91,7 @@ router.get('/edu', function(req, res, next){
   var type = req.url;
   type = type.substr(1);
   life.find({}, function(err, data){
-    res.render('life/edu', { title: '中大生活', life: data, page: type, num: match_num[type], user: req.user});
+    res.render('life/sub', { title: '中大生活', life: data, page: type, num: match_num[type], user: req.user});
   });
 });
 
@@ -98,43 +99,43 @@ router.get('/entertainment', function(req, res, next){
   var type = req.url;
   type = type.substr(1);
   life.find({}, function(err, data){
-    res.render('life/entertainment', { title: '中大生活', life: data, page: type, num: match_num[type], user: req.user});
+    res.render('life/sub', { title: '中大生活', life: data, page: type, num: match_num[type], user: req.user});
   });
 });
 
 /*-------------------------手機版分頁-------------------------*/
 router.get('/food_phone', function(req, res, next){
   life.find({}, function(err, data){
-    res.render('life/phone/food_phone', { title: '中大生活', life: data, page: 'food', num: match_num['food'], user: req.user});
+    res.render('life/phone/sub_phone', { title: '中大生活', life: data, page: 'food', num: match_num['food'], user: req.user});
   });
 })
 
 router.get('/dorm_phone', function(req, res, next){
   life.find({}, function(err, data){
-    res.render('life/phone/dorm_phone', { title: '中大生活', life: data, page: 'dorm', num: match_num['dorm'], user: req.user});
+    res.render('life/phone/sub_phone', { title: '中大生活', life: data, page: 'dorm', num: match_num['dorm'], user: req.user});
   });
 })
 
 router.get('/comm_phone', function(req, res, next){
   life.find({}, function(err, data){
-    res.render('life/phone/comm_phone', { title: '中大生活', life: data, page: 'comm', num: match_num['comm'], user: req.user});
+    res.render('life/phone/sub_phone', { title: '中大生活', life: data, page: 'comm', num: match_num['comm'], user: req.user});
   });
 })
 
 router.get('/edu_phone', function(req, res, next){
   life.find({}, function(err, data){
-    res.render('life/phone/edu_phone', { title: '中大生活', life: data, page: 'edu', num: match_num['edu'], user: req.user});
+    res.render('life/phone/sub_phone', { title: '中大生活', life: data, page: 'edu', num: match_num['edu'], user: req.user});
   });
 })
 
 router.get('/entertainment_phone', function(req, res, next){
   life.find({}, function(err, data){
-    res.render('life/phone/entertainment_phone', { title: '中大生活', life: data, page: 'entertainment', num: match_num['entertainment'], user: req.user});
+    res.render('life/phone/sub_phone', { title: '中大生活', life: data, page: 'entertainment', num: match_num['entertainment'], user: req.user});
   });
 })
 
 /*-------------------------後台-------------------------*/
-router.post('/editPicture', upload.single('picture'), function(req, res, next){
+router.post('/editPicture', checkuser.isAdmin,  upload.single('picture'), function(req, res, next){
   var cuted = req.file.path.split("/"),
       pathed = cuted[2] + "/" + cuted[3];
   var newPicture = new picture({
@@ -147,7 +148,7 @@ router.post('/editPicture', upload.single('picture'), function(req, res, next){
   });
 });
 
-router.post('/editContent', function(req, res, next){
+router.post('/editContent', checkuser.isAdmin, function(req, res, next){
   description.find({mainTitle: req.body.mainTitle, subTitle: req.body.subTitle}, function(err, result){
     if(err) next(err);
     if(result.length == 0){
@@ -167,7 +168,7 @@ router.post('/editContent', function(req, res, next){
   res.redirect('back');
 });
 
-router.post('/editTitle', function(req, res, next){
+router.post('/editTitle', checkuser.isAdmin, function(req, res, next){
   var subTitled = req.body.subTitle.split(";");
   subTitled.pop();
   var typed = req.get('referer').split("/");
@@ -190,7 +191,7 @@ router.post('/editTitle', function(req, res, next){
   res.redirect('back');
 });
 
-router.post('/changing', function(req, res, next){
+router.post('/changing', checkuser.isAdmin, function(req, res, next){
   var mainTitled = req.body.mainTitle;
   life.find({mainTitle: mainTitled}, function(err, result){
     if(err) return next(err);
