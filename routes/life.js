@@ -6,6 +6,7 @@ var description = require('../models/life/description');
 var router = express.Router();
 var formidable = require('formidable');
 var multer = require('multer');
+var checkuser = require('./check-user');
 fs = require('fs');
 // var apiKey = 'c7282145be089c1ab3c03aa2e2f7c5dd';
 
@@ -134,7 +135,7 @@ router.get('/entertainment_phone', function(req, res, next){
 })
 
 /*-------------------------後台-------------------------*/
-router.post('/editPicture', upload.single('picture'), function(req, res, next){
+router.post('/editPicture', checkuser.isAdmin,  upload.single('picture'), function(req, res, next){
   var cuted = req.file.path.split("/"),
       pathed = cuted[2] + "/" + cuted[3];
   var newPicture = new picture({
@@ -147,7 +148,7 @@ router.post('/editPicture', upload.single('picture'), function(req, res, next){
   });
 });
 
-router.post('/editContent', function(req, res, next){
+router.post('/editContent', checkuser.isAdmin, function(req, res, next){
   description.find({mainTitle: req.body.mainTitle, subTitle: req.body.subTitle}, function(err, result){
     if(err) next(err);
     if(result.length == 0){
@@ -167,7 +168,7 @@ router.post('/editContent', function(req, res, next){
   res.redirect('back');
 });
 
-router.post('/editTitle', function(req, res, next){
+router.post('/editTitle', checkuser.isAdmin, function(req, res, next){
   var subTitled = req.body.subTitle.split(";");
   subTitled.pop();
   var typed = req.get('referer').split("/");
@@ -190,7 +191,7 @@ router.post('/editTitle', function(req, res, next){
   res.redirect('back');
 });
 
-router.post('/changing', function(req, res, next){
+router.post('/changing', checkuser.isAdmin, function(req, res, next){
   var mainTitled = req.body.mainTitle;
   life.find({mainTitle: mainTitled}, function(err, result){
     if(err) return next(err);

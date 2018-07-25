@@ -54,7 +54,7 @@ ul li{
 .middle a:hover:before
 {
     color:#00ff51;
-	transform:rotatex(-15deg) rotatey(5deg) scale(3);
+	transform:rotatex(-15deg) rotatey(5deg) scale(2);
 }
 .middle a:hover:after
 {
@@ -165,7 +165,8 @@ ul li{
     position: absolute;
     height: 90%;
     width: 100%;
-    overflow: hidden;
+    overflow-x: scroll;
+    overflow-y: hidden;
 }
 .prev, .next{
     cursor: pointer;
@@ -234,6 +235,9 @@ ul li{
     width: 130px;
     height: 130px;
     z-index: 4000;
+}
+.clk:hover{
+    cursor: pointer;
 }
 .selectbar a{
     font-size: 25px;
