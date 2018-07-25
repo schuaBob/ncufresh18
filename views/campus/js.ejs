@@ -10,11 +10,14 @@
         var seq = null
         var array1 = []
         $('.indexelepic').tooltip();
+        $('.modal-header span i').click(function () {
+            $('#indexmodal').modal('hide')
+        })
 
         $('.indexelepic').hover(function () {
-            $('.indexelepic').velocity({ scale: 1.1, boxShadowBlur: 35 }, 100)
+            $(this).velocity({ scale: 1.1, boxShadowBlur: 35 }, 100)
         }, function () {
-            $('.indexelepic').velocity({ scale: 1, boxShadowBlur: 0 }, 100)
+            $(this).velocity({ scale: 1, boxShadowBlur: 0 }, 100)
         })
         $('.indexelepic').click(function (event) {
             $.ajax({
@@ -27,25 +30,37 @@
                     $('#indexmodal .modal-title').text(data.Element_Name)
                     $('#indexmodalp p').text(data.Element_Intro)
                     for (let i = 0; i < data.Intropic.length; i++) {
-                        $('.carousel-indicators').append("<li data-target='#carouselExampleIndicators' data-slide-to='"+i+"'></li>")
+                        $('.carousel-indicators').append("<li data-target='#carouselExampleIndicators' data-slide-to='" + i + "'></li>")
                         $('#carouselExampleIndicators .carousel-inner').append("<div class='carousel-item'><img class='d-block w-100' src='/campus/" + data.Intropic[i] + "'></div>")
                     }
                     $('.carousel-indicators li').first().addClass('active')
                     $('#carouselExampleIndicators .carousel-inner div').first().addClass('active')
-                    $('#indexmodal').on('hide.bs.modal',function(e) {
+                    $('#indexmodal').on('hide.bs.modal', function (e) {
                         $('.carousel-indicators li').remove()
                         $('#carouselExampleIndicators .carousel-inner .carousel-item').remove()
                         $('#indexmodal').off('hide.bs.modal')
                     })
+
+
+
+
                     $('#indexmodal').modal('show')
-                    
+
+
                 }
             })
         })
-
+        $('#List_index li').hover(function(event) {
+            $('.indexelepic[val='+event.currentTarget.attributes.val.value+']').velocity({ scale: 1.1, boxShadowBlur: 35 }, 100)
+            $('.indexelepic[val='+event.currentTarget.attributes.val.value+']').stop().tooltip('show')
+        },function(event) {
+            $('.indexelepic[val='+event.currentTarget.attributes.val.value+']').velocity({ scale: 1, boxShadowBlur: 0 }, 100)
+            $('.indexelepic[val='+event.currentTarget.attributes.val.value+']').stop().tooltip('hide')
+        })
 
 
         $('#List_index li').click(function (event) {
+            $('.indexelepic[val='+event.currentTarget.attributes.val.value+']').stop().tooltip('hide')
             $('.elelist').hide()
             array1 = ["系館", "運動", "餐廳", "設施", "住宿", "行政", "活動場地", "緊急醫療"]
             for (let i = 1; i <= 8; i++) {
@@ -57,6 +72,10 @@
 
                             $('.main_list_detail').stop().collapse('hide')
                             $('.main_list_detail').removeClass('clicked')
+                            $('#map').css("filter","none")
+                            $('.indexelepic').css("filter","none")
+                            
+                            
 
                         } else {
                             console.log("2")
@@ -64,6 +83,9 @@
                             $('.main_list_detail li[val=' + i + ']').show()
                             $('.main_list_detail').stop().collapse('show')
                             $('.main_list_detail').addClass('clicked')
+                            $('#map').css("filter","brightness(55%)")
+                            $('.indexelepic').css("filter","brightness(55%)")
+                            $('.indexelepic[val='+event.currentTarget.attributes.val.value+']').css("filter","none")
                         }
 
 
@@ -93,21 +115,26 @@
                                 $('.main_list_detail').off('hidden.bs.collapse');
                             })
                             $('.main_list_detail').addClass('clicked')
+                            $('.indexelepic').css("filter","brightness(55%)")
+                            $('.indexelepic[val='+event.currentTarget.attributes.val.value+']').css("filter","none")
                         } else {
                             console.log("4")
                             $('.listtitle').text(array1[i - 1])
                             $('.main_list_detail li[val=' + i + ']').show()
                             $('.main_list_detail').stop().collapse('show')
                             $('.main_list_detail').addClass('clicked')
+                            $('#map').css("filter","brightness(55%)")
+                            $('.indexelepic').css("filter","brightness(55%)")
+                            $('.indexelepic[val='+event.currentTarget.attributes.val.value+']').css("filter","none")
+                            
+
+                            
                         }
                         properties = {
                             'margin-left': '2%',
                             'margin-right': '29%'
                         };
                         $('.mapmove').addClass('clicked')
-
-
-
                     }
 
                 }
@@ -116,6 +143,41 @@
             console.log(temp);
             $('.mapmove').stop().velocity(properties, 500)
         })
+        $('.elelist').hover(function (event) {
+            $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').velocity({ scale: 1.1, boxShadowBlur: 35 }, 100)
+            $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').tooltip('show')
+        }, function () {
+            $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').velocity({ scale: 1, boxShadowBlur: 0 }, 100)
+            $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').tooltip('hide')
+        })
+        $('.elelist').click(function (event) {
+            $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').tooltip('hide')
+            $.ajax({
+                url: "indexmodal?id=" + event.currentTarget.attributes.idconnect.value,
+                method: "GET",
+                error: function (err) {
+
+                },
+                success: function (data) {
+                    $('#indexmodal .modal-title').text(data.Element_Name)
+                    $('#indexmodalp p').text(data.Element_Intro)
+                    for (let i = 0; i < data.Intropic.length; i++) {
+                        $('.carousel-indicators').append("<li data-target='#carouselExampleIndicators' data-slide-to='" + i + "'></li>")
+                        $('#carouselExampleIndicators .carousel-inner').append("<div class='carousel-item'><img class='d-block w-100' src='/campus/" + data.Intropic[i] + "'></div>")
+                    }
+                    $('.carousel-indicators li').first().addClass('active')
+                    $('#carouselExampleIndicators .carousel-inner div').first().addClass('active')
+                    $('#indexmodal').on('hide.bs.modal', function (e) {
+                        $('.carousel-indicators li').remove()
+                        $('#carouselExampleIndicators .carousel-inner .carousel-item').remove()
+                        $('#indexmodal').off('hide.bs.modal')
+                    })
+                    $('#indexmodal').modal('show')
+
+                }
+            })
+        })
+
     })
 
 

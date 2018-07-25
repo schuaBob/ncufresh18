@@ -28,16 +28,16 @@
                         $('input[name="size"]').val(data.Size)
                         $('.picspace').prepend("<img class='posipic' src='/campus/" + data.Buildpic + "'width='" + data.Size + "%' style='top:" + data.X_position + "%; left:" + data.Y_position + "%;'>")
                         $('.posipic').draggable({ containment: '.picspace' });
-                        
-                        
+
+
                         $('.posipic').mousemove(function () {
                             console.log($('#mainmap2').width())
                             console.log($('#mainmap2').height())
-                            $('input[name="x_position"]').val($('.posipic').position().top/$('#mainmap2').height()*100)
-                            $('input[name="y_position"]').val($('.posipic').position().left/$('#mainmap2').width()*100)
-                            
-                            
-                            
+                            $('input[name="x_position"]').val($('.posipic').position().top / $('#mainmap2').height() * 100)
+                            $('input[name="y_position"]').val($('.posipic').position().left / $('#mainmap2').width() * 100)
+
+
+
                         })
 
 
@@ -61,6 +61,11 @@
                     alert("發生錯誤");
                 },
                 success: function (data) {
+                    $('.fkpicedit').on('hide.bs.modal', function (e) {
+                        $('.saved').remove()
+                        $('.posipic').remove()
+                        $('.fkpicedit').off('hide.bs.modal')
+                    })
                     if (data.Buildpic != "") {
 
                         $('.imgcontent').prepend("<div class='saved buildpic'><img class='pic' src='/campus/" + data.Buildpic + "'><a class='picdele' val='0' ipname=''>Delete</a></div>")
@@ -96,6 +101,7 @@
                         })
 
                     })
+                    
                     $('.imgtype').attr('value', '0')
                     $('.buildpic').show();
                     $('.intropic').hide();
@@ -116,10 +122,6 @@
             $('.intropic').show();
         })
 
-        $('.picclose').click(function () {
-            $('.saved').remove()
-            $('.posipic').remove()
-        })
             <% for (let i = 0; i < result.length; i++) { %>
                 $("#elecategory" +<%=i %>).children("[value=<%= result[i]['Type'] %>]").attr({ "selected": "selected" });
         <%}%>
