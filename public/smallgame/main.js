@@ -755,21 +755,43 @@ var states = {
             // 退出按鈕
             var quit = game.add.button(0, 0, 'quit', quitRankClick).alignIn(rank, Phaser.TOP_RIGHT)
             
-            // 左邊領獎台
-            var rankLeft = game.add.image(0, 0, 'rankLeft').alignIn(rank, Phaser.LEFT_CENTER, -20, 70)
-            
             // 右邊氣泡
             function createBubble(data, type) {
+                var style = {
+                    'font': 'Microsoft Yahei',
+                    'fontSize': '25px'
+                }
+                // 左邊領獎台
+                var rankLeftSprite = game.add.image(0, 0, 'rankLeft').alignIn(rank, Phaser.LEFT_CENTER, -20, 70)
+                rankLeftSprite.alpha = 1
+                // var rankLeftX = -240
+                var rankLeft = game.add.group()
+                rankLeft.classType = Phaser.Text
+                rankLeft.create(0, 0, data[0].name).alignTo(rankLeftSprite, Phaser.TOP_CENTER)
+                rankLeft.create(0, 0, data[1].name).alignTo(rankLeftSprite, Phaser.TOP_CENTER, -80, -80)
+                rankLeft.create(0, 0, data[2].name).alignTo(rankLeftSprite, Phaser.TOP_CENTER, 80, -60)
+                if (type === 'sum') {
+                    rankLeft.create(0, 0, data[0].score_sum, style).alignTo(rankLeftSprite, Phaser.BOTTOM_CENTER);
+                    rankLeft.create(0, 0, data[1].score_sum, style).alignTo(rankLeftSprite, Phaser.BOTTOM_CENTER, -80);
+                    rankLeft.create(0, 0, data[2].score_sum, style).alignTo(rankLeftSprite, Phaser.BOTTOM_CENTER, 80);
+                } else {
+                    rankLeft.create(0, 0, data[0].score_high, style).alignTo(rankLeftSprite, Phaser.BOTTOM_CENTER);
+                    rankLeft.create(0, 0, data[1].score_high, style).alignTo(rankLeftSprite, Phaser.BOTTOM_CENTER, -80);
+                    rankLeft.create(0, 0, data[2].score_high, style).alignTo(rankLeftSprite, Phaser.BOTTOM_CENTER, 80);
+                }
+                
+                rankLeft.setAll('alpha', 1);
+                game.add.tween(rankLeftSprite).from({alpha: 0}, 800, Phaser.Easing.Exponential.In, true)                                
+                
+                rankLeft.alpha = 1
+                game.add.tween(rankLeft).from({alpha: 0}, 1500, Phaser.Easing.Exponential.In, true)            
+
                 for(i = 3; i < 10; i++) {
                     // 立即函數，立刻執行
                     (function(i) {
                         setTimeout(function () {
                             var rankLine = game.add.group()
                             var temp = alignLine.create(415, alignLineY, 'rankBubble');
-                            var style = {
-                                'font': 'Microsoft Yahei',
-                                'fontSize': '25px'
-                            }
                             var scoreText = game.add.text(0, 0, '分數: ', style).alignTo(rankSum, Phaser.BOTTOM_RIGHT, -50, alignLineY - 85);
                             if (type === 'sum') {
                                 var scoreShow = game.add.text(0, 0, data[i].score_sum, style).alignTo(scoreText, Phaser.RIGHT_CENTER);
@@ -788,7 +810,7 @@ var states = {
                             game.add.tween(temp).from({alpha: 0}, 1500, Phaser.Easing.Exponential.In, true);
                             game.add.tween(rankLine).from({alpha: 0}, 1500, Phaser.Easing.Exponential.In, true);    
                             alignLineY += 68.5;
-                        },  i * 100) 
+                        },  i * 200) 
                     })(i)
                 }
             }
@@ -801,7 +823,7 @@ var states = {
                     cache: false,
                     type: "get",
                     success: function(data) {
-                        console.log(url)
+                        console.log(data)
                         if (type === 'sum') {
                             createBubble(JSON.parse(data), 'sum')
                         } else {
