@@ -504,8 +504,9 @@ iframe {
             
             bottom: 13vh;
             border-radius: 10px;
-            background-color: #ffffffc9;
-            color: rgb(36, 103, 148);
+            background-color: #ffffff00;
+            /* color: rgb(36, 103, 148); */
+            color: rgb(202, 92, 85);
             font-size: 4vw;
             font-weight: bolder;
         }
