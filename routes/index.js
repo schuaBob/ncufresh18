@@ -28,15 +28,17 @@ passport.use(new LocalStrategy({
     Users.findOne({ id: id }, function (err, user) {
       if (err) { return done(err); }
       if (!user) {
-        return done(null, false, console.log("User not found"));
+        console.log(id+'不存在');
+        return done(null, false, {message: '使用者名稱或密碼錯誤'});
       }
       user.comparePassword(password, user.password, function (err, isMatch) {
         if (err) { return done(err); }
         if (isMatch) {
-          return done(null, user, console.log(user.name + " login Successfully"));
+          return done(null, user, console.log(user.id + " login Successfully"));
         }
         else {
-          return done(null, false, console.log("Error Password"));
+          console.log(id+'密碼錯誤');
+          return done(null, false, {message: '使用者名稱或密碼錯誤'});
         }
       });
     });
@@ -197,7 +199,7 @@ router.get('/delete_schedule/:id', (req, res, next) => {
 
 /* login page */
 router.get('/login', function (req, res, next) {
-  res.render('login/login', { title: '登入', user: req.user });
+  res.render('login/login', { title: '登入', user: req.user, message: req.flash('error')});
 });
 
 
@@ -223,10 +225,11 @@ router.get('/password', function (req, res, next) {
   res.render('login/password', { title: '登入', user : req.user });
 });
 
-router.post('/password', passport.authenticate('local', {failureRedirect: '/login'}),
-  function (req, res,next) {
-    res.redirect('/');
-});
+router.post('/password', passport.authenticate('local',{
+  successRedirect : '/',
+  failureRedirect : '/login',
+  failureFlash : true
+}));
 
 //NCU OAuth2 登入  
 router.get('/auth/provider', function (req, res) {

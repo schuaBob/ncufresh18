@@ -19,6 +19,10 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/ncufresh18');
 
+//Connect-flash
+const flash = require('connect-flash');
+app.use(flash());
+
 //validator
 const expressValidator = require('express-validator');
 app.use(expressValidator({

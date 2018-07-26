@@ -11,6 +11,9 @@
     </header>
     <main>
         <div id="er"></div>
+        <% if (message.length > 0) { %>
+            <div class="alert alert-danger"><%= message[0] %></div>
+        <% } %>
         <form method="post" action="/login" onsubmit="return checkname()">
         <div class="form-group">
             <img src="login.png" id="lg"><img src="登入.png" id="w"><br>
