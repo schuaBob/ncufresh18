@@ -55,6 +55,10 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
+router.get('*',function(req,res,next){
+  res.locals.error=req.flash('error');
+  next();
+});
 /* home page */
 router.get('/', function (req, res, next) {
   res.render('index/index', { title: '首頁', user: req.user });
@@ -199,7 +203,8 @@ router.get('/delete_schedule/:id', (req, res, next) => {
 
 /* login page */
 router.get('/login', function (req, res, next) {
-  res.render('login/login', { title: '登入', user: req.user, message: req.flash('error')});
+ // res.render('login/login', { title: '登入', user: req.user, message: req.flash('error')});
+ res.render('login/login', { title: '登入', user: req.user});
 });
 
 

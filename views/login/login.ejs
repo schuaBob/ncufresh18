@@ -11,8 +11,8 @@
     </header>
     <main>
         <div id="er"></div>
-        <% if (message.length > 0) { %>
-            <div class="alert alert-danger"><%= message[0] %></div>
+        <% if (error.length > 0) { %>
+            <div class="alert alert-danger"><%= error[0] %></div>
         <% } %>
         <form method="post" action="/login" onsubmit="return checkname()">
         <div class="form-group">
