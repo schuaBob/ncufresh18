@@ -11,14 +11,14 @@
     </header>
     <main>
         <div id="er"></div>
-        <% if (error.length > 0) { %>
-            <div class="alert alert-danger"><%= error[0] %></div>
-        <% } %>
         <form method="post" action="/login" onsubmit="return checkname()">
         <div class="form-group">
             <img src="login.png" id="lg"><img src="登入.png" id="w"><br>
             <img src="學號.png" id="number">
             <input type="text" class="form-control" name="id" id='num' required>
+            <% if (error.length > 0) { %>
+                <div class="alert alert-danger"><%= error[0] %></div>
+            <% } %>
             <button id="btn">繼續</button>
         </div>
         </form>

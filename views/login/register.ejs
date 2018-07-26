@@ -24,6 +24,9 @@
             <input type="password" class="form-control" name="password" onkeyup="this.value=this.value.replace(/[^\w]/g,'');" required>
             <img src="../login/確認密碼.png" id="pic">
             <input type="password" class="form-control" name="checkpassword" onkeyup="this.value=this.value.replace(/[^\w]/g,'');" required>
+            <% if (error.length > 0) { %>
+                <div class="alert alert-danger"><%= error[0] %></div>
+            <% } %>
             <button id="btn">繼續</button>
         </div>
         </form>
