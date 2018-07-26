@@ -34,7 +34,7 @@
     
    
     $(document).ready(() => {
-
+        // 感應手機方向改變
         // $(window).on("orientationchange",function(){
         //     if(window.orientation == 0) // Portrait
         //     {
@@ -46,11 +46,14 @@
         //     }
         // });
 
-        
+        // 點任意鍵大太空人消失 右上角太空人出現
         $(document).on("click",".button",function(event){
             if(index == 1){
                 $(".man_right_div").css("display","none");
                 $(".man_left_div").css("display","none");
+                $(".bonus1").css("display", "none");
+                $(".bonus2").css("display", "none");
+                $(".bonus3").css("display", "none");
 
                 $(".man_up").removeClass("man_up_out")
                 $(".man_up").addClass("man_up_in")
@@ -58,7 +61,8 @@
             index = 0;
         });
         
-        let man = 0;
+        // 大太空人跑來跑去
+        let man = 0, counter = 0;
         $('.man').mouseenter(function() {
             //console.log(man);
             if(man == 0){
@@ -75,7 +79,39 @@
                 $(".man_left").removeClass("man_left_in")
                 $(".man_left").addClass("man_left_out")
             }
+
+            if((counter == 9 || counter == 10) && man == 0){
+                $(".bonus1").css("display", "block");
+            }
+            else{
+                $(".bonus1").css("display", "none");
+            }
+
+            if((counter == 14 || counter == 15) && man == 1){
+                $(".bonus2").css("display", "block");
+            }
+            else{
+                $(".bonus2").css("display", "none");
+            }
+
+            if(counter == 50){
+                $(".bonus3").css("display", "block");
+                $(".man_right_div").css("display","none");
+                $(".man_left_div").css("display","none");
+                let bye = 0;
+                $(document).on("click",".bonus3",function(event){
+                    bye++;
+                    if(bye == 1){
+                        $(".bonus3_word").html("掰掰ξ( ✿＞◡❛)");
+                    }
+                    else{
+                        $(".bonus3").css("display", "none");
+                    }
+                    
+                });
+            }
         }).mouseleave(function () {
+            counter++;
             if(man == 0){
                 man = 1;
             }
@@ -84,6 +120,24 @@
             }
         })
         
+        // 太空人說嗨
+        let hicounter = 0;
+        $(document).on("click",".man_up",function(event){
+            hicounter++;
+            if(hicounter == 3){
+                $(".hi").velocity({ 
+                    opacity: 1, 
+                    duration: 500, 
+                    complete:function(){
+                        $(".hi").velocity({ 
+                            opacity: 0, 
+                            duration: 300, 
+                        });
+                        hicounter = 0;
+                    } 
+                });
+            }
+        })
 
         $(document).on("click",".rotate",function(event){//旋轉唱片盒
             if(end == 1){//end記錄唱片盒轉完了沒
