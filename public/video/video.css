@@ -790,7 +790,9 @@ iframe {
         background-image:url("background_cel.png");
         background-size: cover;
         background-repeat: repeat;
-        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        width: 100vw;
     }
     .btn-outline-title, .btn-outline-title-click, .btn-outline-item, .btn-outline-item-click, #back {
         border-radius: 1px;
@@ -800,7 +802,8 @@ iframe {
         display: none;
     }
 
-     .cellphone {
+    .cellphone {
+        overflow: hidden;
         display: initial;
     }
     .computer {
