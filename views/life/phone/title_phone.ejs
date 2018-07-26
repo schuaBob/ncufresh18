@@ -1,21 +1,47 @@
-    <div class="selectPart">
-        <img class="icon" src="<%=page%>_icon.png"/>
-        <hr>
-        <div class="title"> 
-            <% for (var i in life) { %>
-                <% if (life[i].type == page) { %>
-                    <% if(life[i].subTitle.length != 0) { %>
-                        <select class="showDetail_phone2" >
-                            <option value=""><%=life[i].mainTitle%></option>
-                            <% for(var j=0 ; j<life[i].subTitle.length ; j++) { %>
-                                <option value="<%=life[i].mainTitle%>_<%=life[i].subTitle[j]%>"><%=life[i].subTitle[j]%></option>
-                            <% } %>
-                        </select>
-                    <% } else { %>
-                        <a class="showDetail_phone" id="<%=life[i].mainTitle%>_default"> <%=life[i].mainTitle%></a>
-                    <% } %>  
-                    <hr style="height:10px; visibility:hidden;" />
-                <% } %>
+<!--
+<div class="selectPart">
+    <img class="icon" src="<%=page%>_icon.png"/>
+    <hr>
+    <div class="title"> 
+        <% for (var i in life) { %>
+            <% if (life[i].type == page) { %>
+                <% if(life[i].subTitle.length != 0) { %>
+                    <select class="showDetail_phone2" >
+                        <option value=""><%=life[i].mainTitle%></option>
+                        <% for(var j=0 ; j<life[i].subTitle.length ; j++) { %>
+                            <option value="<%=life[i].mainTitle%>_<%=life[i].subTitle[j]%>"><%=life[i].subTitle[j]%></option>
+                        <% } %>
+                    </select>
+                <% } else { %>
+                    <a class="showDetail_phone" id="<%=life[i].mainTitle%>_default"> <%=life[i].mainTitle%></a>
+                <% } %>  
+                <hr style="height:10px; visibility:hidden;" />
             <% } %>
-        </div>
+        <% } %>
     </div>
+</div>
+-->
+<div class="selectPart">
+    <img class="icon" src="<%=page%>_icon.png"/>
+    <hr>
+    <div class="title"> 
+        <% var cnt = 0 %>
+        <% for (var i in life) { %>
+            <% if (life[i].type == page) { %>
+                <div class="selectbar">
+                <% if(life[i].subTitle.length != 0) { %>
+                    <div class="bar"><a class="show_dropdown" id="<%=num%>_<%=cnt%>" href="#"><%=life[i].mainTitle%></a></div>
+                    <div class="dropdown_hide" id="<%=num%>_<%=cnt%>_sub">
+                        <% for(var j=0 ; j<life[i].subTitle.length ; j++) { %>
+                           <div class="subar"><a class="showDetail_phone" id="<%=life[i].mainTitle%>_<%=life[i].subTitle[j]%>" href="#"><%=life[i].subTitle[j]%></a></div>
+                        <% } %>  
+                    </div>
+                <% } else { %>
+                    <div class="bar"><a class="showDetail_phone" id="<%=life[i].mainTitle%>_default" href="#"><%=life[i].mainTitle%></a></div>
+                <% } %>  
+                </div>
+                <% cnt = cnt + 1 %>
+            <% } %>
+        <% } %>
+    </div>
+</div>
