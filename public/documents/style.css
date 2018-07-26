@@ -6,6 +6,46 @@ body{
 
 }
 
+/*直接飛*/
+.space_fly{
+    animation-name:spacefly;
+    animation-duration:2s;
+}
+/*等太空人後才能飛*/
+.space_wait_fly{
+    animation-delay:3.5s;
+    -webkit-animation-delay:3.5s;
+    animation-name:spacefly;
+    animation-duration:6s;
+}
+/*太空人走向space*/
+.man_enter_space{
+    animation-name:man_enter_space;
+    animation-duration:6s;
+}
+/*太空人走進去後消失*/
+.man_display{
+    transition: 3.8s ease-out; 
+    visibility: hidden;
+}
+/*動畫軌跡*/
+@keyframes spacefly{
+    from{
+        bottom:0;
+    }
+    to{
+        bottom:100vh;
+    }
+}
+@keyframes man_enter_space{
+    from{
+        right:0;
+    }
+    to{
+           right:85vw;          
+           height:27vh;  width:23vh;
+    }
+}
 /*背景先載入*/
 body::after{
     position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
@@ -23,7 +63,7 @@ body::after{
     
 }
 
-
+/*標題列顏色等*/
 #u:hover{
     color: black;
 }
@@ -56,13 +96,6 @@ body::after{
 }
 */
 
-
-/*點下去後的樣子
-#nav-item_u:hover  {
-    background-color: #F8F8F8;
-    border-radius: 6px; 
-    
-}*/
 .nav-pills #u.active{
     color: black;
     background-color: #F8F8F8;
@@ -82,6 +115,7 @@ body::after{
 
 /*電腦大螢幕*/
 @media only screen and (min-width: 993px) {
+    /*太空人和太空艙排版及大小*/
     #man{     
         position:absolute;  
         z-index:1;
@@ -116,6 +150,7 @@ body::after{
     #space1 {
         height:48vh;  width:32vh;
     }
+    
     #tab{
         padding-top: 2%;
         padding-left: 16%;
@@ -214,7 +249,7 @@ body::after{
     .second{
         grid-area: 1 / 3 / span 2 / span 2;
     }
-    a{
+    .box a{
         font-size: 20px;
     }
     
@@ -845,6 +880,7 @@ a{
         overflow: auto;
     }
     
+    /*浮動式按鈕*/
     #b_close {
         border-radius: 0px;
         background-color:rgb(110, 97, 226);
@@ -863,29 +899,14 @@ a{
 
 
 
-
+/*大一配色*/
 .bg1{background-color: rgb(132, 206, 226,0.86);}
-
 .bg3{background-color:	rgb(255, 243, 162,0.86)}
-
 .bg5{background-color: rgb(96, 189, 173,0.86)}
-
-.bg7{background-color: rgb(96, 189, 173,0.86)}
-.bg51{background-color:rgb(96, 189, 173,0.86);}
-.bg12{background-color: #FFCCCC};
-.bg33{background-color: rgb(132, 206, 226,0.86);}
-.bg34{background-color:  rgb(132, 206, 226,0.86);}
-.bg35{background-color:  rgb(132, 206, 226,0.86);}
-
+/*碩一配色*/
 .bg2{background-color: rgb(200,195,248,0.86)}
 .bg4{background-color: rgb(129,212,239,0.86)}
 .bg6{background-color: rgba(226, 224, 224, 0.86)}
 
-.bg39{background-color: rgb(132, 206, 226,0.86);}
-.bg40{background-color: rgb(96, 189, 173,0.86)}
-.bg27{background-color: #CCCCFF};
-/*
-.bg4{background-image:url("s_man2.png");background-color: #FFCCCC}
-*/
 
 
