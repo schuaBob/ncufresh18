@@ -37,7 +37,7 @@
                             <div class="modal-body">
                                 <!--<input name="introduce" type="file" class="form-control-file" id="exampleFormControlFile1">-->
                                 <!-- <p class="alert">*請按照順序上傳!!!</p> -->
-                                <input  name="insert" class="form-control" type="text" placeholder="輸入影片ID(youtube網址最後面的'='之後那串)">
+                                <input  name="insert" class="form-control" type="text" placeholder="輸入影片ID(youtube嵌入碼src裡'embed/'後面的那串)">
                                 <select name="title" class="form-control">
                                     <option disabled selected>請選擇</option>
                                     <option value="1翻譯香蕉">中大長劇-翻譯香蕉</option>
@@ -97,25 +97,28 @@
                     <div id='<%= video[i].insert %>' class='player'></div>
                 <% } %>
             </div>
-            <div class="CDpicture"><!--介紹圖片-->
+            <div class="CDpicture"><!--影片介紹-->
                 <% for(let i = 0;　i<video.length;　i++){ %>
                     <img class="<%= video[i].insert %> picture"  src='<%= video[i].type %>/<%= video[i].title %>.png'>
                 <% } %>
             </div>
             </div>
+            <!-- 電腦版 -->
             <div class="computer">
                 <img src="button/影片介紹.png" picture="button/影片介紹" class="rotate sbtn button rotate_out">
             </div>
+            <!-- 手機版 -->
             <div class="cellphone">
                 <button class="rotate btn-outline-title sbtn button">簡介</button>
             </div>
         </div>
        
-
+        <!-- 測試youtube影片 -->
         <!--<div class=video-container>
             <iframe width="560" height="315" src="https://www.youtube.com/embed/JwjBbWQs71k" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>-->
 
+        <!-- 左邊大標題 -->
         <table unselectable="on" class="video_item_title_allvideo ">
             <td>
                 <button unselectable="on" type="button" video="longvideo" class="video_item btn-outline-title turn  longvideo button">中大長劇</button>
@@ -133,6 +136,10 @@
         <img unselectable="on" src="button/1/光碟.png" class="bigCD_position_in">
         <img unselectable="on" src="button/1/光碟.png" class="bigCD_position_out">
         <div unselectable="on" class="computer">
+            <div unselectable="on" class="bonus1">-別玩了 快看影片啦(#`Д´)ﾉ</div>
+            <div unselectable="on" class="bonus2">還玩(╬ﾟдﾟ)<br>我要生氣了喔(╬ﾟдﾟ)▄︻┻┳═一-</div>
+            <div unselectable="on" class="bonus3"><img class="bonus3_img" src="太空人_倒.png"><p class="bonus3_word">-不跟你玩了 我累了 我投降(´,_ゝ`)</p></div>
+            <div unselectable="on" class="hi">Hi~</div>
             <div unselectable="on" class="man_up_div"><img src="太空人_倒.png" class="man_up man_up_out"></div>
             <div unselectable="on" class="man_right_div"><img src="太空人_側.png" class="man_right man_right_in man"></div>
             <div unselectable="on" class="man_left_div"><img src="太空人_正.png" class="man_left man_left_out man"></div>
