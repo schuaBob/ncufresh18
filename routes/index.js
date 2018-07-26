@@ -55,6 +55,8 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
+
+//Pass error message through all pages in index route
 router.get('*',function(req,res,next){
   res.locals.error=req.flash('error');
   next();
@@ -329,7 +331,8 @@ router.get('/auth/provider/callback', function (req, res, next) {
 
 
 router.get('/logout', function (req, res, next) {
-  req.logout()
+  req.logout();
+  req.session.destroy();
   res.redirect('/');
 })
 
