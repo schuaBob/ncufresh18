@@ -11,82 +11,152 @@ router.get('/', function(req, res, next) {
 
 // 上傳分數
 router.post('/setScore', function (req, res, next) {
-  var newScore = req.body.score;
-  var player
-  var temp;
-  console.log(req.user)
-  UserScore.findOne({
-    'id': req.user.id
-  }, function(err, user) {
-    // 此用戶不存在, 新建
-    if (user === null) {
-      // 從總數據庫中尋找
-      User.findOne({
-        'id': req.user.id
-      }, function(err, newUser) {
-        if(err) console.log(err);
-        player = {
-          id: newUser.id,
-          name: newUser.name,
-          score_sum: newUser.score_sum,
-          score_high: newUser.score_high,
-          avatar: newUser.avatar
-        }
-        UserScore.create(player, function(err, result){
-          if(err) console.log(err);
-          console.log('新建用戶：' + result);
-        });
-        updateScore(player)
-      })
-    } else {
-      player = user
-      updateScore(player)
-    }
-    
-    // 更新數據到總表和小遊戲表
-    function updateScore(player) {
-      // 更新最高分數
-      if (newScore > player.score_high) {
-        // 更新總表
-        User.update({ id: req.user.id}, { $set: {score_high: newScore}}, function (err, res) {
-          if (err) {
-            throw err;
-          } 
-        });
-        // 更新小遊戲表
-        UserScore.update({ id: req.user.id}, { $set: {score_high: newScore}}, function (err, res) {
-          if (err) {
-            throw err;
-          } 
-        });
-      }
-      // 更新累計分數
-      temp = player.score_sum;
-      var allScore = parseInt(temp) + parseInt(newScore);
-      User.update({ id: req.user.id}, { $set: {score_sum: allScore}}, function (err, res) {
-          if (err) {
-            throw err;
-          } 
-      });
-      UserScore.update({ id: req.user.id}, { $set: {score_sum: allScore}}, function (err, res) {
-          if (err) {
-            throw err;
-          } 
-      });
-    }
+  var player = {
+    id: req.user.id,
+    name: req.user.name,
+    score_high: req.user.score_high,
+    score_sum: req.user.score_sum,
+    avatar: req.user.avatar
+  }
+  var newScoreHigh = req.body.score;
+  var newScoreSum = parseInt(newScoreHigh) + parseInt(player.score_sum)
+  if (newScoreHigh < req.user.score_high) {
+    newScoreHigh = req.user.score_high
+  }
+  player.score_high = newScoreHigh
+  player.score_sum = newScoreSum
+  // 更新總表分數
+  User.update({ id: req.user.id}, { $set: {score_high: newScoreHigh, score_sum: newScoreSum}}, function(err, res) {
+    if (err) {
+      return next(err);
+    } 
   });
-})
+
+  console.log("player: " + player.id)
+  var count;
+  UserScore.count({}, function(err, result) {
+    count = parseInt(result);
+    console.log("count: " + count)
+    // UserScore 中少於 10 個直接新建
+    if (count < 10) {
+      UserScore.findOne({ id: player.id}, function(err, result) {
+        if (err) {
+          return next(err);
+        }
+        if (result) {
+          UserScore.update({ id: player.id}, { $set: {
+            score_high: player.score_high,
+            score_sum: player.score_sum,
+            id: player.id,
+            name: player.name,
+            avatar: player.avatar
+          }}, function(err, result) {
+            if (err) {
+              return next(err);
+            }
+          })
+        } else {
+          UserScore.create(player, function(err, result){
+            if(err) {
+              return next(err);
+            }
+            console.log('新建用戶：' + result);
+          });
+        }   
+      })
+      res.end()
+    } else {
+      // highScore 為 UserScore 中的最小分數
+      var highScore = {
+        id_high: "",
+        id_sum: "",
+        score_high: 0,
+        score_sum: 0
+      }
+      UserScore.findOne({ score_high: { $gte: 0 }}, 'id score_high avatar').sort({ score_high: 1}).limit(10).exec(function(err, result) {
+        if (err) {
+          return next(err);
+        }
+        if (result !== null) {
+          highScore.id_high = result.id
+          highScore.score_high = result.score_high;
+        }
+      });
+      UserScore.findOne({ score_sum: { $gte: 0 }}, 'id score_sum avatar').sort({ score_sum: 1}).limit(10).exec(function(err, result) {
+        if (err) {
+          return next(err);
+        }
+        if (result !== null) {
+          highScore.id_sum = result.id
+          highScore.score_sum = result.score_sum;
+        }
+      });
+      
+      // 如果用戶已經在 UserScore 中則直接更新
+      console.log("用戶已在 UserScore")
+      UserScore.findOne({ id: player.id}, function(err, result) {
+        if (err) {
+          return next(err);
+        }
+        if (result) {
+          UserScore.update({ id: player.id}, { $set: {
+            score_high: player.score_high,
+            score_sum: player.score_sum,
+            id: player.id,
+            name: player.name,
+            avatar: player.avatar
+          }}, function(err, result) {
+            if (err) {
+              return next(err);
+            }
+          });
+        } else {
+          // 如果分數大於 highScore 則替換 UserScore 中的最後一名
+          console.log("用戶不在 UserScore")
+          if (player.score_high > highScore.score_high) {
+            UserScore.update({ id: highScore.id_high}, { $set: {
+              score_sum: player.score_sum,      
+              score_high: player.score_high,
+              id: player.id,
+              name: player.name,
+              avatar: player.avatar
+            }}, function(err, result) {
+              if (err) {
+                return next(err);
+              }
+            })
+          }
+        
+          if (player.score_sum > highScore.score_sum) {
+            UserScore.update({ id: highScore.id_sum}, { $set: {
+              score_sum: player.score_sum,
+              score_high: player.score_high,
+              id: player.id,
+              name: player.name,
+              avatar: player.avatar
+            }}, function(err, result) {
+              if (err) {
+                return next(err);
+              }
+            })
+          }
+        }   
+      }) 
+    }
+    res.end();
+  });
+});
 
 // 傳遞分數給前端
 router.get('/getScore', function(req, res, next){
   var type = req.query.type;
   if (type === 'high') {
-    User.find({ score_high: { $gte: 0 }}, 'name score_high avatar').sort({ score_high: -1}).limit(10).exec(function(err, result) {
+    UserScore.find({ score_high: { $gte: 0 }}, 'name score_high avatar').sort({ score_high: -1}).limit(10).exec(function(err, result) {
       if (err) throw err;
       res.send(result);
     }) 
   } else {
-    User.find({ score_sum: { $gte: 0 }}, 'name score_sum avatar').sort({ score_sum: -1}).limit(10).exec(function(err, result) {
+    UserScore.find({ score_sum: { $gte: 0 }}, 'name score_sum avatar').sort({ score_sum: -1}).limit(10).exec(function(err, result) {
       if (err) throw err;
       res.send(result);
     }) 
