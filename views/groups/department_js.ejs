@@ -1,20 +1,9 @@
 <script>
-    $(document).ready(function(){
-
-        /* club的方法太冗長,利用for迴圈縮減篇幅 */
-        let depart_type = [["文學院","literature"],["理學院","science"],["管理學院","management"],["工學院","engineering"],["資訊電機學院","csee"],["地球科學學院","earth"],["客家學院","hakka"],["生醫理工學院","chst"]]
-
-        //載入IFrame Player API code
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-        var currentid ;
-
-        let player = Object();
+    let player = Object();
         function onYouTubeIframeAPIReady() {//此函數在IFrame Player API code 載入後將自動呼叫
+            console.log("fdasf");
             $(".player").each(function(){
-                //console.log(this.id);
+                // console.log(this.id);
                 //console.log($(this));
                 let id=this.id;
                 player[id] = new YT.Player(id, {
@@ -27,7 +16,33 @@
                 });
             })
         }
+    $(document).ready(function(){
+        
+        /* club的方法太冗長,利用for迴圈縮減篇幅 */
+        let depart_type = [["文學院","literature"],["理學院","science"],["管理學院","management"],["工學院","engineering"],["資訊電機學院","csee"],["地球科學學院","earth"],["客家學院","hakka"],["生醫理工學院","chst"]]
 
+        //載入IFrame Player API code
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        var currentid="" ;
+
+        
+        // <% for(var i in department){ %>
+        //     $('.nav_y').click(function() {
+        //         currentid = $(this).attr('ytID');
+        //     })
+        //     $('#<%= department[i]._id %>').on('hide.bs.modal', function (e) {
+        //         if(currentid != ""){
+        //             player[currentid].pauseVideo();
+        //     }
+        //         player[currentid].pauseVideo();
+        //     })
+        // <%}%>
+        
+        
+        
         /* 字串要分開打 */
         for(let p = 0; p<8 ; p++){
             $("."+depart_type[p][1]+"_button").mousedown(function(){
@@ -90,6 +105,8 @@
                 $("#cellup").show();
                 $("#combut").hide();
                 $(".sidedown").show();
+                $(".titleup").show();
+
                 
             }
             else if($(window).width()>768){
@@ -97,6 +114,7 @@
                 $("#cellup").hide();
                 $(".sidedown").hide();
                 $("#combut").show();
+                $(".titleup").hide();
                 
             }
         });
@@ -106,6 +124,7 @@
             $("#cellup").show();
             $("#combut").hide();
             $(".sidedown").show();
+            $(".titleup").show();
 
         }
         else if($(window).width()>768){
@@ -113,6 +132,7 @@
             $("#cellup").hide();
             $("#combut").show();
             $(".sidedown").hide();
+            $(".titleup").hide();
 
             
 

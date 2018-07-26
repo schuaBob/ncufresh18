@@ -24,25 +24,35 @@ body{
     top: 40%;
     position: absolute;
 }
+.index_club:hover{
+    transform: scale(1.2);
+}
 .index_student{
     width: 34%;
     left: 36%;
     top: 51%;
     position: absolute;
-
+}
+.index_student:hover{
+    transform: scale(1.2);
 }
 .index_department{
     width: 33%;
     left: 36%;
     top: 63%;
     position: absolute;
-
+}
+.index_department:hover{
+    transform: scale(1.2);
 }
 .index_community{
     width: 43%;
     left: 36%;
     top: 75%;
     position: absolute;
+}
+.index_community:hover{
+    transform: scale(1.2);
 }
 .side{
     width:30vw;

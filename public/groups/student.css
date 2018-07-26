@@ -63,8 +63,8 @@ h6{
 /* 差一個s */
 #carouselExampleIndicator{
     width: 650px;
-    height: 400px;
-    margin-left: 10%;
+    height: 450px;
+    margin-left: 6%;
     float:left;
 }    
 
@@ -108,7 +108,7 @@ h6{
 #stu_button{
     position: relative;
     display: inline-block;
-    margin-top: 9%;
+    margin-top: 7%;
     margin-left: 59%;
 }
 .button_place{
@@ -122,12 +122,17 @@ h6{
     left: 40%;
     top: 15%;
 }
-
+.stu_intro:hover{
+    transform: scale(1.2);
+}
 .stu_branch{
     position: absolute;
     width: 12vw;
     left: 32%;
     top: 37%;
+}
+.stu_branch:hover{
+    transform: scale(1.2);
 }
 .stu_activity{
     position: absolute;
@@ -135,7 +140,9 @@ h6{
     left: 32%;
     top: 57%;
 }
-
+.stu_activity:hover{
+    transform: scale(1.2);
+}
 
 
 @media screen and (max-width: 768px){

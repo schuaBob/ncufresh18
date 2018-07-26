@@ -5,7 +5,7 @@
         let y =$(window).height();
         let h =(y-65)+"px"
         document.body.style.setProperty('--height', h);
-
+        
         $(".learn").mousedown(function(){
             $(".learns").show();
             $(".plays").hide();
@@ -33,6 +33,7 @@
             $(".plays").hide();
             $(".dates").hide();
         });
+        
         <%_ if (user && user.role === 'admin'){ -%>
             CKEDITOR.replace('add_introduction',{
                 filebrowserUploadUrl: '/uploader',
@@ -52,6 +53,8 @@
                 config.autoParagraph = false;
             };
         <%_ } -%> 
+
+        // 每次變更畫面大小時偵測
         $(window).resize(function(){
             if($(window).width()<768){
                 $("#nav_ul").removeClass("flex-column");
@@ -59,7 +62,7 @@
                 $(".bread").hide();
                 $("#combut").hide();
                 $(".sidedown").show();
-                
+                $(".titleup").show();
             }
             else if($(window).width()>768){
                 $("#nav_ul").addClass("flex-column");
@@ -67,17 +70,17 @@
                 $("#cellup").hide();
                 $(".sidedown").hide();
                 $("#combut").show();
-
+                $(".titleup").hide();
             }
         });
-
+        // 一開始偵測
         if($(window).width()<768){
             $("#nav_ul").removeClass("flex-column");
             $("#cellup").show();
             $(".bread").hide();
             $("#combut").hide();
             $(".sidedown").show();
-            
+            $(".titleup").show();
         }
         else if($(window).width()>768){
             $("#nav_ul").addClass("flex-column");
@@ -85,7 +88,22 @@
             $("#cellup").hide();
             $(".sidedown").hide();
             $("#combut").show();
-
+            $(".titleup").hide();
         }
+
+        // $('.').click(function (event) {
+        //     $.ajax({
+        //         url: "clubmodal?id=" + event.currentTarget.attributes.alt.value,
+        //         method: "GET",
+        //         error: function (err) {
+
+        //         },
+        //         success: function (data) {
+        //             
+        //             
+        //             $('#').modal('show')
+        //         }
+        //     })
+        // })
     });
 </script>
