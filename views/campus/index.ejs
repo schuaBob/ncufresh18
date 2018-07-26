@@ -102,8 +102,9 @@
                             <%}-%>
                     </ul>
                 </div>
-                
-                    <div class="mapmove">
+
+                <div class="mapmove">
+                    <div class="mapshadow">
                         <%for (let i in result) {-%>
                             <% if (result[i]['Buildpic'] != "") {-%>
                                 <img title="<%=result[i]['Element_Name']%>" val="<%=result[i]['Type']%>" class="indexelepic" src="<%=result[i]['Buildpic']%>"
@@ -113,33 +114,35 @@
 
                                         <img id="map" src="back2.png">
                     </div>
-                
-                    <ul id="List_index">
-                        <li class="Main_listele1" val="1">
-                            <img src="list1.png" alt="">
-                        </li>
-                        <li class="Main_listele2" val="2">
-                            <img src="list2.png" alt="">
-                        </li>
-                        <li class="Main_listele3" val="3">
-                            <img src="list3.png" alt="">
-                        </li>
-                        <li class="Main_listele4" val="4">
-                            <img src="list4.png" alt="">
-                        </li>
-                        <li class="Main_listele5" val="5">
-                            <img src="list5.png" alt="">
-                        </li>
-                        <li class="Main_listele6" val="6">
-                            <img src="list6.png" alt="">
-                        </li>
-                        <li class="Main_listele7" val="7">
-                            <img src="list7.png" alt="">
-                        </li>
-                        <li class="Main_listele8" val="8">
-                            <img src="list8.png" alt="">
-                        </li>
-                    </ul>
+
+                </div>
+
+                <ul id="List_index">
+                    <li class="Main_listele1" val="1">
+                        <img src="list1.png" alt="">
+                    </li>
+                    <li class="Main_listele2" val="2">
+                        <img src="list2.png" alt="">
+                    </li>
+                    <li class="Main_listele3" val="3">
+                        <img src="list3.png" alt="">
+                    </li>
+                    <li class="Main_listele4" val="4">
+                        <img src="list4.png" alt="">
+                    </li>
+                    <li class="Main_listele5" val="5">
+                        <img src="list5.png" alt="">
+                    </li>
+                    <li class="Main_listele6" val="6">
+                        <img src="list6.png" alt="">
+                    </li>
+                    <li class="Main_listele7" val="7">
+                        <img src="list7.png" alt="">
+                    </li>
+                    <li class="Main_listele8" val="8">
+                        <img src="list8.png" alt="">
+                    </li>
+                </ul>
                 <div class="modal fade" id="indexmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -183,7 +186,7 @@
     <footer id="campusfooter">
         <% include ../layout/footer %>
     </footer>
-    <% include ../layout/js %>
+    
         <% include js %>
 
 </body>
