@@ -199,6 +199,13 @@ router.post('/changing', checkuser.isAdmin, function(req, res, next){
   });
 });
 
+router.post('/delete_pic', checkuser.isAdmin, function(req, res, next){
+  picture.remove({path: req.body.path}, function(err, result){
+    if(err) return next(err);
+    res.send();
+  })
+});
+
 /*-------------------------抓細項內容-------------------------*/
 router.post('/showing', function(req, res, next){
   var mainTitled = req.body.mainTitle,

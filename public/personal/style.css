@@ -88,3 +88,16 @@ table {
     position: absolute;
     top : 30vh ;
 }
+@font-face {
+    font-family: 'myFont';
+    src: url('/personal/myFont.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+#point {
+    position: relative;
+    top :3vh ;
+    text-align:center ;
+    font-size: 5vw ;
+    font-family: 'myFont' ;
+}

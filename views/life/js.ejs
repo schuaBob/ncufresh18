@@ -154,6 +154,31 @@
         } );
     } );
 
+    var last_slide_id = 0;
+    $(document).ready(function(){ 
+        $('.dropdown_hide').slideUp();
+        $('.show_dropdown').click(function(){
+            var id = $(this).attr("id"),
+                sub_id = "#" + id + "_sub";
+            if($(sub_id).attr('class') == "dropdown_hide"){
+                if(last_slide_id != 0){
+                    $(last_slide_id).slideUp();
+                    $(last_slide_id).addClass("dropdown_hide");
+                    $(last_slide_id).removeClass("dropdown_show");
+                }
+                $(sub_id).slideDown();
+                $(sub_id).addClass("dropdown_show");
+                $(sub_id).removeClass("dropdown_hide");
+                last_slide_id = sub_id;
+            }
+            else{
+                $(sub_id).slideUp();
+                $(sub_id).addClass("dropdown_hide");
+                $(sub_id).removeClass("dropdown_show");
+            }
+        });
+    });
+
     $(".showDetail_phone").on('click', function(e){
        e.preventDefault(); 
        var info = this.id.split("_");
@@ -174,27 +199,6 @@
             }
         });
     });
-    
-    $('.showDetail_phone2').on('change', function(e){
-        e.preventDefault();
-        var info = this.value.split("_");
-        $.ajax({
-            url:    "showing",
-            method: "POST",
-            data:   {mainTitle: info[0], subTitle: info[1]},
-            error: function(err){
-                alert("Some error occur...");
-            },
-            success: function(data){
-                $(".selectPart").css("visibility", "hidden");
-                $(".backenArrow").css("visibility", "visible");
-                $(".pictureArea").css("visibility", "visible");
-                $(".descArea").css("visibility", "visible");
-                putPic_phone(data.res1);
-                putCont_phone(data.res2);
-            }
-        });        
-    });
 
     var putPic_phone = function(data){
         $(".pictureArea").empty();
@@ -209,6 +213,7 @@
             showSlides(ramSlideNum);
         }
     }
+
     var putCont_phone = function(data){
         $(".descArea").empty();
         $(".descArea").append("<div class='describeArea'> <div class='contentArea'></div></div>")
@@ -216,6 +221,28 @@
         if(data != null)
             $(".describeArea").children(".contentArea").append(data.content);
     }
+
+    $("#delete_picture").on("click", function(e){
+        e.preventDefault();
+        var slides = document.getElementsByClassName("mySlides");
+        var tofind;
+        for(var i=0 ; i<slides.length ; i++){
+            if(slides[i].style.display == "block"){
+                tofind = slides[i].children[0].getAttribute('src');
+            }
+        }
+        $.ajax({
+            url:    "delete_pic",
+            method: "POST",
+            data:   {path: tofind},
+            error: function(err){
+                alert("Some error occur...");
+            },
+            success: function(data){
+                location.reload();
+            }
+        });
+    })
 
     $(".backenArrow").on("click", function(e){
         e.preventDefault();
@@ -226,4 +253,5 @@
         $(".pictureArea").empty();
         $(".descArea").empty();
     });
+    
 </script>
