@@ -2,9 +2,53 @@
 
     $(document).ready(function () {
 
+       //飛走的彩蛋
+        var change=0;
+        var man_enter=0;
+        var space_enter=0;
+        var man_enter1=0;
+        var space_enter1=0;
+        $("#space").mousedown(function(){
+            space_enter++;
+             if(space_enter==6){
+                alert("乖，答應我不要亂玩背景(〒︿〒)");               
+            } 
+        });
+        $("#man").mousedown(function(){
+            man_enter++;
+            $("#space").removeClass("space_fly");
+            if(man_enter==3){
+                alert("哼，再玩我就生氣氣了喔"); 
+            }
+             if(man_enter==4){              
+                $("#man").addClass("man_enter_space");
+                $("#man").addClass("man_display");
+                $("#space").addClass("space_wait_fly");     
+            }
+        });
+        $("#space1").mousedown(function(){
+            space_enter1++;
+             if(space_enter1==6){
+                alert("乖，答應我不要亂玩背景(〒︿〒)");               
+            } 
+        });
+        $("#man1").mousedown(function(){
+            man_enter1++;
+            $("#space1").removeClass("space_fly");
+            if(man_enter1==3){
+                alert("哼，再玩我就生氣氣了喔"); 
+            }
+             if(man_enter1==4){              
+                $("#man1").addClass("man_enter_space");
+                $("#man1").addClass("man_display");
+                $("#space1").addClass("space_wait_fly");     
+            }
+
+        });
 
         //showmodel全屏，偵測手機高度
         let y =$(window).height();
+
         let h =(y-70)+"px";
         //將css的變數取出
             //var bodyStyles = window.getComputedStyle(document.body);
@@ -14,7 +58,7 @@
     
         //判斷是用電腦還手機
         let x= $(window).width(); 
-        alert(x+"and"+y); 
+       //alert(x+"and"+y); 
         if(x>450){
             $("#t_close").show();
             $("#o_close").show();
@@ -55,7 +99,6 @@
         //大學生研究生的動畫
         $(".under").mouseover(function () {
             $(".gra").removeClass("big").addClass("small");
-
         });
         $(".gra").mouseover(function () {
             $(".under").removeClass("big").addClass("small");
@@ -68,8 +111,7 @@
                 $(".under").removeClass("small").addClass("big");
                 $(".gra").removeClass("big").addClass("small");
             }
-        });
-
+        });      
         $(".under").mouseleave(function () {
             if(under==true){
                 $(".under").removeClass("small").addClass("big");
@@ -90,8 +132,14 @@
 
         //大學生研究生選擇
         $(".gra").mousedown(function () {
+            change++;
             gra=true;
             under=false; 
+            $("#space").removeClass("space_fly");
+            if(change==5){ 
+                $("#space1").addClass("space_fly");
+            }
+            
 
             $(".gra").removeClass("small").addClass("big");
             $(".under").removeClass("big").addClass("small");
@@ -103,8 +151,16 @@
 
         });
         $(".under").mousedown(function () {
+            
             under=true;
             gra=false;
+
+            //彩蛋，切換五次後火箭飛走
+            change++;
+            $("#space1").removeClass("space_fly");
+            if(change==5){       
+                $("#space").addClass("space_fly");
+            }           
 
             $(".under").removeClass("small").addClass("big");
             $(".gra").removeClass("big").addClass("small");
@@ -116,7 +172,6 @@
             
         });
        
-
 
     <%_ if (user && user.role === 'admin'){-%>
 
