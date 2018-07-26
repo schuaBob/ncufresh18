@@ -4,11 +4,18 @@
         e.preventDefault();
     });
 
+    var last_slide_id = 0, ifHide, ifRun = 0;
     $(document).ready(function(){
-        var ifHide = 1;
+        ifHide = 1;
         $('.hide2').slideUp();
         $('.expendImg').click(function(){
             if(ifHide == 1){
+                if(last_slide_id != 0){
+                    $(last_slide_id).slideUp();
+                    $(last_slide_id).addClass("dropdown_hide");
+                    $(last_slide_id).removeClass("dropdown_show");
+                    last_slide_id = 0;
+                }
                 $('#downNav').slideDown();
                 $('#downNav').addClass("show2");
                 $('#downNav').removeClass("hide2");
@@ -23,8 +30,8 @@
         });
     });
     
-    var last_slide_id = 0;
     $(document).ready(function(){ 
+        last_slide_id = 0;
         $('.hide1').slideUp();
         $('.clk').click(function(){
             var id = $(this).attr("id"),
@@ -154,8 +161,8 @@
         } );
     } );
 
-    var last_slide_id = 0;
     $(document).ready(function(){ 
+        last_slide_id = 0;
         $('.dropdown_hide').slideUp();
         $('.show_dropdown').click(function(){
             var id = $(this).attr("id"),
@@ -165,6 +172,12 @@
                     $(last_slide_id).slideUp();
                     $(last_slide_id).addClass("dropdown_hide");
                     $(last_slide_id).removeClass("dropdown_show");
+                }
+                if(ifHide == 0){
+                    $('#downNav').slideUp();
+                    $('#downNav').addClass("hide2");
+                    $('#downNav').removeClass("show2");
+                    ifHide = (ifHide + 1) % 2;
                 }
                 $(sub_id).slideDown();
                 $(sub_id).addClass("dropdown_show");
@@ -254,4 +267,12 @@
         $(".descArea").empty();
     });
     
+    $(document).ready(function(){        
+        setInterval(function(){
+            var slides = document.getElementsByClassName("mySlides");
+            if(slides.length != 0){
+                plusSlides(-1);
+            }
+        }, 5000); 
+    })
 </script>

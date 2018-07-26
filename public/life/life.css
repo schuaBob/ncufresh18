@@ -110,14 +110,14 @@ ul li{
 .selectbar{
     position: relative;
     width: 400px;
-    height: 200px;
+    height: 150px;
 }
 .mainTitle{
     position: absolute;
-    top: -8vh;
+    top: -6vh;
     left: 0vw;
-    width: 300px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
     z-index: 0;
 }
 #footered{
@@ -246,15 +246,15 @@ ul li{
     cursor: pointer;
 }
 .selectbar a{
-    font-size: 30px;
+    font-size: 25px;
     text-align: center;
 }
 .icon{
     position: absolute;
-    top: 12vh;
-    left: 42vw;
-    height: 650px;
-    width: 650px;
+    top: 10vh;
+    left: 38vw;
+    height: 600px;
+    width: 600px;
 }
 .mapClass{
     width: 650px;
@@ -315,7 +315,7 @@ ul li{
 }
 .navSubBtn{
     position: relative;
-    right: 30px;
+    right: 20px;
     width: 160px;
 }
 #sideNav.activeNav{
@@ -333,3 +333,8 @@ ul li{
     height: 440px;
 }
 */ 
+/*
+body > main > div > div > ul > li > a{
+    color: red;
+}
+*/

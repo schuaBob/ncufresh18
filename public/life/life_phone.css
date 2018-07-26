@@ -1,9 +1,22 @@
 html, body{
-    overflow-y: hidden;
     background-color: rgb(249, 242, 234);
 }
 ul li{
     list-style-type:none;
+}
+@media screen and (max-height: 500px){
+    .bode{
+        height: 600px;
+    }
+}
+@media screen and (min-height: 500px){
+    .bode{
+        height: 100vh;
+    }
+    html, body{
+        overflow-y: hidden;
+        overflow-x: hidden;
+    }
 }
 .icon{
     margin:auto;
@@ -46,7 +59,8 @@ select {
 .dropdown_hide, .dropdown_show{
     position: relative;
     top: -50px;
-    left: 180px;
+    left: 170px;
+    width: 150px;
     z-index: 100;
 }
 .dropdown_hide{
@@ -65,7 +79,7 @@ select {
     background-color:  #D2D7D3;   
 }
 .bar{
-    width: 180px;
+    width: 170px;
     height: 50px;
     -moz-border-radius: 20px;
     -webkit-border-radius: 20px;
@@ -89,13 +103,14 @@ hr{
 .middle{
     position: absolute;
     top: 37vh;
+    margin-top: -55px;
     left: 45vw;
     font-size: 30px;
     z-index: 2;
 }
 .pictureArea{
     position: absolute;
-    top: 10vh;
+    top: 12vh;
     left: 2vw;
     width: 96vw;
     height: 58vh;
@@ -159,18 +174,18 @@ hr{
 }
 .backenArrow{
     position: absolute;
-    top: 7vh;
-    height: 4vh;
-    width: 12vw;
+    top: 10vh;
+    height: 5vh;
+    width: 13vw;
     visibility: hidden;
     z-index: 3;
 }
 .expendImg{
     position: absolute;
-    bottom: 5vh;
+    bottom: 8vh;
     right: 2vw;
-    height: 6vh;
-    width: 12vw;
+    height: 40px;
+    width: 60px;
     z-index: 5;
 }
 /*
@@ -189,10 +204,9 @@ hr{
 */
 .hide2, .show2{
     position: absolute;
-    right: -10vw;
-    bottom: 2vh;
-    width: 180px;
-    height: 340px;
+    right: 0vw;
+    bottom: 10vh;
+    height: 300px;
     z-index: 1; 
 }
 .hide2{
@@ -206,7 +220,7 @@ hr{
     opacity: 1;
 }
 #navi{
-    overflow: auto;
+    overflow: hidden;
 }
 .navSubBtn{
     position: relative;
