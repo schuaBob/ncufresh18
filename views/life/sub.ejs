@@ -4,11 +4,11 @@
     <% include ../layout/head %>
     <link rel=stylesheet type="text/css" href="../life/life.css">
 </head>
-<body> 
+<body style="background-image: url('backstar.png'); background-repeat: no-repeat;  background-size:cover; background-attachment: fixed; height: 100vh;"> 
     <header>
         <% include ../layout/navbar %>
     </header>
-    <main style="background-image: url('backstar.png'); background-repeat: no-repeat;  background-size:cover; background-attachment: fixed; height: 100vw;">
+    <main>
         <%_ if (user && user.role === 'admin'){ -%>
             <% include modify %>
         <%_ } -%>
@@ -32,12 +32,6 @@
                     document.location.href = "/life/<%= page %>_phone";
             });
         });
-        $(document).ready(function(){
-            setInterval(function(){
-                plusSlides(-1);
-            }
-            ,5000); 
-        })
     </script>
 </body>
 </html>

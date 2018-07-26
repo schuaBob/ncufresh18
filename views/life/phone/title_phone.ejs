@@ -30,14 +30,14 @@
             <% if (life[i].type == page) { %>
                 <div class="selectbar">
                 <% if(life[i].subTitle.length != 0) { %>
-                    <div class="bar"><a class="show_dropdown" id="<%=num%>_<%=cnt%>" href="#"><%=life[i].mainTitle%></a></div>
+                    <div class="bar"><a class="show_dropdown" id="<%=num%>_<%=cnt%>"><%=life[i].mainTitle%></a></div>
                     <div class="dropdown_hide" id="<%=num%>_<%=cnt%>_sub">
                         <% for(var j=0 ; j<life[i].subTitle.length ; j++) { %>
-                           <div class="subar"><a class="showDetail_phone" id="<%=life[i].mainTitle%>_<%=life[i].subTitle[j]%>" href="#"><%=life[i].subTitle[j]%></a></div>
+                           <div class="subar"><a class="showDetail_phone" id="<%=life[i].mainTitle%>_<%=life[i].subTitle[j]%>" ><%=life[i].subTitle[j]%></a></div>
                         <% } %>  
                     </div>
                 <% } else { %>
-                    <div class="bar"><a class="showDetail_phone" id="<%=life[i].mainTitle%>_default" href="#"><%=life[i].mainTitle%></a></div>
+                    <div class="bar"><a class="showDetail_phone" id="<%=life[i].mainTitle%>_default"><%=life[i].mainTitle%></a></div>
                 <% } %>  
                 </div>
                 <% cnt = cnt + 1 %>
