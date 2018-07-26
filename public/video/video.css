@@ -123,6 +123,7 @@ iframe {
     body{
         background-image:url("background.png");
         background-repeat: no-repeat;
+        height: 100vh;
     }
     .bigCD_position_in, .bigCD_position_out {
         opacity: 0;
@@ -180,7 +181,7 @@ iframe {
         position: relative;
         margin-left: auto;
         margin-right: auto;
-        top: 20vh;
+        top: 16vh;
     }
 
     .item {
@@ -217,7 +218,7 @@ iframe {
         -o-transition: bottom 1s, opacity 0.5s ease-out;/* Opera 12.1   */
         transition: bottom 1s, opacity 0.5s ease-out;
         opacity: 1;
-        bottom: 10vh;
+        bottom: 14vh;
     }
     
     .remove_cd {
