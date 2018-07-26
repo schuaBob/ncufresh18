@@ -6,7 +6,10 @@ var UserScore = require('../models/smallgame/score');
 
 /* 小遊戲首頁 */
 router.get('/', function(req, res, next) {
-  res.render('smallgame/index', { title: '小遊戲' , user: req.user});
+  UserScore.find({}, 'avatar id').sort({ score_high: -1}).exec(function(err, result) {
+    if (err) throw err;
+    res.render('smallgame/index', { title: '小遊戲' , user: req.user, result: result});
+  })
 });
 
 // 上傳分數
@@ -151,16 +154,18 @@ router.post('/setScore', function (req, res, next) {
 router.get('/getScore', function(req, res, next){
   var type = req.query.type;
   if (type === 'high') {
-    UserScore.find({ score_high: { $gte: 0 }}, 'name score_high avatar').sort({ score_high: -1}).limit(10).exec(function(err, result) {
+    UserScore.find({ score_high: { $gte: 0 }}, 'id name score_high avatar').sort({ score_high: -1}).limit(10).exec(function(err, result) {
       if (err) throw err;
       res.send(result);
     }) 
   } else {
-    UserScore.find({ score_sum: { $gte: 0 }}, 'name score_sum avatar').sort({ score_sum: -1}).limit(10).exec(function(err, result) {
+    UserScore.find({ score_sum: { $gte: 0 }}, 'id name score_sum avatar').sort({ score_sum: -1}).limit(10).exec(function(err, result) {
       if (err) throw err;
       res.send(result);
     }) 
   }
 });
+
+
 
 module.exports = router;
