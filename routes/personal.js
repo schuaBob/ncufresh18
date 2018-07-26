@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
   console.log(req.user) ;
   fs.access("public/personal/bighead/"+req.user.id+".png", fs.constants.R_OK, (err) => {
     if(err){
-      picname = "預設頭貼.png" ;
+      picname = "default.png" ;
     }
     else{
       picname = req.user.id+".png" ;
@@ -33,6 +33,17 @@ var upload = multer({ storage: storage });
 router.post('/editPicture', upload.single('picture') , function(req,res,next){
       res.redirect('/');
 })
+
+/* 拿發問紀錄 */
+router.get('/', function(req, res, next) {
+  Question.find({Answer:{$nin:[""]}}).exec(function(err, question){
+    if(err){return next(err)};
+    res.render('qna/index',{
+      question:question,
+      user:req.user
+    });
+  });
+});
 
 
 /* 拿分數*/
