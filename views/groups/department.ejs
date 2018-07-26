@@ -19,8 +19,9 @@
             <li class="breadcrumb-item"><a href="/groups/community" id="text">其他學生組織</a></li>
           </ol>
       </nav>
+      <img src="標題_去被.png" class="titleup">
       <div id="cellup">
-        <img src="系所社團畫框上_去被.png" class="sideup">
+        <img src="系所社團畫框上(修)_去被.png" class="sideup">
         <img src="系所社團電子框上_去被.png" class="boxup">
         <div class="buttonup" id="cellbut">
           <% for(let p = 1; p<=8 ; p++) {%>
@@ -181,19 +182,26 @@
                     <div class="container">
                       <div id="scroll_nav">
                         <ul class="nav nav-pills flex-column" id="nav_ul">
-                          <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#introduction_<%= department[i].name %>">系所介紹</a></li>
-                          <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#organization_<%= department[i].name %>">系學會</a></li>
-                          <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#activity_<%= department[i].name %>">系所活動</a></li>
-                          <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#team_<%= department[i].name %>">系隊</a></li>
-                          <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#course_<%= department[i].name %>">系上課程</a></li> <!-- 之後跟影音專區拿影片 -->
-                          <li id="modal_button"><a data-toggle="pill" id="nav_a" href="#lightning_round_<%= department[i].name %>">快問快答</a></li>
+                          <li id="modal_button"><a class="nav-link active" data-toggle="pill" id="nav_a" href="#introduction_<%= department[i].name %>">系所介紹</a></li>
+                          <% if(department[i].name[department[i].name.length-1] === "系"){ %>
+                            <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#organization_<%= department[i].name %>">系學會</a></li>
+                            <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#activity_<%= department[i].name %>">系所活動</a></li>
+                            <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#team_<%= department[i].name %>">系隊</a></li>
+                            <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#course_<%= department[i].name %>">系上課程</a></li> 
+                            <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#lightning_round_<%= department[i].name %>" ytID='<%= QAvideo[i].insert %>'> 快問快答</a></li><!-- 之後跟影音專區拿影片 -->
+                          <%}%>
+                          <% if(department[i].name[department[i].name.length-1] === "所"){ %>
+                            <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#organization_<%= department[i].name %>">知道更多</a></li>
+                          <%}%>
                         </ul>
                       </div>
                       <div class="tab-content">
-                          <div id="introduction_<%= department[i].name %>" class="tab-pane fade in">
-                            <h5>系所介紹</h5>  
-                            <h6><%- department[i].introduction %></h6>  
-                          </div>
+                        <div id="introduction_<%= department[i].name %>" class="tab-pane active">
+                          <h5>系所介紹</h5>  
+                          <h6><%- department[i].introduction %></h6>  
+                        </div>
+                        <!-- 區分系.所的modal內容 -->
+                        <% if(department[i].name[department[i].name.length-1] === "系"){ %>
                           <div id="organization_<%= department[i].name %>" class="tab-pane fade in">
                             <h5>系學會</h5>
                             <h6><%- department[i].organization %></h6>
@@ -211,13 +219,22 @@
                             <h6><%- department[i].course %></h6>
                           </div>
                           <div id="lightning_round_<%= department[i].name %>" class="tab-pane fade in">
+                            <h5>快問快答</h5>
                             <div class='CDplayer'><!--影片-->
                               <% for(let i = 0;　i<QAvideo.length;　i++){ %>
                                   <div id='<%= QAvideo[i].insert %>' class='player'></div>
                               <% } %>
                             </div>
                           </div>
-                        </div>
+                        <% } %>
+                        <!-- 區分系.所的modal內容 -->
+                        <% if(department[i].name[department[i].name.length-1] === "所"){ %>
+                          <div id="organization_<%= department[i].name %>" class="tab-pane fade in">
+                            <h5></h5>
+                            <h6><%- department[i].organization %></h6>
+                          </div>
+                        <% } %>
+                      </div>
                     </div> 
                   </div>
                   <div class="modal-footer">

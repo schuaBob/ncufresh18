@@ -387,6 +387,42 @@ router.post('/cominsert_img',  checkuser.isAdmin, (req, res, next) => {
   });
 })
 
-
+// 給ajax拿資料的各路由
+router.get("/clubmodal",function(req,res,next) {
+  club.findById(req.query.id).exec(function(err,data_club) {
+    if(err) {
+      return next(err);
+    }
+    console.log(data_club);
+    res.send(data_club);
+  });
+});
+router.get("/depmodal",function(req,res,next) {
+  club.findById(req.query.id).exec(function(err,data_dep) {
+    if(err) {
+      return next(err);
+    }
+    console.log(data_dep);
+    res.send(data_dep);
+  });
+});
+router.get("/commodal",function(req,res,next) {
+  club.findById(req.query.id).exec(function(err,data_com) {
+    if(err) {
+      return next(err);
+    }
+    console.log(data_com);
+    res.send(data_com);
+  });
+});
+router.get("/stumodal",function(req,res,next) {
+  club.findById(req.query.id).exec(function(err,data_stu) {
+    if(err) {
+      return next(err);
+    }
+    console.log(data_stu);
+    res.send(data_stu);
+  });
+});
 
 module.exports = router;
