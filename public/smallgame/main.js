@@ -276,12 +276,10 @@ var quiz = [
 ];
 
 // ajax 請求 
-var url = '/smallgame';
-console.log(url)
 function setScore(score) {
     $.ajax({
         data: {score: score},
-        url: url + "/setScore",
+        url: "/smallgame/setScore",
         cache: false,
         type: "post",
         success: function(data) {
@@ -294,11 +292,24 @@ function setScore(score) {
 }
 
 
+// 血小板
+function createCute() {
+    var cuteGroup = game.add.group()
+    var cute1 = cuteGroup.create(0, 0, 'cute').alignIn(bg, Phaser.BOTTOM_RIGHT)
+    var cute2 = cuteGroup.create(0, 0, 'cute').alignIn(bg, Phaser.BOTTOM_LEFT)
+    cute1.animations.add('jump')
+    cute1.play('jump', 15, true)
+    cute2.animations.add('jump')
+    cute2.play('jump', 15, true)
+}
+
+
 // 遊戲主體長寬
 var width = 800
 var height = 600
 var rankClick = 0
 var score = 0
+var bgMusicFlag = 0
 var game = new Phaser.Game(width, height, Phaser.CANVAS, 'game')
 
 var states = {
@@ -307,12 +318,12 @@ var states = {
     	this.preload = function() {
             // 手機屏幕適應             未完成！！！
             if (!game.device.desktop) {
-                Phaser.Canvas.setTouchAction(game.canvas, 'pan-y')
-                Phaser.Canvas.setUserSelect(game.canvas, 'all')
+                // Phaser.Canvas.setTouchAction(game.canvas, 'pan-y')
+                // Phaser.Canvas.setUserSelect(game.canvas, 'all')
                 game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
-                // game.scale.fullScreenscaleMode = Phaser.ScaleManager.EXACT_FIT
-                // game.scale.pageAlignHorizontally = true
-                // game.scale.pageAlignVertically = true
+                game.scale.fullScreenscaleMode = Phaser.ScaleManager.EXACT_FIT
+                game.scale.pageAlignHorizontally = true
+                game.scale.pageAlignVertically = true
             }
             game.state.backgroundColor = '#000000'
             // 載入資源
@@ -352,9 +363,17 @@ var states = {
             game.load.image('question', 'images/question.png')
             game.load.spritesheet('btnBack', 'images/back.png', 60, 60)
             game.load.spritesheet('blank', 'images/blank.png', width, height)
-
             game.load.spritesheet('cute', 'images/cute/cute.png', 200, 213)
+            game.load.audio('correct', 'sounds/correct.mp3')
+            game.load.audio('wrong', 'sounds/wrong.mp3')
+            game.load.audio('bgMusic', 'sounds/lovelyflower.mp3')
             
+            game.load.image('imagesNo1', '../personal/bighead/<%= user.avatar %>')
+
+            game.load.image('imagesNo1', '../personal/bighead/1st.png')
+            game.load.image('imagesNo2', '../personal/bighead/2ed.png')
+            game.load.image('imagesNo3', '../personal/bighead/3rd.png')  
+
             // 添加進度提示
             var progressText = game.add.text(game.world.centerX, game.world.centerY, '0%', {
                 font: '60px myFont',
@@ -383,9 +402,14 @@ var states = {
     // 开始界面
     main: function() {
         this.create = function() {
+            // 遊戲背景音樂
+            if (bgMusicFlag !== 1) {
+                game.add.audio('bgMusic', 1, true).play()
+                bgMusicFlag = 1
+            }
             // 設置背景邊界
             game.world.setBounds(0, 0, 800, 3910);
-            
+
             // 背景
             var bg = game.add.image(0, 0, 'bg')
             
@@ -397,15 +421,6 @@ var states = {
             introduction.visible = false
             var btnBack = game.add.button(600, 3400, 'btnBack', btnBackClick)
             btnBack.visible = false
-
-            // 血小板
-            var cuteGroup = game.add.group()
-            var cute1 = cuteGroup.create(0, 0, 'cute').alignIn(bg, Phaser.BOTTOM_RIGHT)
-            var cute2 = cuteGroup.create(0, 0, 'cute').alignIn(bg, Phaser.BOTTOM_LEFT)
-            cute1.animations.add('jump')
-            cute1.play('jump', 15, true)
-            cute2.animations.add('jump')
-            cute2.play('jump', 15, true)
 
             // 按鈕
             var buttonStart
@@ -683,6 +698,8 @@ var states = {
                     choiceState = 1
                     // 選擇正確
                     if (item.rightOrWrong === true) {
+                        // 音樂
+                        game.add.audio('correct', 1).play()
                         // 添加松鼠一隻
                         squirrelGroupY -= 40
                         createSquirrel(squirrelGroupY)
@@ -719,6 +736,9 @@ var states = {
                         }
                         setTimeout(resetQuestionAndChoice, 500, data[count], item)
                     } else {
+                        // 音樂
+                        game.add.audio('wrong', 1).play()
+
                         combo = 0
                         item.frame = 1
                         // 屏幕抖動效果
@@ -749,7 +769,7 @@ var states = {
     },
     
     rank: function () {
-        this.create = function () {
+        this.create = function() {
             var rank = game.add.image(game.camera.x, game.camera.y, 'rankStage')
             var alignLine = game.add.group()
             var alignLineY = 117
@@ -759,6 +779,7 @@ var states = {
             
             // 右邊氣泡
             function createBubble(data, type) {
+                    
                 var style = {
                     'font': 'Microsoft Yahei',
                     'fontSize': '25px'
@@ -768,14 +789,19 @@ var states = {
                     'fontSize': '25px'
                 }
                 // 左邊領獎台
-                var rankLeftSprite = game.add.image(0, 0, 'rankLeft').alignIn(rank, Phaser.LEFT_CENTER, -20, 70)
-                rankLeftSprite.alpha = 1
-                // var rankLeftX = -240
+                var rankLeftImage = game.add.group()
+                var rankLeftSprite = rankLeftImage.create(0, 0, 'rankLeft').alignIn(rank, Phaser.LEFT_CENTER, -20, 70)
+                rankLeftImage.create(0, 0, 'imagesNo1').alignTo(rankLeftSprite, Phaser.TOP_CENTER, 0, 40)
+                rankLeftImage.create(0, 0, 'imagesNo2').alignTo(rankLeftSprite, Phaser.TOP_CENTER, 75, -20)
+                rankLeftImage.create(0, 0, 'imagesNo3').alignTo(rankLeftSprite, Phaser.TOP_CENTER, -80, -40)
+                rankLeftImage.setAll('alpha', 1);
+
                 var rankLeft = game.add.group()
                 rankLeft.classType = Phaser.Text
                 rankLeft.create(0, 0, data[0].name).alignTo(rankLeftSprite, Phaser.TOP_CENTER)
                 rankLeft.create(0, 0, data[1].name).alignTo(rankLeftSprite, Phaser.TOP_CENTER, 75, -60)
                 rankLeft.create(0, 0, data[2].name).alignTo(rankLeftSprite, Phaser.TOP_CENTER, -80, -80)
+
                 if (type === 'sum') {
                     rankLeft.create(0, 0, data[0].score_sum, styleNum).alignTo(rankLeftSprite, Phaser.BOTTOM_CENTER);
                     rankLeft.create(0, 0, data[1].score_sum, styleNum).alignTo(rankLeftSprite, Phaser.BOTTOM_CENTER, 75);
@@ -787,11 +813,11 @@ var states = {
                 }
                 
                 rankLeft.setAll('alpha', 1);
-                game.add.tween(rankLeftSprite).from({alpha: 0}, 800, Phaser.Easing.Exponential.In, true)                                
+                game.add.tween(rankLeftImage).from({alpha: 0}, 800, Phaser.Easing.Exponential.In, true)                                
                 
-                rankLeft.alpha = 1
                 game.add.tween(rankLeft).from({alpha: 0}, 1500, Phaser.Easing.Exponential.In, true)            
 
+                // 右邊動畫
                 for(i = 3; i < 10; i++) {
                     // 立即函數，立刻執行
                     (function(i) {
@@ -819,17 +845,19 @@ var states = {
                         },  i * 200) 
                     })(i)
                 }
+
             }
             
             function getScore(type) {
                 $.ajax({
                     data: {type: type},
-                    url: url + "/getScore",
+                    url: "/smallgame/getScore",
                     dataType: 'text',
                     cache: false,
                     type: "get",
                     success: function(data) {
                         console.log(data)
+                        
                         if (type === 'sum') {
                             createBubble(JSON.parse(data), 'sum')
                         } else {
