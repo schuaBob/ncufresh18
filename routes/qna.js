@@ -3,11 +3,14 @@ var mongoose=require('mongoose');
 require('../models/qna/qna');
 var Question=mongoose.model('Question');
 var Rule =mongoose.model('Rule');
+var deleteReason =mongoose.model('deleteReason');
 var router = express.Router();
 
 
 /* Q&A首頁 */
 router.get('/', function(req, res, next) {
+  res.locals.user = req.session.user ;
+  res.locals.role = req.session.role;
   Rule.find().exec(function(err, rule){
     //管理員的話才顯示未回答的問題
     if(req.user && req.user.role==="admin"){
@@ -126,7 +129,7 @@ router.post('/addq',isLoggedIn,function(req,res,next){
         Question.findById(req.params.id).exec(function(err,result){
           if(err){return next(err)};
           if(result!==null){
-            Question.update({_id:req.params.id}, {Answer:req.body.Answer},{CreateDate:Date.now()},function(err){
+            Question.update({_id:req.params.id},{Type:req.body.Type},{Answer:req.body.Answer},{CreateDate:Date.now()},function(err){
               if(err)
               console.log('Fail to update article.');
               else
@@ -147,10 +150,8 @@ router.get('/search',function(req,res,next){
   //console.log(req.query);
   if(req.query.keyword){
     console.log(req.query.keyword);
-    //模糊查詢參數
-    var query={};
-    query['Title']=new RegExp(req.query.keyword);
-    Question.find(query ,function(err,question,rule){
+    //模糊查詢參數，標題跟答案都要找
+    Question.find({$or : [ {Title : {$regex : req.query.keyword}},{Answer : {$regex :req.query.keyword}}]}).exec(function(err,question,rule){
       if(err){return next(err)};
       //轉換時間欄位
       var Time = function(date) {
@@ -177,15 +178,23 @@ router.get('/clickQ/:id', function(req, res, next) {
   if(mongoose.Types.ObjectId.isValid(req.params.id)){
     Question.findById(req.params.id,function(err,question){
       if(err){return next(err)};
-       //增加瀏覽次數
-       question.Click++;
-       //儲存瀏覽次數
-      question.save(function(err) {
-         if (err){return next(err);}
-         res.json({
-           click:question.Click
-         });
-      });
+      if(isAdmin){
+        res.json({
+          click:question.Click
+        });
+      }
+      else{
+        //增加瀏覽次數
+        question.Click++;
+        //儲存瀏覽次數
+       question.save(function(err) {
+          if (err){return next(err);}
+          res.json({
+            click:question.Click
+          });
+       });
+
+      }
     });
   }
   else{
@@ -197,15 +206,23 @@ router.get('/clickR/:id', function(req, res, next) {
   if(mongoose.Types.ObjectId.isValid(req.params.id)){
     Rule.findById(req.params.id,function(err,rule){
       if(err){return next(err)};
-       //增加瀏覽次數
-       rule.Click++;
-       //儲存瀏覽次數
-      rule.save(function(err) {
-         if (err){return next(err);}
-         res.json({
-           click:rule.Click
-         });
-      });
+      if(isAdmin){
+        res.json({
+          click:rule.Click
+        });
+      }
+      else{
+
+        //增加瀏覽次數
+        rule.Click++;
+        //儲存瀏覽次數
+       rule.save(function(err) {
+          if (err){return next(err);}
+          res.json({
+            click:rule.Click
+          });
+       });
+      }
     });
   }
   else{
@@ -219,7 +236,7 @@ router.post('/updateA/:id',isAdmin,function(req,res,next){
             if(err){return next(err)};
             //if(result.Username===res.locals.username||req.session.type==="admin"){
             if(req.body.Answer){
-              Question.update({_id:req.params.id}, {Answer:req.body.Answer},function(err){
+              Question.update({_id:req.params.id}, {Type:req.body.Type},{Answer:req.body.Answer},function(err){
                 if(err)
                     console.log('Fail to update answer.');
                 else
@@ -259,12 +276,26 @@ router.get('/deleteQ/:id',isAdmin,function(req,res,next){
           if(err){return next(err)};
           /*真的有這篇文章*/
           if(result!==null){
-                  /*刪除*/
-                  result.remove();
-                  res.json({ id: result._id });
+            var temp = new deleteReason({
+              Username:req.body.Title,
+              QuestionId:req.params.id,
+              Reason: req.body.Reason,
+              CreateDate:Date.now()
+            }).save(function(err){
+              if(err){
+                return next(err);
+                /*刪除*/
+                // result.remove();
+                res.json({ id: result._id });
+              }
+              else{
+                //sendSuccess();
+              }
+              res.redirect('/qna');
+            });
           }
           else{
-            return next(err);
+            res.redirect('/qna');
           }
         });
     }
@@ -272,26 +303,6 @@ router.get('/deleteQ/:id',isAdmin,function(req,res,next){
       return next(err);
     }
 });
-// 使用者刪除問題 
-router.post('/deleteByUser/:id', isLoggedIn, function(req, res, next) {
-  Question.findById(req.params.id, function(err,result) {
-    if (err){return next(err);}
-    //發問者本人且問題還沒被管理員審核才能刪除問題
-    if ((req.user.id === result.Username)&&(result.Answer==="")) {
-      if(result!==null){
-        /*刪除*/
-        result.remove();
-      }
-      else{
-        return next(err);
-      }
-    } 
-    else {
-      return next(err);
-    }
-  });
-});
-
 /*刪除板規*/
 router.get('/deleteR/:id',isAdmin,function(req,res,next){
 
@@ -315,6 +326,49 @@ router.get('/deleteR/:id',isAdmin,function(req,res,next){
         return next(err);
       }
   //}
+});
+// 使用者刪除問題 
+router.post('/deleteByUser/:id', isLoggedIn, function(req, res, next) {
+  Question.findById(req.params.id, function(err,result) {
+    if (err){return next(err);}
+    //發問者本人且問題還沒被管理員審核才能刪除問題
+    if ((req.user.id === result.Username)&&(result.Answer==="")) {
+      if(result!==null){
+        /*刪除*/
+        result.remove();
+      }
+      else{
+        return next(err);
+      }
+    } 
+    else {
+      return next(err);
+    }
+  });
+});
+// 使用者編輯問題 
+router.post('/editByUser/:id', isLoggedIn, function(req, res, next) {
+  Question.findById(req.params.id, function(err,result) {
+    if (err){return next(err);}
+    //發問者本人且問題還沒被管理員審核才能刪除問題
+    if ((req.user.id === result.Username)&&(result.Answer==="")) {
+      if(result!==null){
+        /*編輯*/
+        Question.update({_id:req.params.id}, {Content:req.body.Content},function(err){
+          if(err)
+              console.log('Fail to update question.');
+          else
+              console.log('Done');
+        });
+      }
+      else{
+        return next(err);
+      }
+    } 
+    else {
+      return next(err);
+    }
+  });
 });
 //判斷是否登入
 function isLoggedIn(req, res, next) {

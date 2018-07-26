@@ -1,0 +1,56 @@
+#sideNav {
+    background: url(太空電梯導管_去被.png);
+    background-size: cover;
+    width: 230px;
+    left:0;
+    /* width: 200px; */
+    z-index: 1000;
+    /* position: fixed; */
+    /* transform: translate(-200px); */
+    background-color: rgba(77, 192, 199, 0.2);
+}
+
+.nav-toggle-btn {
+    background: url(飛碟素材.png);
+    background-size: 150px 100px;
+    background-color: transparent;
+    border-color: transparent;
+    width: 150px;
+    height:100px;
+    transform: translate(-75px);
+    top:100px;
+    z-index: 1000;
+    display: block;
+    position: absolute;
+    transition: transform 1s ease;
+}
+
+/* #sideNav.active-nav {
+    transform: translate(100px);
+
+} */
+.nav-toggle-btn.active-nav{
+    transform: translate(1px);
+}
+/* .dropdown-menu{
+    transition: transform 1s ease;
+} */
+.dropdown-item{
+    color: white;
+}
+.dropdown-menu.active-nav{
+    position: absolute;
+    /* left:100px; */
+}
+#navi {
+    left:-1vw;
+    position: absolute;
+    top:200px;
+    overflow: auto;
+    background-color: rgba(255, 255, 255, 0);
+}
+.elev{
+    float: left;
+    /* left:0; 這樣寫fullpage會壞掉不知為何*/
+    width:230px;
+}

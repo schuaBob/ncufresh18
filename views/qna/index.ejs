@@ -84,10 +84,9 @@
                                     <label for="message-text" class="col-form-label">問題內容：</label>
                                     <textarea class="form-control content" id="message-text" name="Content" rows="5"></textarea>
                                 </div>
-                                <!-- <div class="g-recaptcha" data-sitekey="6LeJx2MUAAAAAILzJ8UKyyWzSw1gepCJ16fUoI1G"></div>  -->
                             </div> 
                             <div class="modal-footer">
-                                <input class="btn btn-primary submitbtn" type="submit" value="送 出">
+                                <input class="btn btn-primary submitbtn subQ" type="submit" value="送 出">
                                 <button type="button" class="btn btn-secondary closebtn" data-dismiss="modal">返 回</button>              
                             </div>
                         </form>
@@ -203,7 +202,7 @@
                                         <form name="update" action="/qna/updateR/<%= rule[j].id %>" method="post">
                                                 <div class="modal-body">
                                                     <br>
-                                                    <textarea id="answer" required="required" name="Content" rows="5"><%= rule[j].Content %></textarea>  
+                                                    <textarea id="answer111" required="required" name="Content" rows="5"><%= rule[j].Content %></textarea>  
                                                 </div>
                                                 <div class="modal-footer">
                                                     <input class="btn btn-primary submit submitbtn" type="submit" value="更改板規"></input>
@@ -251,7 +250,7 @@
                                     <td class="admin"  data-toggle="modal" data-target="#<%= question[i].id %>-edit">新增答案</td>
                                 <%} 
                                 %>
-                                <td  class="deleteQ admin" id="<%= question[i].id %>"><a method="get" href="/qna/deleteQ/<%= question[i].id %>" role="button">刪除問題</a></td>
+                                <td  class="admin" data-toggle="modal" data-target="#<%= question[i].id %>-delete" >刪除問題</td>
                             <%}%>
                             <%# /管理員頁面才有的 %>
                         </tr>
@@ -291,10 +290,19 @@
                                             <form name="update" action="/qna/updateA/<%= question[i].id %>" method="post">
                                                     <div class="modal-body"><h5>Question 問題</h5></div>
                                                     <div class="modal-body"><%= question[i].Content %></div>
+                                                    <div class="modal-body form-group">
+                                                        <label for="exampleFormControlSelect1">類別：</label>
+                                                            <select class="form-control type" name="Type" required="required">
+                                                                <option>校園生活</option>
+                                                                <option>學生事務</option>
+                                                                <option>課程相關</option>
+                                                                <option>其他</option>
+                                                            </select>
+                                                    </div>
                                                     <div class="modal-body"><h5>Answer 答案</h5></div>
                                                     <div class="modal-body"><h5>編輯答案</h5>
                                                         <br>
-                                                        <textarea id="<%= i %>"  class="answer" required="required" name="Answer" rows="5"><%= question[i].Answer %></textarea>  
+                                                        <textarea id="answer111 <%= i %>"  class="answer111" required="required" name="Answer" rows="5"><%= question[i].Answer %></textarea>  
                                                     </div>
                                                     <div class="modal-footer">
                                                         <input class="btn btn-primary submit submitbtn" type="submit" value="更改答案">
@@ -307,9 +315,18 @@
                                             <form name="adda" action="/qna/adda/<%= question[i].id %>" method="post">
                                                 <div class="modal-body"><h5>Question 問題</h5></div>
                                                 <div class="modal-body"><%= question[i].Content %></div>
+                                                <div class="modal-body form-group">
+                                                        <label for="exampleFormControlSelect1">類別：</label>
+                                                            <select class="form-control type" name="Type" required="required">
+                                                                <option>校園生活</option>
+                                                                <option>學生事務</option>
+                                                                <option>課程相關</option>
+                                                                <option>其他</option>
+                                                            </select>
+                                                    </div>
                                                 <div class="modal-body"><h5>輸入解答</h5>
                                                     <br>
-                                                    <textarea id="<%= i %>"  class="answer" required="required" name="Answer" rows="5"></textarea>
+                                                    <textarea id="<%= i %>"  class="answer111" required="required" name="Answer" rows="5"></textarea>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <input class="btn btn-primary submit submitbtn" type="submit" value="送出答案"> 
@@ -321,7 +338,30 @@
                                     </div>
                                 </div>
                             </div>
-                        
+                            <%/*刪除問題的modal*/%>
+                            <div class="modal fade bd-example-modal-lg" id="<%= question[i].id %>-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content QA">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">刪除理由</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    
+                                                    <div class="modal-body">
+                                                        <br>
+                                                        <textarea id="delete111" required="required" name="Reason" rows="5"></textarea>  
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <input id="<%= question[i].id %>" class="btn btn-primary deleteQ submit submitbtn" type="submit" value="送出刪除理由"></input>
+                                                        <button type="button" class="btn btn-secondary closebtn" data-dismiss="modal">關 閉</button>
+                                                    </div>    
+                                           
+                                    
+                                    </div>
+                                </div>
+                            </div>
                     <% } %>
                 </tbody>
             </table>

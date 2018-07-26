@@ -1,5 +1,32 @@
 <script>
 $(document).ready(() => {
+    //$(window).resize(function() {
+        var w=$(window).width();
+        var h=$(window).height();
+        // var padW=$('.pad').width();
+        // console.log(padW);
+        // $(".pad").css({'height':h-50,'width':w-300});
+        $(".pad").css({'height':h-50});
+        if(w<600){
+            $('.elev').hide();
+            //$('.pad').hide();
+            //$("body").css({'height':h,'width':w});
+        }
+        else{
+
+        }
+
+    //});
+    //切換字樣
+    // var url = new URL(window.location.href);
+    //     console.log(url);
+    // $("li a[href='#markting'], li a[href='#programming'], li a[href='#art'], li a[href='#video'], li a[href='#ceo']").on('event', function(event) {
+    //     event.preventDefault();
+    //     // Store hash
+    //     var hash = this.hash;
+        
+    // });
+    //fullpage
     $('#fullpage').fullpage({
 		//options here
 		autoScrolling:true,
@@ -15,10 +42,8 @@ $(document).ready(() => {
             console.log("Leaving section" + origin.index);
         },
     });
-    if($("#position").position()===-50){
-        $('#navi').hide();
-
-    }
+    //按鈕動畫
+    $('#navi').hide();
     $('.nav-toggle-btn').on('click', function(e) {
         $('.dropdown-menu').toggleClass('active-nav');
         $('.nav-toggle-btn').toggleClass('active-nav');
