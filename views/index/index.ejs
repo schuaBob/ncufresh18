@@ -2,15 +2,132 @@
 <html>
 <head>
     <% include ../layout/head %>
+    <style>
+        main {
+            margin-top: -56px;
+        }
+        .slider_container{
+            width:  100vw;
+            height: 100vh;
+            display: block;
+        }
+        .img_container {
+            width:  100%;
+            height: 100%;
+            -webkit-animation: round 50s linear infinite;
+            animation: round 50s linear infinite;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
+        .ooooooo {
+            /* min-height: 100vmin;
+            max-height: 100vmax;
+            min-width: 100vmin;
+            max-width: 100vmax; */
+            -webkit-animation: round 50s linear infinite;
+            animation: round 50s linear infinite;
+            object-fit: cover;
+            object-position: 40% center;
+            width: 100vw;
+            height: 100%;
+        }
+    @-webkit-keyframes round {
+        0% {
+            opacity: 0;
+            filter: alpha(opacity=0);
+            object-position: 40% center;
+        }
+        2% {
+            opacity: 1;
+            filter: alpha(opacity=1);
+        }
+        10% {
+            object-position: 50% center;
+        }
+        20% {
+            opacity: 1;
+            filter: alpha(opacity=1);
+        }
+        22% {
+            opacity: 0;
+            filter: alpha(opacity=0);
+            object-position: 60% center;
+        }
+    }
+    @keyframes round {
+        0% {
+            opacity: 0;
+            filter: alpha(opacity=0);
+            object-position: 40% center;
+        }
+        2% {
+            opacity: 1;
+            filter: alpha(opacity=1);
+        }
+        10% {
+            object-position: 50% center;
+        }
+        20% {
+            opacity: 1;
+            filter: alpha(opacity=1);
+        }
+        22% {
+            opacity: 0;
+            filter: alpha(opacity=0);
+            object-position: 60% center;
+        }
+    }
+    .slider_container div:nth-child(5) , #c5 {
+        -webkit-animation-delay: 0s;
+                animation-delay: 0s;
+    }
+
+    .slider_container div:nth-child(4) , #c4 {
+        -webkit-animation-delay: 10s;
+                animation-delay: 10s;
+    }
+
+    .slider_container div:nth-child(3) , #c3 {
+        -webkit-animation-delay: 20s;
+                animation-delay: 20s;
+    }
+
+    .slider_container div:nth-child(2) , #c2 {
+        -webkit-animation-delay: 30s;
+                animation-delay: 30s;
+    }
+
+    .slider_container div:nth-child(1) , #c1 {
+        -webkit-animation-delay: 40s;
+                animation-delay: 40s;
+    }
+    </style>
 </head>
 <body>
     <header>
         <% include ../layout/navbar %>
     </header>
     <main>
-        <h1><%= title %></h1>
-        <a href="/login">登入</a>
-        <a href="/comingsoon">倒數</a>
+        <div class="slider_container">
+            <div class="img_container">
+                <img id="c1" class="ooooooo" src="index/Cosmos01.jpg"/>
+            </div>
+            <div class="img_container">
+                <img id="c2" class="ooooooo" src="index/Cosmos02.jpg"/>
+            </div>
+            <div class="img_container">
+                <img id="c3" class="ooooooo" src="index/Cosmos03.jpg"/>
+            </div>
+            <div class="img_container">
+                <img id="c4" class="ooooooo" src="index/111.jpg"/>
+            </div>
+            <div class="img_container">
+                <img id="c5" class="ooooooo" src="index/未命名.png"/>
+            </div>
+        </div>
     </main>
     <footer>
         <% include ../layout/footer %>
