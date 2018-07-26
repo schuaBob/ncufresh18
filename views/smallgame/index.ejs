@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <% include ../layout/head %>
-    <script src="phaser.min.js"></script>
-    <script src="main.js"></script>
+        <script src="phaser.min.js"></script>
+        <script src="main.js"></script>
+        <style type="text/css">
+            @font-face {
+                font-family: 'myFont';
+                src: url('/smallgame/images/myFont.ttf');
+                font-weight: normal;
+                font-style: normal;
+            }
+        </style>
 </head>
+
 <body>
     <header>
         <% include ../layout/navbar %>
@@ -16,7 +26,8 @@
     <footer>
         <% include ../layout/footer %>
     </footer>
-        <% include ../layout/js %>
+    <% include ../layout/js %>
         <% include js %>
 </body>
+
 </html>

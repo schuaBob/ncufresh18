@@ -24,7 +24,7 @@ String.prototype.insert = function (index, string) {
 var LabelButton = function(rightOrWrong, game, x, y, key, label, callback, callbackContext, overFrame, outFrame, downFrame, upFrame) {
     Phaser.Button.call(this, game, x, y, key, callback, callbackContext, overFrame, outFrame, downFrame, upFrame)    
     this.style = {
-        'font': '25px Microsoft Yahei',
+        'font': '25px Noto Sans TC',
         'fill': 'white'
     }    
     this.rightOrWrong = false
@@ -53,7 +53,7 @@ var LabelSprite = function(game, x, y, key, frame) {
     this.label = new Phaser.Text(game, 0, 0)    
     this.label.anchor.setTo(0.5)    
     this.label.setStyle({
-        font: "30px Microsoft Yahei",
+        font: "30px Noto Sans TC",
         fill: "#ffffff", 
         wordWrap: true, 
         wordWrapWidth: this.width,
@@ -307,10 +307,12 @@ var states = {
     	this.preload = function() {
             // 手機屏幕適應             未完成！！！
             if (!game.device.desktop) {
+                Phaser.Canvas.setTouchAction(game.canvas, 'pan-y')
+                Phaser.Canvas.setUserSelect(game.canvas, 'all')
                 game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
-                game.scale.fullScreenscaleMode = Phaser.ScaleManager.EXACT_FIT
-                game.scale.pageAlignHorizontally = true
-                game.scale.pageAlignVertically = true
+                // game.scale.fullScreenscaleMode = Phaser.ScaleManager.EXACT_FIT
+                // game.scale.pageAlignHorizontally = true
+                // game.scale.pageAlignVertically = true
             }
             game.state.backgroundColor = '#000000'
             // 載入資源
@@ -355,7 +357,7 @@ var states = {
             
             // 添加進度提示
             var progressText = game.add.text(game.world.centerX, game.world.centerY, '0%', {
-                font: '60px Microsoft Yahei',
+                font: '60px myFont',
                 fill: '#ffffff'
             })
             progressText.anchor.setTo(0.5, 0.5)
@@ -444,7 +446,7 @@ var states = {
         this.create = function() {
             var combo = 0
             score = 0
-            var remainTime = 60
+            var remainTime = 6
             game.physics.startSystem(Phaser.Physics.P2JS)
             
             // 設置背景邊界
@@ -475,7 +477,7 @@ var states = {
 
             // 添加 combo
             var comboSprite = game.add.image(0, 0, 'combo').alignTo(cameraFocus, Phaser.RIGHT_CENTER, -140, 40)
-            var comboText = game.add.text(0, 0, '0', {font: "45px Microsoft Yahei"})
+            var comboText = game.add.text(0, 0, '0', {font: "45px myFont"})
             comboText.anchor.setTo(0.5, 0.5)
             comboText.alignTo(comboSprite, Phaser.BOTTOM_CENTER)
             comboSprite.visible = false
@@ -483,7 +485,7 @@ var states = {
 
             // 剩餘時間
             var remainTimeSprite = game.add.sprite(0, 0, 'remainTime').alignIn(cameraFocus, Phaser.TOP_RIGHT, -10, -100)
-            var remainTimeText = game.add.text(0, 0, remainTime.toString(), {font: "45px Microsoft Yahei"})
+            var remainTimeText = game.add.text(0, 0, remainTime.toString(), {font: "45px myFont"})
             remainTimeText.anchor.setTo(0.5, 0.5)
             remainTimeText.alignTo(remainTimeSprite, Phaser.BOTTOM_CENTER, -10)
             
@@ -530,7 +532,7 @@ var states = {
             var squirrelGroupY = 3230
             function createSquirrel(tempY) {
                 // 墜落動畫
-                var fallAnimation = game.add.sprite(squirrelGroupX, game.camera.y - 220, 'squirrelSky', 0)
+                var fallAnimation = squirrelGroup.create(squirrelGroupX, game.camera.y - 220, 'squirrelSky', 0)
                 fallAnimation.animations.add('falldown')
                 fallAnimation.play('falldown', 15, true)
                 
@@ -570,7 +572,7 @@ var states = {
             var scoreQuit = game.add.button(0, 0, 'scoreQuit', scoreQuitClick).alignIn(scoreStage, Phaser.CENTER, -140, 130)
             var scoreAgain = game.add.button(0, 0, 'scoreAgain', scoreAgainClick).alignIn(scoreStage, Phaser.TOP_RIGHT, -50, -50)
             var scoreText = game.add.text(0, 0, '0' ,{
-                font: "50px Microsoft Yahei",
+                font: "50px myFont",
             })
             scoreText.anchor.setTo(0.5, 0.5)
             scoreText.alignIn(scoreStage, Phaser.CENTER)
@@ -685,7 +687,7 @@ var states = {
                         squirrelGroupY -= 40
                         createSquirrel(squirrelGroupY)
                         // 加分, combo
-                        score += 100
+                        score += 1000
                         combo++
                         var goal = choiceBonus(combo)
                         // 選項顏色反饋, 變綠
@@ -761,6 +763,10 @@ var states = {
                     'font': 'Microsoft Yahei',
                     'fontSize': '25px'
                 }
+                var styleNum = {
+                    'font': 'myFont',
+                    'fontSize': '25px'
+                }
                 // 左邊領獎台
                 var rankLeftSprite = game.add.image(0, 0, 'rankLeft').alignIn(rank, Phaser.LEFT_CENTER, -20, 70)
                 rankLeftSprite.alpha = 1
@@ -768,16 +774,16 @@ var states = {
                 var rankLeft = game.add.group()
                 rankLeft.classType = Phaser.Text
                 rankLeft.create(0, 0, data[0].name).alignTo(rankLeftSprite, Phaser.TOP_CENTER)
-                rankLeft.create(0, 0, data[1].name).alignTo(rankLeftSprite, Phaser.TOP_CENTER, -80, -80)
-                rankLeft.create(0, 0, data[2].name).alignTo(rankLeftSprite, Phaser.TOP_CENTER, 80, -60)
+                rankLeft.create(0, 0, data[1].name).alignTo(rankLeftSprite, Phaser.TOP_CENTER, 75, -60)
+                rankLeft.create(0, 0, data[2].name).alignTo(rankLeftSprite, Phaser.TOP_CENTER, -80, -80)
                 if (type === 'sum') {
-                    rankLeft.create(0, 0, data[0].score_sum, style).alignTo(rankLeftSprite, Phaser.BOTTOM_CENTER);
-                    rankLeft.create(0, 0, data[1].score_sum, style).alignTo(rankLeftSprite, Phaser.BOTTOM_CENTER, -80);
-                    rankLeft.create(0, 0, data[2].score_sum, style).alignTo(rankLeftSprite, Phaser.BOTTOM_CENTER, 80);
+                    rankLeft.create(0, 0, data[0].score_sum, styleNum).alignTo(rankLeftSprite, Phaser.BOTTOM_CENTER);
+                    rankLeft.create(0, 0, data[1].score_sum, styleNum).alignTo(rankLeftSprite, Phaser.BOTTOM_CENTER, 75);
+                    rankLeft.create(0, 0, data[2].score_sum, styleNum).alignTo(rankLeftSprite, Phaser.BOTTOM_CENTER, -80);
                 } else {
-                    rankLeft.create(0, 0, data[0].score_high, style).alignTo(rankLeftSprite, Phaser.BOTTOM_CENTER);
-                    rankLeft.create(0, 0, data[1].score_high, style).alignTo(rankLeftSprite, Phaser.BOTTOM_CENTER, -80);
-                    rankLeft.create(0, 0, data[2].score_high, style).alignTo(rankLeftSprite, Phaser.BOTTOM_CENTER, 80);
+                    rankLeft.create(0, 0, data[0].score_high, styleNum).alignTo(rankLeftSprite, Phaser.BOTTOM_CENTER);
+                    rankLeft.create(0, 0, data[1].score_high, styleNum).alignTo(rankLeftSprite, Phaser.BOTTOM_CENTER, 75);
+                    rankLeft.create(0, 0, data[2].score_high, styleNum).alignTo(rankLeftSprite, Phaser.BOTTOM_CENTER, -80);
                 }
                 
                 rankLeft.setAll('alpha', 1);
@@ -794,11 +800,11 @@ var states = {
                             var temp = alignLine.create(415, alignLineY, 'rankBubble');
                             var scoreText = game.add.text(0, 0, '分數: ', style).alignTo(rankSum, Phaser.BOTTOM_RIGHT, -50, alignLineY - 85);
                             if (type === 'sum') {
-                                var scoreShow = game.add.text(0, 0, data[i].score_sum, style).alignTo(scoreText, Phaser.RIGHT_CENTER);
+                                var scoreShow = game.add.text(0, 0, data[i].score_sum, styleNum).alignTo(scoreText, Phaser.RIGHT_CENTER);
                             } else {
-                                var scoreShow = game.add.text(0, 0, data[i].score_high, style).alignTo(scoreText, Phaser.RIGHT_CENTER);
+                                var scoreShow = game.add.text(0, 0, data[i].score_high, styleNum).alignTo(scoreText, Phaser.RIGHT_CENTER);
                             }
-                            var nth = game.add.text(0, 0, i + 1 + 'th', style).alignTo(scoreText, Phaser.LEFT_CENTER, 165);
+                            var nth = game.add.text(0, 0, i + 1 + 'th', styleNum).alignTo(scoreText, Phaser.LEFT_CENTER, 165);
                             var textName = game.add.text(0, 0, data[i].name, style).alignTo(nth, Phaser.RIGHT_CENTER, 10);
                             
                             rankLine.add(scoreText);

@@ -17,11 +17,17 @@ ul li{
 /* index */
 .middle{
     position: absolute;
-    top: 30vh;
+    top: 54vh;
+    margin-top: -225px;
     left: 49vw;
     font-size: 38px;
     z-index: 2;
 }
+/*
+    top: 30vh;
+    
+    
+*/
 .middle a{
     margin: 14px;
     display:inline-block;
@@ -240,7 +246,7 @@ ul li{
     cursor: pointer;
 }
 .selectbar a{
-    font-size: 25px;
+    font-size: 30px;
     text-align: center;
 }
 .icon{
@@ -326,4 +332,4 @@ ul li{
     width: 180px;
     height: 440px;
 }
-*/
+*/ 
