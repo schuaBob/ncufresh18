@@ -11,6 +11,9 @@
     </header>
     <main>
         <div id="er"></div>
+        <% if (error.length > 0) { %>
+        <div class="alert alert-danger"><%= error[0] %></div>
+        <% } %>
         <form method="post" action="/register">
         <div class="form-group">
             <input type="hidden" class="form-control" name="id" required>

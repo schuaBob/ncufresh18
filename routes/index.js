@@ -342,7 +342,7 @@ router.get('/register', function (req, res, next) {
   res.render('login/register', { title: '註冊', user: req.user  });
 });
 
-router.post('/register', function (req, res) {
+router.post('/register', function (req, res,next) {
   //Backend Validation
   let name = req.body.name;
   let password = req.body.password;
@@ -360,20 +360,22 @@ router.post('/register', function (req, res) {
     return console.log(errors[0]);
   }
   Users.findOne({ 'id': id }, function (err, obj) {
-    if (err) {
-      res.redirect('login');
-      return next(err);
+    if (err)
+      return res.redirect('/');
+    if(!obj){
+      req.flash('error','不被允許註冊的學號');
+      return res.redirect('login');
     }
-    if(!obj)
-       return res.redirect('register?id=' + id);
-    if (obj.name !== name) {
+
+    if (obj.name !== name){
+      console.log('Name not match');
+      req.flash('error','請確認姓名輸入是否正確');
       return res.redirect('register?id=' + id);
     }
-    //If found,try to login
     else{
         obj.password = password;
       //Create password for the user in database
-      Users.createUser(obj, function (err, user) {
+      Users.createUser(obj, function (err, user,next) {
         if (err) return next(err);
         else console.log(id + " Created.");
         req.login(user, function (err) {
@@ -382,7 +384,6 @@ router.post('/register', function (req, res) {
           res.redirect('/');
         });
       });
-
     }
   });
 });
