@@ -21,17 +21,9 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 router.post('/editPicture', upload.single('picture') , function(req,res,next){
-  var cuted = req.file.path.split("/"),
-      pathed = cuted[2] + "/" + cuted[3];
-  var newPicture = new picture({
-      number    : req.user.id ,
-      path      : pathed
-  }).save(function(err,doc){
-      if(err){ return next(err);}
-      console.log(doc);
-      res.redirect('back');
-  });
+      res.redirect('/');
 })
+
 
 /* 拿分數*/
 router.get('/getScore' ,function(req, res, next){
