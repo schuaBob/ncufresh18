@@ -11,7 +11,7 @@ Array.prototype.shuffle = function() {
         array[i] = t;
     }
     return array;
-}
+};
 
 // string 插入
 String.prototype.insert = function (index, string) {
@@ -294,14 +294,12 @@ function setScore(score) {
 
 
 // 血小板
-
 function colorEgg() {
     var x = 0, y = 3310;
     for (let i = 0; i < 4; i++) {
         createCute(x, y)
         x += 200
     }
-
 
     function createCute(x, y) {
         var cute = game.add.sprite(x, y, 'cute')
@@ -315,7 +313,6 @@ function colorEgg() {
 var width = 800
 var height = 600
 var rankClick = 0
-var score = 0
 var bgMusicFlag = 0
 var game = new Phaser.Game(width, height, Phaser.CANVAS, 'game')
 
@@ -462,8 +459,8 @@ var states = {
     start: function() {
         this.create = function() {
             var combo = 0
-            score = 0
-            var remainTime = 60
+            var score = 0
+            var remainTime = 6
             game.physics.startSystem(Phaser.Physics.P2JS)
             
             // 設置背景邊界
