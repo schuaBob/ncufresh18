@@ -804,9 +804,15 @@ var states = {
                 game.add.tween(rankLeftImage).from({alpha: 0}, 800, Phaser.Easing.Exponential.In, true)                                
                 
                 game.add.tween(rankLeft).from({alpha: 0}, 1500, Phaser.Easing.Exponential.In, true)            
-                
+		                
+		var bubbleLength
+		if (data.length > 10) {
+			bubbleLength = 10
+		} else {
+			bubbleLength = data.length
+		}
                 // 右邊動畫
-                for(i = 3; i < 10; i++) {
+                for(i = 3; i < bubbleLength; i++) {
                     // 立即函數，立刻執行
                     (function(i) {
                         setTimeout(function () {

@@ -7,7 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('ncufresh18:server');
 var http = require('http');
-
+var fs = require('fs');
 /**
  * Get port from environment and store in Express.
  */
@@ -21,6 +21,10 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
+//https
+var https = require('https');
+var httpsServer = https.createServer({key : fs.readFileSync("/var/ssl/live/csie.ncu.edu.tw/privkey.pem"), cert: fs.readFileSync("/var/ssl/live/csie.ncu.edu.tw/cert.pem")}, app);
+httpsServer.listen(3001);
 /**
  * Listen on provided port, on all network interfaces.
  */
