@@ -293,10 +293,10 @@ function setScore(score) {
 
 
 // 血小板
-function createCute(parent) {
-    var cute2 = cuteGroup.create(0, 0, 'cute').alignIn(parent, Phaser.BOTTOM_LEFT)
-    cute2.animations.add('jump')
-    cute2.play('jump', 15, true)
+function createCute(x, y) {
+    var cute = game.add.sprite(x, y, 'cute')
+    cute.animations.add('jump')
+    cute.play('jump', 15, true)
 }
 
 
