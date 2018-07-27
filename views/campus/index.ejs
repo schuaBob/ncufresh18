@@ -4,6 +4,8 @@
 <head>
     <% include ../layout/head %>
         <link rel="stylesheet" href="campus.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+            crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
@@ -69,7 +71,7 @@
                                         <div class="form-group">
                                             <label class="col-md-4 control-label" for="eleintro">物件說明</label>
                                             <div class="col-lg">
-                                                <textarea class="form-control" rows="8" cols="60" id="eleintro" name="eleintro"></textarea>
+                                                <textarea class="form-control" id="adminta2" rows="8" cols="60" id="eleintro" name="eleintro"></textarea>
                                             </div>
                                         </div>
 
@@ -92,8 +94,11 @@
 
             </div>
             <%_ } -%>
+                
                 <div class="main_list_detail collapse">
                     <li id="listtitle">99</li>
+                    <div id="closemainlist"><img src="close.png"></div>
+
                     <ul>
                         <%for (let i in result) {-%>
                             <li class="elelist" idconnect="<%=result[i]['_id']%>" val="<%=result[i]['Type']%>">
@@ -150,7 +155,6 @@
                                 <h5 class="modal-title"></h5>
                                 <span>
                                     <i class="material-icons">highlight_off</i>
-
                                 </span>
                             </div>
                             <div class="modal-body">
@@ -186,8 +190,8 @@
     <footer id="campusfooter">
         <% include ../layout/footer %>
     </footer>
-    
-        <% include js %>
+
+    <% include js %>
 
 </body>
 

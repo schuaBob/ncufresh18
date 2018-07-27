@@ -126,10 +126,13 @@ body {
   
 }
 .main_list_detail ul {
-  margin: 0;
+  margin-top: 0;
+  margin-right: 0;
+  margin-left: 0; 
   padding: 0;
   max-height: 50vh;
   overflow-y: scroll;
+  margin-bottom: 15px;
   
 }
 .main_list_detail li {
@@ -323,10 +326,29 @@ li {
   background-color: #0f0c2e;
 }
 
+#closemainlist{
+  position: absolute;
+  float: right;
+  top: 15px;
+  right: 15px;
+  width: 10%;
+  z-index: 1;  
+}
+#closemainlist img{
+  width: 100%;
+}
+
+
 @media only screen and (max-width: 767px) {
+  .adminbt {
+    position: fixed;
+    top: 56px;
+    left: 10px;
+    z-index: 10;
+  }
   .modal-dialog {
     min-width: 100vw;
-    min-height: 100vh;
+    min-height: calc(100vh - 56px);
     margin: 0;
   }
   .modal-content {
@@ -376,7 +398,6 @@ li {
   #List_index li {
     margin: calc(8% / 8);
     width: 23%;
-    display: inline-block;
     float: left;
   }
   #List_index li:hover {
@@ -388,12 +409,31 @@ li {
     padding: 0;
   }
   .main_list_detail{
-    position: fixed;
+    position: absolute;
     top: calc(100vh - 24px - 46vw - 8vw/2);
     width: 100vw;
     margin: 0;
     float: none;
     right: unset;
+    max-height: calc(24px + 46vw + 8vw/2)
+  }
+  .main_list_detail ul{
+    max-height: calc(24px + 46vw + 8vw/2 - 60px);
+    overflow: scroll;
+    margin: 0;
+  }
+  .elelist:last-child {
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+    padding: 3%;
+  }
+  #closemainlist{
+    position: absolute;
+    float: right;
+    top: 15px;
+    right: 15px;
+    width: 10%; 
+    z-index: 1; 
   }
   #listtitle {
     margin: 0;
