@@ -1,9 +1,9 @@
 module.exports = {
     isLoggedIn :
         function(req, res, next) {
-            if (req.isAuthenticated())
-                res.redirect('/');
-            return next();
+            if (!req.isAuthenticated()) {}
+                return res.redirect('/');
+            next();
         },
     isAdmin :
         function(req, res, next) {

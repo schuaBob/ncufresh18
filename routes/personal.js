@@ -3,6 +3,9 @@ var router = express.Router();
 var multer = require('multer') ;
 var checkuser = require("./check-user") ;
 var fs = require('fs') ;
+
+var User = require('../models/index/user');
+
 var picname ;
 /* 個人專區首頁 */
 router.get('/', function(req, res, next) {
@@ -24,6 +27,11 @@ var storage = multer.diskStorage({
   filename   : function(req, file, cb){
     console.log(req) ;
     var fileName = req.user.id + ".png";
+    User.update({id: req.user.id}, { $set: {avatar: fileName}}, function(err, result) {
+      if (err) {
+        return next(err);
+      }
+    })
     cb(null, fileName);
   }
 })
