@@ -190,6 +190,13 @@ $(document).ready(() => {
             }
         });
     });
+    //排序按鈕動畫
+    $('.clbtn').on('mouseover', function(){
+        $(this).css({'color':'#0056b3'});
+    });
+    $('.clbtn').on('mouseout', function(){
+        $(this).css({'color':'#FFFFFF'});
+    });
     $(".Time").on('click',function(){
         if (w < 600) {
             //手機版排序按鈕動畫
@@ -244,12 +251,21 @@ $(document).ready(() => {
             url: '/qna/clickQ/' + id,
             method: 'GET',
             success: function(res) {
-            
-                //動態新增點擊次數
-                var objs = $('.' + id).find('.view');
-                console.log(objs);
-                for (var i = 0; i < objs.length; i++) {
-                    objs[i].innerHTML = parseInt(objs[i].innerHTML) + 1;
+                if (user && user.locals.role==='admin'){
+                    var objs = $('.' + id).find('.view');
+                    console.log(objs);
+                    for (var i = 0; i < objs.length; i++) {
+                        objs[i].innerHTML = parseInt(objs[i].innerHTML);
+                    }
+                }
+                else{
+                    //動態新增點擊次數
+                    var objs = $('.' + id).find('.view');
+                    console.log(objs);
+                    for (var i = 0; i < objs.length; i++) {
+                        objs[i].innerHTML = parseInt(objs[i].innerHTML) + 1;
+                    }
+
                 }
         
             }
@@ -264,20 +280,31 @@ $(document).ready(() => {
             url: '/qna/clickR/' + id,
             method: 'GET',
             success: function(res) {
-            
-                //動態新增點擊次數
-                var objs = $('.' + id).find('.view');
-                for (var i = 0; i < objs.length; i++) {
-                    objs[i].innerHTML = parseInt(objs[i].innerHTML) + 1;
+                if (user && user.locals.role==='admin'){
+                    var objs = $('.' + id).find('.view');
+                    console.log(objs);
+                    for (var i = 0; i < objs.length; i++) {
+                        objs[i].innerHTML = parseInt(objs[i].innerHTML);
+                    }
                 }
-        
+                else{
+                    //動態新增點擊次數
+                    var objs = $('.' + id).find('.view');
+                    for (var i = 0; i < objs.length; i++) {
+                        objs[i].innerHTML = parseInt(objs[i].innerHTML) + 1;
+                    }
+            
+
+                }
             }
         })
     })
     //CKEDITOR
     CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
     CKEDITOR.config.shiftEnterMode = CKEDITOR.ENTER_BR; 
-    $('.answer').each(function(e){
+    $('.answer111').each(function(e){
+        CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
+        CKEDITOR.config.shiftEnterMode = CKEDITOR.ENTER_BR; 
         CKEDITOR.replace(this.id,{
         filebrowserUploadUrl: '/uploader',
         });
@@ -290,13 +317,17 @@ $(document).ready(() => {
           url: '/qna/deleteQ/' + this.id
         }).done(function(res) {
           alert('刪除成功');
-          //$('#modal-admin-answer').modal('hide');
+          //關閉視窗
+          $("#"+res.id+"-delete").modal('hide');
           //動態刪除
           $('.' + res.id).remove();
         })
         // .fail(function(err) {
         //   alert('發生錯誤: ' + err);
         // })
+      }
+      else{
+        //$("#"+this.id+"-delete").modal('hide');
       }
     });
     //刪除板規
