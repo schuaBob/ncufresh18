@@ -6,9 +6,33 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var app = express();
 
+//Cache views
+app.set('view cache', true);
+
+
 //We need compression
 var compression = require('compression');
 app.use(compression());
+
+//express-minify
+var minify = require('express-minify');
+app.use(minify());
+
+//express-minify-html
+var minifyHTML = require('express-minify-html');
+app.use(minifyHTML({
+  override:      true,
+  exception_url: false,
+  htmlMinifier: {
+      removeComments:            true,
+      collapseWhitespace:        true,
+      collapseBooleanAttributes: true,
+      removeAttributeQuotes:     true,
+      removeEmptyAttributes:     true,
+      minifyJS:                  true
+  }
+}));
+
 
 //best-practice of security
 const helmet = require('helmet')
@@ -64,7 +88,7 @@ app.use(session({
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+app.use(logger(':method :url :status :response-time ms'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser("NcuFresh18"));
