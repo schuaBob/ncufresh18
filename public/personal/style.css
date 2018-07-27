@@ -61,6 +61,7 @@ table {
 #w2 {
     position: relative;
     color : rgb(203, 138 , 120) ;
+    width : 31vw ;
     top : 3px ;
     left : 10px ;
     font-size: 5vh ;
@@ -97,8 +98,27 @@ table {
 }
 #point {
     position: relative;
-    top :3vh ;
     text-align:center ;
     font-size: 5vw ;
     font-family: 'myFont' ;
+}
+#record {
+    position: relative ;
+    left : 2vw ;
+    width : 31vw ;
+    font-size: 3vh ;
+}
+#Q {
+    width : 20vw ;
+}
+#sta {
+    width: 5vw ;
+}
+#ope {
+    width: 5vw ;
+}
+hr {
+    border: 3px solid white ;
+    width : 80% ;
+    border-radius: 3px ;
 }
