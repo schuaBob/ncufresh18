@@ -18,21 +18,6 @@ app.use(compression());
 var minify = require('express-minify');
 app.use(minify());
 
-//express-minify-html
-var minifyHTML = require('express-minify-html');
-app.use(minifyHTML({
-  override:      true,
-  exception_url: false,
-  htmlMinifier: {
-      removeComments:            true,
-      collapseWhitespace:        true,
-      collapseBooleanAttributes: true,
-      removeAttributeQuotes:     true,
-      removeEmptyAttributes:     true,
-      minifyJS:                  true
-  }
-}));
-
 
 //best-practice of security
 const helmet = require('helmet')
