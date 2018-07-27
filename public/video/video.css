@@ -493,9 +493,12 @@ iframe {
         }
 
         #back {
-            
+            bottom: 5vh;
             margin-bottom: 0;
             margin-left: 3vw;
+        }
+        #back:hover {
+            bottom: 5vh;
         }
         
         .bonus1, .bonus2 {
@@ -705,8 +708,15 @@ iframe {
 
         /* 手機橫向 */
         @media only screen and (max-height: 415px) {
+            .cd {
+                -webkit-transform: translateY(-9vh);
+                -moz-transform: translateY(-9vh);
+                -o-transform: translateY(-9vh);
+                -ms-transform: translateY(-9vh);
+                transform: translateY(-9vh);
+            }
             .bigCD_position_in {
-                top: 76px;
+                top: 73px;
             }
             .bigCD_move {
                 left: 40px;
@@ -726,10 +736,17 @@ iframe {
                 width: 25vw;
                 top: 85vh;
             }
+            #back {
+                bottom: 9vh;
+            }
+            #back:hover {
+                bottom: 9vh;
+            }
         }
 
         /* 電腦 */
         @media only screen and (min-height: 415px) and (max-height: 900px) {
+            
             .bigCD_position_in {
                 top: 94px;
             }
@@ -751,16 +768,22 @@ iframe {
                 width: 15vw;
                 top: 65vh;
             }
+            #back {
+                bottom: 5vh;
+            }
+            #back:hover {
+                bottom: 5vh;
+            }
         }
 
         /* 平板 */
         @media only screen and (min-height: 900px) {
             .cd {
-                -webkit-transform: translateY(4vh);
-                -moz-transform: translateY(4vh);
-                -o-transform: translateY(4vh);
-                -ms-transform: translateY(4vh);
-                transform: translateY(4vh);
+                -webkit-transform: translateY(6vh);
+                -moz-transform: translateY(6vh);
+                -o-transform: translateY(6vh);
+                -ms-transform: translateY(6vh);
+                transform: translateY(6vh);
             }
             .bigCD_position_in {
                 top: 120px;
@@ -782,6 +805,12 @@ iframe {
                 width: 15vw;
                 top: 65vh;
             } 
+            #back {
+                bottom: 4vh;
+            }
+            #back:hover {
+                bottom: 4vh;
+            }
         }
     }
 }
