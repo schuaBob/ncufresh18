@@ -276,22 +276,6 @@ var quiz = [
     { q: '與中央大學服務學習相關資訊需去哪個網站查看?', o: ['lms','portal','國際事務處','中央大學服務學習網'] , correctIndex:3},
 ];
 
-// ajax 請求 
-function setScore(score) {
-    $.ajax({
-        data: {score: score},
-        url: "/smallgame/setScore",
-        cache: false,
-        type: "post",
-        success: function(data) {
-            console.log(data)
-        },
-        error: function (err) {
-            console.log(err)
-        }
-    })
-}
-
 
 // 血小板
 function colorEgg() {
@@ -516,6 +500,22 @@ var states = {
             }, this)
             timer.start()
             
+            // ajax 請求 
+            function setScore(score) {
+                $.ajax({
+                    data: {score: score},
+                    url: "/smallgame/setScore",
+                    cache: false,
+                    type: "post",
+                    success: function(data) {
+                        console.log(data)
+                    },
+                    error: function (err) {
+                        console.log(err)
+                    }
+                })
+            }
+
             function gameOver() {
                 // 更新分數
                 scoreText.setText(score)
