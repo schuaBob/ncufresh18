@@ -284,6 +284,7 @@ function setScore(score) {
         cache: false,
         type: "post",
         success: function(data) {
+            console.log(data)
         },
         error: function (err) {
             console.log(err)
@@ -295,7 +296,11 @@ function setScore(score) {
 // 血小板
 
 function colorEgg() {
-    createCute()
+    var x = 0, y = 3310;
+    for (let i = 0; i < 4; i++) {
+        createCute(x, y)
+        x += 200
+    }
 
 
     function createCute(x, y) {
@@ -314,18 +319,18 @@ var score = 0
 var bgMusicFlag = 0
 var game = new Phaser.Game(width, height, Phaser.CANVAS, 'game')
 
-    // if (!game.device.desktop) {
-    //     alert('no!')
-    //     // game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
-    //     // game.scale.fullScreenscaleMode = Phaser.ScaleManager.EXACT_FIT
-    //     // game.scale.pageAlignHorizontally = true
-    //     // game.scale.pageAlignVertically = true
-    // }
+console.log(game.device)
 var states = {
-	// 加载场景, 載入資源
+    // 加载场景, 載入資源
     preload: function() {
-    	this.preload = function() {
-            // 手機屏幕適應             未完成！！！
+        this.preload = function() {
+            // 禁止手機版
+            if (!this.game.device.desktop == true) {
+                alert('あのね、あのね，請在電腦端體驗小遊戲喔喔喔~')
+                window.location.href = "/personal/"
+                game.kill()
+            }
+
             game.state.backgroundColor = '#000000'
             // 載入資源
             game.load.image('bg', 'images/background.png')
@@ -520,8 +525,8 @@ var states = {
 
                 scoreUI.visible = true
                 scoreUI.alpha = 1
-                playUI.visible = false
                 otherUI.visible = false
+                playUI.visible = false
                 squirrelGroup.visible = false
                 // 添加過渡效果
                 game.add.tween(scoreUI).from({
@@ -692,6 +697,13 @@ var states = {
                 // choiceState 判斷一次答題是否點擊多次
                 if (!choiceState) {
                     count++
+
+                    // 彩蛋觸發 
+                    if (count >= quiz.length) {
+                        // colorEgg()
+                        alert("少俠好功夫，正常人是玩不到這裡的")
+                        gameOver()
+                    }
                     choiceState = 1
                     // 選擇正確
                     if (item.rightOrWrong === true) {
@@ -701,7 +713,7 @@ var states = {
                         squirrelGroupY -= 40
                         createSquirrel(squirrelGroupY)
                         // 加分, combo
-                        score += 1000
+                        score += 100
                         combo++
                         var goal = choiceBonus(combo)
                         // 選項顏色反饋, 變綠
@@ -730,9 +742,10 @@ var states = {
                             game.add.tween(otherUI).to({y: otherUI.y - 40}, 1000, Phaser.Easing.Bounce.Out, true)
                             game.add.tween(scoreUI).to({y: scoreUI.y - 40}, 1000, Phaser.Easing.Bounce.Out, true)         
                             game.add.tween(game.camera).to({y: game.camera.y - 40}, 500, Phaser.Easing.Linear.None, true)
-                        } else if (game.camera.y <= 40) {
-                            createCute()
-                        }
+                        } 
+                        // else if (game.camera.y <= 40) {
+                        //     createCute()
+                        // }
                             setTimeout(resetQuestionAndChoice, 500, data[count], item)
                     } else {
                         // 音樂
@@ -764,6 +777,7 @@ var states = {
             
             // 第一次刷新題目
             resetQuestionAndChoice(data[count])
+            // colorEgg()
         }
     },
     
