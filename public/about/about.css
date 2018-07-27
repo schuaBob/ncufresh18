@@ -10,6 +10,101 @@
         width:50%;
         top:40px;
     }
+    /* 太空小人2位置 */
+    .down.people2{
+        left:28vw;
+        width:15%;
+        height:25%;
+            
+        bottom:30px;
+    }
+    /* 太空小人1位置 */
+    .down.people1{
+        right:10vw;
+        width:10%;
+        height:25%;
+        bottom:20px;
+    }
+    /* 紙箱位置 */
+    .down.paperbox{
+        right:15vw;
+        width:10%;
+        height:25%;
+        bottom:20px;
+    }
+    .down{
+        position: absolute;
+        z-index: 2;
+    
+    }
+    .name{
+        position: absolute;
+        top:125px;
+        right:7vw;
+        width:190px;
+        height:40px;
+        z-index: 5000;
+    }
+    .logo{
+        
+        position: absolute;
+        top:98px;
+        right:36.5vw;
+        width:80px;
+        height:80px;
+        z-index: 5000;
+    }
+    .marktingLogo{
+        background: url(企劃組icon_去被.png);
+        background-size: cover;
+        z-index: 5000;
+    }
+    .programmingLogo{
+        background: url(程設組icon_去被.png);
+        background-size: cover;
+        z-index: 5000;
+    }
+    .artLogo{
+        /* background: url(企劃組icon_去被.png); */
+        background-color: rgb(178, 118, 226);
+        background-size: cover;
+        z-index: 5000;
+    }
+    .videoLogo{
+        background: url(影音組icon.png);
+        background-size: cover;
+        z-index: 5000;
+    }
+    .ceoLogo{
+        background: url(執行組icon去被.png);
+        background-size: cover;
+        z-index: 5000;
+    }
+    .marktingName{
+        background: url(行銷企劃組.png);
+        background-size: 190px 40px;
+        z-index: 5000;
+    }
+    .programmingName{
+        background: url(程式設計組.png);
+        background-size: 190px 40px;
+        z-index: 5000;
+    }
+    .artName{
+        background: url(網頁美工組.png);
+        background-size: 190px 40px;
+        z-index: 5000;
+    }
+    .videoName{
+        background: url(媒體影音組.png);
+        background-size: 190px 40px;
+        z-index: 5000;
+    }
+    .ceoName{
+        background: url(執行組.png);
+        background-size: 190px 40px;
+        z-index: 5000;
+    }
 }
 /* 只有手機板才有的 */
 @media only screen and (max-width:600px){
@@ -24,6 +119,7 @@
     right:0;
     top:40px;
     width:75%;
+    bottom:10px;
 }
 /* 標題 */
 /* h1{
@@ -32,8 +128,10 @@
     top:100px;
 } */
 .aboutUs.title{
-    top:60px;
-    width:20%;  
+    position: absolute;
+    left: 25vw;
+    top:65px;
+    width:25%;  
 }
 .aboutUs{
     position: absolute;

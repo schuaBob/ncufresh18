@@ -17,8 +17,80 @@ $(document).ready(() => {
         }
 
     //});
-    //切換字樣
-    // var url = new URL(window.location.href);
+    //預設logo跟字樣
+    $(".logo").addClass("marktingLogo");
+    $(".name").addClass("marktingName");
+    //切換logo跟字樣
+    $(window).on('hashchange', function() {
+        var hash = window.location.hash.substr(1);
+        console.log(hash);
+        if(hash==="markting"){
+            $(".logo").addClass("marktingLogo");
+            $(".logo").removeClass("programmingLogo");
+            $(".logo").removeClass("artLogo");
+            $(".logo").removeClass("videoLogo");
+            $(".logo").removeClass("ceoLogo");
+
+            $(".name").addClass("marktingName");
+            $(".name").removeClass("programmingName");
+            $(".name").removeClass("artName");
+            $(".name").removeClass("videoName");
+            $(".name").removeClass("ceoName");
+        }
+        else if(hash==="programming"){
+            $(".logo").addClass("programmingLogo");
+            $(".logo").removeClass("marktingLogo");
+            $(".logo").removeClass("artLogo");
+            $(".logo").removeClass("videoLogo");
+            $(".logo").removeClass("ceoLogo");
+
+            $(".name").addClass("programmingName");
+            $(".name").removeClass("marktingName");
+            $(".name").removeClass("artName");
+            $(".name").removeClass("videoName");
+            $(".name").removeClass("ceoName");
+        }
+        else if(hash==="art"){
+            $(".logo").addClass("artLogo");
+            $(".logo").removeClass("marktingLogo");
+            $(".logo").removeClass("programmingLogo");
+            $(".logo").removeClass("videoLogo");
+            $(".logo").removeClass("ceoLogo");
+
+            $(".name").addClass("artName");
+            $(".name").removeClass("programmingName");
+            $(".name").removeClass("marktingName");
+            $(".name").removeClass("videoName");
+            $(".name").removeClass("ceoName");
+        }
+        else if(hash==="video"){
+            $(".logo").addClass("videoLogo");
+            $(".logo").removeClass("marktingLogo");
+            $(".logo").removeClass("programmingLogo");
+            $(".logo").removeClass("artLogo");
+            $(".logo").removeClass("ceoLogo");
+
+            $(".name").addClass("videoName");
+            $(".name").removeClass("programmingName");
+            $(".name").removeClass("artName");
+            $(".name").removeClass("marktingName");
+            $(".name").removeClass("ceoName");
+        }
+        else if(hash==="ceo"){
+            $(".logo").addClass("ceoLogo");
+            $(".logo").removeClass("marktingLogo");
+            $(".logo").removeClass("programmingLogo");
+            $(".logo").removeClass("artLogo");
+            $(".logo").removeClass("videoLogo");
+
+            $(".name").addClass("ceoName");
+            $(".name").removeClass("programmingName");
+            $(".name").removeClass("artName");
+            $(".name").removeClass("videoName");
+            $(".name").removeClass("marktingName");
+        }
+    });
+    // var hash = new URL(window.location.href);
     //     console.log(url);
     // $("li a[href='#markting'], li a[href='#programming'], li a[href='#art'], li a[href='#video'], li a[href='#ceo']").on('event', function(event) {
     //     event.preventDefault();
@@ -43,12 +115,14 @@ $(document).ready(() => {
         },
     });
     //按鈕動畫
-    $('#navi').hide();
+    $('.navi').hide();
+    $('.laser').hide();
     $('.nav-toggle-btn').on('click', function(e) {
         $('.dropdown-menu').toggleClass('active-nav');
         $('.nav-toggle-btn').toggleClass('active-nav');
         if($('.nav-toggle-btn.active')){
-            $('#navi').fadeIn(500);
+            $('.navi').fadeIn(500);
+            $('.laser').fadeIn(500);
         }
 
         e.preventDefault();

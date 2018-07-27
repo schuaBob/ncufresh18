@@ -6,6 +6,7 @@ $(document).ready(() => {
         var w=$(window).width();
         var h=$(window).height();
     // });
+    $(".hideAct").hide();
     if (w < 600) {
         //手機版頁面樣式
         
@@ -310,25 +311,34 @@ $(document).ready(() => {
         });
     });
     //刪除問題
-    $('.deleteQ').on('click', function() {
-      if (confirm("確定要刪除嗎？")) {
-        $.ajax({
-          method: 'GET',
-          url: '/qna/deleteQ/' + this.id
-        }).done(function(res) {
-          alert('刪除成功');
-          //關閉視窗
-          $("#"+res.id+"-delete").modal('hide');
-          //動態刪除
-          $('.' + res.id).remove();
-        })
-        // .fail(function(err) {
-        //   alert('發生錯誤: ' + err);
-        // })
-      }
-      else{
-        //$("#"+this.id+"-delete").modal('hide');
-      }
+    // $('.deleteQ').on('click', function() {
+    //   if (confirm("確定要刪除嗎？")) {
+    //     $.ajax({
+    //       method: 'POST',
+    //       url: '/qna/deleteQ/' + this.id
+    //     }).done(function(res) {
+    //       alert('刪除成功');
+    //       //關閉視窗
+    //       $("#"+this.id+"-delete").modal('hide');
+    //       //區別已送出刪除理由的文章
+    //         $('tr.' + this.id).addClass('gray');
+    //     })
+    //     // .fail(function(err) {
+    //     //   alert('發生錯誤: ' + err);
+    //     // })
+    //   }
+    //   else{
+    //     //$("#"+this.id+"-delete").modal('hide');
+    //   }
+    // });
+    //從管理員端隱藏問題
+    $('td.hide').on('click', function() {
+        //var id = this.id.split('-')[0];
+        //var id=$(this).prop('id');
+        //id顯示是對的，但是不知道為什麼addClass是失敗的
+        console.log(this.id);
+        $('tr.'+this.id).addClass('hideAct');
+        $(".hideAct").hide();
     });
     //刪除板規
     $('.deleteR').on('click', function() {

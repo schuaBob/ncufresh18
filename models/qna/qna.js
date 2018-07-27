@@ -8,6 +8,8 @@ var Question = mongoose.Schema({
     Answer:String,//問題的答案
     CreateDate: Date,//創立日期
     Click: Number,//點擊次數
+    Reason: String, //被刪除理由
+    DeleteDate: Date//被刪除日期
 });
 var Rule = mongoose.Schema({
     Title:String,//板規標題
@@ -16,12 +18,12 @@ var Rule = mongoose.Schema({
     CreateDate:Date,//板規建立日期
     Click:Number//板規點擊數
 });
-var deleteReason =mongoose.Schema({
-    Username:String,//使用者名稱
-    QuestionId: String, //問題標題
-    Reason: String, //被刪除理由
-    CreateDate: Date,//被刪除日期
-});
+// var deleteReason =mongoose.Schema({
+//     Username:String,//使用者名稱
+//     QuestionId: String, //問題標題
+//     Reason: String, //被刪除理由
+//     CreateDate: Date,//被刪除日期
+// });
 module.exports = mongoose.model( 'Question', Question );
 module.exports = mongoose.model( 'Rule', Rule );
-module.exports = mongoose.model( 'deleteReason', deleteReason );
+//module.exports = mongoose.model( 'deleteReason', deleteReason );

@@ -143,6 +143,7 @@
                         <%if(user && user.role==="admin"){%>
                             <th class="admin">解答與否</th>
                             <th class="admin">更改解答</th>
+                            <th class="admin">提出刪除理由</th>
                             <th class="admin">刪除問題</th>
                         <%}%>
                         <%# /管理員頁面才有的 %>
@@ -168,6 +169,7 @@
                             <%if(user &&　user.role==="admin"){%>
                                 <td class="admin">無解答</td>
                                 <td class="admin" data-toggle="modal" data-target="#<%= rule[j].id %>-edit">編輯板規</td>
+                                <td class="admin">無</td>
                                 <td class="deleteR admin" id="<%= rule[j].id %>"><a method="get" href="/qna/deleteR/<%= rule[j].id %>" role="button">刪除板規</a></td>
                                 <%}%>
                         </tr>
@@ -250,7 +252,16 @@
                                     <td class="admin"  data-toggle="modal" data-target="#<%= question[i].id %>-edit">新增答案</td>
                                 <%} 
                                 %>
-                                <td  class="admin" data-toggle="modal" data-target="#<%= question[i].id %>-delete" >刪除問題</td>
+                                <!-- <% if(question[i].Answer) {%>
+                                    <%}%> -->
+                                <% if(question[i].Reason ==="") {%>
+                                        <td class="admin" data-toggle="modal" data-target="#<%= question[i].id %>-delete" >提出刪除理由</td>
+                                    <%}
+                                    else{%>
+                                        <td  class="admin" >已提出</td>
+                                        <%}
+                                    %>
+                                <td class="admin hide" id="<%= question[i].id %>">刪除問題</td>
                             <%}%>
                             <%# /管理員頁面才有的 %>
                         </tr>
@@ -348,7 +359,7 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                    
+                                            <form name="delete" action="/qna/deleteQ/<%= question[i].id %>" method="post">
                                                     <div class="modal-body">
                                                         <br>
                                                         <textarea id="delete111" required="required" name="Reason" rows="5"></textarea>  
@@ -357,7 +368,7 @@
                                                         <input id="<%= question[i].id %>" class="btn btn-primary deleteQ submit submitbtn" type="submit" value="送出刪除理由"></input>
                                                         <button type="button" class="btn btn-secondary closebtn" data-dismiss="modal">關 閉</button>
                                                     </div>    
-                                           
+                                                </form>
                                     
                                     </div>
                                 </div>
