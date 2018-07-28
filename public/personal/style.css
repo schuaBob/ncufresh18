@@ -1,10 +1,6 @@
 .space {
     padding :1vh ;
 }
-table {
-    position: relative;
-    z-index: 1 ;
-}
 #empty {
     height: 40vh ;
     width: 25vw ;
@@ -121,4 +117,25 @@ hr {
     border: 3px solid white ;
     width : 80% ;
     border-radius: 3px ;
+}
+@media only screen and (max-width: 800px) {
+    #canvas {
+        background-image : url("預設封面.png") ;
+        background-position: center ;
+        background-size: cover ;
+        position: relative;
+        z-index: 1 ;
+        height: 45vh ;
+        width: 100vw ;
+    }
+    #box {
+        position: absolute;
+        top : 40vh ;
+        left : calc(50vw - 12vh) ;
+        z-index: 2 ;
+        width : 24vh ;
+    }
+    #t {
+        display: none ;
+    }
 }
