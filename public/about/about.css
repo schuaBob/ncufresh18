@@ -119,6 +119,15 @@
     width:70%;
     height:80%;
 }
+/* 介紹文字 */
+.intro{
+    background-color:rgb(141, 206, 236);
+    opacity: 0.8;
+    position: absolute;
+    z-index: 0;
+
+}
+/* 面板 */
 .pad{
     z-index: 1;
     position: absolute;
