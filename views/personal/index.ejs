@@ -10,25 +10,55 @@
     </header>
     <main>
         <div id="canvas"></div>
-        <table>
+        <table id='t'>
             <tr>
                 <td class='space'>
                     <div id="empty"></div>
                 </td>
                 <td class='space'>
                     <div id="score">
-                        <p id="w1">遊戲紀錄</p>
+                        <p id="w1">遊戲最高分數</p>
                         <p id='point'></p>
                     </div>
                 </td>
                 <td class='space'>
                     <div id="writing">
                         <p id="w2">發問紀錄</p>
-                        <div id="record">
-                            <div id="Q"></div>
-                            <div id="sta"></div>
-                            <div id="ope"></div>
-                        </div>
+                        <table id="record">
+                            <thead>
+                                <td id="Q">問題</td>
+                                <td id="sta">狀態</td>
+                                <td id="ope">功能</td>
+                                <hr>
+                            </thead>
+                            <tbody>
+                            <% for(var a=question.length-1;a>-1;a--){ %>
+                                <% if(question.question!==0){ %>
+                                    <% if(question.reason!==0){ %>
+                                            <tr>
+                                                <td id="Q"><%= question[a].Title %></td>
+                                                <td id="sta">未過審</td>
+                                                <td id="ope"><button>查看</button></td>
+                                            </tr>
+                                    <% }else{ %>
+                                        <% if(question.answer!==0){ %>
+                                                <tr>
+                                                    <td id="Q"><%= question[a].Title %></td>
+                                                    <td id="sta">已審核</td>
+                                                    <td id="ope"><button>查看</button></td>
+                                                </tr>
+                                        <% }else{ %>
+                                                <tr>
+                                                    <td id="Q"><%= question[a].Title %></td>
+                                                    <td id="sta">審核中</td>
+                                                    <td id="ope"><button>刪除</button></td>
+                                                </tr>
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
+                            <% } %>
+                            </tbody>
+                        </table>
                     </div>
                 </td>
                 <td class='space'>
