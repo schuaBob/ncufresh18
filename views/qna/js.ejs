@@ -252,14 +252,8 @@ $(document).ready(() => {
             url: '/qna/clickQ/' + id,
             method: 'GET',
             success: function(res) {
-                if (user && user.locals.role==='admin'){
-                    var objs = $('.' + id).find('.view');
-                    console.log(objs);
-                    for (var i = 0; i < objs.length; i++) {
-                        objs[i].innerHTML = parseInt(objs[i].innerHTML);
-                    }
-                }
-                else{
+            
+                
                     //動態新增點擊次數
                     var objs = $('.' + id).find('.view');
                     console.log(objs);
@@ -267,7 +261,7 @@ $(document).ready(() => {
                         objs[i].innerHTML = parseInt(objs[i].innerHTML) + 1;
                     }
 
-                }
+                
         
             }
         })
@@ -281,14 +275,7 @@ $(document).ready(() => {
             url: '/qna/clickR/' + id,
             method: 'GET',
             success: function(res) {
-                if (user && user.locals.role==='admin'){
-                    var objs = $('.' + id).find('.view');
-                    console.log(objs);
-                    for (var i = 0; i < objs.length; i++) {
-                        objs[i].innerHTML = parseInt(objs[i].innerHTML);
-                    }
-                }
-                else{
+                
                     //動態新增點擊次數
                     var objs = $('.' + id).find('.view');
                     for (var i = 0; i < objs.length; i++) {
@@ -296,7 +283,7 @@ $(document).ready(() => {
                     }
             
 
-                }
+                
             }
         })
     })

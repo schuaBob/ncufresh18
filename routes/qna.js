@@ -182,12 +182,8 @@ router.get('/clickQ/:id', function(req, res, next) {
   if(mongoose.Types.ObjectId.isValid(req.params.id)){
     Question.findById(req.params.id,function(err,question){
       if(err){return next(err)};
-      if(isAdmin){
-        res.json({
-          click:question.Click
-        });
-      }
-      else{
+      
+   
         //增加瀏覽次數
         question.Click++;
         //儲存瀏覽次數
@@ -198,7 +194,7 @@ router.get('/clickQ/:id', function(req, res, next) {
           });
        });
 
-      }
+      
     });
   }
   else{
@@ -210,12 +206,7 @@ router.get('/clickR/:id', function(req, res, next) {
   if(mongoose.Types.ObjectId.isValid(req.params.id)){
     Rule.findById(req.params.id,function(err,rule){
       if(err){return next(err)};
-      if(isAdmin){
-        res.json({
-          click:rule.Click
-        });
-      }
-      else{
+      
 
         //增加瀏覽次數
         rule.Click++;
@@ -226,7 +217,7 @@ router.get('/clickR/:id', function(req, res, next) {
             click:rule.Click
           });
        });
-      }
+      
     });
   }
   else{
@@ -370,13 +361,13 @@ router.post('/editByUser/:id', isLoggedIn, function(req, res, next) {
 });
 //判斷是否登入
 function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated())
+  if (user)
     return next();
   res.redirect('/login');
 }
 //判斷是否管理員
 function isAdmin(req, res, next) {
-  if (req.isAuthenticated() && req.user.role === 'admin')
+  if (req.user && req.user.role === 'admin')
     return next();
   res.redirect('/qna');
 }
