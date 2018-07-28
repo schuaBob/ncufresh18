@@ -122,7 +122,7 @@ td{
     color: white;
 }
 
-#carouselExampleIndicators{
+#carouselExampleIndicator1{
     max-width: 400px;
     max-height: 300px;
     float: left;
@@ -137,7 +137,7 @@ td{
     display: none;
 }
 
-#carouselExampleIndicator{
+#carouselExampleIndicator2{
     max-width: 400px;
     max-height: 300px;
     float: left;
@@ -263,13 +263,13 @@ td{
     h6{
         width:75%;
     }
-    #carouselExampleIndicators{
+    #carouselExampleIndicator1{
         max-width: 300px;
         max-height: 250px;
         float: left;
         margin-left: 21%;
     }
-    #carouselExampleIndicator{
+    #carouselExampleIndicator2{
         max-width: 300px;
         max-height: 250px;
         float: left;

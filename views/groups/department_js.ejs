@@ -133,10 +133,89 @@
             $("#combut").show();
             $(".sidedown").hide();
             $(".titleup").hide();
-
-            
-
         }
+
+        
+        $('.open').click(function (event) {
+            //console.log(event);
+            $.ajax({
+                url: "depmodal?id=" + event.currentTarget.attributes.search.value,
+                method: "GET",
+                error: function (err) {
+
+                },
+                success: function (data_dep) {
+                    console.log(data_dep);
+                    $('#depmodal .modal-title').text(data_dep.name)
+                    $('#depmodal .intro').html(data_dep.introduction)
+                    $('#depmodal .org').html(data_dep.organization)
+                    $('#depmodal .acti').html(data_dep.activity)
+                    $('#depmodal .team').html(data_dep.team)
+                    $('#depmodal .cour').html(data_dep.course)
+                    $('.kkk').each(function(){
+                        if($(this).attr('iiiii') === data_dep.name){
+                            $('#depmodal .player').css("display" , "")
+                        }
+                        else{
+                            $('#depmodal .player').css("display" , "none")
+                        }
+                    })
+
+                    for (let i = 0; i < data_dep.intro_pic.length; i++) {
+                        $('#carouselExampleIndicator1 .carousel-indicators').append("<li data-target='#carouselExampleIndicator1' data-slide-to='" + i + "'></li>")
+                        $('#carouselExampleIndicator1 .carousel-inner').append("<div class='carousel-item'><img class='d-block w-100' src='/groups/img/" + data_dep.intro_pic[i] + "'></div>")
+                    }
+                    $('carouselExampleIndicator1 .carousel-indicators li').first().addClass('active')
+                    $('#carouselExampleIndicator1 .carousel-inner div').first().addClass('active')
+                    $('#depmodal').on('hide.bs.modal', function (e) {
+                        $('carouselExampleIndicator1 .carousel-indicators li').remove()
+                        $('#carouselExampleIndicator1 .carousel-inner .carousel-item').remove()
+                        $('#depmodal').off('hide.bs.modal')
+                    })
+                    
+                    for (let i = 0; i < data_dep.organ_pic.length; i++) {
+                        $('#carouselExampleIndicator2 .carousel-indicators').append("<li data-target='#carouselExampleIndicator2' data-slide-to='" + i + "'></li>")
+                        $('#carouselExampleIndicator2 .carousel-inner').append("<div class='carousel-item'><img class='d-block w-100' src='/groups/img/" + data_dep.organ_pic[i] + "'></div>")
+                    }
+                    $('carouselExampleIndicator2 .carousel-indicators li').first().addClass('active')
+                    $('#carouselExampleIndicator2 .carousel-inner div').first().addClass('active')
+                    $('#depmodal').on('hide.bs.modal', function (e) {
+                        $('carouselExampleIndicator2 .carousel-indicators li').remove()
+                        $('#carouselExampleIndicator2 .carousel-inner .carousel-item').remove()
+                        $('#depmodal').off('hide.bs.modal')
+                    })
+
+                    for (let i = 0; i < data_dep.act_pic.length; i++) {
+                        $('#carouselExampleIndicator3 .carousel-indicators').append("<li data-target='#carouselExampleIndicator3' data-slide-to='" + i + "'></li>")
+                        $('#carouselExampleIndicator3 .carousel-inner').append("<div class='carousel-item'><img class='d-block w-100' src='/groups/img/ " + data_dep.act_pic[i] + "'></div>")
+                    }
+                    $('carouselExampleIndicator3 .carousel-indicators li').first().addClass('active')
+                    $('#carouselExampleIndicator3 .carousel-inner div').first().addClass('active')
+                    $('#depmodal').on('hide.bs.modal', function (e) {
+                        $('carouselExampleIndicator3 .carousel-indicators li').remove()
+                        $('#carouselExampleIndicator3 .carousel-inner .carousel-item').remove()
+                        $('#depmodal').off('hide.bs.modal')
+                    })
+
+                    for (let i = 0; i < data_dep.team_pic.length; i++) {
+                        $('#carouselExampleIndicator4 .carousel-indicators').append("<li data-target='#carouselExampleIndicator4' data-slide-to='" + i + "'></li>")
+                        $('#carouselExampleIndicator4 .carousel-inner').append("<div class='carousel-item'><img class='d-block w-100' src='/groups/img/" + data_dep.team_pic[i] + "'></div>")
+                    }
+                    $('carouselExampleIndicator4 .carousel-indicators li').first().addClass('active')
+                    $('#carouselExampleIndicator4 .carousel-inner div').first().addClass('active')
+                    $('#depmodal').on('hide.bs.modal', function (e) {
+                        $('carouselExampleIndicator4 .carousel-indicators li').remove()
+                        $('#carouselExampleIndicator4 .carousel-inner .carousel-item').remove()
+                        $('#depmodal').off('hide.bs.modal')
+                    })
+
+
+                    
+                    
+                    $('#depmodal').modal('show')
+                }
+            })
+        })
 
     });
 </script>

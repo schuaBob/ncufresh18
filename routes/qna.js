@@ -302,9 +302,23 @@ router.get('/deleteR/:id',isAdmin,function(req,res,next){
           if(err){return next(err)};
           /*真的有這篇文章*/
           if(result!==null){
-                  /*刪除*/
-                  result.remove();
-                  res.json({ id: result._id });
+            var temp = new deleteReason({
+              Username:req.body.Title,
+              QuestionId:req.params.id,
+              Reason: req.body.Reason,
+              CreateDate:Date.now()
+            }).save(function(err){
+              if(err){
+                return next(err);
+                /*刪除*/
+                // result.remove();
+                res.json({ id: result._id });
+              }
+              else{
+                //sendSuccess();
+              }
+              res.redirect('/qna');
+            });
           }
           else{
               res.redirect('/qna');
@@ -315,6 +329,49 @@ router.get('/deleteR/:id',isAdmin,function(req,res,next){
         return next(err);
       }
   //}
+});
+// 使用者刪除問題 
+router.post('/deleteByUser/:id', isLoggedIn, function(req, res, next) {
+  Question.findById(req.params.id, function(err,result) {
+    if (err){return next(err);}
+    //發問者本人且問題還沒被管理員審核才能刪除問題
+    if ((req.user.id === result.Username)&&(result.Answer==="")) {
+      if(result!==null){
+        /*刪除*/
+        result.remove();
+      }
+      else{
+        return next(err);
+      }
+    } 
+    else {
+      return next(err);
+    }
+  });
+});
+// 使用者編輯問題 
+router.post('/editByUser/:id', isLoggedIn, function(req, res, next) {
+  Question.findById(req.params.id, function(err,result) {
+    if (err){return next(err);}
+    //發問者本人且問題還沒被管理員審核才能刪除問題
+    if ((req.user.id === result.Username)&&(result.Answer==="")) {
+      if(result!==null){
+        /*編輯*/
+        Question.update({_id:req.params.id}, {Content:req.body.Content},function(err){
+          if(err)
+              console.log('Fail to update question.');
+          else
+              console.log('Done');
+        });
+      }
+      else{
+        return next(err);
+      }
+    } 
+    else {
+      return next(err);
+    }
+  });
 });
 // 使用者刪除問題 
 router.post('/deleteByUser/:id', isLoggedIn, function(req, res, next) {

@@ -74,7 +74,7 @@ h6{
 }
 
 
-#carouselExampleIndicators{
+#carouselExampleIndicator1{
     max-width: 400px;
     max-height: 300px;
     float: left;
@@ -82,10 +82,11 @@ h6{
 }
 
 /* 差一個s */
-#carouselExampleIndicator{
-    width: 40%;
-    height: 40%;
-    float: right;
+#carouselExampleIndicator2{
+    max-width: 400px;
+    max-height: 300px;
+    float: left;
+    margin-left: 13%;
 }
 
 #com_button{
@@ -268,7 +269,13 @@ body{
         line-height: 26px;
         letter-spacing: 1px;
     }
-    #carouselExampleIndicators{
+    #carouselExampleIndicator1{
+        max-width: 400px;
+        max-height: 300px;
+        float: left;
+        margin-left: 5%;
+    }
+    #carouselExampleIndicator2{
         max-width: 400px;
         max-height: 300px;
         float: left;

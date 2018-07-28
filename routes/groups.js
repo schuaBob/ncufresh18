@@ -398,7 +398,7 @@ router.get("/clubmodal",function(req,res,next) {
   });
 });
 router.get("/depmodal",function(req,res,next) {
-  club.findById(req.query.id).exec(function(err,data_dep) {
+  department.findById(req.query.id).exec(function(err,data_dep) {
     if(err) {
       return next(err);
     }
@@ -407,7 +407,7 @@ router.get("/depmodal",function(req,res,next) {
   });
 });
 router.get("/commodal",function(req,res,next) {
-  club.findById(req.query.id).exec(function(err,data_com) {
+  community.findOne({name : req.query.name}).exec(function(err,data_com) {
     if(err) {
       return next(err);
     }
@@ -416,7 +416,7 @@ router.get("/commodal",function(req,res,next) {
   });
 });
 router.get("/stumodal",function(req,res,next) {
-  club.findById(req.query.id).exec(function(err,data_stu) {
+  student.findById(req.query.id).exec(function(err,data_stu) {
     if(err) {
       return next(err);
     }
