@@ -25,6 +25,9 @@ var UserSchema = mongoose.Schema({
     score_high: {
         type: Number, default: 0
     },
+    update: {
+        type: Date, default: Date.now()
+    },
     //圖片
     avatar: {
         type: String, default: "profile.png" 

@@ -450,7 +450,7 @@ body::after{
         
 }
 
-/*為了處理那兩隻的電腦螢幕新排版....*/
+/*為了處理太空人和太空艙的電腦螢幕新排版....*/
 @media only screen and (min-width: 480px) and (max-width: 768px){
     .grid {
         padding-top:35px;
@@ -900,12 +900,12 @@ a{
 
 
 /*大一配色*/
-.bg1{background-color: rgb(132, 206, 226,0.86);}
-.bg3{background-color:	rgb(255, 243, 162,0.86)}
-.bg5{background-color: rgb(96, 189, 173,0.86)}
+.bg1{background-color: rgba(132, 206, 226,0.86);}
+.bg3{background-color:	rgba(255, 243, 162,0.86)}
+.bg5{background-color: rgba(96, 189, 173,0.86)}
 /*碩一配色*/
-.bg2{background-color: rgb(200,195,248,0.86)}
-.bg4{background-color: rgb(129,212,239,0.86)}
+.bg2{background-color: rgba(200,195,248,0.86)}
+.bg4{background-color: rgba(129,212,239,0.86)}
 .bg6{background-color: rgba(226, 224, 224, 0.86)}
 
 

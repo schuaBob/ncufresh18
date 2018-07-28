@@ -137,10 +137,6 @@ td{
 th{
     width:120px;
 }
-/* 排序與分類的連結 */
-.nav-link{
-    font-family: YouYuan;
-}
 li{
     height:40px;
 }
@@ -158,6 +154,7 @@ li{
 }
 /* 排序與分類 */
 .classification{
+    font-family: YouYuan;
     margin: 10px;
 }
 /* 排序與分類的按鈕 */

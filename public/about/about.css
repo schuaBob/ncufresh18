@@ -1,48 +1,46 @@
-h1{
+/* 只有電腦板才有的 */
+@media only screen and (min-width:600px){
+    body{
+        background: url(關於我們背景正式.png);
+        background-size: cover;
+        color:white;
+    }
+    .aboutUs.screen{
+        right:0;
+        width:50%;
+        top:40px;
+    }
+}
+/* 只有手機板才有的 */
+@media only screen and (max-width:600px){
+    body{
+        background: url(關於我們手機板背景.png);
+        background-size: cover;
+    }
+}
+.pad{
+    z-index: 1;
     position: absolute;
-    left:300px;
+    right:0;
+    top:40px;
+    width:75%;
+}
+/* 標題 */
+/* h1{
+    position: absolute;
+    left:20vh;
     top:100px;
-}
-#sideNav {
-    
-    /* width: 200px; */
-    z-index: 1000;
-    /* position: fixed; */
-    /* transform: translate(-200px); */
-    background-color: rgba(77, 192, 199, 0.2);
-}
-
-.nav-toggle-btn {
-    transform: translate(-50px);
-    top:100px;
-    z-index: 1000;
-    display: block;
-    position: absolute;
-    transition: transform 1s ease;
-}
-
-/* #sideNav.active-nav {
-    transform: translate(100px);
-
 } */
-.nav-toggle-btn.active-nav{
-    transform: translate(1px);
+.aboutUs.title{
+    top:60px;
+    width:20%;  
 }
-/* .dropdown-menu{
-    transition: transform 1s ease;
-} */
-.dropdown-menu.active-nav{
+.aboutUs{
     position: absolute;
-    /* left:100px; */
-}
-#navi {
-    left:-50px;
-    position: absolute;
-    top:150px;
-    overflow: auto;
-    background-color: rgba(255, 255, 255, 0);
+    z-index: 2;
 }
 #fullpage{
-    float: right;
-    left:200px;
+    z-index: -1;
+    /* left:390px; */
+    left: 30.7%;
 }

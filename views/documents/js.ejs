@@ -1,7 +1,16 @@
 <script>
 
     $(document).ready(function () {
-
+        //講話彩蛋
+        var space_say = {
+            placement: 'top',
+            content:"乖，答應我不要亂玩背景(´Ａ｀。)"
+        };
+        var man_say = {
+            placement: 'top',
+            content:"哼，再玩我就生氣氣了喔(ﾒ ﾟ皿ﾟ)ﾒ"
+        };
+        
        //飛走的彩蛋
         var change=0;
         var man_enter=0;
@@ -11,14 +20,17 @@
         $("#space").mousedown(function(){
             space_enter++;
              if(space_enter==6){
-                alert("乖，答應我不要亂玩背景(〒︿〒)");               
+                $('#space').popover(space_say);              
             } 
+           /* if(space_enter==7){
+                $('#space').popover('hind');              
+            } */
         });
         $("#man").mousedown(function(){
             man_enter++;
             $("#space").removeClass("space_fly");
             if(man_enter==3){
-                alert("哼，再玩我就生氣氣了喔"); 
+                $('#man').popover(man_say); 
             }
              if(man_enter==4){              
                 $("#man").addClass("man_enter_space");
@@ -29,16 +41,16 @@
         $("#space1").mousedown(function(){
             space_enter1++;
              if(space_enter1==6){
-                alert("乖，答應我不要亂玩背景(〒︿〒)");               
+                $('#space1').popover(space_say);              
             } 
         });
         $("#man1").mousedown(function(){
             man_enter1++;
             $("#space1").removeClass("space_fly");
             if(man_enter1==3){
-                alert("哼，再玩我就生氣氣了喔"); 
+                $('#man1').popover(man_say); 
             }
-             if(man_enter1==4){              
+             if(man_enter1==5){              
                 $("#man1").addClass("man_enter_space");
                 $("#man1").addClass("man_display");
                 $("#space1").addClass("space_wait_fly");     
@@ -58,7 +70,7 @@
     
         //判斷是用電腦還手機
         let x= $(window).width(); 
-       //alert(x+"and"+y); 
+
         if(x>450){
             $("#t_close").show();
             $("#o_close").show();
@@ -178,7 +190,7 @@
         //所有按鈕
         $(".box").mousedown(function () {
             
-            $("header").hide();
+          //  $("header").hide();
 
             //抓按下按鈕的id
             let textid = this.id;
@@ -202,7 +214,7 @@
 
             $("#save").click(function(){
                 $("#edit").modal("hide");
-                $("header").show();
+               // $("header").show();
             });
                             
         });
@@ -210,7 +222,7 @@
 
         //使用者
         $(".box").mousedown(function () {
-            $("header").hide();
+            //$("header").hide();
 
             let textid = this.id;
             $("#show").modal("show");
@@ -231,24 +243,17 @@
            
         });
 
-        $("#t_close").mousedown(function () {
-            $("header").show();
-        });
-        $("#o_close").mousedown(function () {
-            $("header").show();
-        });        
-        $("#b_close").mousedown(function () {
-            $("header").show();
-        });
-        
 
         /*modal出來時外面滾輪不會動*/
         $(".modal").on('hide.bs.modal', function () {
+            $("header").show();
             $("body").css({
                 "overflow":"auto"
             });
          });
         $(".modal").on('show.bs.modal', function () {
+             $("header").hide();
+
             $("body").css({
                 "overflow":"hidden"
             });
