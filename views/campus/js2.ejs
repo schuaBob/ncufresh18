@@ -10,7 +10,7 @@
 
     $(document).ready(function () {
         $('.editpicposi').click(function (event) {
-            
+
             var tempid = event.currentTarget.attributes.xxx.value
             $.ajax({
                 url: "picposition?id=" + event.currentTarget.attributes.xxx.value,
@@ -37,10 +37,10 @@
                             $('input[name="y_position"]').val($('.posipic').position().left / $('#mainmap2').width() * 100)
                         })
                         $('#mapedit').on('hide.bs.modal', function (e) {
-                        
-                        $('.posipic').remove()
-                        $('#mapedit').off('hide.bs.modal')
-                    })
+
+                            $('.posipic').remove()
+                            $('#mapedit').off('hide.bs.modal')
+                        })
 
 
                     }
@@ -103,7 +103,7 @@
                         })
 
                     })
-                    
+
                     $('.imgtype').attr('value', '0')
                     $('.buildpic').show();
                     $('.intropic').hide();
@@ -123,9 +123,17 @@
             $('.buildpic').hide();
             $('.intropic').show();
         })
+        CKEDITOR.replace('adminta1', {
+            filebrowserUploadUrl: '/uploader',
+        })
+        CKEDITOR.editorConfig = function (config) {
+            config.enterMode = CKEDITOR.ENTER_BR;
+            config.shiftEnterMode = CKEDITOR.ENTER_P;
+            config.autoParagraph = false;
+        };
 
             <% for (let i = 0; i < result.length; i++) { %>
-                $("#elecategory" +<%=i %>).children("[value=<%= result[i]['Type'] %>]").attr({ "selected": "selected" });
+            $("#elecategory" +<%=i %>).children("[value=<%= result[i]['Type'] %>]").attr({ "selected": "selected" });
         <%}%>
             
 

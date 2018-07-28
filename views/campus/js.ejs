@@ -9,8 +9,7 @@
         var action2 = null
         var seq = null
         var array1 = []
-        $('.indexelepic').tooltip();
-        
+
 
 
         $('.modal-header span i').click(function () {
@@ -31,7 +30,7 @@
                 },
                 success: function (data) {
                     $('#indexmodal .modal-title').text(data.Element_Name)
-                    $('#indexmodalp p').text(data.Element_Intro)
+                    $('#indexmodalp .p').html(data.Element_Intro)
                     for (let i = 0; i < data.Intropic.length; i++) {
                         $('.carousel-indicators').append("<li data-target='#carouselExampleIndicators' data-slide-to='" + i + "'></li>")
                         $('#carouselExampleIndicators .carousel-inner').append("<div class='carousel-item'><img class='d-block w-100' src='/campus/" + data.Intropic[i] + "'></div>")
@@ -65,12 +64,14 @@
         $('#List_index li').click(function (event) {
             $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').stop().tooltip('hide')
             $('.elelist').hide()
+
             array1 = ["系館", "運動", "餐廳", "設施", "住宿", "行政", "活動場地", "緊急醫療"]
             for (let i = 1; i <= 8; i++) {
                 if (event.currentTarget.attributes.val.value == i) {
 
                     if ($(this)[0] === temp) {
                         if ($('.main_list_detail').hasClass('clicked')) {
+                            temp = $(this)[0]
                             console.log("1")
 
                             $('.main_list_detail').stop().collapse('hide')
@@ -82,6 +83,7 @@
 
                         } else {
                             console.log("2")
+                            temp = $(this)[0]
                             $('#listtitle').text(array1[i - 1])
                             $('.main_list_detail li[val=' + i + ']').show()
                             $('.main_list_detail').stop().collapse('show')
@@ -108,6 +110,12 @@
                             $('.mapmove').addClass('clicked')
                         }
                     } else {
+                        temp = $(this)[0]
+                        properties = {
+                            'margin-left': '2%',
+                            'margin-right': '29%'
+                        };
+                        $('.mapmove').addClass('clicked')
                         if ($('.main_list_detail').hasClass('clicked')) {
                             console.log("3")
                             $('.main_list_detail').stop().collapse('hide')
@@ -132,18 +140,26 @@
 
 
 
+
                         }
-                        properties = {
-                            'margin-left': '2%',
-                            'margin-right': '29%'
-                        };
-                        $('.mapmove').addClass('clicked')
+
                     }
 
                 }
             }
-            temp = $(this)[0];
+            $('.mapmove').stop().velocity(properties, 400)
             console.log(temp);
+        })
+        $('#closemainlist').click(function () {
+            $('#map').css("filter", "none")
+            $('.indexelepic').css("filter", "none")
+            $('.main_list_detail').stop().collapse('hide')
+            $('.main_list_detail').removeClass('clicked')
+            $('.mapmove').removeClass('clicked')
+            properties = {
+                'margin-right': '15%',
+                'margin-left': '16%'
+            };
             $('.mapmove').stop().velocity(properties, 400)
         })
         $('.elelist').hover(function (event) {
@@ -163,7 +179,7 @@
                 },
                 success: function (data) {
                     $('#indexmodal .modal-title').text(data.Element_Name)
-                    $('#indexmodalp p').text(data.Element_Intro)
+                    $('#indexmodalp .p').html(data.Element_Intro)
                     for (let i = 0; i < data.Intropic.length; i++) {
                         $('.carousel-indicators').append("<li data-target='#carouselExampleIndicators' data-slide-to='" + i + "'></li>")
                         $('#carouselExampleIndicators .carousel-inner').append("<div class='carousel-item'><img class='d-block w-100' src='/campus/" + data.Intropic[i] + "'></div>")
@@ -182,6 +198,16 @@
         })
 
     })
+    $('.indexelepic').tooltip();
+
+    CKEDITOR.replace('adminta2', {
+        filebrowserUploadUrl: '/uploader',
+    })
+    CKEDITOR.editorConfig = function (config) {
+        config.enterMode = CKEDITOR.ENTER_BR;
+        config.shiftEnterMode = CKEDITOR.ENTER_P;
+        config.autoParagraph = false;
+    };
 
 
 
