@@ -11,7 +11,7 @@ Array.prototype.shuffle = function() {
         array[i] = t;
     }
     return array;
-}
+};
 
 // string 插入
 String.prototype.insert = function (index, string) {
@@ -276,56 +276,40 @@ var quiz = [
     { q: '與中央大學服務學習相關資訊需去哪個網站查看?', o: ['lms','portal','國際事務處','中央大學服務學習網'] , correctIndex:3},
 ];
 
-// ajax 請求 
-function setScore(score) {
-    $.ajax({
-        data: {score: score},
-        url: "/smallgame/setScore",
-        cache: false,
-        type: "post",
-        success: function(data) {
-            console.log(data)
-        },
-        error: function (err) {
-            console.log(err)
-        }
-    })
-}
-
-
 // 血小板
-function createCute() {
-    var cuteGroup = game.add.group()
-    var cute1 = cuteGroup.create(0, 0, 'cute').alignIn(bg, Phaser.BOTTOM_RIGHT)
-    var cute2 = cuteGroup.create(0, 0, 'cute').alignIn(bg, Phaser.BOTTOM_LEFT)
-    cute1.animations.add('jump')
-    cute1.play('jump', 15, true)
-    cute2.animations.add('jump')
-    cute2.play('jump', 15, true)
-}
+function colorEgg() {
+    var x = 0, y = 3310;
+    for (let i = 0; i < 4; i++) {
+        createCute(x, y)
+        x += 200
+    }
 
+    function createCute(x, y) {
+        var cute = game.add.sprite(x, y, 'cute')
+        cute.animations.add('jump')
+        cute.play('jump', 15, true)
+    }
+}
 
 // 遊戲主體長寬
 var width = 800
 var height = 600
 var rankClick = 0
-var score = 0
 var bgMusicFlag = 0
 var game = new Phaser.Game(width, height, Phaser.CANVAS, 'game')
 
+console.log(game.device)
 var states = {
-	// 加载场景, 載入資源
+    // 加载场景, 載入資源
     preload: function() {
-    	this.preload = function() {
-            // 手機屏幕適應             未完成！！！
-            if (!game.device.desktop) {
-                // Phaser.Canvas.setTouchAction(game.canvas, 'pan-y')
-                // Phaser.Canvas.setUserSelect(game.canvas, 'all')
-                game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
-                game.scale.fullScreenscaleMode = Phaser.ScaleManager.EXACT_FIT
-                game.scale.pageAlignHorizontally = true
-                game.scale.pageAlignVertically = true
+        this.preload = function() {
+            // 禁止手機版
+            if (!this.game.device.desktop == true) {
+                alert('あのね、あのね，請在電腦端體驗小遊戲喔喔喔~')
+                window.location.href = "/personal/"
+                game.kill()
             }
+
             game.state.backgroundColor = '#000000'
             // 載入資源
             game.load.image('bg', 'images/background.png')
@@ -354,11 +338,6 @@ var states = {
             game.load.image('scoreRank', 'images/score_rank.png')
             game.load.image('scoreQuit', 'images/score_quit.png')
             game.load.image('scoreAgain', 'images/score_again.png')
-            game.load.image('cloud1', 'images/cloud1.png')
-            game.load.image('cloud2', 'images/cloud2.png')
-            game.load.image('cloud3', 'images/cloud3.png')
-            game.load.image('cloud4', 'images/cloud4.png')
-            game.load.image('cloud5', 'images/cloud5.png')
             game.load.image('questionStage', 'images/question_stage.png')
             game.load.image('quit', 'images/quit.png')
             game.load.image('question', 'images/question.png')
@@ -369,8 +348,8 @@ var states = {
             game.load.audio('wrong', 'sounds/wrong.mp3')
             game.load.audio('bgMusic', 'sounds/lovelyflower.mp3')
             
-            game.load.image('mySelf', '../personal/bighead/<%= user.avatar %>')
-            <% console.log(result)%>
+            // 載入頭像
+            game.load.image('<%= user.id %>', '../personal/bighead/<%= user.avatar %>')
             <% var avatarName = 'image' %>
             <% for(let i = 0; i < result.length; i++) { %>
                 game.load.image('<%= result[i].id%>', '../personal/bighead/<%= result[i].avatar %>')
@@ -389,7 +368,7 @@ var states = {
             var deadLine = false
             setTimeout(function() {
                 deadLine = true
-            }, 1000)
+            }, 800)
 
             function onLoad() {
                 if (deadLine) {
@@ -462,7 +441,7 @@ var states = {
     start: function() {
         this.create = function() {
             var combo = 0
-            score = 0
+            var score = 0
             var remainTime = 60
             game.physics.startSystem(Phaser.Physics.P2JS)
             
@@ -519,14 +498,30 @@ var states = {
             }, this)
             timer.start()
             
+            // ajax 請求 
+            function setScore(score) {
+                $.ajax({
+                    data: {score: score},
+                    url: "/smallgame/setScore",
+                    cache: false,
+                    type: "post",
+                    success: function(data) {
+                        console.log(data)
+                    },
+                    error: function (err) {
+                        console.log(err)
+                    }
+                })
+            }
+
             function gameOver() {
                 // 更新分數
                 scoreText.setText(score)
 
                 scoreUI.visible = true
                 scoreUI.alpha = 1
-                playUI.visible = false
                 otherUI.visible = false
+                playUI.visible = false
                 squirrelGroup.visible = false
                 // 添加過渡效果
                 game.add.tween(scoreUI).from({
@@ -697,6 +692,13 @@ var states = {
                 // choiceState 判斷一次答題是否點擊多次
                 if (!choiceState) {
                     count++
+
+                    // 彩蛋觸發 
+                    if (count >= quiz.length) {
+                        // colorEgg()
+                        alert("少俠好功夫，正常人是玩不到這裡的")
+                        gameOver()
+                    }
                     choiceState = 1
                     // 選擇正確
                     if (item.rightOrWrong === true) {
@@ -706,7 +708,7 @@ var states = {
                         squirrelGroupY -= 40
                         createSquirrel(squirrelGroupY)
                         // 加分, combo
-                        score += 1000
+                        score += 100
                         combo++
                         var goal = choiceBonus(combo)
                         // 選項顏色反饋, 變綠
@@ -735,8 +737,11 @@ var states = {
                             game.add.tween(otherUI).to({y: otherUI.y - 40}, 1000, Phaser.Easing.Bounce.Out, true)
                             game.add.tween(scoreUI).to({y: scoreUI.y - 40}, 1000, Phaser.Easing.Bounce.Out, true)         
                             game.add.tween(game.camera).to({y: game.camera.y - 40}, 500, Phaser.Easing.Linear.None, true)
-                        }
-                        setTimeout(resetQuestionAndChoice, 500, data[count], item)
+                        } 
+                        // else if (game.camera.y <= 40) {
+                        //     createCute()
+                        // }
+                            setTimeout(resetQuestionAndChoice, 500, data[count], item)
                     } else {
                         // 音樂
                         game.add.audio('wrong', 1).play()
@@ -767,6 +772,7 @@ var states = {
             
             // 第一次刷新題目
             resetQuestionAndChoice(data[count])
+            // colorEgg()
         }
     },
     
@@ -784,7 +790,6 @@ var states = {
             
             // 右邊氣泡
             function createBubble(data, type) {
-                    
                 var style = {
                     'font': 'Microsoft Yahei',
                     'fontSize': '25px'
@@ -813,14 +818,20 @@ var states = {
                 game.add.tween(rankLeftImage).from({alpha: 0}, 800, Phaser.Easing.Exponential.In, true)                                
                 
                 game.add.tween(rankLeft).from({alpha: 0}, 1500, Phaser.Easing.Exponential.In, true)            
-                
+         
+                var bubbleLength
+                if (data.length > 10) {
+                    bubbleLength = 10
+                } else {
+                    bubbleLength = data.length
+                }
                 // 右邊動畫
-                for(i = 3; i < 10; i++) {
+                for(i = 3; i < bubbleLength; i++) {
                     // 立即函數，立刻執行
                     (function(i) {
                         setTimeout(function () {
                             var rankLine = game.add.group()
-                            var temp = alignLine.create(415, alignLineY, 'rankBubble');
+                            var hhh = alignLine.create(415, alignLineY, 'rankBubble');
                             var scoreText = game.add.text(0, 0, '分數: ', style).alignTo(rankSum, Phaser.BOTTOM_RIGHT, -80, alignLineY - 85);
                             if (type === 'sum') {
                                 var scoreShow = game.add.text(0, 0, data[i].score_sum, styleNum).alignTo(scoreText, Phaser.RIGHT_CENTER);
@@ -836,7 +847,7 @@ var states = {
                             rankLine.add(textName);
                             rankLine.setAll('alpha', 1);
                             
-                            game.add.tween(temp).from({alpha: 0}, 1500, Phaser.Easing.Exponential.In, true);
+                            game.add.tween(hhh).from({alpha: 0}, 1500, Phaser.Easing.Exponential.In, true);
                             game.add.tween(rankLine).from({alpha: 0}, 1500, Phaser.Easing.Exponential.In, true);    
                             alignLineY += 68.5;
                         },  i * 200) 
@@ -853,17 +864,34 @@ var states = {
                     cache: false,
                     type: "get",
                     success: function(data) {
-                        console.log(data)
-                        
+                        var inputData = JSON.parse(data)
+                        for (let i = 0; i < inputData.length; i++) {
+                            var str = inputData[i].name
+                            inputData[i].name = str.substr(0,1) + 'O' + str.substr(str.length-1,1)
+
+                        }
+
                         if (type === 'sum') {
-                            createBubble(JSON.parse(data), 'sum')
+                            createBubble(inputData, 'sum')
                         } else {
-                            createBubble(JSON.parse(data), 'high')
+                            createBubble(inputData, 'high')
                         }
                         // 顯示頭像
-                        rankLeftImage.create(0, 0, JSON.parse(data)[0].id).alignTo(rankLeftSprite, Phaser.TOP_CENTER, -5, 20)
-                        rankLeftImage.create(0, 0, JSON.parse(data)[1].id).alignTo(rankLeftSprite, Phaser.TOP_CENTER, 80, -40)
-                        rankLeftImage.create(0, 0, JSON.parse(data)[2].id).alignTo(rankLeftSprite, Phaser.TOP_CENTER, -90, -65)
+                        var no1 = rankLeftImage.create(0, 0, JSON.parse(data)[0].id)
+                        no1.width = 50
+                        no1.height = 50
+                        no1.alignTo(rankLeftSprite, Phaser.TOP_CENTER, -5, 20)
+
+                        var no2 = rankLeftImage.create(0, 0, JSON.parse(data)[1].id)
+                        no2.width = 50
+                        no2.height = 50
+                        no2.alignTo(rankLeftSprite, Phaser.TOP_CENTER, 80, -40)
+
+                        var no3 = rankLeftImage.create(0, 0, JSON.parse(data)[2].id)
+                        no3.width = 50
+                        no3.height = 50
+                        no3.alignTo(rankLeftSprite, Phaser.TOP_CENTER, -90, -65)
+
                         rankLeftImage.setAll('alpha', 1);
                     },
                     error: function (err) {
