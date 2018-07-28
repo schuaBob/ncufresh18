@@ -218,9 +218,8 @@
             });
                             
         });
-    <%_ } -%>
-
-        //使用者
+        <% } else { %>
+        //非管理員使用者
         $(".box").mousedown(function () {
             //$("header").hide();
 
@@ -242,7 +241,7 @@
             });
            
         });
-
+    <%_ } -%>
 
         /*modal出來時外面滾輪不會動*/
         $(".modal").on('hide.bs.modal', function () {

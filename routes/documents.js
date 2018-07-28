@@ -21,23 +21,19 @@ router.get('/require_data/:id', function (req, res, next) {
   });
 });
 
-//update database
-if (check.isAdmin) {
-  router.post('/edit/:id', function (req, res, next) {
 
-    Document.updateOne({ count: req.params.id }, { title: req.body.title, content: req.body.add_text },
-      function (err, result) {
+router.post('/edit/:id',check.isAdmin, function (req, res, next) {
+  Document.updateOne({ count: req.params.id }, { title: req.body.title, content: req.body.add_text },
+    function (err, result) {
+      console.log(result);
+      if (err)
+        console.log('fail to update article.');
+      else
+        console.log('Save to DB.');
+      return res.redirect('/documents');
+    });
+});
 
-        console.log(result);
-        if (err)
-          console.log('fail to update article.');
-        else
-          console.log('Save to DB.');
-      });
-
-
-  });
-}
 
 
 
