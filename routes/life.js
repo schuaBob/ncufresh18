@@ -15,7 +15,7 @@ var storage = multer.diskStorage({
   filename   : function(req, file, cb){
     var rdm = '';
     for(var i=0 ; i<10 ; i++) rdm += Math.floor((Math.random() * 10));
-    var fileName = req.body.mainTitle + "_" + req.body.subTitle + "_" + rdm + ".jpg";
+    var fileName = req.body.mainTitle + "_" + req.body.subTitle + "_" + rdm + ".png";
     cb(null, fileName);
   }
 })
