@@ -268,3 +268,7 @@ p{
     font-family: Microsoft YaHei;
     border-radius: 15px;
  }
+ /* 區別已送出刪除理由的問題 */
+ .gray{
+    background:gray;
+ }

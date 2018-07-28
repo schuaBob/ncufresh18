@@ -3,7 +3,7 @@ var mongoose=require('mongoose');
 require('../models/qna/qna');
 var Question=mongoose.model('Question');
 var Rule =mongoose.model('Rule');
-var deleteReason =mongoose.model('deleteReason');
+//var deleteReason =mongoose.model('deleteReason');
 var router = express.Router();
 
 
@@ -11,7 +11,8 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.locals.user = req.session.user ;
   res.locals.role = req.session.role;
-  Rule.find().exec(function(err, rule){
+  //deleteReason.find().exec(function(err, deleteReason){
+    Rule.find().exec(function(err, rule){
     //管理員的話才顯示未回答的問題
     if(req.user && req.user.role==="admin"){
       Question.find().sort({CreateDate:'desc'}).exec(function(err, question){
@@ -26,13 +27,14 @@ router.get('/', function(req, res, next) {
         }
         res.render('qna/index',{
           title:'新生Ｑ＆Ａ ｜ 新生知訊網',
+          //deleteReason:deleteReason,
           rule:rule,
           question:question,
           Time:Time,
           user:req.user
         });
       }); 
-
+ 
     }
     else{
       Question.find({Answer:{$nin:[""]}}).sort({CreateDate:'desc'}).exec(function(err, question){
@@ -55,6 +57,7 @@ router.get('/', function(req, res, next) {
       });
     }
   });
+  //});
 });
 //新增板規
 router.post('/addR',isAdmin,function(req,res,next){
@@ -106,6 +109,7 @@ router.post('/addq',isLoggedIn,function(req,res,next){
         Content: req.body.Content,
         Answer: "",
         CreateDate:Date.now(),
+        Reason: "",
         Click:0
       }).save(function(err){
         if(err){
@@ -178,12 +182,8 @@ router.get('/clickQ/:id', function(req, res, next) {
   if(mongoose.Types.ObjectId.isValid(req.params.id)){
     Question.findById(req.params.id,function(err,question){
       if(err){return next(err)};
-      if(isAdmin){
-        res.json({
-          click:question.Click
-        });
-      }
-      else{
+      
+   
         //增加瀏覽次數
         question.Click++;
         //儲存瀏覽次數
@@ -194,7 +194,7 @@ router.get('/clickQ/:id', function(req, res, next) {
           });
        });
 
-      }
+      
     });
   }
   else{
@@ -206,12 +206,7 @@ router.get('/clickR/:id', function(req, res, next) {
   if(mongoose.Types.ObjectId.isValid(req.params.id)){
     Rule.findById(req.params.id,function(err,rule){
       if(err){return next(err)};
-      if(isAdmin){
-        res.json({
-          click:rule.Click
-        });
-      }
-      else{
+      
 
         //增加瀏覽次數
         rule.Click++;
@@ -222,7 +217,7 @@ router.get('/clickR/:id', function(req, res, next) {
             click:rule.Click
           });
        });
-      }
+      
     });
   }
   else{
@@ -267,37 +262,31 @@ router.post('/updateR/:id',isAdmin,function(req,res,next){
         res.redirect('/qna');
 }
 });
-/*管理員刪除問題*/
-router.get('/deleteQ/:id',isAdmin,function(req,res,next){
+/*管理員給刪除理由*/
+router.post('/deleteQ/:id',isAdmin,function(req,res,next){
     /*確定傳進來的是不是有效ID*/
     if(mongoose.Types.ObjectId.isValid(req.params.id)){
-      /*確定這篇文章是他發的或他是管理員*/
+      /*找是哪篇文章*/
         Question.findById(req.params.id).exec(function(err,result){
           if(err){return next(err)};
-          /*真的有這篇文章*/
-          if(result!==null){
-            var temp = new deleteReason({
-              Username:req.body.Title,
-              QuestionId:req.params.id,
-              Reason: req.body.Reason,
-              CreateDate:Date.now()
-            }).save(function(err){
-              if(err){
-                return next(err);
-                /*刪除*/
-                // result.remove();
-                res.json({ id: result._id });
+              /*真的有這篇文章*/
+              if(result!==null){
+                if(req.body.Reason){
+                  Question.update({_id:req.params.id}, {Reason:req.body.Reason},{DeleteDate:Date.now()},function(err){
+                    if(err){
+                      console.log('Fail to update reason.');
+                    }
+                    else{
+                      console.log('Done');
+                    }
+                    res.redirect('/qna');
+                  });
+                }    
               }
               else{
-                //sendSuccess();
+                res.redirect('/qna');
               }
-              res.redirect('/qna');
-            });
-          }
-          else{
-            res.redirect('/qna');
-          }
-        });
+          });
     }
     else{
       return next(err);
@@ -372,13 +361,13 @@ router.post('/editByUser/:id', isLoggedIn, function(req, res, next) {
 });
 //判斷是否登入
 function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated())
+  if (user)
     return next();
   res.redirect('/login');
 }
 //判斷是否管理員
 function isAdmin(req, res, next) {
-  if (req.isAuthenticated() && req.user.role === 'admin')
+  if (req.user && req.user.role === 'admin')
     return next();
   res.redirect('/qna');
 }

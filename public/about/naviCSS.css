@@ -1,3 +1,18 @@
+/* 只有電腦板才有的 */
+@media only screen and (min-width:600px){
+    .elev2{
+        position: absolute;
+        left:0;
+        width: 230px;
+        z-index: 2;
+    }
+    .elev2.elevup{
+        top:10px;
+    }
+    .elev2.elevdown{
+        bottom:0px;
+    }
+}
 #sideNav {
     background: url(太空電梯導管_去被.png);
     background-size: cover;
@@ -9,7 +24,14 @@
     /* transform: translate(-200px); */
     background-color: rgba(77, 192, 199, 0.2);
 }
-
+.laser{
+    position: absolute;
+    z-index: 1500;
+    left:-25px;
+    top:230px;
+    height:300px;
+    width:280px;
+}
 .nav-toggle-btn {
     background: url(飛碟素材.png);
     background-size: 150px 100px;
@@ -18,8 +40,8 @@
     width: 150px;
     height:100px;
     transform: translate(-75px);
-    top:100px;
-    z-index: 1000;
+    top:150px;
+    z-index: 1800;
     display: block;
     position: absolute;
     transition: transform 1s ease;
@@ -30,24 +52,37 @@
 
 } */
 .nav-toggle-btn.active-nav{
-    transform: translate(1px);
+    transform: translate(35px);
 }
 /* .dropdown-menu{
     transition: transform 1s ease;
 } */
 .dropdown-item{
+    line-height: 2.2;
+    color: white;
+}
+a{
     color: white;
 }
 .dropdown-menu.active-nav{
     position: absolute;
     /* left:100px; */
 }
-#navi {
-    left:-1vw;
+.navi {
+    /* background: url(雷射群按鈕去被.png);
+    background-size: cover; */
+    left:0.5vw;
     position: absolute;
-    top:200px;
+    z-index: 2000;
+    /* height: 300px;
+    width: 200px; */
+    top:250px;
     overflow: auto;
     background-color: rgba(255, 255, 255, 0);
+}
+.naviBtn{
+    height:20px;
+    width:100px;
 }
 .elev{
     float: left;
