@@ -120,11 +120,8 @@ $(document).ready(() => {
     $('.nav-toggle-btn').on('click', function(e) {
         $('.dropdown-menu').toggleClass('active-nav');
         $('.nav-toggle-btn').toggleClass('active-nav');
-        if($('.nav-toggle-btn.active')){
-            $('.navi').fadeIn(500);
-            $('.laser').fadeIn(500);
-        }
-
+        $('.navi').slideToggle(1500);
+        $('.laser').slideToggle(1500);
         e.preventDefault();
     });
 });
