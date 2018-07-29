@@ -33,15 +33,15 @@
                             </thead>
                             <tbody>
                             <% for(var a=question.length-1;a>-1;a--){ %>
-                                <% if(question.question!==0){ %>
-                                    <% if(question.reason!==0){ %>
+                                <% if(question[a].question!==0){ %>
+                                    <% if(question[a].Reason!==0){ %>
                                             <tr>
                                                 <td id="Q"><%= question[a].Title %></td>
                                                 <td id="sta">未過審</td>
                                                 <td id="ope"><button>查看</button></td>
                                             </tr>
                                     <% }else{ %>
-                                        <% if(question.answer!==0){ %>
+                                        <% if(question[a].Answer!==0){ %>
                                                 <tr>
                                                     <td id="Q"><%= question[a].Title %></td>
                                                     <td id="sta">已審核</td>
