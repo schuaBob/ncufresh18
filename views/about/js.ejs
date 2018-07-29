@@ -1,6 +1,21 @@
 <script>
 $(document).ready(() => {
-    //$(window).resize(function() {
+    if($(window).width()<600){
+            $('.elev').hide();
+            $('.elev2').hide();
+            $('.pad').hide();
+            $('.down').hide();
+            $('.aboutUs.screen').hide();
+            $("body").css({'height':h,'width':w});
+        }
+        else{
+            $('.elev').show();
+            $('.elev2').show();
+            $('.pad').show();
+            $('.down').show();
+            $('.aboutUs.screen').show();
+        }
+    $(window).resize(function() {
         var w=$(window).width();
         var h=$(window).height();
         // var padW=$('.pad').width();
@@ -9,14 +24,21 @@ $(document).ready(() => {
         $(".pad").css({'height':h-50});
         if(w<600){
             $('.elev').hide();
-            //$('.pad').hide();
-            //$("body").css({'height':h,'width':w});
+            $('.elev2').hide();
+            $('.pad').hide();
+            $('.down').hide();
+            $('.aboutUs.screen').hide();
+            $("body").css({'height':h,'width':w});
         }
         else{
-
+            $('.elev').show();
+            $('.elev2').show();
+            $('.pad').show();
+            $('.down').show();
+            $('.aboutUs.screen').show();
         }
 
-    //});
+    });
     //預設logo跟字樣
     $(".logo").addClass("marktingLogo");
     $(".name").addClass("marktingName");
