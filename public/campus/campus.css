@@ -1,3 +1,6 @@
+.modal-dialog{
+  z-index: 1;
+}
 .adminbt {
   position: fixed;
   top: 15%;
@@ -73,7 +76,7 @@
 }
 body {
   min-height: 100vh;
-  background: url("32F0D3EF-2598-4271-B40D-D5CCCBF339E3.png");
+  background: url("1FEE96A9-7657-4632-B0C6-AAECFBD4D094.png");
   top: 0;
   height: auto;
   width: auto;
@@ -182,7 +185,7 @@ main {
 }
 
 #sidebar_left {
-  background-color: lightblue;
+  background-color: lightcoral;
   width: 15%;
   margin-left: 2.5%;
   height: 100%;
@@ -202,6 +205,10 @@ main {
   padding-top: 5%;
   padding-bottom: 5%;
   line-height: auto;
+}
+#sidebar_left li:hover{
+  cursor: pointer;
+  background-color: lightsalmon;
 }
 #sidebar_left ul {
   padding-left: 0;

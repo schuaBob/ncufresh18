@@ -8,7 +8,7 @@
 </head>
 
 <body>
-        <div id="mapedit" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    <div id="mapedit" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -32,7 +32,7 @@
                         <input type="hidden" name="ratio">
                         <br>
                         <div class="picspace">
-                            
+
                             <img src="back2.png" alt="mainmap" width="100%" id="mainmap2">
                         </div>
                         <div class="modal-footer">
@@ -45,24 +45,90 @@
         </div>
     </div>
 
+
     <header>
         <% include ../layout/navbar %>
     </header>
+    <div class="modal fade bd-example-modal-lg" id="textedit" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal texteditform" method="POST">
+                        <fieldset>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="elename">物件名稱</label>
+                                <div class="col-md-6">
+                                    <input name="elename" type="text" class="form-control input-md">
+
+                                </div>
+                            </div>
+
+                            <!-- Select Basic -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="elecategory">類別</label>
+                                <div class="col-md-6">
+                                    <select name="elecategory" class="form-control">
+                                        <option value="1">系館</option>
+                                        <option value="2">運動</option>
+                                        <option value="3">餐廳</option>
+                                        <option value="4">設施/option>
+                                            <option value="5">住宿</option>
+                                            <option value="6">行政</option>
+                                            <option value="7">活動場地</option>
+                                            <option value="8">緊急醫療</option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Textarea -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="eleintro">物件說明</label>
+                                <div class="col-lg">
+                                    <textarea class="form-control edittext" id="edittextarea" rows="8" cols="60" name="eleintro"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Multiple Radios (inline) -->
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                <button type="submit" class="btn btn-primary">儲存</button>
+                            </div>
+
+
+                        </fieldset>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
     <main>
         <h1>
             <%= title %>
         </h1>
         <div id="sidebar_left">
             <ul>
-                <li>系館</li>
-                <li>運動</li>
-                <li>餐廳</li>
-                <li>設施</li>
-                <li>住宿</li>
-                <li>行政</li>
-                <li>藝文活動</li>
-                <li>醫療緊急</li>
-                
+                <li val="0">全部</li>
+                <li val="1">系館</li>
+                <li val="2">運動</li>
+                <li val="3">餐廳</li>
+                <li val="4">設施</li>
+                <li val="5">住宿</li>
+                <li val="6">行政</li>
+                <li val="7">藝文活動</li>
+                <li val="8">醫療緊急</li>
+
             </ul>
         </div>
         <div id="content">
@@ -79,7 +145,7 @@
                 </thead>
                 <tbody>
                     <%_ for (let i in result) { -%>
-                        <tr>
+                        <tr class="tabledata" eletype="<%=result[i]['Type']%>">
                             <td>
                                 <%= result[i]['Element_Name'] %>
                             </td>
@@ -87,7 +153,8 @@
                                 <button class="picedit" type="button" data-toggle="modal" data-target="#editpic<%=i%>" ooo="<%= result[i]['_id'] %>">編輯</button>
                             </td>
                             <!--picedit<%= i %>-->
-                            <div class="modal fade fkpicedit" id="editpic<%=i%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                            <div class="modal fade fkpicedit" id="editpic<%=i%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+                                aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -100,8 +167,8 @@
                                         </div>
                                         <div class="modal-body imgcontent" ooo="<%= result[i]['_id'] %>">
 
-                                            
-                                            <img id="output" width="300px" >
+
+                                            <img id="output" width="300px">
                                             <form class="picuploadform" action="/campus/insert_img/<%=result[i]['_id']%>" enctype="multipart/form-data" method="post">
                                                 <fieldset>
                                                     <input type="file" name="uploadingImg" accept="image/*" onchange="loadFile(event)">
@@ -123,77 +190,13 @@
                             <td>
                                 <button type="button" data-toggle="modal" data-target="#mapedit" class="editpicposi" xxx="<%=result[i]['_id']%>">編輯</button>
                             </td>
-                            
+
 
 
                             <td>
-                                <button type="button" data-toggle="modal" data-target="#textedit<%= i %>">編輯</button>
+                                <button type="button" class="edittextbt" val="<%=result[i]['_id']%>" data-toggle="modal" data-target="#textedit">編輯</button>
                             </td>
-                            <div id="textedit<%= i %>" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Modal title</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form class="form-horizontal" action="/campus/editElement/<%= result[i]['_id']%>" method="POST">
-                                                <fieldset>
 
-                                                    <!-- Text input-->
-                                                    <div class="form-group">
-                                                        <label class="col-md-4 control-label" for="elename">物件名稱</label>
-                                                        <div class="col-md-6">
-                                                            <input name="elename" type="text" class="form-control input-md" value="<%= result[i]['Element_Name'] %>">
-
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- Select Basic -->
-                                                    <div class="form-group">
-                                                        <label class="col-md-4 control-label" for="elecategory">類別</label>
-                                                        <div class="col-md-6">
-                                                            <select id="elecategory<%= i %>" name="elecategory" class="form-control">
-                                                                <option value="1">系館</option>
-                                                                <option value="2">運動</option>
-                                                                <option value="3">餐廳</option>
-                                                                <option value="4">設施/option>
-                                                                <option value="5">住宿</option>
-                                                                <option value="6">行政</option>                                                                
-                                                                <option value="7">活動場地</option>
-                                                                <option value="8">緊急醫療</option>
-                                                                
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- Textarea -->
-                                                    <div class="form-group">
-                                                        <label class="col-md-4 control-label" for="eleintro">物件說明</label>
-                                                        <div class="col-lg">
-                                                            <textarea class="form-control" id="adminta1"rows="8" cols="60" name="eleintro"><%= result[i]['Element_Intro'] %></textarea>
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- Multiple Radios (inline) -->
-
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                                                        <button type="submit" class="btn btn-primary">儲存</button>
-                                                    </div>
-
-
-                                                </fieldset>
-                                            </form>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                            </div>
 
 
                             <td>

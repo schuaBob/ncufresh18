@@ -116,6 +116,7 @@ router.post("/insert_img/:id", function(req, res, next) {
                 if (err) {
                   return next(err);
                 }
+                res.redirect("/campus/editElement");
               });
           } else if (fields.imgtype === "1") {
             elebuilding
@@ -126,6 +127,7 @@ router.post("/insert_img/:id", function(req, res, next) {
                 if (err) {
                   return next(err);
                 }
+                res.redirect("/campus/editElement");
               });
           }
 
@@ -212,6 +214,14 @@ router.get("/indexmodal",function(req,res,next) {
       return next(err)
     }
     console.log(result)
+    res.send(result)
+  })
+})
+router.get("/edittext",function(req,res,next){
+  elebuilding.findById(req.query.id,{_id:1,Element_Name:1,Type:1,Element_Intro:1}).exec(function(err,result){
+    if(err) {
+      return next(err)
+    }
     res.send(result)
   })
 })
