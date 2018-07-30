@@ -5,6 +5,7 @@ body{
     background-position:top right;
     background-size: cover;
     background-repeat: no-repeat;
+    overflow-x: hidden;
 }
 
 #com_all{
@@ -26,6 +27,9 @@ body{
 }
 .index_club:hover{
     transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -o-transform: scale(1.2);
 }
 .index_student{
     width: 34%;
@@ -35,6 +39,9 @@ body{
 }
 .index_student:hover{
     transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -o-transform: scale(1.2);
 }
 .index_department{
     width: 33%;
@@ -44,6 +51,9 @@ body{
 }
 .index_department:hover{
     transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -o-transform: scale(1.2);
 }
 .index_community{
     width: 43%;
@@ -53,6 +63,9 @@ body{
 }
 .index_community:hover{
     transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -o-transform: scale(1.2);
 }
 .side{
     width:30vw;

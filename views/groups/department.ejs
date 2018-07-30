@@ -10,10 +10,17 @@
     </header>
     <main>
       <% let ffffffff  = [["文學院","literature"],["理學院","science"],["管理學院","management"],["工學院","engineering"],["資訊電機學院","csee"],["地球科學學院","earth"],["客家學院","hakka"],["生醫理工學院","chst"]]%>
+      <!--左側按鈕-->
+      <div id="combut">
+        <img src="系所社團飛船修正版地底電子幕_去被.png" class="leftbox">
+        <% for(let p = 1; p<=8 ; p++) {%>
+          <button class="<%= ffffffff[p-1][1] %>_button" id="but_<%= p %>"><%= ffffffff[p-1][0] %></button></br>
+        <%}%>
+      </div>          
       <!-- 麵包屑 -->
       <nav aria-label="breadcrumb" id="bread">
           <ol class="breadcrumb" id="breadcru">
-            <li class="breadcrumb-item" ><a href="/groups/student" id="text">學生會</a></li>
+            <li class="breadcrumb-item" ><a href="/groups/student" id="text_stu">學生會</a></li>
             <li class="breadcrumb-item active" aria-current="page" id="text_at">系所</li>
             <li class="breadcrumb-item"><a href="/groups/club" id="text">社團</a></li>
             <li class="breadcrumb-item"><a href="/groups/community" id="text">其他學生組織</a></li>
@@ -29,7 +36,7 @@
           <%}%>
         </div>
       </div>
-
+      
       <%_ if (user && user.role === 'admin'){ -%>
         <!-- 新增圖片按鈕 -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="update1">
@@ -140,13 +147,7 @@
         </div>
         <%_ } -%> 
   
-        <!--左側按鈕-->
-        <div id="combut">
-          <img src="系所社團飛船修正版地底電子幕_去被.png" class="leftbox">
-          <% for(let p = 1; p<=8 ; p++) {%>
-            <button class="<%= ffffffff[p-1][1] %>_button" id="but_<%= p %>"><%= ffffffff[p-1][0] %></button></br>
-          <%}%>
-        </div>          
+        
         <!-- 根據按鈕選出相對類別 -->
           <%for (let q = 1 ;q<=8;q++){%>
             <table class="<%= ffffffff[q-1][1] %>_table" id="table_<%= q %>">
@@ -188,7 +189,8 @@
                             <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#activity_<%= department[i].name %>">系所活動</a></li>
                             <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#team_<%= department[i].name %>">系隊</a></li>
                             <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#course_<%= department[i].name %>">系上課程</a></li> 
-                            <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#lightning_round_<%= department[i].name %>" ytID='<%= QAvideo[i].insert %>'> 快問快答</a></li><!-- 之後跟影音專區拿影片 -->
+                            <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_i" href="#lightning_round_<%= department[i].name %>" 
+                              ytID="<% for(let i = 0;　i<QAvideo.length;　i++){ if(QAvideo[i].title === department[i].name){%><%= QAvideo[i].insert %><% break;}}%>">快問快答</a></li>
                           <%}%>
                           <% if(department[i].name[department[i].name.length-1] === "所"){ %>
                             <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#organization_<%= department[i].name %>">知道更多</a></li>
@@ -320,7 +322,7 @@
     <footer>
         <% include ../layout/footer %>
     </footer>
-        <% include ../layout/js %>
+        <!-- <% include ../layout/js %> -->
         <% include department_js %>
 </body>
 </html>

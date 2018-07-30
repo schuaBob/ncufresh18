@@ -1,21 +1,20 @@
 <script>
     let player = Object();
-        function onYouTubeIframeAPIReady() {//此函數在IFrame Player API code 載入後將自動呼叫
-            console.log("fdasf");
-            $(".player").each(function(){
-                // console.log(this.id);
-                //console.log($(this));
-                let id=this.id;
-                player[id] = new YT.Player(id, {
-                    height: '390',
-                    width: '640',
-                    videoId: id, //Youtube ID
-                    enablejsapi: 1,
-                    origin: 'http://localhost:3000'
+    function onYouTubeIframeAPIReady() {//此函數在IFrame Player API code 載入後將自動呼叫
+        $(".player").each(function(){
+            // console.log(this.id);
+            //console.log($(this));
+            let id=this.id;
+            player[id] = new YT.Player(id, {
+                height: '390',
+                width: '640',
+                videoId: id, //Youtube ID
+                enablejsapi: 1,
+                origin: 'http://localhost:3000'
 
-                });
-            })
-        }
+            });
+        })
+    }
     $(document).ready(function(){
         
         /* club的方法太冗長,利用for迴圈縮減篇幅 */
@@ -28,21 +27,29 @@
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
         var currentid="" ;
 
-        
-        // <% for(var i in department){ %>
-        //     $('.nav_y').click(function() {
-        //         currentid = $(this).attr('ytID');
-        //     })
-        //     $('#<%= department[i]._id %>').on('hide.bs.modal', function (e) {
-        //         if(currentid != ""){
-        //             player[currentid].pauseVideo();
-        //     }
-        //         player[currentid].pauseVideo();
-        //     })
-        // <%}%>
-        
-        
-        
+        $(document).on("click","#nav_i",function(evnt){
+            currentid = $(this).attr('ytID');
+            // console.log("後")
+            // console.log(currentid);
+            // console.log(player[currentid]);
+
+        })
+        $(document).on("click","#nav_a",function(event){
+            // console.log("前")
+            // console.log(currentid);
+            // console.log(player[currentid]);
+            if(currentid != ""){
+                player[currentid].pauseVideo();
+            }
+            // console.log("後")
+            // console.log(currentid);
+            // console.log(player[currentid]);
+        })
+        $('#depmodal').on('hide.bs.modal', function (e) {
+            if(currentid != ""){
+                player[currentid].pauseVideo();
+            }
+        })        
         /* 字串要分開打 */
         for(let p = 0; p<8 ; p++){
             $("."+depart_type[p][1]+"_button").mousedown(function(){
@@ -100,7 +107,7 @@
         };
 
         $(window).resize(function(){
-            if($(window).width()<768){
+            if($(window).width()<=768){
                 $("#nav_ul").removeClass("flex-column");
                 $("#cellup").show();
                 $("#combut").hide();
@@ -119,7 +126,7 @@
             }
         });
 
-        if($(window).width()<768){
+        if($(window).width()<=768){
             $("#nav_ul").removeClass("flex-column");
             $("#cellup").show();
             $("#combut").hide();
@@ -165,10 +172,10 @@
                         $('#carouselExampleIndicator1 .carousel-indicators').append("<li data-target='#carouselExampleIndicator1' data-slide-to='" + i + "'></li>")
                         $('#carouselExampleIndicator1 .carousel-inner').append("<div class='carousel-item'><img class='d-block w-100' src='/groups/img/" + data_dep.intro_pic[i] + "'></div>")
                     }
-                    $('carouselExampleIndicator1 .carousel-indicators li').first().addClass('active')
+                    $('#carouselExampleIndicator1 .carousel-indicators li').first().addClass('active')
                     $('#carouselExampleIndicator1 .carousel-inner div').first().addClass('active')
                     $('#depmodal').on('hide.bs.modal', function (e) {
-                        $('carouselExampleIndicator1 .carousel-indicators li').remove()
+                        $('#carouselExampleIndicator1 .carousel-indicators li').remove()
                         $('#carouselExampleIndicator1 .carousel-inner .carousel-item').remove()
                         $('#depmodal').off('hide.bs.modal')
                     })
@@ -177,10 +184,10 @@
                         $('#carouselExampleIndicator2 .carousel-indicators').append("<li data-target='#carouselExampleIndicator2' data-slide-to='" + i + "'></li>")
                         $('#carouselExampleIndicator2 .carousel-inner').append("<div class='carousel-item'><img class='d-block w-100' src='/groups/img/" + data_dep.organ_pic[i] + "'></div>")
                     }
-                    $('carouselExampleIndicator2 .carousel-indicators li').first().addClass('active')
+                    $('#carouselExampleIndicator2 .carousel-indicators li').first().addClass('active')
                     $('#carouselExampleIndicator2 .carousel-inner div').first().addClass('active')
                     $('#depmodal').on('hide.bs.modal', function (e) {
-                        $('carouselExampleIndicator2 .carousel-indicators li').remove()
+                        $('#carouselExampleIndicator2 .carousel-indicators li').remove()
                         $('#carouselExampleIndicator2 .carousel-inner .carousel-item').remove()
                         $('#depmodal').off('hide.bs.modal')
                     })
@@ -189,10 +196,10 @@
                         $('#carouselExampleIndicator3 .carousel-indicators').append("<li data-target='#carouselExampleIndicator3' data-slide-to='" + i + "'></li>")
                         $('#carouselExampleIndicator3 .carousel-inner').append("<div class='carousel-item'><img class='d-block w-100' src='/groups/img/ " + data_dep.act_pic[i] + "'></div>")
                     }
-                    $('carouselExampleIndicator3 .carousel-indicators li').first().addClass('active')
+                    $('#carouselExampleIndicator3 .carousel-indicators li').first().addClass('active')
                     $('#carouselExampleIndicator3 .carousel-inner div').first().addClass('active')
                     $('#depmodal').on('hide.bs.modal', function (e) {
-                        $('carouselExampleIndicator3 .carousel-indicators li').remove()
+                        $('#carouselExampleIndicator3 .carousel-indicators li').remove()
                         $('#carouselExampleIndicator3 .carousel-inner .carousel-item').remove()
                         $('#depmodal').off('hide.bs.modal')
                     })
@@ -201,10 +208,10 @@
                         $('#carouselExampleIndicator4 .carousel-indicators').append("<li data-target='#carouselExampleIndicator4' data-slide-to='" + i + "'></li>")
                         $('#carouselExampleIndicator4 .carousel-inner').append("<div class='carousel-item'><img class='d-block w-100' src='/groups/img/" + data_dep.team_pic[i] + "'></div>")
                     }
-                    $('carouselExampleIndicator4 .carousel-indicators li').first().addClass('active')
+                    $('#carouselExampleIndicator4 .carousel-indicators li').first().addClass('active')
                     $('#carouselExampleIndicator4 .carousel-inner div').first().addClass('active')
                     $('#depmodal').on('hide.bs.modal', function (e) {
-                        $('carouselExampleIndicator4 .carousel-indicators li').remove()
+                        $('#carouselExampleIndicator4 .carousel-indicators li').remove()
                         $('#carouselExampleIndicator4 .carousel-inner .carousel-item').remove()
                         $('#depmodal').off('hide.bs.modal')
                     })
