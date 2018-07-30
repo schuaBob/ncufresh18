@@ -366,7 +366,10 @@ li {
   }
   .mapshadow {
     position: relative;
-    width: 250vw;
+    display: block;
+    margin-top: calc((100vh - 80px - 46vw - 8vw / 2 - 750px*996/2000)/2);
+    margin-bottom: calc((100vh - 80px - 46vw - 8vw / 2 - 750px*996/2000)/2);
+    width: 750px;
   }
   .mapmove {
     display: block;
