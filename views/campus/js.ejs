@@ -20,6 +20,7 @@
             $(this).velocity({ scale: 1, boxShadowBlur: 0 }, 100)
         })
         $('.indexelepic').click(function (event) {
+            $('.indexelepic').tooltip('hide');
             $.ajax({
                 url: "indexmodal?id=" + event.currentTarget.attributes.alt.value,
                 method: "GET",
@@ -197,15 +198,6 @@
 
     })
     $('.indexelepic').tooltip();
-
-    CKEDITOR.replace('adminta2', {
-        filebrowserUploadUrl: '/uploader',
-    })
-    CKEDITOR.editorConfig = function (config) {
-        config.enterMode = CKEDITOR.ENTER_BR;
-        config.shiftEnterMode = CKEDITOR.ENTER_P;
-        config.autoParagraph = false;
-    };
 
 
 

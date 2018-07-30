@@ -9,11 +9,11 @@
     };
 
     $(document).ready(function () {
-        $('#sidebar_left li').click(function(event) {
-            if(event.currentTarget.attributes.val.value !== 0) {
+        $('#sidebar_left li').click(function (event) {
+            if (event.currentTarget.attributes.val.value != 0) {
                 $('.tabledata').hide()
-                $('.tabledata[eletype='+ event.currentTarget.attributes.val.value +']').show()
-            } else{
+                $('.tabledata[eletype=' + event.currentTarget.attributes.val.value + ']').show()
+            } else {
                 $('.tabledata').show()
             }
         })
@@ -142,7 +142,7 @@
                 },
                 success: function (data) {
                     $('#textedit .modal-title').text(data.Element_Name)
-                    $('.texteditform').attr("action","/campus/editElement/"+tempid)
+                    $('.texteditform').attr("action", "/campus/editElement/" + tempid)
                     $('input[name="elename"]').val(data.Element_Name)
                     $('select[name="elecategory"]').children("[value=" + data.Type + "]").attr({ "selected": "selected" });
                     console.log(data._id)
@@ -152,6 +152,9 @@
             })
         })
         CKEDITOR.replace('edittextarea', {
+            filebrowserUploadUrl: '/uploader',
+        })
+        CKEDITOR.replace('adminta2', {
             filebrowserUploadUrl: '/uploader',
         })
         CKEDITOR.editorConfig = function (config) {
