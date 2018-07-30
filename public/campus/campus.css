@@ -1,3 +1,6 @@
+h1{
+  text-align: center;
+}
 .modal-dialog {
   z-index: 1;
 }
@@ -6,8 +9,8 @@
 }
 .adminbt {
   position: fixed;
-  top: 15%;
-  left: 10px;
+  top: 56px;
+  left: 50px;
 }
 
 #indexmodal .modal-dialog {
@@ -90,11 +93,11 @@ body {
 
 #List_index {
   position: relative;
-  display: block;
+  display: flex;
   margin-top: 3px;
   margin-bottom: 15px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 80px;
+  margin-right: 80px;
   padding: 0;
 }
 #List_index li {
@@ -105,7 +108,7 @@ body {
   cursor: pointer;
 }
 #List_index img {
-  width: 100px;
+  width: 110px;
   margin: 0;
   padding: 0;
 }
@@ -113,7 +116,7 @@ body {
   cursor: pointer;
 }
 .main_list_detail {
-  position: fixed;
+  position: absolute;
   float: right;
   top: calc((100vh - 80) / 2);
   right: 2%;

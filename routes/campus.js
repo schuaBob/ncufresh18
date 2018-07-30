@@ -54,14 +54,14 @@ router.post("/AddNew_element", function(req, res, next) {
             if (err) {
               return next(err);
             }
-            res.redirect("/campus/");
+            res.redirect("/campus/editElement");
           });
         } else {
-          res.redirect("/campus/");
+          res.redirect("/campus/editElement");
         }
       });
   } else {
-    res.redirect("/campus/");
+    res.redirect("/campus/editElement");
   }
 });
 router.post("/editElement/:id", function(req, res, next) {
