@@ -2,13 +2,21 @@
 
 <script>
 
-
+    var _editorname = null;
     var loadFile = function (event) {
         var output = document.getElementById('output');
         output.src = URL.createObjectURL(event.target.files[0]);
     };
 
     $(document).ready(function () {
+        $('#sidebar_left li').click(function(event) {
+            if(event.currentTarget.attributes.val.value !== 0) {
+                $('.tabledata').hide()
+                $('.tabledata[eletype='+ event.currentTarget.attributes.val.value +']').show()
+            } else{
+                $('.tabledata').show()
+            }
+        })
         $('.editpicposi').click(function (event) {
 
             var tempid = event.currentTarget.attributes.xxx.value
@@ -123,7 +131,27 @@
             $('.buildpic').hide();
             $('.intropic').show();
         })
-        CKEDITOR.replace('adminta1', {
+
+        $('.edittextbt').click(function (event) {
+            var tempid = event.currentTarget.attributes.val.value
+            $.ajax({
+                url: 'edittext?id=' + event.currentTarget.attributes.val.value,
+                method: 'GET',
+                error: function (err) {
+
+                },
+                success: function (data) {
+                    $('#textedit .modal-title').text(data.Element_Name)
+                    $('.texteditform').attr("action","/campus/editElement/"+tempid)
+                    $('input[name="elename"]').val(data.Element_Name)
+                    $('select[name="elecategory"]').children("[value=" + data.Type + "]").attr({ "selected": "selected" });
+                    console.log(data._id)
+                    CKEDITOR.instances['edittextarea'].setData(data.Element_Intro);
+
+                }
+            })
+        })
+        CKEDITOR.replace('edittextarea', {
             filebrowserUploadUrl: '/uploader',
         })
         CKEDITOR.editorConfig = function (config) {
@@ -132,10 +160,6 @@
             config.autoParagraph = false;
         };
 
-            <% for (let i = 0; i < result.length; i++) { %>
-            $("#elecategory" +<%=i %>).children("[value=<%= result[i]['Type'] %>]").attr({ "selected": "selected" });
-        <%}%>
-            
 
     })
 </script>

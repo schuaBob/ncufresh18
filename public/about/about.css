@@ -37,6 +37,19 @@
         z-index: 3;
     
     }
+    /* 團照 */
+    .picture{
+        z-index: 0;
+        position: absolute;
+    }
+    /* 手機板邊框 */
+    .pad2{
+        display: none;
+    }
+    .pad3{
+        display: none;
+    }
+    /* 各組名稱 */
     .name{
         position: absolute;
         top:120px;
@@ -45,6 +58,7 @@
         height:30px;
         z-index: 5000;
     }
+    /* 各組logo */
     .logo{
         
         position: absolute;
@@ -65,8 +79,7 @@
         z-index: 5000;
     }
     .artLogo{
-        /* background: url(企劃組icon_去被.png); */
-        background-color: rgb(178, 118, 226);
+        background: url(美宣組icon.png);
         background-size: cover;
         z-index: 5000;
     }
@@ -106,7 +119,7 @@
         z-index: 5000;
     }
     /* 標題 */
-    .aboutUs.title{
+    .aboutUs.title1{
         position: absolute;
         left: 25vw;
         top:65px;
@@ -121,53 +134,77 @@
     }
     /* 介紹文字 */
     .alert{
-        width:40%;
-        bottom:10vw;
+        left:70px;
+        bottom:-50px;
+        width:35%;
+        bottom:5vw;
     }
     #fullpage{
         left: 30.7%;
     }
-
+    .aboutUs.title2{
+        display: none; 
+    }
 }
 /* 只有手機板才有的 */
 @media only screen and (max-width:600px){
     body{
-        background: url(關於我們手機板背景.png);
-        background-size: cover;
+        background: url(晶片.png);
+        /* background-size: cover; */
+        overflow-y: auto;
     }
     /* 標題 */
-    .aboutUs.title{
+    .aboutUs.title1{
+        display: none; 
+    }
+    .aboutUs.title2{
         position: absolute;
         right:0;
         top:65px;
-        width:25%;  
+        width:50%;  
     }
     /* 團照 */
     .picture{
-        height:80%;
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        /* height:80%; */
+       
+        float: center;
         z-index: 0;
         position: absolute;
-        top:50px;
+        top:50vw;
+    }
+    /* 介紹文字 */
+    .alert{
+        bottom: -1vw;
+        width: 90%;
     }
     #fullpage{
         z-index: -1;
         width:80%;
         height:20%;
     }
-}
-/* 團照 */
-.picture{
-    z-index: 0;
-    position: absolute;
+    .pad{
+        display: none;
+    }
+    .aboutUs.screen{
+        display: none;
+    }
+    .down{
+        display: none;
+    }
+    /* 團照 */
+    .picture{
+        z-index: 0;
+        float: center;
+        position: absolute;
+    }
+    #fullpage{
+        width:100%;
+    }
 }
 /* 介紹文字 */
-/* .intro{
-    background-color:rgb(141, 206, 236);
-    opacity: 0.8;
-    z-index: 1;
-    position: absolute;
-    
-} */
 .alert{
     opacity: 0.8;
     z-index: 1;
@@ -181,6 +218,20 @@
     top:40px;
     width:75%;
     bottom:10px;
+}
+.pad2{
+    z-index: 2;
+    /* position: absolute;
+    top:15vw; */
+    position: fixed;
+    width:100%;
+    height: 100%;
+}
+.pad3{
+    z-index: 2;
+    position: absolute;
+    bottom: 20px;
+    width:100%;
 }
 .aboutUs{
     position: absolute;

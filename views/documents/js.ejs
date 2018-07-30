@@ -1,7 +1,21 @@
 <script>
 
     $(document).ready(function () {
-        //講話彩蛋
+
+
+        //showmodel全屏，偵測手機高度
+        let y =$(window).height();
+
+        let h =(y-70)+"px";
+        //將css的變數取出
+            //var bodyStyles = window.getComputedStyle(document.body);
+            //var fooBar = bodyStyles.getPropertyValue('--height'); //get
+        document.body.style.setProperty('--height', h);//set
+        
+    
+        //判斷是用電腦還手機
+        let x= $(window).width(); 
+                //講話彩蛋
         var space_say = {
             placement: 'top',
             content:"乖，答應我不要亂玩背景(´Ａ｀。)"
@@ -21,66 +35,54 @@
             space_enter++;
              if(space_enter==6){
                 $('#space').popover(space_say);              
-            } 
-           /* if(space_enter==7){
-                $('#space').popover('hind');              
-            } */
+            };
         });
-        $("#man").mousedown(function(){
-            man_enter++;
-            $("#space").removeClass("space_fly");
-            if(man_enter==3){
-                $('#man').popover(man_say); 
-            }
-             if(man_enter==4){              
-                $("#man").addClass("man_enter_space");
-                $("#man").addClass("man_display");
-                $("#space").addClass("space_wait_fly");     
-            }
-        });
+
         $("#space1").mousedown(function(){
             space_enter1++;
              if(space_enter1==6){
                 $('#space1').popover(space_say);              
             } 
         });
-        $("#man1").mousedown(function(){
-            man_enter1++;
-            $("#space1").removeClass("space_fly");
-            if(man_enter1==3){
-                $('#man1').popover(man_say); 
-            }
-             if(man_enter1==5){              
-                $("#man1").addClass("man_enter_space");
-                $("#man1").addClass("man_display");
-                $("#space1").addClass("space_wait_fly");     
-            }
 
-        });
-
-        //showmodel全屏，偵測手機高度
-        let y =$(window).height();
-
-        let h =(y-70)+"px";
-        //將css的變數取出
-            //var bodyStyles = window.getComputedStyle(document.body);
-            //var fooBar = bodyStyles.getPropertyValue('--height'); //get
-        document.body.style.setProperty('--height', h);//set
-        
-    
-        //判斷是用電腦還手機
-        let x= $(window).width(); 
-
-        if(x>450){
+        if(x>480){
             $("#t_close").show();
             $("#o_close").show();
             $("#b_close").hide();
+            
+            //電腦版彩蛋:太空人搭火箭
+            $("#man").mousedown(function(){
+                man_enter++;
+                $("#space").removeClass("space_fly");
+                if(man_enter==3){
+                    $('#man').popover(man_say); 
+                }
+                if(man_enter==4){              
+                    $("#man").addClass("man_enter_space");
+                    $("#man").addClass("man_display");
+                    $("#space").addClass("space_wait_fly");     
+                }
+            });
+            $("#man1").mousedown(function(){
+                man_enter1++;
+                $("#space1").removeClass("space_fly");
+                if(man_enter1==3){
+                    $('#man1').popover(man_say); 
+                }
+                if(man_enter1==5){              
+                    $("#man1").addClass("man_enter_space");
+                    $("#man1").addClass("man_display");
+                    $("#space1").addClass("space_wait_fly");     
+                }
+            });    
         }
         else{
            // $("#edit").modal("hide");
-            $("#t_close").hide();
+            $("#t_close").show();
             $("#o_close").hide();
-            $("#b_close").show();   
+            $("#b_close").show();
+
+
         }
 
 
@@ -144,13 +146,18 @@
 
         //大學生研究生選擇
         $(".gra").mousedown(function () {
-            change++;
+           
             gra=true;
-            under=false; 
-            $("#space").removeClass("space_fly");
-            if(change==5){ 
-                $("#space1").addClass("space_fly");
-            }
+            under=false;
+            //電腦彩蛋:切換五次後火箭飛起
+            if(x>480){
+                change++;
+                $("#space").removeClass("space_fly");
+                if(change==5){ 
+                    $("#space1").addClass("space_fly");
+                }
+            } 
+
             
 
             $(".gra").removeClass("small").addClass("big");
@@ -168,11 +175,14 @@
             gra=false;
 
             //彩蛋，切換五次後火箭飛走
-            change++;
-            $("#space1").removeClass("space_fly");
-            if(change==5){       
-                $("#space").addClass("space_fly");
-            }           
+            if(x>480){
+                change++;
+                $("#space1").removeClass("space_fly");
+                if(change==5){       
+                    $("#space").addClass("space_fly");
+                }
+            }
+           
 
             $(".under").removeClass("small").addClass("big");
             $(".gra").removeClass("big").addClass("small");
@@ -214,15 +224,12 @@
 
             $("#save").click(function(){
                 $("#edit").modal("hide");
-               // $("header").show();
             });
                             
         });
         <% } else { %>
         //非管理員使用者
         $(".box").mousedown(function () {
-            //$("header").hide();
-
             let textid = this.id;
             $("#show").modal("show");
             

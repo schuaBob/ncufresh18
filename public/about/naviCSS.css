@@ -1,5 +1,20 @@
 /* 只有電腦板才有的 */
 @media only screen and (min-width:600px){
+    .nav-toggle-btn {
+        top:150px;
+        position: absolute;
+        transition: transform 1s ease;
+    }
+    /* 列表 */
+    .navi {
+        position: absolute;
+        top:250px;
+        overflow: auto;
+    }
+    .laser{
+        position: absolute;
+        top:230px;
+    }
     .elev2{
         position: absolute;
         left:0;
@@ -13,6 +28,33 @@
         bottom:0px;
     }
 }
+/* 只有手機板才有的 */
+@media only screen and (max-width:600px){
+    /* 飛碟按鈕 */
+    .nav-toggle-btn {
+        width: 150px;
+        height:100px;
+        top:30vw;
+        transform: translate(-75px);
+        position: fixed;
+    }
+    /* 各組列表 */
+    .navi {
+        position: fixed;
+        top:61vw;
+        overflow: auto;
+    }
+    .laser{
+        position: fixed;
+        top:55vw;
+    }
+    .elev{
+        display: none;
+    }
+    .elev2{
+        display: none;
+    }
+}
 #sideNav {
     background: url(太空電梯導管_去被.png);
     background-size: cover;
@@ -24,13 +66,20 @@
     /* transform: translate(-200px); */
     background-color: rgba(77, 192, 199, 0.2);
 }
+/* 列表 */
+.navi {
+    left:0.5vw;
+    z-index: 2000;
+    overflow: auto;
+    background-color: rgba(255, 255, 255, 0);
+    display: none;
+}
 .laser{
-    position: absolute;
     z-index: 1500;
     left:-25px;
-    top:230px;
     height:300px;
     width:280px;
+    display: none;
 }
 .nav-toggle-btn {
     background: url(飛碟素材.png);
@@ -40,17 +89,10 @@
     width: 150px;
     height:100px;
     transform: translate(-75px);
-    top:150px;
     z-index: 1800;
     display: block;
-    position: absolute;
     transition: transform 1s ease;
 }
-
-/* #sideNav.active-nav {
-    transform: translate(100px);
-
-} */
 .nav-toggle-btn.active-nav{
     transform: translate(35px);
 }
@@ -67,18 +109,6 @@ a{
 .dropdown-menu.active-nav{
     position: absolute;
     /* left:100px; */
-}
-.navi {
-    /* background: url(雷射群按鈕去被.png);
-    background-size: cover; */
-    left:0.5vw;
-    position: absolute;
-    z-index: 2000;
-    /* height: 300px;
-    width: 200px; */
-    top:250px;
-    overflow: auto;
-    background-color: rgba(255, 255, 255, 0);
 }
 .naviBtn{
     height:20px;

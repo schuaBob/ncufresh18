@@ -155,7 +155,7 @@
                             <td class="type"><%= rule[j].Type %></td>
                             <%if(user && user.role==="admin"){%>
                                 <td class="titleR title" id="<%= rule[j].id %>" style="width:200px">
-                                    <div class="article"><%= rule[j].Title %></div>
+                                    <div class="article title2"><%= rule[j].Title %></div>
                                 </td>
                                 <%}
                                 else{%>
@@ -222,12 +222,13 @@
                             <td class="type"><%= question[i].Type %></td>
                             <%if(user && user.role==="admin"){%>
                                 <td class="titleQ title" style="width:200px" id="<%= question[i].id %>">
-                                    <div class="article"><%= question[i].Title %></div>
+                                    <p class="article title2"><%= question[i].Title %></p>
                                 </td>
                                 <%}
                                 else{%>
-                                    <td class="titleQ title" style="width:60%" id="<%= question[i].id %>">
-                                        <div class="article"><%= question[i].Title %></div>
+                                    <td class="titleQ title" style="width:60%;" id="<%= question[i].id %>">
+                                        <div class="article title2"><%= question[i].Title %></div>
+                                        <!-- <p class="article title2"><%= question[i].Title %></p> -->
                                     </td>
                                 <%}
                             %>

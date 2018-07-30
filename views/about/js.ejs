@@ -1,47 +1,28 @@
 <script>
 $(document).ready(() => {
-    if($(window).width()<600){
-            $('.elev').hide();
-            $('.elev2').hide();
-            $('.pad').hide();
-            $('.down').hide();
-            $('.aboutUs.screen').hide();
-            $("body").css({'height':h,'width':w});
-        }
-        else{
-            $('.elev').show();
-            $('.elev2').show();
-            $('.pad').show();
-            $('.down').show();
-            $('.aboutUs.screen').show();
-        }
+    var w=$(window).width();
+    var h=$(window).height();
+    $(".pad").css({'height':h-50});
+    $("body").css({'height':h-50,'width':w});
     $(window).resize(function() {
         var w=$(window).width();
         var h=$(window).height();
         // var padW=$('.pad').width();
         // console.log(padW);
         // $(".pad").css({'height':h-50,'width':w-300});
-        $(".pad").css({'height':h-50});
-        if(w<600){
-            $('.elev').hide();
-            $('.elev2').hide();
-            $('.pad').hide();
-            $('.down').hide();
-            $('.aboutUs.screen').hide();
-            $("body").css({'height':h,'width':w});
+        if(w<600){  
+            $("body").css({'height':h-50,'width':w});
+            $("body").css({'background-size':w+"px "+h-50+"px"});
+            // $(".picture").css({'width':w});
         }
         else{
-            $('.elev').show();
-            $('.elev2').show();
-            $('.pad').show();
-            $('.down').show();
-            $('.aboutUs.screen').show();
+            $(".pad").css({'height':h-50});
         }
 
     });
     //預設logo跟字樣
-    $(".logo").addClass("marktingLogo");
-    $(".name").addClass("marktingName");
+    // $(".logo").addClass("marktingLogo");
+    // $(".name").addClass("marktingName");
     //切換logo跟字樣
     $(window).on('hashchange', function() {
         var hash = window.location.hash.substr(1);
@@ -111,6 +92,19 @@ $(document).ready(() => {
             $(".name").removeClass("videoName");
             $(".name").removeClass("marktingName");
         }
+        else if(hash==="all"){
+            $(".logo").removeClass("ceoLogo");
+            $(".logo").removeClass("marktingLogo");
+            $(".logo").removeClass("programmingLogo");
+            $(".logo").removeClass("artLogo");
+            $(".logo").removeClass("videoLogo");
+
+            $(".name").removeClass("ceoName");
+            $(".name").removeClass("programmingName");
+            $(".name").removeClass("artName");
+            $(".name").removeClass("videoName");
+            $(".name").removeClass("marktingName");
+        }
     });
     // var hash = new URL(window.location.href);
     //     console.log(url);
@@ -130,7 +124,7 @@ $(document).ready(() => {
     new fullpage('#fullpage', {
         navigation: true,
         responsiveWidth: 700,
-        anchors: ['markting', 'programming', 'art', 'video', 'ceo'],
+        anchors: ['all','markting', 'programming', 'art', 'video', 'ceo'],
         parallax: true,
         onLeave: function(origin, destination, direction){
             console.log("Leaving section" + origin.index);
