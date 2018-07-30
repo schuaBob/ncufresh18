@@ -5,6 +5,7 @@ var Question=mongoose.model('Question');
 var Rule =mongoose.model('Rule');
 //var deleteReason =mongoose.model('deleteReason');
 var router = express.Router();
+var checkUser = require('./check-user');
 
 
 /* Q&A首頁 */
@@ -12,7 +13,7 @@ router.get('/', function(req, res, next) {
   res.locals.user = req.session.user ;
   res.locals.role = req.session.role;
   //deleteReason.find().exec(function(err, deleteReason){
-    Rule.find().exec(function(err, rule){
+    Rule.find().sort({CreateDate:'desc'}).exec(function(err, rule){
     //管理員的話才顯示未回答的問題
     if(req.user && req.user.role==="admin"){
       Question.find().sort({CreateDate:'desc'}).exec(function(err, question){
@@ -60,7 +61,7 @@ router.get('/', function(req, res, next) {
   //});
 });
 //新增板規
-router.post('/addR',isAdmin,function(req,res,next){
+router.post('/addR',checkUser.isAdmin,function(req,res,next){
   if((req.body.Title)&&(req.body.Type)&&(req.body.Content)){
     var temp = new Rule({
       Title:req.body.Title,
@@ -81,7 +82,7 @@ router.post('/addR',isAdmin,function(req,res,next){
   }
 });
 //編輯板規
-router.post('/updateR/:id',isAdmin,function(req,res,next){
+router.post('/updateR/:id',checkUser.isAdmin,function(req,res,next){
   //if(result.Username===res.locals.username||req.session.type==="admin"){
     if(mongoose.Types.ObjectId.isValid(req.params.id)){
       Rule.findById(req.params.id).exec(function(err,result){
@@ -99,7 +100,7 @@ router.post('/updateR/:id',isAdmin,function(req,res,next){
   }
 });
 /*新增問題*/
-router.post('/addq',isLoggedIn,function(req,res,next){
+router.post('/addq',checkUser.isLoggedIn,function(req,res,next){
   /*有標題或分類才能送出問題*/
   if((req.body.Title)&&(req.body.Type)){
       var temp = new Question({
@@ -125,7 +126,7 @@ router.post('/addq',isLoggedIn,function(req,res,next){
     }
   });
   /*新增答案*/
-  router.post('/adda/:id',isAdmin,function(req,res,next){
+  router.post('/adda/:id',checkUser.isAdmin,function(req,res,next){
     /*有內容才能送出解答*/
     if(req.body.Answer){
       if(mongoose.Types.ObjectId.isValid(req.params.id)){
@@ -133,7 +134,7 @@ router.post('/addq',isLoggedIn,function(req,res,next){
         Question.findById(req.params.id).exec(function(err,result){
           if(err){return next(err)};
           if(result!==null){
-            Question.update({_id:req.params.id},{Type:req.body.Type},{Answer:req.body.Answer},{CreateDate:Date.now()},function(err){
+            Question.update({_id:req.params.id},{Type:req.body.Type,Answer:req.body.Answer,CreateDate:Date.now()},function(err){
               if(err)
               console.log('Fail to update article.');
               else
@@ -225,7 +226,7 @@ router.get('/clickR/:id', function(req, res, next) {
   }
 });
 /*編輯答案*/
-router.post('/updateA/:id',isAdmin,function(req,res,next){
+router.post('/updateA/:id',checkUser.isAdmin,function(req,res,next){
     if(mongoose.Types.ObjectId.isValid(req.params.id)){
           Question.findById(req.params.id).exec(function(err,result){
             if(err){return next(err)};
@@ -244,7 +245,7 @@ router.post('/updateA/:id',isAdmin,function(req,res,next){
   }
 });
 /*編輯板規*/
-router.post('/updateR/:id',isAdmin,function(req,res,next){
+router.post('/updateR/:id',checkUser.isAdmin,function(req,res,next){
   if(mongoose.Types.ObjectId.isValid(req.params.id)){
         Rule.findById(req.params.id).exec(function(err,result){
           if(err){return next(err)};
@@ -263,7 +264,7 @@ router.post('/updateR/:id',isAdmin,function(req,res,next){
 }
 });
 /*管理員給刪除理由*/
-router.post('/deleteQ/:id',isAdmin,function(req,res,next){
+router.post('/deleteQ/:id',checkUser.isAdmin,function(req,res,next){
     /*確定傳進來的是不是有效ID*/
     if(mongoose.Types.ObjectId.isValid(req.params.id)){
       /*找是哪篇文章*/
@@ -293,7 +294,7 @@ router.post('/deleteQ/:id',isAdmin,function(req,res,next){
     }
 });
 /*刪除板規*/
-router.get('/deleteR/:id',isAdmin,function(req,res,next){
+router.get('/deleteR/:id',checkUser.isAdmin,function(req,res,next){
 
       /*確定傳進來的是不是有效ID*/
       if(mongoose.Types.ObjectId.isValid(req.params.id)){
@@ -331,7 +332,7 @@ router.get('/deleteR/:id',isAdmin,function(req,res,next){
   //}
 });
 // 使用者刪除問題 
-router.post('/deleteByUser/:id', isLoggedIn, function(req, res, next) {
+router.post('/deleteByUser/:id', checkUser.isLoggedIn, function(req, res, next) {
   Question.findById(req.params.id, function(err,result) {
     if (err){return next(err);}
     //發問者本人且問題還沒被管理員審核才能刪除問題
@@ -350,7 +351,7 @@ router.post('/deleteByUser/:id', isLoggedIn, function(req, res, next) {
   });
 });
 // 使用者編輯問題 
-router.post('/editByUser/:id', isLoggedIn, function(req, res, next) {
+router.post('/editByUser/:id', checkUser.isLoggedIn, function(req, res, next) {
   Question.findById(req.params.id, function(err,result) {
     if (err){return next(err);}
     //發問者本人且問題還沒被管理員審核才能刪除問題
@@ -374,7 +375,7 @@ router.post('/editByUser/:id', isLoggedIn, function(req, res, next) {
   });
 });
 // 使用者刪除問題 
-router.post('/deleteByUser/:id', isLoggedIn, function(req, res, next) {
+router.post('/deleteByUser/:id', checkUser.isLoggedIn, function(req, res, next) {
   Question.findById(req.params.id, function(err,result) {
     if (err){return next(err);}
     //發問者本人且問題還沒被管理員審核才能刪除問題
@@ -393,7 +394,7 @@ router.post('/deleteByUser/:id', isLoggedIn, function(req, res, next) {
   });
 });
 // 使用者編輯問題 
-router.post('/editByUser/:id', isLoggedIn, function(req, res, next) {
+router.post('/editByUser/:id', checkUser.isLoggedIn, function(req, res, next) {
   Question.findById(req.params.id, function(err,result) {
     if (err){return next(err);}
     //發問者本人且問題還沒被管理員審核才能刪除問題
@@ -416,18 +417,6 @@ router.post('/editByUser/:id', isLoggedIn, function(req, res, next) {
     }
   });
 });
-//判斷是否登入
-function isLoggedIn(req, res, next) {
-  if (user)
-    return next();
-  res.redirect('/login');
-}
-//判斷是否管理員
-function isAdmin(req, res, next) {
-  if (req.user && req.user.role === 'admin')
-    return next();
-  res.redirect('/qna');
-}
 //發送成功提示
 // function sendSuccess(){
 //   alert("發送成功");

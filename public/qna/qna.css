@@ -120,6 +120,12 @@ table{
     
 }
 /* 問題合集 */
+/* .title2{
+    width: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+} */
 .Q{
     line-height: 2.3;
     /* border-bottom: 1.5px #29ABE2 solid; */
