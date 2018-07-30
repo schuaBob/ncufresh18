@@ -291,14 +291,15 @@ function colorEgg() {
     }
 }
 
+
 // 遊戲主體長寬
 var width = 800
 var height = 600
 var rankClick = 0
 var bgMusicFlag = 0
+var bgMusicBack = 0
 var game = new Phaser.Game(width, height, Phaser.CANVAS, 'game')
 
-console.log(game.device)
 var states = {
     // 加载场景, 載入資源
     preload: function() {
@@ -341,6 +342,7 @@ var states = {
             game.load.image('questionStage', 'images/question_stage.png')
             game.load.image('quit', 'images/quit.png')
             game.load.image('question', 'images/question.png')
+            game.load.spritesheet('musicSwitch', 'images/music_swtich.png', 60, 60)
             game.load.spritesheet('btnBack', 'images/back.png', 60, 60)
             game.load.spritesheet('blank', 'images/blank.png', width, height)
             game.load.spritesheet('cute', 'images/cute/cute.png', 200, 213)
@@ -384,16 +386,37 @@ var states = {
     main: function() {
         this.create = function() {
             // 遊戲背景音樂
-            if (bgMusicFlag !== 1) {
-                game.add.audio('bgMusic', 1, true).play()
+            if (bgMusicFlag !== 1 && !bgMusicBack) {
+                bgMusic = game.add.audio('bgMusic', 1, true).play()
                 bgMusicFlag = 1
             }
+
             // 設置背景邊界
             game.world.setBounds(0, 0, 800, 3910);
 
             // 背景
             var bg = game.add.image(0, 0, 'bg')
             
+            // 音樂關閉
+            if (bgMusicFlag !== 1) {
+                var musicSwitch =  game.add.button(0, 0, 'musicSwitch', musicSwitch, 1, 1, 0, 1).alignIn(bg, Phaser.BOTTOM_RIGHT)
+            } else {
+                var musicSwitch =  game.add.button(0, 0, 'musicSwitch', musicSwitch, 0, 0, 1, 0).alignIn(bg, Phaser.BOTTOM_RIGHT)
+            }
+
+            // 音樂關閉
+            function musicSwitch() {
+                if (bgMusicFlag !== 1) {
+                    bgMusic = game.add.audio('bgMusic', 1, true).play()
+                    bgMusicFlag = 1
+                    musicSwitch.setFrames(1)
+                } else {
+                    musicSwitch.setFrames(0)
+                    bgMusicFlag = 0
+                    bgMusic.stop()
+                }
+            }
+
             // 松鼠圖片
             var squirrel = game.add.image(game.world.centerX - 200, game.world.centerY - 200, 'squirrel').alignIn(bg, Phaser.BOTTOM_CENTER, 0, -185)
             
@@ -457,6 +480,28 @@ var states = {
             var cameraFocus = game.add.sprite(game.world.centerX, game.world.centerY + 1700, 'blank')
             game.physics.p2.enable(cameraFocus)
             
+            // 音樂關閉按鈕
+            if (bgMusicFlag === 1) {
+                var musicSwitch = game.add.button(0, 0, 'musicSwitch', musicSwitch, 0, 0, 1, 0).alignIn(cameraFocus, Phaser.BOTTOM_RIGHT, 0, -45)
+            } else {
+                var musicSwitch = game.add.button(0, 0, 'musicSwitch', musicSwitch, 1, 1, 0, 1).alignIn(cameraFocus, Phaser.BOTTOM_RIGHT, 0, -45)
+            }
+
+            // 音樂關閉
+            function musicSwitch() {
+                if (bgMusicFlag !== 1) {
+                    bgMusic = game.add.audio('bgMusic', 1, true).play()
+                    bgMusicFlag = 1
+                    bgMusicBack = 0
+                    musicSwitch.setFrames(1)
+                } else {
+                    musicSwitch.setFrames(0)
+                    bgMusic.stop()
+                    bgMusicFlag = 0
+                    bgMusicBack = 1
+                }
+            }
+
             // 返回按鈕            
             var btnBack = game.add.button(0, 0, 'btnBack', btnBackClick).alignIn(cameraFocus, Phaser.TOP_RIGHT, -10, -10)
             
@@ -632,6 +677,7 @@ var states = {
             otherUI.add(bonus2)
             otherUI.add(bonus3)
             otherUI.add(bonus4)
+            otherUI.add(musicSwitch)
             
             var playUI = game.add.group()
             playUI.add(btnChoiceD)
