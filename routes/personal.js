@@ -55,18 +55,30 @@ router.post('/editPicture', upload.single('picture') , function(req,res,next){
       res.redirect('/');
 })
 
-
-
-
-/* 拿分數*/
-router.get('/getScore' ,function(req, res, next){
-  /* 前端傳id */
-  // console.log(req.user)
-  var userID = req.user.id
-  User.find({ id: userID}, 'score_high score_sum').exec(function(err, result) {
-    if (err) throw err;
-    res.send(result);
-  }) 
+router.get('/deleteQna/:id', checkuser.isLoggedIn, function(req, res, next){
+  if(!mongoose.Types.ObjectId.isValid(req.params.id)){
+    return res.redirect('../')
+  }
+  Question.findById(req.params.id).exec(function(err,result){
+    if (err) {
+      return next(err);
+    }
+    if(!result){
+      return res.redirect('../') ;
+    }
+    console.log(result.Username)
+    console.log(req.user.id)
+    console.log(result.Username !== req.user.id)
+    if(result.Username !== req.user.id){
+      return res.redirect('../') ;
+    }
+    result.DeleteDate = Date.now();
+    result.save(function(err){
+      if (err) {
+        return next(err);
+      }
+      res.redirect('../') ;
+    })
+  })
 })
-
 module.exports = router;

@@ -16,8 +16,29 @@
     width: 35vw ;
     background-color: rgb(247, 233, 224) ;
 }
-#btn {
+#btn1 {
+    width: 18vw ;
     height: 12vh ;
+    color : rgb(0,44,144) ;
+    background-color: rgb(201,210,225);
+    border: none ;
+    font-size : 5vh ;
+}
+#btn2 {
+    width: 18vw ;
+    height: 12vh ;
+    color : rgb(0,23,91) ;
+    background-color: rgb(157,173,196);
+    border: none ;
+    font-size : 5vh ;
+}
+#btn3 {
+    width: 18vw ;
+    height: 12vh ;
+    color : rgb(0,16,94) ;
+    background-color: rgb(121,135,161);
+    border: none ;
+    font-size : 5vh ;
 }
 #pic {
     object-fit: cover ;
@@ -104,8 +125,10 @@
     width : 31vw ;
     font-size: 3vh ;
 }
-#Q {
+.qt {
     width : 20vw ;
+    text-overflow: ellipsis ;
+    overflow:hidden;
 }
 #sta {
     width: 5vw ;
@@ -117,6 +140,23 @@ hr {
     border: 3px solid white ;
     width : 80% ;
     border-radius: 3px ;
+}
+#qb {
+    height: 30vh;
+    overflow: scroll;
+}
+#t {
+    position: relative ;
+    top : 1vh ;
+}
+#reason {
+    top : 30vh ;
+}
+#answer {
+    top : 10vh ;
+}
+#ansbox {
+    background-color: rgb(247, 233, 224) ;
 }
 @media only screen and (max-width: 800px) {
     #canvas {

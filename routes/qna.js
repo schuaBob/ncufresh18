@@ -418,7 +418,7 @@ router.post('/editByUser/:id', isLoggedIn, function(req, res, next) {
 });
 //判斷是否登入
 function isLoggedIn(req, res, next) {
-  if (user)
+  if (req.user)
     return next();
   res.redirect('/login');
 }
