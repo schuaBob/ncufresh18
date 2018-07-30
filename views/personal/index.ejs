@@ -24,52 +24,100 @@
                 <td class='space'>
                     <div id="writing">
                         <p id="w2">發問紀錄</p>
-                        <table id="record">
-                            <thead>
-                                <td id="Q">問題</td>
-                                <td id="sta">狀態</td>
-                                <td id="ope">功能</td>
-                                <hr>
-                            </thead>
-                            <tbody>
-                            <% for(var a=question.length-1;a>-1;a--){ %>
-                                <% if(question[a].question!==0){ %>
-                                    <% if(question[a].Reason!==0){ %>
-                                            <tr>
-                                                <td id="Q"><%= question[a].Title %></td>
-                                                <td id="sta">未過審</td>
-                                                <td id="ope"><button>查看</button></td>
-                                            </tr>
-                                    <% }else{ %>
-                                        <% if(question[a].Answer!==0){ %>
-                                                <tr>
-                                                    <td id="Q"><%= question[a].Title %></td>
-                                                    <td id="sta">已審核</td>
-                                                    <td id="ope"><button>查看</button></td>
-                                                </tr>
-                                        <% }else{ %>
-                                                <tr>
-                                                    <td id="Q"><%= question[a].Title %></td>
-                                                    <td id="sta">審核中</td>
-                                                    <td id="ope"><button>刪除</button></td>
-                                                </tr>
+                        <div id="qb">
+                            <table id="record">
+                                <thead>
+                                    <td class="Q">問題</td>
+                                    <td id="sta">狀態</td>
+                                    <td id="ope">功能</td>
+                                </thead>
+                                <tbody>
+                                <% for(var a=question.length-1;a>-1;a--){ %>
+                                    <% if(question[a].Content.length!==0){ %>
+                                        <% if(!question[a].DeleteDate){ %>
+                                            <% if(question[a].Reason.length!==0){ %>
+                                                    <tr>
+                                                        <td class="Q"><p class="qt"><%= question[a].Title %></p></td>
+                                                        <td id="sta">未過審</td>
+                                                        <td id="ope">
+                                                            <a data-toggle="modal" data-target="#reason">
+                                                                <button>查看</button>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <div class="modal fade" id="reason" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <%= question[a].Reason %>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            <% }else{ %>
+                                                <% if(question[a].Answer.length!==0){ %>
+                                                        <tr>
+                                                            <td class="Q"><p class="qt"><%= question[a].Title %></p></td>
+                                                            <td id="sta">已審核</td>
+                                                            <td id="ope">
+                                                                <a data-toggle="modal" data-target="#answer">
+                                                                    <button>查看</button>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        <div class="modal fade bd-example-modal-lg" id="answer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                                            <div class="modal-dialog modal-lg" role="document">
+                                                                <div class="modal-content QA">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLongTitle"><%= question[a].Title %></h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body"><h5 class="blueLetter">Q</h5><h5 style="display: inline;font-weight:bold;">uestion</h5></div>
+                                                                    <div class="modal-body"><%= question[a].Content %></div>
+                                                                    <div class="modal-body"><h5 class="blueLetter">A</h5><h5 style="display: inline;font-weight:bold;">nswer</h5></div>
+                                                                    <div class="modal-body"><%= question[a].Answer %></div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-primary closemodal" data-dismiss="modal">　O K　</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                <% }else{ %>
+                                                        <tr>
+                                                            <td class="Q"><p class="qt"><%= question[a].Title %></p></td>
+                                                            <td id="sta">審核中</td>
+                                                            <td id="ope">
+                                                                <a href="deleteQna/<%= question[a]._id %>" onclick="return confirm('是否要刪除?');">
+                                                                    <button>刪除</button>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                <% } %>
+                                            <% } %>
                                         <% } %>
                                     <% } %>
                                 <% } %>
-                            <% } %>
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </td>
                 <td class='space'>
                     <div class='space'>
-                        <a href="/smallgame"><img src="小遊戲.png" id="btn"></a>
+                        <a href="/smallgame"><button id="btn1">小遊戲</button></a>
                     </div>
                     <div class='space'>
-                        <a href="/qna"><img src="我要發問.png" id="btn"></a>
+                        <a href="/qna"><button id="btn2">我要發問</button></a>
                     </div>
                     <div class='space'>
-                        <a href="https://goo.gl/forms/3Xk8HAkeKQiodR7r1"><img src="調查問卷.png" id="btn"></a>
+                        <a href="https://goo.gl/forms/3Xk8HAkeKQiodR7r1"><button id="btn3">問卷調查</button></a>
                     </div>
                 </td>
             </tr>
