@@ -4,6 +4,7 @@ var elebuilding = require("../models/campus/elebuilding");
 var formidable = require("formidable");
 var mongoose = require("mongoose");
 var fs = require("fs");
+var checkuser = require("./check-user");
 /* 校園導覽首頁 */
 router.get("/", function(req, res, next) {
   elebuilding.find({},{_id: 1, Element_Name:1,Type:1,Buildpic:1,X_position:1,Y_position:1,Size:1}).exec(function(err,result) {
@@ -14,7 +15,7 @@ router.get("/", function(req, res, next) {
     
   })
 });
-router.get("/editElement", function(req, res, next) {
+router.get("/editElement", checkuser.isAdmin, function(req, res, next) {
   elebuilding
     .find(
       {},
@@ -35,7 +36,7 @@ router.get("/editElement", function(req, res, next) {
       res.render("campus/editElement", { title: "編輯物件", result: result, user: req.user});
     });
 });
-router.post("/AddNew_element", function(req, res, next) {
+router.post("/AddNew_element",checkuser.isAdmin, function(req, res, next) {
   if (req.body.elename && req.body.elecategory != 0) {
     elebuilding
       .findOne({ Element_Name: req.body.elename })
@@ -64,7 +65,7 @@ router.post("/AddNew_element", function(req, res, next) {
     res.redirect("/campus/editElement");
   }
 });
-router.post("/editElement/:id", function(req, res, next) {
+router.post("/editElement/:id",checkuser.isAdmin, function(req, res, next) {
   elebuilding
     .findByIdAndUpdate(req.params.id, {
       Element_Name: req.body.elename,
@@ -78,7 +79,7 @@ router.post("/editElement/:id", function(req, res, next) {
       res.redirect("/campus/editElement");
     });
 });
-router.get("/delete/:id", function(req, res, next) {
+router.get("/delete/:id", checkuser.isAdmin,function(req, res, next) {
   elebuilding.findByIdAndRemove(req.params.id).exec(function(err, result) {
     if (err) {
       return next(err);
@@ -86,7 +87,7 @@ router.get("/delete/:id", function(req, res, next) {
     res.redirect("/campus/editElement");
   });
 });
-router.post("/insert_img/:id", function(req, res, next) {
+router.post("/insert_img/:id", checkuser.isAdmin,function(req, res, next) {
   var form = new formidable.IncomingForm();
   form.parse(req, (err, fields, files) => {
     //如果你的表單有不是file的欄位，他們會在fields裡面
@@ -146,7 +147,7 @@ router.post("/insert_img/:id", function(req, res, next) {
     res.redirect("/campus/editElement");
   });
 });
-router.get("/picposition", function(req, res, next) {
+router.get("/picposition",checkuser.isAdmin, function(req, res, next) {
   elebuilding
     .findById(req.query.id, { _id: 0, Buildpic: 1,X_position:1,Y_position:1,Size:1})
     .exec(function(err, result) {
@@ -157,7 +158,7 @@ router.get("/picposition", function(req, res, next) {
     });
 });
 
-router.get("/getimg", function(req, res, next) {
+router.get("/getimg",checkuser.isAdmin, function(req, res, next) {
   elebuilding
     .findById(req.query.id, { _id: 0, Buildpic: 1, Intropic: 1 })
     .exec(function(err, result) {
@@ -168,7 +169,7 @@ router.get("/getimg", function(req, res, next) {
     });
   // res.redirect("/campus/editElement");
 });
-router.post("/deleimg", function(req, res, next) {
+router.post("/deleimg",checkuser.isAdmin, function(req, res, next) {
   if (req.body.val === "0") {
     elebuilding
       .findByIdAndUpdate(req.body.id, {
@@ -195,7 +196,7 @@ router.post("/deleimg", function(req, res, next) {
       });
   }
 });
-router.post("/saveposition/:id",function(req,res,next) {
+router.post("/saveposition/:id",checkuser.isAdmin,function(req,res,next) {
   elebuilding.findByIdAndUpdate(req.params.id,{
     X_position : req.body.x_position,
     Y_position : req.body.y_position,
@@ -216,7 +217,7 @@ router.get("/indexmodal",function(req,res,next) {
     res.send(result)
   })
 })
-router.get("/edittext",function(req,res,next){
+router.get("/edittext",checkuser.isAdmin,function(req,res,next){
   elebuilding.findById(req.query.id,{_id:1,Element_Name:1,Type:1,Element_Intro:1}).exec(function(err,result){
     if(err) {
       return next(err)

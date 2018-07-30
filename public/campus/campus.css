@@ -118,7 +118,6 @@ body {
 .main_list_detail {
   position: absolute;
   float: right;
-  top: calc((100vh - 80) / 2);
   right: 2%;
   width: 25%;
   z-index: 5;
