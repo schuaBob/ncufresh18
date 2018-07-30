@@ -10,10 +10,10 @@
 
     $(document).ready(function () {
         $('#sidebar_left li').click(function(event) {
-            if(event.currentTarget.attributes.val.value !== 0) {
+            if(event.currentTarget.attributes.val.value != 0) {
                 $('.tabledata').hide()
                 $('.tabledata[eletype='+ event.currentTarget.attributes.val.value +']').show()
-            } else{
+            } else {
                 $('.tabledata').show()
             }
         })

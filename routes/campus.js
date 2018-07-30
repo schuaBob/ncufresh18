@@ -116,7 +116,6 @@ router.post("/insert_img/:id", function(req, res, next) {
                 if (err) {
                   return next(err);
                 }
-                res.redirect("/campus/editElement");
               });
           } else if (fields.imgtype === "1") {
             elebuilding
