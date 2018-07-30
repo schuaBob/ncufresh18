@@ -37,5 +37,6 @@ package-lock.json
 
 #vscode configures
 .vscode/
+
 #server config 
 bin/www

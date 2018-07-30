@@ -8,6 +8,10 @@ var mongoose = require('mongoose');
 require('../models/qna/qna') ;
 var Question = mongoose.model('Question');
 
+//convert image
+var fs = require('fs')
+  , gm = require('gm').subClass({imageMagick: true});
+
 var picname ;
 /* 個人專區首頁 */
 router.get('/',checkuser.isLoggedIn, function(req, res, next) {
@@ -38,8 +42,11 @@ router.get('/',checkuser.isLoggedIn, function(req, res, next) {
 var storage = multer.diskStorage({
   destination: "public/personal/bighead/",
   filename   : function(req, file, cb){
-    console.log(req) ;
     var fileName = req.user.id + ".png";
+    Gm(file).resize(100, 100, "!").write(fileName, function (err) {
+      if (err) throw err;
+      console.log(filename+' converted.');
+    });
     User.update({id: req.user.id}, { $set: {avatar: fileName}}, function(err, result) {
       if (err) {
         return next(err);
@@ -52,7 +59,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 router.post('/editPicture', upload.single('picture') , function(req,res,next){
-      res.redirect('/');
+  res.redirect('/');
 })
 
 
