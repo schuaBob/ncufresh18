@@ -1,21 +1,13 @@
-
-#modal_button{ 
-    margin-top: 8px;
-    width: 120px;
-    padding-top:8px; 
-    padding-bottom: 8px;
-    border-radius: 10%;
-    text-align: center;
+body{
+    background-image: url(其他學生組織背景圖修正版.png);
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
 }
-
 ul{
     float:left;
-}
-
-h5{
-    margin-left: 18%;
-    color: white;
-    font-size: 30px;
 }
 
 h3{
@@ -23,37 +15,10 @@ h3{
     font-size: 40px;
     margin-left: 2%;
 }
-.modal-content{
-    background-image: url(彈出視窗背景.png);
-}
-
-.modal{
-  margin-top: 5%;  
-}
-
-#nav_a{
-    font-size: 17px;
+h5{
+    margin-left: 18%;
     color: white;
-}
-#nav_a:focus{
-    color: rgb(7, 56, 112);
-}
-.nav-link{
-    background-color: rgb(255, 255, 255,0);
-    display: block;
-    padding: 0.4rem 0rem;
-}
-.nav-pills .nav-link.active{
-    background-color: rgb(98, 224, 255);
-}
-
-#nav_ul{
-    margin-top: 5%;
-}
-
-#modal_button:hover{
-    box-shadow: 0 14px 20px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-
+    font-size: 30px;
 }
 h6{
     margin-top: 2%;
@@ -72,30 +37,66 @@ h6{
     line-height: 26px;
     letter-spacing: 1px;
 }
+/* modal位置.內部字體大小調整 */
+.modal{
+    margin-top: 5%;  
+  }
+.modal-content{
+    background-image: url(彈出視窗背景.png);
+}
+#nav_a{
+    font-size: 17px;
+    color: white;
+}
+#nav_a:focus{
+    color: rgb(7, 56, 112);
+}
+.nav-link{
+    background-color: rgba(255, 255, 255,0);
+    display: block;
+    padding: 0.4rem 0rem;
+}
+.nav-pills .nav-link.active{
+    background-color: rgb(98, 224, 255);
+}
 
+#nav_ul{
+    margin-top: 5%;
+}
 
+#modal_button{ 
+    margin-top: 8px;
+    width: 120px;
+    padding-top:8px; 
+    padding-bottom: 8px;
+    border-radius: 10%;
+    text-align: center;
+}
+#modal_button:hover{
+    box-shadow: 0 14px 20px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+
+}
+/* 圖片 */
 #carouselExampleIndicator1{
-    max-width: 400px;
+    max-width: 550px;
     max-height: 300px;
     float: left;
-    margin-left: 13%;
+    margin-left: 1.5%;
 }
-
-/* 差一個s */
 #carouselExampleIndicator2{
-    max-width: 400px;
+    max-width: 550px;
     max-height: 300px;
     float: left;
-    margin-left: 13%;
+    margin-left: 1.5%;
 }
 
+/* 跟著box移動的物件 */
 #com_button{
     position: relative;
     display: inline-block;
     margin-left: 12%;
     margin-top: 4%;
 }
-
 .main{
     width:28vw;
     position: absolute;
@@ -108,10 +109,14 @@ h6{
     position: absolute;
 }
 .astro:hover{
-    -webkit-transform: rotate(360deg); /* Safari */
     transform: rotate(360deg);
-    -webkit-transition: width 2s, height 2s, -webkit-transform 2s; /* Safari */
+    -webkit-transform: rotate(360deg); 
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
     transition: width 2s, height 2s, transform 2s;
+    -webkit-transition: width 2s, height 2s, -webkit-transition 2s; 
+    -moz-transition: width 2s, height 2s, -moz-transition 2s;
+    -o-transition: width 2s, height 2s, -o-transition 2s;
 }
 .box{
     width:32vw;
@@ -127,6 +132,9 @@ h6{
 }
 .com_1:hover{
     transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
 }
 .com_2{
     width: 9vw;
@@ -136,6 +144,9 @@ h6{
 }
 .com_2:hover{
     transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
 }
 .com_3{
     width: 15vw;
@@ -145,6 +156,9 @@ h6{
 }
 .com_3:hover{
     transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
 }
 .com_4{
     width: 6.5vw;
@@ -154,6 +168,9 @@ h6{
 }
 .com_4:hover{
     transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
 }
 .com_5{
     width: 10vw;
@@ -163,6 +180,9 @@ h6{
 }
 .com_5:hover{
     transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
 }
 .com_6{
     width: 11.5vw;
@@ -172,6 +192,9 @@ h6{
 }
 .com_6:hover{
     transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
 }
 .com_7{
     width: 15vw;
@@ -181,6 +204,9 @@ h6{
 }
 .com_7:hover{
     transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
 }
 .com_8{
     width: 16vw;
@@ -190,10 +216,15 @@ h6{
 }
 .com_8:hover{
     transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
 }
+
+/* 麵包屑 */
 #bread{
     float:left;
-    width: 25vw;
+    /* width: 25vw; */
 }
 #breadcru{
     background-color: black;
@@ -204,25 +235,53 @@ h6{
     opacity: 1;
     font-size: 1.3vw;
 }
-#text{
+#text, #text_stu{
     opacity: 1;
     color: white;
     font-size: 1.3vw;
 }
 
-
-
-body{
-    background-image: url(其他學生組織背景圖修正版.png);
-    background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+@media screen and (min-width: 767px) and (max-width: 992px){
+    #carouselExampleIndicator1{
+        max-width: 450px;
+        max-height: 220px;
+        margin-left: 5%;
+    }
+    #carouselExampleIndicator2{
+        max-width: 450px;
+        max-height: 220px;
+        margin-left: 5%;
+    }
 }
+@media screen and (min-width: 992px) and (max-width: 1000px){
+    #bread{
+        margin-top:2.3%;
+    }
+}
+@media screen and (min-width: 589px) and (max-width: 769px){
+    .breadcrumb {
+        padding: 0rem 0.9rem;
 
+    }
+    #text_at{
+        font-size: 3vw;
+    }
+}
+@media screen and (max-width: 588px) and (min-width: 532px){
+    .breadcrumb {
+        padding: .75rem .9rem;
+    }
+}
+@media screen and (max-width: 532px){
+    .breadcrumb {
+        padding: .75rem .5rem;
 
+    }
+}
 @media screen and (max-width: 768px){
-    
+    body{
+        overflow-x:hidden;
+    }
     .modal{
         z-index: 4100;
         margin-top: 0%;
@@ -363,13 +422,17 @@ body{
     #text{
         font-size: 3.5vw;
     }
+    #text_stu{
+        font-size: 3.5vw;
+        text-align: center;
+        float: right;
+        padding-left: .5rem;
+
+    }
     #text_at{
         font-size: 3.8vw;
         float: left;
         text-align: center;
-    }
-    .breadcrumb {
-        padding: .75rem 0.5rem;
     }
     
 }

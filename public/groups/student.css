@@ -3,6 +3,7 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center; 
+    overflow-x: hidden;
 }
 
 /* img{
@@ -27,7 +28,7 @@ h3{
 
 
 h6{
-    white-space: pre;
+    /* white-space: pre; */
     float: left;
     margin-top: 2%;
     margin-left: 6%;
@@ -46,35 +47,24 @@ h6{
     letter-spacing: 1px;
 }
 
-
-
-
-#carouselExampleIndicators{
-    width: 650px;
-    height:450px;
-    margin-left: 6%;
+#carouselExampleIndicator1{
+    width: 550px;
+    height:400px;
+    margin-left: 12%;
     float:left;
 }    
 
-.carousel-inner{
+/* .carousel-inner{
     width: 650px;
     height: 450px;
-}
-/* 差一個s */
-#carouselExampleIndicator{
-    width: 650px;
-    height: 450px;
-    margin-left: 6%;
-    float:left;
-}    
-
+} */
 
 #update{
     float: left;
 }
 #bread{
     float:left;
-    width: 25vw;
+    /* width: 25vw; */
 }
 #breadcru{
     background-color: black;
@@ -124,6 +114,9 @@ h6{
 }
 .stu_intro:hover{
     transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -o-transform: scale(1.2);
 }
 .stu_branch{
     position: absolute;
@@ -133,6 +126,9 @@ h6{
 }
 .stu_branch:hover{
     transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -o-transform: scale(1.2);
 }
 .stu_activity{
     position: absolute;
@@ -142,13 +138,41 @@ h6{
 }
 .stu_activity:hover{
     transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -o-transform: scale(1.2);
 }
 
-
+@media screen and (min-width: 767px) and (max-width: 992px){
+    #carouselExampleIndicator1{
+        max-width: 450px;
+        max-height: 220px;
+        margin-left: 5%;
+    }
+}
+@media screen and (min-width: 992px) and (max-width: 1000px){
+    .bread{
+        margin-top:2.3%;
+    }
+}
+@media screen and (min-width: 589px) and (max-width: 769px){
+    .breadcrumb {
+        padding: 0rem 0.9rem;
+    }
+    #text_at{
+        font-size: 3vw;
+    }
+}
+@media screen and (max-width: 588px){
+    .breadcrumb {
+        padding: .75rem .5rem;
+    }
+}
 @media screen and (max-width: 768px){
     body{
         background-image: url(學生會手機板正式背景.png);
         background-position: left;
+        overflow-x: hidden;
     }
 
     .modal{
@@ -195,22 +219,13 @@ h6{
         line-height: 26px;
         letter-spacing: 1px;
     }
-    #carouselExampleIndicators{
+    #carouselExampleIndicator1{
         max-width: 280px;
-        max-height: 300px;
+        max-height: 220px;
         float: left;
         margin-left: 5%;
     }
-    .carousel-inner{
-        width: 280px;
-        height: 300px;
-    }
-    #carouselExampleIndicator{
-        max-width: 280px;
-        max-height: 300px;
-        float: left;
-        margin-left: 5%;
-    }
+    
     /* 麵包屑 */
     #bread{
         float:left;
@@ -225,9 +240,7 @@ h6{
         float: left;
         text-align: center;
     }
-    .breadcrumb {
-        padding: .75rem 0.5rem;
-    }
+    
     /* Modal按鈕 */
     #stu_button{
         position: relative;

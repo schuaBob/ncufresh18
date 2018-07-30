@@ -27,7 +27,7 @@
         let com = ["com_1","com_2","com_3","com_4","com_5","com_6","com_7","com_8"]
         let cell = ["cell_1","cell_2","cell_3","cell_4","cell_5","cell_6","cell_7","cell_8"]
         $(window).resize(function(){
-            if($(window).width()<768){
+            if($(window).width()<=768){
                 $("#nav_ul").removeClass("flex-column");
                 $(".box").hide();
                 $(".main").hide();
@@ -60,7 +60,7 @@
             }
         });
 
-        if($(window).width()<768){
+        if($(window).width()<=768){
             $("#nav_ul").removeClass("flex-column");
             $(".box").hide();
             $(".main").hide();
@@ -74,7 +74,6 @@
             for(let q=0;q<8;q++){
                 $("."+cell[q]).show();
             }
-
         }
         else if($(window).width()>768){
             $("#nav_ul").addClass("flex-column");
@@ -91,6 +90,7 @@
                 $("."+cell[q]).hide();
             }
         }
+        
         $('.open').click(function (event) {
             console.log(event);
             $.ajax({
@@ -110,10 +110,10 @@
                         $('#carouselExampleIndicator1 .carousel-indicators').append("<li data-target='#carouselExampleIndicator1' data-slide-to='" + i + "'></li>")
                         $('#carouselExampleIndicator1 .carousel-inner').append("<div class='carousel-item'><img class='d-block w-100' src='/groups/img/" + data_com.intro_pic[i] + "'></div>")
                     }
-                    $('carouselExampleIndicator1 .carousel-indicators li').first().addClass('active')
+                    $('#carouselExampleIndicator1 .carousel-indicators li').first().addClass('active')
                     $('#carouselExampleIndicator1 .carousel-inner div').first().addClass('active')
                     $('#commodal').on('hide.bs.modal', function () {
-                        $('carouselExampleIndicator1 .carousel-indicators li').remove()
+                        $('#carouselExampleIndicator1 .carousel-indicators li').remove()
                         $('#carouselExampleIndicator1 .carousel-inner .carousel-item').remove()
                         $('#commodal').off('hide.bs.modal')
                     })
@@ -121,10 +121,10 @@
                         $('#carouselExampleIndicator2 .carousel-indicators').append("<li data-target='#carouselExampleIndicator2' data-slide-to='" + i + "'></li>")
                         $('#carouselExampleIndicator2 .carousel-inner').append("<div class='carousel-item'><img class='d-block w-100' src='/groups/img/" + data_com.act_pic[i] + "'></div>")
                     }
-                    $('carouselExampleIndicator2 .carousel-indicators li').first().addClass('active')
+                    $('#carouselExampleIndicator2 .carousel-indicators li').first().addClass('active')
                     $('#carouselExampleIndicator2 .carousel-inner div').first().addClass('active')
                     $('#commodal').on('hide.bs.modal', function () {
-                        $('carouselExampleIndicator2 .carousel-indicators li').remove()
+                        $('#carouselExampleIndicator2 .carousel-indicators li').remove()
                         $('#carouselExampleIndicator2 .carousel-inner .carousel-item').remove()
                         $('#commodal').off('hide.bs.modal')
                     })
