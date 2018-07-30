@@ -30,7 +30,6 @@
     body {
         padding-top: 56px;
         padding-bottom: 24px;
-        
         <%_ /* overscroll-behavior-y: none; 這真的不知道該加還是不加ＱＱ */ -%>
     }
     footer {
@@ -58,5 +57,9 @@
         .footer-third-line {
             display: none;
         }
+    }
+    <% /* 解決在螢幕寬度992~1000px時導覽列的按鈕上的字會自己換行問題 */ %>
+    .nav-link {
+        white-space: nowrap;
     }
 </style>

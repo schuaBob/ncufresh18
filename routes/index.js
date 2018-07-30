@@ -233,7 +233,7 @@ router.get('/password', function (req, res, next) {
 });
 
 router.post('/password', passport.authenticate('local',{
-  successRedirect : '/',
+  successRedirect : '/personal/',
   failureRedirect : '/login',
   failureFlash : true
 }));
