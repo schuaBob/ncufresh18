@@ -85,6 +85,7 @@ const passport = require('passport');
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 //Pages
 var index = require('./routes/index');
 var documents = require('./routes/documents');

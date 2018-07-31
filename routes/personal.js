@@ -9,8 +9,7 @@ require('../models/qna/qna') ;
 var Question = mongoose.model('Question');
 
 //convert image
-var fs = require('fs')
-  , gm = require('gm').subClass({imageMagick: true});
+var gm = require('gm').subClass({imageMagick: true});
 
 var picname ;
 /* 個人專區首頁 */
@@ -42,15 +41,11 @@ router.get('/',checkuser.isLoggedIn, function(req, res, next) {
 var storage = multer.diskStorage({
   destination: "public/personal/bighead/",
   filename   : function(req, file, cb){
+    console.log(file);
     var fileName = req.user.id + ".png";
-    Gm(file).resize(100, 100, "!").write(fileName, function (err) {
-      if (err) throw err;
-      console.log(filename+' converted.');
-    });
     User.update({id: req.user.id}, { $set: {avatar: fileName}}, function(err, result) {
-      if (err) {
+      if (err) 
         return next(err);
-      }
     })
     cb(null, fileName);
   }
@@ -59,7 +54,16 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 router.post('/editPicture', upload.single('picture') , function(req,res,next){
-  res.redirect('/');
+  var fileName="public/personal/bighead/"+req.user.id+".png";
+  fs.access(fileName, fs.constants.R_OK, (err) => {
+    if(err)
+      next(err);
+    else
+      gm(fileName).resize(100, 100, "!").write(fileName, function (err) {
+        if (err) next(err);
+        res.redirect('/personal');
+      });
+   });
 })
 
 router.get('/deleteQna/:id', checkuser.isLoggedIn, function(req, res, next){
@@ -73,9 +77,6 @@ router.get('/deleteQna/:id', checkuser.isLoggedIn, function(req, res, next){
     if(!result){
       return res.redirect('../') ;
     }
-    console.log(result.Username)
-    console.log(req.user.id)
-    console.log(result.Username !== req.user.id)
     if(result.Username !== req.user.id){
       return res.redirect('../') ;
     }
