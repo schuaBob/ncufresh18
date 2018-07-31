@@ -389,7 +389,7 @@ router.post('/register', function (req, res,next) {
 });
 
 
-/* comingsoon */
+/* comingsoon 記得上線後註解*/
 router.get('/comingsoon', function (req, res, next) {
   res.render('comingsoon/index', { title: '倒數' });
 });
