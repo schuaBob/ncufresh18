@@ -419,7 +419,6 @@ td{
     }
     table{
         opacity: 0.7;
-        width:80vw;
         float:right;
         margin-right: 5%;
     }
@@ -427,7 +426,6 @@ td{
         text-align: center;
         font-size:9vw;
         color: white;
-
     }
     
     tbody{
@@ -438,10 +436,19 @@ td{
         border-collapse: collapse;
         text-align: center;
         margin-top: 5%;
-        
+        width:80vw;
     }
 
     .typelearn_name{
+        white-space: nowrap;
+    }
+    .typeplay_name{
+        white-space: nowrap;
+    }
+    .typedate_name{
+        white-space: nowrap;
+    }
+    .typeservice_name{
         white-space: nowrap;
     }
     td{
