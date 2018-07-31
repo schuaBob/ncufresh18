@@ -169,14 +169,14 @@
             </table>
           <% } %>
           <% var map = {
-            "中文系":"中國文學系","英文系":"英美語文學系","法文系":"法國語文學系",
-            "物理系":"物理學系","化學系":"化學學系","光電系":"光電科學與工程學系",
-            "經濟系":"經濟學系","企管系":"企業管理學系","資管系":"資訊管理學系","財金系":"財務金融學系",
-            "化材系":"化學工程與材料工程學系","土木系":"土木工程學系","機械系":"機械工程學系",
-            "電機系":"電機工程學系","資工系":"資訊工程學系","通訊系":"通訊工程學系",
-            "地科系":"地球科學學系","大氣系":"大氣科學學系",
-            "客家系":"客家語文暨社會科學學系",
-            "生科系":"生命科學系","生醫系":"生醫科學與工程學系"
+            "中文":"中國文學系", "英文":"英美語文學系", "法文":"法國語文學系",
+            "物理":"物理學系", "化學":"化學學系", "光電":"光電科學與工程學系", "數學":"數學系"
+            "經濟":"經濟學系", "企管":"企業管理學系", "資管":"資訊管理學系", "財金":"財務金融學系",
+            "化材":"化學工程與材料工程學系", "土木":"土木工程學系", "機械":"機械工程學系",
+            "電機":"電機工程學系", "資工":"資訊工程學系", "通訊":"通訊工程學系",
+            "地科":"地球科學學系", "大氣":"大氣科學學系",
+            "客家":"客家語文暨社會科學學系",
+            "生科":"生命科學系", "生醫":"生醫科學與工程學系"
           } %>
 
         <% for(var i in department){ %>
@@ -201,7 +201,7 @@
                             <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#team_<%= department[i].name %>">系隊</a></li>
                             <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#course_<%= department[i].name %>">系上課程</a></li> 
                             <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_i" href="#lightning_round_<%= department[i].name %>" 
-                              ytID="<% for(let j = 0;　j<QAvideo.length;　j++){ if(map[QAvideo[j].title] === department[j].name){%><%= QAvideo[j].insert %><% break;}}%>">快問快答</a></li>
+                              ytID="<% for(let j = 0;　j<QAvideo.length;　j++){ if(map[QAvideo[j].title] === department[i].name){%><%= QAvideo[j].insert %><% break;}}%>">快問快答</a></li>
                           <%}%>
                           <% if(department[i].name[department[i].name.length-1] === "所"){ %>
                             <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#organization_<%= department[i].name %>">知道更多</a></li>
