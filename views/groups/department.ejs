@@ -302,9 +302,9 @@
                           <div id="lightning_round_<%= department[i].name %>" class="tab-pane fade in">
                             <h5>快問快答</h5>
                             <div class='CDplayer'><!--影片-->
-                              <% for(let i = 0;　i<QAvideo.length;　i++){ %>
-                                <div class="kkk" iiiii="<%= QAvideo[i].title %>">
-                                  <div id='<%= QAvideo[i].insert %>' class='player'></div>
+                              <% for(let j = 0;　j<QAvideo.length;　j++){ %>
+                                <div class="kkk" iiiii="<% map[QAvideo[j].title] %>">
+                                  <div id='<%= QAvideo[j].insert %>' class='player'></div>
                                 </div>
                               <% } %>
                             </div>
