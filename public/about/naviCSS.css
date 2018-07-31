@@ -3,7 +3,7 @@
     .nav-toggle-btn {
         top:150px;
         position: absolute;
-        transition: transform 1s ease;
+        left: 35px;
     }
     /* 列表 */
     .navi {
@@ -34,19 +34,22 @@
     .nav-toggle-btn {
         width: 150px;
         height:100px;
-        top:30vw;
+        top:20vw;
         transform: translate(-75px);
+        transition: transform 1s ease;
         position: fixed;
     }
     /* 各組列表 */
     .navi {
         position: fixed;
-        top:61vw;
+        top:50vw;
         overflow: auto;
+        display: none;
     }
     .laser{
         position: fixed;
-        top:55vw;
+        top:45vw;
+        display: none;
     }
     .elev{
         display: none;
@@ -72,14 +75,12 @@
     z-index: 2000;
     overflow: auto;
     background-color: rgba(255, 255, 255, 0);
-    display: none;
 }
 .laser{
     z-index: 1500;
     left:-25px;
     height:300px;
     width:280px;
-    display: none;
 }
 .nav-toggle-btn {
     background: url(飛碟素材.png);
@@ -88,17 +89,13 @@
     border-color: transparent;
     width: 150px;
     height:100px;
-    transform: translate(-75px);
     z-index: 1800;
     display: block;
-    transition: transform 1s ease;
+    
 }
 .nav-toggle-btn.active-nav{
     transform: translate(35px);
 }
-/* .dropdown-menu{
-    transition: transform 1s ease;
-} */
 .dropdown-item{
     line-height: 2.2;
     color: white;
