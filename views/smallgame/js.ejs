@@ -354,7 +354,7 @@ var states = {
             game.load.image('<%= user.id %>', '../personal/bighead/<%= user.avatar %>')
             <% var avatarName = 'image' %>
             <% for(let i = 0; i < result.length; i++) { %>
-                game.load.image('<%= result[i].id%>', '../personal/bighead/<%= result[i].avatar %>')
+                game.load.image('<%= result[i].id %>', '../personal/bighead/<%= result[i].avatar %>')
             <% } %>
 
             // 添加進度提示
@@ -899,7 +899,6 @@ var states = {
                         },  i * 200) 
                     })(i)
                 }
-                
             }
             
             function getScore(type) {
@@ -911,10 +910,11 @@ var states = {
                     type: "get",
                     success: function(data) {
                         var inputData = JSON.parse(data)
+
+                        // 隱藏中間姓名
                         for (let i = 0; i < inputData.length; i++) {
                             var str = inputData[i].name
                             inputData[i].name = str.substr(0,1) + 'O' + str.substr(str.length-1,1)
-
                         }
 
                         if (type === 'sum') {
@@ -924,18 +924,18 @@ var states = {
                         }
                         // 顯示頭像
                         var no1 = rankLeftImage.create(0, 0, JSON.parse(data)[0].id)
-                        no1.width = 50
-                        no1.height = 50
+                        // no1.width = 50
+                        // no1.height = 50
                         no1.alignTo(rankLeftSprite, Phaser.TOP_CENTER, -5, 20)
 
                         var no2 = rankLeftImage.create(0, 0, JSON.parse(data)[1].id)
-                        no2.width = 50
-                        no2.height = 50
+                        // no2.width = 50
+                        // no2.height = 50
                         no2.alignTo(rankLeftSprite, Phaser.TOP_CENTER, 80, -40)
 
                         var no3 = rankLeftImage.create(0, 0, JSON.parse(data)[2].id)
-                        no3.width = 50
-                        no3.height = 50
+                        // no3.width = 50
+                        // no3.height = 50
                         no3.alignTo(rankLeftSprite, Phaser.TOP_CENTER, -90, -65)
 
                         rankLeftImage.setAll('alpha', 1);

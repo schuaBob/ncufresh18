@@ -30,7 +30,7 @@ var UserSchema = mongoose.Schema({
     },
     //圖片
     avatar: {
-        type: String, default: "profile.png" 
+        type: String, default: "default.png" 
     }
 });
 //Schema method for checking user login password hash with Bcrypt

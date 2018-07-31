@@ -21,9 +21,9 @@ router.post('/setScore', checkLogin.isLoggedIn, function (req, res, next) {
     var nowTime = Date.now()
     var checkTime = nowTime - resultDate
 
-    console.log("Date.now(): " + nowTime)
-    console.log("update: " + resultDate)
-    console.log("checkTime: " + checkTime)
+    // console.log("Date.now(): " + nowTime)
+    // console.log("update: " + resultDate)
+    // console.log("checkTime: " + checkTime)
     // 間隔 60s 才能 post
     if (checkTime > 50000) {
       var player = {
@@ -38,8 +38,8 @@ router.post('/setScore', checkLogin.isLoggedIn, function (req, res, next) {
       if (parseInt(req.body.score) < 100 || parseInt(req.body.score) > 17000) {
         newScoreHigh = 0
       }
-      console.log("player: " + player.id)
-      console.log("score: " + newScoreHigh)
+      // console.log("player: " + player.id)
+      // console.log("score: " + newScoreHigh)
       var newScoreSum = newScoreHigh + parseInt(player.score_sum); 
       if (newScoreHigh < req.user.score_high) {
         newScoreHigh = req.user.score_high
@@ -56,7 +56,7 @@ router.post('/setScore', checkLogin.isLoggedIn, function (req, res, next) {
       var count;
       UserScore.count({}, function(err, result) {
         count = parseInt(result);
-        console.log("count: " + count)
+        // console.log("count: " + count)
         // UserScore 中少於 10 個直接新建
         if (count < 10) {
           UserScore.findOne({ id: player.id}, function(err, result) {
@@ -168,13 +168,10 @@ router.post('/setScore', checkLogin.isLoggedIn, function (req, res, next) {
       });
       
     } else {
-      res.end('Do not do anything illegal！')
+      res.end('Do not do anything illegal！');
     }
   })
-
-
-  
-  });
+});
 
 // 傳遞分數給前端
 router.get('/getScore', checkLogin.isLoggedIn, function(req, res, next){
