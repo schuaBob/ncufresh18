@@ -18,7 +18,7 @@ ul li{
 .middle{
     position: absolute;
     top: 54vh;
-    margin-top: -225px;
+    margin-top: -210px;
     left: 49vw;
     font-size: 38px;
     z-index: 2;
@@ -29,7 +29,7 @@ ul li{
     
 */
 .middle a{
-    margin: 14px;
+    margin: 12px;
     display:inline-block;
 	position:relative;
 	color:inherit;
@@ -78,25 +78,25 @@ ul li{
 }
 */
 #circle {
-    position: absolute;
+    position: fixed;
     top: 30vh;
     left: 36vw;
-    width: 320px;
-    height: 320px;
+    width: 20vw;
+    height: 20vw;
     background-color: transparent; /* Can be set to transparent */
     border: 4px #e0e0e0 solid;
-    -webkit-border-radius: 160px;
+    -webkit-border-radius: 10vw;
     z-index: 0; 
 }
 #circle_small {
-    position: absolute;
+    position: fixed;
     top: 53vh;
     left: 48vw;
-    width: 180px;
-    height: 180px;
+    width: 10vw;
+    height: 10vw;
     background-color: transparent; /* Can be set to transparent */
     border: 4px #e0e0e0 solid;
-    -webkit-border-radius: 90px;
+    -webkit-border-radius: 5vw;
     z-index: 1;
 }
 
@@ -251,7 +251,7 @@ ul li{
 }
 .icon{
     position: absolute;
-    top: 10vh;
+    top: 5vh;
     left: 38vw;
     height: 600px;
     width: 600px;
