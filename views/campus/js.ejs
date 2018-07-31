@@ -15,9 +15,9 @@
         })
 
         $('.indexelepic').hover(function () {
-            $(this).velocity({ scale: 1.1}, 100)
+            $(this).velocity({ scale: 1.1 }, 100)
         }, function () {
-            $(this).velocity({ scale: 1}, 100)
+            $(this).velocity({ scale: 1 }, 100)
         })
         $('.indexelepic').click(function (event) {
             $('.indexelepic').tooltip('hide');
@@ -52,20 +52,18 @@
             })
         })
         $('#List_index li').hover(function (event) {
-            $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').velocity({ scale: 1.1}, 100)
+            $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').velocity({ scale: 1.1 }, 100)
             $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').stop().tooltip('show')
         }, function (event) {
-            $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').velocity({ scale: 1}, 100)
+            $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').velocity({ scale: 1 }, 100)
             $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').stop().tooltip('hide')
         })
         $('#List_index li').click(function (event) {
             $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').stop().tooltip('hide')
             $('.elelist').hide()
-
             array1 = ["系館", "運動", "餐廳", "設施", "住宿", "行政", "活動場地", "緊急醫療"]
             for (let i = 1; i <= 8; i++) {
                 if (event.currentTarget.attributes.val.value == i) {
-
                     if ($(this)[0] === temp) {
                         if ($('.main_list_detail').hasClass('clicked')) {
                             temp = $(this)[0]
@@ -82,7 +80,16 @@
                             console.log("2")
                             temp = $(this)[0]
                             $('#listtitle').text(array1[i - 1])
-                            $('.main_list_detail li[val=' + i + ']').show()
+                            if(event.currentTarget.attributes.val.value == 4) {
+                                $('.main_list_detail li[val="4.1"]').show()
+                                $('.main_list_detail li[val="4.2"]').show()
+                                $('.main_list_detail li[val="4.3"]').show()
+                                $('.main_list_detail li[val="4.4"]').show()
+                                $('.main_list_detail li[val="4.5"]').show()
+
+                            } else {
+                                $('.main_list_detail li[val=' + i + ']').show()
+                            }
                             $('.main_list_detail').stop().collapse('show')
                             $('.main_list_detail').addClass('clicked')
                             $('#map').css("filter", "brightness(55%)")
@@ -114,11 +121,22 @@
                         };
                         $('.mapmove').addClass('clicked')
                         if ($('.main_list_detail').hasClass('clicked')) {
+
                             console.log("3")
+
                             $('.main_list_detail').stop().collapse('hide')
-                            $('.main_list_detail li[val=' + i + ']').show()
                             $('.main_list_detail').on('hidden.bs.collapse', function () {
                                 $('#listtitle').text(array1[i - 1])
+                                if (event.currentTarget.attributes.val.value == 4) {
+                                    $('.main_list_detail li[val="4.1"]').show()
+                                    $('.main_list_detail li[val="4.2"]').show()
+                                    $('.main_list_detail li[val="4.3"]').show()
+                                    $('.main_list_detail li[val="4.4"]').show()
+                                    $('.main_list_detail li[val="4.5"]').show()
+
+                                } else {
+                                    $('.main_list_detail li[val=' + i + ']').show()
+                                }
                                 $('.main_list_detail').stop().collapse('show')
                                 $('.main_list_detail').off('hidden.bs.collapse');
                             })
@@ -128,14 +146,21 @@
                         } else {
                             console.log("4")
                             $('#listtitle').text(array1[i - 1])
-                            $('.main_list_detail li[val=' + i + ']').show()
+                            if (event.currentTarget.attributes.val.value == 4) {
+                                $('.main_list_detail li[val="4.1"]').show()
+                                $('.main_list_detail li[val="4.2"]').show()
+                                $('.main_list_detail li[val="4.3"]').show()
+                                $('.main_list_detail li[val="4.4"]').show()
+                                $('.main_list_detail li[val="4.5"]').show()
+
+                            } else {
+                                $('.main_list_detail li[val=' + i + ']').show()
+                            }
                             $('.main_list_detail').stop().collapse('show')
                             $('.main_list_detail').addClass('clicked')
                             $('#map').css("filter", "brightness(55%)")
                             $('.indexelepic').css("filter", "brightness(55%)")
                             $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').css("filter", "none")
-
-
 
 
                         }
@@ -144,6 +169,7 @@
 
                 }
             }
+
             $('.mapmove').stop().velocity(properties, 400)
             console.log(temp);
         })
@@ -160,10 +186,10 @@
             $('.mapmove').stop().velocity(properties, 400)
         })
         $('.elelist').hover(function (event) {
-            $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').velocity({ scale: 1.1}, 100)
+            $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').velocity({ scale: 1.1 }, 100)
             $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').tooltip('show')
-        }, function () {
-            $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').velocity({ scale: 1}, 100)
+        }, function (event) {
+            $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').velocity({ scale: 1 }, 100)
             $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').tooltip('hide')
         })
         $('.elelist').click(function (event) {

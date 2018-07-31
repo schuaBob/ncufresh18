@@ -429,7 +429,7 @@ li {
     right: unset;
     max-height: calc(24px + 46vw + 8vw / 2);
   }
-  .main_list_detail ul {
+  .main_list_detail ul{
     max-height: calc(24px + 46vw + 8vw / 2 - 60px);
     overflow: scroll;
     margin: 0;
