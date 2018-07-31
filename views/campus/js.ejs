@@ -7,17 +7,41 @@
         var properties = null
         var seq = null
         var array1 = []
+        var action1 = function (event) {
+            console.log("FD")
+            if (event.currentTarget.attributes.val.value === '4') {
+                $('.indexelepic[val="9"]').show()
+                $('.indexelepic[val="9"]').velocity({ scale: 1.1 }, 100)
+                $('.indexelepic[val="9"]').stop().tooltip('show')
+            } else {
+                $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').velocity({ scale: 1.1 }, 100)
+                $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').stop().tooltip('show')
 
+            }
+        }
+        var action2 = function (event) {
+            console.log("SS")
+            if (event.currentTarget.attributes.val.value === '4') {
+                $('.indexelepic[val="9"]').hide()
+                $('.indexelepic[val="9"]').velocity({ scale: 1 }, 100)
+                $('.indexelepic[val="9"]').stop().tooltip('hide')
+            } else {
 
+                $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').velocity({ scale: 1 }, 100)
+                $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').stop().tooltip('hide')
 
+            }
+        }
+        $('.indexelepic[val="9"]').hide()
         $('.modal-header span i').click(function () {
             $('#indexmodal').modal('hide')
         })
 
+
         $('.indexelepic').hover(function () {
-            $(this).velocity({ scale: 1.1}, 100)
+            $(this).velocity({ scale: 1.1 }, 100)
         }, function () {
-            $(this).velocity({ scale: 1}, 100)
+            $(this).velocity({ scale: 1 }, 100)
         })
         $('.indexelepic').click(function (event) {
             $('.indexelepic').tooltip('hide');
@@ -51,14 +75,12 @@
                 }
             })
         })
-        $('#List_index li').hover(function (event) {
-            $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').velocity({ scale: 1.1}, 100)
-            $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').stop().tooltip('show')
-        }, function (event) {
-            $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').velocity({ scale: 1}, 100)
-            $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').stop().tooltip('hide')
-        })
+        $('#List_index li').hover(action1,action2)
+        // $('#List_index li').on('hover',action1,action2)
         $('#List_index li').click(function (event) {
+            if (event.currentTarget.attributes.val.value === '4') {
+                $('.indexelepic[val="9"]').stop().tooltip('hide')
+            }
             $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').stop().tooltip('hide')
             $('.elelist').hide()
 
@@ -70,6 +92,11 @@
                         if ($('.main_list_detail').hasClass('clicked')) {
                             temp = $(this)[0]
                             console.log("1")
+                            
+                            if (event.currentTarget.attributes.val.value === '4') {
+                                $('#List_index li').hover(action1,action2)
+                                $('.indexelepic[val="9"]').hide()
+                            }
 
                             $('.main_list_detail').stop().collapse('hide')
                             $('.main_list_detail').removeClass('clicked')
@@ -80,8 +107,14 @@
 
                         } else {
                             console.log("2")
+                            
                             temp = $(this)[0]
                             $('#listtitle').text(array1[i - 1])
+                            if (event.currentTarget.attributes.val.value === '4') {
+                                $('#List_index li').unbind('mouseenter mouseleave')
+                                $('.indexelepic[val="9"]').show()
+                                $('.indexelepic[val="9"]').css("filter", "none")
+                            }
                             $('.main_list_detail li[val=' + i + ']').show()
                             $('.main_list_detail').stop().collapse('show')
                             $('.main_list_detail').addClass('clicked')
@@ -115,9 +148,15 @@
                         $('.mapmove').addClass('clicked')
                         if ($('.main_list_detail').hasClass('clicked')) {
                             console.log("3")
+
+                            if (event.currentTarget.attributes.val.value === '4') {
+                                $('.indexelepic[val="9"]').show()
+                                $('.indexelepic[val="9"]').css("filter", "none")
+                            }
                             $('.main_list_detail').stop().collapse('hide')
-                            $('.main_list_detail li[val=' + i + ']').show()
+
                             $('.main_list_detail').on('hidden.bs.collapse', function () {
+                                $('.main_list_detail li[val=' + i + ']').show()
                                 $('#listtitle').text(array1[i - 1])
                                 $('.main_list_detail').stop().collapse('show')
                                 $('.main_list_detail').off('hidden.bs.collapse');
@@ -128,6 +167,12 @@
                         } else {
                             console.log("4")
                             $('#listtitle').text(array1[i - 1])
+                            
+                            if (event.currentTarget.attributes.val.value === '4') {
+                                $('#List_index li').unbind('mouseenter mouseleave')
+                                $('.indexelepic[val="9"]').show()
+                                $('.indexelepic[val="9"]').css("filter", "none")
+                            }
                             $('.main_list_detail li[val=' + i + ']').show()
                             $('.main_list_detail').stop().collapse('show')
                             $('.main_list_detail').addClass('clicked')
@@ -159,11 +204,18 @@
             };
             $('.mapmove').stop().velocity(properties, 400)
         })
+        $('elelist[val="4"]').hover(function () {
+            $('.indexelepic[data-original-title=' + $(this).html() + ']').velocity({ scale: 1.1 }, 100)
+            $('.indexelepic[data-original-title=' + $(this).html() + ']').tooltip('show')
+        }, function () {
+            $('.indexelepic[data-original-title=' + $(this).html() + ']').velocity({ scale: 1 }, 100)
+            $('.indexelepic[data-original-title=' + $(this).html() + ']').tooltip('hide')
+        })
         $('.elelist').hover(function (event) {
-            $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').velocity({ scale: 1.1}, 100)
+            $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').velocity({ scale: 1.1 }, 100)
             $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').tooltip('show')
         }, function () {
-            $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').velocity({ scale: 1}, 100)
+            $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').velocity({ scale: 1 }, 100)
             $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').tooltip('hide')
         })
         $('.elelist').click(function (event) {

@@ -37,30 +37,22 @@ router.get("/editElement", checkuser.isAdmin, function(req, res, next) {
     });
 });
 router.post("/AddNew_element",checkuser.isAdmin, function(req, res, next) {
-  if (req.body.elename && req.body.elecategory != 0) {
-    elebuilding
-      .findOne({ Element_Name: req.body.elename })
-      .exec(function(err, result) {
-        if (result === null) {
-          var temp = new elebuilding({
-            Element_Name: req.body.elename,
-            Type: req.body.elecategory,
-            Element_Intro: req.body.eleintro,
-            Buildpic: "",
-            Intropic: [],
-            X_position:0,
-            Y_position:0,
-            Size:8
-          }).save(function(err) {
-            if (err) {
-              return next(err);
-            }
-            res.redirect("/campus/editElement");
-          });
-        } else {
-          res.redirect("/campus/editElement");
-        }
-      });
+  if (req.body.elename && req.body.elecategory != 0){
+    new elebuilding({
+      Element_Name: req.body.elename,
+      Type: req.body.elecategory,
+      Element_Intro: req.body.eleintro,
+      Buildpic: "",
+      Intropic: [],
+      X_position:0,
+      Y_position:0,
+      Size:8
+    }).save(function(err) {
+      if (err) {
+        return next(err);
+      }
+      res.redirect("/campus/editElement");
+    });
   } else {
     res.redirect("/campus/editElement");
   }
