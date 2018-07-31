@@ -437,6 +437,8 @@ td{
         text-align: center;
         margin-top: 5%;
         width:80vw;
+        margin-left: 0;
+        padding-left: 12%;
     }
 
     .typelearn_name{
