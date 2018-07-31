@@ -271,6 +271,7 @@ td{
         float: left;
         margin-left: 21%;
     }
+    
 }
 @media screen and (min-width: 992px) and (max-width: 1000px){
     #bread{
@@ -289,13 +290,12 @@ td{
 @media screen and (max-width: 588px) and (min-width: 532px){
     .breadcrumb {
         padding: .75rem .9rem;
-
     }
 }
 @media screen and (max-width: 532px){
     .breadcrumb {
         padding: .75rem .5rem;
-
+        
     }
 }
 @media screen and (max-width: 768px){
@@ -418,13 +418,10 @@ td{
         left: 55%;
     }
     table{
-        background-size: cover;
-        background-position: left; 
-        margin-top: 16%;
-        margin-right: 12%;
         opacity: 0.7;
-        
-        
+        width:80vw;
+        float:right;
+        margin-right: 5%;
     }
     thead{
         text-align: center;
@@ -434,7 +431,6 @@ td{
     }
     
     tbody{
-        float:center;
         display: block;
         height: 35vh;
         overflow-y: scroll;
@@ -442,19 +438,15 @@ td{
         border-collapse: collapse;
         text-align: center;
         margin-top: 5%;
-        width:70vw;
         
     }
-    tr{
-        
-    }
+
     .typelearn_name{
         white-space: nowrap;
     }
     td{
         float: left;
         font-size: 6vw;
-        margin-left: 10%;
         
     }
     #tabletext{

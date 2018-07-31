@@ -241,16 +241,30 @@ h6{
     font-size: 1.3vw;
 }
 
-@media screen and (min-width: 767px) and (max-width: 992px){
+
+@media screen and (min-width: 768px) and (max-width: 992px){
+    
+    h6{
+        width:70%;
+        margin-right: 10%;
+    }
     #carouselExampleIndicator1{
-        max-width: 450px;
-        max-height: 220px;
-        margin-left: 5%;
+        max-width: 300px;
+        max-height: 250px;
+        float: left;
+        margin-left: 28%;
     }
     #carouselExampleIndicator2{
-        max-width: 450px;
-        max-height: 220px;
-        margin-left: 5%;
+        max-width: 300px;
+        max-height: 250px;
+        float: left;
+        margin-left: 21%;
+    }
+    h5{
+        margin-top: 0%;
+    }
+    #nav_ul{
+        margin-top: 0;
     }
 }
 @media screen and (min-width: 992px) and (max-width: 1000px){
@@ -261,11 +275,8 @@ h6{
 @media screen and (min-width: 589px) and (max-width: 769px){
     .breadcrumb {
         padding: 0rem 0.9rem;
-
     }
-    #text_at{
-        font-size: 3vw;
-    }
+    
 }
 @media screen and (max-width: 588px) and (min-width: 532px){
     .breadcrumb {
@@ -275,7 +286,6 @@ h6{
 @media screen and (max-width: 532px){
     .breadcrumb {
         padding: .75rem .5rem;
-
     }
 }
 @media screen and (max-width: 768px){
@@ -322,7 +332,7 @@ h6{
         padding-left:10px; 
         width: 100%;
         word-wrap: break-word;
-        max-width: 280px;
+        max-width: 400px;
         max-height: 300px;
         overflow-y: auto;
         line-height: 26px;
@@ -434,6 +444,17 @@ h6{
         float: left;
         text-align: center;
     }
-    
 }
+@media screen and (min-width: 990px) and (max-width: 1200px){
+    #com_button{
+        margin-top: 18%;
+    }
+}
+@media screen and (min-width: 769px) and (max-width: 989px){
+    #com_button{
+        margin-top: 26%;
+    }
+}
+
+
 
