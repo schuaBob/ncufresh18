@@ -59,7 +59,7 @@ router.post('/editPicture', upload.single('picture') , function(req,res,next){
     if(err)
       next(err);
     else
-      gm(fileName).resize(100, 100, "!").write(fileName, function (err) {
+      gm(fileName).resize(50, 50, "!").write(fileName, function (err) {
         if (err) next(err);
         res.redirect('/personal');
       });
