@@ -98,6 +98,15 @@ var video = require('./routes/video');
 var personal = require('./routes/personal');
 var about = require('./routes/about');
 
+// 倒數頁面
+/*app.use(function(req, res, next){
+  if(new Date("Aug 6, 2018 16:00:00 UTC").getTime() >  Date.now()){
+    res.render('comingsoon/index', {title : "新生知訊網", user: req.user});
+  }else{
+    next();
+  }
+})*/
+
 // 首頁
 app.use('/', index);
 // 新生必讀

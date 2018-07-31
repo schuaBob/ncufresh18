@@ -8,7 +8,9 @@
 <script src="/js/popper.min.js"></script>
 <script src="/bootstrap-4.1.1-dist/js/bootstrap.min.js"></script>
 <%_ /* ckeditor */ -%>
+<%_ if (user && user.role === 'admin'){-%>
 <script src="/ckeditor/ckeditor.js"></script>
+<%_ } -%>
 <style>
     <%_ /* 全域思源黑體 */ -%>
     @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
