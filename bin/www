@@ -21,13 +21,31 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
-//https
+
+
+
+/**
+ * Create HTTPS server.
+ */
 //var https = require('https');
 //var httpsServer = https.createServer({key : fs.readFileSync("/var/ssl/live/csie.ncu.edu.tw/privkey.pem"), cert: fs.readFileSync("/var/ssl/live/csie.ncu.edu.tw/cert.pem")}, app);
 //httpsServer.listen(3001);
+
+/**
+ * Redirect HTTP request to HTTPS.
+ */
+//app.use(function(req, res, next) {
+//  if(!req.secure) {
+//    return res.redirect(['https://', req.get('Host'), req.url].join(''));
+//  }
+//  next();
+//});
+
+
 /**
  * Listen on provided port, on all network interfaces.
  */
+
 
 server.listen(port);
 server.on('error', onError);
