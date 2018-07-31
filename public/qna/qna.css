@@ -10,7 +10,6 @@ tbody{
     background-color: white;
     float:center;
     display: block;
-    /* height: 300px; */
     
     border-collapse: collapse;
     font-family: Microsoft YaHei;
@@ -35,6 +34,12 @@ table{
 }
 /* 只有電腦版出現的 */
 @media only screen and (min-width:600px){
+    table{
+        width:70%;
+    }
+    td{
+        border-right:1.5px black solid;
+    }
     /* table的外框 */
     tr::before{
         content:"";
@@ -76,9 +81,21 @@ table{
         bottom: 10vw;
         right:15px;
     }
+    .admin{
+        width: 10%;
+    }
+    .askbutton2{
+        display:none;
+    }
+    .classificationBtn{
+        display:none;
+    }
 }
 /* 只有手機板介面出現的 */
 @media only screen and (max-width:600px){
+    .admin{
+        display:none;
+    }
     table{
         font-size:12px;
     }

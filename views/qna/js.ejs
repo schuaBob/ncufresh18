@@ -18,8 +18,6 @@ $(document).ready(() => {
         $("ul").addClass("flex-column");
         //排序與分類字體的顏色
         $(".nav-link").css({"font-color":"black"});
-        //管理員相關的功能隱藏起來
-        $(".admin").hide();
         //文章列表樣式
         $('table').css({"width":w});
         //modal的樣式
@@ -28,15 +26,8 @@ $(document).ready(() => {
         // $(".askbutton").hide();//隱藏電腦版的我要發問按鈕
     }
     else if(w>600){
-        //電腦版頁面樣式
-        //我要發問按鈕的位置
-        $(".askbutton2").hide();//隱藏手機版的我要發問按鈕
-        //文章列表樣式
-        $('table').css({"width":"70%"});
         //$('tbody').css({"height":"300px"});
         $('td').css({"border-right":"1.5px black solid"});
-        //排序跟分類的按鈕
-        $(".classificationBtn").hide();
         
     }
     //預設分類

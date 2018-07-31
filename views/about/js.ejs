@@ -2,21 +2,23 @@
 $(document).ready(() => {
     var w=$(window).width();
     var h=$(window).height();
-    $(".pad").css({'height':h-50});
+    // $(".pad").css({'height':h-50});
     $("body").css({'height':h-50,'width':w});
+    $(".screen").css({'background-size':w*0.5+"px "+h*0.28+"px"});
     $(window).resize(function() {
         var w=$(window).width();
         var h=$(window).height();
         // var padW=$('.pad').width();
         // console.log(padW);
         // $(".pad").css({'height':h-50,'width':w-300});
+        $(".screen").css({'background-size':w*0.5+"px "+h*0.28+"px"});
         if(w<600){  
             $("body").css({'height':h-50,'width':w});
             $("body").css({'background-size':w+"px "+h-50+"px"});
             // $(".picture").css({'width':w});
         }
         else{
-            $(".pad").css({'height':h-50});
+            // $(".pad").css({'height':h-50});
         }
 
     });
@@ -39,6 +41,8 @@ $(document).ready(() => {
             $(".name").removeClass("artName");
             $(".name").removeClass("videoName");
             $(".name").removeClass("ceoName");
+
+            $(".title2").hide();
         }
         else if(hash==="programming"){
             $(".logo").addClass("programmingLogo");
@@ -52,6 +56,8 @@ $(document).ready(() => {
             $(".name").removeClass("artName");
             $(".name").removeClass("videoName");
             $(".name").removeClass("ceoName");
+
+            $(".title2").hide();
         }
         else if(hash==="art"){
             $(".logo").addClass("artLogo");
@@ -65,6 +71,8 @@ $(document).ready(() => {
             $(".name").removeClass("marktingName");
             $(".name").removeClass("videoName");
             $(".name").removeClass("ceoName");
+
+            $(".title2").hide();
         }
         else if(hash==="video"){
             $(".logo").addClass("videoLogo");
@@ -78,6 +86,8 @@ $(document).ready(() => {
             $(".name").removeClass("artName");
             $(".name").removeClass("marktingName");
             $(".name").removeClass("ceoName");
+
+            $(".title2").hide();
         }
         else if(hash==="ceo"){
             $(".logo").addClass("ceoLogo");
@@ -91,6 +101,8 @@ $(document).ready(() => {
             $(".name").removeClass("artName");
             $(".name").removeClass("videoName");
             $(".name").removeClass("marktingName");
+
+            $(".title2").hide();
         }
         else if(hash==="all"){
             $(".logo").removeClass("ceoLogo");
@@ -131,14 +143,27 @@ $(document).ready(() => {
         },
     });
     //按鈕動畫
-    $('.navi').hide();
-    $('.laser').hide();
-    $('.nav-toggle-btn').on('click', function(e) {
-        $('.dropdown-menu').toggleClass('active-nav');
-        $('.nav-toggle-btn').toggleClass('active-nav');
-        $('.navi').slideToggle(1500);
-        $('.laser').slideToggle(1500);
-        e.preventDefault();
-    });
+    if(w<600){
+
+        $('.nav-toggle-btn').on('click', function(e) {
+            $('.dropdown-menu').toggleClass('active-nav');
+            $('.nav-toggle-btn').toggleClass('active-nav');
+            $('.navi').slideToggle(1500);
+            $('.laser').slideToggle(1500);
+            e.preventDefault();
+        });
+    }
+    else{
+        $('.nav-toggle-btn').on('mouseover', function(){
+            $(this).css({'width':'180px','height':'120px'});
+            $(this).css({'background-size':'180px 120px'});
+            $(this).css({'left':'25px','top':'140px'});
+        });
+        $('.nav-toggle-btn').on('mouseout', function(){
+            $(this).css({'width':'150px','height':'100px'});
+            $(this).css({'background-size':'150px 100px'});
+            $(this).css({'left':'35px','top':'150px'});
+        });
+    }
 });
 </script> 
