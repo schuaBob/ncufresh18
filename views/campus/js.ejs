@@ -15,9 +15,9 @@
         })
 
         $('.indexelepic').hover(function () {
-            $(this).velocity({ scale: 1.1, boxShadowBlur: 35 }, 100)
+            $(this).velocity({ scale: 1.1}, 100)
         }, function () {
-            $(this).velocity({ scale: 1, boxShadowBlur: 0 }, 100)
+            $(this).velocity({ scale: 1}, 100)
         })
         $('.indexelepic').click(function (event) {
             $('.indexelepic').tooltip('hide');
@@ -52,14 +52,12 @@
             })
         })
         $('#List_index li').hover(function (event) {
-            $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').velocity({ scale: 1.1, boxShadowBlur: 35 }, 100)
+            $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').velocity({ scale: 1.1}, 100)
             $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').stop().tooltip('show')
         }, function (event) {
-            $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').velocity({ scale: 1, boxShadowBlur: 0 }, 100)
+            $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').velocity({ scale: 1}, 100)
             $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').stop().tooltip('hide')
         })
-
-
         $('#List_index li').click(function (event) {
             $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').stop().tooltip('hide')
             $('.elelist').hide()
@@ -162,10 +160,10 @@
             $('.mapmove').stop().velocity(properties, 400)
         })
         $('.elelist').hover(function (event) {
-            $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').velocity({ scale: 1.1, boxShadowBlur: 35 }, 100)
+            $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').velocity({ scale: 1.1}, 100)
             $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').tooltip('show')
         }, function () {
-            $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').velocity({ scale: 1, boxShadowBlur: 0 }, 100)
+            $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').velocity({ scale: 1}, 100)
             $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').tooltip('hide')
         })
         $('.elelist').click(function (event) {
