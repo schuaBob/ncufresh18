@@ -59,7 +59,7 @@ select {
 .dropdown_hide, .dropdown_show{
     position: relative;
     top: -50px;
-    left: 170px;
+    left: 165px;
     width: 150px;
     z-index: 100;
 }
@@ -79,7 +79,7 @@ select {
     background-color:  #D2D7D3;   
 }
 .bar{
-    width: 170px;
+    width: 165px;
     height: 50px;
     -moz-border-radius: 20px;
     -webkit-border-radius: 20px;
@@ -102,10 +102,10 @@ hr{
 }
 .middle{
     position: absolute;
-    top: 37vh;
+    top: 38vh;
     margin-top: -55px;
-    left: 45vw;
-    font-size: 30px;
+    left: 50%;
+    font-size: 4vh;
     z-index: 2;
 }
 .pictureArea{
@@ -235,22 +235,22 @@ hr{
 #circle {
     position: absolute;
     top: 30vh;
-    left: 11vw;
-    width: 230px;
-    height: 230px;
+    left: 15%;
+    width: 32vh;/*230px;*/
+    height: 32vh;/*230px;*/
     background-color: transparent; /* Can be set to transparent */
     border: 2px #e0e0e0 solid;
-    -webkit-border-radius: 115px;
+    -webkit-border-radius: 16vh;
     z-index: 0; 
 }
 #circle_small {
     position: absolute;
     top: 47vh;
-    left: 44vw;
-    width: 140px;
-    height: 140px;
+    left: 50%;
+    width: 16vh;
+    height: 16vh;
     background-color: transparent; /* Can be set to transparent */
     border: 2px #e0e0e0 solid;
-    -webkit-border-radius: 70px;
+    -webkit-border-radius: 9vh;
     z-index: 1;
 }

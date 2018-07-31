@@ -8,7 +8,7 @@
     <header>
         <% include ../../layout/navbar %>
     </header>
-    <main >
+    <main>
         <div id="circle"></div>
         <div id="circle_small"></div>
         <div class="middle">
@@ -27,7 +27,7 @@
         $(document).ready(function(){
             $(window).resize(function(){
                 var width = innerWidth;
-                if(width > 850)
+                if(width > 1024)
                     document.location.href = "/life";
             });
         });
