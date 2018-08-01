@@ -20,8 +20,8 @@
       <!-- 麵包屑 -->
       <nav aria-label="breadcrumb" id="bread">
           <ol class="breadcrumb" id="breadcru">
-            <li class="breadcrumb-item" ><a href="/groups/student" id="text_stu">學生會</a></li>
             <li class="breadcrumb-item active" aria-current="page" id="text_at">系所</li>
+            <li class="breadcrumb-item" ><a href="/groups/student" id="text">學生會</a></li>
             <li class="breadcrumb-item"><a href="/groups/club" id="text">社團</a></li>
             <li class="breadcrumb-item"><a href="/groups/community" id="text">其他學生組織</a></li>
           </ol>
@@ -303,9 +303,9 @@
                             <h5>快問快答</h5>
                             <div class='CDplayer'><!--影片-->
                               <% for(let j = 0;　j<QAvideo.length;　j++){ %>
-                                <div class="kkk" iiiii="<%= map[QAvideo[j].title] %>">
+                                <% if(map[QAvideo[j].title]=== department[i].name) {%>
                                   <div id='<%= QAvideo[j].insert %>' class='player'></div>
-                                </div>
+                                <%}%>
                               <% } %>
                             </div>
                           </div>

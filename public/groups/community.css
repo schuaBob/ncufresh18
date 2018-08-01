@@ -382,13 +382,13 @@ button:hover {
         width: 44vw;
         position: absolute;
         right: 13%;
-        top:18%;
+        top:17%;
     }
     .cell_2{
         width: 23vw;
         position: absolute;
         left: 14%;
-        top: 32%;
+        top: 31.5%;
     }
     .cell_3{
         width: 40vw;
@@ -418,13 +418,13 @@ button:hover {
         width: 43vw;
         position: absolute;
         left: 14%;
-        top: 66%;
+        top: 67%;
     }
     .cell_8{
         width: 46vw;
         position: absolute;
         left: 19%;
-        top:76%;
+        top:77.5%;
     }
     /* 麵包屑 */
     #bread{
@@ -436,7 +436,7 @@ button:hover {
         font-size: 3.5vw;
     }
     #text_stu{
-        font-size: 3.5vw;
+        font-size: 3.8vw;
         text-align: center;
         float: right;
         padding-left: .5rem;
