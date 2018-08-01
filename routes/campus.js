@@ -98,14 +98,14 @@ router.post("/insert_img/:id", checkuser.isAdmin,function(req, res, next) {
       readStream
         .on("end", err => {
           if (err) return next(err);
-          console.log(fields);
+          
           if (fields.imgtype === "0") {
             elebuilding
               .findByIdAndUpdate(req.params.id, {
                 Buildpic: fileName
               })
               .exec(function(err, result) {
-                console.log(result);
+                
                 if (err) {
                   return next(err);
                 }
@@ -217,5 +217,17 @@ router.get("/edittext",checkuser.isAdmin,function(req,res,next){
     res.send(result)
   })
 })
+router.post("/searchnow", function(req, res, next) {
+  if(req.body.searchwhat) {
+    let job = Array();
+    job.push(elebuilding.find({Element_Name:{$regex:req.body.searchwhat}},{_id:1,Element_Name:1,Type:1}));
+    job.push(elebuilding.find({Element_Intro:{$regex:req.body.searchwhat}},{_id:1,Element_Intro:1,Type:1}));
+    Promise.all(job).then(function(result){
+      res.send(result);
+    }).catch(function(err){
+      return next(err);
+    })
+  }
+});
 
 module.exports = router;
