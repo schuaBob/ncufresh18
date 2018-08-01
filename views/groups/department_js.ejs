@@ -93,6 +93,11 @@
         CKEDITOR.replace('edit_course',{
             filebrowserUploadUrl: '/uploader',
         });
+        
+        CKEDITOR.editorConfig = function (config){
+            config.enterMode = CKEDITOR.ENTER_BR;
+            config.autoParagraph = false;
+        };
         <%_ } -%> 
         // $('.modal').on('hidden.bs.modal', function(){
         //     var $iframe = $(this).find('iframe');
@@ -102,10 +107,6 @@
         //     $iframe.attr('src', videoSrc);
         // });
        
-        CKEDITOR.editorConfig = function (config){
-            config.enterMode = CKEDITOR.ENTER_BR;
-            config.autoParagraph = false;
-        };
 
         $(window).resize(function(){
             if($(window).width()<=768){
