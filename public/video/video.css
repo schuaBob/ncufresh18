@@ -795,7 +795,7 @@ iframe {
                 left: 140px;
             }
             .video_item_title {
-                left: 100px;
+                left: 130px;
             }
             body{
                 background-size: cover;
@@ -810,6 +810,22 @@ iframe {
             }
             #back:hover {
                 bottom: 4vh;
+            }
+        }
+
+        /* 小平板 */
+        @media only screen and (height: 800px)  and (width: 600px) {
+            .cd {
+                -webkit-transform: translateY(4vh);
+                -moz-transform: translateY(4vh);
+                -o-transform: translateY(4vh);
+                -ms-transform: translateY(4vh);
+                transform: translateY(4vh);
+            }
+
+            body{
+                background-size: cover;
+                height: 1350px;
             }
         }
     }
