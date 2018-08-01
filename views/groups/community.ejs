@@ -169,13 +169,12 @@
             </a>
         </div>
         <%}%>
-        <% for(var i in community) { %>    
             <!-- 社團介紹 Modal -->
-            <div class="modal fade bd-example-modal-lg " role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="commodal">  <!-- 根據資料庫id判斷modal內容 -->
+            <div class="modal fade bd-example-modal-lg " role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="commodal">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title" id="exampleModalLabel"><!-- <%= community[i].name %> --></h3>
+                            <h3 class="modal-title" id="exampleModalLabel"></h3>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -184,17 +183,17 @@
                             <div class="container">
                                 <div id="scroll_nav">
                                     <ul class="nav nav-pills flex-column" id="nav_ul">
-                                        <li id="modal_button"><a class="nav-link active" data-toggle="pill" id="nav_a" href="#introduction_<%= community[i].name %>">學生組織介紹</a></li>
-                                        <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#participation_<%= community[i].name %>">加入學生組織</a></li>
-                                        <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#FB_<%= community[i].name %>">FB粉絲團</a></li>
-                                        <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#activity_<%= community[i].name %>">活動剪影</a></li>
+                                        <li id="modal_button"><a class="nav-link active" data-toggle="pill" id="nav_a" href="#introduction">學生組織介紹</a></li>
+                                        <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#participation">加入學生組織</a></li>
+                                        <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#FB">FB粉絲團</a></li>
+                                        <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#activity">活動剪影</a></li>
                                     </ul>
                                 </div>
                                 <Br>
                                 <div class="tab-content">
-                                    <div id="introduction_<%= community[i].name %>" class="tab-pane active">
+                                    <div id="introduction" class="tab-pane active">
                                         <h5>學生組織介紹</h5>  
-                                        <h6 class="intro"><!-- <%- community[i].introduction %> --></h6>  
+                                        <h6 class="intro"></h6>  
                                         <div id="carouselExampleIndicator1" class="carousel slide" data-ride="carousel">
                                             <ol class="carousel-indicators" id="carousel2">
             
@@ -212,17 +211,17 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div id="participation_<%= community[i].name %>" class="tab-pane fade in">
+                                    <div id="participation" class="tab-pane fade in">
                                         <h5>加入學生組織</h5>
-                                        <h6 class="parti"><!-- <%- community[i].participation %> --></h6>
+                                        <h6 class="parti"></h6>
                                     </div>
-                                    <div id="FB_<%= community[i].name %>" class="tab-pane fade in">
+                                    <div id="FB" class="tab-pane fade in">
                                         <h5>FB粉絲團</h5>
-                                        <h6 class="fb"><!-- <%- community[i].FB %> --></h6>
+                                        <h6 class="fb"></h6>
                                     </div>
-                                    <div id="activity_<%= community[i].name %>" class="tab-pane fade in">
+                                    <div id="activity" class="tab-pane fade in">
                                         <h5>活動剪影</h5>
-                                        <h6 class="acti"><!-- <%- community[i].activity %> --></h6>
+                                        <h6 class="acti"></h6>
                                         <div id="carouselExampleIndicator2" class="carousel slide" data-ride="carousel">
                                                 <ol class="carousel-indicators" id="carousel2">
                 
@@ -249,7 +248,6 @@
                     </div>
                 </div>
             </div> 
-        <% } %>
         
     </main>
     <footer>
