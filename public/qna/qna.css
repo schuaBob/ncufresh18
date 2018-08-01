@@ -7,7 +7,7 @@ body{
     overflow-y: scroll;
 }
 tbody{
-    background-color: white;
+    /* background-color: white; */
     float:center;
     display: block;
     
@@ -15,13 +15,13 @@ tbody{
     font-family: Microsoft YaHei;
 }
 thead{
+    width: 100%;
     line-height: 2;
     display: block;
     text-align: center;
     font-family: Microsoft YaHei;
     color:#29ABE2;
     font-size: 15pt;
-    background-color: white;
     /* background-image: url(外框.png);
     background-size: cover; */
 }
@@ -32,23 +32,50 @@ table{
     /* border-spacing: 10px; */
     z-index: 1;
 }
+td{
+    background-color: white;
+}
+th{
+    background-color: white;
+}
 /* 只有電腦版出現的 */
 @media only screen and (min-width:600px){
     table{
         width:70%;
     }
+    tr{
+        width: cover;
+    }
     td{
         border-right:1.5px black solid;
     }
+    .notebook{
+        background: url(外框.png);
+        background-size: 100% 2.3em;
+        width: 10%;
+        height:2.3em;
+        border-bottom: 0px;
+        border-right:0px;
+    }
+    .TIME{
+        width:15%;
+    }
+    .HOT{
+        width:10%;
+    }
     /* table的外框 */
-    tr::before{
+    /* tr::before{
+        background-color:transparent; 
         content:"";
         display: inline-block;
         background-image:url(外框.png);
-        background-size:cover;
+        background-size:50px 50px;
         width: 50px;
-        height: 50px;
-    }
+        height:53px;
+        margin: 0;
+        margin-top: calc((4.6em - 1rem - 20vh)/2);
+        margin-bottom: calc((4.6em - 1rem - 20vh)/2);;
+    } */
     /* 分類排序的顏色 */
     .nav-link{
         color:white;
@@ -83,6 +110,7 @@ table{
     }
     .admin{
         width: 10%;
+        /* width: 10vw; */
     }
     .askbutton2{
         display:none;
@@ -90,20 +118,46 @@ table{
     .classificationBtn{
         display:none;
     }
+    /* 讓太長的標題可以省略的功能 */
+    .title2{
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 }
+        
 /* 只有手機板介面出現的 */
 @media only screen and (max-width:600px){
     .admin{
         display:none;
     }
     table{
+        top:20vh;
+        /* position: absolute; */
+        width: 97%;
+        float: center;
         font-size:12px;
     }
     thead{
+        /* width: 100%; */
         font-size:14px;
+    }
+    tbody{
+        width: 100%;
+    }
+    tr{
+        /* height:50x; */
+        width: 100%;
+    }
+    .modal{
+        height:100%;
     }
     .nav-link{
         color:black;
+    }
+    .search{
+        float: left;
     }
     .classification{
         position: absolute;
@@ -133,23 +187,23 @@ table{
         position: fixed;
         bottom: 21vw;
         right:10px;
+        z-index: 5000;
     }
     
 }
 /* 問題合集 */
-/* .title2{
-    width: 60%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-} */
+.title{
+    /* 標題的寬度一定要設成px才能用text-overflow: ellipsis
+    網址:https://stackoverflow.com/questions/17779293/css-text-overflow-ellipsis-not-working */
+    max-width:500px;
+}
 .Q{
-    line-height: 2.3;
+    line-height: 2.3em;
     /* border-bottom: 1.5px #29ABE2 solid; */
 }
 /* 板規合集 */
 .R{
-    line-height: 2.3;
+    line-height: 2.3em;
     /* border-bottom: 1.5px #29ABE2 solid; */
 }
 td{
@@ -183,11 +237,11 @@ li{
 /* 排序與分類的按鈕 */
 .classificationBtn{
     background: url(排序2.png);
-    background-size: cover;
+    background-size: 25px 25px;
     float: left;
     border: medium none;
-    width: 20px;
-    height:20px;
+    width: 25px;
+    height:25px;
     color: transparent;
     margin-top:5px;
 }
@@ -199,12 +253,12 @@ p{
 /* 搜尋按鈕 */
 .searchbtn{
     background: url(搜尋2.png);
-    background-size: 20px 15px;
+    background-size: 25px 15px;
     background-color: transparent;
     border: medium none;
     color: transparent;
     background-size: cover; 
-    width: 20px;
+    width: 25px;
     height:25px;
     margin-top:5px;
     margin-left: 5px;
