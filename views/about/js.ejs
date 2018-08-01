@@ -138,6 +138,7 @@ $(document).ready(() => {
         responsiveWidth: 700,
         anchors: ['all','markting', 'programming', 'art', 'video', 'ceo'],
         parallax: true,
+        // scrollBar: w>600? false:true,
         onLeave: function(origin, destination, direction){
             console.log("Leaving section" + origin.index);
         },
@@ -145,6 +146,8 @@ $(document).ready(() => {
     //按鈕動畫
     if(w<600){
 
+            $('.navi').hide();
+            $('.laser').hide();
         $('.nav-toggle-btn').on('click', function(e) {
             $('.dropdown-menu').toggleClass('active-nav');
             $('.nav-toggle-btn').toggleClass('active-nav');

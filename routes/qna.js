@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
     Rule.find().sort({CreateDate:'desc'}).exec(function(err, rule){
     //管理員的話才顯示未回答的問題
     if(req.user && req.user.role==="admin"){
-      Question.find().sort({CreateDate:'desc'}).exec(function(err, question){
+      Question.find({DeleteDate: {$exists: false}}).sort({CreateDate:'desc'}).exec(function(err, question){
         if(err){return next(err)};
         //轉換時間欄位
         var Time = function(date) {

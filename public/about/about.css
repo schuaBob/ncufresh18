@@ -41,12 +41,12 @@
     }
     /* 右上角的框框 */
     .aboutUs.screen{
-        background: url(關於我們吊掛螢幕加logo_去被正式.png);
-        /* background-size: cover; */
+        background-image: url(關於我們吊掛螢幕加logo_去被正式.png) ;
+        background-size: contain;
         right:0;
-        width:50%;
-        height: 27%;
-        top:25px;
+        width:40vw;
+        height: 27vh;
+        top:20px;
         position: absolute;
     }
     /* .screen2{
@@ -78,7 +78,7 @@
     }
     .marktingLogo{
         background: url(企劃組icon_去被.png);
-        background-size:cover;
+        background-size:6vw 17vh;
         z-index: 5000;
     }
     .programmingLogo{

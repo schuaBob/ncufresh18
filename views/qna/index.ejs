@@ -51,7 +51,13 @@
                     </div>
                 </div>
             <%/*我要發問的按鈕*/%>
-            <button class="btn askbutton"  data-toggle="modal" data-target="#askQuestion"></button>
+            <%if(user){%>
+                <button class="btn askbutton"  data-toggle="modal" data-target="#askQuestion"></button>
+                <%}
+                else{%>
+                    <button class="btn askbutton loginFirst"></button>
+                <%}
+                %>
             <%/*回到頁面最頂端的按鈕*/%>
             <button type="button" class="btn goTop"></button>
             <%/*新增問題modal*/%>
@@ -95,18 +101,19 @@
             </div>
             <%/*搜尋功能*/%>
             <form class="search" action="/qna/search" method="get">
-                <div class="input-group">
+                <div class="input-group" style="margin:10px;">
                     <input class="form-control form-control-sm" type="search" id="searchtext" placeholder="輸入關鍵字" name="keyword" ></input>
                     <div class="input-group-append">
                             <button class="btn searchbtn" type="submit"></button>
 
                         </span>
                     </div>    
+                    <%/*展開排序與分類的按鈕*/%>
+                    <a class="dropdown-toggle classificationBtn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                 </div>
             </form>
         <div id="select111">
-            <%/*展開排序與分類的按鈕*/%>
-                <a class="dropdown-toggle classificationBtn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+           
 
             <%/*排序與分類的按鈕*/%>
             <div class="classification">  
@@ -129,27 +136,28 @@
                 
                 <thead>
                     <tr>
-                        
+                        <th class="notebook"></th>
                         <%if(user && user.role==="admin"){%>
-                            <th style="width: 10%">分類</th>
-                            <th style="width:30%">標題</th>
-                            <th>時間</th>
-                            <th>人氣</th>
+                            <th class="type">分類</th>
+                            <th class="title">標題</th>
+                            <th class="TIME">時間</th>
+                            <th class="HOT">人氣</th>
                             <%}
                             else{%>
-                            <th style="width: 15%">分類</th>
-                            <th style="width: 60%">標題</th>
-                            <th style="width: 15%">時間</th>
-                            <th style="width: 10%">人氣</th>
+                            <%# /用vw排版才不會跑掉不知道為什麼 %>
+                            <th style="width: 15vw">分類</th>
+                            <th style="width: 60vw">標題</th>
+                            <th style="width: 15vw">時間</th>
+                            <th style="width: 10vw">人氣</th>
                             <%}
                         %>
                         
                         <%# /管理員頁面才有的 %>
                         <%if(user && user.role==="admin"){%>
-                            <th class="admin">解答與否</th>
+                            <!-- <th class="admin">解答與否</th> -->
                             <th class="admin">更改解答</th>
-                            <th class="admin">提出刪除理由</th>
-                            <th class="admin">刪除問題</th>
+                            <th class="admin">刪除</th>
+                            <!-- <th class="admin">刪除問題</th> -->
                         <%}%>
                         <%# /管理員頁面才有的 %>
                     </tr>
@@ -157,27 +165,29 @@
                     <tbody class="list">
                     <% for(var j=0;j<rule.length;j++){%>
                         <tr id="<%= rule[j].id %>" class="<%= rule[j].id %> R">
-                            <td class="type" style="width:10%"><%= rule[j].Type %></td>
+                            <td class="notebook"></td>
                             <%if(user && user.role==="admin"){%>
+                                <td class="type" style="width:20%"><%= rule[j].Type %></td>
                                 <td class="titleR title" id="<%= rule[j].id %>" style="width:30%">
                                     <div class="article title2"><%= rule[j].Title %></div>
                                 </td>
-                                <td class="time topT" style="width:10%"><%= Time(rule[j].CreateDate) %></td>
-                                <td class="view hot" style="text-align: center;width:10%"><%= rule[j].Click %></td>
+                                <td class="time TIME" style="width:10%"><%= Time(rule[j].CreateDate) %></td>
+                                <td class="view HOT" style="text-align: center;width:10%"><%= rule[j].Click %></td>
                                 <%}
                                 else{%>
+                                    <td class="type" style="width:15%"><%= rule[j].Type %></td>
                                     <td class="titleR title" id="<%= rule[j].id %>" style="width:60%">
                                         <div class="article"><%= rule[j].Title %></div>
                                     </td>
-                                    <td class="time topT"><%= Time(rule[j].CreateDate) %></td>
+                                    <td class="time topT" style="width:15%"><%= Time(rule[j].CreateDate) %></td>
                                     <td class="view hot" style="text-align: center;width:10%"><%= rule[j].Click %></td>
                                     <%}
                                 %>
                             <%if(user &&　user.role==="admin"){%>
-                                <td class="admin" style="width:10%">無解答</td>
-                                <td class="admin" style="width:10%" data-toggle="modal" data-target="#<%= rule[j].id %>-edit">編輯板規</td>
-                                <td class="admin" style="width:10%">無</td>
-                                <td class="deleteR admin" style="width:10%" id="<%= rule[j].id %>"><a method="get" href="/qna/deleteR/<%= rule[j].id %>" role="button">刪除板規</a></td>
+                                <!-- <td class="admin" style="width:10%">無解答</td> -->
+                                <td class="admin"  data-toggle="modal" data-target="#<%= rule[j].id %>-edit">編輯板規</td>
+                                <!-- <td class="admin" style="width:10%">無</td> -->
+                                <td class="deleteR admin"  id="<%= rule[j].id %>"><a method="get" href="/qna/deleteR/<%= rule[j].id %>" role="button">刪除板規</a></td>
                                 <%}%>
                         </tr>
                         <%#顯示板規的Modal%>
@@ -226,14 +236,16 @@
                     <%}%>
                     <% for(var i=0; i<question.length; i++) {%>
                         <tr id="<%= question[i].id %>" class="<%= question[i].id %> <%= question[i].Type %> Q">
-                            <td class="type"><%= question[i].Type %></td>
+                            <td class="notebook"></td>
                             <%if(user && user.role==="admin"){%>
+                                <td class="type" style="width:20%;"><%= question[i].Type %></td>
                                 <td class="titleQ title" style="width:30%" id="<%= question[i].id %>">
                                     <div class="article title2"><%= question[i].Title %></div>
                                 </td>
                                 <%}
                                 else{%>
-                                    <td class="titleQ title" style="width:60%;" id="<%= question[i].id %>">
+                                    <td style="width:15vw;" class="type"><%= question[i].Type %></td>
+                                    <td class="titleQ title" style="width:60vw;" id="<%= question[i].id %>">
                                         <div class="article title2"><%= question[i].Title %></div>
                                         <!-- <p class="article title2"><%= question[i].Title %></p> -->
                                     </td>
@@ -241,35 +253,34 @@
                             %>
 
                             <% if(question[i].CreateDate){%>
-                                    <td class="time" style="width:10%;"><%= Time(question[i].CreateDate) %></td>
+                                    <td class="time TIME" style="width:10%;"><%= Time(question[i].CreateDate) %></td>
                                 <%}
                                 else{%>
                                     <td style="width:10%;">未解答</td>
                                 <%}
                                 %>
-                                <td class="view hot" style="text-align: center;width:10%"><%= question[i].Click %></td>
+                                <td class="view hot HOT" style="text-align: center;width:10%"><%= question[i].Click %></td>
                             
                             <%# /管理員頁面才有的 %>
                             <%if(user && user.role==="admin"){%>
                                 <% if(question[i].Answer) {%>
-                                    <td class="admin ans">是</td>
+                                    <!-- <td class="admin ans">是</td> -->
                                     <td class="admin"  data-toggle="modal" data-target="#<%= question[i].id %>-edit">編輯答案</td>
                                 <%} 
                                 else{%>
-                                    <td class="admin ans">否</td>
+                                    <!-- <td class="admin ans">否</td> -->
                                     <td class="admin"  data-toggle="modal" data-target="#<%= question[i].id %>-edit">新增答案</td>
                                 <%} 
                                 %>
-                                <!-- <% if(question[i].Answer) {%>
-                                    <%}%> -->
+        
                                 <% if(question[i].Reason ==="") {%>
                                         <td class="admin" data-toggle="modal" data-target="#<%= question[i].id %>-delete" >提出刪除理由</td>
                                     <%}
                                     else{%>
-                                        <td  class="admin" >已提出</td>
+                                        <!-- <td  class="admin" >已提出</td> -->
+                                        <td class="admin hide" id="<%= question[i].id %>">刪除問題</td>
                                         <%}
                                     %>
-                                <td class="admin hide" id="<%= question[i].id %>">刪除問題</td>
                             <%}%>
                             <%# /管理員頁面才有的 %>
                         </tr>
