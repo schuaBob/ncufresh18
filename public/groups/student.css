@@ -78,7 +78,7 @@ h6{
     opacity: 1;
     font-size: 1.3vw;
 }
-#text{
+#text, #text_stu{
     opacity: 1;
     color: white;
     font-size: 1.3vw;
@@ -277,6 +277,13 @@ h6{
     }
     .main{
         width:45vw;
+    }
+    #text_stu{
+        font-size: 3.8vw;
+        text-align: center;
+        float: right;
+        padding-left: .5rem;
+
     }
 }
 

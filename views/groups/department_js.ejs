@@ -154,14 +154,6 @@
                     $('#depmodal-'+  event.currentTarget.attributes.search.value +' .acti').html(data_dep.activity)
                     $('#depmodal-'+  event.currentTarget.attributes.search.value +' .team').html(data_dep.team)
                     $('#depmodal-'+  event.currentTarget.attributes.search.value +' .cour').html(data_dep.course)
-                    $('.kkk').each(function(){
-                        if($(this).attr('iiiii') === data_dep.name){
-                            $('#depmodal-'+  event.currentTarget.attributes.search.value +' .player').css("display" , "")
-                        }
-                        else{
-                            $('#depmodal-'+  event.currentTarget.attributes.search.value +' .player').css("display" , "none")
-                        }
-                    })
 
                     for (let i = 0; i < data_dep.intro_pic.length; i++) {
                         $('#depmodal-'+  event.currentTarget.attributes.search.value +'#carouselExampleIndicator1 .carousel-indicators').append("<li data-target='#carouselExampleIndicator1' data-slide-to='" + i + "'></li>")

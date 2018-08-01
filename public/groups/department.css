@@ -588,16 +588,11 @@ h5{
     }
     #text_at{
         font-size: 3.8vw;
-        float: left;
-        text-align: center;
-    }
-    #text_stu{
-        font-size: 3.5vw;
-        text-align: center;
         float: right;
+        text-align: center;
         padding-left: .5rem;
-
     }
+    
     
     .CDplayer{
         margin-left: 0%;
