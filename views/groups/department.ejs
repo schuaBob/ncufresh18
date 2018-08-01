@@ -185,7 +185,7 @@
               <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3 class="modal-title" id="exampleModalLabel"><!-- <%= department[i].name %> --></h3>
+                    <h3 class="modal-title" id="exampleModalLabel"></h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -211,7 +211,7 @@
                       <div class="tab-content">
                         <div id="introduction_<%= department[i].name %>" class="tab-pane active">
                           <h5>系所介紹</h5>  
-                          <h6 class="intro"><!-- <%- department[i].introduction %> --></h6>
+                          <h6 class="intro"></h6>
 
                           <div id="carouselExampleIndicator1" class="carousel slide" data-ride="carousel">
                               <ol class="carousel-indicators" id="carousel1">
@@ -234,7 +234,7 @@
                         <% if(department[i].name[department[i].name.length-1] === "系"){ %>
                           <div id="organization_<%= department[i].name %>" class="tab-pane fade in">
                             <h5>系學會</h5>
-                            <h6 class="org"><!-- <%- department[i].organization %> --></h6>
+                            <h6 class="org"></h6>
 
                             <div id="carouselExampleIndicator2" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators" id="carousel2">
@@ -255,7 +255,7 @@
                           </div>
                           <div id="activity_<%= department[i].name %>" class="tab-pane fade in">
                             <h5>系所活動</h5>
-                            <h6 class="acti"><!-- <%- department[i].activity %> --></h6>
+                            <h6 class="acti"></h6>
 
                             <div id="carouselExampleIndicator3" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators" id="carousel3">
@@ -276,7 +276,7 @@
                           </div>
                           <div id="team_<%= department[i].name %>" class="tab-pane fade in">
                             <h5>系隊</h5>
-                            <h6 class="team"><!-- <%- department[i].team %> --></h6>
+                            <h6 class="team"></h6>
 
                             <div id="carouselExampleIndicator4" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators" id="carousel4">
@@ -297,13 +297,13 @@
                           </div>                          
                           <div id="course_<%= department[i].name %>" class="tab-pane fade in">
                             <h5>系上課程</h5>
-                            <h6 class="cour"><!-- <%- department[i].course %> --></h6>
+                            <h6 class="cour"></h6>
                           </div>
                           <div id="lightning_round_<%= department[i].name %>" class="tab-pane fade in">
                             <h5>快問快答</h5>
                             <div class='CDplayer'><!--影片-->
                               <% for(let j = 0;　j<QAvideo.length;　j++){ %>
-                                <div class="kkk" iiiii="<% map[QAvideo[j].title] %>">
+                                <div class="kkk" iiiii="<%= map[QAvideo[j].title] %>">
                                   <div id='<%= QAvideo[j].insert %>' class='player'></div>
                                 </div>
                               <% } %>
@@ -314,7 +314,7 @@
                         <% if(department[i].name[department[i].name.length-1] === "所"){ %>
                           <div id="organization_<%= department[i].name %>" class="tab-pane fade in">
                             <h5>知道更多</h5>
-                            <h6 class ="org"><!-- <%- department[i].organization %> --></h6>
+                            <h6 class ="org"></h6>
                           </div>
                         <% } %>
                       </div>

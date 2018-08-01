@@ -74,7 +74,10 @@ h6{
 }
 #modal_button:hover{
     box-shadow: 0 14px 20px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-
+}
+button:hover {
+    background-color: rgb(43, 78, 233);
+    color: white;
 }
 /* 圖片 */
 #carouselExampleIndicator1{
