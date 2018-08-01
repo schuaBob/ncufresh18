@@ -24,15 +24,30 @@
 
                 </div>
 
-                
+
 
 
             </div>
             <%_ } -%>
-                
+
+                <input type="search" id="searchbar" name="searchct">
+                <div class="searchresult">
+                    <h5>標題</h5>
+                    <ul class="titleresult">
+
+                    </ul>
+                    <h5>內文</h5>
+                    <ul class="contentresult">
+                        
+                    </ul>
+                </div>
+
+
                 <div class="main_list_detail collapse">
                     <li id="listtitle">99</li>
-                    <div id="closemainlist"><img src="close.png"></div>
+                    <div id="closemainlist">
+                        <img src="close.png">
+                    </div>
 
                     <ul>
                         <%for (let i in result) {-%>
@@ -47,8 +62,8 @@
                     <div class="mapshadow">
                         <%for (let i in result) {-%>
                             <% if (result[i]['Buildpic'] != "") {-%>
-                                <img title="<%=result[i]['Element_Name']%>" pictitle="<%=result[i]['Element_Name']%>" val="<%=result[i]['Type']%>" class="indexelepic" src="<%=result[i]['Buildpic']%>"
-                                    alt="<%=result[i]['_id']%>" style="top: <%=result[i]['X_position']%>%;left: <%=result[i]['Y_position']%>%; width: <%=result[i]['Size']%>%;">
+                                <img title="<%=result[i]['Element_Name']%>" pictitle="<%=result[i]['Element_Name']%>" val="<%=result[i]['Type']%>" class="indexelepic"
+                                    src="<%=result[i]['Buildpic']%>" alt="<%=result[i]['_id']%>" style="top: <%=result[i]['X_position']%>%;left: <%=result[i]['Y_position']%>%; width: <%=result[i]['Size']%>%;">
                                 <%}-%>
                                     <%}-%>
 
@@ -114,7 +129,7 @@
                                 </div>
                                 <div id="indexmodalp">
                                     <div class="p">
-                                        
+
                                     </div>
 
                                 </div>

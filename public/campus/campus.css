@@ -1,7 +1,10 @@
 h1{
   text-align: center;
 }
-
+.searchresult{
+  position: absolute;
+  
+}
 .modal-dialog {
   z-index: 1;
 }
