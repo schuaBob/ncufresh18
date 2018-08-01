@@ -1,3 +1,4 @@
+
 body{
     font-family: 微軟正黑體,simsun, Comic Sans MS;
     background-image:url("s_b.png");
@@ -115,6 +116,9 @@ body::after{
 
 /*電腦大螢幕*/
 @media only screen and (min-width: 993px) {
+    .modal-dialog {
+        max-width: 70%; 
+    }
     /*太空人和太空艙排版及大小*/
     #man{     
         position:absolute;  
@@ -283,6 +287,9 @@ body::after{
 
 /*電腦螢幕縮小，調字體，調長度*/   
 @media only screen and (min-width: 768px) and (max-width: 993px) {
+    .modal-dialog {
+        max-width: 90%; 
+    }
     
     #man{     
         position:absolute;  
@@ -452,6 +459,9 @@ body::after{
 
 /*為了處理太空人和太空艙的電腦螢幕新排版....*/
 @media only screen and (min-width: 480px) and (max-width: 768px){
+    .modal-dialog {
+        max-width: 90%; 
+    }
     .grid {
         padding-top:35px;
         padding-bottom:40%;
@@ -621,6 +631,9 @@ body::after{
 }
 /*手機螢幕大小*/
  @media only screen  and (max-width: 480px){
+    .modal-dialog {
+        max-width: 100%; 
+    }
     #man{     
         position:absolute;  
         z-index:1;
