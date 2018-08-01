@@ -264,9 +264,9 @@ router.get('/auth/provider/callback', function (req, res, next) {
       'client_secret': PORTAL_CLIENT_SECRET
     }
   }, function Callback(err, httpResponse, token) {
-    if (err) {
+    if (err) 
       return console.error('failed:', err);
-    }
+
     if (!httpResponse.statusCode === 200) {
       console.log('http status 200 response error!');
       return res.redirect('/login');
@@ -281,9 +281,9 @@ router.get('/auth/provider/callback', function (req, res, next) {
         'Authorization': 'Bearer' + obj.access_token,
       }
     }, function Callback(err, httpResponse, info) {
-      if (err) {
+      if (err)
         return console.error('failed:', err);
-      }
+
       if (!httpResponse.statusCode === 200) {
         console.log('response error!');
         return res.redirect('/login');
