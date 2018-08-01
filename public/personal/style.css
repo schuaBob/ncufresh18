@@ -22,30 +22,32 @@
     width: 35vw ;
     background-color: rgb(247, 233, 224) ;
 }
-#other {
+#btn1 {
     position: absolute ;
     top: 55vh ;
     left : 82vw ;
-}
-#btn1 {
     width: 17vw ;
     height: 12vh ;
     color : rgb(0,44,144) ;
     background-color: rgb(201,210,225);
     border: none ;
     font-size : 5vh ;
-    margin-bottom: 2vh ;
 }
 #btn2 {
+    position: absolute ;
+    top: 69vh ;
+    left : 82vw ;
     width: 17vw ;
     height: 12vh ;
     color : rgb(0,23,91) ;
     background-color: rgb(157,173,196);
     border: none ;
     font-size : 5vh ;
-    margin-bottom: 2vh ;
 }
 #btn3 {
+    position: absolute ;
+    top: 83vh ;
+    left : 82vw ;
     width: 17vw ;
     height: 12vh ;
     color : rgb(0,16,94) ;
@@ -71,9 +73,11 @@
 }
 #namae {
     text-align:center;
+    font-size: 4vh ;
 }
 #number {
     text-align:center;
+    font-size: 3vh ;
 }
 #bighead {
     top:15vh;
@@ -101,9 +105,9 @@
     background-position: center ;
     background-size: cover ;
     position: absolute;
-    top : 7vh ;
+    top : 56px ;
     z-index: 1 ;
-    height: 45vh ;
+    height: calc(52vh - 56px) ;
     width: 100vw ;
 }
 #pic:hover {
@@ -188,14 +192,15 @@ hr {
 button {
     cursor: pointer;
 }
-@media only screen and (max-width: 990px) {
+@media only screen and (max-width: 1200px) {
     #canvas {
         background-image : url("預設封面.png") ;
         background-position: center ;
         background-size: cover ;
-        position: relative;
+        position: absolute;
+        top : 56px ;
         z-index: 1 ;
-        height: 45vh ;
+        height: calc(52vh - 56px) ;
         width: 100vw ;
     }
     #box {
@@ -210,49 +215,105 @@ button {
     }
     #score {
         position: absolute ;
-        top: 55vh ;
-        left : 27vw ;
-        height: 40vh ;
-        width: 18vw ;
+        left :41vw ;
+        top : 80vh ;
+        height: 20vh ;
+        width: 57vw ;
         background-color: rgb(244, 209, 207) ;
+        text-align:center ;
+    }
+    #w1 {
+        position: relative;
+        color: rgb(170, 33, 63) ;
+        top : 3px ;
+        left : 0px ;
+        font-size: 4vh ;
+    }
+    #point {
+        position : relative ;
+        top : 0 ;
+        text-align:center ;
+        width : 57vw ;
+        font-size: 12vw ;
+        font-family: 'myFont' ;
     }
     #btn1 {
-        width: 17vw ;
-        height: 12vh ;
+        position: absolute ;
+        left :2vw ;
+        top : 80vh ;
+        width: 37vw ;
+        height: 20vh ;
         color : rgb(0,44,144) ;
         background-color: rgb(201,210,225);
         border: none ;
         font-size : 5vh ;
-        margin-bottom: 2vh ;
     }
     #writing {
         position: absolute ;
-        top: 55vh ;
-        left : 46vw ;
-        height: 40vh ;
-        width: 35vw ;
+        top: 102vh ;
+        left : 2vw ;
+        height: 41vh ;
+        width: 96vw ;
         background-color: rgb(247, 233, 224) ;
     }
-    #other {
-        position: absolute ;
-        top: 55vh ;
-        left : 82vw ;
+    #record {
+        position: relative ;
+        left : 2vw ;
+        height: 40vw;
+        width : 92vw ;
+        font-size: 3vh ;
+    }
+    .qt {
+        width : 55vw ;
+        text-overflow: ellipsis ;
+        overflow:hidden;
+    }
+    #ope {
+        width: 16vw ;
+        font-size: 5vw ;
+    }
+    #sta {
+        width: 21vw ;
+        font-size: calc(10px+1vw) ;
+    }
+    hr {
+        border: 3px solid white ;
+        width : 160% ;
+        border-radius: 3px ;
+    }
+    #w2 {
+        position: relative;
+        color : rgb(203, 138 , 120) ;
+        width : 60vw ;
+        top : 3px ;
+        left : 10px ;
+        font-size: 5vh ;
     }
     #btn2 {
-        width: 17vw ;
-        height: 12vh ;
+        position: absolute;
+        top :145vh ;
+        left :2vw ;
+        width: 96vw ;
+        height: 10vh ;
         color : rgb(0,23,91) ;
         background-color: rgb(157,173,196);
         border: none ;
         font-size : 5vh ;
-        margin-bottom: 2vh ;
-    }
+    } 
     #btn3 {
-        width: 17vw ;
-        height: 12vh ;
+        position: absolute;
+        top :157vh ;
+        left :2vw ;
+        width: 96vw ;
+        height: 10vh ;
         color : rgb(0,16,94) ;
         background-color: rgb(121,135,161);
         border: none ;
         font-size : 5vh ;
+    }
+    footer{
+        position: absolute;
+        top : 169vh ;
+        height: 4vh;
     }
 }
