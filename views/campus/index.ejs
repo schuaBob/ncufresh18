@@ -47,7 +47,7 @@
                     <div class="mapshadow">
                         <%for (let i in result) {-%>
                             <% if (result[i]['Buildpic'] != "") {-%>
-                                <img title="<%=result[i]['Element_Name']%>" val="<%=result[i]['Type']%>" class="indexelepic" src="<%=result[i]['Buildpic']%>"
+                                <img title="<%=result[i]['Element_Name']%>" pictitle="<%=result[i]['Element_Name']%>" val="<%=result[i]['Type']%>" class="indexelepic" src="<%=result[i]['Buildpic']%>"
                                     alt="<%=result[i]['_id']%>" style="top: <%=result[i]['X_position']%>%;left: <%=result[i]['Y_position']%>%; width: <%=result[i]['Size']%>%;">
                                 <%}-%>
                                     <%}-%>

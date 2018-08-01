@@ -32,6 +32,7 @@
 
             }
         }
+        $('.indexelepic[pictitle="排球場"]').css({"z-index":"10"})
         $('.indexelepic[val="9"]').hide()
         $('.modal-header span i').click(function () {
             $('#indexmodal').modal('hide')
@@ -110,6 +111,7 @@
                             
                             temp = $(this)[0]
                             $('#listtitle').text(array1[i - 1])
+                            $('.indexelepic').css("filter", "brightness(55%)")
                             if (event.currentTarget.attributes.val.value === '4') {
                                 $('#List_index li').unbind('mouseenter mouseleave')
                                 $('.indexelepic[val="9"]').show()
@@ -119,7 +121,7 @@
                             $('.main_list_detail').stop().collapse('show')
                             $('.main_list_detail').addClass('clicked')
                             $('#map').css("filter", "brightness(55%)")
-                            $('.indexelepic').css("filter", "brightness(55%)")
+                            
                             $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').css("filter", "none")
                         }
 
@@ -148,7 +150,7 @@
                         $('.mapmove').addClass('clicked')
                         if ($('.main_list_detail').hasClass('clicked')) {
                             console.log("3")
-
+                            $('.indexelepic').css("filter", "brightness(55%)")
                             if (event.currentTarget.attributes.val.value === '4') {
                                 $('.indexelepic[val="9"]').show()
                                 $('.indexelepic[val="9"]').css("filter", "none")
@@ -162,12 +164,12 @@
                                 $('.main_list_detail').off('hidden.bs.collapse');
                             })
                             $('.main_list_detail').addClass('clicked')
-                            $('.indexelepic').css("filter", "brightness(55%)")
+                            
                             $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').css("filter", "none")
                         } else {
                             console.log("4")
                             $('#listtitle').text(array1[i - 1])
-                            
+                            $('.indexelepic').css("filter", "brightness(55%)")
                             if (event.currentTarget.attributes.val.value === '4') {
                                 $('#List_index li').unbind('mouseenter mouseleave')
                                 $('.indexelepic[val="9"]').show()
@@ -177,7 +179,7 @@
                             $('.main_list_detail').stop().collapse('show')
                             $('.main_list_detail').addClass('clicked')
                             $('#map').css("filter", "brightness(55%)")
-                            $('.indexelepic').css("filter", "brightness(55%)")
+                            
                             $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').css("filter", "none")
 
 
@@ -204,12 +206,12 @@
             };
             $('.mapmove').stop().velocity(properties, 400)
         })
-        $('elelist[val="4"]').hover(function () {
-            $('.indexelepic[data-original-title=' + $(this).html() + ']').velocity({ scale: 1.1 }, 100)
-            $('.indexelepic[data-original-title=' + $(this).html() + ']').tooltip('show')
+        $('.elelist[val="4"]').hover(function () {
+            $('.indexelepic[pictitle="' + $(this).text().trim() + '"]').velocity({ scale: 1.1 }, 100)
+            $('.indexelepic[pictitle="' + $(this).text().trim() + '"]').tooltip('show')
         }, function () {
-            $('.indexelepic[data-original-title=' + $(this).html() + ']').velocity({ scale: 1 }, 100)
-            $('.indexelepic[data-original-title=' + $(this).html() + ']').tooltip('hide')
+            $('.indexelepic[pictitle="' + $(this).text().trim() + '"]').velocity({ scale: 1 }, 100)
+            $('.indexelepic[pictitle="' + $(this).text().trim() + '"]').tooltip('hide')
         })
         $('.elelist').hover(function (event) {
             $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').velocity({ scale: 1.1 }, 100)
