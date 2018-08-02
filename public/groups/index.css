@@ -22,7 +22,7 @@ body{
 .index_club{
     width: 33%;
     left: 36%;
-    top: 40%;
+    top: 63.5%;
     position: absolute;
 }
 .index_club:hover{
@@ -46,7 +46,7 @@ body{
 .index_department{
     width: 33%;
     left: 36%;
-    top: 63%;
+    top: 40%;
     position: absolute;
 }
 .index_department:hover{
@@ -97,7 +97,7 @@ body{
         position: relative;
         display: inline-block; 
         margin-right: 2%;
-        margin-top: 10%;
+        margin-top: 5%;
     }
     .cell_community{
         width: 80%;
@@ -114,15 +114,15 @@ body{
     #cell_club{
         position: relative;
         display: inline-block;
-        margin-left: 15%;
+        margin-left: 10%;
     }
     .cell_club{
         width: 67%;
         position: relative;
     }
     .cell_club_text{
-        width: 25%;
-        left: 36%;
+        width: 23%;
+        left: 37%;
         top: 38%;
         position: absolute;
     }

@@ -195,6 +195,8 @@ h5{
     color: white;    
     font-size: 2.1vw;
     position: absolute;
+    border-radius: 1vh;
+
 }
 
 #but_1{
@@ -503,7 +505,9 @@ h5{
         color: white;    
         font-size: 4.5vw;
         position: absolute;
-        border-color: rgba(255, 255, 255, 0.5);
+        border-color: rgba(255, 255, 255, 0.5);    
+        border-radius: 1vh;
+
     }
     #butcell_1{
         top: 11%;
@@ -584,16 +588,11 @@ h5{
     }
     #text_at{
         font-size: 3.8vw;
-        float: left;
-        text-align: center;
-    }
-    #text_stu{
-        font-size: 3.5vw;
-        text-align: center;
         float: right;
+        text-align: center;
         padding-left: .5rem;
-
     }
+    
     
     .CDplayer{
         margin-left: 0%;

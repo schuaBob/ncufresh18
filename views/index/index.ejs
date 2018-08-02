@@ -17,8 +17,8 @@
         .img_container {
             width:  100%;
             height: 100%;
-            -webkit-animation: round 50s linear infinite;
-            animation: round 50s linear infinite;
+            -webkit-animation: round 63s linear infinite;
+            animation: round 63s linear infinite;
             position: absolute;
             top: 0;
             left: 0;
@@ -27,20 +27,39 @@
             background-size: cover;
             background-position: 40% center;
         }
+        body {
+            background: url("index/ncu首頁.png") no-repeat center center fixed; 
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+        }
         #c1 {
-            background-image: url("index/Cosmos01.jpg");
+            background-image: url("index/IMG-0.png");
         }
         #c2 {
-            background-image: url("index/Cosmos02.jpg");
+            background-image: url("index/IMG-1.png");
         }
         #c3 {
-            background-image: url("index/Cosmos03.jpg");
+            background-image: url("index/IMG-2.png");
         }
         #c4 {
-            background-image: url("index/111.jpg");
+            background-image: url("index/IMG-3.png");
         }
         #c5 {
-            background-image: url("index/未命名.png");
+            background-image: url("index/IMG-4.png");
+        }
+        #c6 {
+            background-image: url("index/IMG-5.png");
+        }
+        #c7 {
+            background-image: url("index/IMG-6.png");
+        }
+        #c8 {
+            background-image: url("index/IMG-7.png");
+        }
+        #c9 {
+            background-image: url("index/IMG-8.png");
         }
         @-webkit-keyframes round {
             0% {
@@ -48,18 +67,18 @@
                 filter: alpha(opacity=0);
                 background-position: 40% center;
             }
-            2% {
+            2.5% {
                 opacity: 1;
                 filter: alpha(opacity=1);
             }
-            10% {
+            6.25% {
                 background-position: 50% center;
             }
-            20% {
+            12.5% {
                 opacity: 1;
                 filter: alpha(opacity=1);
             }
-            22% {
+            15% {
                 opacity: 0;
                 filter: alpha(opacity=0);
                 background-position: 60% center;
@@ -71,46 +90,66 @@
                 filter: alpha(opacity=0);
                 background-position: 40% center;
             }
-            2% {
+            2.5% {
                 opacity: 1;
                 filter: alpha(opacity=1);
             }
-            10% {
+            6.25% {
                 background-position: 50% center;
             }
-            20% {
+            12.5% {
                 opacity: 1;
                 filter: alpha(opacity=1);
             }
-            22% {
+            15% {
                 opacity: 0;
                 filter: alpha(opacity=0);
                 background-position: 60% center;
             }
         }
+        .slider_container div:nth-child(9) , #c9 {
+            -webkit-animation-delay: -5s;
+                    animation-delay: -5s;
+        }
+
+        .slider_container div:nth-child(8) , #c8 {
+            -webkit-animation-delay: 2s;
+                    animation-delay: 2s;
+        }
+
+        .slider_container div:nth-child(7) , #c7 {
+            -webkit-animation-delay: 9s;
+                    animation-delay: 9s;
+        }
+
+        .slider_container div:nth-child(6) , #c6 {
+            -webkit-animation-delay: 16s;
+                    animation-delay: 16s;
+        }
+
         .slider_container div:nth-child(5) , #c5 {
-            -webkit-animation-delay: 0s;
-                    animation-delay: 0s;
+            -webkit-animation-delay: 23s;
+                    animation-delay: 23s;
         }
 
         .slider_container div:nth-child(4) , #c4 {
-            -webkit-animation-delay: 10s;
-                    animation-delay: 10s;
-        }
-
-        .slider_container div:nth-child(3) , #c3 {
-            -webkit-animation-delay: 20s;
-                    animation-delay: 20s;
-        }
-
-        .slider_container div:nth-child(2) , #c2 {
             -webkit-animation-delay: 30s;
                     animation-delay: 30s;
         }
 
+        .slider_container div:nth-child(3) , #c3 {
+            -webkit-animation-delay: 37s;
+                    animation-delay: 37s;
+        }
+
+        .slider_container div:nth-child(2) , #c2 {
+            -webkit-animation-delay: 44s;
+                    animation-delay: 44s;
+        }
+
         .slider_container div:nth-child(1) , #c1 {
-            -webkit-animation-delay: 40s;
-                    animation-delay: 40s;
+            -webkit-animation-delay: 51s;
+                    animation-delay: 51s;
         }
         .latest-news-btn {
             z-index: 1;
@@ -151,6 +190,8 @@
         #box1 {
             overflow-y: scroll;
             height: calc(80vh - 48px);
+            border-radius: 2%;
+            background-color: rgba(255,255,255,0.7);
         }
     </style>
 </head>
@@ -172,6 +213,10 @@
                 <div class="img_container" id="c3"></div>
                 <div class="img_container" id="c4"></div>
                 <div class="img_container" id="c5"></div>
+                <div class="img_container" id="c6"></div>
+                <div class="img_container" id="c7"></div>
+                <div class="img_container" id="c8"></div>
+                <div class="img_container" id="c9"></div>
             </div>
             <div class="section">
                 <div id="news-text">
@@ -180,7 +225,7 @@
                 </div>
                 <div id="news-box" class="mx-auto">
                     <div>
-                        <div class="d-inline-block w-50 select-bar"><h1 class="text-center bg-warning">即時資訊</h1></div><div class="d-inline-block w-50 select-bar"><h1 class="text-center bg-info">熱門Q&A</h1></div>
+                        <div class="d-inline-block w-50 select-bar"><h2 class="text-center bg-warning">即時資訊</h2></div><div class="d-inline-block w-50 select-bar"><h2 class="text-center bg-info">熱門Q&A</h2></div>
                         <div id="box1">
                             <table class="table">
                                 <tbody>
@@ -264,6 +309,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="section">
+                我是時間軸ＱＱＱＱ
             </div>
         </div>
 

@@ -2,34 +2,19 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
 <script>
 $(document).ready(() => {
-    // $(window).resize(function() {
+//  $(window).resize(function() {
         var w=$(window).width();
         var h=$(window).height();
-    // });
+    
     $(".hideAct").hide();
     if (w < 600) {
         //手機版頁面樣式
-        
-        //搜尋的位置
-        $(".search").css({"float":"left"});
         // $(".classifiaction").css({"float":"left"});
         //排序與分類的位置
         $(".classification").addClass("dropdown-menu");
         $("ul").addClass("flex-column");
-        //排序與分類字體的顏色
-        $(".nav-link").css({"font-color":"black"});
-        //文章列表樣式
-        $('table').css({"width":w});
-        //modal的樣式
-        $(".modal").css({"height":h});
-        //我要發問按鈕的位置
-        // $(".askbutton").hide();//隱藏電腦版的我要發問按鈕
     }
-    else if(w>600){
-        //$('tbody').css({"height":"300px"});
-        $('td').css({"border-right":"1.5px black solid"});
-        
-    }
+// });
     //預設分類
     if (w < 600) {
         //分類按鈕動畫
@@ -278,6 +263,9 @@ $(document).ready(() => {
             }
         })
     })
+    $(".loginFirst").on('click',function(){
+        alert('請先登入');
+    });
     //CKEDITOR
     CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
     CKEDITOR.config.shiftEnterMode = CKEDITOR.ENTER_BR; 

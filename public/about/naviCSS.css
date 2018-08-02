@@ -44,12 +44,10 @@
         position: fixed;
         top:50vw;
         overflow: auto;
-        display: none;
     }
     .laser{
         position: fixed;
         top:45vw;
-        display: none;
     }
     .elev{
         display: none;

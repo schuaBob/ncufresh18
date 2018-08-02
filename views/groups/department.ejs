@@ -20,8 +20,8 @@
       <!-- 麵包屑 -->
       <nav aria-label="breadcrumb" id="bread">
           <ol class="breadcrumb" id="breadcru">
-            <li class="breadcrumb-item" ><a href="/groups/student" id="text_stu">學生會</a></li>
             <li class="breadcrumb-item active" aria-current="page" id="text_at">系所</li>
+            <li class="breadcrumb-item" ><a href="/groups/student" id="text">學生會</a></li>
             <li class="breadcrumb-item"><a href="/groups/club" id="text">社團</a></li>
             <li class="breadcrumb-item"><a href="/groups/community" id="text">其他學生組織</a></li>
           </ol>
@@ -170,10 +170,10 @@
           <% } %>
           <% var map = {
             "中文":"中國文學系","英文":"英美語文學系","法文":"法國語文學系",
-            "物理":"物理學系","化學":"化學學系","光電":"光電科學與工程學系","數學":"數學系",
+            "物理":"物理學系","化學":"化學學系","光電":"光電科學與工程學系","數學":"數學系","理學院學士班":"理學院學士班",
             "經濟":"經濟學系","企管":"企業管理學系","資管":"資訊管理學系","財金":"財務金融學系",
-            "化材":"化學工程與材料工程學系","土木":"土木工程學系","機械":"機械工程學系",
-            "電機":"電機工程學系","資工":"資訊工程學系","通訊":"通訊工程學系",
+            "化材":"化學工程與材料工程學系","土木":"土木工程學系","機械":"機械工程學系","工學院學士班":"工學院學士班",
+            "電機":"電機工程學系","資工":"資訊工程學系","通訊":"通訊工程學系","資訊電機學院學士班":"資訊電機學院學士班",
             "地科":"地球科學學系","大氣":"大氣科學學系",
             "客家":"客家語文暨社會科學學系",
             "生科":"生命科學系","生醫":"生醫科學與工程學系"
@@ -181,7 +181,7 @@
 
         <% for(var i in department){ %>
           <!-- 社團介紹 Modal -->                            
-            <div class="modal fade bd-example-modal-lg" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id ="depmodal"><!-- 根據資料庫id判斷modal內容 --> 
+            <div class="modal fade bd-example-modal-lg" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id ="depmodal-<%= department[i]._id %>"><!-- 根據資料庫id判斷modal內容 --> 
               <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -303,9 +303,9 @@
                             <h5>快問快答</h5>
                             <div class='CDplayer'><!--影片-->
                               <% for(let j = 0;　j<QAvideo.length;　j++){ %>
-                                <div class="kkk" iiiii="<%= map[QAvideo[j].title] %>">
+                                <% if(map[QAvideo[j].title]=== department[i].name) {%>
                                   <div id='<%= QAvideo[j].insert %>' class='player'></div>
-                                </div>
+                                <%}%>
                               <% } %>
                             </div>
                           </div>
