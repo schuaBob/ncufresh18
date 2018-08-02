@@ -145,6 +145,9 @@
                     $('.texteditform').attr("action", "/campus/editElement/" + tempid)
                     $('input[name="elename"]').val(data.Element_Name)
                     $('select[name="elecategory"]').children("[value=" + data.Type + "]").attr({ "selected": "selected" });
+                    $('.radios1[value='+ data.Showdefault +']').attr({"checked":"checked"})
+                    $('.radios2[value='+ data.Multi +']').attr({"checked":"checked"})
+                    $('.radios3[value='+ data.Modalneed +']').attr({"checked":"checked"})
                     console.log(data._id)
                     CKEDITOR.instances['edittextarea'].setData(data.Element_Intro);
 

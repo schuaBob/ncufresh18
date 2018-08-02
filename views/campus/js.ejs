@@ -7,33 +7,10 @@
         var properties = null
         var seq = null
         var array1 = []
-        var action1 = function (event) {
-            console.log("FD")
-            if (event.currentTarget.attributes.val.value === '4') {
-                $('.indexelepic[val="9"]').show()
-                $('.indexelepic[val="9"]').velocity({ scale: 1.1 }, 100)
-                $('.indexelepic[val="9"]').stop().tooltip('show')
-            } else {
-                $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').velocity({ scale: 1.1 }, 100)
-                $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').stop().tooltip('show')
 
-            }
-        }
-        var action2 = function (event) {
-            console.log("SS")
-            if (event.currentTarget.attributes.val.value === '4') {
-                $('.indexelepic[val="9"]').hide()
-                $('.indexelepic[val="9"]').velocity({ scale: 1 }, 100)
-                $('.indexelepic[val="9"]').stop().tooltip('hide')
-            } else {
-
-                $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').velocity({ scale: 1 }, 100)
-                $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').stop().tooltip('hide')
-
-            }
-        }
         $('.indexelepic[pictitle="排球場"]').css({ "z-index": "2" })
-        $('.indexelepic[val="9"]').hide()
+        $('.indexelepic.hide').hide()
+
         $('.modal-header span i').click(function () {
             $('#indexmodal').modal('hide')
         })
@@ -44,7 +21,7 @@
         }, function () {
             $(this).velocity({ scale: 1 }, 100)
         })
-        $('.indexelepic').click(function (event) {
+        $('.indexelepic.modalshow').click(function (event) {
             $('.indexelepic').tooltip('hide');
             $.ajax({
                 url: "indexmodal?id=" + event.currentTarget.attributes.alt.value,
@@ -76,54 +53,54 @@
                 }
             })
         })
-        
-        $('#List_index li').hover(action1, action2)
-        // $('#List_index li').on('hover',action1,action2)
-        $('#List_index li').click(function (event) {
-            if (event.currentTarget.attributes.val.value === '4') {
-                $('.indexelepic[val="9"]').stop().tooltip('hide')
-            }
-            $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').stop().tooltip('hide')
-            $('.elelist').hide()
 
+        $('#List_index li').hover(function (event) {
+            $('.indexelepic.hide[val=' + event.currentTarget.attributes.val.value + ']').show()
+            $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').velocity({ scale: 1.1 }, 100)
+            $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').stop().tooltip('show')
+        }, function (event) {
+            $('.indexelepic.hide[val=' + event.currentTarget.attributes.val.value + ']').hide()
+            $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').velocity({ scale: 1 }, 100)
+            $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').stop().tooltip('hide')
+        })
+        $('.elelist').hide()
+        $('#List_index li').click(function (event) {
+            $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').stop().tooltip('hide')
             array1 = ["系館", "運動", "餐廳", "設施", "住宿", "行政", "活動場地", "緊急醫療"]
             for (let i = 1; i <= 8; i++) {
                 if (event.currentTarget.attributes.val.value == i) {
-
                     if ($(this)[0] === temp) {
                         if ($('.main_list_detail').hasClass('clicked')) {
                             temp = $(this)[0]
                             console.log("1")
-
-                            if (event.currentTarget.attributes.val.value === '4') {
-                                $('#List_index li').hover(action1, action2)
-                                $('.indexelepic[val="9"]').hide()
-                            }
-
-                            $('.main_list_detail').stop().collapse('hide')
-                            $('.main_list_detail').removeClass('clicked')
+                            $('#List_index li').hover(function (event) {
+                                $('.indexelepic.hide[val=' + event.currentTarget.attributes.val.value + ']').show()
+                                $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').velocity({ scale: 1.1 }, 100)
+                                $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').stop().tooltip('show')
+                            }, function (event) {
+                                $('.indexelepic.hide[val=' + event.currentTarget.attributes.val.value + ']').hide()
+                                $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').velocity({ scale: 1 }, 100)
+                                $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').stop().tooltip('hide')
+                            })
                             $('#map').css("filter", "none")
                             $('.indexelepic').css("filter", "none")
+                            $('.indexelepic.hide[val=' + event.currentTarget.attributes.val.value + ']').hide()
+                            $('.main_list_detail').stop().collapse('hide')
+                            $('.main_list_detail').removeClass('clicked')
 
 
 
                         } else {
                             console.log("2")
-
                             temp = $(this)[0]
                             $('#listtitle').text(array1[i - 1])
                             $('.indexelepic').css("filter", "brightness(55%)")
-                            if (event.currentTarget.attributes.val.value === '4') {
-                                $('#List_index li').unbind('mouseenter mouseleave')
-                                $('.indexelepic[val="9"]').show()
-                                $('.indexelepic[val="9"]').css("filter", "none")
-                            }
+                            $('#map').css("filter", "brightness(55%)")
+                            $('#List_index li').unbind('mouseenter mouseleave')
+                            $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').css("filter", "none")
                             $('.main_list_detail li[val=' + i + ']').show()
                             $('.main_list_detail').stop().collapse('show')
                             $('.main_list_detail').addClass('clicked')
-                            $('#map').css("filter", "brightness(55%)")
-
-                            $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').css("filter", "none")
                         }
 
 
@@ -152,12 +129,9 @@
                         if ($('.main_list_detail').hasClass('clicked')) {
                             console.log("3")
                             $('.indexelepic').css("filter", "brightness(55%)")
-                            if (event.currentTarget.attributes.val.value === '4') {
-                                $('.indexelepic[val="9"]').show()
-                                $('.indexelepic[val="9"]').css("filter", "none")
-                            }
+                            $('.indexelepic.hide[val='+ event.currentTarget.attributes.val.value +']').show()
+                            $('.indexelepic[val='+ event.currentTarget.attributes.val.value +']').css("filter", "none")
                             $('.main_list_detail').stop().collapse('hide')
-
                             $('.main_list_detail').on('hidden.bs.collapse', function () {
                                 $('.main_list_detail li[val=' + i + ']').show()
                                 $('#listtitle').text(array1[i - 1])
@@ -165,27 +139,17 @@
                                 $('.main_list_detail').off('hidden.bs.collapse');
                             })
                             $('.main_list_detail').addClass('clicked')
-
-                            $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').css("filter", "none")
                         } else {
                             console.log("4")
                             $('#listtitle').text(array1[i - 1])
                             $('.indexelepic').css("filter", "brightness(55%)")
-                            if (event.currentTarget.attributes.val.value === '4') {
-                                $('#List_index li').unbind('mouseenter mouseleave')
-                                $('.indexelepic[val="9"]').show()
-                                $('.indexelepic[val="9"]').css("filter", "none")
-                            }
+                            $('#map').css("filter", "brightness(55%)")
+                            $('#List_index li').unbind('mouseenter mouseleave')
+                            $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').css("filter", "none")
                             $('.main_list_detail li[val=' + i + ']').show()
+                            
                             $('.main_list_detail').stop().collapse('show')
                             $('.main_list_detail').addClass('clicked')
-                            $('#map').css("filter", "brightness(55%)")
-
-                            $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').css("filter", "none")
-
-
-
-
                         }
 
                     }
@@ -195,9 +159,11 @@
             $('.mapmove').stop().velocity(properties, 400)
             console.log(temp);
         })
+
         $('#closemainlist').click(function () {
             $('#map').css("filter", "none")
             $('.indexelepic').css("filter", "none")
+            $('.indexelepic.hide').hide()
             $('.main_list_detail').stop().collapse('hide')
             $('.main_list_detail').removeClass('clicked')
             $('.mapmove').removeClass('clicked')
@@ -207,24 +173,21 @@
             };
             $('.mapmove').stop().velocity(properties, 400)
         })
-        $('.elelist[val="4"]').hover(function () {
+
+
+
+
+
+
+        $('.main_list_detail li').hover(function () {
             $('.indexelepic[pictitle="' + $(this).text().trim() + '"]').velocity({ scale: 1.1 }, 100)
             $('.indexelepic[pictitle="' + $(this).text().trim() + '"]').tooltip('show')
         }, function () {
             $('.indexelepic[pictitle="' + $(this).text().trim() + '"]').velocity({ scale: 1 }, 100)
             $('.indexelepic[pictitle="' + $(this).text().trim() + '"]').tooltip('hide')
         })
-        $('.elelist').hover(function (event) {
-            $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').velocity({ scale: 1.1 }, 100)
-            $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').tooltip('show')
-        }, function () {
-            $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').velocity({ scale: 1 }, 100)
-            $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').tooltip('hide')
-        })
         $('.elelist').click(function (event) {
             $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').tooltip('hide')
-            if (event.currentTarget.attributes.val.value !== "4") {
-
                 $.ajax({
                     url: "indexmodal?id=" + event.currentTarget.attributes.idconnect.value,
                     method: "GET",
@@ -249,91 +212,7 @@
 
                     }
                 })
-            }
         })
-        // $('.searchresult').hide()
-
-
-        // $('#searchbar').focus(function (event) {
-        //     $('#searchbar').keyup(function (event) {
-        //         var userwant = $(this).val()
-        //         if ((event.keyCode == 8) || (event.keyCode == 46)) {
-        //             if (userwant != "") {
-        //                 $.ajax({
-        //                     url: "searchnow",
-        //                     method: "POST",
-        //                     data: { searchwhat: userwant },
-        //                     error: function (err) {
-
-        //                     },
-        //                     success: function (data) {
-                                
-        //                     }
-        //                 })
-        //             } else {
-        //                 $('.searchresult').hide()
-        //                 $('.titleresult li').remove()
-        //                 $('.contentresult li').remove()
-        //             }
-        //         } else {
-        //             console.log(event.keyCode)
-        //             if ($(this).val() !== "") {
-        //                 $('.searchresult').show()
-        //                 var userwant = $(this).val()
-
-        //                 $.ajax({
-        //                     url: "searchnow",
-        //                     method: "POST",
-        //                     data: { searchwhat: userwant },
-        //                     error: function (err) {
-
-        //                     },
-        //                     success: function (data) {
-
-        //                         for (let i = 0; i < data[0].length; i++) {
-        //                             $('.titleresult').append("<li class='searchresult' idconnect='" + data[0][i]._id + "'>" + data[0][i].Element_Name + "</li>")
-
-        //                         }
-
-        //                         $('.searchresult').click(function (event) {
-                                    
-        //                             $('.searchresult').hide()
-
-
-        //                             $.ajax({
-        //                                 url: "indexmodal?id=" + event.currentTarget.attributes.idconnect.value,
-        //                                 method: "GET",
-        //                                 error: function (err) {
-
-        //                                 },
-        //                                 success: function (data) {
-        //                                     $('#indexmodal .modal-title').text(data.Element_Name)
-        //                                     $('#indexmodalp .p').html(data.Element_Intro)
-        //                                     for (let i = 0; i < data.Intropic.length; i++) {
-        //                                         $('.carousel-indicators').append("<li data-target='#carouselExampleIndicators' data-slide-to='" + i + "'></li>")
-        //                                         $('#carouselExampleIndicators .carousel-inner').append("<div class='carousel-item'><img class='d-block w-100' src='/campus/" + data.Intropic[i] + "'></div>")
-        //                                     }
-        //                                     $('.carousel-indicators li').first().addClass('active')
-        //                                     $('#carouselExampleIndicators .carousel-inner div').first().addClass('active')
-        //                                     $('#indexmodal').on('hide.bs.modal', function (e) {
-        //                                         $('.carousel-indicators li').remove()
-        //                                         $('#carouselExampleIndicators .carousel-inner .carousel-item').remove()
-        //                                         $('#indexmodal').off('hide.bs.modal')
-        //                                     })
-        //                                     $('#indexmodal').modal('show')
-
-        //                                 }
-        //                             })
-        //                         })
-        //                     }
-        //                 })
-        //             }
-        //         }
-        //     })
-
-        // })
-
-
 
     })
     $('.indexelepic').tooltip();

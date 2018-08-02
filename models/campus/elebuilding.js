@@ -8,7 +8,10 @@ var elebuilding = mongoose.Schema({
     Intropic : [String],
     X_position : Number,
     Y_position : Number,
-    Size : Number
+    Size : Number,
+    Showdefault : Number,
+    Multi : Number,
+    Modalneed : Number
 });
 
 module.exports = mongoose.model('elebuilding',elebuilding);

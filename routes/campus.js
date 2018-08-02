@@ -7,7 +7,7 @@ var fs = require("fs");
 var checkuser = require("./check-user");
 /* 校園導覽首頁 */
 router.get("/", function(req, res, next) {
-  elebuilding.find({},{_id: 1, Element_Name:1,Type:1,Buildpic:1,X_position:1,Y_position:1,Size:1}).exec(function(err,result) {
+  elebuilding.find({},{_id: 1, Element_Name:1,Type:1,Buildpic:1,X_position:1,Y_position:1,Size:1,Multi:1,Modalneed:1,Showdefault:1}).exec(function(err,result) {
     if(err) {
       return next(err)
     }
@@ -46,7 +46,10 @@ router.post("/AddNew_element",checkuser.isAdmin, function(req, res, next) {
       Intropic: [],
       X_position:0,
       Y_position:0,
-      Size:8
+      Size:8,
+      Showdefault:req.body.radios1,
+      Multi:req.body.radios2,
+      Modalneed:req.body.radios3
     }).save(function(err) {
       if (err) {
         return next(err);
@@ -62,7 +65,10 @@ router.post("/editElement/:id",checkuser.isAdmin, function(req, res, next) {
     .findByIdAndUpdate(req.params.id, {
       Element_Name: req.body.elename,
       Type: req.body.elecategory,
-      Element_Intro: req.body.eleintro
+      Element_Intro: req.body.eleintro,
+      Showdefault:req.body.radios1,
+      Multi:req.body.radios2,
+      Modalneed:req.body.radios3
     })
     .exec(function(err) {
       if (err) {
@@ -210,24 +216,13 @@ router.get("/indexmodal",function(req,res,next) {
   })
 })
 router.get("/edittext",checkuser.isAdmin,function(req,res,next){
-  elebuilding.findById(req.query.id,{_id:1,Element_Name:1,Type:1,Element_Intro:1}).exec(function(err,result){
+  elebuilding.findById(req.query.id,{_id:1,Element_Name:1,Type:1,Element_Intro:1,Modalneed:1,Multi:1,Showdefault:1}).exec(function(err,result){
     if(err) {
       return next(err)
     }
     res.send(result)
   })
 })
-router.post("/searchnow", function(req, res, next) {
-  if(req.body.searchwhat) {
-    let job = Array();
-    job.push(elebuilding.find({Element_Name:{$regex:req.body.searchwhat}},{_id:1,Element_Name:1,Type:1}));
-    job.push(elebuilding.find({Element_Intro:{$regex:req.body.searchwhat}},{_id:1,Element_Intro:1,Type:1}));
-    Promise.all(job).then(function(result){
-      res.send(result);
-    }).catch(function(err){
-      return next(err);
-    })
-  }
-});
+
 
 module.exports = router;

@@ -30,19 +30,6 @@
             </div>
             <%_ } -%>
 
-                <!-- <input type="search" id="searchbar" name="searchct">
-                <div class="searchresult">
-                    <h5>標題</h5>
-                    <ul class="titleresult">
-
-                    </ul>
-                    <h5>內文</h5>
-                    <ul class="contentresult">
-                        
-                    </ul>
-                </div> -->
-
-
                 <div class="main_list_detail collapse">
                     <li id="listtitle">99</li>
                     <div id="closemainlist">
@@ -51,10 +38,13 @@
 
                     <ul>
                         <%for (let i in result) {-%>
-                            <li class="elelist" idconnect="<%=result[i]['_id']%>" val="<%=result[i]['Type']%>">
-                                <%=result[i]['Element_Name']%>
-                            </li>
-                            <%}-%>
+                            <%if(result[i]['Multi'] == 1){-%>
+
+                                <li class="elelist" idconnect="<%=result[i]['_id']%>" val="<%=result[i]['Type']%>">
+                                    <%=result[i]['Element_Name']%>
+                                </li>
+                            <%_}-%>
+                        <%_}-%>
                     </ul>
                 </div>
 
@@ -62,12 +52,28 @@
                     <div class="mapshadow">
                         <%for (let i in result) {-%>
                             <% if (result[i]['Buildpic'] != "") {-%>
-                                <img title="<%=result[i]['Element_Name']%>" pictitle="<%=result[i]['Element_Name']%>" val="<%=result[i]['Type']%>" class="indexelepic"
-                                    src="<%=result[i]['Buildpic']%>" alt="<%=result[i]['_id']%>" style="top: <%=result[i]['X_position']%>%;left: <%=result[i]['Y_position']%>%; width: <%=result[i]['Size']%>%;">
-                                <%}-%>
-                                    <%}-%>
+                                <%if (result[i]['Showdefault'] === 0){-%>
+                                    <%if(result[i]['Modalneed'] === 0 ){-%>
+                                        <img title="<%=result[i]['Element_Name']%>" pictitle="<%=result[i]['Element_Name']%>" val="<%=result[i]['Type']%>" class="indexelepic hide modalshow"
+                                            src="<%=result[i]['Buildpic']%>" alt="<%=result[i]['_id']%>" style="top: <%=result[i]['X_position']%>%;left:<%=result[i]['Y_position']%>%; width: <%=result[i]['Size']%>%;">
+                                    <%} else{%>
+                                        <img title="<%=result[i]['Element_Name']%>" pictitle="<%=result[i]['Element_Name']%>" val="<%=result[i]['Type']%>" class="indexelepic hide"
+                                                src="<%=result[i]['Buildpic']%>" alt="<%=result[i]['_id']%>" style="top: <%=result[i]['X_position']%>%;left: <%=result[i]['Y_position']%>%; width: <%=result[i]['Size']%>%;">
+                                    <%_}-%>
+                                <%} else{%>
+                                    <%if(result[i]['Modalneed'] === 1 ){-%>
+                                         <img title="<%=result[i]['Element_Name']%>" pictitle="<%=result[i]['Element_Name']%>" val="<%=result[i]['Type']%>" class="indexelepic modalshow"
+                                                src="<%=result[i]['Buildpic']%>" alt="<%=result[i]['_id']%>" style="top: <%=result[i]['X_position']%>%;left: <%=result[i]['Y_position']%>%; width: <%=result[i]['Size']%>%;">
+                                    <%} else{%>
+                                        <img title="<%=result[i]['Element_Name']%>" pictitle="<%=result[i]['Element_Name']%>" val="<%=result[i]['Type']%>" class="indexelepic"
+                                                src="<%=result[i]['Buildpic']%>" alt="<%=result[i]['_id']%>"
+                                                    style="top: <%=result[i]['X_position']%>%;left: <%=result[i]['Y_position']%>%; width:<%=result[i]['Size']%>%;">
+                                    <%_}-%>
+                                <%_}-%>
+                            <%_}-%>
+                        <%_}-%>
 
-                                        <img id="map" src="back2.png">
+                        <img id="map" src="back2.png">
                     </div>
 
                 </div>
