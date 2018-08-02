@@ -28,11 +28,11 @@
             background-position: 40% center;
         }
         body {
-            background: url("index/ncu首頁.png") no-repeat center center fixed; 
+            background: url("index/ncu首頁.png") no-repeat 80% 25% fixed; 
 			-webkit-background-size: cover;
 			-moz-background-size: cover;
 			-o-background-size: cover;
-			background-size: cover;
+            background-size: cover;
         }
         #c1 {
             background-image: url("index/IMG-0.png");
@@ -225,85 +225,28 @@
                 </div>
                 <div id="news-box" class="mx-auto">
                     <div>
-                        <div class="d-inline-block w-50 select-bar"><h2 class="text-center bg-warning">即時資訊</h2></div><div class="d-inline-block w-50 select-bar"><h2 class="text-center bg-info">熱門Q&A</h2></div>
+                        <div class="d-inline-block w-50 select-bar"><h2 class="text-center bg-warning" onclick="document.getElementById('one').style.removeProperty( 'display' ); document.getElementById('two').style.display = 'none';">即時資訊</h2></div><div class="d-inline-block w-50 select-bar"><h2 class="text-center bg-info" onclick="document.getElementById('one').style.display = 'none'; document.getElementById('two').style.removeProperty( 'display' );">熱門Q&A</h2></div>
                         <div id="box1">
-                            <table class="table">
+                            <table class="table" id="one">
                                 <tbody>
+                                    <%_ for(let i = 0;i<news.length;i++){ -%>
                                     <tr>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
+                                        <td><%= news[i].time %></td>
+                                        <td><%= news[i].title %></td>
+                                        <td>more</td>
                                     </tr>
+                                    <%_ } -%>
+                                </tbody>
+                            </table>
+                            <table class="table" id="two" style="display: none;">
+                                <tbody>
+                                    <%_ for(let i = 0;i<qna.length;i++){ -%>
                                     <tr>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
+                                        <td><%= qna[i].CreateDate %></td>
+                                        <td><%= qna[i].Title %></td>
+                                        <td><%= qna[i].Click %>人次點閱</td>
                                     </tr>
-                                    <tr>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
+                                    <%_ } -%>
                                 </tbody>
                             </table>
                         </div>
@@ -311,7 +254,7 @@
                 </div>
             </div>
             <div class="section">
-                我是時間軸ＱＱＱＱ
+                
             </div>
         </div>
 
