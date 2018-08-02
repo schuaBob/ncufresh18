@@ -32,7 +32,7 @@
 
             }
         }
-        $('.indexelepic[pictitle="排球場"]').css({ "z-index": "10" })
+        $('.indexelepic[pictitle="排球場"]').css({ "z-index": "2" })
         $('.indexelepic[val="9"]').hide()
         $('.modal-header span i').click(function () {
             $('#indexmodal').modal('hide')
@@ -76,6 +76,7 @@
                 }
             })
         })
+        
         $('#List_index li').hover(action1, action2)
         // $('#List_index li').on('hover',action1,action2)
         $('#List_index li').click(function (event) {
@@ -250,87 +251,87 @@
                 })
             }
         })
-        $('.searchresult').hide()
+        // $('.searchresult').hide()
 
 
-        $('#searchbar').focus(function (event) {
-            $('#searchbar').keyup(function (event) {
-                var userwant = $(this).val()
-                if ((event.keyCode == 8) || (event.keyCode == 46)) {
-                    if (userwant != "") {
-                        $.ajax({
-                            url: "searchnow",
-                            method: "POST",
-                            data: { searchwhat: userwant },
-                            error: function (err) {
+        // $('#searchbar').focus(function (event) {
+        //     $('#searchbar').keyup(function (event) {
+        //         var userwant = $(this).val()
+        //         if ((event.keyCode == 8) || (event.keyCode == 46)) {
+        //             if (userwant != "") {
+        //                 $.ajax({
+        //                     url: "searchnow",
+        //                     method: "POST",
+        //                     data: { searchwhat: userwant },
+        //                     error: function (err) {
 
-                            },
-                            success: function (data) {
+        //                     },
+        //                     success: function (data) {
                                 
-                            }
-                        })
-                    } else {
-                        $('.searchresult').hide()
-                        $('.titleresult li').remove()
-                        $('.contentresult li').remove()
-                    }
-                } else {
-                    console.log(event.keyCode)
-                    if ($(this).val() !== "") {
-                        $('.searchresult').show()
-                        var userwant = $(this).val()
+        //                     }
+        //                 })
+        //             } else {
+        //                 $('.searchresult').hide()
+        //                 $('.titleresult li').remove()
+        //                 $('.contentresult li').remove()
+        //             }
+        //         } else {
+        //             console.log(event.keyCode)
+        //             if ($(this).val() !== "") {
+        //                 $('.searchresult').show()
+        //                 var userwant = $(this).val()
 
-                        $.ajax({
-                            url: "searchnow",
-                            method: "POST",
-                            data: { searchwhat: userwant },
-                            error: function (err) {
+        //                 $.ajax({
+        //                     url: "searchnow",
+        //                     method: "POST",
+        //                     data: { searchwhat: userwant },
+        //                     error: function (err) {
 
-                            },
-                            success: function (data) {
+        //                     },
+        //                     success: function (data) {
 
-                                for (let i = 0; i < data[0].length; i++) {
-                                    $('.titleresult').append("<li class='searchresult' idconnect='" + data[0][i]._id + "'>" + data[0][i].Element_Name + "</li>")
+        //                         for (let i = 0; i < data[0].length; i++) {
+        //                             $('.titleresult').append("<li class='searchresult' idconnect='" + data[0][i]._id + "'>" + data[0][i].Element_Name + "</li>")
 
-                                }
+        //                         }
 
-                                $('.searchresult').click(function (event) {
+        //                         $('.searchresult').click(function (event) {
                                     
-                                    $('.searchresult').hide()
+        //                             $('.searchresult').hide()
 
 
-                                    $.ajax({
-                                        url: "indexmodal?id=" + event.currentTarget.attributes.idconnect.value,
-                                        method: "GET",
-                                        error: function (err) {
+        //                             $.ajax({
+        //                                 url: "indexmodal?id=" + event.currentTarget.attributes.idconnect.value,
+        //                                 method: "GET",
+        //                                 error: function (err) {
 
-                                        },
-                                        success: function (data) {
-                                            $('#indexmodal .modal-title').text(data.Element_Name)
-                                            $('#indexmodalp .p').html(data.Element_Intro)
-                                            for (let i = 0; i < data.Intropic.length; i++) {
-                                                $('.carousel-indicators').append("<li data-target='#carouselExampleIndicators' data-slide-to='" + i + "'></li>")
-                                                $('#carouselExampleIndicators .carousel-inner').append("<div class='carousel-item'><img class='d-block w-100' src='/campus/" + data.Intropic[i] + "'></div>")
-                                            }
-                                            $('.carousel-indicators li').first().addClass('active')
-                                            $('#carouselExampleIndicators .carousel-inner div').first().addClass('active')
-                                            $('#indexmodal').on('hide.bs.modal', function (e) {
-                                                $('.carousel-indicators li').remove()
-                                                $('#carouselExampleIndicators .carousel-inner .carousel-item').remove()
-                                                $('#indexmodal').off('hide.bs.modal')
-                                            })
-                                            $('#indexmodal').modal('show')
+        //                                 },
+        //                                 success: function (data) {
+        //                                     $('#indexmodal .modal-title').text(data.Element_Name)
+        //                                     $('#indexmodalp .p').html(data.Element_Intro)
+        //                                     for (let i = 0; i < data.Intropic.length; i++) {
+        //                                         $('.carousel-indicators').append("<li data-target='#carouselExampleIndicators' data-slide-to='" + i + "'></li>")
+        //                                         $('#carouselExampleIndicators .carousel-inner').append("<div class='carousel-item'><img class='d-block w-100' src='/campus/" + data.Intropic[i] + "'></div>")
+        //                                     }
+        //                                     $('.carousel-indicators li').first().addClass('active')
+        //                                     $('#carouselExampleIndicators .carousel-inner div').first().addClass('active')
+        //                                     $('#indexmodal').on('hide.bs.modal', function (e) {
+        //                                         $('.carousel-indicators li').remove()
+        //                                         $('#carouselExampleIndicators .carousel-inner .carousel-item').remove()
+        //                                         $('#indexmodal').off('hide.bs.modal')
+        //                                     })
+        //                                     $('#indexmodal').modal('show')
 
-                                        }
-                                    })
-                                })
-                            }
-                        })
-                    }
-                }
-            })
+        //                                 }
+        //                             })
+        //                         })
+        //                     }
+        //                 })
+        //             }
+        //         }
+        //     })
 
-        })
+        // })
 
 
 
