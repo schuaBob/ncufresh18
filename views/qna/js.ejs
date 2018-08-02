@@ -19,9 +19,9 @@ $(document).ready(() => {
     if (w < 600) {
         //分類按鈕動畫
         $("li a[href='#all']").css({"color":"#29ABE2","font-weight":"bold"});
-        $("li a[href='/qna/time']").css({"color":"#29ABE2","font-weight":"bold"});
-        //排序按鈕動畫
         $(".Time").css({"color":"#29ABE2","font-weight":"bold"});
+        //排序按鈕動畫
+        $(".Time").css({"font-color":"#29ABE2","font-weight":"bold"});
         $(".Hot").css({"color":"black","font-weight":"normal"});
     }
     else{
@@ -168,12 +168,16 @@ $(document).ready(() => {
         });
     });
     //排序按鈕動畫
-    $('.clbtn').on('mouseover', function(){
-        $(this).css({'color':'#0056b3'});
-    });
-    $('.clbtn').on('mouseout', function(){
-        $(this).css({'color':'#FFFFFF'});
-    });
+    if(w>600){
+
+        $('.clbtn').on('mouseover', function(){
+            $(this).css({'color':'#0056b3'});
+        });
+        $('.clbtn').on('mouseout', function(){
+                $(this).css({'color':'#FFFFFF'});
+    
+        });
+    }
     $(".Time").on('click',function(){
         if (w < 600) {
             //手機版排序按鈕動畫
@@ -213,10 +217,10 @@ $(document).ready(() => {
     if(w>600){
         //滑鼠移動到我要發問按鈕上面會換圖案
         $('.askbutton').on('mouseover', function(){
-            $(this).css({'background':'url(發問按鈕2.png)','background-size':'cover'});
+            $(this).css({'background':'url(發問按鈕2.png) no-repeat','background-size':'contain'});
         });
         $('.askbutton').on('mouseout', function(){
-            $(this).css({'background':'url(發問按鈕1.png)','background-size':'cover'});
+            $(this).css({'background':'url(發問按鈕1.png) no-repeat','background-size':'contain'});
         });
     }
     //紀錄問題點擊次數

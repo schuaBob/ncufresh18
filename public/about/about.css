@@ -41,26 +41,26 @@
     }
     /* 右上角的框框 */
     .aboutUs.screen{
-        background-image: url(關於我們吊掛螢幕加logo_去被正式.png) ;
-        background-size: contain;
+        /* background-image: url(關於我們吊掛螢幕加logo_去被正式.png);
+        background-size: 70%; */
         right:0;
         width:40vw;
-        height: 27vh;
-        top:20px;
-        position: absolute;
+        /* height: 33vh; */
+        top:50px;
+        /* position: absolute; */
     }
-    /* .screen2{
+    .screen2{
         width:100%;
         right:0;
-        position: absolute;
-    } */
+        /* position: absolute; */
+    }
     /* 各組名稱 */
     .name{
         position: absolute;
-        top:16.5vh;
-        right:7.5vw;
-        width:14vw;
-        height:6vh;
+        top:60%;
+        right:17%;
+        width:25%;
+        height:25%;
         z-index: 5000;
     }
     .name2{
@@ -70,61 +70,72 @@
     .logo{
         
         position: absolute;
-        top:9vh;
+        z-index: 5000;
+        /* top:9vh;
         right:36.5vw;
         width:6vw;
-        height:17vh;
-        z-index: 5000;
+        height:17vh; */
+        bottom: 13%;
+        left:15.5%;
+        width:13%;
+        height:45%;
     }
     .marktingLogo{
-        background: url(企劃組icon_去被.png);
-        background-size:6vw 17vh;
+        background: url(企劃組icon_去被.png) no-repeat;
+        /* background-size:6vw 17vh; */
+        background-size:contain;
         z-index: 5000;
     }
     .programmingLogo{
-        background: url(程設組icon_去被.png);
-        background-size:6vw 17vh;
+        background: url(程設組icon_去被.png) no-repeat;
+        /* background-size:6vw 17vh; */
+        background-size:contain;
         z-index: 5000;
     }
     .artLogo{
-        background: url(美宣組icon.png);
-        background-size:6vw 17vh;
+        background: url(美宣組icon.png) no-repeat;
+        /* background-size:6vw 17vh; */
+        background-size:contain;
         z-index: 5000;
     }
     .videoLogo{
-        background: url(影音組icon.png);
+        background: url(影音組icon.png) no-repeat;
         /* background-size:17vh; */
-        background-size:6vw 17vh;
+        background-size:contain;
         z-index: 5000;
     }
     .ceoLogo{
-        background: url(執行組icon去被.png);
-        background-size:6vw 17vh;
+        background: url(執行組icon去被.png) no-repeat;
+        background-size:contain;
         z-index: 5000;
     }
     .marktingName{
-        background: url(行銷企劃組.png);
-        background-size: 14vw 6vh;
+        background: url(行銷企劃組.png) no-repeat;
+        background-size: contain;
         z-index: 5000;
     }
     .programmingName{
-        background: url(程式設計組.png);
-        background-size: 14vw 6vh;
+        background: url(程式設計組.png) no-repeat;
+        /* background-size: 11vw 5vh; */
+        background-size: contain;
         z-index: 5000;
     }
     .artName{
-        background: url(網頁美工組.png);
-        background-size: 14vw 6vh;
+        background: url(網頁美工組.png) no-repeat;
+        /* background-size: 11vw 5vh; */
+        background-size: contain;
         z-index: 5000;
     }
     .videoName{
-        background: url(媒體影音組.png);
-        background-size: 14vw 6vh;
+        background: url(媒體影音組.png) no-repeat;
+        /* background-size: 11vw 5vh; */
+        background-size: contain;
         z-index: 5000;
     }
     .ceoName{
-        background: url(執行組2.png);
-        background-size: 14vw 6vh;
+        background: url(執行組2.png) no-repeat;
+        /* background-size: 11vw 5vh; */
+        background-size: contain;
         z-index: 5000;
     }
     /* 標題 */

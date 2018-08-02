@@ -109,9 +109,9 @@
                         </span>
                     </div>    
                     <%/*展開排序與分類的按鈕*/%>
-                    <a class="dropdown-toggle classificationBtn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                 </div>
             </form>
+         <a class="dropdown-toggle classificationBtn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
         <div id="select111">
            
 
@@ -139,7 +139,7 @@
                         <th class="notebook"></th>
                         <%if(user && user.role==="admin"){%>
                             <th class="type">分類</th>
-                            <th class="title">標題</th>
+                            <th class="thTitle">標題</th>
                             <th class="TIME">時間</th>
                             <th class="HOT">人氣</th>
                             <%}
@@ -149,6 +149,11 @@
                             <th style="width: 60vw">標題</th>
                             <th style="width: 15vw">時間</th>
                             <th style="width: 10vw">人氣</th>
+
+                            <!-- <th style="width: 15%">分類</th>
+                            <th style="width: 52%">標題</th>
+                            <th style="width: 15%">時間</th>
+                            <th style="width: 10%">人氣</th> -->
                             <%}
                         %>
                         
@@ -167,7 +172,7 @@
                         <tr id="<%= rule[j].id %>" class="<%= rule[j].id %> R">
                             <td class="notebook"></td>
                             <%if(user && user.role==="admin"){%>
-                                <td class="type" style="width:20%"><%= rule[j].Type %></td>
+                                <td class="type"><%= rule[j].Type %></td>
                                 <td class="titleR title" id="<%= rule[j].id %>" style="width:30%">
                                     <div class="article title2"><%= rule[j].Title %></div>
                                 </td>
@@ -175,8 +180,8 @@
                                 <td class="view HOT" style="text-align: center;width:10%"><%= rule[j].Click %></td>
                                 <%}
                                 else{%>
-                                    <td class="type" style="width:15%"><%= rule[j].Type %></td>
-                                    <td class="titleR title" id="<%= rule[j].id %>" style="width:60%">
+                                    <td class="type"><%= rule[j].Type %></td>
+                                    <td class="titleR title" id="<%= rule[j].id %>">
                                         <div class="article"><%= rule[j].Title %></div>
                                     </td>
                                     <td class="time topT" style="width:15%"><%= Time(rule[j].CreateDate) %></td>
@@ -238,14 +243,14 @@
                         <tr id="<%= question[i].id %>" class="<%= question[i].id %> <%= question[i].Type %> Q">
                             <td class="notebook"></td>
                             <%if(user && user.role==="admin"){%>
-                                <td class="type" style="width:20%;"><%= question[i].Type %></td>
+                                <td class="type"><%= question[i].Type %></td>
                                 <td class="titleQ title" style="width:30%" id="<%= question[i].id %>">
                                     <div class="article title2"><%= question[i].Title %></div>
                                 </td>
                                 <%}
                                 else{%>
-                                    <td style="width:15vw;" class="type"><%= question[i].Type %></td>
-                                    <td class="titleQ title" style="width:60vw;" id="<%= question[i].id %>">
+                                    <td style="width:15%;" class="type"><%= question[i].Type %></td>
+                                    <td class="titleQ title"  id="<%= question[i].id %>">
                                         <div class="article title2"><%= question[i].Title %></div>
                                         <!-- <p class="article title2"><%= question[i].Title %></p> -->
                                     </td>
@@ -253,13 +258,13 @@
                             %>
 
                             <% if(question[i].CreateDate){%>
-                                    <td class="time TIME" style="width:10%;"><%= Time(question[i].CreateDate) %></td>
+                                    <td class="time TIME"><%= Time(question[i].CreateDate) %></td>
                                 <%}
                                 else{%>
                                     <td style="width:10%;">未解答</td>
                                 <%}
                                 %>
-                                <td class="view hot HOT" style="text-align: center;width:10%"><%= question[i].Click %></td>
+                                <td class="view hot HOT"><%= question[i].Click %></td>
                             
                             <%# /管理員頁面才有的 %>
                             <%if(user && user.role==="admin"){%>
