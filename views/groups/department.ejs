@@ -231,7 +231,7 @@
                           </div>
                         </div>
                         <!-- 區分系.所的modal內容 -->
-                        <% if(department[i].name[department[i].name.length-1] === "系"){ %>
+                        <% if(department[i].name[department[i].name.length-1] === "系" || department[i].name[department[i].name.length-1] === "班"){ %>
                           <div id="organization_<%= department[i].name %>" class="tab-pane fade in">
                             <h5>系學會</h5>
                             <h6 class="org"></h6>
