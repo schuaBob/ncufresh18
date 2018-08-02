@@ -11,6 +11,7 @@ var mongoose = require('mongoose');
 var Users = require('../models/index/user');
 var news = require('../models/index/news');
 var schedule = require('../models/index/schedule');
+var qna = require('../models/qna/qna');
 
 var checkUser = require('./check-user');
 
@@ -63,7 +64,15 @@ router.get('*',function(req,res,next){
 });
 /* home page */
 router.get('/', function (req, res, next) {
-  res.render('index/index', { title: '首頁', user: req.user });
+  Promise.all([
+    news.find().exec(),
+    qna.find({DeleteDate: {$exists: false}, Answer : {$nin:[""]}, Reason : ""}).sort({Click : 'desc'}).limit(10).exec(),
+    schedule.find().exec()
+  ]).then((result) => {
+    res.render('index/index', { title: '首頁', user: req.user, news : result[0], qna : result[1], schedule : result[2] });
+  }).catch((err) => {
+    return next(err);
+  })
 });
 
 /* home page administer page */
