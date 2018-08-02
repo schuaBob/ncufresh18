@@ -60,11 +60,6 @@
     $('.showDetail').on('click', function(e){
         e.preventDefault();
         var info = this.id.split("_");
-        // if(info[0] == "桃園景點"){
-        //     $('.descArea').empty();
-        //     $('.pictureArea').empty();
-        //     $('.pictureArea').append("<img class='mapClass' src='map.png'>");
-        // }
         $(".show1").slideUp();
         $(".show1").addClass("hide1");
         $(".show1").removeClass("show1");
@@ -97,7 +92,17 @@
                 ramSlideNum = Math.floor((Math.random() * slideNum) + 1);
                 showSlides(ramSlideNum);
             }
+            var modal = document.getElementById('modal');
+            var bgImg = document.getElementById('bgImg');
+            $('.picture').click(function(){
+                modal.style.display = 'block';
+                bgImg.src = this.src;
+            });
+            bgImg.onclick = function() {
+                modal.style.display = 'none';
+            }
         }
+        
         var putCont = function(data){
             $(".descArea").empty();
             $(".descArea").append("<div class='describeArea'> <div class='contentArea'></div></div>")
@@ -145,12 +150,14 @@
         if (n > slides.length) {ramSlideNum = 1}
         if (n < 1) {ramSlideNum = slides.length}
         for (var i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
+            slides[i].style.display = "none"
+            slides[i].children[0].style.zIndex = "0";
         }
         for (var i = 0; i < dots.length; i++) {
             dots[i].className = dots[i].className.replace(" active", "");
         }
         slides[ramSlideNum-1].style.display = "block";
+        slides[ramSlideNum-1].children[0].style.zIndex = "4000";
         if(dots.length != 0) dots[ramSlideNum-1].className += " active";
     }
 
