@@ -263,6 +263,8 @@ li{
 .classification{
     font-family: YouYuan;
     margin: 15px;
+    /* display : flex;
+    vertical-align : center; */
 }
 /* 排序與分類的按鈕 */
 .classificationBtn{
