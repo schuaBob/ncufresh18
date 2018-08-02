@@ -81,7 +81,7 @@ router.post('/setScore', checkLogin.isLoggedIn, function (req, res, next) {
                 if(err) {
                   return next(err);
                 }
-                console.log('新建用戶：' + result);
+                // console.log('新建用戶：' + result);
               });
             }   
           })
@@ -114,7 +114,7 @@ router.post('/setScore', checkLogin.isLoggedIn, function (req, res, next) {
           });
           
           // 如果用戶已經在 UserScore 中則直接更新
-          console.log("用戶已存在 UserScore")
+          // console.log("用戶已存在 UserScore")
           UserScore.findOne({ id: player.id}, function(err, result) {
             if (err) {
               return next(err);
@@ -133,7 +133,7 @@ router.post('/setScore', checkLogin.isLoggedIn, function (req, res, next) {
               });
             } else {
               // 如果分數大於 highScore 則替換 UserScore 中的最後一名
-              console.log("用戶不在 UserScore")
+              // console.log("用戶不在 UserScore")
               if (player.score_high > highScore.score_high) {
                 UserScore.update({ id: highScore.id_high}, { $set: {
                   score_sum: player.score_sum,      
@@ -188,7 +188,5 @@ router.get('/getScore', checkLogin.isLoggedIn, function(req, res, next){
     }) 
   }
 });
-
-
 
 module.exports = router;

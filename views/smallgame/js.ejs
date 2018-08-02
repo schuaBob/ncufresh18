@@ -872,32 +872,29 @@ var states = {
                     bubbleLength = data.length
                 }
                 // 右邊動畫
-                for(i = 3; i < bubbleLength; i++) {
-                    // 立即函數，立刻執行
-                    (function(i) {
-                        setTimeout(function () {
-                            var rankLine = game.add.group()
-                            var hhh = alignLine.create(415, alignLineY, 'rankBubble');
-                            var scoreText = game.add.text(0, 0, '分數: ', style).alignTo(rankSum, Phaser.BOTTOM_RIGHT, -80, alignLineY - 85);
-                            if (type === 'sum') {
-                                var scoreShow = game.add.text(0, 0, data[i].score_sum, styleNum).alignTo(scoreText, Phaser.RIGHT_CENTER);
-                            } else {
-                                var scoreShow = game.add.text(0, 0, data[i].score_high, styleNum).alignTo(scoreText, Phaser.RIGHT_CENTER);
-                            }
-                            var nth = game.add.text(0, 0, i + 1 + 'th', styleNum).alignTo(scoreText, Phaser.LEFT_CENTER, 135);
-                            var textName = game.add.text(0, 0, data[i].name, style).alignTo(nth, Phaser.RIGHT_CENTER, 10);
-                            
-                            rankLine.add(scoreText);
-                            rankLine.add(scoreShow);
-                            rankLine.add(nth);
-                            rankLine.add(textName);
-                            rankLine.setAll('alpha', 1);
-                            
-                            game.add.tween(hhh).from({alpha: 0}, 1500, Phaser.Easing.Exponential.In, true);
-                            game.add.tween(rankLine).from({alpha: 0}, 1500, Phaser.Easing.Exponential.In, true);    
-                            alignLineY += 68.5;
-                        },  i * 200) 
-                    })(i)
+                for(let i = 3; i < bubbleLength; i++) {
+                    setTimeout(function () {
+                        var rankLine = game.add.group()
+                        var hhh = alignLine.create(415, alignLineY, 'rankBubble');
+                        var scoreText = game.add.text(0, 0, '分數: ', style).alignTo(rankSum, Phaser.BOTTOM_RIGHT, -80, alignLineY - 85);
+                        if (type === 'sum') {
+                            var scoreShow = game.add.text(0, 0, data[i].score_sum, styleNum).alignTo(scoreText, Phaser.RIGHT_CENTER);
+                        } else {
+                            var scoreShow = game.add.text(0, 0, data[i].score_high, styleNum).alignTo(scoreText, Phaser.RIGHT_CENTER);
+                        }
+                        var nth = game.add.text(0, 0, i + 1 + 'th', styleNum).alignTo(scoreText, Phaser.LEFT_CENTER, 135);
+                        var textName = game.add.text(0, 0, data[i].name, style).alignTo(nth, Phaser.RIGHT_CENTER, 10);
+                        
+                        rankLine.add(scoreText);
+                        rankLine.add(scoreShow);
+                        rankLine.add(nth);
+                        rankLine.add(textName);
+                        rankLine.setAll('alpha', 1);
+                        
+                        game.add.tween(hhh).from({alpha: 0}, 1500, Phaser.Easing.Exponential.In, true);
+                        game.add.tween(rankLine).from({alpha: 0}, 1500, Phaser.Easing.Exponential.In, true);    
+                        alignLineY += 68.5;
+                    },  i * 200)
                 }
             }
             
