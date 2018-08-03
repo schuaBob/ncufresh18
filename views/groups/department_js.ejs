@@ -104,7 +104,7 @@
         $(window).resize(function(){
             if($(window).width()<=768){
                 <% for(var i in department){ %>
-                    $("#nav_ul").removeClass("flex-column"); 
+                    $("#nav_ul-<%= department[i]._id %>").removeClass("flex-column"); 
                 <% } %>
                 $("#cellup").show();
                 $("#combut").hide();
@@ -115,7 +115,7 @@
             }
             else if($(window).width()>768){
                 <% for(var i in department){ %>
-                    $("#nav_ul").addClass("flex-column"); 
+                    $("#nav_ul-<%= department[i]._id %>").addClass("flex-column"); 
                 <% } %>
                 $("#cellup").hide();
                 $(".sidedown").hide();
@@ -127,7 +127,7 @@
 
         if($(window).width()<=768){
             <% for(var i in department){ %>
-                $("#nav_ul").removeClass("flex-column"); 
+                $("#nav_ul-<%= department[i]._id %>").removeClass("flex-column"); 
             <% } %>
             $("#cellup").show();
             $("#combut").hide();
@@ -137,7 +137,7 @@
         }
         else if($(window).width()>768){
             <% for(var i in department){ %>
-                $("#nav_ul").addClass("flex-column"); 
+                $("#nav_ul-<%= department[i]._id %>").addClass("flex-column"); 
             <% } %>
             $("#cellup").hide();
             $("#combut").show();
