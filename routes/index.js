@@ -11,7 +11,8 @@ var mongoose = require('mongoose');
 var Users = require('../models/index/user');
 var news = require('../models/index/news');
 var schedule = require('../models/index/schedule');
-var qna = require('../models/qna/qna');
+require('../models/qna/qna');
+var qna = mongoose.model('Question');
 
 var checkUser = require('./check-user');
 
@@ -400,7 +401,7 @@ router.post('/register', function (req, res,next) {
 
 /* comingsoon 記得上線後註解*/
 router.get('/comingsoon', function (req, res, next) {
-  res.render('comingsoon/index', { title: '倒數' });
+  res.render('comingsoon/index', { title: '倒數' , user: req.user});
 });
 
 module.exports = router;

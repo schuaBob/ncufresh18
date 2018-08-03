@@ -180,20 +180,20 @@
         #news-box {
             min-height: 100px;
             height: 80vh;
-            width: 80vw;
+            width: 70vw;
         }
         #select-bar {
             height: 48px;
         }
         #box1 {
             overflow-y: scroll;
-            height: calc(80vh - 48px);
-            border-radius: 2%;
-            background-color: rgba(255,255,255,0.7);
+            height: calc(80vh - 48px - 3rem);
+            border-radius: 0 0 2% 2%;
+            background-color: rgba(255,255,255,0.9);
         }
-        #qna-halo:hover, #news-halo:hover {
-            
-        }
+        /* #qna-halo:hover, #news-halo:hover {
+
+        } */
     </style>
 </head>
 <body>
@@ -223,17 +223,17 @@
                     <h1 class="text-center">最新消息</h1>
                     <h6 class="text-center">隨時掌握最新動態</h6>
                 </div>
-                <div id="news-box" class="mx-auto">
+                <div id="news-box" class="mx-auto mt-5">
                     <div>
                         <div class="d-inline-block w-100 select-bar">
                             <ul class="nav nav-pills nav-fill">
                                 <li class="nav-item ">
-                                    <a class="nav-item nav-link active p-0" id="news-halo">
+                                    <a class="nav-item nav-link active" id="news-halo">
                                         <h2 class="text-center nav-item" onclick="news_page();">即時資訊</h2>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-item nav-link p-0" id="qna-halo">
+                                    <a class="nav-item nav-link" id="qna-halo">
                                         <h2 class="text-center" onclick="qna_page();">熱門Q&A</h2>
                                     </a>
                                 </li>
@@ -244,7 +244,7 @@
                                 <tbody>
                                     <%_ for(let i = 0;i<news.length;i++){ -%>
                                     <tr>
-                                        <td><%= news[i].time %></td>
+                                        <td><%= news[i].time.toISOString().substring(0, 10) %></td>
                                         <td><%= news[i].title %></td>
                                         <td>more</td>
                                     </tr>
@@ -255,7 +255,7 @@
                                 <tbody>
                                     <%_ for(let i = 0;i<qna.length;i++){ -%>
                                     <tr>
-                                        <td><%= qna[i].CreateDate %></td>
+                                        <td><%= qna[i].CreateDate.toISOString().substring(0, 10) %></td>
                                         <td><%= qna[i].Title %></td>
                                         <td><%= qna[i].Click %>人次點閱</td>
                                     </tr>
