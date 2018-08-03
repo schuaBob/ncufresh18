@@ -50,28 +50,28 @@
 
                 <div class="mapmove">
                     <div class="mapshadow">
-                        <%for (let i in result) {-%>
-                            <% if (result[i]['Buildpic'] != "") {-%>
-                                <%if (result[i]['Showdefault'] === 0){-%>
-                                    <%if(result[i]['Modalneed'] === 0 ){-%>
+                        <% for (let i in result) { -%>
+                            <% if (result[i]['Buildpic'] != "") { -%>
+                                <% if (result[i]['Showdefault'] === 0) { -%>
+                                    <% if (result[i]['Modalneed'] === 0 ) { -%>
                                         <img title="<%=result[i]['Element_Name']%>" pictitle="<%=result[i]['Element_Name']%>" val="<%=result[i]['Type']%>" class="indexelepic hide modalshow"
                                             src="<%=result[i]['Buildpic']%>" alt="<%=result[i]['_id']%>" style="top: <%=result[i]['X_position']%>%;left:<%=result[i]['Y_position']%>%; width: <%=result[i]['Size']%>%;">
-                                    <%} else{%>
+                                    <% } else { %>
                                         <img title="<%=result[i]['Element_Name']%>" pictitle="<%=result[i]['Element_Name']%>" val="<%=result[i]['Type']%>" class="indexelepic hide"
                                                 src="<%=result[i]['Buildpic']%>" alt="<%=result[i]['_id']%>" style="top: <%=result[i]['X_position']%>%;left: <%=result[i]['Y_position']%>%; width: <%=result[i]['Size']%>%;">
-                                    <%_}-%>
-                                <%} else{%>
-                                    <%if(result[i]['Modalneed'] === 1 ){-%>
-                                         <img title="<%=result[i]['Element_Name']%>" pictitle="<%=result[i]['Element_Name']%>" val="<%=result[i]['Type']%>" class="indexelepic modalshow"
+                                    <%_ } -%>
+                                <% } else { %>
+                                    <% if (result[i]['Modalneed'] === 1 ) { -%>
+                                         <img title="<%=result[i]['Element_Name']%>" pictitle="<%=result[i]['Element_Name']%>" val="<%=result[i]['Type']%>" class="indexelepic "
                                                 src="<%=result[i]['Buildpic']%>" alt="<%=result[i]['_id']%>" style="top: <%=result[i]['X_position']%>%;left: <%=result[i]['Y_position']%>%; width: <%=result[i]['Size']%>%;">
-                                    <%} else{%>
-                                        <img title="<%=result[i]['Element_Name']%>" pictitle="<%=result[i]['Element_Name']%>" val="<%=result[i]['Type']%>" class="indexelepic"
+                                    <% } else { %>
+                                        <img title="<%=result[i]['Element_Name']%>" pictitle="<%=result[i]['Element_Name']%>" val="<%=result[i]['Type']%>" class="indexelepic modalshow"
                                                 src="<%=result[i]['Buildpic']%>" alt="<%=result[i]['_id']%>"
                                                     style="top: <%=result[i]['X_position']%>%;left: <%=result[i]['Y_position']%>%; width:<%=result[i]['Size']%>%;">
-                                    <%_}-%>
-                                <%_}-%>
-                            <%_}-%>
-                        <%_}-%>
+                                    <%_ } -%>
+                                <%_ } -%>
+                            <%_ } -%>
+                        <%_ } -%>
 
                         <img id="map" src="back2.png">
                     </div>
@@ -110,7 +110,7 @@
                             <div class="modal-header">
                                 <h5 class="modal-title"></h5>
                                 <span>
-                                    <i class="material-icons">highlight_off</i>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M14.59 8L12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41 14.59 8zM12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
                                 </span>
                             </div>
                             <div class="modal-body">
