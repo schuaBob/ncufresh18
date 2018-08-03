@@ -91,7 +91,7 @@
                 <div class="form-group">
                         <label class="col-md-4 control-label" for="elecategory">大項</label>
                         <div class="col-md-6">
-                            <select class="form-control input-md bigTitle" name="mainTitle">
+                            <select class="form-control input-md bigTitle" id="descBigTitle" name="mainTitle">
                                 <option value="default">請選擇</option>
                                 <% for(var i in life) { %>
                                     <% if(life[i].type == page) { %>
@@ -104,7 +104,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="elecategory">小項</label>
                     <div class="col-md-6">
-                        <select class="form-control input-md smallTitle" name="subTitle">
+                        <select class="form-control input-md smallTitle" id="descSmallTitle" name="subTitle">
                             <option value="default">請選擇</option>
                         </select>
                     </div>
@@ -115,6 +115,7 @@
                         <textarea class="form-control input-md" name="description" id="disc"></textarea>
                     </div>
                 </div>
+                <button type="button" class="btn btn-primary" id="refresh">Refresh</button>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">儲存/修改</button>
                 </div>
