@@ -165,7 +165,6 @@ ul li{
 .picture{
     position: absolute;
     top:0; bottom:0; left:0; right:0; margin:auto;
-    z-index: 4000;
     height: 100%;
 }
 .slideshow_container{

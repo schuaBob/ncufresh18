@@ -14,7 +14,6 @@ ul li{
         height: 100vh;
     }
     html, body{
-        overflow-y: hidden;
         overflow-x: hidden;
     }
 }
@@ -59,7 +58,7 @@ select {
 .dropdown_hide, .dropdown_show{
     position: relative;
     top: -50px;
-    left: 165px;
+    left: 185px;
     width: 150px;
     z-index: 100;
 }
@@ -73,12 +72,10 @@ select {
 .dropdown_show{
     opacity: 1;
 }
-.bar, .subar{
+.bar{
     position: relative;
     text-align: center;
-    background-color:  #D2D7D3;   
-}
-.bar{
+    background-color:  rgba(226, 231, 227, 0.5);
     width: 165px;
     height: 50px;
     -moz-border-radius: 20px;
@@ -86,10 +83,12 @@ select {
     border-radius: 20px;
 }
 .subar{
+    position: relative;
+    text-align: left;  
     height: 30px;
     width: 150px;
     font-size: 20px;
-    border: 1px solid  rgba(0, 0, 0, 0.235);
+    color: rgb(6, 113, 6);
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px;
@@ -110,11 +109,10 @@ hr{
 }
 .pictureArea{
     position: absolute;
-    top: 12vh;
+    top: 14vh;
     left: 2vw;
     width: 96vw;
-    height: 58vh;
-    border: solid 1px black;
+    height: 55vh;
     visibility: hidden;
     overflow: hidden;
 }
@@ -174,7 +172,7 @@ hr{
 }
 .backenArrow{
     position: absolute;
-    top: 10vh;
+    top: 9vh;
     height: 5vh;
     width: 13vw;
     visibility: hidden;
@@ -184,8 +182,7 @@ hr{
     position: absolute;
     bottom: 8vh;
     right: 2vw;
-    height: 40px;
-    width: 60px;
+    width: 50px;
     z-index: 5;
 }
 /*

@@ -92,6 +92,9 @@
                 ramSlideNum = Math.floor((Math.random() * slideNum) + 1);
                 showSlides(ramSlideNum);
             }
+            else{
+                $(".slideshow_container").append("<div class='mySlides'><img src='<%=page%>_icon.png'" + "class='picture'></div>");
+            }
             var modal = document.getElementById('modal');
             var bgImg = document.getElementById('bgImg');
             $('.picture').click(function(){
@@ -151,13 +154,11 @@
         if (n < 1) {ramSlideNum = slides.length}
         for (var i = 0; i < slides.length; i++) {
             slides[i].style.display = "none"
-            slides[i].children[0].style.zIndex = "0";
         }
         for (var i = 0; i < dots.length; i++) {
             dots[i].className = dots[i].className.replace(" active", "");
         }
         slides[ramSlideNum-1].style.display = "block";
-        slides[ramSlideNum-1].children[0].style.zIndex = "4000";
         if(dots.length != 0) dots[ramSlideNum-1].className += " active";
     }
 
@@ -231,6 +232,9 @@
             slideNum = data.length;
             ramSlideNum = Math.floor((Math.random() * slideNum) + 1);
             showSlides(ramSlideNum);
+        }
+        else{
+            $(".slideshow_container").append("<div class='mySlides'><img src='<%=page%>_icon.png'" + "class='picture'></div>");
         }
     }
 
