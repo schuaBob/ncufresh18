@@ -23,7 +23,7 @@ $(document).ready(() => {
 
     });
     $('.people2').on('click', function(e) {
-        $('.people2').css({'transform': 'translate(5vw)'});
+        $('.people2').css({'transform': 'translate(1000px)'});
     });
     $('.people1').on('click', function(e) {
             $('.alert').toggle(1000);
@@ -137,7 +137,7 @@ $(document).ready(() => {
     //fullpage
     $('#fullpage').fullpage({
 		//options here
-		autoScrolling:true,
+		autoScrolling:false,
 		scrollHorizontally: true
     });
     $.fn.fullpage.setAllowScrolling(false);
@@ -145,11 +145,6 @@ $(document).ready(() => {
         navigation: true,
         responsiveWidth: 700,
         anchors: ['all','markting', 'programming', 'art', 'video', 'ceo'],
-        parallax: true,
-        // scrollBar: w>600? false:true,
-        onLeave: function(origin, destination, direction){
-            console.log("Leaving section" + origin.index);
-        },
     });
     //按鈕動畫
     if(w<600){
