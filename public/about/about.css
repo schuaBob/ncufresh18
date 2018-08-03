@@ -7,18 +7,18 @@
     }
     /* 太空小人2位置 */
     .down.people2{
-        left:28vw;
         width:15%;
         height:25%;
         
-        bottom:30px;
+        right:5vw;
+        bottom:20px;
     }
     /* 太空小人1位置 */
     .down.people1{
-        right:10vw;
+        left:21vw;
+        bottom:30px;
         width:10%;
         height:25%;
-        bottom:20px;
     }
     /* 紙箱位置 */
     .down.paperbox{
@@ -44,9 +44,9 @@
         /* background-image: url(關於我們吊掛螢幕加logo_去被正式.png);
         background-size: 70%; */
         right:0;
-        width:40vw;
+        width:25vw;
         /* height: 33vh; */
-        top:50px;
+        top:30px;
         /* position: absolute; */
     }
     .screen2{
@@ -57,57 +57,14 @@
     /* 各組名稱 */
     .name{
         position: absolute;
-        top:60%;
-        right:17%;
-        width:25%;
+        top:61%;
+        right:26%;
+        width:50%;
         height:25%;
         z-index: 5000;
     }
     .name2{
         display: none;
-    }
-    /* 各組logo */
-    .logo{
-        
-        position: absolute;
-        z-index: 5000;
-        /* top:9vh;
-        right:36.5vw;
-        width:6vw;
-        height:17vh; */
-        bottom: 13%;
-        left:15.5%;
-        width:13%;
-        height:45%;
-    }
-    .marktingLogo{
-        background: url(企劃組icon_去被.png) no-repeat;
-        /* background-size:6vw 17vh; */
-        background-size:contain;
-        z-index: 5000;
-    }
-    .programmingLogo{
-        background: url(程設組icon_去被.png) no-repeat;
-        /* background-size:6vw 17vh; */
-        background-size:contain;
-        z-index: 5000;
-    }
-    .artLogo{
-        background: url(美宣組icon.png) no-repeat;
-        /* background-size:6vw 17vh; */
-        background-size:contain;
-        z-index: 5000;
-    }
-    .videoLogo{
-        background: url(影音組icon.png) no-repeat;
-        /* background-size:17vh; */
-        background-size:contain;
-        z-index: 5000;
-    }
-    .ceoLogo{
-        background: url(執行組icon去被.png) no-repeat;
-        background-size:contain;
-        z-index: 5000;
     }
     .marktingName{
         background: url(行銷企劃組.png) no-repeat;
@@ -141,7 +98,7 @@
     /* 標題 */
     .aboutUs.title1{
         position: absolute;
-        left: 25vw;
+        left: 23vw;
         top:50px;
         width:25%;  
     }
@@ -155,23 +112,24 @@
         position: absolute;
         top:35px;
         /* right:28vw; */
-        width:75%;
+        width:77%;
     }
     .picture.all2{
         display: none;
     }
     /* 介紹文字 */
     .alert{
-        left:80px;
+        left:90px;
         /* bottom:-50px; */
         width:35%;
-        bottom:4vw;
+        bottom:3vw;
         position: absolute;
+
     }
     #fullpage{
         background: url(晶片.png);
         background-size: cover;
-        left: 30vw;
+        left: 23vw;
     }
 }
 /* 只有手機板才有的 */
@@ -252,7 +210,7 @@
     position: absolute;
     right:0;
     top:0px;
-    width:76%;
+    width:82vw;
     height: 97vh;
     bottom:1vh;
 }

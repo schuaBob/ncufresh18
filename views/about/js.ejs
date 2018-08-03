@@ -22,6 +22,14 @@ $(document).ready(() => {
         }
 
     });
+    // $('.pad').on('click', function(e) {
+    //     console.log("測試");
+    // });
+    $('.people1').on('click', function(e) {
+            $('.alert').toggle(1000);
+            // $('.alert').slideToggle(1000);
+            e.preventDefault();
+    });
     //預設logo跟字樣
     // $(".logo").addClass("marktingLogo");
     // $(".name").addClass("marktingName");
