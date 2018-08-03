@@ -38,7 +38,12 @@ router.get('/', function(req, res, next) {
  
     }
     else{
-      Question.find({Answer:{$nin:[""]},DeleteDate: {$exists: false}}).sort({CreateDate:'desc'}).exec(function(err, question){
+      /**
+       * Answer不空白 =>審核通過
+       * Reason空白 =>沒被管理員刪除
+       * DeleteDate不存在 =>文章沒被使用者刪除
+       */
+      Question.find({Answer:{$nin:[""]},Reason:{$in:[""]},DeleteDate: {$exists: false}}).sort({CreateDate:'desc'}).exec(function(err, question){
         if(err){return next(err)};
         //轉換時間欄位
         var Time = function(date) {
