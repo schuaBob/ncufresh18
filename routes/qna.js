@@ -38,7 +38,7 @@ router.get('/', function(req, res, next) {
  
     }
     else{
-      Question.find({Answer:{$nin:[""]}}).sort({CreateDate:'desc'}).exec(function(err, question){
+      Question.find({Answer:{$nin:[""]}},{DeleteDate: {$exists: false}}).sort({CreateDate:'desc'}).exec(function(err, question){
         if(err){return next(err)};
         //轉換時間欄位
         var Time = function(date) {
@@ -269,7 +269,7 @@ router.post('/updateR/:id',checkUser.isAdmin,function(req,res,next){
 }
 });
 /*管理員給刪除理由*/
-router.post('/deleteQ/:id',checkUser.isAdmin,function(req,res,next){
+router.post('/deleteReason/:id',checkUser.isAdmin,function(req,res,next){
     /*確定傳進來的是不是有效ID*/
     if(mongoose.Types.ObjectId.isValid(req.params.id)){
       /*找是哪篇文章*/
@@ -277,8 +277,9 @@ router.post('/deleteQ/:id',checkUser.isAdmin,function(req,res,next){
           if(err){return next(err)};
               /*真的有這篇文章*/
               if(result!==null){
+                //有刪除理由才能送出
                 if(req.body.Reason){
-                  Question.update({_id:req.params.id}, {Reason:req.body.Reason},{DeleteDate:Date.now()},function(err){
+                  Question.update({_id:req.params.id}, {Reason:req.body.Reason},function(err){
                     if(err){
                       console.log('Fail to update reason.');
                     }
@@ -297,6 +298,37 @@ router.post('/deleteQ/:id',checkUser.isAdmin,function(req,res,next){
     else{
       return next(err);
     }
+});
+/*管理員刪除問題*/
+router.get('/deleteQ/:id',checkUser.isAdmin,function(req,res,next){
+  /*確定傳進來的是不是有效ID*/
+  if(mongoose.Types.ObjectId.isValid(req.params.id)){
+    /*找是哪篇文章*/
+      Question.findById(req.params.id).exec(function(err,result){
+        if(err){return next(err)};
+            /*真的有這篇文章*/
+            if(result!==null){
+              //有刪除理由才能送出
+              if(result.Reason!==""){
+                Question.update({_id:req.params.id}, {DeleteDate:Date.now()},function(err){
+                  if(err){
+                    console.log('Fail to update reason.');
+                  }
+                  else{
+                    console.log('Done');
+                  }
+                  res.redirect('/qna');
+                });
+              }    
+            }
+            else{
+              res.redirect('/qna');
+            }
+        });
+  }
+  else{
+    return next(err);
+  }
 });
 /*刪除板規*/
 router.get('/deleteR/:id',checkUser.isAdmin,function(req,res,next){
