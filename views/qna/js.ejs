@@ -227,13 +227,16 @@ $(document).ready(() => {
     $(".titleQ").on('click',function(){
         //var id = $(this).prop('id');
         var id = this.id.split('-')[0];
-        $('#'+id).modal('show');
+        //$('#'+id).modal('show');
         $.ajax({
             url: '/qna/clickQ/' + id,
             method: 'GET',
             success: function(res) {
-            
-                
+                document.getElementById('show-title').innerHTML = res.title;
+                document.getElementById('show-content').innerHTML = res.content;
+                document.getElementById('show-answer').innerHTML = res.answer;
+                $('#show-modal').modal('show');
+
                     //動態新增點擊次數
                     var objs = $('.' + id).find('.view');
                     console.log(objs);
@@ -250,12 +253,13 @@ $(document).ready(() => {
     $(".titleR").on('click',function(){
         //var id = $(this).prop('id');
         var id = this.id.split('-')[0];
-        $('#'+id).modal('show');
         $.ajax({
             url: '/qna/clickR/' + id,
             method: 'GET',
             success: function(res) {
-                
+                document.getElementById('show-rule-title').innerHTML = res.title;
+                document.getElementById('show-rule-content').innerHTML = res.content;
+                $('#show-rule-modal').modal('show');
                     //動態新增點擊次數
                     var objs = $('.' + id).find('.view');
                     for (var i = 0; i < objs.length; i++) {
@@ -311,21 +315,21 @@ $(document).ready(() => {
         $(".hideAct").hide();
     });
     //刪除板規
-    $('.deleteR').on('click', function() {
-      if (confirm("確定要刪除嗎？")) {
-        $.ajax({
-          method: 'GET',
-          url: '/qna/deleteR/' + this.id
-        }).done(function(res) {
-          alert('刪除成功');
-          //$('#modal-admin-answer').modal('hide');
-          //動態刪除
-          $('.' + res.id).remove();
-        })
-        // .fail(function(err) {
-        //   alert('發生錯誤: ' + err);
-        // })
-      }
-    });
+    // $('.deleteR').on('click', function() {
+    //   if (confirm("確定要刪除嗎？")) {
+    //     $.ajax({
+    //       method: 'GET',
+    //       url: '/qna/deleteR/' + this.id
+    //     }).done(function(res) {
+    //       alert('刪除成功');
+    //       //$('#modal-admin-answer').modal('hide');
+    //       //動態刪除
+    //       $('.' + res.id).remove();
+    //     })
+    //     // .fail(function(err) {
+    //     //   alert('發生錯誤: ' + err);
+    //     // })
+    //   }
+    // });
 })         
 </script>
