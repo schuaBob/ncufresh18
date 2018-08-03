@@ -199,6 +199,15 @@ router.post('/changing', checkuser.isAdmin, function(req, res, next){
   });
 });
 
+router.post('/changingCK', checkuser.isAdmin, function(req, res, next){
+  var mainTitled = req.body.mainTitle,
+      subTitled = req.body.subTitle;
+  description.find({mainTitle: mainTitled, subTitle: subTitled}, function(err, result){
+    if(err) return next(err);
+    res.send(result[0].content);
+  });
+});
+
 router.post('/delete_pic', checkuser.isAdmin, function(req, res, next){
   picture.remove({path: req.body.path}, function(err, result){
     if(err) return next(err);

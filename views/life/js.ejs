@@ -76,6 +76,7 @@
             }
         });
         
+        
         var putPic = function(data){
             $(".pictureArea").empty();
             $(".pictureArea").append('<div class="slideshow_container"></div><div class="dot_container"></div>');
@@ -97,13 +98,32 @@
             }
             var modal = document.getElementById('modal');
             var bgImg = document.getElementById('bgImg');
+            /*document.body.onclick = function(event){
+                if(ifOpen === 1){
+                    console.log(ifOpen);
+                    if(event.srcElement.id !== "bgImg"){
+                        console.log("suc2");
+                        modal.style.display = 'none';
+                        document.body.onclick = undefined;
+                        ifOpen = 0;
+                    }
+                }
+            }*/
             $('.picture').click(function(){
                 modal.style.display = 'block';
                 bgImg.src = this.src;
+                var firstTime = true;
+                $('body').on('click',function(event){
+                    if(firstTime === true) {
+                        firstTime = false;
+                        return;
+                    }
+                    if(event.target.id !== "bgImg"){
+                        modal.style.display = 'none';
+                        $('body').off('click');
+                    }
+                })
             });
-            bgImg.onclick = function() {
-                modal.style.display = 'none';
-            }
         }
         
         var putCont = function(data){
@@ -115,9 +135,30 @@
         }
     });
 
+    $('#refresh').on('click', function(e){
+        e.preventDefault();
+        var bigTitle = $('#descBigTitle').val(),
+            smallTitle = $('#descSmallTitle').val();
+        $.ajax({
+            url:    "changingCK",
+            method: 'POST',
+            data:   {mainTitle: bigTitle, subTitle: smallTitle},
+            error: function(err){
+                alert("Some error occur...");
+            },
+            success: function(data){
+                todo(data);
+            }
+        });
+        var todo = function(data){
+            CKEDITOR.instances['disc'].setData(data);
+        }
+    })
+   
     $('.bigTitle').on('change', function(e){
         e.preventDefault();
         var choose = this.value;
+        if(choose === "default") return;
         $.ajax({
             url:    "changing",
             method: 'POST',
