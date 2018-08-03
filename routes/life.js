@@ -32,7 +32,7 @@ var match_num = {
 
 /*-------------------------中大生活首頁----------------------------*/
 router.get('/', function(req, res, next){
-  res.render('life/index', {title: '中大生活', user: req.user});
+  res.render('life/index', {title: '中大生活', user: req.user, page: ""});
 });
 /* 天氣 */
 /*
@@ -55,11 +55,11 @@ router.get('/index_com', function(req, res, next){
 */
 
 router.get('/index_com', function(req, res, next){
-  res.render('life/index_com', {title: '中大生活', user: req.user});
+  res.render('life/index_com', {title: '中大生活', user: req.user, page: ""});
 })
 
 router.get('/index_phone', function(req, res, next){
-  res.render('life/phone/index_phone', {title: '中大生活', user: req.user});
+  res.render('life/phone/index_phone', {title: '中大生活', user: req.user,  page: ""});
 });
 
 /*-------------------------網頁版分頁-------------------------*/
