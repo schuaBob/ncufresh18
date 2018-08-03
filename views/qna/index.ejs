@@ -33,7 +33,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">類別：</label>
-                                            <select class="form-control type" name="Type" required="required">
+                                            <select class="form-control type2" name="Type" required="required">
                                                 <option>板規</option>
                                             </select>
                                     </div>
@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">類別：</label>
-                                        <select class="form-control type" name="Type" required="required">
+                                        <select class="form-control type2" name="Type" required="required">
                                             <option>校園生活</option>
                                             <option>學生事務</option>
                                             <option>課程相關</option>
@@ -196,16 +196,16 @@
                                 <%}%>
                         </tr>
                         <%#顯示板規的Modal%>
-                            <div class="modal fade bd-example-modal-lg" id="<%= rule[j].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade bd-example-modal-lg" id="show-rule-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content QA">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel"><%= rule[j].Title %></h5>
+                                            <h5 class="modal-title" id="exampleModalLabel"><p id="show-rule-title"></p></h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <div class="modal-body"><%= rule[j].Content %></div>
+                                        <div class="modal-body"><p id="show-rule-content"></p></div>
                                         <div class="modal-body"></div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-primary closemodal" data-dismiss="modal">　O K　</button>
@@ -226,7 +226,7 @@
                                         <form name="update" action="/qna/updateR/<%= rule[j].id %>" method="post">
                                                 <div class="modal-body">
                                                     <br>
-                                                    <textarea id="answer111" required="required" name="Content" rows="5"><%= rule[j].Content %></textarea>  
+                                                    <textarea id="answer1" required="required" name="Content" rows="5"><%= rule[j].Content %></textarea>  
                                                 </div>
                                                 <div class="modal-footer">
                                                     <input class="btn btn-primary submit submitbtn" type="submit" value="更改板規"></input>
@@ -291,19 +291,23 @@
                         </tr>
                        
                             <%#顯示問題跟答案的Modal%>
-                            <div class="modal fade bd-example-modal-lg" id="<%= question[i].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                            <!-- <div class="modal fade bd-example-modal-lg" id="<%= question[i].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true"> -->
+                            <div class="modal fade bd-example-modal-lg" id="show-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">   
                                 <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content QA">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle"><%= question[i].Title %></h5>
+                                            <!-- <h5 class="modal-title" id="exampleModalLongTitle"><%= question[i].Title %></h5> -->
+                                            <h5 class="modal-title" id="exampleModalLongTitle"><p id="show-title">></p></h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body"><h5 class="blueLetter">Q</h5><h5 style="display: inline;font-weight:bold;">uestion</h5></div>
-                                        <div class="modal-body"><%= question[i].Content %></div>
+                                        <!-- <div class="modal-body"><%= question[i].Content %></div> -->
+                                        <div class="modal-body"><p id="show-content"></p></div>
                                         <div class="modal-body"><h5 class="blueLetter">A</h5><h5 style="display: inline;font-weight:bold;">nswer</h5></div>
-                                        <div class="modal-body"><%= question[i].Answer %></div>
+                                        <!-- <div class="modal-body"><span><%= question[i].Answer %></span></div> -->
+                                        <div class="modal-body"><p id="show-answer"></p></div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-primary closemodal" data-dismiss="modal">　O K　</button>
                                         </div>
@@ -327,7 +331,7 @@
                                                     <div class="modal-body"><%= question[i].Content %></div>
                                                     <div class="modal-body form-group">
                                                         <label for="exampleFormControlSelect1">類別：</label>
-                                                            <select class="form-control type" name="Type" required="required">
+                                                            <select class="form-control type1" name="Type" required="required">
                                                                 <option>校園生活</option>
                                                                 <option>學生事務</option>
                                                                 <option>課程相關</option>
