@@ -9,8 +9,7 @@ body{
 tbody{
     /* background-color: white; */
     float:center;
-    display: block;
-    
+    display:table;
     border-collapse: collapse;
     font-family: Microsoft YaHei;
 }
@@ -28,7 +27,6 @@ thead{
 table{
     margin:0 auto;
     border-collapse: collapse;
-
     /* border-spacing: 10px; */
     z-index: 1;
 }
@@ -42,12 +40,22 @@ th{
 @media only screen and (min-width:600px){
     table{
         width:70%;
+        
+    }
+    tbody{
+        
+        width:100%;
     }
     tr{
-        width: cover;
+        width: 70vw;
+
+        /* width: 100%; */
     }
     td{
         border-right:1.5px black solid;
+    }
+    th.thTitle{
+        width:30%;
     }
     .notebook{
         background: url(外框.png);
@@ -58,10 +66,11 @@ th{
         border-right:0px;
     }
     .TIME{
-        width:15%;
+        width:10%;
     }
     .HOT{
         width:10%;
+        text-align: center;
     }
     /* table的外框 */
     /* tr::before{
@@ -80,10 +89,13 @@ th{
     .nav-link{
         color:white;
     }
+    p.nav-link{
+        vertical-align: text-top;
+    }
     /* 回到頁面最頂端按鈕 */
     .goTop{
-        background: url(移至頂端2.png);
-        background-size: 60px 60px;
+        background: url(移至頂端2.png) no-repeat;
+        background-size: cover;
         border-color: transparent;
         border-radius: 50%;
         width: 60px;
@@ -94,12 +106,13 @@ th{
     }
     /* 搜尋的位置 */
     .search{
+        margin-right:15px;
         float:right;
     }
     /* 電腦版我要發問按鈕 */
     .askbutton{
-        background: url(發問按鈕1.png);
-        background-size: cover;
+        background: url(發問按鈕1.png) no-repeat;
+        background-size: contain;
         width:130px;
         height:180px;
         float: right;
@@ -108,22 +121,22 @@ th{
         bottom: 10vw;
         right:15px;
     }
-    .admin{
+    tr.admin{
         width: 10%;
         /* width: 10vw; */
+    }
+    th.admin{
+        /* width: 10%; */
+        width: 10vw;
+    }
+    .type{
+        width: 15%;
     }
     .askbutton2{
         display:none;
     }
     .classificationBtn{
         display:none;
-    }
-    /* 讓太長的標題可以省略的功能 */
-    .title2{
-        width: 100%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
     }
 }
         
@@ -150,6 +163,21 @@ th{
         /* height:50x; */
         width: 100%;
     }
+    th.type{
+        width:15vw;
+    }
+    th.thTitle{
+        width:40vw;
+    }
+    th.TIME{
+        width:15vw;
+    }
+    th.HOT{
+        width:10vw;
+    }
+    .notebook{
+        display: none;
+    }
     .modal{
         height:100%;
     }
@@ -165,8 +193,8 @@ th{
     }
     /* 回到頁面最頂端按鈕 */
     .goTop{
-        background: url(移至頂端3.png);
-        background-size: 40px 40px;
+        background: url(移至頂端3.png) no-repeat;
+        background-size: contain;
         border-color: transparent;
         border-radius: 50%;
         width: 40px;
@@ -195,25 +223,27 @@ th{
 .title{
     /* 標題的寬度一定要設成px才能用text-overflow: ellipsis
     網址:https://stackoverflow.com/questions/17779293/css-text-overflow-ellipsis-not-working */
-    max-width:500px;
+    width:50%;
 }
 .Q{
     line-height: 2.3em;
+    width: 100%;
     /* border-bottom: 1.5px #29ABE2 solid; */
 }
 /* 板規合集 */
 .R{
     line-height: 2.3em;
+    width: 100%;
     /* border-bottom: 1.5px #29ABE2 solid; */
 }
 td{
     text-align: center;
-    width:120px;
+    /* width:120px; */
     border-bottom: 1.5px #29ABE2 solid;
 }
-th{
+/* th{
     width:120px;
-}
+} */
 li{
     height:40px;
 }
@@ -232,7 +262,9 @@ li{
 /* 排序與分類 */
 .classification{
     font-family: YouYuan;
-    margin: 10px;
+    margin: 15px;
+    /* display : flex;
+    vertical-align : center; */
 }
 /* 排序與分類的按鈕 */
 .classificationBtn{
@@ -243,11 +275,13 @@ li{
     width: 25px;
     height:25px;
     color: transparent;
-    margin-top:5px;
+    margin-top:15px;
+    margin-left:10px;
 }
 
 /* 排序與分類文字 */
 p{
+    font-size:20px;
     font-weight:bold;
 }
 /* 搜尋按鈕 */

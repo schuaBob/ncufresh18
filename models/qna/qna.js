@@ -1,5 +1,10 @@
 var mongoose = require('mongoose');
-
+/**
+ * Answer不空白 =>審核通過
+ * Reason不空白 =>被管理員刪除
+ * DeleteDate存在 =>使用者自己刪除
+ * CreateDate新增問題時是新增問題的時間，管理員新增答案時會更新成回答問題的時間
+ */
 var Question = mongoose.Schema({
     Username:String,//使用者名稱
     Title: String, //問題標題
