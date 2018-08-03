@@ -114,7 +114,7 @@ hr{
     width: 96vw;
     height: 55vh;
     visibility: hidden;
-    overflow: hidden;
+    overflow-x: scroll;
 }
 .descArea{
     position: absolute;
