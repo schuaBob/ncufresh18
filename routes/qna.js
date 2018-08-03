@@ -191,6 +191,9 @@ router.get('/clickQ/:id', function(req, res, next) {
        question.save(function(err) {
           if (err){return next(err);}
           res.json({
+            title:question.Title,
+            content:question.Content,
+            answer:question.Answer,
             click:question.Click
           });
        });
@@ -215,6 +218,8 @@ router.get('/clickR/:id', function(req, res, next) {
        rule.save(function(err) {
           if (err){return next(err);}
           res.json({
+            title:rule.Title,
+            content:rule.Content,
             click:rule.Click
           });
        });
@@ -295,7 +300,6 @@ router.post('/deleteQ/:id',checkUser.isAdmin,function(req,res,next){
 });
 /*刪除板規*/
 router.get('/deleteR/:id',checkUser.isAdmin,function(req,res,next){
-
       /*確定傳進來的是不是有效ID*/
       if(mongoose.Types.ObjectId.isValid(req.params.id)){
         /*確定這篇文章是他發的或他是管理員*/
@@ -303,33 +307,20 @@ router.get('/deleteR/:id',checkUser.isAdmin,function(req,res,next){
           if(err){return next(err)};
           /*真的有這篇文章*/
           if(result!==null){
-            var temp = new deleteReason({
-              Username:req.body.Title,
-              QuestionId:req.params.id,
-              Reason: req.body.Reason,
-              CreateDate:Date.now()
-            }).save(function(err){
-              if(err){
-                return next(err);
-                /*刪除*/
-                // result.remove();
-                res.json({ id: result._id });
-              }
-              else{
-                //sendSuccess();
-              }
+            if(err){return next(err)};
+              /*刪除*/
+              result.remove();
+              // res.json({ id: result._id });
               res.redirect('/qna');
-            });
-          }
+            }
           else{
-              res.redirect('/qna');
+            return next(err);
           }
-        })
+        });
       }
       else{
         return next(err);
       }
-  //}
 });
 // 使用者刪除問題 
 router.post('/deleteByUser/:id', checkUser.isLoggedIn, function(req, res, next) {

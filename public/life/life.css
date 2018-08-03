@@ -65,7 +65,7 @@ ul li{
 .middle a:hover:after
 {
     color:#ffea00;
-	transform:rotatey(-5deg) rotatex(15deg) scale(3);
+	transform:rotatey(-5deg) rotatex(15deg) scale(2.2);
 }
 /*
 .middle a:hover{
@@ -102,33 +102,59 @@ ul li{
 
 
 /* 分頁 */
-.selectArea{
-    position: absolute;
-    top: 8%;
-    left: 10%;
+@media screen and (min-height: 700px){
+    .selectArea{
+        position: absolute;
+        top: 8%;
+        left: 10%;
+    }
+    .selectbar{
+        position: relative;
+        width: 400px;
+        height: 150px;
+    }
+    .mainTitle{
+        position: absolute;
+        top: -6vh;
+        left: 0vw;
+        width: 250px;
+        height: 250px;
+        z-index: 0;
+    }
+    .hide1, .show1{
+        position: absolute;
+        top: 70px;
+        left: 200px;
+        width: 60%;
+        z-index: 4000; /* always top */
+    }
 }
-.selectbar{
-    position: relative;
-    width: 400px;
-    height: 150px;
-}
-.mainTitle{
-    position: absolute;
-    top: -6vh;
-    left: 0vw;
-    width: 250px;
-    height: 250px;
-    z-index: 0;
-}
-#footered{
-    position:fixed;
-}
-.hide1, .show1{
-    position: absolute;
-    top: 70px;
-    left: 200px;
-    width: 60%;
-    z-index: 4000; /* always top */
+@media screen and (max-height: 700px){
+    .selectArea{
+        position: absolute;
+        top: 8%;
+        left: 10%;
+    }
+    .selectbar{
+        position: relative;
+        width: 400px;
+        height: 120px;
+    }
+    .mainTitle{
+        position: absolute;
+        top: -6vh;
+        left: 0vw;
+        width: 220px;
+        height: 220px;
+        z-index: 0;
+    }
+    .hide1, .show1{
+        position: absolute;
+        top: 70px;
+        left: 150px;
+        width: 60%;
+        z-index: 4000; /* always top */
+    }
 }
 .hide1{
     opacity: 0;
@@ -139,6 +165,9 @@ ul li{
 }
 .show1{
     opacity: 1;
+}
+#footered{
+    position:fixed;
 }
 .select.afterClick{
     background-color: black;
@@ -164,8 +193,8 @@ ul li{
 }
 .picture{
     position: absolute;
-    height: 100%;
     top:0; bottom:0; left:0; right:0; margin:auto;
+    height: 100%;
 }
 .slideshow_container{
     position: absolute;
@@ -270,9 +299,9 @@ ul li{
 }  
 .showDet:hover {
     opacity: 1;
-    color: rgb(6, 113, 6);
-    text-decoration:none;
-  }
+    color: rgb(3, 94, 3);
+    cursor: pointer;
+}
   
 .showDet:before {
     content: "";
@@ -295,6 +324,34 @@ ul li{
     transform: scaleX(1);
 }
 
+/* modal */
+.modal {
+    display: none;
+    margin: auto;
+    padding-top: 5%;
+    width: 50%;
+    height: 80%;
+    z-index: 4001;
+    background-color: transparent;
+}
+.modal img {
+    display: block;
+    padding: 10px;
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+    box-shadow: 0 2px 6px rgb(0, 0, 0, 0.2), 0 10px 20px rgb(0, 0, 0, 0.2);
+    border-radius: 12px;
+    border: 1px solid white;
+}
+@keyframes zoom {
+    from {transform: scale(0.1)}
+    to {transform: scale(1)}
+}
+.modal img {
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
 
 /* navi */
 #sideNav{

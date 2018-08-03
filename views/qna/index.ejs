@@ -33,7 +33,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">類別：</label>
-                                            <select class="form-control type" name="Type" required="required">
+                                            <select class="form-control type2" name="Type" required="required">
                                                 <option>板規</option>
                                             </select>
                                     </div>
@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">類別：</label>
-                                        <select class="form-control type" name="Type" required="required">
+                                        <select class="form-control type2" name="Type" required="required">
                                             <option>校園生活</option>
                                             <option>學生事務</option>
                                             <option>課程相關</option>
@@ -109,9 +109,9 @@
                         </span>
                     </div>    
                     <%/*展開排序與分類的按鈕*/%>
-                    <a class="dropdown-toggle classificationBtn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                 </div>
             </form>
+         <a class="dropdown-toggle classificationBtn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
         <div id="select111">
            
 
@@ -139,7 +139,7 @@
                         <th class="notebook"></th>
                         <%if(user && user.role==="admin"){%>
                             <th class="type">分類</th>
-                            <th class="title">標題</th>
+                            <th class="thTitle">標題</th>
                             <th class="TIME">時間</th>
                             <th class="HOT">人氣</th>
                             <%}
@@ -149,6 +149,11 @@
                             <th style="width: 60vw">標題</th>
                             <th style="width: 15vw">時間</th>
                             <th style="width: 10vw">人氣</th>
+
+                            <!-- <th style="width: 15%">分類</th>
+                            <th style="width: 52%">標題</th>
+                            <th style="width: 15%">時間</th>
+                            <th style="width: 10%">人氣</th> -->
                             <%}
                         %>
                         
@@ -167,7 +172,7 @@
                         <tr id="<%= rule[j].id %>" class="<%= rule[j].id %> R">
                             <td class="notebook"></td>
                             <%if(user && user.role==="admin"){%>
-                                <td class="type" style="width:20%"><%= rule[j].Type %></td>
+                                <td class="type"><%= rule[j].Type %></td>
                                 <td class="titleR title" id="<%= rule[j].id %>" style="width:30%">
                                     <div class="article title2"><%= rule[j].Title %></div>
                                 </td>
@@ -175,8 +180,8 @@
                                 <td class="view HOT" style="text-align: center;width:10%"><%= rule[j].Click %></td>
                                 <%}
                                 else{%>
-                                    <td class="type" style="width:15%"><%= rule[j].Type %></td>
-                                    <td class="titleR title" id="<%= rule[j].id %>" style="width:60%">
+                                    <td class="type"><%= rule[j].Type %></td>
+                                    <td class="titleR title" id="<%= rule[j].id %>">
                                         <div class="article"><%= rule[j].Title %></div>
                                     </td>
                                     <td class="time topT" style="width:15%"><%= Time(rule[j].CreateDate) %></td>
@@ -191,16 +196,16 @@
                                 <%}%>
                         </tr>
                         <%#顯示板規的Modal%>
-                            <div class="modal fade bd-example-modal-lg" id="<%= rule[j].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade bd-example-modal-lg" id="show-rule-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content QA">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel"><%= rule[j].Title %></h5>
+                                            <h5 class="modal-title" id="exampleModalLabel"><p id="show-rule-title"></p></h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <div class="modal-body"><%= rule[j].Content %></div>
+                                        <div class="modal-body"><p id="show-rule-content"></p></div>
                                         <div class="modal-body"></div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-primary closemodal" data-dismiss="modal">　O K　</button>
@@ -221,7 +226,7 @@
                                         <form name="update" action="/qna/updateR/<%= rule[j].id %>" method="post">
                                                 <div class="modal-body">
                                                     <br>
-                                                    <textarea id="answer111" required="required" name="Content" rows="5"><%= rule[j].Content %></textarea>  
+                                                    <textarea id="answer1" required="required" name="Content" rows="5"><%= rule[j].Content %></textarea>  
                                                 </div>
                                                 <div class="modal-footer">
                                                     <input class="btn btn-primary submit submitbtn" type="submit" value="更改板規"></input>
@@ -238,14 +243,14 @@
                         <tr id="<%= question[i].id %>" class="<%= question[i].id %> <%= question[i].Type %> Q">
                             <td class="notebook"></td>
                             <%if(user && user.role==="admin"){%>
-                                <td class="type" style="width:20%;"><%= question[i].Type %></td>
+                                <td class="type"><%= question[i].Type %></td>
                                 <td class="titleQ title" style="width:30%" id="<%= question[i].id %>">
                                     <div class="article title2"><%= question[i].Title %></div>
                                 </td>
                                 <%}
                                 else{%>
-                                    <td style="width:15vw;" class="type"><%= question[i].Type %></td>
-                                    <td class="titleQ title" style="width:60vw;" id="<%= question[i].id %>">
+                                    <td style="width:15%;" class="type"><%= question[i].Type %></td>
+                                    <td class="titleQ title"  id="<%= question[i].id %>">
                                         <div class="article title2"><%= question[i].Title %></div>
                                         <!-- <p class="article title2"><%= question[i].Title %></p> -->
                                     </td>
@@ -253,13 +258,13 @@
                             %>
 
                             <% if(question[i].CreateDate){%>
-                                    <td class="time TIME" style="width:10%;"><%= Time(question[i].CreateDate) %></td>
+                                    <td class="time TIME"><%= Time(question[i].CreateDate) %></td>
                                 <%}
                                 else{%>
                                     <td style="width:10%;">未解答</td>
                                 <%}
                                 %>
-                                <td class="view hot HOT" style="text-align: center;width:10%"><%= question[i].Click %></td>
+                                <td class="view hot HOT"><%= question[i].Click %></td>
                             
                             <%# /管理員頁面才有的 %>
                             <%if(user && user.role==="admin"){%>
@@ -286,19 +291,23 @@
                         </tr>
                        
                             <%#顯示問題跟答案的Modal%>
-                            <div class="modal fade bd-example-modal-lg" id="<%= question[i].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                            <!-- <div class="modal fade bd-example-modal-lg" id="<%= question[i].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true"> -->
+                            <div class="modal fade bd-example-modal-lg" id="show-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">   
                                 <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content QA">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle"><%= question[i].Title %></h5>
+                                            <!-- <h5 class="modal-title" id="exampleModalLongTitle"><%= question[i].Title %></h5> -->
+                                            <h5 class="modal-title" id="exampleModalLongTitle"><p id="show-title">></p></h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body"><h5 class="blueLetter">Q</h5><h5 style="display: inline;font-weight:bold;">uestion</h5></div>
-                                        <div class="modal-body"><%= question[i].Content %></div>
+                                        <!-- <div class="modal-body"><%= question[i].Content %></div> -->
+                                        <div class="modal-body"><p id="show-content"></p></div>
                                         <div class="modal-body"><h5 class="blueLetter">A</h5><h5 style="display: inline;font-weight:bold;">nswer</h5></div>
-                                        <div class="modal-body"><%= question[i].Answer %></div>
+                                        <!-- <div class="modal-body"><span><%= question[i].Answer %></span></div> -->
+                                        <div class="modal-body"><p id="show-answer"></p></div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-primary closemodal" data-dismiss="modal">　O K　</button>
                                         </div>
@@ -322,7 +331,7 @@
                                                     <div class="modal-body"><%= question[i].Content %></div>
                                                     <div class="modal-body form-group">
                                                         <label for="exampleFormControlSelect1">類別：</label>
-                                                            <select class="form-control type" name="Type" required="required">
+                                                            <select class="form-control type1" name="Type" required="required">
                                                                 <option>校園生活</option>
                                                                 <option>學生事務</option>
                                                                 <option>課程相關</option>

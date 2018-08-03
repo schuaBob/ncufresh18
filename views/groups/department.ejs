@@ -195,7 +195,7 @@
                       <div id="scroll_nav">
                         <ul class="nav nav-pills flex-column" id="nav_ul">
                           <li id="modal_button"><a class="nav-link active" data-toggle="pill" id="nav_a" href="#introduction_<%= department[i].name %>">系所介紹</a></li>
-                          <% if(department[i].name[department[i].name.length-1] === "系"){ %>
+                          <% if(department[i].name[department[i].name.length-1] === "系" || department[i].name[department[i].name.length-1] === "班"){ %>
                             <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#organization_<%= department[i].name %>">系學會</a></li>
                             <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#activity_<%= department[i].name %>">系所活動</a></li>
                             <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#team_<%= department[i].name %>">系隊</a></li>
@@ -231,7 +231,7 @@
                           </div>
                         </div>
                         <!-- 區分系.所的modal內容 -->
-                        <% if(department[i].name[department[i].name.length-1] === "系"){ %>
+                        <% if(department[i].name[department[i].name.length-1] === "系" || department[i].name[department[i].name.length-1] === "班"){ %>
                           <div id="organization_<%= department[i].name %>" class="tab-pane fade in">
                             <h5>系學會</h5>
                             <h6 class="org"></h6>

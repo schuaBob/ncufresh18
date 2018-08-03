@@ -26,7 +26,9 @@ h6{
     line-height: 26px;
     letter-spacing: 1px;
 }
-
+th{
+    padding-top: 4%;
+}
 h3{
     color: rgb(32, 243, 180);
     font-size: 40px;
@@ -88,7 +90,7 @@ thead{
 tbody{
     float:center;
     display: block;
-    height: 40vh;
+    height: 38vh;
     overflow-y: scroll;
     border-collapse: collapse;
     text-align: center;

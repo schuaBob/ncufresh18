@@ -28,11 +28,11 @@
             background-position: 40% center;
         }
         body {
-            background: url("index/ncu首頁.png") no-repeat center center fixed; 
+            background: url("index/ncu首頁.png") no-repeat 83% 10% fixed; 
 			-webkit-background-size: cover;
 			-moz-background-size: cover;
 			-o-background-size: cover;
-			background-size: cover;
+            background-size: cover;
         }
         #c1 {
             background-image: url("index/IMG-0.png");
@@ -163,15 +163,13 @@
             display: block;
             margin-right: auto;
             margin-left: auto;
-            width: 20vw;
+            width: 15vh;
         }
         #down-img {
-            margin-right: 5vw;
-            margin-left: 5vw;
-            width: 10vw;
-            -webkit-filter: invert(100%); /* Safari/Chrome */
-            filter: invert(100%);
-            background-color: rgba(255, 255, 255, 0.75)
+            margin-right: auto;
+            margin-left: auto;
+            margin-bottom: 20px;
+            width: 15vh;
         }
         #down-text {
             width: inherit;
@@ -193,6 +191,9 @@
             border-radius: 2%;
             background-color: rgba(255,255,255,0.7);
         }
+        #qna-halo:hover, #news-halo:hover {
+            
+        }
     </style>
 </head>
 <body>
@@ -201,11 +202,10 @@
     </header>
     <main>
         <div id="fullpage">
-            <div class="section">
+            <div class="section" id="7">
                 <div class="latest-news-btn">
                     <a href="#news-Q&A" id="down-btn">
-                        <img id="down-img" src="index/thin-arrowheads-pointing-down.png">
-                        <b id="down-text">最新公告</b>
+                        <img id="down-img" src="index/down-arrow-in-small-circle.svg">
                     </a>
                 </div>
                 <div class="img_container" id="c1"></div>
@@ -225,85 +225,41 @@
                 </div>
                 <div id="news-box" class="mx-auto">
                     <div>
-                        <div class="d-inline-block w-50 select-bar"><h2 class="text-center bg-warning">即時資訊</h2></div><div class="d-inline-block w-50 select-bar"><h2 class="text-center bg-info">熱門Q&A</h2></div>
+                        <div class="d-inline-block w-100 select-bar">
+                            <ul class="nav nav-pills nav-fill">
+                                <li class="nav-item ">
+                                    <a class="nav-item nav-link active p-0" id="news-halo">
+                                        <h2 class="text-center nav-item" onclick="news_page();">即時資訊</h2>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-item nav-link p-0" id="qna-halo">
+                                        <h2 class="text-center" onclick="qna_page();">熱門Q&A</h2>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                         <div id="box1">
-                            <table class="table">
+                            <table class="table" id="one">
                                 <tbody>
+                                    <%_ for(let i = 0;i<news.length;i++){ -%>
                                     <tr>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
+                                        <td><%= news[i].time %></td>
+                                        <td><%= news[i].title %></td>
+                                        <td>more</td>
                                     </tr>
+                                    <%_ } -%>
+                                </tbody>
+                            </table>
+                            <table class="table" id="two" style="display: none;">
+                                <tbody>
+                                    <%_ for(let i = 0;i<qna.length;i++){ -%>
                                     <tr>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
+                                        <td><%= qna[i].CreateDate %></td>
+                                        <td><%= qna[i].Title %></td>
+                                        <td><%= qna[i].Click %>人次點閱</td>
                                     </tr>
-                                    <tr>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
+                                    <%_ } -%>
                                 </tbody>
                             </table>
                         </div>
@@ -311,7 +267,7 @@
                 </div>
             </div>
             <div class="section">
-                我是時間軸ＱＱＱＱ
+                
             </div>
         </div>
 

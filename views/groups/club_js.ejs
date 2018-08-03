@@ -106,17 +106,7 @@
                     $('#clubmodal .parti').html(data_club.participation)
                     $('#clubmodal .fb').html(data_club.FB)
                     $('#clubmodal .acti').html(data_club.activity)
-                    for (let i = 0; i < data_club.intro_pic.length; i++) {
-                        $('#carouselExampleIndicator1 .carousel-indicators').append("<li data-target='#carouselExampleIndicator1' data-slide-to='" + i + "'></li>")
-                        $('#carouselExampleIndicator1 .carousel-inner').append("<div class='carousel-item'><img class='d-block w-100' src='/groups/img/" + data_club.intro_pic[i] + "'></div>")
-                    }
-                    $('#carouselExampleIndicator1 .carousel-indicators li').first().addClass('active')
-                    $('#carouselExampleIndicator1 .carousel-inner div').first().addClass('active')
-                    $('#clubmodal').on('hide.bs.modal', function (e) {
-                        $('#carouselExampleIndicator1 .carousel-indicators li').remove()
-                        $('#carouselExampleIndicator1 .carousel-inner .carousel-item').remove()
-                        $('#clubmodal').off('hide.bs.modal')
-                    })
+                    
                     for (let i = 0; i < data_club.act_pic.length; i++) {
                         $('#carouselExampleIndicator2 .carousel-indicators').append("<li data-target='#carouselExampleIndicator2' data-slide-to='" + i + "'></li>")
                         $('#carouselExampleIndicator2 .carousel-inner').append("<div class='carousel-item'><img class='d-block w-100' src='/groups/img/" + data_club.act_pic[i] + "'></div>")

@@ -60,11 +60,6 @@
     $('.showDetail').on('click', function(e){
         e.preventDefault();
         var info = this.id.split("_");
-        // if(info[0] == "桃園景點"){
-        //     $('.descArea').empty();
-        //     $('.pictureArea').empty();
-        //     $('.pictureArea').append("<img class='mapClass' src='map.png'>");
-        // }
         $(".show1").slideUp();
         $(".show1").addClass("hide1");
         $(".show1").removeClass("show1");
@@ -80,6 +75,7 @@
                 putCont(data.res2);
             }
         });
+        
         
         var putPic = function(data){
             $(".pictureArea").empty();
@@ -97,7 +93,39 @@
                 ramSlideNum = Math.floor((Math.random() * slideNum) + 1);
                 showSlides(ramSlideNum);
             }
+            else{
+                $(".slideshow_container").append("<div class='mySlides'><img src='<%=page%>_icon.png'" + "class='picture'></div>");
+            }
+            var modal = document.getElementById('modal');
+            var bgImg = document.getElementById('bgImg');
+            /*document.body.onclick = function(event){
+                if(ifOpen === 1){
+                    console.log(ifOpen);
+                    if(event.srcElement.id !== "bgImg"){
+                        console.log("suc2");
+                        modal.style.display = 'none';
+                        document.body.onclick = undefined;
+                        ifOpen = 0;
+                    }
+                }
+            }*/
+            $('.picture').click(function(){
+                modal.style.display = 'block';
+                bgImg.src = this.src;
+                var firstTime = true;
+                $('body').on('click',function(event){
+                    if(firstTime === true) {
+                        firstTime = false;
+                        return;
+                    }
+                    if(event.target.id !== "bgImg"){
+                        modal.style.display = 'none';
+                        $('body').off('click');
+                    }
+                })
+            });
         }
+        
         var putCont = function(data){
             $(".descArea").empty();
             $(".descArea").append("<div class='describeArea'> <div class='contentArea'></div></div>")
@@ -107,9 +135,30 @@
         }
     });
 
+    $('#refresh').on('click', function(e){
+        e.preventDefault();
+        var bigTitle = $('#descBigTitle').val(),
+            smallTitle = $('#descSmallTitle').val();
+        $.ajax({
+            url:    "changingCK",
+            method: 'POST',
+            data:   {mainTitle: bigTitle, subTitle: smallTitle},
+            error: function(err){
+                alert("Some error occur...");
+            },
+            success: function(data){
+                todo(data);
+            }
+        });
+        var todo = function(data){
+            CKEDITOR.instances['disc'].setData(data);
+        }
+    })
+   
     $('.bigTitle').on('change', function(e){
         e.preventDefault();
         var choose = this.value;
+        if(choose === "default") return;
         $.ajax({
             url:    "changing",
             method: 'POST',
@@ -145,7 +194,7 @@
         if (n > slides.length) {ramSlideNum = 1}
         if (n < 1) {ramSlideNum = slides.length}
         for (var i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
+            slides[i].style.display = "none"
         }
         for (var i = 0; i < dots.length; i++) {
             dots[i].className = dots[i].className.replace(" active", "");
@@ -224,6 +273,9 @@
             slideNum = data.length;
             ramSlideNum = Math.floor((Math.random() * slideNum) + 1);
             showSlides(ramSlideNum);
+        }
+        else{
+            $(".slideshow_container").append("<div class='mySlides'><img src='<%=page%>_icon.png'" + "class='picture'></div>");
         }
     }
 
