@@ -160,7 +160,7 @@ h5{
 #nav_a:focus{
     color: rgb(7, 56, 112);
 }
-#nav_ul{
+.nav{
     margin-top: 8%;
 }
 .nav-link{
@@ -416,7 +416,7 @@ h5{
         font-size: 12px;
     }
 
-    #nav_ul{
+    .nav{
         margin-top: 0%;
         margin-left: 27%;
         flex-wrap: nowrap;
