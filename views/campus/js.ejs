@@ -63,9 +63,10 @@
             $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').velocity({ scale: 1 }, 100)
             $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').stop().tooltip('hide')
         })
-        $('.elelist').hide()
+        
         $('#List_index li').click(function (event) {
             $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').stop().tooltip('hide')
+            $('.elelist').hide()
             array1 = ["系館", "運動", "餐廳", "設施", "住宿", "行政", "活動場地", "緊急醫療"]
             for (let i = 1; i <= 8; i++) {
                 if (event.currentTarget.attributes.val.value == i) {
