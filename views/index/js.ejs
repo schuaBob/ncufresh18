@@ -1,13 +1,27 @@
 <script>
-new fullpage('#fullpage', {
-	licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
-	autoScrolling:true,
-	scrollHorizontally: true,
-    // verticalCentered: false,
-    scrollBar: true,
-    anchors:['Carousel', 'news-Q&A', 'timeline']
-});
+    new fullpage('#fullpage', {
+        licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
+        autoScrolling:true,
+        scrollHorizontally: true,
+        // verticalCentered: false,
+        scrollBar: true,
+        anchors:['Carousel', 'news-Q&A', 'timeline']
+    });
 
-//methods
-fullpage_api.setAllowScrolling(false);
+    //methods
+    fullpage_api.setAllowScrolling(false);
+
+    var news_page = function(){
+        document.getElementById('one').style.removeProperty( 'display' );
+        document.getElementById('two').style.display = 'none';
+        document.getElementById("news-halo").classList.add("active");
+        document.getElementById("qna-halo").classList.remove("active");
+    }
+
+    var qna_page = function(){
+        document.getElementById('one').style.display = 'none';
+        document.getElementById('two').style.removeProperty( 'display' );
+        document.getElementById("news-halo").classList.remove("active");
+        document.getElementById("qna-halo").classList.add("active");
+    }
 </script>
