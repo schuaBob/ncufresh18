@@ -278,12 +278,12 @@
                                 <%} 
                                 %>
         
-                                <% if(question[i].Reason ==="") {%>
+                                <% if(!question[i].Reason) {%>
                                         <td class="admin" data-toggle="modal" data-target="#<%= question[i].id %>-delete" >提出刪除理由</td>
                                     <%}
                                     else{%>
                                         <!-- <td  class="admin" >已提出</td> -->
-                                        <td class="admin hide" id="<%= question[i].id %>">刪除問題</td>
+                                        <td class="admin hide" id="<%= question[i].id %>"><a method="get" role="button" href="/qna/deleteQ/<%= question[i].id %>">刪除問題</a></td>
                                         <%}
                                     %>
                             <%}%>
@@ -387,7 +387,7 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                            <form name="delete" action="/qna/deleteQ/<%= question[i].id %>" method="post">
+                                            <form name="delete" action="/qna/deleteReason/<%= question[i].id %>" method="post">
                                                     <div class="modal-body">
                                                         <br>
                                                         <textarea id="delete111" required="required" name="Reason" rows="5"></textarea>  

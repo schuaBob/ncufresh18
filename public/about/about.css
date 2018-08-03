@@ -9,7 +9,7 @@
     .down.people2{
         width:15%;
         height:25%;
-        
+        transition: transform 1s ease;
         right:5vw;
         bottom:20px;
     }
