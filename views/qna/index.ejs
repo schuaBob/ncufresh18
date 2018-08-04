@@ -146,7 +146,7 @@
                             else{%>
                             <%# /用vw排版才不會跑掉不知道為什麼 %>
                             <th style="width: 15vw">分類</th>
-                            <th style="width: 60vw">標題</th>
+                            <th style="width: 50vw">標題</th>
                             <th style="width: 15vw">時間</th>
                             <th style="width: 10vw">人氣</th>
 
@@ -173,15 +173,17 @@
                             <td class="notebook"></td>
                             <%if(user && user.role==="admin"){%>
                                 <td class="type"><%= rule[j].Type %></td>
-                                <td class="titleR title" id="<%= rule[j].id %>" style="width:30%">
+                                <td class="titleR title" id="<%= rule[j].id %>">
+                                <!-- <td class="titleR title" id="<%= rule[j].id %>" style="width:30%"> -->
                                     <div class="article title2"><%= rule[j].Title %></div>
                                 </td>
-                                <td class="time TIME" style="width:10%"><%= Time(rule[j].CreateDate) %></td>
+                                <!-- <td class="time TIME" style="width:10%"><%= Time(rule[j].CreateDate) %></td> -->
+                                <td class="time TIME"><%= Time(rule[j].CreateDate) %></td>
                                 <td class="view HOT" style="text-align: center;width:10%"><%= rule[j].Click %></td>
                                 <%}
                                 else{%>
                                     <td class="type"><%= rule[j].Type %></td>
-                                    <td class="titleR title" id="<%= rule[j].id %>">
+                                    <td class="titleR title" style="width:50%" id="<%= rule[j].id %>">
                                         <div class="article"><%= rule[j].Title %></div>
                                     </td>
                                     <td class="time topT" style="width:15%"><%= Time(rule[j].CreateDate) %></td>
@@ -244,13 +246,14 @@
                             <td class="notebook"></td>
                             <%if(user && user.role==="admin"){%>
                                 <td class="type"><%= question[i].Type %></td>
-                                <td class="titleQ title" style="width:30%" id="<%= question[i].id %>">
+                                <!-- <td class="titleQ title" style="width:30%" id="<%= question[i].id %>"> -->
+                                <td class="titleQ title" id="<%= question[i].id %>">
                                     <div class="article title2"><%= question[i].Title %></div>
                                 </td>
                                 <%}
                                 else{%>
                                     <td style="width:15%;" class="type"><%= question[i].Type %></td>
-                                    <td class="titleQ title"  id="<%= question[i].id %>">
+                                    <td class="titleQ title"  id="<%= question[i].id %>" style="width:50%">
                                         <div class="article title2"><%= question[i].Title %></div>
                                         <!-- <p class="article title2"><%= question[i].Title %></p> -->
                                     </td>

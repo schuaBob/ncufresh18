@@ -161,7 +161,7 @@ router.get('/search',function(req,res,next){
   if(req.query.keyword){
     console.log(req.query.keyword);
     //模糊查詢參數，標題跟答案都要找
-    Question.find({$or : [ {Title : {$regex : req.query.keyword}},{Answer : {$regex :req.query.keyword}}]}).exec(function(err,question,rule){
+    Question.find({Answer:{$nin:[""]},Reason:{$in:[""]},DeleteDate: {$exists: false},$or : [ {Title : {$regex : req.query.keyword}},{Answer : {$regex :req.query.keyword}}]}).exec(function(err,question,rule){
       if(err){return next(err)};
       //轉換時間欄位
       var Time = function(date) {

@@ -5,7 +5,9 @@ $(document).ready(() => {
 //  $(window).resize(function() {
         var w=$(window).width();
         var h=$(window).height();
-    
+    $(window).resize(function() {
+        console.log($(window).width());
+    });
     $(".hideAct").hide();
     if (w < 600) {
         //手機版頁面樣式
