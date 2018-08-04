@@ -27,7 +27,8 @@
                 width: '640',
                 videoId: id, //Youtube ID
                 enablejsapi: 1,
-                origin: 'http://localhost:3000'
+                controls: 2,
+                origin: 'http://ncufresh.ncu.edu.tw'
 
             });
         })
@@ -146,14 +147,16 @@
         $(document).on("click",".rotate",function(event){//旋轉唱片盒
             if(end == 1){//end記錄唱片盒轉完了沒
                 if(rotate == 0){
-                    if($(window).width<=414){
-                        $(this).html('影片');
-                    }
-                    else {
+                    if($(window).width()>414){
                         $(this).attr("src", "button/影片.png");
                         $(this).attr("picture", "button/影片");
 
                         rsrc = "button/影片";
+                    }
+                    else {
+                        //console.log("影片"+$(window).width);
+                        $(this).html('影片');
+                        
                     }
                     
                     if(currentid != ""){
@@ -163,13 +166,14 @@
                     //rotate = 1;
                 }
                 else{
-                    if($(window).width<=414){
-                        $(this).html('簡介');
-                    }
-                    else {
+                    if($(window).width()>414){
                         $(this).attr("src", "button/影片介紹.png");
                         $(this).attr("picture", "button/影片介紹");
                         rsrc = "button/影片介紹";
+                    }
+                    else {
+                        //console.log("簡介1"+$(window).width);
+                        $(this).html('簡介');
                     }
                     
                     //rotate = 0;
@@ -182,13 +186,14 @@
         // 有turn就要轉(只有返回鍵沒有turn)
         $(document).on("click",".turn",function(event){
             if(rotate==1){//每個按鍵都唱片盒轉回正面
-                if($(window).width<=414){
-                    $(".rotate").html('簡介');
-                }
-                else {
+                if($(window).width()>414){
                     $(".rotate").attr("src", "button/影片介紹.png");
                     $(".rotate").attr("picture", "button/影片介紹");
                     rsrc = "button/影片介紹";
+                }
+                else {
+                    //console.log("簡介2"+$(window).width);
+                    $(".rotate").html('簡介');
                 }
                 rotate = 0;
                 rotateDIV()
