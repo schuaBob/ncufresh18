@@ -118,7 +118,7 @@ th{
         float: right;
         vertical-align: middle;
         position: fixed;
-        bottom: 10vw;
+        bottom: 20vh;
         right:15px;
     }
     tr.admin{
@@ -163,20 +163,34 @@ th{
         /* height:50x; */
         width: 100%;
     }
+    /* 手機版的thead */
     th.type{
-        width:15vw;
+        width:25vw;
     }
     th.thTitle{
-        width:40vw;
+        width:45vw;
     }
     th.TIME{
-        width:15vw;
+        width:20vw;
     }
     th.HOT{
         width:10vw;
     }
+    /* 手機版的tbody */
     .notebook{
         display: none;
+    }
+    td.type{
+        width:25vw;
+    }
+    td.title{
+        width:40vw;
+    }
+    td.TIME{
+        width:15vw;
+    }
+    td.HOT{
+        width:10vw;
     }
     .modal{
         height:100%;
@@ -187,12 +201,22 @@ th{
     .search{
         float: left;
     }
+    /* 手機版的排序分類排版 */
     .classification{
         margin:20px;
         position: absolute;
         z-index: 5000;
     }
-    /* 回到頁面最頂端按鈕 */
+    a.nav-link{
+        text-align: center;
+    }
+    p.nav-link{
+        text-align: center;
+    }
+    button.nav-link{
+      margin: 0 auto;
+    }
+    /* 手機板回到頁面最頂端按鈕 */
     .goTop{
         background: url(移至頂端3.png) no-repeat;
         background-size: contain;
@@ -201,7 +225,7 @@ th{
         width: 40px;
         height:40px;
         position: fixed;
-        bottom: 5vw;
+        bottom: 5vh;
         right:10px;
     }
     /* 手機版的我要發問按鈕 */
@@ -214,7 +238,7 @@ th{
         color: white;
         border-color: white;
         position: fixed;
-        bottom: 21vw;
+        bottom: 20vh;
         right:10px;
         z-index: 5000;
     }
@@ -224,7 +248,7 @@ th{
 .title{
     /* 標題的寬度一定要設成px才能用text-overflow: ellipsis
     網址:https://stackoverflow.com/questions/17779293/css-text-overflow-ellipsis-not-working */
-    width:50%;
+    width:30%;
 }
 .Q{
     line-height: 2.3em;
