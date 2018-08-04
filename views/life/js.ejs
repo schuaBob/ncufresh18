@@ -98,17 +98,6 @@
             }
             var modal = document.getElementById('modal');
             var bgImg = document.getElementById('bgImg');
-            /*document.body.onclick = function(event){
-                if(ifOpen === 1){
-                    console.log(ifOpen);
-                    if(event.srcElement.id !== "bgImg"){
-                        console.log("suc2");
-                        modal.style.display = 'none';
-                        document.body.onclick = undefined;
-                        ifOpen = 0;
-                    }
-                }
-            }*/
             $('.picture').click(function(){
                 modal.style.display = 'block';
                 bgImg.src = this.src;
@@ -289,6 +278,7 @@
 
     $("#delete_picture").on("click", function(e){
         e.preventDefault();
+        if(!confirm("你確定要刪除目前的照片嗎")) return;
         var slides = document.getElementsByClassName("mySlides");
         var tofind;
         for(var i=0 ; i<slides.length ; i++){
@@ -323,8 +313,8 @@
         setInterval(function(){
             var slides = document.getElementsByClassName("mySlides");
             if(slides.length != 0){
-                plusSlides(-1);
+                plusSlides(1);
             }
-        }, 5000); 
+        }, 7000); 
     })
 </script>

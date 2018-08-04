@@ -104,6 +104,7 @@ hr{
     top: 38vh;
     margin-top: -55px;
     left: 50%;
+    margin-left: -2vh;
     font-size: 4vh;
     z-index: 2;
 }
@@ -138,7 +139,7 @@ hr{
 }
 .prev, .next{
     cursor: pointer;
-    position: absolute;
+    position: fixed;
     padding: 16px;
     top: 36%;
     width: auto;
@@ -150,7 +151,7 @@ hr{
     z-index: 3;
 }
 .next{
-    right: 0;
+    right: 8px;
     border-radius: 3px 0 0 3px;
 }
 .prev:hover, .next:hover {
