@@ -70,7 +70,7 @@ router.get('/', function (req, res, next) {
     qna.find({DeleteDate: {$exists: false}, Answer : {$nin:[""]}, Reason : ""}).sort({Click : 'desc'}).limit(10).exec(),
     schedule.find().exec()
   ]).then((result) => {
-    res.render('index/index', { title: '首頁', user: req.user, news : result[0], qna : result[1], schedule : result[2] });
+    res.render('index/index', { title: '首頁', user: req.user, news : result[0], qna : result[1], schedule : JSON.stringify(result[2]) });
   }).catch((err) => {
     return next(err);
   })
