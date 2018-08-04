@@ -15,6 +15,7 @@ ul li{
     }
     html, body{
         overflow-x: hidden;
+        overflow-y: hidden;
     }
 }
 .icon{
