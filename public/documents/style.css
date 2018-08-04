@@ -117,7 +117,7 @@ body::after{
 /*電腦大螢幕*/
 @media only screen and (min-width: 993px) {
     .modal-dialog {
-        max-width: 70%; 
+        max-width: 80%; 
     }
     /*太空人和太空艙排版及大小*/
     #man{     

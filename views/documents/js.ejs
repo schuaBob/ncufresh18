@@ -15,7 +15,8 @@
     
         //判斷是用電腦還手機
         let x= $(window).width(); 
-                //講話彩蛋
+        
+        //講話彩蛋
         var space_say = {
             placement: 'top',
             content:"乖，答應我不要亂玩背景(´Ａ｀。)"
@@ -31,6 +32,7 @@
         var space_enter=0;
         var man_enter1=0;
         var space_enter1=0;
+
         $("#space").mousedown(function(){
             space_enter++;
              if(space_enter==6){
@@ -45,8 +47,7 @@
             } 
         });
 
-        if(x>480){
-            $("#t_close").show();
+        if(x>520){
             $("#o_close").show();
             $("#b_close").hide();
             
@@ -78,11 +79,9 @@
         }
         else{
            // $("#edit").modal("hide");
-            $("#t_close").show();
-            $("#o_close").hide();
             $("#b_close").show();
-
-
+            $("#o_close").hide();
+           
         }
 
 
@@ -93,15 +92,12 @@
             let rx= $(window).width();
            
             if(rx>520){
-                $("#t_close").show();
-                $("#o_close").show();
+                $("#o_close").show();               
                 $("#b_close").hide();
             }
             else{
-                $("#t_close").hide();
                 $("#o_close").hide();
                 $("#b_close").show();
-
             }
        })
 
@@ -137,8 +133,8 @@
         $(".undergraduate").show();
 
         //判斷現在是大學生或研究生
-        var gra;
-        var under;
+        var gra=false;
+        var under=true;
 
         //大學生研究生選擇
         $(".gra").mousedown(function () {
@@ -171,7 +167,7 @@
             gra=false;
 
             //彩蛋，切換五次後火箭飛走
-            if(x>480){
+            if(x>520){
                 change++;
                 $("#space1").removeClass("space_fly");
                 if(change==5){       
