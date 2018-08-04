@@ -1,5 +1,5 @@
 /* 只有電腦板才有的 */
-@media only screen and (min-width:600px){
+@media only screen and (min-width:800px){
     body{
         background: url(關於我們背景正式.png);
         background-size: cover;
@@ -133,7 +133,7 @@
     }
 }
 /* 只有手機板才有的 */
-@media only screen and (max-width:600px){
+@media only screen and (max-width:800px){
     body{
         background: url(晶片.png);
         /* background-size: cover; */
