@@ -117,7 +117,7 @@ body::after{
 /*電腦大螢幕*/
 @media only screen and (min-width: 993px) {
     .modal-dialog {
-        max-width: 70%; 
+        max-width: 0%; 
     }
     /*太空人和太空艙排版及大小*/
     #man{     
@@ -266,16 +266,16 @@ body::after{
         
     }
     h2 a:hover,h2 a:active{
-        color: white;
+        color: #000093;
         text-decoration:none;
         font-size:40px;
     }
-    
+
 
     /*變大*/
     .big{
         font-size:40px;
-        color: white;
+        color: #000093;
         font-weight: bold;
 
     }
@@ -438,7 +438,7 @@ body::after{
         
     }
     h2 a:hover{
-        color: white;
+        color: #000093;
         position: relative; 
         top: 1px;
         left: 1px;
@@ -447,7 +447,7 @@ body::after{
     }
     .big{
         font-size:40px;
-        color: white;
+        color: #000093;
         font-weight: bold;
     }
     .small{
@@ -611,7 +611,7 @@ body::after{
     }
     /*字體大小有修*/
     h2 a:hover{
-        color: white;
+        color: #000093;
         position: relative; 
         top: 1px;
         left: 1px;
@@ -620,7 +620,7 @@ body::after{
     }
     .big{
         font-size:30px;
-        color: white;
+        color: #000093;
         font-weight: bold;
 
     }
@@ -781,7 +781,7 @@ body::after{
         
     }
     h2 a:hover{
-        color: white;
+        color: #000093;
         position: relative; 
         top: 1px;
         left: 1px;
@@ -792,7 +792,7 @@ body::after{
     /*變大*/
     .big{
         font-size:30px;
-        color: white;
+        color: #000093;
         font-weight: bold;
 
     }
