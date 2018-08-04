@@ -266,16 +266,17 @@ body::after{
         
     }
     h2 a:hover,h2 a:active{
-        color: #000093;
+        color: white;
         text-decoration:none;
         font-size:40px;
     }
-
+    
+    
 
     /*變大*/
     .big{
         font-size:40px;
-        color: #000093;
+        color: white;
         font-weight: bold;
 
     }
@@ -438,7 +439,7 @@ body::after{
         
     }
     h2 a:hover{
-        color: #000093;
+        color: white;
         position: relative; 
         top: 1px;
         left: 1px;
@@ -447,7 +448,7 @@ body::after{
     }
     .big{
         font-size:40px;
-        color: #000093;
+        color: white;
         font-weight: bold;
     }
     .small{
@@ -611,7 +612,7 @@ body::after{
     }
     /*字體大小有修*/
     h2 a:hover{
-        color: #000093;
+        color: white;
         position: relative; 
         top: 1px;
         left: 1px;
@@ -620,7 +621,7 @@ body::after{
     }
     .big{
         font-size:30px;
-        color: #000093;
+        color: white;
         font-weight: bold;
 
     }
@@ -781,7 +782,7 @@ body::after{
         
     }
     h2 a:hover{
-        color: #000093;
+        color: white;
         position: relative; 
         top: 1px;
         left: 1px;
@@ -792,7 +793,7 @@ body::after{
     /*變大*/
     .big{
         font-size:30px;
-        color: #000093;
+        color: white;
         font-weight: bold;
 
     }
