@@ -415,7 +415,9 @@ h5{
     #nav_a, #nav_i{
         font-size: 12px;
     }
-
+    h3{
+        font-size: 6.7vw;
+    }
     .nav{
         margin-top: 0%;
         margin-left: 27%;
@@ -594,7 +596,10 @@ h5{
         text-align: center;
         padding-left: .5rem;
     }
-    
+    .player{
+        width:80vw;
+        height: 50vw;
+    }
     
     .CDplayer{
         margin-left: 0%;
