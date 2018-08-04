@@ -27,9 +27,9 @@ var server = http.createServer(app);
 /**
  * Create HTTPS server.
  */
-//var https = require('https');
-//var httpsServer = https.createServer({key : fs.readFileSync("/var/ssl/live/csie.ncu.edu.tw/privkey.pem"), cert: fs.readFileSync("/var/ssl/live/csie.ncu.edu.tw/cert.pem"), ca : fs.readFileSync("/var/ssl/live/csie.ncu.edu.tw/chain.pem")}, app);
-//httpsServer.listen(3001);
+var https = require('https');
+var httpsServer = https.createServer({key : fs.readFileSync("/var/ssl/live/csie.ncu.edu.tw/privkey.pem"), cert: fs.readFileSync("/var/ssl/live/csie.ncu.edu.tw/cert.pem"), ca : fs.readFileSync("/var/ssl/live/csie.ncu.edu.tw/chain.pem")}, app);
+httpsServer.listen(3001);
 
 /**
  * Redirect HTTP request to HTTPS.
