@@ -2,6 +2,20 @@
 logs
 *.log
 
+# OS X
+.DS_Store*
+Icon?
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+.directory
+*~
+
 # Runtime data
 pids
 *.pid
@@ -28,7 +42,7 @@ node_modules
 
 # Debug log from npm
 npm-debug.log
-
+*.gz
 #macOS temp
 **/.DS_Store
 
@@ -39,4 +53,4 @@ package-lock.json
 .vscode/
 
 #server config 
-bin/www
+bin/
