@@ -295,6 +295,7 @@ button:hover {
     body{
         overflow-x:hidden;
     }
+    
     .modal{
         z-index: 4100;
         margin-top: 0%;

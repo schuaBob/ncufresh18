@@ -1,9 +1,10 @@
 <script>
     $(document).ready(function(){
-
         let y =$(window).height();
-        let h =(y-65)+"px"
+        let h =(y-120)+"px"
         document.body.style.setProperty('--height', h);
+
+        
         <%_ if (user && user.role === 'admin'){ -%>
 
         CKEDITOR.replace('add_introduction',{
@@ -134,5 +135,6 @@
                 }
             })
         })
+        
     });
 </script>
