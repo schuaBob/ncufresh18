@@ -39,10 +39,15 @@
                     <ul>
                         <%for (let i in result) {-%>
                             <%if(result[i]['Multi'] == 1){-%>
-
-                                <li class="elelist" idconnect="<%=result[i]['_id']%>" val="<%=result[i]['Type']%>">
-                                    <%=result[i]['Element_Name']%>
-                                </li>
+                                <%if (result[i]['Modalneed'] == 0 ) {-%>
+                                    <li class="elelist modalshow" idconnect="<%=result[i]['_id']%>" val="<%=result[i]['Type']%>">
+                                        <%=result[i]['Element_Name']%>
+                                    </li>
+                                <%}else{%>    
+                                    <li class="elelist" idconnect="<%=result[i]['_id']%>" val="<%=result[i]['Type']%>">
+                                        <%=result[i]['Element_Name']%>
+                                    </li>
+                                <%_}-%>
                             <%_}-%>
                         <%_}-%>
                     </ul>
