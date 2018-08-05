@@ -107,7 +107,7 @@
     }
     /* 團照 */
     .picture{
-        height:85%;
+        height:85vh;
         z-index: 0;
         position: absolute;
         top:35px;
