@@ -149,19 +149,19 @@
                 <% for(let i = 0; i<longvideo.length; i++){ %>
                     <td>
                         <img unselectable="on" src="button/1/光碟.png" video="longvideo" i=<%= i %> ytID='<%= longvideo[i].insert %>' class='cd item video_item_longvideo sbtn ssbtn turn <%= longvideo[i].title %>_cd'>
-                        <img cd="<%= longvideo[i].title %>_cd" cdsrc="button/1/光碟.png" src="button/1/<%= longvideo[i].title %>.png" video="longvideo" i=<%= i %> ytID='<%= longvideo[i].insert %>' class='box item video_item_longvideo video_item_longvideo_<%= i+1 %> sbtn ssbtn turn button'>
+                        <img cd="<%= longvideo[i].title %>_cd" cdsrc="button/1/光碟.png" src="button/1/<%= longvideo[i].title %>.png" video="longvideo" i=<%= i %> ytID='<%= longvideo[i].insert %>' class='box item video_item_longvideo video_item_longvideo_<%= i+1 %> sbtn ssbtn iframe turn button'>
                     </td>
                 <% } %>
                 <% for(let i = 0; i<QAvideo.length; i++){ %>
                     <td>
                         <img unselectable="on" src="button/2/<%= QAvideo[i].college %>光碟.png" video="QAvideo" i=<%= i %> ytID='<%= QAvideo[i].insert %>' class='cd disable item video_item_QAvideo_<%= QAvideo[i].college %> video_item_QAvideo_dep sbtn ssbtn turn <%= QAvideo[i].title %>_cd'>
-                        <img cd="<%= QAvideo[i].title %>_cd" cdsrc="button/2/<%= QAvideo[i].college %>光碟.png" src="button/2/<%= QAvideo[i].title %>.png" video="QAvideo" i=<%= i %> ytID='<%= QAvideo[i].insert %>' class='box item video_item_QAvideo_<%= QAvideo[i].college %> video_item_QAvideo_dep sbtn ssbtn turn button'>
+                        <img cd="<%= QAvideo[i].title %>_cd" cdsrc="button/2/<%= QAvideo[i].college %>光碟.png" src="button/2/<%= QAvideo[i].title %>.png" video="QAvideo" i=<%= i %> ytID='<%= QAvideo[i].insert %>' class='box item video_item_QAvideo_<%= QAvideo[i].college %> video_item_QAvideo_dep sbtn ssbtn iframe turn button'>
                     </td>
                 <% } %>
                 <% for(let i = 0; i<lifevideo.length; i++){ %>
                     <td>
                         <img unselectable="on" src="button/3/<%= lifevideo[i].title %>光碟.png"  video="lifevideo" i=<%= i %> ytID='<%= lifevideo[i].insert %>' class='cd disable item video_item_lifevideo sbtn ssbtn turn <%= lifevideo[i].title %>_cd'>
-                        <img cd="<%= lifevideo[i].title %>_cd" cdsrc="button/3/<%= lifevideo[i].title %>光碟.png" src="button/3/<%= lifevideo[i].title %>.png" video="lifevideo" i=<%= i %> ytID='<%= lifevideo[i].insert %>' class='box item video_item_lifevideo  video_item_lifevideo_<%= i+1 %> sbtn ssbtn turn button'>
+                        <img cd="<%= lifevideo[i].title %>_cd" cdsrc="button/3/<%= lifevideo[i].title %>光碟.png" src="button/3/<%= lifevideo[i].title %>.png" video="lifevideo" i=<%= i %> ytID='<%= lifevideo[i].insert %>' class='box item video_item_lifevideo  video_item_lifevideo_<%= i+1 %> sbtn ssbtn iframe turn button'>
                     </td>
                 <% } %>
 
@@ -182,13 +182,13 @@
                     <tr>
                         <!-- <td id="scrolltd"><button type='button' disabled class='video_item_QAvideo video_item_lifevideo item btn sbtn btn-outline-item turn video_item_longvideo  video_item_QAvideo_c1 video_item_QAvideo_c2 video_item_QAvideo_c3 video_item_QAvideo_c4 video_item_QAvideo_c5 video_item_QAvideo_c6 video_item_QAvideo_c7 video_item_QAvideo_c8'>文學院</button></td> -->
                         <% for(let i = 0; i<longvideo.length; i++){ %>
-                            <td><button unselectable="on" i=<%= i %> type='button' ytID='<%= longvideo[i].insert %>' class='item video_item_longvideo sbtn ssbtn btn-outline-item turn'><%= longvideo[i].title %></button></td>
+                            <td><button unselectable="on" i=<%= i %> type='button' ytID='<%= longvideo[i].insert %>' class='item video_item_longvideo sbtn ssbtn iframe btn-outline-item turn'><%= longvideo[i].title %></button></td>
                         <% } %>
                         <% for(let i = 0; i<QAvideo.length; i++){ %>
-                            <td><button unselectable="on" i=<%= i %> type='button' href="#<%= QAvideo[i].title %>" ytID='<%= QAvideo[i].insert %>' class='item video_item_QAvideo_<%= QAvideo[i].college %> video_item_QAvideo_dep sbtn ssbtn btn-outline-item turn'><%= QAvideo[i].title %></button></td>
+                            <td><button unselectable="on" i=<%= i %> type='button' href="#<%= QAvideo[i].title %>" ytID='<%= QAvideo[i].insert %>' class='item video_item_QAvideo_<%= QAvideo[i].college %> video_item_QAvideo_dep sbtn ssbtn iframe btn-outline-item turn'><%= QAvideo[i].title %></button></td>
                         <% } %>
                         <% for(let i = 0; i<lifevideo.length; i++){ %>
-                            <td><button unselectable="on" i=<%= i %> type='button' ytID='<%= lifevideo[i].insert %>' class='item video_item_lifevideo sbtn ssbtn btn-outline-item turn'><%= lifevideo[i].title %></button></td>
+                            <td><button unselectable="on" i=<%= i %> type='button' ytID='<%= lifevideo[i].insert %>' class='item video_item_lifevideo sbtn ssbtn iframe btn-outline-item turn'><%= lifevideo[i].title %></button></td>
                         <% } %>
     
                         <td><button unselectable="on" type='button' video="QAvideo" class='item video_item_QAvideo sbtn btn-outline-item turn' college='c1'>文學院</button></td>
