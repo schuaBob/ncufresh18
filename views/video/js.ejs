@@ -34,8 +34,26 @@
     //         });
     //     })
     // }
+
+    //點到再載入youtube api
+    function onYouTubeIframeAPIReady() {//此函數在IFrame Player API code 載入後將自動呼叫
+        $(document).on("click",".iframe",function(event){
+            let id=$(this).attr("ytID");
+            //console.log(id)
+            player[id] = new YT.Player(id, {
+                height: '390',
+                width: '640',
+                videoId: id, //Youtube ID
+                enablejsapi: 1,
+                controls: 2,
+                origin: 'http://ncufresh.ncu.edu.tw'
+
+            });
+
+            $(this).removeClass("iframe");
+        })
     
-     
+    }
     
    
     $(document).ready(() => {
@@ -453,20 +471,7 @@
                 
         })
 
-        //點到再載入youtube api
-        $(document).on("click",".ssbtn",function(event){
-            let id=$(this).attr("ytID");
-            //console.log(id)
-            player[id] = new YT.Player(id, {
-                height: '390',
-                width: '640',
-                videoId: id, //Youtube ID
-                enablejsapi: 1,
-                controls: 2,
-                origin: 'http://ncufresh.ncu.edu.tw'
-
-            });
-        })
+        
 
 
         
