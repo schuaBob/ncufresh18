@@ -291,7 +291,6 @@ function colorEgg() {
     }
 }
 
-
 // 遊戲主體長寬
 var width = 800
 var height = 600
@@ -299,11 +298,12 @@ var rankClick = 0
 var bgMusicFlag = 0
 var bgMusicBack = 0
 var game = new Phaser.Game(width, height, Phaser.CANVAS, 'game')
-
 var states = {
     // 加载场景, 載入資源
     preload: function() {
         this.preload = function() {
+            // 阻止點擊遊戲區域外后遊戲暫停
+            game.stage.disableVisibilityChange = true   
             // 禁止手機版
             if (!this.game.device.desktop == true) {
                 alert('あのね、あのね，請在電腦端體驗小遊戲喔喔喔~')
@@ -385,6 +385,7 @@ var states = {
     // 开始界面
     main: function() {
         this.create = function() {
+            game.stage.disableVisibilityChange = true   
             // 遊戲背景音樂
             if (bgMusicFlag !== 1 && !bgMusicBack) {
                 bgMusic = game.add.audio('bgMusic', 1, true).play()
@@ -415,6 +416,7 @@ var states = {
                     bgMusicFlag = 0
                     bgMusic.stop()
                 }
+                // console.log("bgMusicFlag: " + bgMusicFlag)
             }
 
             // 松鼠圖片
@@ -423,7 +425,7 @@ var states = {
             // 遊戲介紹圖片
             var introduction = game.add.sprite(0, 0, 'gamerules').alignIn(bg, Phaser.BOTTOM_CENTER)
             introduction.visible = false
-            var quit = game.add.button(0, 0, 'quit', btnBackClick).alignIn(bg, Phaser.BOTTOM_RIGHT, 0, -550)
+            var quit = game.add.button(0, 0, 'quit', buttonForIntroQuit).alignIn(bg, Phaser.BOTTOM_RIGHT, 0, -550)
             quit.visible = false
             
             // 按鈕
@@ -450,6 +452,12 @@ var states = {
                 quit.visible = true
             }
         
+            function buttonForIntroQuit() {
+                introduction.visible = false
+                mainUI.visible = true
+                quit.visible = false
+            }
+
             var mainUI = game.add.group()
             mainUI.add(squirrel)
             mainUI.add(buttonStart)
@@ -463,6 +471,7 @@ var states = {
     // 遊戲 play 界面
     start: function() {
         this.create = function() {
+            game.stage.disableVisibilityChange = true   
             var combo = 0
             var score = 0
             var remainTime = 60
@@ -500,6 +509,7 @@ var states = {
                     bgMusicFlag = 0
                     bgMusicBack = 1
                 }
+                console.log("bgMusicFlag: " + bgMusicFlag)
             }
 
             // 返回按鈕            
@@ -717,7 +727,7 @@ var states = {
                 // 中文換行處理
                 formatChinese(questionSprite.label, questionSprite)
                 choices = [btnChoiceA, btnChoiceB, btnChoiceC, btnChoiceD]
-                console.log("correctIndex:" + data.correctIndex)
+                // console.log("correctIndex:" + data.correctIndex)
                 // 設定正確選擇
                 for (i = 0; i < choices.length; i++) {
                     choices[i].setLabel(data.o[i])
@@ -784,10 +794,7 @@ var states = {
                             game.add.tween(scoreUI).to({y: scoreUI.y - 40}, 1000, Phaser.Easing.Bounce.Out, true)         
                             game.add.tween(game.camera).to({y: game.camera.y - 40}, 500, Phaser.Easing.Linear.None, true)
                         } 
-                        // else if (game.camera.y <= 40) {
-                        //     createCute()
-                        // }
-                            setTimeout(resetQuestionAndChoice, 500, data[count], item)
+                        setTimeout(resetQuestionAndChoice, 500, data[count], item)
                     } else {
                         // 音樂
                         game.add.audio('wrong', 1).play()
@@ -824,10 +831,11 @@ var states = {
     
     rank: function () {
         this.create = function() {
+            game.stage.disableVisibilityChange = true   
             var rank = game.add.image(game.camera.x, game.camera.y, 'rankStage')
             var alignLineY = 117
-            var alignLine = game.add.group()
             var rankLeftImage = game.add.group()
+            var alignLine = game.add.group()
             var rankLeft = game.add.group()
             var rankLeftSprite = rankLeftImage.create(0, 0, 'rankLeft').alignIn(rank, Phaser.LEFT_CENTER, 0, 70)
             rankLeftSprite.alpha = 0
@@ -875,7 +883,7 @@ var states = {
                 for(let i = 3; i < bubbleLength; i++) {
                     setTimeout(function () {
                         var rankLine = game.add.group()
-                        var hhh = alignLine.create(415, alignLineY, 'rankBubble');
+                        var rankBubble = game.add.sprite(415, alignLineY, 'rankBubble');
                         var scoreText = game.add.text(0, 0, '分數: ', style).alignTo(rankSum, Phaser.BOTTOM_RIGHT, -80, alignLineY - 85);
                         if (type === 'sum') {
                             var scoreShow = game.add.text(0, 0, data[i].score_sum, styleNum).alignTo(scoreText, Phaser.RIGHT_CENTER);
@@ -890,9 +898,11 @@ var states = {
                         rankLine.add(nth);
                         rankLine.add(textName);
                         rankLine.setAll('alpha', 1);
+                        alignLine.add(rankBubble)
                         
-                        game.add.tween(hhh).from({alpha: 0}, 1500, Phaser.Easing.Exponential.In, true);
+                        game.add.tween(rankBubble).from({alpha: 0}, 1500, Phaser.Easing.Exponential.In, true);
                         game.add.tween(rankLine).from({alpha: 0}, 1500, Phaser.Easing.Exponential.In, true);    
+                        // rankLine.callAll('bringToTop')
                         alignLineY += 68.5;
                     },  i * 200)
                 }
