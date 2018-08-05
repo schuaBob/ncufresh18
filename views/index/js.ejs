@@ -48,4 +48,80 @@
     }
     schedule.sort(function(a, b){return a.week-b.week}).sort(function(a, b){return a.year-b.year});
     console.log(schedule)
+    <%_ /* -%>
+    <div>
+        <div class="timeline-container left">
+            <div class="content">
+                <h2></h2>
+                <ul>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <%_ */ -%>
+    var leftOrNot = true;
+    var curWeek;
+    var curYear;
+    var tempDiv = document.createElement('div');
+    var QQQQQ = document.getElementById("QQQQQ");
+    for(var i = 0;i< schedule.length;i++){
+        curWeek = schedule[i].week;
+        curYear = schedule[i].year;
+
+        var dateH2 = document.createElement('h2');
+        dateH2.innerHTML = ((new Date(schedule[i].time)).getMonth()+1) + "/" +(new Date( schedule[i].time)).getDate();
+
+        var theUl = document.createElement('ul');
+        for (var j = 0;j<schedule[i].content.length;j++){
+            var temp = document.createElement('li');
+            temp.innerHTML = schedule[i].content[j];
+            theUl.appendChild(temp);
+        }
+
+        var contentDiv = document.createElement('div');
+        contentDiv.classList.add("content");
+        contentDiv.appendChild(dateH2);
+        contentDiv.appendChild(theUl);
+        
+        var timelineDiv = document.createElement('div');
+        timelineDiv.classList.add("timeline-container");
+        timelineDiv.classList.add((leftOrNot ? "left" : "right"));
+        leftOrNot = (leftOrNot ? false : true);
+        timelineDiv.appendChild(contentDiv);
+        tempDiv.appendChild(timelineDiv);
+        
+        if( i + 1 < schedule.length){
+            if ((curWeek !== schedule[i+1].week) || (curYear !== schedule[i+1].year)){
+                tempDiv.setAttribute("id",curWeek+"-"+curYear);
+                QQQQQ.appendChild(tempDiv);
+                tempDiv = document.createElement('div');
+            }
+        }else{
+            tempDiv.setAttribute("id",curWeek+"-"+curYear);
+            QQQQQ.appendChild(tempDiv);
+        }
+    }
+
+    var currentWeek = $("#"+getWeekNumber(new Date())[1]+"-"+getWeekNumber(new Date())[0]);
+    if(currentWeek.length !== 0){
+        currentWeek.velocity("scroll", { 
+            container: $("#QQQQQ"),
+            duration: 800,
+            delay: 500
+        })
+    }else{
+        for (var i = schedule.length-1;i>=0;i--){
+            // llllll
+        }
+    }
+
+    // var tr = document.createElement('tr');
+    // var td1 = document.createElement('td');
+    // var td2 = document.createElement('td');
+    // var input = document.createElement('input');
+    // input.setAttribute('type', 'text'); input.setAttribute('name', 'content');
+    // var button = document.createElement('button'); button.setAttribute('type', 'button');
+    // button.innerHTML = '刪除此項'; button.setAttribute('onclick', 'this.parentNode.parentNode.remove()'); td1.appendChild(input); td2.appendChild(button); tr.appendChild(td1); tr.appendChild(td2);
+    // this.parentNode.children[0].children[0].appendChild(tr);
 </script>
