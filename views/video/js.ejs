@@ -1,13 +1,13 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.1.0/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
-
+<script src='https://www.youtube.com/iframe_api' async></script>
 
 <script>
     //載入IFrame Player API code
-    var tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    // var tag = document.createElement('script');
+    // tag.src = "https://www.youtube.com/iframe_api";
+    // var firstScriptTag = document.getElementsByTagName('script')[0];
+    // firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
     // x:當前旋轉目標 nx:當前div旋轉度數 rotate:目前為正面(0)或背面(1) end:旋轉是否結束
     let x, nx=0, rotINT, rotate = 0, end = 1;
@@ -35,7 +35,7 @@
     //     })
     // }
 
-    //點到再載入youtube api
+    //點到再載入youtube影片
     function onYouTubeIframeAPIReady() {//此函數在IFrame Player API code 載入後將自動呼叫
         $(document).on("click",".iframe",function(event){
             let id=$(this).attr("ytID");
