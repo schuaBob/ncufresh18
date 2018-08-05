@@ -3,7 +3,7 @@
     .nav-toggle-btn {
         top:150px;
         position: absolute;
-        left: 35px;
+        left: 4vw;
     }
     /* 列表 */
     .navi {
@@ -39,7 +39,7 @@
         height:100px;
         top:15vh;
         transform: translate(-75px);
-        transition: transform 1s ease;
+        
         position: fixed;
     }
     /* 各組列表 */
@@ -97,6 +97,7 @@
     height:100px;
     z-index: 1800;
     display: block;
+    transition: transform 1s ease;
     
 }
 .nav-toggle-btn.active-nav{
@@ -105,6 +106,8 @@
 .dropdown-item{
     line-height: 2.2;
     color: white;
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
 }
 a{
     color: white;
@@ -116,9 +119,15 @@ a{
 .naviBtn{
     height:20px;
     width:100px;
+    margin: 0 auto;
 }
 .elev{
     float: left;
     /* left:0; 這樣寫fullpage會壞掉不知為何*/
     width:23vw;
+}
+a.markting{
+    background: url(行銷企劃組_去被.png);
+    background-size:contain;
+    width:1
 }
