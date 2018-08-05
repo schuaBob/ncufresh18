@@ -90,12 +90,12 @@ thead{
 tbody{
     float:center;
     display: block;
-    height: 38vh;
+    height: 39.5vh;
     overflow-y: scroll;
     border-collapse: collapse;
     text-align: center;
     margin-left: 15%;
-    margin-top: 5%;
+    margin-top: 2%;
     width:29vw;
 
 }
@@ -314,10 +314,10 @@ td{
         z-index: 4100;
         margin-top: 0%;
     }
-    /* .modal .modal-body {
+    .modal .modal-body {
         height: var(--height);
         overflow: auto;
-    } */
+    }
     #nav_a{
         font-size: 12px;
     }
@@ -432,7 +432,7 @@ td{
     
     tbody{
         display: block;
-        height: 35vh;
+        height: 35.4vh;
         overflow-y: scroll;
         overflow-x: scroll;
         border-collapse: collapse;

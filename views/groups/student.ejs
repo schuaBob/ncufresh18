@@ -23,7 +23,6 @@
         <div id="stu_title">
             <img src="學生會標題_去被.png" class="main"><br>
         </div>
-        <% for(var i in student) {%>
         <div id="stu_button">
             <img src="圖片1.png" class="button_place">
             <a data-toggle="modal" data-target="#intro">
@@ -33,10 +32,9 @@
                 <img class="stu_branch" src="/groups/部門介紹按鈕_去被.png">
             </a>
             <a data-toggle="modal" data-target="#stumodal">
-                <img class="stu_activity open" src="/groups/活動剪影按鈕_去被.png" search="<%= student[i]._id %>">
+                <img class="stu_activity open" src="/groups/活動剪影按鈕_去被.png" search="<%= student[0]._id %>">
             </a>
         </div>
-        <% } %>
 
         <%_ if (user && user.role === 'admin'){ -%>
         <!-- 新增圖片按鈕 -->
