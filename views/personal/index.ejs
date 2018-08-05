@@ -62,12 +62,12 @@
                                                 <td class="Q"><p class="qt"><%= question[a].Title %></p></td>
                                                 <td id="sta">已審核</td>
                                                 <td id="ope">
-                                                    <a data-toggle="modal" data-target="#answer">
+                                                    <a data-toggle="modal" data-target="#<%=  question[a].id %>">
                                                         <button>查看</button>
                                                     </a>
                                                 </td>
                                             </tr>
-                                            <div class="modal fade bd-example-modal-lg" id="answer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                            <div class="modal fade bd-example-modal-lg" id='<%=  question[a].id %>' tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content QA">
                                                         <div class="modal-header">
