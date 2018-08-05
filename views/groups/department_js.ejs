@@ -18,6 +18,10 @@
 
     $(document).ready(function(){
         
+        let y =$(window).height();
+        let h =(y-120)+"px"
+        document.body.style.setProperty('--height', h);
+
         /* club的方法太冗長,利用for迴圈縮減篇幅 */
         let depart_type = [["文學院","literature"],["理學院","science"],["管理學院","management"],["工學院","engineering"],["資訊電機學院","csee"],["地球科學學院","earth"],["客家學院","hakka"],["生醫理工學院","chst"]]
 

@@ -8,6 +8,7 @@
     <% /* This following line is only necessary in the case of using the option `scrollOverflow:true` */%>
     <% /* <script type="text/javascript" src="vendors/scrolloverflow.min.js"></script> */%>
     <script type="text/javascript" src="about/fullPage.js-master/dist/fullpage.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
     <style>
         .slider_container{
             width:  100%;
@@ -191,9 +192,6 @@
             border-radius: 0 0 2% 2%;
             background-color: rgba(255,255,255,0.9);
         }
-        /* #qna-halo:hover, #news-halo:hover {
-
-        } */
     </style>
     <style>
         * {
@@ -201,7 +199,6 @@
         }
 
         #scrolling {
-            height: 100%;
             overflow: scroll;
         }
         
@@ -402,17 +399,42 @@
                     </div>
                 </div>
             </div>
-            <div class="section">
+            <div class="section fp-auto-height">
+                <div>
+                    <h1 class="mx-auto">近期日程</h1>
+                </div>
+                <div class="week-btn bg-light">
+                    <h3>前一周</h3>
+                </div>
                 <div id="scrolling">
-                    <div class="timeline">
-                        <div class="timeline-container left">
-                            <div class="content">
-                            <h2>2017</h2>
-                            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+                    <div class="timeline" id="QQQQQ">
+                        <%_ /* -%>
+                        <%_ let ooo = true; -%>
+                        <%_ for (let i = 0;i<10;i++){ -%>
+                            <div>
+                                <%_ for (let i = 0;i<10;i++){ -%>
+                                <div class="timeline-container <%= (ooo ? 'left' : 'right') %>">
+                                    <div class="content">
+                                    <h2>08/01</h2>
+                                    <ul>
+                                        <li>aaaaa</li>
+                                        <li>aaaaa</li>
+                                        <li>aaaaa</li>
+                                        <li>aaaaa</li>
+                                        <li>aaaaa</li>
+                                    </ol>
+                                    </div>
+                                </div>
+                                <%_ ooo = (ooo ? false : true); -%>
+                                <%_ } -%>
                             </div>
-                        </div>
+                        <%_ } -%>
+                        <%_ */ -%>
                     </div>
                 </div>
+                <div class="week-btn bg-light">
+                    <h3>後一週</h3>
+                </div>                
             </div>
         </div>
 

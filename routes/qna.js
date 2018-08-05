@@ -161,25 +161,49 @@ router.get('/search',function(req,res,next){
   if(req.query.keyword){
     console.log(req.query.keyword);
     //模糊查詢參數，標題跟答案都要找
-    Question.find({$or : [ {Title : {$regex : req.query.keyword}},{Answer : {$regex :req.query.keyword}}]}).exec(function(err,question,rule){
-      if(err){return next(err)};
-      //轉換時間欄位
-      var Time = function(date) {
-        var year=date.getYear();
-        var monthIndex = date.getMonth();
-        var day = date.getDate();
-        var time = (year+1900) + '/' + (++monthIndex) + '/' + day;
-        return time;
-      }
-      var rule=0;
-      res.render('qna/index', { 
-        title: '新生Ｑ＆Ａ ｜ 新生知訊網',
-        question:question,
-        rule:rule,
-        Time:Time,
-        user:req.user
+    if(req.user && req.user.role==="admin"){
+      Question.find({DeleteDate: {$exists: false},$or : [ {Title : {$regex : req.query.keyword}},{Answer : {$regex :req.query.keyword}},{Content : {$regex :req.query.keyword}}]}).exec(function(err,question,rule){
+        if(err){return next(err)};
+        //轉換時間欄位
+        var Time = function(date) {
+          var year=date.getYear();
+          var monthIndex = date.getMonth();
+          var day = date.getDate();
+          var time = (year+1900) + '/' + (++monthIndex) + '/' + day;
+          return time;
+        }
+        var rule=0;
+        res.render('qna/index', { 
+          title: '新生Ｑ＆Ａ ｜ 新生知訊網',
+          question:question,
+          rule:rule,
+          Time:Time,
+          user:req.user
+        });
       });
-    });
+    }
+    else{
+          Question.find({Answer:{$nin:[""]},Reason:{$in:[""]},DeleteDate: {$exists: false},$or : [ {Title : {$regex : req.query.keyword}},{Answer : {$regex :req.query.keyword}},{Content : {$regex :req.query.keyword}}]}).exec(function(err,question,rule){
+            if(err){return next(err)};
+            //轉換時間欄位
+            var Time = function(date) {
+              var year=date.getYear();
+              var monthIndex = date.getMonth();
+              var day = date.getDate();
+              var time = (year+1900) + '/' + (++monthIndex) + '/' + day;
+              return time;
+            }
+            var rule=0;
+            res.render('qna/index', { 
+              title: '新生Ｑ＆Ａ ｜ 新生知訊網',
+              question:question,
+              rule:rule,
+              Time:Time,
+              user:req.user
+            });
+          });
+
+    }
   }
 });
 

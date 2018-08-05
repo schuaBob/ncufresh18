@@ -38,7 +38,7 @@ main{
 #grid-block p{
     color:  white ;
     text-align: center;
-    font-family: 'Itim', cursive ;
+    font-family: 'Itim', cursive !important;
 }
 
 .time {
