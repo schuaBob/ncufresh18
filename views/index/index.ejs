@@ -192,6 +192,14 @@
             border-radius: 0 0 2% 2%;
             background-color: rgba(255,255,255,0.9);
         }
+        main {
+            padding-bottom: 24px;
+        }
+        #prvweek, #nextweek {
+            font-size: 1.5em;
+            margin-left: calc((100vw - 72px)/2);
+            margin-right: calc((100vw - 72px)/2);
+        }
     </style>
     <style>
         * {
@@ -199,7 +207,7 @@
         }
 
         #scrolling {
-            overflow: scroll;
+            overflow: hidden;
         }
         
         /* The actual timeline (the vertical ruler) */
@@ -401,10 +409,10 @@
             </div>
             <div class="section fp-auto-height">
                 <div>
-                    <h1 class="mx-auto">近期日程</h1>
+                    <h1 class="mx-auto text-center">近期日程</h1>
                 </div>
-                <div class="week-btn bg-light">
-                    <h3>前一周</h3>
+                <div class="week-btn">
+                    <b id="prvweek">前一周</b>
                 </div>
                 <div id="scrolling">
                     <div class="timeline" id="QQQQQ">
@@ -432,9 +440,9 @@
                         <%_ */ -%>
                     </div>
                 </div>
-                <div class="week-btn bg-light">
-                    <h3>後一週</h3>
-                </div>                
+                <div class="week-btn">
+                    <b id="nextweek">後一週</b>
+                </div>
             </div>
         </div>
 
