@@ -286,6 +286,13 @@ $(document).ready(() => {
         filebrowserUploadUrl: '/uploader',
         });
     });
+    $('.rule111').each(function(e){
+        CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
+        CKEDITOR.config.shiftEnterMode = CKEDITOR.ENTER_BR; 
+        CKEDITOR.replace(this.id,{
+        filebrowserUploadUrl: '/uploader',
+        });
+    });
     //刪除問題
     // $('.deleteQ').on('click', function() {
     //   if (confirm("確定要刪除嗎？")) {

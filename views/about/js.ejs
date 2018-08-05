@@ -154,10 +154,11 @@ $(document).ready(() => {
             $('.navi').hide();
             $('.laser').hide();
         $('.nav-toggle-btn').on('click', function(e) {
-            $('.dropdown-menu').toggleClass('active-nav');
+            // $('.dropdown-menu').toggleClass('active-nav');
             $('.nav-toggle-btn').toggleClass('active-nav');
             $('.navi').slideToggle(1500);
             $('.laser').slideToggle(1500);
+            // $('.navi').dropdown();
             e.preventDefault();
         });
     }
