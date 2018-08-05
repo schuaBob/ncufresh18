@@ -11,6 +11,7 @@
         top:250px;
         overflow: auto;
         width:15vw;
+        left:0.5vw;
     }
     .laser{
         position: absolute;
@@ -47,8 +48,9 @@
         position: fixed;
         top:35vh;
         overflow: auto;
-        width:230px;
+        width:200px;
         height:300px;
+        left: 0vw;
     }
     .laser{
         position: fixed;
@@ -77,7 +79,6 @@
 .navi {
     /* background: url(雷射群按鈕去被.png) no-repeat;
     background-size: contain; */
-    left:0.5vw;
     z-index: 2000;
     overflow: auto;
     background-color: rgba(255, 255, 255, 0);
@@ -116,10 +117,15 @@ a{
     position: absolute;
     /* left:100px; */
 }
+/* 文字圖片 */
 .naviBtn{
     height:20px;
     width:100px;
-    margin: 0 auto;
+}
+a{
+    display:block; 
+    margin:auto;
+    text-align: center;
 }
 .elev{
     float: left;
