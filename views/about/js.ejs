@@ -36,7 +36,7 @@ $(document).ready(() => {
     //切換logo跟字樣
     $(window).on('hashchange', function() {
         var hash = window.location.hash.substr(1);
-        console.log(hash);
+        //console.log(hash);
         if(hash==="markting"){
             $(".logo").addClass("marktingLogo");
             $(".logo").removeClass("programmingLogo");
@@ -137,12 +137,13 @@ $(document).ready(() => {
     //fullpage
     $('#fullpage').fullpage({
 		//options here
-		autoScrolling:false,
+		autoScrolling:true,
 		scrollHorizontally: true
     });
     $.fn.fullpage.setAllowScrolling(false);
     new fullpage('#fullpage', {
         navigation: true,
+        resize:true,
         responsiveWidth: 700,
         anchors: ['all','markting', 'programming', 'art', 'video', 'ceo'],
     });

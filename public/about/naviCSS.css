@@ -10,7 +10,7 @@
         position: absolute;
         top:250px;
         overflow: auto;
-        width:23vw;
+        width:15vw;
     }
     .laser{
         position: absolute;
@@ -37,7 +37,7 @@
     .nav-toggle-btn {
         width: 150px;
         height:100px;
-        top:20vw;
+        top:15vh;
         transform: translate(-75px);
         transition: transform 1s ease;
         position: fixed;
