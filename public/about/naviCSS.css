@@ -104,7 +104,7 @@
 .nav-toggle-btn.active-nav{
     transform: translate(35px);
 }
-.dropdown-item{
+.group{
     line-height: 2.2;
     color: white;
     padding-left: 0.1rem;
