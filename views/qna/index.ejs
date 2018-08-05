@@ -207,7 +207,7 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <div class="modal-body"><p id="show-rule-content"></p></div>
+                                        <div class="modal-body"><p id="show-rule-content" style = "white-space: pre"></p></div>
                                         <div class="modal-body"></div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-primary closemodal" data-dismiss="modal">　O K　</button>
@@ -228,7 +228,7 @@
                                         <form name="update" action="/qna/updateR/<%= rule[j].id %>" method="post">
                                                 <div class="modal-body">
                                                     <br>
-                                                    <textarea id="answer1" required="required" name="Content" rows="5"><%= rule[j].Content %></textarea>  
+                                                    <textarea class="rule111" id="<%= j %>" required="required" name="Content" rows="5"><%= rule[j].Content %></textarea>  
                                                 </div>
                                                 <div class="modal-footer">
                                                     <input class="btn btn-primary submit submitbtn" type="submit" value="更改板規"></input>
@@ -344,7 +344,7 @@
                                                     <div class="modal-body"><h5>Answer 答案</h5></div>
                                                     <div class="modal-body"><h5>編輯答案</h5>
                                                         <br>
-                                                        <textarea id="answer111 <%= i %>"  class="answer111" required="required" name="Answer" rows="5"><%= question[i].Answer %></textarea>  
+                                                        <textarea id="<%= i %>"  class="answer111" required="required" name="Answer" rows="5"><%= question[i].Answer %></textarea>  
                                                     </div>
                                                     <div class="modal-footer">
                                                         <input class="btn btn-primary submit submitbtn" type="submit" value="更改答案">
