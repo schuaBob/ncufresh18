@@ -154,7 +154,7 @@ body {
   position: relative;
   display: flex;
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: 15px;
   margin-left: 80px;
   margin-right: 80px;
   padding: 0;
@@ -177,6 +177,7 @@ body {
 .main_list_detail {
   position: absolute;
   float: right;
+  top: 1%;
   right: 2%;
   width: 25%;
   z-index: 5;
@@ -191,7 +192,7 @@ body {
   margin-right: 0;
   margin-left: 0;
   padding: 0;
-  max-height: 60vh;
+  max-height: 40vh;
   overflow-y: scroll;
   margin-bottom: 15px;
 }
@@ -403,7 +404,7 @@ li {
   width: 100%;
 }
 
-@media only screen and (max-width: 843px) {
+@media only screen and (max-width: 770px) {
   .modal{
     z-index: 4001;
   }
@@ -482,7 +483,7 @@ li {
   }
   .main_list_detail {
     position: absolute;
-    bottom: calc(46vw - 8vw);
+    bottom: 0;
     width: 100vw;
     margin: 0;
     float: none;
