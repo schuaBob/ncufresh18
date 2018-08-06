@@ -57,6 +57,7 @@ th{
     th.thTitle{
         width:30%;
     }
+    /* table的外框 */
     .notebook{
         background: url(外框.png);
         background-size: 100% 2.3em;
@@ -72,19 +73,7 @@ th{
         width:10%;
         text-align: center;
     }
-    /* table的外框 */
-    /* tr::before{
-        background-color:transparent; 
-        content:"";
-        display: inline-block;
-        background-image:url(外框.png);
-        background-size:50px 50px;
-        width: 50px;
-        height:53px;
-        margin: 0;
-        margin-top: calc((4.6em - 1rem - 20vh)/2);
-        margin-bottom: calc((4.6em - 1rem - 20vh)/2);;
-    } */
+    
     /* 分類排序的顏色 */
     .classfi{
         color:white;
@@ -137,6 +126,11 @@ th{
     }
     .classificationBtn{
         display:none;
+    }
+    /* 選到的分類/排序的切換 */
+    .onclick{
+        background-color:#29ABE2 !important;
+        border-radius:20px !important;
     }
 }
         
@@ -216,6 +210,11 @@ th{
     button.classfi{
       margin: 0 auto;
     }
+    /* 選到的分類/排序的切換 */
+    .onclick{
+        color:#29ABE2;
+        font-weight:bold;
+    }
     /* 手機板回到頁面最頂端按鈕 */
     .goTop{
         background: url(移至頂端3.png) no-repeat;
@@ -269,8 +268,12 @@ td{
 /* th{
     width:120px;
 } */
-li{
+/* li{
     height:40px;
+} */
+/* 滑鼠移動到按鈕上面會變色的動畫 */
+.mouseOn{
+    color: #0056b3;
 }
 .article{
     text-align: left;
