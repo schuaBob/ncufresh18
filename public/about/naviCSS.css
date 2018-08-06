@@ -43,34 +43,17 @@
 @media only screen and (max-width:800px){
     /* 飛碟按鈕 */
     .nav-toggle-btn {
-        background-size: contain !important; 
-        width: 120px;
-        height:80px;
-        top:50px;
-        transform: translate(-60px);
-        position: fixed;
+        display: none;
     }
     /* 各組列表 */
-    .naviPlusLaser{
-        overflow-y: auto;
-    }
     .group{
         line-height: 1.7;
     }
     .navi {
-        position: fixed;
-        top:120px;
-        overflow-y: auto;
-        width:200px;
-        height:300px;
-        left: 0vw;
+        display: none;
     }
     .laser{
-        position: fixed;
-        top:100px;
-        width:280px;
-        height:250px;
-        overflow-y: auto;
+        display: none;
     }
     .elev{
         display: none;
