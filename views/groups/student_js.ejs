@@ -45,7 +45,6 @@
         }
         
         $('.open').click(function (event) {
-            //console.log(event);
             $.ajax({
                 url: "stumodal?id=" + event.currentTarget.attributes.search.value,
                 method: "GET",
@@ -53,7 +52,6 @@
 
                 },
                 success: function (data_stu) {
-                    console.log(data_stu);
                     $('#stumodal .acti').html(data_stu.activity)
                     for (let i = 0; i < data_stu.act_pic.length; i++) {
                         $('#carouselExampleIndicator1 .carousel-indicators').append("<li data-target='#carouselExampleIndicator1' data-slide-to='" + i + "'></li>")

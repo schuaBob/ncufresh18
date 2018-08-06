@@ -92,7 +92,6 @@
         }
 
         $('.open').click(function (event) {
-            //console.log(event);
             $.ajax({
                 url: "clubmodal?id=" + event.currentTarget.attributes.search.value,
                 method: "GET",
@@ -100,7 +99,6 @@
 
                 },
                 success: function (data_club) {
-                    console.log(data_club);
                     $('#clubmodal .modal-title').text(data_club.name)
                     $('#clubmodal .intro').html(data_club.introduction)
                     $('#clubmodal .parti').html(data_club.participation)
