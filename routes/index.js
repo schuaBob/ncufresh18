@@ -63,8 +63,9 @@ router.get('*',function(req,res,next){
   res.locals.error=req.flash('error');
   next();
 });
+
 /* home page */
-router.get('/', function (req, res, next) {
+router.get('/', (req, res, next) => {
   Promise.all([
     news.find().exec(),
     qna.find({DeleteDate: {$exists: false}, Answer : {$nin:[""]}, Reason : ""}).sort({Click : 'desc'}).limit(10).exec(),
@@ -76,8 +77,26 @@ router.get('/', function (req, res, next) {
   })
 });
 
+/* home page news ajax */
+router.get('/require_data', (req, res, next) => {
+  if (!mongoose.Types.ObjectId.isValid(req.query.id)){
+    next();
+  }else{
+    news.findById(req.query.id, {_id: 0, content: 1}).exec((err, result) => {
+      if(err){
+        return next(err);
+      }
+      if(!result){
+        next();
+      }else{
+        res.send(result.content);
+      }
+    })
+  }
+})
+
 /* home page administer page */
-router.get('/index_admin', (req, res, next) => {
+router.get('/index_admin', checkUser.isAdmin, (req, res, next) => {
   Promise.all([
     news.find().exec(),
     schedule.find().exec()
@@ -89,7 +108,7 @@ router.get('/index_admin', (req, res, next) => {
 })
 
 /* add news */
-router.post('/add_news', (req, res, next) => {
+router.post('/add_news', checkUser.isAdmin, (req, res, next) => {
   let temp = new Date(req.body.time);
   if (isNaN(temp.getTime())) {  // date is not valid
     return res.redirect('index_admin');
@@ -105,7 +124,7 @@ router.post('/add_news', (req, res, next) => {
 })
 
 /* edit news page */
-router.get('/edit_news/:id', (req, res, next) => {
+router.get('/edit_news/:id', checkUser.isAdmin, (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)){
     return next();
   }
@@ -120,7 +139,7 @@ router.get('/edit_news/:id', (req, res, next) => {
 })
 
 /* update news */
-router.post('/edit_news/:id', (req, res, next) => {
+router.post('/edit_news/:id', checkUser.isAdmin, (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)){
     return next();
   }
@@ -139,7 +158,7 @@ router.post('/edit_news/:id', (req, res, next) => {
 })
 
 /* delete news */
-router.get('/delete_news/:id', (req, res, next) => {
+router.get('/delete_news/:id', checkUser.isAdmin, (req, res, next) => {
   if (mongoose.Types.ObjectId.isValid(req.params.id)){
     news.findByIdAndRemove(req.params.id).exec((err) => {
       if(err) return next(err);
@@ -149,7 +168,7 @@ router.get('/delete_news/:id', (req, res, next) => {
 })
 
 /* add schedule */
-router.post('/add_schedule', (req, res, next) => {
+router.post('/add_schedule', checkUser.isAdmin, (req, res, next) => {
   let temp = new Date(req.body.time);
   if (isNaN(temp.getTime())) { // date is not valid
     return res.redirect('index_admin');
@@ -164,7 +183,7 @@ router.post('/add_schedule', (req, res, next) => {
 })
 
 /* update schedule's content */
-router.post('/update_schedule_content/:id', (req, res, next) => {
+router.post('/update_schedule_content/:id', checkUser.isAdmin, (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)){
     return next();
   }
@@ -187,7 +206,7 @@ router.post('/update_schedule_content/:id', (req, res, next) => {
 })
 
 /* update schedule's time */
-router.post('/update_schedule_time/:id', (req, res, next) => {
+router.post('/update_schedule_time/:id', checkUser.isAdmin,(req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)){
     return next();
   }
@@ -204,7 +223,7 @@ router.post('/update_schedule_time/:id', (req, res, next) => {
 })
 
 /* delete schedule */
-router.get('/delete_schedule/:id', (req, res, next) => {
+router.get('/delete_schedule/:id', checkUser.isAdmin, (req, res, next) => {
   if (mongoose.Types.ObjectId.isValid(req.params.id)){
     schedule.findByIdAndRemove(req.params.id).exec((err) => {
       if(err) return next(err);

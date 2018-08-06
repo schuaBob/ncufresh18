@@ -8,6 +8,7 @@
     <% /* This following line is only necessary in the case of using the option `scrollOverflow:true` */%>
     <% /* <script type="text/javascript" src="vendors/scrolloverflow.min.js"></script> */%>
     <script type="text/javascript" src="about/fullPage.js-master/dist/fullpage.js"></script>
+    <script type="text/javascript" src="about/fullPage.js-master/dist/fullpage.extensions.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
     <style>
         .slider_container{
@@ -197,6 +198,10 @@
         }
         #prvweek, #nextweek {
             font-size: 1.5em;
+            color: white;
+            background-color: rgba(0,74,130, 0.95);
+            border-radius: 10px;
+            font-weight: 500;
             margin-left: calc((100vw - 72px)/2);
             margin-right: calc((100vw - 72px)/2);
         }
@@ -338,6 +343,22 @@
     </style>
 </head>
 <body>
+    <div class="modal" tabindex="-1" id="the-only-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="the-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <div class="modal-body" id="the-content"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+    </div>
     <header>
         <% include ../layout/navbar %>
     </header>
@@ -387,7 +408,7 @@
                                     <tr>
                                         <td><%= news[i].time.toISOString().substring(0, 10) %></td>
                                         <td><%= news[i].title %></td>
-                                        <td>more</td>
+                                        <td class="open-modal" id="<%= news[i]._id %>">more</td>
                                     </tr>
                                     <%_ } -%>
                                 </tbody>
@@ -415,30 +436,7 @@
                     <b id="prvweek">前一周</b>
                 </div>
                 <div id="scrolling">
-                    <div class="timeline" id="QQQQQ">
-                        <%_ /* -%>
-                        <%_ let ooo = true; -%>
-                        <%_ for (let i = 0;i<10;i++){ -%>
-                            <div>
-                                <%_ for (let i = 0;i<10;i++){ -%>
-                                <div class="timeline-container <%= (ooo ? 'left' : 'right') %>">
-                                    <div class="content">
-                                    <h2>08/01</h2>
-                                    <ul>
-                                        <li>aaaaa</li>
-                                        <li>aaaaa</li>
-                                        <li>aaaaa</li>
-                                        <li>aaaaa</li>
-                                        <li>aaaaa</li>
-                                    </ol>
-                                    </div>
-                                </div>
-                                <%_ ooo = (ooo ? false : true); -%>
-                                <%_ } -%>
-                            </div>
-                        <%_ } -%>
-                        <%_ */ -%>
-                    </div>
+                    <div class="timeline" id="QQQQQ"></div>
                 </div>
                 <div class="week-btn">
                     <b id="nextweek">後一週</b>
