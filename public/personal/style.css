@@ -192,26 +192,7 @@ hr {
 button {
     cursor: pointer;
 }
-@media only screen and (max-width: 1700px) and (min-width: 1400px) {
-    #point {
-        position : relative ;
-        top : -3vh ;
-        text-align:center ;
-        width : 57vw ;
-        font-size: 8vw ;
-        font-family: 'myFont' ;
-    }
-}
-@media only screen and (max-width: 1400px) and (min-width: 1000px) {
-    #point {
-        position : relative ;
-        top : -2vh ;
-        text-align:center ;
-        width : 57vw ;
-        font-size: 8vw ;
-        font-family: 'myFont' ;
-    }
-}
+
 @media only screen and (max-width: 1000px) {
     #point {
         position : relative ;

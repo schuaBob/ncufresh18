@@ -46,7 +46,7 @@
 
             <%_ if (user){ -%>
             <li class="nav-item dropdown">
-                <a class="nav-link navbar-link dropdown-toggle" role="button" data-toggle="dropdown">
+                <a class="nav-link dropdown-toggle img_nopad" role="button" data-toggle="dropdown">
                 <img src="/personal/bighead/<%= user.avatar %>" id="avatar">
                 </a>
                 <div class="dropdown-menu scrollable-menu dropdown-menu-right" >
@@ -71,13 +71,14 @@
 .navbar-brand{
     padding: 0px 0px;
 }
-a.nav-link.navbar-link.text-white{
-    padding-top: 16px;
-}
-.navbar-link{
-    padding: 0px 0px;
-}
 
+.navbar-link{
+    padding-top:1rem;
+    padding-bottom:1rem;
+}
+.img_nopad{
+    padding:0rem 0rem;
+}
 /*header > nav > div > ul > li > a.nav-link{navbar-link 
     padding: 0px 0px;
 }*/
