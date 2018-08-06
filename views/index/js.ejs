@@ -36,6 +36,7 @@
         document.getElementById('two').style.display = 'none';
         document.getElementById("news-halo").classList.add("active");
         document.getElementById("qna-halo").classList.remove("active");
+        $('.dotdotdottext').width($('#news-box').width()-$('.news-time').outerWidth()-$('.open-modal').outerWidth());
     }
 
     <%_ /*按下熱門Q&A按鍵*/ -%>
@@ -44,6 +45,7 @@
         document.getElementById('two').style.removeProperty( 'display' );
         document.getElementById("news-halo").classList.remove("active");
         document.getElementById("qna-halo").classList.add("active");
+        $('.dotdotdotqna').width($('#news-box').width()-$('.left-qna').outerWidth()-$('.right-qna').outerWidth());
     }
 
     <%_ /*算周次function*/ -%>
@@ -277,5 +279,11 @@
             });
         })
     }
+
+    $('.dotdotdottext').width($('#news-box').width()-$('.news-time').outerWidth()-$('.open-modal').outerWidth());
+    $( window ).resize(function() {
+        $('.dotdotdottext').width($('#news-box').width()-$('.news-time').outerWidth()-$('.open-modal').outerWidth());
+        $('.dotdotdotqna').width($('#news-box').width()-$('.left-qna').outerWidth()-$('.right-qna').outerWidth());
+    });
     
 </script>

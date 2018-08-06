@@ -183,13 +183,28 @@
             min-height: 100px;
             height: 80vh;
             width: 70vw;
+            overflow: scroll;
+        }
+        @media screen and (max-width: 460px) {
+            .dontnextline {
+                font-size: 1.5em;
+            }
+            #new-box {
+                margin-right: 0;
+                margin-left: 0;
+            }
+        }
+        @media screen and (max-width: 369px) {
+            .dontnextline {
+                font-size: 1em;
+            }
         }
         #select-bar {
             height: 48px;
         }
         #box1 {
-            /* overflow-y: scroll;
-            height: calc(80vh - 48px - 3rem); */
+            overflow-y: scroll;
+            height: calc(80vh - 48px - 3rem);
             border-radius: 0 0 2% 2%;
             background-color: rgba(255,255,255,0.9);
         }
@@ -205,17 +220,17 @@
             margin-left: calc((100vw - 72px)/2);
             margin-right: calc((100vw - 72px)/2);
         }
-        .news-time {
+        .news-time, .left-qna, .right-qna {
             white-space: nowrap;
         }
-        .news-title {
+        .dotdotdottext, .dotdotdotqna {
             text-overflow: ellipsis;
             <%_ /* Required for text-overflow to do anything */ -%>
             white-space: nowrap;
             overflow: hidden;
         }
-        #news-text {
-            margin-top: 56px;
+        #news-text, #paddingtopeverywhere {
+            padding-top: 56px;
         }
     </style>
     <style>
@@ -225,6 +240,7 @@
 
         #scrolling {
             overflow: hidden;
+            padding-bottom: 24px;
         }
         
         /* The actual timeline (the vertical ruler) */
@@ -445,12 +461,12 @@
                             <ul class="nav nav-pills nav-fill">
                                 <li class="nav-item ">
                                     <a class="nav-item nav-link active" id="news-halo">
-                                        <h2 class="text-center nav-item" onclick="news_page();">即時資訊</h2>
+                                        <h2 class="text-center nav-item dontnextline" onclick="news_page();">即時資訊</h2>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-item nav-link" id="qna-halo">
-                                        <h2 class="text-center" onclick="qna_page();">熱門Q&A</h2>
+                                        <h2 class="text-center nav-item dontnextline" onclick="qna_page();">熱門Q&A</h2>
                                     </a>
                                 </li>
                             </ul>
@@ -459,9 +475,9 @@
                             <table class="table" id="one">
                                 <tbody>
                                     <%_ for(let i = 0;i<news.length;i++){ -%>
-                                    <tr>
+                                    <tr class="news-row">
                                         <td class="news-time"><%= news[i].time.toISOString().substring(0, 10) %></td>
-                                        <td class="news-title"><%= news[i].title %></td>
+                                        <td class="news-title px-0"><p class="dotdotdottext"><%= news[i].title %></p></td>
                                         <td class="open-modal" id="<%= news[i]._id %>">more</td>
                                     </tr>
                                     <%_ } -%>
@@ -471,9 +487,9 @@
                                 <tbody>
                                     <%_ for(let i = 0;i<qna.length;i++){ -%>
                                     <tr class="qna-btn">
-                                        <td oid="<%= qna[i]._id%>"><%= qna[i].CreateDate.toISOString().substring(0, 10) %></td>
-                                        <td oid="<%= qna[i]._id%>"><%= qna[i].Title %></td>
-                                        <td id="<%= qna[i]._id%>" oid="<%= qna[i]._id%>"><%= qna[i].Click %>人次點閱</td>
+                                        <td class="left-qna" oid="<%= qna[i]._id%>"><%= qna[i].CreateDate.toISOString().substring(0, 10) %></td>
+                                        <td class="px-0" oid="<%= qna[i]._id%>"><p class="dotdotdotqna" oid="<%= qna[i]._id%>"><%= qna[i].Title %></p></td>
+                                        <td class="right-qna" id="<%= qna[i]._id%>" oid="<%= qna[i]._id%>"><%= qna[i].Click %>人次點閱</td>
                                     </tr>
                                     <%_ } -%>
                                 </tbody>
@@ -483,7 +499,7 @@
                 </div>
             </div>
             <div class="section fp-auto-height-responsive">
-                <div>
+                <div id="paddingtopeverywhere">
                     <h1 class="mx-auto text-center">近期日程</h1>
                 </div>
                 <%_ /* -%>
