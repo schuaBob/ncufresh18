@@ -1,14 +1,34 @@
 <script>
     <%_ /*fullpage config*/ -%>
+    // new fullpage('#fullpage', {
+    //     licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
+    //     // autoScrolling:true,
+    //     // scrollHorizontally: true,
+    //     // verticalCentered: false,
+    //     touchSensitivity: 5,
+    //     slidesNavigation: true,
+    //     scrollBar: true,
+    //     anchors:['Carousel', 'news-Q&A', 'timeline'],
+    //     dragAndMove: true
+    // });
+    // fullpage_api.setAllowScrolling(false);
+
     new fullpage('#fullpage', {
         licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
-        // autoScrolling:true,
-        scrollHorizontally: true,
-        // verticalCentered: false,
-        scrollBar: true,
-        anchors:['Carousel', 'news-Q&A', 'timeline']
+        anchors:['Carousel', 'news-Q&A', 'timeline'],
+        // css3: true,
+        // scrollingSpeed: 1000,
+        // navigation: true,
+        // slidesNavigation: true,
+        // responsiveHeight: 330,
+        scrollOverflow: true,
+        autoScrolling: true,
+        responsiveHeight: 500,
+        verticalCentered: false
+        // dragAndMove: true,
+        // controlArrows: false,
+        // normalScrollElements: '#0623'
     });
-    fullpage_api.setAllowScrolling(false);
 
     <%_ /*按下即時資訊按鍵*/ -%>
     var news_page = function(){
@@ -50,7 +70,8 @@
         schedule[i].week = weekYaer[1];
     }
     <%_ /*然後按照年份和周次sort*/ -%>
-    schedule.sort(function(a, b){return a.year-b.year}).sort(function(a, b){return a.week-b.week});
+    schedule.sort(function(a, b){return new Date(a.time) - new Date(b.time)});
+    console.log(schedule);
 
     <%_ /*印在頁面上*/ -%>
     <%_ /*雛形 -%>
@@ -135,7 +156,7 @@
     }
     
     <%_ /*滑到最近的那周*/ -%>
-    $("#scrolling").css({'height':(currentWeek.height()+'px')})
+    //$("#scrolling").css({'height':(currentWeek.height()+'px')})
     currentWeek.velocity("scroll", { 
         container: $("#scrolling"),
         duration: 800
@@ -146,6 +167,7 @@
 
     <%_ /*前一週按鈕*/ -%>
     document.getElementById("prvweek").addEventListener("click",function(){
+        console.log(currentOnDisplay);
         <%_ /*如果有前一週*/ -%>
         if(currentOnDisplay.prev().length !== 0){
             <%_ /*近期日程區塊縮放*/ -%>
@@ -153,10 +175,16 @@
             $("#scrolling").velocity({
                 height: $(currentOnDisplay).prev().height()+'px',
                 duration: 800
+            },{
+                complete: function(){
+                    console.log("ss");
+                    fullpage_api.reBuild();
+                }
             })
             <%_ /*滑到上一週*/ -%>
             $("#scrolling").stop().animate({
-                scrollTop: "-="+currentOnDisplay.prev().height()
+                scrollTop: "-="+currentOnDisplay.prev().height(),
+                duration: 800
             })
             <%_ /*目前顯示的是上一週*/ -%>
             currentOnDisplay = currentOnDisplay.prev();
@@ -165,17 +193,25 @@
 
     <%_ /*下一週按鈕*/ -%>
     document.getElementById("nextweek").addEventListener("click",function(){
+        console.log(currentOnDisplay);
         <%_ /*如果有下一週*/ -%>
         if(currentOnDisplay.next().length !== 0){
             <%_ /*近期日程區塊縮放*/ -%>
             currentOnDisplay.velocity("stop");
+            console.log(currentOnDisplay.next().height());
             $("#scrolling").velocity({
-                height: $(currentOnDisplay).next().height()+'px',
+                height:  currentOnDisplay.next().height()+'px',
                 duration: 800
+            },{
+                complete: function(){
+                    console.log("ss");
+                    fullpage_api.reBuild();
+                }
             })
             <%_ /*滑到下一週*/ -%>
             $("#scrolling").stop().animate({
-                scrollTop: "+="+currentOnDisplay.height()
+                scrollTop: "+="+currentOnDisplay.height(),
+                duration: 800
             })
             <%_ /*目前顯示的是下一週*/ -%>
             currentOnDisplay = currentOnDisplay.next();
@@ -189,7 +225,7 @@
     for (var i = 0; i < document.getElementsByClassName('open-modal').length; i++) {
         document.getElementsByClassName('open-modal')[i].addEventListener('click',function(event){
             <%_ /* 如果已經有資料了 */ -%>
-            if (newsStorage[event.target.id]){  
+            if (newsStorage[event.target.id]){
                 $("#the-title").text($(event.target).prev().text());
                 $("#the-content").html(newsStorage[event.target.id]);
                 $("#the-only-modal").modal("show");
