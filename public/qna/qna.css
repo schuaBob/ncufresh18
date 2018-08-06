@@ -86,10 +86,10 @@ th{
         margin-bottom: calc((4.6em - 1rem - 20vh)/2);;
     } */
     /* 分類排序的顏色 */
-    .nav-link{
+    .classfi{
         color:white;
     }
-    p.nav-link{
+    p.classfi{
         vertical-align: text-top;
     }
     /* 回到頁面最頂端按鈕 */
@@ -195,7 +195,7 @@ th{
     .modal{
         height:100%;
     }
-    .nav-link{
+    .classfi{
         color:black;
     }
     .search{
@@ -207,13 +207,13 @@ th{
         position: absolute;
         z-index: 5000;
     }
-    a.nav-link{
+    a.classfi{
         text-align: center;
     }
-    p.nav-link{
+    p.classfi{
         text-align: center;
     }
-    button.nav-link{
+    button.classfi{
       margin: 0 auto;
     }
     /* 手機板回到頁面最頂端按鈕 */
@@ -305,7 +305,7 @@ li{
 }
 
 /* 排序與分類文字 */
-p.nav-link{
+p.classfi{
     font-size:20px;
     font-weight:bold;
 }

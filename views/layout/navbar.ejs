@@ -29,22 +29,12 @@
             <li class="nav-item">
                 <a class="nav-link text-white" href="/about">關於我們</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="/personal">個人專區</a>
-            </li>
-            <li class="nav-item">
-                <%_ /* 就是這裡在雷 by Andrew Lin */ -%>
-                <%_ if (user){ -%>
-                <a class="nav-link text-white" href="/logout"><% if (user.role === 'admin'){ %>管理登出<% }else{ %>登出<%}%></a>
-                <%_ }else{ -%>
-                <a class="nav-link text-white" href="/login">登入</a>
-                <%_ } -%>
-            </li>
+            
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" role="button" data-toggle="dropdown">
                     常用連結
                 </a>
-                <div class="dropdown-menu" >
+                <div class="dropdown-menu scrollable-menu" >
                     <a class="dropdown-item ddpad" target="_blank" href="https://www.ncu.edu.tw/">中大首頁</a>
                     <a class="dropdown-item ddpad" target="_blank" href="http://osa.ncu.edu.tw/">學務處</a>
                     <a class="dropdown-item ddpad" target="_blank" href="https://portal.ncu.edu.tw/">中大Portal</a>
@@ -53,18 +43,42 @@
                     <a class="dropdown-item ddpad" target="_blank" href="https://uncia.cc.ncu.edu.tw/dormnet/">宿網系統</a>
                 </div>
             </li>
+
+            <%_ if (user){ -%>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="/personal">個人專區</a>
+            </li>
+            <%_ } -%>
+
+            <li class="nav-item">
+                <%_ if (user){ -%>
+                <a class="nav-link text-white" href="/logout"><% if (user.role === 'admin'){ %>管理登出<% }else{ %>登出<%}%></a>
+                <%_ }else{ -%>
+                <a class="nav-link text-white" href="/login">登入</a>
+                <%_ } -%>
+            </li>
         </ul>
     </div>
 </nav>
 
 <style>
 .navbar {
-    padding: 0px 0px;
-}
+    padding: 0rem 1rem;
+}   
 #navbarImg {
     height:56px;
 }
 .navbar-brand{
     padding: 0px 0px;
+}
+.scrollable-menu {
+    height: auto;
+    overflow-x: hidden;
+}
+@media only screen and (max-width: 992px) {
+    .navbar-collapse {
+         max-height: calc(100vh - 56px);
+        overflow-y: auto;
+     }
 }
 </style>

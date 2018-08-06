@@ -129,7 +129,14 @@
                         $('#carouselExampleIndicator2 .carousel-inner .carousel-item').remove()
                         $('#commodal').off('hide.bs.modal')
                     })
-
+                    $('#commodal').on('shown.bs.modal', function (e) {
+                        $('.nav .nav-link').removeClass('active show')
+                        $('.nav .nav-link').first().addClass('active show')
+                        $('#participation').removeClass('active show')
+                        $('#FB').removeClass('active show')
+                        $('#activity').removeClass('active show')
+                        $('#introduction').addClass('active show')
+                    })
                     
                     $('#commodal').modal('show')
                 }
