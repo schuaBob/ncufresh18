@@ -7,6 +7,7 @@ $(document).ready(() => {
             $(".intro").removeClass("alert");
             $(".intro").removeClass("alert-dismissible");
             // $(".picture").css({'width':w});
+            //$('.content111').removeAttr(id);
         }
     $("body").css({'height':h-50,'width':w});
     $(".screen").css({'background-size':w*0.5+"px "+h*0.28+"px"});
@@ -22,6 +23,9 @@ $(document).ready(() => {
             $("body").css({'background-size':w+"px "+h-50+"px"});
             $(".intro").removeClass("alert");
             $(".intro").removeClass("alert-dismissible");
+            $(window).on("orientationchange",function(){
+                console.log($(window).width());
+            });
             // $(".picture").css({'width':w});
         }
         else{
@@ -33,8 +37,11 @@ $(document).ready(() => {
     $('.people2').on('click', function(e) {
         $('.people2').css({'transform': 'translate(1000px)'});
     });
+    //可以把簡介收起來
     $('.people1').on('click', function(e) {
             $('.alert').toggle(1000);
+            $('.people1').toggleClass('people1-act');
+            //$('.people1').css({'width': '20%','height':'40%'});
             // $('.alert').slideToggle(1000);
             e.preventDefault();
     });
@@ -146,7 +153,8 @@ $(document).ready(() => {
     $('#fullpage').fullpage({
 		//options here
 		autoScrolling:true,
-		scrollHorizontally: false
+        scrollHorizontally: false,
+        
     });
     $.fn.fullpage.setAllowScrolling(false);
     new fullpage('#fullpage', {

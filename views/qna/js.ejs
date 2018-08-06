@@ -6,12 +6,16 @@ $(document).ready(() => {
         var w=$(window).width();
         var h=$(window).height();
     $(window).resize(function() {
-        console.log($(window).width());
+        if (w < 800) {
+        //手機版頁面樣式
+        //排序與分類的位置
+        $(".classification").addClass("dropdown-menu");
+        $("ul").addClass("flex-column");
+    }
     });
     $(".hideAct").hide();
     if (w < 600) {
         //手機版頁面樣式
-        // $(".classifiaction").css({"float":"left"});
         //排序與分類的位置
         $(".classification").addClass("dropdown-menu");
         $("ul").addClass("flex-column");
@@ -238,12 +242,14 @@ $(document).ready(() => {
                 document.getElementById('show-content').innerHTML = res.content;
                 document.getElementById('show-answer').innerHTML = res.answer;
                 $('#show-modal').modal('show');
+                    if(res.answer!==""){
+                        //動態新增點擊次數
+                        var objs = $('.' + id).find('.view');
+                        console.log(objs);
+                        for (var i = 0; i < objs.length; i++) {
+                            objs[i].innerHTML = parseInt(objs[i].innerHTML) + 1;
+                        }
 
-                    //動態新增點擊次數
-                    var objs = $('.' + id).find('.view');
-                    console.log(objs);
-                    for (var i = 0; i < objs.length; i++) {
-                        objs[i].innerHTML = parseInt(objs[i].innerHTML) + 1;
                     }
 
                 

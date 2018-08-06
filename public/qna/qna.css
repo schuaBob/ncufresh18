@@ -359,6 +359,18 @@ p.classfi{
     margin-left:20px;
     margin-right:20px;
 }
+/* 答案文字太長可以換行 */
+p#show-answer{
+    word-wrap:break-word;
+}
+/* 問題內容文字太長可以換行 */
+p#show-content{
+    word-wrap:break-word;
+}
+/* 板規內容文字太長可以換行 */
+p#show-rule-content{
+    word-wrap:break-word;
+}
 /* 問題與答案樣式 */
  .QA{
     background-image: url(問題.png);
