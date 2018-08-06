@@ -4,12 +4,12 @@ html, body{
 ul li{
     list-style-type:none;
 }
-@media screen and (max-height: 500px){
+@media screen and (max-height: 600px){
     .bode{
-        height: 600px;
+        height: 650px;
     }
 }
-@media screen and (min-height: 500px){
+@media screen and (min-height: 600px){
     .bode{
         height: 100vh;
     }
