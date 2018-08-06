@@ -5,7 +5,17 @@ $(document).ready(() => {
 //  $(window).resize(function() {
         var w=$(window).width();
         var h=$(window).height();
-
+    $(window).resize(function(){
+        if($(window).width()>800){
+            //滑鼠移動到我要發問按鈕上面會換圖案
+            $('.askbutton').on('mouseover', function(){
+                $(this).css({'background':'url(發問按鈕2.png) no-repeat','background-size':'contain'});
+            });
+            $('.askbutton').on('mouseout', function(){
+                $(this).css({'background':'url(發問按鈕1.png) no-repeat','background-size':'contain'});
+            });
+        }
+    })
     $(window).bind("resize", function () {
         if ($(this).width() < 800) {
             $(".classification").addClass("dropdown-menu");
@@ -13,8 +23,10 @@ $(document).ready(() => {
         } 
         else{
             $(".classification").removeClass("dropdown-menu");
+            
             $("ul").removeClass("flex-column");
             $(".classification").css({"top":"50px"});
+            
         }
     })
     $(".hideAct").hide();
@@ -108,7 +120,6 @@ $(document).ready(() => {
         userList.sort("hot",{
             order:'desc',
             sortFunction: function (a, b) {
-                console.log(a._values.hot);
                 var Aobjs = $(a.elm).find('.type');
                 var Bobjs = $(b.elm).find('.type');
                 var Aview = $(a.elm).find('.view');
@@ -134,7 +145,6 @@ $(document).ready(() => {
         userList.sort("time",{
             order:'desc',
             sortFunction: function (a, b) {
-                console.log(a._values.time);
                 var Aobjs = $(a.elm).find('.type');
                 var Bobjs = $(b.elm).find('.type');
                 if ((Aobjs[0].innerHTML === "板規") != (Bobjs[0].innerHTML === "板規")) {
@@ -155,15 +165,7 @@ $(document).ready(() => {
             scrollTop:0
         },300);
     });
-    if(w>600){
-        //滑鼠移動到我要發問按鈕上面會換圖案
-        $('.askbutton').on('mouseover', function(){
-            $(this).css({'background':'url(發問按鈕2.png) no-repeat','background-size':'contain'});
-        });
-        $('.askbutton').on('mouseout', function(){
-            $(this).css({'background':'url(發問按鈕1.png) no-repeat','background-size':'contain'});
-        });
-    }
+    
     //搜尋後返回首頁的按鍵
     var url = new URL(window.location.href);
     //搜尋後才會出現
@@ -186,7 +188,6 @@ $(document).ready(() => {
                     if(res.answer!==""){
                         //動態新增點擊次數
                         var objs = $('.' + id).find('.view');
-                        console.log(objs);
                         for (var i = 0; i < objs.length; i++) {
                             objs[i].innerHTML = parseInt(objs[i].innerHTML) + 1;
                         }
@@ -224,33 +225,36 @@ $(document).ready(() => {
         alert('請先登入');
     });
     //CKEDITOR
-    CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
-    CKEDITOR.config.shiftEnterMode = CKEDITOR.ENTER_BR;
-    //加了這些CKEDITOR的新增超連結才能用，不知道為啥
-    $.fn.modal.Constructor.prototype._enforceFocus = function() {
-                var $modalElement = this.$element;
-                $(document).on('focusin.modal',function(e) {
-                    if ($modalElement[0] !== e.target
-                        && !$modalElement.has(e.target).length
-                        && $(e.target).parentsUntil('*[role="dialog"]').length === 0) {
-                        $modalElement.focus();
-                    }
-                });
-            }; 
-    $('.answer111').each(function(e){
+    if(user&&user.role==="admin"){
+
         CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
-        CKEDITOR.config.shiftEnterMode = CKEDITOR.ENTER_BR; 
-        CKEDITOR.replace(this.id,{
-        filebrowserUploadUrl: '/uploader',
+        CKEDITOR.config.shiftEnterMode = CKEDITOR.ENTER_BR;
+        //加了這些CKEDITOR的新增超連結才能用，不知道為啥
+        $.fn.modal.Constructor.prototype._enforceFocus = function() {
+                    var $modalElement = this.$element;
+                    $(document).on('focusin.modal',function(e) {
+                        if ($modalElement[0] !== e.target
+                            && !$modalElement.has(e.target).length
+                            && $(e.target).parentsUntil('*[role="dialog"]').length === 0) {
+                            $modalElement.focus();
+                        }
+                    });
+                }; 
+        $('.answer111').each(function(e){
+            CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
+            CKEDITOR.config.shiftEnterMode = CKEDITOR.ENTER_BR; 
+            CKEDITOR.replace(this.id,{
+            filebrowserUploadUrl: '/uploader',
+            });
         });
-    });
-    $('.rule111').each(function(e){
-        CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
-        CKEDITOR.config.shiftEnterMode = CKEDITOR.ENTER_BR; 
-        CKEDITOR.replace(this.id,{
-        filebrowserUploadUrl: '/uploader',
+        $('.rule111').each(function(e){
+            CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
+            CKEDITOR.config.shiftEnterMode = CKEDITOR.ENTER_BR; 
+            CKEDITOR.replace(this.id,{
+            filebrowserUploadUrl: '/uploader',
+            });
         });
-    });
+    }
     //刪除問題
     // $('.deleteQ').on('click', function() {
     //   if (confirm("確定要刪除嗎？")) {
@@ -277,7 +281,6 @@ $(document).ready(() => {
         //var id = this.id.split('-')[0];
         //var id=$(this).prop('id');
         //id顯示是對的，但是不知道為什麼addClass是失敗的
-        console.log(this.id);
         $('tr.'+this.id).addClass('hideAct');
         $(".hideAct").hide();
     });

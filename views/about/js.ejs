@@ -6,17 +6,14 @@ $(document).ready(() => {
     if(w<800){  
             $(".intro").removeClass("alert");
             $(".intro").removeClass("alert-dismissible");
-            // $(".picture").css({'width':w});
-            //$('.content111').removeAttr(id);
+
         }
     $("body").css({'height':h-50,'width':w});
     $(".screen").css({'background-size':w*0.5+"px "+h*0.28+"px"});
     $(window).resize(function() {
         var w=$(window).width();
         var h=$(window).height();
-        // var padW=$('.pad').width();
-        // console.log(padW);
-        // $(".pad").css({'height':h-50,'width':w-300});
+
         $(".screen").css({'background-size':w*0.5+"px "+h*0.28+"px"});
         if(w<800){  
             $("body").css({'height':h-50,'width':w});
@@ -24,9 +21,6 @@ $(document).ready(() => {
             $(".intro").removeClass("alert");
             $(".intro").removeClass("alert-dismissible");
             $(".intro2").hide();
-            $(window).on("orientationchange",function(){
-                console.log($(window).width());
-            });
             // $(".picture").css({'width':w});
         }
         else{
@@ -57,7 +51,6 @@ $(document).ready(() => {
     //切換字樣
     $(window).on('hashchange', function() {
         var hash = window.location.hash.substr(1);
-        //console.log(hash);
         if(hash==="markting"){
 
             $(".name").addClass("marktingName");
@@ -153,14 +146,6 @@ $(document).ready(() => {
             $(".people1").removeClass("people1-act");
         }
     });
-    // var hash = new URL(window.location.href);
-    //     console.log(url);
-    // $("li a[href='#markting'], li a[href='#programming'], li a[href='#art'], li a[href='#video'], li a[href='#ceo']").on('event', function(event) {
-    //     event.preventDefault();
-    //     // Store hash
-    //     var hash = this.hash;
-        
-    // });
     //fullpage
     if(w>800){
 
