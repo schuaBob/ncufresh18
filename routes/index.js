@@ -245,7 +245,7 @@ router.post('/login', function (req, res, next) {
   if (grade !== '107')
     return res.redirect('auth/provider');
   Users.findOne({ 'id': req.body.id }, function (err, obj) {
-      if (err) return res.redirect('/login');
+      if (err) return res.redirect('auth/provider');
       //If found, login
       if (obj && obj.password) {
         res.redirect('password?id='+req.body.id);
