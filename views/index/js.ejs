@@ -16,18 +16,11 @@
     new fullpage('#fullpage', {
         licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
         anchors:['Carousel', 'news-Q&A', 'timeline'],
-        // css3: true,
-        // scrollingSpeed: 1000,
-        // navigation: true,
-        // slidesNavigation: true,
-        // responsiveHeight: 330,
         scrollOverflow: true,
         autoScrolling: true,
         responsiveHeight: 500,
-        verticalCentered: false
-        // dragAndMove: true,
-        // controlArrows: false,
-        // normalScrollElements: '#0623'
+        verticalCentered: false,
+        normalScrollElements: '.navbar-collapse, .navbar-nav'
     });
 
     <%_ /*按下即時資訊按鍵*/ -%>
@@ -285,5 +278,20 @@
         $('.dotdotdottext').width($('#news-box').width()-$('.news-time').outerWidth()-$('.open-modal').outerWidth());
         $('.dotdotdotqna').width($('#news-box').width()-$('.left-qna').outerWidth()-$('.right-qna').outerWidth());
     });
-    
+    $(".collapse").on('show.bs.collapse', function(e) {
+        fullpage_api.destroy('all');
+    })
+    $(".collapse").on('hide.bs.collapse', function(e) {
+        console.log("hgf")
+        new fullpage('#fullpage', {
+            licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
+            anchors:['Carousel', 'news-Q&A', 'timeline'],
+            scrollOverflow: true,
+            autoScrolling: true,
+            responsiveHeight: 500,
+            verticalCentered: false,
+            normalScrollElements: '.navbar-collapse, .navbar-nav'
+        });
+    })
+
 </script>
