@@ -29,7 +29,7 @@
         document.getElementById('two').style.display = 'none';
         document.getElementById("news-halo").classList.add("active");
         document.getElementById("qna-halo").classList.remove("active");
-        $('.dotdotdottext').width($('#news-box').width()-$('.news-time').outerWidth()-$('.open-modal').outerWidth());
+        $('.dotdotdottext').width($('#news-box').width()-$('.news-time').outerWidth()-$('.ppppppppppppp').outerWidth()-18);
     }
 
     <%_ /*按下熱門Q&A按鍵*/ -%>
@@ -38,7 +38,7 @@
         document.getElementById('two').style.removeProperty( 'display' );
         document.getElementById("news-halo").classList.remove("active");
         document.getElementById("qna-halo").classList.add("active");
-        $('.dotdotdotqna').width($('#news-box').width()-$('.left-qna').outerWidth()-$('.right-qna').outerWidth());
+        $('.dotdotdotqna').width($('#news-box').width()-$('.left-qna').outerWidth()-$('.right-qna').outerWidth()-18);
     }
 
     <%_ /*算周次function*/ -%>
@@ -66,7 +66,6 @@
     }
     <%_ /*然後按照年份和周次sort*/ -%>
     schedule.sort(function(a, b){return new Date(a.time) - new Date(b.time)});
-    console.log(schedule);
 
     <%_ /*印在頁面上*/ -%>
     <%_ /*雛形 -%>
@@ -225,7 +224,7 @@
         document.getElementsByClassName('open-modal')[i].addEventListener('click',function(event){
             <%_ /* 如果已經有資料了 */ -%>
             if (newsStorage[event.target.id]){
-                $("#the-title").text($(event.target).prev().text());
+                $("#the-title").text($('#'+event.target.id+'.ppppppppppppp').text());
                 $("#the-content").html(newsStorage[event.target.id]);
                 $("#the-only-modal").modal("show");
             <%_ /* 沒資料 */ -%>
@@ -238,7 +237,7 @@
                         console.log("",err);
                     },
                     success: function(data){
-                        $("#the-title").text($(event.target).prev().text());
+                        $("#the-title").text($('#'+event.target.id+'.ppppppppppppp').text());
                         $("#the-content").html(data);
                         $("#the-only-modal").modal("show");
                         <%_ /* 存入資料 */ -%>
@@ -273,16 +272,15 @@
         })
     }
 
-    $('.dotdotdottext').width($('#news-box').width()-$('.news-time').outerWidth()-$('.open-modal').outerWidth());
+    $('.dotdotdottext').width($('#news-box').width()-$('.news-time').outerWidth()-$('.ppppppppppppp').outerWidth()-18);
     $( window ).resize(function() {
-        $('.dotdotdottext').width($('#news-box').width()-$('.news-time').outerWidth()-$('.open-modal').outerWidth());
-        $('.dotdotdotqna').width($('#news-box').width()-$('.left-qna').outerWidth()-$('.right-qna').outerWidth());
+        $('.dotdotdottext').width($('#news-box').width()-$('.news-time').outerWidth()-$('.ppppppppppppp').outerWidth()-18);
+        $('.dotdotdotqna').width($('#news-box').width()-$('.left-qna').outerWidth()-$('.right-qna').outerWidth()-18);
     });
     $(".collapse").on('show.bs.collapse', function(e) {
         fullpage_api.destroy('all');
     })
-    $(".collapse").on('hide.bs.collapse', function(e) {
-        console.log("hgf")
+    $(".collapse").on('hidden.bs.collapse', function(e) {
         new fullpage('#fullpage', {
             licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
             anchors:['Carousel', 'news-Q&A', 'timeline'],
@@ -293,5 +291,20 @@
             normalScrollElements: '.navbar-collapse, .navbar-nav'
         });
     })
+    $('.modal').on('show.bs.modal', function (e) {
+        fullpage_api.destroy('all');
+    })
+    $('.modal').on('hidden.bs.modal', function (e) {
+        new fullpage('#fullpage', {
+            licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
+            anchors:['Carousel', 'news-Q&A', 'timeline'],
+            scrollOverflow: true,
+            autoScrolling: true,
+            responsiveHeight: 500,
+            verticalCentered: false,
+            normalScrollElements: '.navbar-collapse, .navbar-nav'
+        });
+    })
+
 
 </script>

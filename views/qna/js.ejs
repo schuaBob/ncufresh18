@@ -235,7 +235,7 @@ $(document).ready(() => {
         alert('請先登入');
     });
     //CKEDITOR
-    if(user&&user.role==="admin"){
+    <%_ if(user&&user.role==="admin"){ -%>
 
         CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
         CKEDITOR.config.shiftEnterMode = CKEDITOR.ENTER_BR;
@@ -264,7 +264,7 @@ $(document).ready(() => {
             filebrowserUploadUrl: '/uploader',
             });
         });
-    }
+    <%_ } -%>
     //刪除問題
     // $('.deleteQ').on('click', function() {
     //   if (confirm("確定要刪除嗎？")) {
