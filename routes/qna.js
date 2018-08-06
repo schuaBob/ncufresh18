@@ -206,7 +206,10 @@ router.get('/search',function(req,res,next){
     }
   }
 });
-
+// 搜尋後返回首頁的按鍵
+router.get('/backToIndex', function(req, res, next) {
+    res.redirect('/qna');
+});
 /*紀錄問題點擊次數*/
 router.get('/clickQ/:id', function(req, res, next) {
   if(mongoose.Types.ObjectId.isValid(req.params.id)){

@@ -37,7 +37,7 @@ th{
     background-color: white;
 }
 /* 只有電腦版出現的 */
-@media only screen and (min-width:600px){
+@media only screen and (min-width:800px){
     table{
         width:70%;
         
@@ -143,10 +143,15 @@ th{
         background-color:#29ABE2 !important;
         border-radius:20px !important;
     }
+     /* 電腦版搜尋過後要返回首頁的按鈕 */
+    .backToIndex{
+        right:80px;
+        top:20vh;
+    }
 }
         
 /* 只有手機板介面出現的 */
-@media only screen and (max-width:600px){
+@media only screen and (max-width:800px){
     .admin{
         display:none;
     }
@@ -251,6 +256,13 @@ th{
         bottom: 20vh;
         right:10px;
         z-index: 5000;
+    }
+    /* 手機版搜尋過後要返回首頁的按鈕 */
+    .backToIndex{
+        right:0;
+        margin-top: 10px;
+        height:30px;
+        font-size: 12px;
     }
     
 }
@@ -434,6 +446,13 @@ p#show-rule-content{
     border-radius: 15px;
  }
  /* 區別已送出刪除理由的問題 */
- .gray{
+ /* .gray{
     background:gray;
+ } */
+ /* 搜尋過後要返回首頁的按鈕 */
+ .backToIndex{
+     display: none;
+     /* float: right; */
+     position: fixed;
+     border-radius: 15px;
  }

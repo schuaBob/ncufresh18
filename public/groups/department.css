@@ -458,30 +458,14 @@ h5{
         line-height: 26px;
         letter-spacing: 1px;
     }
-    #carouselExampleIndicator1{
+    
+    .carousel{
         max-width: 300px;
         max-height: 300px;
         float: left;
         margin-left: 5%;
     }
-    #carouselExampleIndicator2{
-        max-width: 300px;
-        max-height: 300px;
-        float: left;
-        margin-left: 5%;
-    }
-    #carouselExampleIndicator3{
-        max-width: 300px;
-        max-height: 300px;
-        float: left;
-        margin-left: 5%;
-    }
-    #carouselExampleIndicator4{
-        max-width: 300px;
-        max-height: 300px;
-        float: left;
-        margin-left: 5%;
-    }
+    
     .d-block{
         max-width: 300px;
         max-height: 300px;
