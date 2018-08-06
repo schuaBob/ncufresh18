@@ -71,8 +71,12 @@
 }
 .scrollable-menu {
     height: auto;
-    max-height: 180px;
     overflow-x: hidden;
 }
-.navbar-collapse { max-height: calc(100vh - 56px); overflow-y: auto; }
+@media only screen and (max-width: 600px) {
+    .navbar-collapse {
+         max-height: calc(100vh - 56px);
+        overflow-y: auto;
+     }
+}
 </style>
