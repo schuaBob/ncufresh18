@@ -25,43 +25,84 @@
             top: 0;
             left: 0;
             opacity: 0;
-            filter: alpha(opacity=0);
+            /* filter: alpha(opacity=0); */
+            /* -webkit-filter: drop-shadow(16px 16px 10px rgba(90,88,92,0.68));
+            filter: drop-shadow(16px 16px 10px rgba(90,88,92,0.68)); */
             background-size: cover;
             background-position: 40% center;
         }
         body {
-            background: url("index/ncu首頁.png") no-repeat 83% 10% fixed; 
+            background: url("index/background.png") no-repeat 90% 40% fixed; 
 			-webkit-background-size: cover;
 			-moz-background-size: cover;
 			-o-background-size: cover;
             background-size: cover;
         }
-        #c1 {
-            background-image: url("index/IMG-0.png");
+        @media screen and (max-width: 1050px){
+            <%_ for(let i = 1;i<=9;i++){ -%>
+            #c<%= i %> {
+            background: linear-gradient(
+                rgba(90,88,92,0.68),
+                rgba(90,88,92,0.68)
+                ),url("index/900_600/900_600-<%= i-1 %>.png");
+                background-size: cover;
+            }
+            <%_ } -%>
         }
-        #c2 {
-            background-image: url("index/IMG-1.png");
+        @media screen and (max-width: 1350px) and (min-width: 1051px){
+            <%_ for(let i = 1;i<=9;i++){ -%>
+            #c<%= i %> {
+                background: linear-gradient(
+                rgba(90,88,92,0.68),
+                rgba(90,88,92,0.68)
+                ),url("index/1200_800/1200_800-<%= i-1 %>.png");
+                background-size: cover;
+            }
+            <%_ } -%>
         }
-        #c3 {
-            background-image: url("index/IMG-2.png");
+        @media screen and (max-width: 1650px) and (min-width: 1351px){
+            <%_ for(let i = 1;i<=9;i++){ -%>
+            #c<%= i %> {
+                background: linear-gradient(
+                rgba(90,88,92,0.68),
+                rgba(90,88,92,0.68)
+                ),url("index/1500_1000/1500_1000-<%= i-1 %>.png");
+                background-size: cover;
+            }
+            <%_ } -%>
         }
-        #c4 {
-            background-image: url("index/IMG-3.png");
+        @media screen and (max-width: 1950px) and (min-width: 1651px){
+            <%_ for(let i = 1;i<=9;i++){ -%>
+            #c<%= i %> {
+                background: linear-gradient(
+                rgba(90,88,92,0.68),
+                rgba(90,88,92,0.68)
+                ),url("index/1800_1200/1800_1200-<%= i-1 %>.png");
+                background-size: cover;
+            }
+            <%_ } -%>
         }
-        #c5 {
-            background-image: url("index/IMG-4.png");
+        @media screen and (max-width: 2250px) and (min-width: 1951px){
+            <%_ for(let i = 1;i<=9;i++){ -%>
+            #c<%= i %> {
+                background: linear-gradient(
+                rgba(90,88,92,0.68),
+                rgba(90,88,92,0.68)
+                ),url("index/2100_1400/2100_1400-<%= i-1 %>.png");
+                background-size: cover;
+            }
+            <%_ } -%>
         }
-        #c6 {
-            background-image: url("index/IMG-5.png");
-        }
-        #c7 {
-            background-image: url("index/IMG-6.png");
-        }
-        #c8 {
-            background-image: url("index/IMG-7.png");
-        }
-        #c9 {
-            background-image: url("index/IMG-8.png");
+        @media screen (min-width: 2251px){
+            <%_ for(let i = 1;i<=9;i++){ -%>
+            #c<%= i %> {
+                background: linear-gradient(
+                rgba(90,88,92,0.68),
+                rgba(90,88,92,0.68)
+                ),url("index/2400_1600/2400_1600-<%= i-1 %>.png");
+                background-size: cover;
+            }
+            <%_ } -%>
         }
         @-webkit-keyframes round {
             0% {
@@ -181,7 +222,7 @@
         }
         #news-box {
             min-height: 100px;
-            height: 80vh;
+            height: 70vh;
             width: 70vw;
             overflow: scroll;
         }
@@ -231,6 +272,26 @@
         }
         #news-text, #paddingtopeverywhere {
             padding-top: 56px;
+        }
+        #logo{
+            top: 10%;
+            position: relative;
+            max-width: 100vw;
+            max-height: 100vh;
+            width: 50vmax;
+            height: 50vmax;
+        }
+        #big-logo, #small-logo {
+            position: absolute;
+            z-index: 1;
+        }
+        #big-logo{
+            width: 100%;
+        }
+        #small-logo{
+            top: 18%;
+            left: 28.5%;
+            width: 18%;
         }
     </style>
     <style>
@@ -393,7 +454,7 @@
     </style>
 </head>
 <body>
-    <%#顯示問題跟答案的Modal%>
+    <% /*顯示問題跟答案的Modal*/ %>
     <div class="modal fade bd-example-modal-lg" id="show-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">   
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content QA">
@@ -435,9 +496,13 @@
     <main>
         <div id="fullpage">
             <div class="section" id="7">
+                <div id="logo">
+                    <img src="index/首頁ncufresh標題.png" id="big-logo">
+                    <a href="http://oia.ncu.edu.tw/" target="_blank"><img src="index/國際處.png" id="small-logo"></a>
+                </div>
                 <div class="latest-news-btn">
                     <a href="#news-Q&A" id="down-btn">
-                        <img id="down-img" src="index/down-arrow-in-small-circle.svg">
+                        <img id="down-img" src="index/navigate-arrows-pointing-to-down.svg">
                     </a>
                 </div>
                 <div class="img_container" id="c1"></div>
