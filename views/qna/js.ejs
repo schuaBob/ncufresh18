@@ -225,7 +225,18 @@ $(document).ready(() => {
     });
     //CKEDITOR
     CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
-    CKEDITOR.config.shiftEnterMode = CKEDITOR.ENTER_BR; 
+    CKEDITOR.config.shiftEnterMode = CKEDITOR.ENTER_BR;
+    //加了這些CKEDITOR的新增超連結才能用，不知道為啥
+    $.fn.modal.Constructor.prototype._enforceFocus = function() {
+                var $modalElement = this.$element;
+                $(document).on('focusin.modal',function(e) {
+                    if ($modalElement[0] !== e.target
+                        && !$modalElement.has(e.target).length
+                        && $(e.target).parentsUntil('*[role="dialog"]').length === 0) {
+                        $modalElement.focus();
+                    }
+                });
+            }; 
     $('.answer111').each(function(e){
         CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
         CKEDITOR.config.shiftEnterMode = CKEDITOR.ENTER_BR; 

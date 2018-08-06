@@ -23,6 +23,7 @@ $(document).ready(() => {
             $("body").css({'background-size':w+"px "+h-50+"px"});
             $(".intro").removeClass("alert");
             $(".intro").removeClass("alert-dismissible");
+            $(".intro2").hide();
             $(window).on("orientationchange",function(){
                 console.log($(window).width());
             });
@@ -201,9 +202,6 @@ $(document).ready(() => {
             $(this).css({'width':'150px','height':'100px'});
             $(this).css({'background-size':'150px 100px'});
             $(this).css({'left':'4vw','top':'150px'});
-        });
-        $('.nav-toggle-btn').on('click', function(e) {
-            $('.nav-toggle-btn').css({'transform': 'translate(-1000px)'});
         });
     }
 });
