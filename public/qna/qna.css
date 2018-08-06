@@ -306,7 +306,10 @@ td{
     margin-top:15px;
     margin-left:10px;
 }
-
+/* 讓箭頭消失 */
+.classificationBtn.dropdown-toggle::after{
+    display:none;
+}
 /* 排序與分類文字 */
 p.classfi{
     font-size:20px;
