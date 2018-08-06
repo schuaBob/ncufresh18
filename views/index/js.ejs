@@ -141,42 +141,77 @@
         duration: 800
     })
 
-    <%_ /*當前顯示的周*/ -%>
+    <%_ /*當前顯示的周次*/ -%>
     var currentOnDisplay = currentWeek;
 
+    <%_ /*前一週按鈕*/ -%>
     document.getElementById("prvweek").addEventListener("click",function(){
-
+        <%_ /*如果有前一週*/ -%>
         if(currentOnDisplay.prev().length !== 0){
-            console.log(currentOnDisplay.prev())
-            console.log(currentOnDisplay.prev().offset());
+            <%_ /*近期日程區塊縮放*/ -%>
             currentOnDisplay.velocity("stop");
             $("#scrolling").velocity({
                 height: $(currentOnDisplay).prev().height()+'px',
                 duration: 800
             })
-            currentOnDisplay.prev().velocity("scroll", { 
-                container: $("#scrolling"),
-                duration: 800,
+            <%_ /*滑到上一週*/ -%>
+            $("#scrolling").stop().animate({
+                scrollTop: "-="+currentOnDisplay.prev().height()
             })
+            <%_ /*目前顯示的是上一週*/ -%>
             currentOnDisplay = currentOnDisplay.prev();
         }
     })
 
+    <%_ /*下一週按鈕*/ -%>
     document.getElementById("nextweek").addEventListener("click",function(){
-        if(currentOnDisplay.nextSibling){
-            console.log(currentOnDisplay.nextSibling)
-            $(currentOnDisplay).velocity("stop");
+        <%_ /*如果有下一週*/ -%>
+        if(currentOnDisplay.next().length !== 0){
+            <%_ /*近期日程區塊縮放*/ -%>
+            currentOnDisplay.velocity("stop");
             $("#scrolling").velocity({
-                height: $(currentOnDisplay.nextSibling).height()+'px',
+                height: $(currentOnDisplay).next().height()+'px',
                 duration: 800
             })
-            $(currentOnDisplay.nextSibling).velocity("scroll", { 
-                container: $("#scrolling"),
-                duration: 800
+            <%_ /*滑到下一週*/ -%>
+            $("#scrolling").stop().animate({
+                scrollTop: "+="+currentOnDisplay.height()
             })
-            currentOnDisplay = currentOnDisplay.nextSibling;
+            <%_ /*目前顯示的是下一週*/ -%>
+            currentOnDisplay = currentOnDisplay.next();
         }
     })
 
+    <%_ /* 拿來存已經要過資料的最新消息 */ -%>
+    var newsStorage = Object();
+
+    <%_ /* 開modal */ -%>
+    for (var i = 0; i < document.getElementsByClassName('open-modal').length; i++) {
+        document.getElementsByClassName('open-modal')[i].addEventListener('click',function(event){
+            <%_ /* 如果已經有資料了 */ -%>
+            if (newsStorage[event.target.id]){  
+                $("#the-title").text($(event.target).prev().text());
+                $("#the-content").html(newsStorage[event.target.id]);
+                $("#the-only-modal").modal("show");
+            <%_ /* 沒資料 */ -%>
+            }else{
+                <%_ /* 要資料 */ -%>
+                $.ajax({
+                    url:    "/require_data/?id="+event.target.id,
+                    method: 'GET',
+                    error: function(err){
+                        console.log("",err);
+                    },
+                    success: function(data){
+                        $("#the-title").text($(event.target).prev().text());
+                        $("#the-content").html(data);
+                        $("#the-only-modal").modal("show");
+                        <%_ /* 存入資料 */ -%>
+                        newsStorage[event.target.id] = data;
+                    }
+                });
+            }
+        })
+    }
     
 </script>
