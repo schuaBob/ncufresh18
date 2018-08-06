@@ -213,9 +213,10 @@ router.get('/clickQ/:id', function(req, res, next) {
     Question.findById(req.params.id,function(err,question){
       if(err){return next(err)};
       
-   
+      if(question.Answer!==""){
         //增加瀏覽次數
         question.Click++;
+      }
         //儲存瀏覽次數
        question.save(function(err) {
           if (err){return next(err);}

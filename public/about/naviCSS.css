@@ -1,6 +1,9 @@
 /* 只有電腦板才有的 */
 @media only screen and (min-width:800px){
     .nav-toggle-btn {
+        background-size: contain !important; 
+        width: 150px;
+        height:100px;
         top:150px;
         position: absolute;
         left: 4vw;
@@ -17,6 +20,10 @@
         position: absolute;
         top:230px;
         width:23vw;
+        height: 300px;
+    }
+    .group{
+        line-height: 2.2;
     }
     .elev2{
         position: absolute;
@@ -36,26 +43,34 @@
 @media only screen and (max-width:800px){
     /* 飛碟按鈕 */
     .nav-toggle-btn {
-        width: 150px;
-        height:100px;
-        top:15vh;
-        transform: translate(-75px);
-        
+        background-size: contain !important; 
+        width: 120px;
+        height:80px;
+        top:50px;
+        transform: translate(-60px);
         position: fixed;
     }
     /* 各組列表 */
+    .naviPlusLaser{
+        overflow-y: auto;
+    }
+    .group{
+        line-height: 1.7;
+    }
     .navi {
         position: fixed;
-        top:35vh;
-        overflow: auto;
+        top:120px;
+        overflow-y: auto;
         width:200px;
         height:300px;
         left: 0vw;
     }
     .laser{
         position: fixed;
-        top:30vh;
+        top:100px;
         width:280px;
+        height:250px;
+        overflow-y: auto;
     }
     .elev{
         display: none;
@@ -86,26 +101,23 @@
 .laser{
     z-index: 1500;
     left:-25px;
-    height:300px;
+    /* height:300px; */
     
 }
 .nav-toggle-btn {
-    background: url(飛碟素材.png);
-    background-size: 150px 100px;
-    background-color: transparent;
-    border-color: transparent;
-    width: 150px;
-    height:100px;
+    background: url(飛碟素材.png) no-repeat;
+    /* background-color: transparent; */
+    /* border-color: transparent; */
     z-index: 1800;
-    display: block;
+    /* display: block; */
     transition: transform 1s ease;
     
 }
 .nav-toggle-btn.active-nav{
-    transform: translate(35px);
+    transform: translate(60px);
 }
 .group{
-    line-height: 2.2;
+    
     color: white;
     padding-left: 0.1rem;
     padding-right: 0.1rem;
@@ -122,7 +134,7 @@ a{
     height:20px;
     width:100px;
 }
-a{
+a.group2{
     display:block; 
     margin:auto;
     text-align: center;
