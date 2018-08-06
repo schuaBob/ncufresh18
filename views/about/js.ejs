@@ -23,6 +23,7 @@ $(document).ready(() => {
             $("body").css({'background-size':w+"px "+h-50+"px"});
             $(".intro").removeClass("alert");
             $(".intro").removeClass("alert-dismissible");
+            $(".intro2").hide();
             $(window).on("orientationchange",function(){
                 console.log($(window).width());
             });
