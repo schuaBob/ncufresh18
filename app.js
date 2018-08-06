@@ -56,6 +56,7 @@ var router = express.Router({ strict: true });
 router.all('*');
 
 //session
+app.set('trust proxy', 1)
 const session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 app.use(session({

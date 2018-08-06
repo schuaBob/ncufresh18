@@ -3,10 +3,50 @@
   <span><span class="screen-reader-text">0</span></span>
   <span>4</span>
 </section>
-<pre><%= error.stack %></pre>
+<div class="hint ch">錯誤：找不到此頁面</div>
+<div class="hint en">Error：Not Found</div>
+<img class="thinman" src="../error/s_man2.png">
+<img class="longUFO" src="../error/s_space2.png">
+<img class="sitman" src="../error/太空小人2_去被.png">
+<img class="UFO" src="../error/飛碟素材.png">
+<!-- <pre><%= error.stack %></pre> -->
 <style>
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700');
 @import url('https://fonts.googleapis.com/css?family=Catamaran:400,800');
+img {
+  position: absolute;
+  opacity: 0.8;
+}
+.hint {
+  text-align: center;
+}
+.ch {
+  font-size: 40px;
+}
+.en {
+  font-size: 20px;
+}
+.thinman {
+  bottom: 2vh;
+  right: 15vw;
+  width: 8vw;
+}
+.longUFO {
+  z-index: -1;
+  bottom: 0%;
+  right: 0;
+  width: 20vw;
+}
+.sitman {
+  left: 1vw;
+  bottom: 2vh;
+  width: 20vw;
+}
+.UFO {
+  top: 2vh;
+  width: 10vw;
+  transform: rotate(-30deg);
+}
 .error-container {
   text-align: center;
   font-size: 180px;
@@ -137,7 +177,7 @@
     box-sizing: border-box;
 }
 body {
-  background-color: #416475;
+  background-color: #2e4753;
   margin-bottom: 50px;
 }
 html, button, input, select, textarea {

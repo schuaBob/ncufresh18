@@ -84,18 +84,7 @@ body::after{
     border-radius: 6px; 
     
 }
-/*
-#nav-item_u  {
-    background-color: #F8F8F8;
-    border-radius: 6px; 
-    
-}
-#nav-item_g {
-    background-color: rgb(29, 28, 28);
-    border-radius: 6px; 
-    
-}
-*/
+
 
 .nav-pills #u.active{
     color: black;
@@ -826,7 +815,13 @@ a{
     text-decoration:none;
 }
 
-
+.child, .toomuch {
+    cursor: pointer;
+}
+   
+* {
+    user-select: none;
+}
 /*按鈕動畫圖片*/
 .child {
     

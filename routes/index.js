@@ -63,21 +63,40 @@ router.get('*',function(req,res,next){
   res.locals.error=req.flash('error');
   next();
 });
+
 /* home page */
-router.get('/', function (req, res, next) {
+router.get('/', (req, res, next) => {
   Promise.all([
     news.find().exec(),
     qna.find({DeleteDate: {$exists: false}, Answer : {$nin:[""]}, Reason : ""}).sort({Click : 'desc'}).limit(10).exec(),
-    schedule.find().exec()
+    schedule.find({},{_id: 0, __v: 0}).exec()
   ]).then((result) => {
-    res.render('index/index', { title: '首頁', user: req.user, news : result[0], qna : result[1], schedule : JSON.stringify(result[2]) });
+    res.render('index/index', { title: '首頁 ｜ 新生知訊網', user: req.user, news : result[0], qna : result[1], schedule : JSON.stringify(result[2]) });
   }).catch((err) => {
     return next(err);
   })
 });
 
+/* home page news ajax */
+router.get('/require_data', (req, res, next) => {
+  if (!mongoose.Types.ObjectId.isValid(req.query.id)){
+    next();
+  }else{
+    news.findById(req.query.id, {_id: 0, content: 1}).exec((err, result) => {
+      if(err){
+        return next(err);
+      }
+      if(!result){
+        next();
+      }else{
+        res.send(result.content);
+      }
+    })
+  }
+})
+
 /* home page administer page */
-router.get('/index_admin', (req, res, next) => {
+router.get('/index_admin', checkUser.isAdmin, (req, res, next) => {
   Promise.all([
     news.find().exec(),
     schedule.find().exec()
@@ -89,7 +108,7 @@ router.get('/index_admin', (req, res, next) => {
 })
 
 /* add news */
-router.post('/add_news', (req, res, next) => {
+router.post('/add_news', checkUser.isAdmin, (req, res, next) => {
   let temp = new Date(req.body.time);
   if (isNaN(temp.getTime())) {  // date is not valid
     return res.redirect('index_admin');
@@ -105,7 +124,7 @@ router.post('/add_news', (req, res, next) => {
 })
 
 /* edit news page */
-router.get('/edit_news/:id', (req, res, next) => {
+router.get('/edit_news/:id', checkUser.isAdmin, (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)){
     return next();
   }
@@ -120,7 +139,7 @@ router.get('/edit_news/:id', (req, res, next) => {
 })
 
 /* update news */
-router.post('/edit_news/:id', (req, res, next) => {
+router.post('/edit_news/:id', checkUser.isAdmin, (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)){
     return next();
   }
@@ -139,7 +158,7 @@ router.post('/edit_news/:id', (req, res, next) => {
 })
 
 /* delete news */
-router.get('/delete_news/:id', (req, res, next) => {
+router.get('/delete_news/:id', checkUser.isAdmin, (req, res, next) => {
   if (mongoose.Types.ObjectId.isValid(req.params.id)){
     news.findByIdAndRemove(req.params.id).exec((err) => {
       if(err) return next(err);
@@ -149,7 +168,7 @@ router.get('/delete_news/:id', (req, res, next) => {
 })
 
 /* add schedule */
-router.post('/add_schedule', (req, res, next) => {
+router.post('/add_schedule', checkUser.isAdmin, (req, res, next) => {
   let temp = new Date(req.body.time);
   if (isNaN(temp.getTime())) { // date is not valid
     return res.redirect('index_admin');
@@ -164,7 +183,7 @@ router.post('/add_schedule', (req, res, next) => {
 })
 
 /* update schedule's content */
-router.post('/update_schedule_content/:id', (req, res, next) => {
+router.post('/update_schedule_content/:id', checkUser.isAdmin, (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)){
     return next();
   }
@@ -187,7 +206,7 @@ router.post('/update_schedule_content/:id', (req, res, next) => {
 })
 
 /* update schedule's time */
-router.post('/update_schedule_time/:id', (req, res, next) => {
+router.post('/update_schedule_time/:id', checkUser.isAdmin,(req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)){
     return next();
   }
@@ -204,7 +223,7 @@ router.post('/update_schedule_time/:id', (req, res, next) => {
 })
 
 /* delete schedule */
-router.get('/delete_schedule/:id', (req, res, next) => {
+router.get('/delete_schedule/:id', checkUser.isAdmin, (req, res, next) => {
   if (mongoose.Types.ObjectId.isValid(req.params.id)){
     schedule.findByIdAndRemove(req.params.id).exec((err) => {
       if(err) return next(err);
@@ -216,7 +235,7 @@ router.get('/delete_schedule/:id', (req, res, next) => {
 /* login page */
 router.get('/login', function (req, res, next) {
  // res.render('login/login', { title: '登入', user: req.user, message: req.flash('error')});
- res.render('login/login', { title: '登入', user: req.user});
+ res.render('login/login', { title: '登入 ｜ 新生知訊網', user: req.user});
 });
 
 
@@ -239,7 +258,7 @@ router.post('/login', function (req, res, next) {
 
 
 router.get('/password', function (req, res, next) {
-  res.render('login/password', { title: '登入', user : req.user });
+  res.render('login/password', { title: '登入 ｜ 新生知訊網', user : req.user });
 });
 
 router.post('/password', passport.authenticate('local',{
@@ -260,7 +279,7 @@ router.get('/auth/provider/callback', function (req, res, next) {
   url.parse(req.url, true);
   //If user decline the permissoion to read profile from NCU OAuth2,redirect to login page 
   if (req.query.error || !req.query.code) {
-    return res.redirect('/login');
+    return res.redirect('/');
   }
 
   // Grab accessToken by exchangine code with NCU OAuth2
@@ -349,7 +368,7 @@ router.get('/logout', function (req, res, next) {
 
 /* register page */
 router.get('/register', function (req, res, next) {
-  res.render('login/register', { title: '註冊', user: req.user  });
+  res.render('login/register', { title: '註冊 ｜ 新生知訊網', user: req.user  });
 });
 
 router.post('/register', function (req, res,next) {
@@ -401,7 +420,7 @@ router.post('/register', function (req, res,next) {
 
 /* comingsoon 記得上線後註解*/
 router.get('/comingsoon', function (req, res, next) {
-  res.render('comingsoon/index', { title: '倒數' , user: req.user});
+  res.render('comingsoon/index', { title: '倒數 ｜ 新生知訊網' , user: req.user});
 });
 
 module.exports = router;

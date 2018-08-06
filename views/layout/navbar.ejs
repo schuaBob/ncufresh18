@@ -1,58 +1,110 @@
-<nav class="navbar navbar-expand-lg navbar-light w-100" id="Navbar">
-    <a class="navbar-brand text-white" href="/">新生知訊網</a>
+<nav class="navbar navbar-expand-lg navbar-light w-100 " role="navigation" id="Navbar">
+    <a class="navbar-brand" href="/"><img src="/logo.png" id="navbarImg" class="d-inline-block align-top" alt=""></a>
     <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
         <span class="navbar-toggler-icon navbar-dark"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto mr-0">
             <li class="nav-item">
-                <a class="nav-link text-white" href="/documents">新生必讀</a>
+                <a class="nav-link navbar-link text-white" href="/documents">新生必讀</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="/qna">新生Q&A</a>
+                <a class="nav-link navbar-link text-white" href="/qna">新生Q&A</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="/campus">校園地圖</a>
+                <a class="nav-link navbar-link text-white" href="/campus">校園地圖</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="/groups">系所社團</a>
+                <a class="nav-link navbar-link text-white" href="/groups">系所社團</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="/life">中大生活</a>
+                <a class="nav-link navbar-link text-white" href="/life">中大生活</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="/video">影音專區</a>
+                <a class="nav-link navbar-link text-white" href="/video">影音專區</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="/smallgame">小遊戲</a>
+                <a class="nav-link navbar-link text-white" href="/smallgame">小遊戲</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="/about">關於我們</a>
+                <a class="nav-link navbar-link text-white" href="/about">關於我們</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="/personal">個人專區</a>
-            </li>
-            <li class="nav-item">
-                <%_ /* 就是這裡在雷 by Andrew Lin */ -%>
-                <%_ if (user){ -%>
-                <a class="nav-link text-white" href="/logout"><% if (user.role === 'admin'){ %>管理登出<% }else{ %>登出<%}%></a>
-                <%_ }else{ -%>
-                <a class="nav-link text-white" href="/login">登入</a>
-                <%_ } -%>
-            </li>
+            
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" role="button" data-toggle="dropdown">
+                <a class="nav-link navbar-link dropdown-toggle text-white" id="navbarDropdown" role="button" data-toggle="dropdown">
                     常用連結
                 </a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="https://www.ncu.edu.tw/">中大首頁</a>
-                    <a class="dropdown-item" href="http://osa.ncu.edu.tw/">學務處</a>
-                    <a class="dropdown-item" href="https://portal.ncu.edu.tw/">中大Portal</a>
-                    <a class="dropdown-item" href="https://lms.ncu.edu.tw/">LMS</a>
-                    <a class="dropdown-item" href="https://in.ncu.edu.tw/ncu7221/OSDS/">宿服中心</a>
-                    <a class="dropdown-item" href="https://uncia.cc.ncu.edu.tw/dormnet/">宿網系統</a>
+                <div class="dropdown-menu scrollable-menu" >
+                    <a class="dropdown-item ddpad" target="_blank" href="https://www.ncu.edu.tw/">中大首頁</a>
+                    <a class="dropdown-item ddpad" target="_blank" href="http://osa.ncu.edu.tw/">學務處</a>
+                    <a class="dropdown-item ddpad" target="_blank" href="https://portal.ncu.edu.tw/">中大Portal</a>
+                    <a class="dropdown-item ddpad" target="_blank" href="https://lms.ncu.edu.tw/">LMS</a>
+                    <a class="dropdown-item ddpad" target="_blank" href="https://in.ncu.edu.tw/ncu7221/OSDS/">宿服中心</a>
+                    <a class="dropdown-item ddpad" target="_blank" href="https://uncia.cc.ncu.edu.tw/dormnet/">宿網系統</a>
                 </div>
             </li>
+
+            <%_ if (user){ -%>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle img_nopad" role="button" data-toggle="dropdown">
+                <img src="/personal/bighead/<%= user.avatar %>" id="avatar">
+                </a>
+                <div class="dropdown-menu scrollable-menu dropdown-menu-right" >
+                    <a class="dropdown-item ddpad" href="/personal">個人專區</a>
+                    <a class="dropdown-item ddpad" href="/logout"><% if (user.role === 'admin'){ %>管理登出<% }else{ %>登出<%}%></a> 
+                </div>  
+            </li>
+            <%_ }else{ -%>
+            <li class="nav-item">
+                <a class="nav-link navbar-link text-white" href="/auth/provider">登入</a>
+            </li>
+            <%_ } -%>
         </ul>
     </div>
 </nav>
+
+<style>
+.navbar{
+    padding-top:0px;
+    padding-bottom:0px;
+}
+.navbar-brand{
+    padding: 0px 0px;
+}
+
+.navbar-link{
+    padding-top:16px;
+    padding-bottom:16px;
+}
+.img_nopad{
+    padding:0rem 0rem;
+}
+/*header > nav > div > ul > li > a.nav-link{navbar-link 
+    padding: 0px 0px;
+}*/
+
+.navbar-light .navbar-nav .nav-link{
+    color: rgba(255,255,255,1);
+}
+#navbarImg {
+    height:56px;
+}
+.scrollable-menu {
+    height: auto;
+    overflow-x: hidden;
+    background:rgba(0,0,0,0.5); 
+}
+.dropdown-item{
+    color: white;
+}
+#avatar{
+    padding: 3px 0px;
+    cursor: pointer;
+}
+@media only screen and (max-width: 992px) {
+    .navbar-collapse {
+        max-height: calc(100vh - 56px);
+        overflow-y: auto;
+     }
+}
+</style>

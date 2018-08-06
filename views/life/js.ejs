@@ -1,173 +1,6 @@
 <script>
-    $('.navBtn').on('click', function(e){
-        $('#sideNav').toggleClass('activeNav');
-        e.preventDefault();
-    });
-
-    var last_slide_id = 0, ifHide, ifRun = 0;
-    $(document).ready(function(){
-        ifHide = 1;
-        $('.hide2').slideUp();
-        $('.expendImg').click(function(){
-            if(ifHide == 1){
-                if(last_slide_id != 0){
-                    $(last_slide_id).slideUp();
-                    $(last_slide_id).addClass("dropdown_hide");
-                    $(last_slide_id).removeClass("dropdown_show");
-                    last_slide_id = 0;
-                }
-                $('#downNav').slideDown();
-                $('#downNav').addClass("show2");
-                $('#downNav').removeClass("hide2");
-                ifHide = (ifHide + 1) % 2;
-            }
-            else{
-                $('#downNav').slideUp();
-                $('#downNav').addClass("hide2");
-                $('#downNav').removeClass("show2");
-                ifHide = (ifHide + 1) % 2;
-            }
-        });
-    });
-    
-    $(document).ready(function(){ 
-        last_slide_id = 0;
-        $('.hide1').slideUp();
-        $('.clk').click(function(){
-            var id = $(this).attr("id"),
-                sub_id = "#" + id + "_sub";
-            if($(sub_id).attr('class') == "hide1"){
-                if(last_slide_id != 0){
-                    $(last_slide_id).slideUp();
-                    $(last_slide_id).addClass("hide1");
-                    $(last_slide_id).removeClass("show1");
-                }
-                $(sub_id).slideDown();
-                $(sub_id).addClass("show1");
-                $(sub_id).removeClass("hide1");
-                last_slide_id = sub_id;
-            }
-            else{
-                $(sub_id).slideUp();
-                $(sub_id).addClass("hide1");
-                $(sub_id).removeClass("show1");
-            }
-        });
-    });
-    
-
+    // --------------picture slide-------------- //
     var slideNum = 0, ramSlideNum = 0;
-    $('.showDetail').on('click', function(e){
-        e.preventDefault();
-        var info = this.id.split("_");
-        $(".show1").slideUp();
-        $(".show1").addClass("hide1");
-        $(".show1").removeClass("show1");
-        $.ajax({
-            url:    "showing",
-            method: "POST",
-            data:   {mainTitle: info[0], subTitle: info[1]},
-            error: function(err){
-                alert("Some error occur...");
-            },
-            success: function(data){
-                putPic(data.res1);
-                putCont(data.res2);
-            }
-        });
-        
-        
-        var putPic = function(data){
-            $(".pictureArea").empty();
-            $(".pictureArea").append('<div class="slideshow_container"></div><div class="dot_container"></div>');
-            $('.slideshow_container').empty();
-            $('.dot_container').empty();
-            for(var i=0 ; i<data.length ; i++){
-                var j = i + 1;
-                $(".slideshow_container").append("<div class='mySlides'><img src='" + data[i].path + "'" + "class='picture'></div>");
-                $('.dot_container').append("<p class='dot' onclick='currentSlide(" + j + ")' ></p>");
-            }
-            if(data.length > 0){
-                $(".pictureArea").append('<a class="prev" onclick="plusSlides(-1)">&#10094;</a> <a class="next" onclick="plusSlides(1)">&#10095;</a>');
-                slideNum = data.length;
-                ramSlideNum = Math.floor((Math.random() * slideNum) + 1);
-                showSlides(ramSlideNum);
-            }
-            else{
-                $(".slideshow_container").append("<div class='mySlides'><img src='<%=page%>_icon.png'" + "class='picture'></div>");
-            }
-            var modal = document.getElementById('modal');
-            var bgImg = document.getElementById('bgImg');
-            $('.picture').click(function(){
-                modal.style.display = 'block';
-                bgImg.src = this.src;
-                var firstTime = true;
-                $('body').on('click',function(event){
-                    if(firstTime === true) {
-                        firstTime = false;
-                        return;
-                    }
-                    if(event.target.id !== "bgImg"){
-                        modal.style.display = 'none';
-                        $('body').off('click');
-                    }
-                })
-            });
-        }
-        
-        var putCont = function(data){
-            $(".descArea").empty();
-            $(".descArea").append("<div class='describeArea'> <div class='contentArea'></div></div>")
-            $(".describeArea").children(".contentArea").empty();
-            if(data != null)
-                $(".describeArea").children(".contentArea").append(data.content);
-        }
-    });
-
-    $('#refresh').on('click', function(e){
-        e.preventDefault();
-        var bigTitle = $('#descBigTitle').val(),
-            smallTitle = $('#descSmallTitle').val();
-        $.ajax({
-            url:    "changingCK",
-            method: 'POST',
-            data:   {mainTitle: bigTitle, subTitle: smallTitle},
-            error: function(err){
-                alert("Some error occur...");
-            },
-            success: function(data){
-                todo(data);
-            }
-        });
-        var todo = function(data){
-            CKEDITOR.instances['disc'].setData(data);
-        }
-    })
-   
-    $('.bigTitle').on('change', function(e){
-        e.preventDefault();
-        var choose = this.value;
-        if(choose === "default") return;
-        $.ajax({
-            url:    "changing",
-            method: 'POST',
-            data:   {mainTitle : choose},
-            error: function(err){
-                alert("Some error occur...");
-            },
-            success: function(data){
-                todo(data);
-            }
-        });
-        var todo = function(data){
-            $('.smallTitle').empty();
-            $('.smallTitle').append("<option value='default'>" + "請選擇" + "</option>");
-            for(var i=0 ; i<data.length ; i++){
-                $('.smallTitle').append("<option value="+ data[i] + ">" +  data[i] + "</option>");   
-            }
-        }
-    });
-
     function plusSlides(n) {
         showSlides(ramSlideNum += n);
     }
@@ -192,12 +25,72 @@
         if(dots.length != 0) dots[ramSlideNum-1].className += " active";
     }
 
-    $( document ).ready( function(){
-        $( '.middle a' ).each( function()
-        {
-            $( this ).attr( 'data-buzz' , $( this ).text() );
-        } );
-    } );
+    $(document).ready(function(){        
+        setInterval(function(){
+            var slides = document.getElementsByClassName("mySlides");
+            if(slides.length != 0){
+                plusSlides(1);
+            }
+        }, 7000); 
+    })
+    
+    // -------------- navi ----------------//
+    $('.navBtn').on('click', function(e){
+        $('#sideNav').toggleClass('activeNav');
+        e.preventDefault();
+    });
+
+    // --------------slide down-------------//
+    var last_slide_id = 0, ifHide;
+    $(document).ready(function(){
+        ifHide = 1;
+        $('.hide2').slideUp();
+        $('.expendImg').click(function(){
+            if(ifHide == 1){
+                if(last_slide_id != 0){
+                    $(last_slide_id).slideUp();
+                    $(last_slide_id).addClass("dropdown_hide");
+                    $(last_slide_id).removeClass("dropdown_show");
+                    last_slide_id = 0;
+                }
+                $('#downNav').slideDown();
+                $('#downNav').addClass("show2");
+                $('#downNav').removeClass("hide2");
+                ifHide = (ifHide + 1) % 2;
+            }
+            else{
+                $('#downNav').slideUp();
+                $('#downNav').addClass("hide2");
+                $('#downNav').removeClass("show2");
+                ifHide = (ifHide + 1) % 2;
+            }
+        });
+    });
+
+    $(document).ready(function(){ 
+        last_slide_id = 0;
+        $('.hide1').slideUp();
+        $('.clk').click(function(){
+            var id = $(this).attr("id"),
+                sub_id = "#" + id + "_sub";
+            if($(sub_id).attr('class') == "hide1"){
+                if(last_slide_id != 0){
+                    $(last_slide_id).slideUp();
+                    $(last_slide_id).addClass("hide1");
+                    $(last_slide_id).removeClass("show1");
+                }
+                $(sub_id).slideDown();
+                $(sub_id).addClass("show1");
+                $(sub_id).removeClass("hide1");
+                last_slide_id = sub_id;
+            }
+            else{
+                $(sub_id).slideUp();
+                $(sub_id).addClass("hide1");
+                $(sub_id).removeClass("show1");
+            }
+        });
+    });  
 
     $(document).ready(function(){ 
         last_slide_id = 0;
@@ -230,6 +123,90 @@
         });
     });
 
+    // -------------buzz style----------------//
+    $( document ).ready( function(){
+        $( '.middle a' ).each( function()
+        {
+            $( this ).attr( 'data-buzz' , $( this ).text() );
+        } );
+    } );
+
+    // -------------cellphone backen------------//
+    $(".backenArrow").on("click", function(e){
+        e.preventDefault();
+        $(".selectPart").css("visibility", "visible");
+        $(".pictureArea").css("visibility", "hidden");
+        $(".descArea").css("visibility", "hidden");
+        $(".backenArrow").css("visibility", "hidden");
+        $(".pictureArea").empty();
+        $(".descArea").empty();
+    });
+
+    // --------------show detail-----------//
+    $('.showDetail').on('click', function(e){
+        e.preventDefault();
+        var info = this.id.split("_");
+        $(".show1").slideUp();
+        $(".show1").addClass("hide1");
+        $(".show1").removeClass("show1");
+        $.ajax({
+            url:    "showing",
+            method: "POST",
+            data:   {mainTitle: info[0], subTitle: info[1]},
+            error: function(err){
+                alert("Some error occur...");
+            },
+            success: function(data){
+                putPic(data.res1);
+                putCont(data.res2);
+            }
+        });
+        var putPic = function(data){
+            $(".pictureArea").empty();
+            $(".pictureArea").append('<div class="slideshow_container"></div><div class="dot_container"></div>');
+            $('.slideshow_container').empty();
+            $('.dot_container').empty();
+            for(var i=0 ; i<data.length ; i++){
+                var j = i + 1;
+                $(".slideshow_container").append("<div class='mySlides'><img src='" + data[i].path + "'" + "class='picture'></div>");
+                $('.dot_container').append("<p class='dot' onclick='currentSlide(" + j + ")' ></p>");
+            }
+            if(data.length > 0){
+                if(data.length != 1)
+                    $(".pictureArea").append('<a class="prev" onclick="plusSlides(-1)">&#10094;</a> <a class="next" onclick="plusSlides(1)">&#10095;</a>');
+                slideNum = data.length;
+                ramSlideNum = Math.floor((Math.random() * slideNum) + 1);
+                showSlides(ramSlideNum);
+            }
+            else{
+                $(".slideshow_container").append("<div class='mySlides'><img src='<%=page%>_icon.png'" + "class='picture'></div>");
+            }
+            var modal = document.getElementById('modal');
+            var bgImg = document.getElementById('bgImg');
+            $('.picture').click(function(){
+                modal.style.display = 'block';
+                bgImg.src = this.src;
+                var firstTime = true;
+                $('body').on('click',function(event){
+                    if(firstTime === true) {
+                        firstTime = false;
+                        return;
+                    }
+                    if(event.target.id !== "bgImg"){
+                        modal.style.display = 'none';
+                        $('body').off('click');
+                    }
+                })
+            });
+        }
+        var putCont = function(data){
+            $(".descArea").empty();
+            $(".descArea").append("<div class='describeArea'> <div class='contentArea'></div></div>")
+            $(".describeArea").children(".contentArea").empty();
+            if(data != null)
+                $(".describeArea").children(".contentArea").append(data.content);
+        }
+    });
     $(".showDetail_phone").on('click', function(e){
        e.preventDefault(); 
        var info = this.id.split("_");
@@ -249,32 +226,75 @@
                 putCont_phone(data.res2);
             }
         });
+        var putPic_phone = function(data){
+            $(".pictureArea").empty();
+            $(".pictureArea").append('<div class="slideshow_container"></div>');
+            $('.slideshow_container').empty();
+            for(var i=0 ; i<data.length ; i++)
+                $(".slideshow_container").append("<div class='mySlides'><img src='" + data[i].path + "'" + "class='picture'></div>");
+            if(data.length > 0){
+                if(data.length != 1)
+                    $(".pictureArea").append('<a class="prev" onclick="plusSlides(-1)">&#10094;</a> <a class="next" onclick="plusSlides(1)">&#10095;</a>');
+                slideNum = data.length;
+                ramSlideNum = Math.floor((Math.random() * slideNum) + 1);
+                showSlides(ramSlideNum);
+            }
+            else{
+                $(".slideshow_container").append("<div class='mySlides'><img src='<%=page%>_icon.png'" + "class='picture'></div>");
+            }
+        }
+        var putCont_phone = function(data){
+            $(".descArea").empty();
+            $(".descArea").append("<div class='describeArea'> <div class='contentArea'></div></div>")
+            $(".describeArea").children(".contentArea").empty();
+            if(data != null)
+                $(".describeArea").children(".contentArea").append(data.content);
+        }
+    });
+    // ---------------後台-----------------//
+    $('.bigTitle').on('change', function(e){
+        e.preventDefault();
+        var choose = this.value;
+        if(choose === "default") return;
+        $.ajax({
+            url:    "changing",
+            method: 'POST',
+            data:   {mainTitle : choose},
+            error: function(err){
+                alert("Some error occur...");
+            },
+            success: function(data){
+                todo(data);
+            }
+        });
+        var todo = function(data){
+            $('.smallTitle').empty();
+            $('.smallTitle').append("<option value='default'>" + "請選擇" + "</option>");
+            for(var i=0 ; i<data.length ; i++){
+                $('.smallTitle').append("<option value="+ data[i] + ">" +  data[i] + "</option>");   
+            }
+        }
     });
 
-    var putPic_phone = function(data){
-        $(".pictureArea").empty();
-        $(".pictureArea").append('<div class="slideshow_container"></div>');
-        $('.slideshow_container').empty();
-        for(var i=0 ; i<data.length ; i++)
-            $(".slideshow_container").append("<div class='mySlides'><img src='" + data[i].path + "'" + "class='picture'></div>");
-        if(data.length > 0){
-            $(".pictureArea").append('<a class="prev" onclick="plusSlides(-1)">&#10094;</a> <a class="next" onclick="plusSlides(1)">&#10095;</a>');
-            slideNum = data.length;
-            ramSlideNum = Math.floor((Math.random() * slideNum) + 1);
-            showSlides(ramSlideNum);
+    $('#refresh').on('click', function(e){
+        e.preventDefault();
+        var bigTitle = $('#descBigTitle').val(),
+            smallTitle = $('#descSmallTitle').val();
+        $.ajax({
+            url:    "changingCK",
+            method: 'POST',
+            data:   {mainTitle: bigTitle, subTitle: smallTitle},
+            error: function(err){
+                alert("Some error occur...");
+            },
+            success: function(data){
+                todo(data);
+            }
+        });
+        var todo = function(data){
+            CKEDITOR.instances['disc'].setData(data);
         }
-        else{
-            $(".slideshow_container").append("<div class='mySlides'><img src='<%=page%>_icon.png'" + "class='picture'></div>");
-        }
-    }
-
-    var putCont_phone = function(data){
-        $(".descArea").empty();
-        $(".descArea").append("<div class='describeArea'> <div class='contentArea'></div></div>")
-        $(".describeArea").children(".contentArea").empty();
-        if(data != null)
-            $(".describeArea").children(".contentArea").append(data.content);
-    }
+    })
 
     $("#delete_picture").on("click", function(e){
         e.preventDefault();
@@ -297,24 +317,5 @@
                 location.reload();
             }
         });
-    })
-
-    $(".backenArrow").on("click", function(e){
-        e.preventDefault();
-        $(".selectPart").css("visibility", "visible");
-        $(".pictureArea").css("visibility", "hidden");
-        $(".descArea").css("visibility", "hidden");
-        $(".backenArrow").css("visibility", "hidden");
-        $(".pictureArea").empty();
-        $(".descArea").empty();
-    });
-    
-    $(document).ready(function(){        
-        setInterval(function(){
-            var slides = document.getElementsByClassName("mySlides");
-            if(slides.length != 0){
-                plusSlides(1);
-            }
-        }, 7000); 
     })
 </script>

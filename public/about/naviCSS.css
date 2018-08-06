@@ -1,6 +1,9 @@
 /* 只有電腦板才有的 */
 @media only screen and (min-width:800px){
     .nav-toggle-btn {
+        background-size: contain !important; 
+        width: 150px;
+        height:100px;
         top:150px;
         position: absolute;
         left: 4vw;
@@ -11,11 +14,16 @@
         top:250px;
         overflow: auto;
         width:15vw;
+        left:0.5vw;
     }
     .laser{
         position: absolute;
         top:230px;
         width:23vw;
+        height: 300px;
+    }
+    .group{
+        line-height: 2.2;
     }
     .elev2{
         position: absolute;
@@ -35,25 +43,17 @@
 @media only screen and (max-width:800px){
     /* 飛碟按鈕 */
     .nav-toggle-btn {
-        width: 150px;
-        height:100px;
-        top:15vh;
-        transform: translate(-75px);
-        
-        position: fixed;
+        display: none;
     }
     /* 各組列表 */
+    .group{
+        line-height: 1.7;
+    }
     .navi {
-        position: fixed;
-        top:35vh;
-        overflow: auto;
-        width:230px;
-        height:300px;
+        display: none;
     }
     .laser{
-        position: fixed;
-        top:30vh;
-        width:280px;
+        display: none;
     }
     .elev{
         display: none;
@@ -77,7 +77,6 @@
 .navi {
     /* background: url(雷射群按鈕去被.png) no-repeat;
     background-size: contain; */
-    left:0.5vw;
     z-index: 2000;
     overflow: auto;
     background-color: rgba(255, 255, 255, 0);
@@ -85,26 +84,23 @@
 .laser{
     z-index: 1500;
     left:-25px;
-    height:300px;
+    /* height:300px; */
     
 }
 .nav-toggle-btn {
-    background: url(飛碟素材.png);
-    background-size: 150px 100px;
-    background-color: transparent;
-    border-color: transparent;
-    width: 150px;
-    height:100px;
+    background: url(飛碟素材.png) no-repeat;
+    /* background-color: transparent; */
+    /* border-color: transparent; */
     z-index: 1800;
-    display: block;
+    /* display: block; */
     transition: transform 1s ease;
     
 }
 .nav-toggle-btn.active-nav{
-    transform: translate(35px);
+    transform: translate(60px);
 }
-.dropdown-item{
-    line-height: 2.2;
+.group{
+    
     color: white;
     padding-left: 0.1rem;
     padding-right: 0.1rem;
@@ -116,18 +112,18 @@ a{
     position: absolute;
     /* left:100px; */
 }
+/* 文字圖片 */
 .naviBtn{
     height:20px;
     width:100px;
-    margin: 0 auto;
+}
+a.group2{
+    display:block; 
+    margin:auto;
+    text-align: center;
 }
 .elev{
     float: left;
     /* left:0; 這樣寫fullpage會壞掉不知為何*/
     width:23vw;
-}
-a.markting{
-    background: url(行銷企劃組_去被.png);
-    background-size:contain;
-    width:1
 }

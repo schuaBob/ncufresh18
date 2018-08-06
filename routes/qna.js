@@ -206,16 +206,20 @@ router.get('/search',function(req,res,next){
     }
   }
 });
-
+// 搜尋後返回首頁的按鍵
+router.get('/backToIndex', function(req, res, next) {
+    res.redirect('/qna');
+});
 /*紀錄問題點擊次數*/
 router.get('/clickQ/:id', function(req, res, next) {
   if(mongoose.Types.ObjectId.isValid(req.params.id)){
     Question.findById(req.params.id,function(err,question){
       if(err){return next(err)};
       
-   
+      if(question.Answer!==""){
         //增加瀏覽次數
         question.Click++;
+      }
         //儲存瀏覽次數
        question.save(function(err) {
           if (err){return next(err);}
@@ -265,8 +269,8 @@ router.post('/updateA/:id',checkUser.isAdmin,function(req,res,next){
           Question.findById(req.params.id).exec(function(err,result){
             if(err){return next(err)};
             //if(result.Username===res.locals.username||req.session.type==="admin"){
-            if(req.body.Answer){
-              Question.update({_id:req.params.id}, {Type:req.body.Type},{Answer:req.body.Answer},function(err){
+            if(req.body.AnswerEdit){
+              Question.update({_id:req.params.id}, {Type:req.body.Type,Answer:req.body.AnswerEdit},function(err){
                 if(err)
                     console.log('Fail to update answer.');
                 else
@@ -383,15 +387,50 @@ router.get('/deleteR/:id',checkUser.isAdmin,function(req,res,next){
         return next(err);
       }
 });
-// 使用者刪除問題 
-router.post('/deleteByUser/:id', checkUser.isLoggedIn, function(req, res, next) {
+// 使用者編輯問題 
+router.post('/editByUser/:id', checkUser.isLoggedIn, function(req, res, next) {
   Question.findById(req.params.id, function(err,result) {
     if (err){return next(err);}
     //發問者本人且問題還沒被管理員審核才能刪除問題
     if ((req.user.id === result.Username)&&(result.Answer==="")) {
       if(result!==null){
+        /*編輯*/
+        Question.update({_id:req.params.id}, {Content:req.body.Content},function(err){
+          if(err)
+              console.log('Fail to update question.');
+          else
+              console.log('Done');
+        });
+      }
+      else{
+        return next(err);
+      }
+    } 
+    else {
+      return next(err);
+    }
+  });
+});
+// 使用者刪除問題 
+router.post('/deleteByUser/:id', checkUser.isLoggedIn, function(req, res, next) {
+  console.log(req.params.id); 
+  Question.findById(req.params.id, function(err,result) {
+    if (err){return next(err);}
+    
+    //發問者本人且問題還沒被管理員審核才能刪除問題
+    if ((req.user.id === result.Username)&&(result.Answer==="")) {
+      if(result!==null){
         /*刪除*/
-        result.remove();
+        
+        Question.update({_id:req.params.id}, {DeleteDate:Date.now()},function(err){
+          if(err){
+            console.log('Fail to update reason.');
+          }
+          else{
+            console.log('Done');
+          }
+          res.redirect('/qna');
+        });
       }
       else{
         return next(err);
@@ -426,61 +465,6 @@ router.post('/editByUser/:id', checkUser.isLoggedIn, function(req, res, next) {
     }
   });
 });
-// 使用者刪除問題 
-router.post('/deleteByUser/:id', checkUser.isLoggedIn, function(req, res, next) {
-  Question.findById(req.params.id, function(err,result) {
-    if (err){return next(err);}
-    //發問者本人且問題還沒被管理員審核才能刪除問題
-    if ((req.user.id === result.Username)&&(result.Answer==="")) {
-      if(result!==null){
-        /*刪除*/
-        result.remove();
-      }
-      else{
-        return next(err);
-      }
-    } 
-    else {
-      return next(err);
-    }
-  });
-});
-// 使用者編輯問題 
-router.post('/editByUser/:id', checkUser.isLoggedIn, function(req, res, next) {
-  Question.findById(req.params.id, function(err,result) {
-    if (err){return next(err);}
-    //發問者本人且問題還沒被管理員審核才能刪除問題
-    if ((req.user.id === result.Username)&&(result.Answer==="")) {
-      if(result!==null){
-        /*編輯*/
-        Question.update({_id:req.params.id}, {Content:req.body.Content},function(err){
-          if(err)
-              console.log('Fail to update question.');
-          else
-              console.log('Done');
-        });
-      }
-      else{
-        return next(err);
-      }
-    } 
-    else {
-      return next(err);
-    }
-  });
-});
-//判斷是否登入
-function isLoggedIn(req, res, next) {
-  if (req.user)
-    return next();
-  res.redirect('/login');
-}
-//判斷是否管理員
-function isAdmin(req, res, next) {
-  if (req.user && req.user.role === 'admin')
-    return next();
-  res.redirect('/qna');
-}
 //發送成功提示
 // function sendSuccess(){
 //   alert("發送成功");

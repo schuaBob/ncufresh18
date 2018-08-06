@@ -1,14 +1,16 @@
 <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-beta.2/lazyload.js"></script>
 <script>
 
     $(document).ready(function () {
 
         var temp;
         var properties = null
-        var seq = null
         var array1 = []
-
+        
         $('.indexelepic[pictitle="排球場"]').css({ "z-index": "2" })
+        $('.indexelepic[pictitle="百花川"]').css({ "z-index": "2" })
+        $('.indexelepic[pictitle="小木屋鬆餅"]').css({ "z-index": "4" })
         $('.indexelepic.hide').hide()
 
         $('.modal-header span svg').click(function () {
@@ -98,6 +100,7 @@
                             $('.indexelepic').css("filter", "brightness(55%)")
                             $('#map').css("filter", "brightness(55%)")
                             $('#List_index li').unbind('mouseenter mouseleave')
+                            $('.indexelepic.hide[val=' + event.currentTarget.attributes.val.value + ']').show()
                             $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').css("filter", "none")
                             $('.main_list_detail li[val=' + i + ']').show()
                             $('.main_list_detail').stop().collapse('show')
@@ -130,12 +133,13 @@
                         if ($('.main_list_detail').hasClass('clicked')) {
                             console.log("3")
                             $('.indexelepic').css("filter", "brightness(55%)")
-                            $('.indexelepic.hide[val='+ event.currentTarget.attributes.val.value +']').show()
+                            $('.indexelepic.hide').hide()
                             $('.indexelepic[val='+ event.currentTarget.attributes.val.value +']').css("filter", "none")
                             $('.main_list_detail').stop().collapse('hide')
                             $('.main_list_detail').on('hidden.bs.collapse', function () {
                                 $('.main_list_detail li[val=' + i + ']').show()
                                 $('#listtitle').text(array1[i - 1])
+                                $('.indexelepic.hide[val='+ event.currentTarget.attributes.val.value +']').show()
                                 $('.main_list_detail').stop().collapse('show')
                                 $('.main_list_detail').off('hidden.bs.collapse');
                             })
@@ -146,6 +150,7 @@
                             $('.indexelepic').css("filter", "brightness(55%)")
                             $('#map').css("filter", "brightness(55%)")
                             $('#List_index li').unbind('mouseenter mouseleave')
+                            $('.indexelepic.hide[val=' + event.currentTarget.attributes.val.value + ']').show()
                             $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').css("filter", "none")
                             $('.main_list_detail li[val=' + i + ']').show()
                             
@@ -187,7 +192,7 @@
             $('.indexelepic[pictitle="' + $(this).text().trim() + '"]').velocity({ scale: 1 }, 100)
             $('.indexelepic[pictitle="' + $(this).text().trim() + '"]').tooltip('hide')
         })
-        $('.elelist').click(function (event) {
+        $('.elelist.modalshow').click(function (event) {
             $('.indexelepic[alt=' + event.currentTarget.attributes.idconnect.value + ']').tooltip('hide')
                 $.ajax({
                     url: "indexmodal?id=" + event.currentTarget.attributes.idconnect.value,
@@ -200,8 +205,9 @@
                         $('#indexmodalp .p').html(data.Element_Intro)
                         for (let i = 0; i < data.Intropic.length; i++) {
                             $('.carousel-indicators').append("<li data-target='#carouselExampleIndicators' data-slide-to='" + i + "'></li>")
-                            $('#carouselExampleIndicators .carousel-inner').append("<div class='carousel-item'><img class='d-block w-100' src='/campus/" + data.Intropic[i] + "'></div>")
+                            $('#carouselExampleIndicators .carousel-inner').append("<div class='carousel-item'><img class='d-block w-100 forlzlo' src='/campus/" + data.Intropic[i] + "'></div>")
                         }
+                        $('.forlzlo').lazyload();
                         $('.carousel-indicators li').first().addClass('active')
                         $('#carouselExampleIndicators .carousel-inner div').first().addClass('active')
                         $('#indexmodal').on('hide.bs.modal', function (e) {

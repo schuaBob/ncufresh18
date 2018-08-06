@@ -329,9 +329,9 @@ ul li{
 .modal {
     display: none;
     margin: auto;
-    padding-top: 5%;
-    width: 70%;
-    height: 90%;
+    padding-top: 2%;
+    width: 75%;
+    height: 95%;
     z-index: 4001;
     background-color: transparent;
 }

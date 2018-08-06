@@ -4,12 +4,12 @@ html, body{
 ul li{
     list-style-type:none;
 }
-@media screen and (max-height: 500px){
+@media screen and (max-height: 600px){
     .bode{
-        height: 600px;
+        height: 650px;
     }
 }
-@media screen and (min-height: 500px){
+@media screen and (min-height: 600px){
     .bode{
         height: 100vh;
     }
@@ -44,24 +44,82 @@ select {
 .title{
     position: absolute;
     left: 10%;
-    font-size: 30px;
 }
 .title a{
     text-decoration: none;  
     color: black;
 }
-.selectbar{
-    position: relative;
-    height: 60px; 
-    margin-bottom: 10px;
-    
+@media screen and (min-width: 350px){
+    .dropdown_hide, .dropdown_show{
+        position: relative;
+        top: -50px;
+        left: 185px;
+        width: 130px;
+        z-index: 100;
+    }
+    .bar{
+        position: relative;
+        text-align: center;
+        background-color:  rgba(226, 231, 227, 0.5);
+        width: 165px;
+        height: 50px;
+        font-size: 30px;
+        -moz-border-radius: 20px;
+        -webkit-border-radius: 20px;
+        border-radius: 20px;
+    }
+    .subar{
+        position: relative;
+        text-align: left;  
+        height: 30px;
+        width: 130px;
+        font-size: 20px;
+        color: rgb(6, 113, 6);
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+    .selectbar{
+        position: relative;
+        height: 60px; 
+        margin-bottom: 10px;
+    }
 }
-.dropdown_hide, .dropdown_show{
-    position: relative;
-    top: -50px;
-    left: 185px;
-    width: 150px;
-    z-index: 100;
+@media screen and (max-width: 350px){
+    .dropdown_hide, .dropdown_show{
+        position: relative;
+        top: -40px;
+        left: 150px;
+        width: 130px;
+        z-index: 100;
+    }
+    .bar{
+        position: relative;
+        text-align: center;
+        background-color:  rgba(226, 231, 227, 0.5);
+        width: 140px;
+        height: 40px;
+        font-size: 25px;
+        -moz-border-radius: 20px;
+        -webkit-border-radius: 20px;
+        border-radius: 20px;
+    }
+    .subar{
+        position: relative;
+        text-align: left;  
+        height: 30px;
+        width: 130px;
+        font-size: 20px;
+        color: rgb(6, 113, 6);
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+    .selectbar{
+        position: relative;
+        height: 60px; 
+        margin-bottom: 0px;
+    }
 }
 .dropdown_hide{
     opacity: 0;
@@ -73,27 +131,8 @@ select {
 .dropdown_show{
     opacity: 1;
 }
-.bar{
-    position: relative;
-    text-align: center;
-    background-color:  rgba(226, 231, 227, 0.5);
-    width: 165px;
-    height: 50px;
-    -moz-border-radius: 20px;
-    -webkit-border-radius: 20px;
-    border-radius: 20px;
-}
-.subar{
-    position: relative;
-    text-align: left;  
-    height: 30px;
-    width: 150px;
-    font-size: 20px;
-    color: rgb(6, 113, 6);
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-}
+
+
 hr{
     width: 80%;
     margin: auto;
@@ -187,26 +226,12 @@ hr{
     width: 50px;
     z-index: 5;
 }
-/*
-#downNav{
-    position: absolute;
-    right: -10vw;
-    bottom: 2vh;
-    width: 180px;
-    height: 340px; 
-    transform: translate(200px);
-    transition: transform 1s ease; 
-}
-#downNav.activeNav{
-    transform: translate(0);
-}
-*/
 .hide2, .show2{
     position: absolute;
     right: 0vw;
     bottom: 10vh;
     height: 300px;
-    z-index: 1; 
+    z-index: 4; 
 }
 .hide2{
     opacity: 0;
@@ -231,10 +256,12 @@ hr{
 .middle a:hover{
     text-decoration: none;
 }
+@media screen and (max-width: 500px){
 #circle {
     position: absolute;
     top: 30vh;
-    left: 15%;
+    left: 50%;
+    margin-left: -40%;
     width: 32vh;/*230px;*/
     height: 32vh;/*230px;*/
     background-color: transparent; /* Can be set to transparent */
@@ -252,4 +279,30 @@ hr{
     border: 2px #e0e0e0 solid;
     -webkit-border-radius: 9vh;
     z-index: 1;
+}
+}
+@media screen and (min-width: 500px){
+#circle {
+    position: absolute;
+    top: 25vh;
+    left: 45%;
+    margin-left: -30%;
+    width: 40vh;/*230px;*/
+    height: 40vh;/*230px;*/
+    background-color: transparent; /* Can be set to transparent */
+    border: 2px #e0e0e0 solid;
+    -webkit-border-radius: 20vh;
+    z-index: 0; 
+}
+#circle_small {
+    position: absolute;
+    top: 47vh;
+    left: 48%;
+    width: 20vh;
+    height: 20vh;
+    background-color: transparent; /* Can be set to transparent */
+    border: 2px #e0e0e0 solid;
+    -webkit-border-radius: 10vh;
+    z-index: 1;
+}
 }

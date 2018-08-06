@@ -3,22 +3,28 @@ $(document).ready(() => {
     var w=$(window).width();
     var h=$(window).height();
     // $(".pad").css({'height':h-50});
+    if(w<800){  
+            $(".intro").removeClass("alert");
+            $(".intro").removeClass("alert-dismissible");
+
+        }
     $("body").css({'height':h-50,'width':w});
     $(".screen").css({'background-size':w*0.5+"px "+h*0.28+"px"});
     $(window).resize(function() {
         var w=$(window).width();
         var h=$(window).height();
-        // var padW=$('.pad').width();
-        // console.log(padW);
-        // $(".pad").css({'height':h-50,'width':w-300});
-        $(".screen").css({'background-size':w*0.5+"px "+h*0.28+"px"});
+
+        // $(".screen").css({'background-size':w*0.5+"px "+h*0.28+"px"});
         if(w<800){  
             $("body").css({'height':h-50,'width':w});
             $("body").css({'background-size':w+"px "+h-50+"px"});
+            $(".intro").removeClass("alert");
+            $(".intro").removeClass("alert-dismissible");
+            $(".intro2").hide();
             // $(".picture").css({'width':w});
         }
         else{
-            // $(".pad").css({'height':h-50});
+            $("body").css({'height':"auto",'width':"auto"});
         }
 
     });
@@ -26,138 +32,148 @@ $(document).ready(() => {
     $('.people2').on('click', function(e) {
         $('.people2').css({'transform': 'translate(1000px)'});
     });
+    //可以把簡介收起來
+    $('.close-toggle').on('click', function(e) {
+            $('.intro2').toggle(1000);
+            $('.people1').toggleClass('people1-act');
+            e.preventDefault();
+    });
     $('.people1').on('click', function(e) {
-            $('.alert').toggle(1000);
+            $('.intro2').toggle(1000);
+            $('.people1').toggleClass('people1-act');
+            //$('.people1').css({'width': '20%','height':'40%'});
             // $('.alert').slideToggle(1000);
             e.preventDefault();
     });
-    //預設logo跟字樣
-    // $(".logo").addClass("marktingLogo");
-    // $(".name").addClass("marktingName");
-    //切換logo跟字樣
+    //預設字樣
+    $(".name").addClass("allName");
+    $('#introContent').append("由一群熱情的學長姊組成新生知訊網團隊，利用暑假的日子聚在一起開會討論、撰寫程式、拍攝影片、繪製圖片。讓2018新生知訊網帶著各位中央大學的新鮮人開啟精彩的大學生活吧！");
+    //切換字樣
     $(window).on('hashchange', function() {
         var hash = window.location.hash.substr(1);
-        //console.log(hash);
         if(hash==="markting"){
-            $(".logo").addClass("marktingLogo");
-            $(".logo").removeClass("programmingLogo");
-            $(".logo").removeClass("artLogo");
-            $(".logo").removeClass("videoLogo");
-            $(".logo").removeClass("ceoLogo");
 
             $(".name").addClass("marktingName");
             $(".name").removeClass("programmingName");
             $(".name").removeClass("artName");
             $(".name").removeClass("videoName");
             $(".name").removeClass("ceoName");
+            $(".name").removeClass("allName");
 
-            $(".title2").hide();
+            //變成各組介紹文字
+            $('#introContent').empty();
+            $('#introContent').append("企劃組決定網頁的風格，並設計網頁的格式，再將理念交付美工組與程設組，透過美化理想，付諸程式實現，共同完成，並帶給新生一個有如通往大學橋樑的知訊網。");
+            //切換頁面的時候要再展開介紹文字
+            $(".intro2").show();
+            $(".people1").removeClass("people1-act");
         }
         else if(hash==="programming"){
-            $(".logo").addClass("programmingLogo");
-            $(".logo").removeClass("marktingLogo");
-            $(".logo").removeClass("artLogo");
-            $(".logo").removeClass("videoLogo");
-            $(".logo").removeClass("ceoLogo");
-
             $(".name").addClass("programmingName");
             $(".name").removeClass("marktingName");
             $(".name").removeClass("artName");
             $(".name").removeClass("videoName");
             $(".name").removeClass("ceoName");
+            $(".name").removeClass("allName");
 
-            $(".title2").hide();
+            //變成各組介紹文字
+            $('#introContent').empty();
+            $('#introContent').append("程設組以程式架構出知訊網，並利用程式碼，做出其他組希望達到的各種功能，是這個網頁幕後的大功臣，也希望能以程式能力，期許新生一個更好的大學生活。");
+            //切換頁面的時候要再展開介紹文字
+            $(".intro2").show();
+            $(".people1").removeClass("people1-act");
         }
         else if(hash==="art"){
-            $(".logo").addClass("artLogo");
-            $(".logo").removeClass("marktingLogo");
-            $(".logo").removeClass("programmingLogo");
-            $(".logo").removeClass("videoLogo");
-            $(".logo").removeClass("ceoLogo");
-
             $(".name").addClass("artName");
             $(".name").removeClass("programmingName");
             $(".name").removeClass("marktingName");
             $(".name").removeClass("videoName");
             $(".name").removeClass("ceoName");
+            $(".name").removeClass("allName");
 
-            $(".title2").hide();
+            //變成各組介紹文字
+            $('#introContent').empty();
+            $('#introContent').append("美工組為單調的網頁模式注入生動活潑的靈魂，各處美編、精美的圖片都出自於他們之手，若說香水點綴了每個人的氣質，那美工組肯定是知訊網不可或缺的芬芳。");
+            //切換頁面的時候要再展開介紹文字
+            $(".intro2").show();
+            $(".people1").removeClass("people1-act");
         }
         else if(hash==="video"){
-            $(".logo").addClass("videoLogo");
-            $(".logo").removeClass("marktingLogo");
-            $(".logo").removeClass("programmingLogo");
-            $(".logo").removeClass("artLogo");
-            $(".logo").removeClass("ceoLogo");
 
             $(".name").addClass("videoName");
             $(".name").removeClass("programmingName");
             $(".name").removeClass("artName");
             $(".name").removeClass("marktingName");
             $(".name").removeClass("ceoName");
+            $(".name").removeClass("allName");
 
-            $(".title2").hide();
+            //變成各組介紹文字
+            $('#introContent').empty();
+            $('#introContent').append("影音組負責製作所有知訊網的影片，包括拍攝、後製，編寫劇本，為的就是提供新生一個熟悉大學的機會，透過生活日常拍攝，甚至是各系所簡介，提早適應陌生的環境，更可從中體會到大學多采多姿的生活。");
+            //切換頁面的時候要再展開介紹文字
+            $(".intro2").show();
+            $(".people1").removeClass("people1-act");
         }
         else if(hash==="ceo"){
-            $(".logo").addClass("ceoLogo");
-            $(".logo").removeClass("marktingLogo");
-            $(".logo").removeClass("programmingLogo");
-            $(".logo").removeClass("artLogo");
-            $(".logo").removeClass("videoLogo");
 
             $(".name").addClass("ceoName");
             $(".name").removeClass("programmingName");
             $(".name").removeClass("artName");
             $(".name").removeClass("videoName");
             $(".name").removeClass("marktingName");
+            $(".name").removeClass("allName");
 
-            $(".title2").hide();
+            //變成各組介紹文字
+            $('#introContent').empty();
+            $('#introContent').append("執行組負責統整知訊網的事務，與各個相關社團、系所、組織進行協商與聯絡，成為各單位之間的橋樑 ; 更需招募知訊網工人，規劃網站的大方向，配合各個小組，共同創作出新生知訊網。");
+            //切換頁面的時候要再展開介紹文字
+            $(".intro2").show();
+            $(".people1").removeClass("people1-act");
         }
         else if(hash==="all"){
-            $(".logo").removeClass("ceoLogo");
-            $(".logo").removeClass("marktingLogo");
-            $(".logo").removeClass("programmingLogo");
-            $(".logo").removeClass("artLogo");
-            $(".logo").removeClass("videoLogo");
 
+            $(".name").addClass("allName");
             $(".name").removeClass("ceoName");
             $(".name").removeClass("programmingName");
             $(".name").removeClass("artName");
             $(".name").removeClass("videoName");
             $(".name").removeClass("marktingName");
+
+            //變成各組介紹文字
+            $('#introContent').empty();
+            $('#introContent').append("由一群熱情的學長姊組成新生知訊網團隊，利用暑假的日子聚在一起開會討論、撰寫程式、拍攝影片、繪製圖片。讓2018新生知訊網帶著各位中央大學的新鮮人開啟精彩的大學生活吧！");
+            //切換頁面的時候要再展開介紹文字
+            $(".intro2").show();
+            $(".people1").removeClass("people1-act");
         }
     });
-    // var hash = new URL(window.location.href);
-    //     console.log(url);
-    // $("li a[href='#markting'], li a[href='#programming'], li a[href='#art'], li a[href='#video'], li a[href='#ceo']").on('event', function(event) {
-    //     event.preventDefault();
-    //     // Store hash
-    //     var hash = this.hash;
-        
-    // });
     //fullpage
-    $('#fullpage').fullpage({
-		//options here
-		autoScrolling:true,
-		scrollHorizontally: true
-    });
-    $.fn.fullpage.setAllowScrolling(false);
-    new fullpage('#fullpage', {
-        navigation: true,
-        resize:true,
-        responsiveWidth: 700,
-        anchors: ['all','markting', 'programming', 'art', 'video', 'ceo'],
-    });
+    if(w>800){
+
+        $('#fullpage').fullpage({
+            //options here
+            autoScrolling:true,
+            scrollHorizontally: false,
+            
+        });
+        $.fn.fullpage.setAllowScrolling(false);
+        new fullpage('#fullpage', {
+            navigation: true,
+            resize:true,
+            responsiveWidth: 700,
+            anchors: ['all','markting', 'programming', 'art', 'video', 'ceo'],
+        });
+    }
     //按鈕動畫
     if(w<800){
 
             $('.navi').hide();
             $('.laser').hide();
         $('.nav-toggle-btn').on('click', function(e) {
-            $('.dropdown-menu').toggleClass('active-nav');
+            // $('.dropdown-menu').toggleClass('active-nav');
             $('.nav-toggle-btn').toggleClass('active-nav');
             $('.navi').slideToggle(1500);
             $('.laser').slideToggle(1500);
+            // $('.navi').dropdown();
             e.preventDefault();
         });
     }
@@ -171,9 +187,6 @@ $(document).ready(() => {
             $(this).css({'width':'150px','height':'100px'});
             $(this).css({'background-size':'150px 100px'});
             $(this).css({'left':'4vw','top':'150px'});
-        });
-        $('.nav-toggle-btn').on('click', function(e) {
-            $('.nav-toggle-btn').css({'transform': 'translate(-1000px)'});
         });
     }
 });

@@ -1,30 +1,47 @@
 <script>
+    <%_ /*fullpage config*/ -%>
+    // new fullpage('#fullpage', {
+    //     licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
+    //     // autoScrolling:true,
+    //     // scrollHorizontally: true,
+    //     // verticalCentered: false,
+    //     touchSensitivity: 5,
+    //     slidesNavigation: true,
+    //     scrollBar: true,
+    //     anchors:['Carousel', 'news-Q&A', 'timeline'],
+    //     dragAndMove: true
+    // });
+    // fullpage_api.setAllowScrolling(false);
+
     new fullpage('#fullpage', {
         licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
-        autoScrolling:true,
-        scrollHorizontally: true,
-        // verticalCentered: false,
-        scrollBar: true,
-        anchors:['Carousel', 'news-Q&A', 'timeline']
+        anchors:['Carousel', 'news-Q&A', 'timeline'],
+        scrollOverflow: true,
+        autoScrolling: true,
+        responsiveHeight: 500,
+        verticalCentered: false,
+        normalScrollElements: '.navbar-collapse, .navbar-nav'
     });
 
-    //methods
-    fullpage_api.setAllowScrolling(false);
-
+    <%_ /*按下即時資訊按鍵*/ -%>
     var news_page = function(){
         document.getElementById('one').style.removeProperty( 'display' );
         document.getElementById('two').style.display = 'none';
         document.getElementById("news-halo").classList.add("active");
         document.getElementById("qna-halo").classList.remove("active");
+        $('.dotdotdottext').width($('#news-box').width()-$('.news-time').outerWidth()-$('.open-modal').outerWidth());
     }
 
+    <%_ /*按下熱門Q&A按鍵*/ -%>
     var qna_page = function(){
         document.getElementById('one').style.display = 'none';
         document.getElementById('two').style.removeProperty( 'display' );
         document.getElementById("news-halo").classList.remove("active");
         document.getElementById("qna-halo").classList.add("active");
+        $('.dotdotdotqna').width($('#news-box').width()-$('.left-qna').outerWidth()-$('.right-qna').outerWidth());
     }
 
+    <%_ /*算周次function*/ -%>
     var getWeekNumber = function(d){
         // Copy date so don't modify original
         d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
@@ -39,25 +56,34 @@
         return [d.getUTCFullYear(), weekNo];
     }
     
-
+    <%_ /*資料接口*/ -%>
     var schedule = JSON.parse('<%- schedule %>');
+    <%_ /*每天都塞進week和year屬性*/ -%>
     for (let i = 0;i<schedule.length;i++){
         var weekYaer = getWeekNumber(new Date(schedule[i].time));
         schedule[i].year = weekYaer[0];
         schedule[i].week = weekYaer[1];
     }
-    schedule.sort(function(a, b){return a.week-b.week}).sort(function(a, b){return a.year-b.year});
-    console.log(schedule)
-    <%_ /* -%>
-    <div>
-        <div class="timeline-container left">
+    <%_ /*然後按照年份和周次sort*/ -%>
+    schedule.sort(function(a, b){return new Date(a.time) - new Date(b.time)});
+    console.log(schedule);
+
+    <%_ /*印在頁面上*/ -%>
+    <%_ /*雛形 -%>
+    <div id="08-2018">
+        <div class="timeline-container <%= (ooo ? 'left' : 'right') %>">
             <div class="content">
-                <h2></h2>
-                <ul>
-                    <li></li>
-                </ul>
+            <h2>08/01</h2>
+            <ul>
+                <li>aaaaa</li>
+                <li>aaaaa</li>
+                <li>aaaaa</li>
+                <li>aaaaa</li>
+                <li>aaaaa</li>
+            </ol>
             </div>
         </div>
+        ...
     </div>
     <%_ */ -%>
     var leftOrNot = true;
@@ -91,37 +117,181 @@
         timelineDiv.appendChild(contentDiv);
         tempDiv.appendChild(timelineDiv);
         
+        <%_ /*要是下一個還不是最後一個*/ -%>
         if( i + 1 < schedule.length){
+            <%_ /*下一個屬於下一週*/ -%>
             if ((curWeek !== schedule[i+1].week) || (curYear !== schedule[i+1].year)){
+                <%_ /*把這一週的放到頁面裡面並創下一週的div*/ -%>
                 tempDiv.setAttribute("id",curWeek+"-"+curYear);
                 QQQQQ.appendChild(tempDiv);
                 tempDiv = document.createElement('div');
             }
+        <%_ /*要是已經是最後一個了就直接放入頁面*/ -%>
         }else{
             tempDiv.setAttribute("id",curWeek+"-"+curYear);
             QQQQQ.appendChild(tempDiv);
         }
     }
 
+    <%_ /*判斷哪一周離現在最近*/ -%>
     var currentWeek = $("#"+getWeekNumber(new Date())[1]+"-"+getWeekNumber(new Date())[0]);
-    if(currentWeek.length !== 0){
-        currentWeek.velocity("scroll", { 
-            container: $("#QQQQQ"),
-            duration: 800,
-            delay: 500
-        })
-    }else{
+    <%_ /*要是沒現在這一週*/ -%>
+    if(currentWeek.length === 0){
+        <%_ /*如果最後一個日程在今日之前*/ -%>
+        if ((schedule[schedule.length-1].year <=  getWeekNumber(new Date())[0]) && (schedule[schedule.length-1].week <= getWeekNumber(new Date())[1])){
+            currentWeek = $("#"+getWeekNumber(new Date(schedule[schedule.length-1].time))[1]+"-"+getWeekNumber(new Date(schedule[schedule.length-1].time))[0]);
+        }else{
         for (var i = schedule.length-1;i>=0;i--){
-            // llllll
+                if (new Date(schedule[i].time) > new Date()){
+                    currentWeek = $("#"+getWeekNumber(schedule[i].time)[1]+"-"+getWeekNumber(schedule[i].time)[0]);
+                    break;
+                }
+            }
         }
     }
+    
+    <%_ /*滑到最近的那周*/ -%>
+    //$("#scrolling").css({'height':(currentWeek.height()+'px')})
+    currentWeek.velocity("scroll", { 
+        container: $("#scrolling"),
+        duration: 800
+    })
 
-    // var tr = document.createElement('tr');
-    // var td1 = document.createElement('td');
-    // var td2 = document.createElement('td');
-    // var input = document.createElement('input');
-    // input.setAttribute('type', 'text'); input.setAttribute('name', 'content');
-    // var button = document.createElement('button'); button.setAttribute('type', 'button');
-    // button.innerHTML = '刪除此項'; button.setAttribute('onclick', 'this.parentNode.parentNode.remove()'); td1.appendChild(input); td2.appendChild(button); tr.appendChild(td1); tr.appendChild(td2);
-    // this.parentNode.children[0].children[0].appendChild(tr);
+    <%_ /*當前顯示的周次*/ -%>
+    var currentOnDisplay = currentWeek;
+
+    <%_ /*前一週按鈕*/ -%>
+    <%_ /* -%>
+    document.getElementById("prvweek").addEventListener("click",function(){
+        console.log(currentOnDisplay);
+        <%_ //如果有前一週 -%>
+        if(currentOnDisplay.prev().length !== 0){
+            <%_ //近期日程區塊縮放 -%>
+            currentOnDisplay.velocity("stop");
+            $("#scrolling").velocity({
+                height: $(currentOnDisplay).prev().height()+'px',
+                duration: 800
+            },{
+                complete: function(){
+                    console.log("ss");
+                    fullpage_api.reBuild();
+                }
+            })
+            <%_ //滑到上一週 -%>
+            $("#scrolling").stop().animate({
+                scrollTop: "-="+currentOnDisplay.prev().height(),
+                duration: 800
+            })
+            <%_ //目前顯示的是上一週 -%>
+            currentOnDisplay = currentOnDisplay.prev();
+        }
+    })
+    <%_ */ -%>
+
+    <%_ /*下一週按鈕*/ -%>
+    <%_ /* -%>
+    document.getElementById("nextweek").addEventListener("click",function(){
+        console.log(currentOnDisplay);
+        <%_ //如果有下一週 -%>
+        if(currentOnDisplay.next().length !== 0){
+            <%_ //近期日程區塊縮放 -%>
+            currentOnDisplay.velocity("stop");
+            console.log(currentOnDisplay.next().height());
+            $("#scrolling").velocity({
+                height:  currentOnDisplay.next().height()+'px',
+                duration: 800
+            },{
+                complete: function(){
+                    console.log("ss");
+                    fullpage_api.reBuild();
+                }
+            })
+            <%_ //滑到下一週 -%>
+            $("#scrolling").stop().animate({
+                scrollTop: "+="+currentOnDisplay.height(),
+                duration: 800
+            })
+            <%_ //目前顯示的是下一週 -%>
+            currentOnDisplay = currentOnDisplay.next();
+        }
+    })
+    <%_ */ -%>
+
+    <%_ /* 拿來存已經要過資料的最新消息 */ -%>
+    var newsStorage = Object();
+
+    <%_ /* 開modal */ -%>
+    for (var i = 0; i < document.getElementsByClassName('open-modal').length; i++) {
+        document.getElementsByClassName('open-modal')[i].addEventListener('click',function(event){
+            <%_ /* 如果已經有資料了 */ -%>
+            if (newsStorage[event.target.id]){
+                $("#the-title").text($(event.target).prev().text());
+                $("#the-content").html(newsStorage[event.target.id]);
+                $("#the-only-modal").modal("show");
+            <%_ /* 沒資料 */ -%>
+            }else{
+                <%_ /* 要資料 */ -%>
+                $.ajax({
+                    url:    "/require_data/?id="+event.target.id,
+                    method: 'GET',
+                    error: function(err){
+                        console.log("",err);
+                    },
+                    success: function(data){
+                        $("#the-title").text($(event.target).prev().text());
+                        $("#the-content").html(data);
+                        $("#the-only-modal").modal("show");
+                        <%_ /* 存入資料 */ -%>
+                        newsStorage[event.target.id] = data;
+                    }
+                });
+            }
+        })
+    }
+
+    <%_ /* 開modal */ -%>
+    for (var i = 0; i < document.getElementsByClassName('qna-btn').length; i++) {
+        document.getElementsByClassName('qna-btn')[i].addEventListener('click',function(event){
+            <%_ /* 要資料 */ -%>
+            $.ajax({
+                url:    "/qna/clickQ/"+event.target.attributes.oid.value,
+                method: 'GET',
+                error: function(err){
+                    console.log("",err);
+                },
+                success: function(res){
+                    console.log(res);
+                    document.getElementById('show-title').innerHTML = res.title;
+                    document.getElementById('show-content').innerHTML = res.content;
+                    document.getElementById('show-answer').innerHTML = res.answer;
+                    $('#show-modal').modal('show');
+                    <%_ /*動態新增點擊次數*/ -%>
+                    $('#'+event.target.attributes.oid.value).text((new Number($('#'+event.target.attributes.oid.value).text().substring(0,$('#'+event.target.attributes.oid.value).text().length-4))+1)+"人次點閱");
+                    
+                }
+            });
+        })
+    }
+
+    $('.dotdotdottext').width($('#news-box').width()-$('.news-time').outerWidth()-$('.open-modal').outerWidth());
+    $( window ).resize(function() {
+        $('.dotdotdottext').width($('#news-box').width()-$('.news-time').outerWidth()-$('.open-modal').outerWidth());
+        $('.dotdotdotqna').width($('#news-box').width()-$('.left-qna').outerWidth()-$('.right-qna').outerWidth());
+    });
+    $(".collapse").on('show.bs.collapse', function(e) {
+        fullpage_api.destroy('all');
+    })
+    $(".collapse").on('hide.bs.collapse', function(e) {
+        console.log("hgf")
+        new fullpage('#fullpage', {
+            licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
+            anchors:['Carousel', 'news-Q&A', 'timeline'],
+            scrollOverflow: true,
+            autoScrolling: true,
+            responsiveHeight: 500,
+            verticalCentered: false,
+            normalScrollElements: '.navbar-collapse, .navbar-nav'
+        });
+    })
+
 </script>

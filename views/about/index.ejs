@@ -12,56 +12,43 @@
         <link rel="stylesheet" type="text/css" href="fullPage.js-master/src/fullpage.css" >
         <script src='fullPage.js-master/dist/fullpage.min.js'></script> 
         
-        
     </header>
     <main>
-        <!-- <h1><%= title %></h1> -->
         <img src="面板(中空)_去被.png" class="pad"></div>
-        <img src="面板中空_去被.png" class="pad2"></div>
+        <img src="面板中空_去被.png" class="pad2" style="clear:both;"></div>
+        <div class="aboutUs intro2 alert alert-primary alert-dismissible fade show" role="alert">
+                <p id="introContent"></p>
+                <button type="button" class="close close-toggle"  aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         <img src="關於我們標題框(合)_去被.png" class="aboutUs title1"></div>
-        <img src="關於我們標題反面_去被.png" class="aboutUs title2"></div>
         <div class="aboutUs screen">
             <img src="關於我們吊掛螢幕改_去被.png" class="screen2">
             <div class="name"></div>
-            <div class="logo"></div>
         </div>
         <img src="太空小人1_去被.png" class="down people1"></div>
         <img src="紙箱_去被.png" class="down paperbox"></div>
         <img src="太空小人2_去被.png" class="down people2"></div>
         <%/*各組照片*/%>
         <div id="fullpage" class="content111">
-            <%/*測試用色塊版本*/%>
-            <!-- <div class="section" style="background-color: rgb(178, 118, 226)">
-                all
-            </div>
-            <div class="section" style="background-color: rgb(141, 206, 236)">
-                <img src="DSC07734.jpg" class="picture">
-                
-                <div class="alert alert-primary" role="alert">
-                        <p>企劃組決定網頁的風格，並設計網頁的格式，再將理念交付美工組與程設組，透過美化理想，付諸程式實現，共同完成，並帶給新生一個有如通往大學橋樑的知訊網。</p>
+            <%/*正常版本*/%>
+            <img src="關於我們標題反面_去被.png" class="title2">
+            <div class="section all" >
+                <img src="大團照.png" class="picture all1">
+                <div class="intro alert alert-primary alert-dismissible fade show" role="alert">
+                    <p>由一群熱情的學長姊組成新生知訊網團隊，利用暑假的日子聚在一起開會討論、撰寫程式、拍攝影片、繪製圖片。讓2018新生知訊網帶著各位中央大學的新鮮人開啟精彩的大學生活吧！</p>
+                        
                 </div>
             </div>
-            <div class="section" style="background-color: rgb(178, 118, 226)">
-                <p>程設組以程式架構出知訊網，並利用程式碼，做出其他組希望達到的各種功能，是這個網頁幕後的大功臣，也希望能以程式能力，期許新生一個更好的大學生活。</p>
-            </div>
-            <div class="section" style="background-color: rgb(153, 223, 182)">
-                <p>美工組為單調的網頁模式注入生動活潑的靈魂，各處美編、精美的圖片都出自於他們之手，若說香水點綴了每個人的氣質，那美工組肯定是知訊網不可或缺的芬芳。</p>
-            </div>
-            <div class="section" style="background-color: rgb(242, 207, 247)">
-                 <p>影音組負責製作所有知訊網的影片，包括拍攝、後製，編寫劇本，為的就是提供新生一個熟悉大學的機會，透過生活日常拍攝，甚至是各系所簡介，提早適應陌生的環境，更可從中體會到大學多采多姿的生活。</p>
-            </div>
-            <div class="section" style="background-color: rgb(240, 228, 160)">
-                <p>執行組負責統整知訊網的事務，與各個相關社團、系所、組織進行協商與聯絡，成為各單位之間的橋樑 ; 更需招募知訊網工人，規劃網站的大方向，配合各個小組，共同創作出新生知訊網。</p>
-            </div> -->
-            <%/*正常版本*/%>
-            <div class="section all" >
-                <img src="大團照2.png" class="picture all1">
-                <img src="大團照2.png" class="picture all2">
-            </div>
+            <br class="space">
+            <hr class="space line1">
+            <hr class="space line2">
+            <br class="space">
             <div class="section markting" >
                 <img src="行銷企劃組_去被.png" class="name2">
-                <img src="企劃組團照.jpg" class="picture">
-                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <img src="企劃.png" class="picture">
+                <div class="intro alert alert-primary alert-dismissible fade show" role="alert">
                     <p>企劃組決定網頁的風格，並設計網頁的格式，再將理念交付美工組與程設組，透過美化理想，付諸程式實現，共同完成，並帶給新生一個有如通往大學橋樑的知訊網。</p>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -69,53 +56,72 @@
                 </div>
                     
             </div>
+            <br class="space">
+            <hr class="space line1">
+            <hr class="space line2">
+            <br class="space">
             <div class="section programming">
                 <img src="程式設計組_去被.png" class="name2">
-                <img src="程設組團照.jpg" class="picture">
-                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <img src="程設.png" class="picture">
+                <div class="intro alert alert-primary alert-dismissible fade show" role="alert">
                     <p>程設組以程式架構出知訊網，並利用程式碼，做出其他組希望達到的各種功能，是這個網頁幕後的大功臣，也希望能以程式能力，期許新生一個更好的大學生活。</p>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                 </div>
             </div>
+            <br class="space">
+            <hr class="space line1">
+            <hr class="space line2">
+            <br class="space">
             <div class="section art">
                 <img src="網頁美工組_去被.png" class="name2">
-                <img src="美工組團照.jpg" class="picture">
-                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <img src="美工.png" class="picture">
+                <div class="intro alert alert-primary alert-dismissible fade show" role="alert">
                     <p>美工組為單調的網頁模式注入生動活潑的靈魂，各處美編、精美的圖片都出自於他們之手，若說香水點綴了每個人的氣質，那美工組肯定是知訊網不可或缺的芬芳。</p>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                 </div>    
             </div>
+            <br class="space">
+            <hr class="space line1">
+            <hr class="space line2">
+            <br class="space">
             <div class="section video">
                 <img src="媒體影音組_去被.png" class="name2">    
-                <img src="影音組團照.jpg" class="picture">
-                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <img src="影音.png" class="picture">
+                <div class="intro alert alert-primary alert-dismissible fade show" role="alert">
                     <p>影音組負責製作所有知訊網的影片，包括拍攝、後製，編寫劇本，為的就是提供新生一個熟悉大學的機會，透過生活日常拍攝，甚至是各系所簡介，提早適應陌生的環境，更可從中體會到大學多采多姿的生活。</p>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                 </div>
             </div>
+            <br class="space">
+            <hr class="space line1">
+            <hr class="space line2">
+            <br class="space">
             <div class="section" >
                 <img src="執行組_去被.png" class="name2">
-                <img src="執行組團照2.png" class="picture">
-                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <img src="執行.png" class="picture">
+                <div class="intro alert alert-primary alert-dismissible fade show" role="alert">
                     <p>執行組負責統整知訊網的事務，與各個相關社團、系所、組織進行協商與聯絡，成為各單位之間的橋樑 ; 更需招募知訊網工人，規劃網站的大方向，配合各個小組，共同創作出新生知訊網。</p>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                <footer id="dddd">
+                    <% include ../layout/footer %>
+                </footer>
             </div>
-
+            
         </div>
     </main>
-    <footer>
+    <% include ../layout/js %>
+    <% include js %>
+    <footer id="cccc">
         <% include ../layout/footer %>
     </footer>
-        <% include ../layout/js %>
-        <% include js %>
 </body>
 </html>

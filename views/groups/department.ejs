@@ -194,17 +194,17 @@
                     <div class="container">
                       <div id="scroll_nav">
                         <ul class="nav nav-pills flex-column" id="nav_ul-<%= department[i]._id %>">
-                          <li id="modal_button"><a class="nav-link active" data-toggle="pill" id="nav_a" href="#introduction_<%= department[i].name %>">系所介紹</a></li>
+                          <li class="nav-item" id="modal_button"><a class="nav-link active" data-toggle="tab" id="nav_a" href="#introduction_<%= department[i].name %>">系所介紹</a></li>
                           <% if(department[i].name[department[i].name.length-1] === "系" || department[i].name[department[i].name.length-1] === "班"){ %>
-                            <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#organization_<%= department[i].name %>">系學會</a></li>
-                            <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#activity_<%= department[i].name %>">系所活動</a></li>
-                            <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#team_<%= department[i].name %>">系隊</a></li>
-                            <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#course_<%= department[i].name %>">系上課程</a></li> 
-                            <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_i" href="#lightning_round_<%= department[i].name %>" 
+                            <li class="nav-item" id="modal_button"><a class="nav-link" data-toggle="tab" id="nav_a" href="#organization_<%= department[i].name %>">系學會</a></li>
+                            <li class="nav-item" id="modal_button"><a class="nav-link" data-toggle="tab" id="nav_a" href="#activity_<%= department[i].name %>">系所活動</a></li>
+                            <li class="nav-item" id="modal_button"><a class="nav-link" data-toggle="tab" id="nav_a" href="#team_<%= department[i].name %>">系隊</a></li>
+                            <li class="nav-item" id="modal_button"><a class="nav-link" data-toggle="tab" id="nav_a" href="#course_<%= department[i].name %>">系上課程</a></li> 
+                            <li class="nav-item" id="modal_button"><a class="nav-link iframe" data-toggle="tab" id="nav_i" href="#lightning_round_<%= department[i].name %>" 
                               ytID="<% for(let j = 0;　j<QAvideo.length;　j++){ if(map[QAvideo[j].title] === department[i].name){%><%= QAvideo[j].insert %><% break;}}%>">快問快答</a></li>
                           <%}%>
                           <% if(department[i].name[department[i].name.length-1] === "所"){ %>
-                            <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#organization_<%= department[i].name %>">知道更多</a></li>
+                            <li class="nav-item" id="modal_button"><a class="nav-link" data-toggle="tab" id="nav_a" href="#organization_<%= department[i].name %>">知道更多</a></li>
                           <%}%>
                         </ul>
                       </div>
@@ -212,21 +212,20 @@
                         <div id="introduction_<%= department[i].name %>" class="tab-pane active">
                           <h5>系所介紹</h5>  
                           <h6 class="intro"></h6>
-
-                          <div id="carouselExampleIndicator1" class="carousel slide" data-ride="carousel">
-                              <ol class="carousel-indicators" id="carousel1">
+                          <div id="carouselExampleIndicator1-<%= department[i]._id %>" class="carousel slide" data-ride="carousel">
+                              <ol class="carousel-indicators" id="carousel2">
 
                               </ol>
                               <div class="carousel-inner">
 
                               </div>
-                              <a class="carousel-control-prev" href="#carouselExampleIndicator1" role="button" data-slide="prev">
-                                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                  <span class="sr-only">Previous</span>
+                              <a class="carousel-control-prev" href="#carouselExampleIndicator1-<%= department[i]._id %>" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
                               </a>
-                              <a class="carousel-control-next" href="#carouselExampleIndicator1" role="button" data-slide="next">
-                                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                  <span class="sr-only">Next</span>
+                              <a class="carousel-control-next" href="#carouselExampleIndicator1-<%= department[i]._id %>" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
                               </a>
                           </div>
                         </div>
@@ -235,63 +234,60 @@
                           <div id="organization_<%= department[i].name %>" class="tab-pane fade in">
                             <h5>系學會</h5>
                             <h6 class="org"></h6>
-
-                            <div id="carouselExampleIndicator2" class="carousel slide" data-ride="carousel">
+                            <div id="carouselExampleIndicator2-<%= department[i]._id %>" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators" id="carousel2">
 
                                 </ol>
                                 <div class="carousel-inner">
 
                                 </div>
-                                <a class="carousel-control-prev" href="#carouselExampleIndicator2" role="button" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
+                                <a class="carousel-control-prev" href="#carouselExampleIndicator2-<%= department[i]._id %>" role="button" data-slide="prev">
+                                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                  <span class="sr-only">Previous</span>
                                 </a>
-                                <a class="carousel-control-next" href="#carouselExampleIndicator2" role="button" data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
+                                <a class="carousel-control-next" href="#carouselExampleIndicator2-<%= department[i]._id %>" role="button" data-slide="next">
+                                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                  <span class="sr-only">Next</span>
                                 </a>
                             </div>
                           </div>
                           <div id="activity_<%= department[i].name %>" class="tab-pane fade in">
                             <h5>系所活動</h5>
                             <h6 class="acti"></h6>
-
-                            <div id="carouselExampleIndicator3" class="carousel slide" data-ride="carousel">
-                                <ol class="carousel-indicators" id="carousel3">
+                            <div id="carouselExampleIndicator3-<%= department[i]._id %>" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators" id="carousel2">
 
                                 </ol>
                                 <div class="carousel-inner">
 
                                 </div>
-                                <a class="carousel-control-prev" href="#carouselExampleIndicator3" role="button" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
+                                <a class="carousel-control-prev" href="#carouselExampleIndicator3-<%= department[i]._id %>" role="button" data-slide="prev">
+                                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                  <span class="sr-only">Previous</span>
                                 </a>
-                                <a class="carousel-control-next" href="#carouselExampleIndicator3" role="button" data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
+                                <a class="carousel-control-next" href="#carouselExampleIndicator3-<%= department[i]._id %>" role="button" data-slide="next">
+                                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                  <span class="sr-only">Next</span>
                                 </a>
                             </div>
                           </div>
                           <div id="team_<%= department[i].name %>" class="tab-pane fade in">
                             <h5>系隊</h5>
                             <h6 class="team"></h6>
-
-                            <div id="carouselExampleIndicator4" class="carousel slide" data-ride="carousel">
-                                <ol class="carousel-indicators" id="carousel4">
+                            <div id="carouselExampleIndicator4-<%= department[i]._id %>" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators" id="carousel2">
 
                                 </ol>
                                 <div class="carousel-inner">
 
                                 </div>
-                                <a class="carousel-control-prev" href="#carouselExampleIndicator4" role="button" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
+                                <a class="carousel-control-prev" href="#carouselExampleIndicator4-<%= department[i]._id %>" role="button" data-slide="prev">
+                                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                  <span class="sr-only">Previous</span>
                                 </a>
-                                <a class="carousel-control-next" href="#carouselExampleIndicator4" role="button" data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
+                                <a class="carousel-control-next" href="#carouselExampleIndicator4-<%= department[i]._id %>" role="button" data-slide="next">
+                                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                  <span class="sr-only">Next</span>
                                 </a>
                             </div>
                           </div>                          
@@ -333,7 +329,7 @@
     <footer>
         <% include ../layout/footer %>
     </footer>
-        <!-- <% include ../layout/js %> -->
+        <% include ../layout/js %>
         <% include department_js %>
 </body>
 </html>

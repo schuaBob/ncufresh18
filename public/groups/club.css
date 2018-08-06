@@ -1,3 +1,6 @@
+button {
+    cursor: pointer;
+}
 body{
     background-image: url(系所社團飛船修正版海洋背景.png);
     background-repeat: no-repeat;
@@ -59,7 +62,6 @@ h5{
     font-size: 1.3vw;
 }
 
-
 h4{
     margin-top: 3%;
     margin-left:68%;  
@@ -108,13 +110,6 @@ td{
     color: white;
 }
 
-#carouselExampleIndicator1{
-    max-width: 400px;
-    max-height: 300px;
-    float: left;
-    margin-left: 18%;
-}
-
 /* ol{
     height: 10px;
 } */
@@ -129,7 +124,10 @@ td{
     float: left;
     margin-left: 18%;
 }
-
+.d-block{
+    max-width: 400px;
+    max-height: 300px;
+}
 .modal-content{
     background-image: url(彈出視窗背景.png);
     
@@ -163,17 +161,16 @@ td{
 #nav_ul{
     margin-top: 8%;
 }
-.nav-link{
+#nav_a{
     background-color: rgba(255, 255, 255,0);
+    display: block;
+    padding: 0.4rem 0rem;
 }
 #modal_button:hover{
     box-shadow: 0 14px 20px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
-.nav-link {
-    display: block;
-    padding: 0.4rem 0rem;
-}
-.nav-pills .nav-link.active{
+
+.nav-pills #nav_a.active{
     background-color: rgb(98, 224, 255);
 }
 
@@ -273,6 +270,10 @@ td{
         float: left;
         margin-left: 21%;
     }
+    .d-block{
+        max-width: 300px;
+        max-height: 250px;
+    }
     
 }
 @media screen and (min-width: 992px) and (max-width: 1000px){
@@ -357,19 +358,17 @@ td{
         line-height: 26px;
         letter-spacing: 1px;
     }
-    #carouselExampleIndicator1{
-        max-width: 400px;
-        max-height: 300px;
-        float: left;
-        margin-left: 5%;
-    }
+   
     #carouselExampleIndicator2{
-        max-width: 400px;
+        max-width: 300px;
         max-height: 300px;
         float: left;
         margin-left: 5%;
     }
-
+    .d-block{
+        max-width: 300px;
+        max-height: 300px;
+    }
     #cellup{
         position: relative;
         display: inline-block;
