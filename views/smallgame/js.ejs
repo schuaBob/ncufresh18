@@ -277,17 +277,49 @@ var quiz = [
 
 // 血小板
 function colorEgg() {
-    var x = 0, y = 3310;
-    for (let i = 0; i < 4; i++) {
-        createCute(x, y)
-        x += 200
+    var cutes = game.add.group()
+    var yBasic =  game.camera.y - 40
+    var x = 0, y = yBasic;
+    for (let i = 0; i < 22; i++) {
+        setTimeout(function() {
+            if (i === 4 || i === 8) {
+                y += 200
+            } else if (i === 16) {
+                y += 200
+            }
+            createCute(x, y)
+            
+            if (i < 3 || (i >= 8 && i < 12)) {
+                x += 200
+            } else if (i > 3 && i < 7) {
+                x -= 200              
+            } else if (i >= 12 && i < 15) {
+                x += 200
+            } else if (i > 15 && i < 18) {
+                x -= 200
+            } else if (i > 18 && i < 20) {
+                x += 200
+            } else if (i >= 20 && i < 21) {
+                x -= 100
+            }
+
+            if (i === 12) {
+                x = 100, y = yBasic + 100
+            } else if (i === 18) {
+                x = 200, y = yBasic + 200
+            }
+
+        }, (i *80))
     }
 
     function createCute(x, y) {
-        var cute = game.add.sprite(x, y, 'cute')
+        console.log("create cute " +"X:" + x + "Y: " + y)
+        var cute = cutes.create(x, y, 'cute')
         cute.animations.add('jump')
         cute.play('jump', 15, true)
     }
+
+    return cutes
 }
 
 // 遊戲主體長寬
@@ -726,7 +758,7 @@ var states = {
                 // 中文換行處理
                 formatChinese(questionSprite.label, questionSprite)
                 choices = [btnChoiceA, btnChoiceB, btnChoiceC, btnChoiceD]
-                // console.log("correctIndex:" + data.correctIndex)
+                console.log("correctIndex:" + data.correctIndex)
                 // 設定正確選擇
                 for (i = 0; i < choices.length; i++) {
                     choices[i].setLabel(data.o[i])
@@ -747,12 +779,15 @@ var states = {
                 // choiceState 判斷一次答題是否點擊多次
                 if (!choiceState) {
                     count++
-
+                    console.log("count:" + count)
                     // 彩蛋觸發 
-                    if (count >= quiz.length) {
-                        // colorEgg()
-                        alert("少俠好功夫，正常人是玩不到這裡的")
-                        gameOver()
+                    if (count >= 100) {
+                        var a = colorEgg()
+                        setTimeout(function() {
+                            alert("少俠好功夫，正常人是玩不到這裡的XD")
+                            a.kill()
+                            gameOver()
+                        }, 3000)
                     }
                     choiceState = 1
                     // 選擇正確
@@ -788,7 +823,7 @@ var states = {
                         
                         // 使用 tween 移動鏡頭
                         if (squirrelGroupY <= 3020 && game.camera.y >= 40) {
-                            game.add.tween(playUI).to({y: playUI.y -40}, 1000, Phaser.Easing.Bounce.Out, true)
+                            game.add.tween(playUI).to({y: playUI.y - 40}, 1000, Phaser.Easing.Bounce.Out, true)
                             game.add.tween(otherUI).to({y: otherUI.y - 40}, 1000, Phaser.Easing.Bounce.Out, true)
                             game.add.tween(scoreUI).to({y: scoreUI.y - 40}, 1000, Phaser.Easing.Bounce.Out, true)         
                             game.add.tween(game.camera).to({y: game.camera.y - 40}, 500, Phaser.Easing.Linear.None, true)

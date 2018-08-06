@@ -93,7 +93,6 @@
         }
         
         $('.open').click(function (event) {
-            console.log(event);
             $.ajax({
                 url: "commodal?name=" + event.currentTarget.attributes.search.value,
                 method: "GET",
@@ -101,7 +100,6 @@
 
                 },
                 success: function (data_com) {
-                    console.log(data_com);
                     $('#commodal .modal-title').text(data_com.name)
                     $('#commodal .intro').html(data_com.introduction)
                     $('#commodal .parti').html(data_com.participation)

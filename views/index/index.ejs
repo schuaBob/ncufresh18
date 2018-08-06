@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <% /* This following line is only necessary in the case of using the option `scrollOverflow:true` */%>
+    <script type="text/javascript" src="about/fullPage.js-master/vendors/scrolloverflow.min.js"></script>
     <% include ../layout/head %>
     <link rel="stylesheet" type="text/css" href="about/fullPage.js-master/dist/fullpage.css" />
     <% /* This following line is optional. Only necessary if you use the option css3:false and you want to use other easing effects rather than "easeInOutCubic". */%>
     <% /* <script src="vendors/easings.min.js"></script>*/ %>
-    <% /* This following line is only necessary in the case of using the option `scrollOverflow:true` */%>
-    <% /* <script type="text/javascript" src="vendors/scrolloverflow.min.js"></script> */%>
     <script type="text/javascript" src="about/fullPage.js-master/dist/fullpage.js"></script>
     <script type="text/javascript" src="about/fullPage.js-master/dist/fullpage.extensions.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
@@ -188,12 +188,12 @@
             height: 48px;
         }
         #box1 {
-            overflow-y: scroll;
-            height: calc(80vh - 48px - 3rem);
+            /* overflow-y: scroll;
+            height: calc(80vh - 48px - 3rem); */
             border-radius: 0 0 2% 2%;
             background-color: rgba(255,255,255,0.9);
         }
-        main {
+        .fp-auto-height {
             padding-bottom: 24px;
         }
         #prvweek, #nextweek {
@@ -204,6 +204,18 @@
             font-weight: 500;
             margin-left: calc((100vw - 72px)/2);
             margin-right: calc((100vw - 72px)/2);
+        }
+        .news-time {
+            white-space: nowrap;
+        }
+        .news-title {
+            text-overflow: ellipsis;
+            <%_ /* Required for text-overflow to do anything */ -%>
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        #news-text {
+            margin-top: 56px;
         }
     </style>
     <style>
@@ -341,8 +353,50 @@
             }
         }
     </style>
+    <style>
+    /* 問題與答案樣式 */
+    .QA{
+        background-image: url(/qna/問題.png);
+        background-size: cover;
+        font-family: Microsoft YaHei;
+    }
+    .blueLetter{
+        display: inline;
+        color: #29ABE2;
+        font-weight:bold;
+    }
+    /* OK按鈕 */
+    .closemodal{
+        background-color: #29ABE2;
+        color: white;
+        font-family: Microsoft YaHei;
+        border-color: #29ABE2;
+        border-radius: 20px;
+        font-weight:bold;
+    }
+    </style>
 </head>
 <body>
+    <%#顯示問題跟答案的Modal%>
+    <div class="modal fade bd-example-modal-lg" id="show-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">   
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content QA">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle"><p id="show-title">></p></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body"><h5 class="blueLetter">Q</h5><h5 style="display: inline;font-weight:bold;">uestion</h5></div>
+                <div class="modal-body"><p id="show-content" ></p></div>
+                <div class="modal-body"><h5 class="blueLetter">A</h5><h5 style="display: inline;font-weight:bold;">nswer</h5></div>
+                <div class="modal-body"><p id="show-answer"></p></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary closemodal" data-dismiss="modal">　O K　</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal" tabindex="-1" id="the-only-modal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -385,7 +439,7 @@
                     <h1 class="text-center">最新消息</h1>
                     <h6 class="text-center">隨時掌握最新動態</h6>
                 </div>
-                <div id="news-box" class="mx-auto mt-5">
+                <div id="news-box" class="mx-auto">
                     <div>
                         <div class="d-inline-block w-100 select-bar">
                             <ul class="nav nav-pills nav-fill">
@@ -406,8 +460,8 @@
                                 <tbody>
                                     <%_ for(let i = 0;i<news.length;i++){ -%>
                                     <tr>
-                                        <td><%= news[i].time.toISOString().substring(0, 10) %></td>
-                                        <td><%= news[i].title %></td>
+                                        <td class="news-time"><%= news[i].time.toISOString().substring(0, 10) %></td>
+                                        <td class="news-title"><%= news[i].title %></td>
                                         <td class="open-modal" id="<%= news[i]._id %>">more</td>
                                     </tr>
                                     <%_ } -%>
@@ -416,10 +470,10 @@
                             <table class="table" id="two" style="display: none;">
                                 <tbody>
                                     <%_ for(let i = 0;i<qna.length;i++){ -%>
-                                    <tr>
-                                        <td><%= qna[i].CreateDate.toISOString().substring(0, 10) %></td>
-                                        <td><%= qna[i].Title %></td>
-                                        <td><%= qna[i].Click %>人次點閱</td>
+                                    <tr class="qna-btn">
+                                        <td oid="<%= qna[i]._id%>"><%= qna[i].CreateDate.toISOString().substring(0, 10) %></td>
+                                        <td oid="<%= qna[i]._id%>"><%= qna[i].Title %></td>
+                                        <td id="<%= qna[i]._id%>" oid="<%= qna[i]._id%>"><%= qna[i].Click %>人次點閱</td>
                                     </tr>
                                     <%_ } -%>
                                 </tbody>
@@ -428,26 +482,29 @@
                     </div>
                 </div>
             </div>
-            <div class="section fp-auto-height">
+            <div class="section fp-auto-height-responsive">
                 <div>
                     <h1 class="mx-auto text-center">近期日程</h1>
                 </div>
+                <%_ /* -%>
                 <div class="week-btn">
                     <b id="prvweek">前一周</b>
                 </div>
+                <%_ */ -%>
                 <div id="scrolling">
                     <div class="timeline" id="QQQQQ"></div>
                 </div>
+                <%_ /* -%>
                 <div class="week-btn">
                     <b id="nextweek">後一週</b>
                 </div>
+                <%_ */ -%>
+                <footer>
+                    <% include ../layout/footer %>
+                </footer>
             </div>
         </div>
-
     </main>
-    <footer>
-        <% include ../layout/footer %>
-    </footer>
         <% include ../layout/js %>
         <% include js %>
 </body>

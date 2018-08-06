@@ -2,8 +2,6 @@
     let player = Object();
     function onYouTubeIframeAPIReady() {//此函數在IFrame Player API code 載入後將自動呼叫
         $(".player").each(function(){
-            // console.log(this.id);
-            //console.log($(this));
             let id=this.id;
             player[id] = new YT.Player(id, {
                 height: '390',
@@ -34,21 +32,15 @@
 
         $(document).on("click","#nav_i",function(evnt){
             currentid = $(this).attr('ytID');
-            console.log("後")
-            console.log(currentid);
-            console.log(player[currentid]);
+           
 
         })
         $(document).on("click","#nav_a",function(event){
-            console.log("前")
-            console.log(currentid);
-            console.log(player[currentid]);
+            
             if(currentid != ""){
                 player[currentid].pauseVideo();
             }
-            console.log("後")
-            console.log(currentid);
-            console.log(player[currentid]);
+            
         })
         $('#depmodal').on('hide.bs.modal', function (e) {
             if(currentid != ""){
@@ -151,7 +143,6 @@
 
         
         $('.open').click(function (event) {
-            //console.log(event);
             $.ajax({
                 url: "depmodal?id=" + event.currentTarget.attributes.search.value,
                 method: "GET",
@@ -159,7 +150,6 @@
 
                 },
                 success: function (data_dep) {
-                    console.log(data_dep);
                     $('#depmodal-'+  event.currentTarget.attributes.search.value +' .modal-title').text(data_dep.name)
                     $('#depmodal-'+  event.currentTarget.attributes.search.value +' .intro').html(data_dep.introduction)
                     $('#depmodal-'+  event.currentTarget.attributes.search.value +' .org').html(data_dep.organization)
@@ -168,55 +158,52 @@
                     $('#depmodal-'+  event.currentTarget.attributes.search.value +' .cour').html(data_dep.course)
 
                     for (let i = 0; i < data_dep.intro_pic.length; i++) {
-                        $('#depmodal-'+  event.currentTarget.attributes.search.value +'#carouselExampleIndicator1 .carousel-indicators').append("<li data-target='#carouselExampleIndicator1' data-slide-to='" + i + "'></li>")
-                        $('#depmodal-'+  event.currentTarget.attributes.search.value +'#carouselExampleIndicator1 .carousel-inner').append("<div class='carousel-item'><img class='d-block' src='/groups/img/" + data_dep.intro_pic[i] + "'></div>")
+                        $('#depmodal-'+  event.currentTarget.attributes.search.value +' #carouselExampleIndicator1-<%= department[i]._id %> .carousel-indicators').append("<li data-target='#carouselExampleIndicator1-<%= department[i]._id %>' data-slide-to='" + i + "'></li>")
+                        $('#depmodal-'+  event.currentTarget.attributes.search.value +' #carouselExampleIndicator1-<%= department[i]._id %> .carousel-inner').append("<div class='carousel-item'><img class='d-block' src='/groups/img/" + data_dep.intro_pic[i] + "'></div>")
                     }
-                    $('#depmodal-'+  event.currentTarget.attributes.search.value +'#carouselExampleIndicator1 .carousel-indicators li').first().addClass('active')
-                    $('#depmodal-'+  event.currentTarget.attributes.search.value +'#carouselExampleIndicator1 .carousel-inner div').first().addClass('active')
+                    $('#depmodal-'+  event.currentTarget.attributes.search.value +' #carouselExampleIndicator1-<%= department[i]._id %> .carousel-indicators li').first().addClass('active')
+                    $('#depmodal-'+  event.currentTarget.attributes.search.value +' #carouselExampleIndicator1-<%= department[i]._id %> .carousel-inner div').first().addClass('active')
                     $('#depmodal-'+  event.currentTarget.attributes.search.value).on('hide.bs.modal', function (e) {
-                        $('#depmodal-'+  event.currentTarget.attributes.search.value +'#carouselExampleIndicator1 .carousel-indicators li').remove()
-                        $('#depmodal-'+  event.currentTarget.attributes.search.value +'#carouselExampleIndicator1 .carousel-inner .carousel-item').remove()
+                        $('#depmodal-'+  event.currentTarget.attributes.search.value +' #carouselExampleIndicator1-<%= department[i]._id %> .carousel-indicators li').remove()
+                        $('#depmodal-'+  event.currentTarget.attributes.search.value +' #carouselExampleIndicator1-<%= department[i]._id %> .carousel-inner .carousel-item').remove()
                         $('#depmodal-'+  event.currentTarget.attributes.search.value).off('hide.bs.modal')
                     })
                     
                     for (let i = 0; i < data_dep.organ_pic.length; i++) {
-                        $('#depmodal-'+  event.currentTarget.attributes.search.value +'#carouselExampleIndicator2 .carousel-indicators').append("<li data-target='#carouselExampleIndicator2' data-slide-to='" + i + "'></li>")
-                        $('#depmodal-'+  event.currentTarget.attributes.search.value +'#carouselExampleIndicator2 .carousel-inner').append("<div class='carousel-item'><img class='d-block' src='/groups/img/" + data_dep.organ_pic[i] + "'></div>")
+                        $('#depmodal-'+  event.currentTarget.attributes.search.value +' #carouselExampleIndicator2-<%= department[i]._id %> .carousel-indicators').append("<li data-target='#carouselExampleIndicator2-<%= department[i]._id %>' data-slide-to='" + i + "'></li>")
+                        $('#depmodal-'+  event.currentTarget.attributes.search.value +' #carouselExampleIndicator2-<%= department[i]._id %> .carousel-inner').append("<div class='carousel-item'><img class='d-block' src='/groups/img/" + data_dep.organ_pic[i] + "'></div>")
                     }
-                    $('#depmodal-'+  event.currentTarget.attributes.search.value +'#carouselExampleIndicator2 .carousel-indicators li').first().addClass('active')
-                    $('#depmodal-'+  event.currentTarget.attributes.search.value +'#carouselExampleIndicator2 .carousel-inner div').first().addClass('active')
+                    $('#depmodal-'+  event.currentTarget.attributes.search.value +' #carouselExampleIndicator2-<%= department[i]._id %> .carousel-indicators li').first().addClass('active')
+                    $('#depmodal-'+  event.currentTarget.attributes.search.value +' #carouselExampleIndicator2-<%= department[i]._id %> .carousel-inner div').first().addClass('active')
                     $('#depmodal-'+  event.currentTarget.attributes.search.value).on('hide.bs.modal', function (e) {
-                        $('#depmodal-'+  event.currentTarget.attributes.search.value +'#carouselExampleIndicator2 .carousel-indicators li').remove()
-                        $('#depmodal-'+  event.currentTarget.attributes.search.value +'#carouselExampleIndicator2 .carousel-inner .carousel-item').remove()
+                        $('#depmodal-'+  event.currentTarget.attributes.search.value +' #carouselExampleIndicator2-<%= department[i]._id %> .carousel-indicators li').remove()
+                        $('#depmodal-'+  event.currentTarget.attributes.search.value +' #carouselExampleIndicator2-<%= department[i]._id %> .carousel-inner .carousel-item').remove()
                         $('#depmodal-'+  event.currentTarget.attributes.search.value).off('hide.bs.modal')
                     })
 
                     for (let i = 0; i < data_dep.act_pic.length; i++) {
-                        $('#depmodal-'+  event.currentTarget.attributes.search.value +'#carouselExampleIndicator3 .carousel-indicators').append("<li data-target='#carouselExampleIndicator3' data-slide-to='" + i + "'></li>")
-                        $('#depmodal-'+  event.currentTarget.attributes.search.value +'#carouselExampleIndicator3 .carousel-inner').append("<div class='carousel-item'><img class='d-block ' src='/groups/img/ " + data_dep.act_pic[i] + "'></div>")
+                        $('#depmodal-'+  event.currentTarget.attributes.search.value +' #carouselExampleIndicator3-<%= department[i]._id %> .carousel-indicators').append("<li data-target='#carouselExampleIndicator3-<%= department[i]._id %>' data-slide-to='" + i + "'></li>")
+                        $('#depmodal-'+  event.currentTarget.attributes.search.value +' #carouselExampleIndicator3-<%= department[i]._id %> .carousel-inner').append("<div class='carousel-item'><img class='d-block' src='/groups/img/" + data_dep.act_pic[i] + "'></div>")
                     }
-                    $('#depmodal-'+  event.currentTarget.attributes.search.value +'#carouselExampleIndicator3 .carousel-indicators li').first().addClass('active')
-                    $('#depmodal-'+  event.currentTarget.attributes.search.value +'#carouselExampleIndicator3 .carousel-inner div').first().addClass('active')
+                    $('#depmodal-'+  event.currentTarget.attributes.search.value +' #carouselExampleIndicator3-<%= department[i]._id %> .carousel-indicators li').first().addClass('active')
+                    $('#depmodal-'+  event.currentTarget.attributes.search.value +' #carouselExampleIndicator3-<%= department[i]._id %> .carousel-inner div').first().addClass('active')
                     $('#depmodal-'+  event.currentTarget.attributes.search.value).on('hide.bs.modal', function (e) {
-                        $('#depmodal-'+  event.currentTarget.attributes.search.value +'#carouselExampleIndicator3 .carousel-indicators li').remove()
-                        $('#depmodal-'+  event.currentTarget.attributes.search.value +'#carouselExampleIndicator3 .carousel-inner .carousel-item').remove()
-                        $('#depmodal-'+  event.currentTarget.attributes.search.value +'#depmodal').off('hide.bs.modal')
-                    })
-
-                    for (let i = 0; i < data_dep.team_pic.length; i++) {
-                        $('#depmodal-'+  event.currentTarget.attributes.search.value +'#carouselExampleIndicator4 .carousel-indicators').append("<li data-target='#carouselExampleIndicator4' data-slide-to='" + i + "'></li>")
-                        $('#depmodal-'+  event.currentTarget.attributes.search.value +'#carouselExampleIndicator4 .carousel-inner').append("<div class='carousel-item'><img class='d-block ' src='/groups/img/" + data_dep.team_pic[i] + "'></div>")
-                    }
-                    $('#depmodal-'+  event.currentTarget.attributes.search.value +'#carouselExampleIndicator4 .carousel-indicators li').first().addClass('active')
-                    $('#depmodal-'+  event.currentTarget.attributes.search.value +'#carouselExampleIndicator4 .carousel-inner div').first().addClass('active')
-                    $('#depmodal-'+  event.currentTarget.attributes.search.value).on('hide.bs.modal', function (e) {
-                        $('#depmodal-'+  event.currentTarget.attributes.search.value +'#carouselExampleIndicator4 .carousel-indicators li').remove()
-                        $('#depmodal-'+  event.currentTarget.attributes.search.value +'#carouselExampleIndicator4 .carousel-inner .carousel-item').remove()
+                        $('#depmodal-'+  event.currentTarget.attributes.search.value +' #carouselExampleIndicator3-<%= department[i]._id %> .carousel-indicators li').remove()
+                        $('#depmodal-'+  event.currentTarget.attributes.search.value +' #carouselExampleIndicator3-<%= department[i]._id %> .carousel-inner .carousel-item').remove()
                         $('#depmodal-'+  event.currentTarget.attributes.search.value).off('hide.bs.modal')
                     })
 
-
-                    
+                    for (let i = 0; i < data_dep.team_pic.length; i++) {
+                        $('#depmodal-'+  event.currentTarget.attributes.search.value +' #carouselExampleIndicator4-<%= department[i]._id %> .carousel-indicators').append("<li data-target='#carouselExampleIndicator4-<%= department[i]._id %>' data-slide-to='" + i + "'></li>")
+                        $('#depmodal-'+  event.currentTarget.attributes.search.value +' #carouselExampleIndicator4-<%= department[i]._id %> .carousel-inner').append("<div class='carousel-item'><img class='d-block' src='/groups/img/" + data_dep.team_pic[i] + "'></div>")
+                    }
+                    $('#depmodal-'+  event.currentTarget.attributes.search.value +' #carouselExampleIndicator4-<%= department[i]._id %> .carousel-indicators li').first().addClass('active')
+                    $('#depmodal-'+  event.currentTarget.attributes.search.value +' #carouselExampleIndicator4-<%= department[i]._id %> .carousel-inner div').first().addClass('active')
+                    $('#depmodal-'+  event.currentTarget.attributes.search.value).on('hide.bs.modal', function (e) {
+                        $('#depmodal-'+  event.currentTarget.attributes.search.value +' #carouselExampleIndicator4-<%= department[i]._id %> .carousel-indicators li').remove()
+                        $('#depmodal-'+  event.currentTarget.attributes.search.value +' #carouselExampleIndicator4-<%= department[i]._id %> .carousel-inner .carousel-item').remove()
+                        $('#depmodal-'+  event.currentTarget.attributes.search.value).off('hide.bs.modal')
+                    })
                     
                     $('#depmodal-'+  event.currentTarget.attributes.search.value).modal('show')
                 }

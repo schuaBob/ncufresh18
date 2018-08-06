@@ -133,7 +133,7 @@
 }
 #point {
     position : relative ;
-    top : 2vh ;
+    /* top : 2vh ; */
     text-align:center ;
     width : 18vw ;
     font-size: 4vw ;
@@ -192,38 +192,28 @@ hr {
 button {
     cursor: pointer;
 }
-@media only screen and (max-width: 1700px) and (min-width: 1400px) {
+
+@media only screen and (max-width: 600px) {
     #point {
         position : relative ;
-        top : -3vh ;
+        /* top : 0vh ; */
         text-align:center ;
         width : 57vw ;
-        font-size: 8vw ;
-        font-family: 'myFont' ;
-    }
-}
-@media only screen and (max-width: 1400px) and (min-width: 1000px) {
-    #point {
-        position : relative ;
-        top : -2vh ;
-        text-align:center ;
-        width : 57vw ;
-        font-size: 8vw ;
-        font-family: 'myFont' ;
-    }
-}
-@media only screen and (max-width: 1000px) {
-    #point {
-        position : relative ;
-        top : 0vh ;
-        text-align:center ;
-        width : 57vw ;
-        font-size: 8vw ;
+        /* font-size: 8vh ; */
         font-family: 'myFont' ;
     }
 
 }
-@media only screen and (max-width: 1700px) {
+@media only screen and (max-width: 1200px) {
+    #point {
+        position : relative ;
+        /* top : 0vh ; */
+        bottom: 3vh;
+        text-align:center ;
+        width : 57vw ;
+        font-size: 8vh ;
+        font-family: 'myFont' ;
+    }
     #canvas {
         background-image : url("預設封面.png") ;
         background-position: center ;
@@ -293,7 +283,7 @@ button {
     }
     #ope {
         width: 16vw ;
-        font-size: 5vw ;
+        /* font-size: 5vw ; */
     }
     #sta {
         width: 21vw ;
