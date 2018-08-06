@@ -5,8 +5,20 @@ $(document).ready(() => {
 //  $(window).resize(function() {
         var w=$(window).width();
         var h=$(window).height();
-    $(window).resize(function(){
-        if($(window).width()>800){
+        
+    
+    $(window).bind("resize", function () {
+        if ($(this).width() < 800) {
+            $(".classification").addClass("dropdown-menu");
+            $("ul").addClass("flex-column");
+            $("div.classification2").removeClass("nav");
+        } 
+        else{
+            $(".classification").removeClass("dropdown-menu");
+            $(".classification").css({'position':'relative !important'});
+            console.log($(".classification"))
+            $("ul").removeClass("flex-column");
+            $("div.classification2").addClass("nav");
             //滑鼠移動到我要發問按鈕上面會換圖案
             $('.askbutton').on('mouseover', function(){
                 $(this).css({'background':'url(發問按鈕2.png) no-repeat','background-size':'contain'});
@@ -14,18 +26,6 @@ $(document).ready(() => {
             $('.askbutton').on('mouseout', function(){
                 $(this).css({'background':'url(發問按鈕1.png) no-repeat','background-size':'contain'});
             });
-        }
-    })
-    $(window).bind("resize", function () {
-        if ($(this).width() < 800) {
-            $(".classification").addClass("dropdown-menu");
-            $("ul").addClass("flex-column");
-        } 
-        else{
-            $(".classification").removeClass("dropdown-menu");
-            
-            $("ul").removeClass("flex-column");
-            $(".classification").css({"top":"50px"});
             
         }
     })
@@ -37,6 +37,10 @@ $(document).ready(() => {
         $("ul").addClass("flex-column");
     }
 // });
+    $('#55555').on('hide.bs.dropdown', function () {
+        console.log("111111");
+        $(".classification").css({'position':'relative !important'});
+    })
     //預設分類
         //分類按鈕動畫
         $("li a[href='#all']").addClass("onclick");
