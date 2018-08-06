@@ -166,11 +166,12 @@
     var currentOnDisplay = currentWeek;
 
     <%_ /*前一週按鈕*/ -%>
+    <%_ /* -%>
     document.getElementById("prvweek").addEventListener("click",function(){
         console.log(currentOnDisplay);
-        <%_ /*如果有前一週*/ -%>
+        <%_ //如果有前一週 -%>
         if(currentOnDisplay.prev().length !== 0){
-            <%_ /*近期日程區塊縮放*/ -%>
+            <%_ //近期日程區塊縮放 -%>
             currentOnDisplay.velocity("stop");
             $("#scrolling").velocity({
                 height: $(currentOnDisplay).prev().height()+'px',
@@ -181,22 +182,24 @@
                     fullpage_api.reBuild();
                 }
             })
-            <%_ /*滑到上一週*/ -%>
+            <%_ //滑到上一週 -%>
             $("#scrolling").stop().animate({
                 scrollTop: "-="+currentOnDisplay.prev().height(),
                 duration: 800
             })
-            <%_ /*目前顯示的是上一週*/ -%>
+            <%_ //目前顯示的是上一週 -%>
             currentOnDisplay = currentOnDisplay.prev();
         }
     })
+    <%_ */ -%>
 
     <%_ /*下一週按鈕*/ -%>
+    <%_ /* -%>
     document.getElementById("nextweek").addEventListener("click",function(){
         console.log(currentOnDisplay);
-        <%_ /*如果有下一週*/ -%>
+        <%_ //如果有下一週 -%>
         if(currentOnDisplay.next().length !== 0){
-            <%_ /*近期日程區塊縮放*/ -%>
+            <%_ //近期日程區塊縮放 -%>
             currentOnDisplay.velocity("stop");
             console.log(currentOnDisplay.next().height());
             $("#scrolling").velocity({
@@ -208,15 +211,16 @@
                     fullpage_api.reBuild();
                 }
             })
-            <%_ /*滑到下一週*/ -%>
+            <%_ //滑到下一週 -%>
             $("#scrolling").stop().animate({
                 scrollTop: "+="+currentOnDisplay.height(),
                 duration: 800
             })
-            <%_ /*目前顯示的是下一週*/ -%>
+            <%_ //目前顯示的是下一週 -%>
             currentOnDisplay = currentOnDisplay.next();
         }
     })
+    <%_ */ -%>
 
     <%_ /* 拿來存已經要過資料的最新消息 */ -%>
     var newsStorage = Object();
@@ -247,6 +251,30 @@
                     }
                 });
             }
+        })
+    }
+
+    <%_ /* 開modal */ -%>
+    for (var i = 0; i < document.getElementsByClassName('qna-btn').length; i++) {
+        document.getElementsByClassName('qna-btn')[i].addEventListener('click',function(event){
+            <%_ /* 要資料 */ -%>
+            $.ajax({
+                url:    "/qna/clickQ/"+event.target.attributes.oid.value,
+                method: 'GET',
+                error: function(err){
+                    console.log("",err);
+                },
+                success: function(res){
+                    console.log(res);
+                    document.getElementById('show-title').innerHTML = res.title;
+                    document.getElementById('show-content').innerHTML = res.content;
+                    document.getElementById('show-answer').innerHTML = res.answer;
+                    $('#show-modal').modal('show');
+                    <%_ /*動態新增點擊次數*/ -%>
+                    $('#'+event.target.attributes.oid.value).text((new Number($('#'+event.target.attributes.oid.value).text().substring(0,$('#'+event.target.attributes.oid.value).text().length-4))+1)+"人次點閱");
+                    
+                }
+            });
         })
     }
     
