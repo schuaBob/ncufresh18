@@ -1,3 +1,6 @@
+button {
+    cursor: pointer;
+}
 body{
     background-image: url(學生會背景.png);
     background-repeat: no-repeat;

@@ -200,7 +200,7 @@
                             <li class="nav-item" id="modal_button"><a class="nav-link" data-toggle="tab" id="nav_a" href="#activity_<%= department[i].name %>">系所活動</a></li>
                             <li class="nav-item" id="modal_button"><a class="nav-link" data-toggle="tab" id="nav_a" href="#team_<%= department[i].name %>">系隊</a></li>
                             <li class="nav-item" id="modal_button"><a class="nav-link" data-toggle="tab" id="nav_a" href="#course_<%= department[i].name %>">系上課程</a></li> 
-                            <li class="nav-item" id="modal_button"><a class="nav-link" data-toggle="tab" id="nav_i" href="#lightning_round_<%= department[i].name %>" 
+                            <li class="nav-item" id="modal_button"><a class="nav-link iframe" data-toggle="tab" id="nav_i" href="#lightning_round_<%= department[i].name %>" 
                               ytID="<% for(let j = 0;　j<QAvideo.length;　j++){ if(map[QAvideo[j].title] === department[i].name){%><%= QAvideo[j].insert %><% break;}}%>">快問快答</a></li>
                           <%}%>
                           <% if(department[i].name[department[i].name.length-1] === "所"){ %>

@@ -1,3 +1,6 @@
+button {
+    cursor: pointer;
+}
 body{
     background-image: url(其他學生組織背景圖修正版.png);
     background-attachment: fixed;

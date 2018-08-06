@@ -13,6 +13,10 @@
     width: 100%;
     height: 100%;
 }
+
+button {
+    cursor: pointer;
+}
 body{
     background-image: url(系所社團飛船修正版地底背景.png);
     background-repeat: no-repeat;

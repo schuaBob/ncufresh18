@@ -1,17 +1,36 @@
 <script>
     let player = Object();
-    function onYouTubeIframeAPIReady() {//此函數在IFrame Player API code 載入後將自動呼叫
-        $(".player").each(function(){
-            let id=this.id;
-            player[id] = new YT.Player(id, {
-                height: '390',
-                width: '640',
-                videoId: id, //Youtube ID
-                enablejsapi: 1,
-                origin: 'http://localhost:3000'
+    // function onYouTubeIframeAPIReady() {//此函數在IFrame Player API code 載入後將自動呼叫
+    //     $(".player").each(function(){
+    //         let id=this.id;
+    //         player[id] = new YT.Player(id, {
+    //             height: '390',
+    //             width: '640',
+    //             videoId: id, //Youtube ID
+    //             enablejsapi: 1,
+    //             origin: 'http://localhost:3000'
 
-            });
+    //         });
+    //     })
+    // }
+    //點到再載入youtube影片
+    function onYouTubeIframeAPIReady() {//此函數在IFrame Player API code 載入後將自動呼叫
+        $(document).on("click",".iframe",function(event){
+            if($(this).attr("ytID")){
+                let id=$(this).attr("ytID");
+                //console.log(id)
+                player[id] = new YT.Player(id, {
+                    height: '390',
+                    width: '640',
+                    videoId: id, //Youtube ID
+                    controls: 2,
+                    enablejsapi: 1,
+                });
+            }
+            
+            $(this).removeClass("iframe");
         })
+    
     }
 
     $(document).ready(function(){

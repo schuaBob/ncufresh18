@@ -1,4 +1,6 @@
-
+button {
+    cursor: pointer;
+}
 body{
     background-image: url(系所背景4.png);
     /* background-attachment: fixed; */
