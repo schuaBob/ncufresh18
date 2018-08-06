@@ -38,9 +38,12 @@ $(document).ready(() => {
     }
 // });
     $(".classificationBtn").on('click', function () {
-        console.log("11111");
+        // console.log("11111");
         $(".classification").css({'position':'relative !important'});
     })
+    $('#55555').on("shown.bs.dropdown",function(){
+        console.log("11111");
+    });
     //預設分類
         //分類按鈕動畫
         $("li a[href='#all']").addClass("onclick");
