@@ -108,13 +108,6 @@ td{
     color: white;
 }
 
-#carouselExampleIndicator1{
-    max-width: 400px;
-    max-height: 300px;
-    float: left;
-    margin-left: 18%;
-}
-
 /* ol{
     height: 10px;
 } */
@@ -129,7 +122,10 @@ td{
     float: left;
     margin-left: 18%;
 }
-
+.d-block{
+    max-width: 400px;
+    max-height: 300px;
+}
 .modal-content{
     background-image: url(彈出視窗背景.png);
     
@@ -273,6 +269,10 @@ td{
         float: left;
         margin-left: 21%;
     }
+    .d-block{
+        max-width: 300px;
+        max-height: 250px;
+    }
     
 }
 @media screen and (min-width: 992px) and (max-width: 1000px){
@@ -357,19 +357,17 @@ td{
         line-height: 26px;
         letter-spacing: 1px;
     }
-    #carouselExampleIndicator1{
-        max-width: 400px;
-        max-height: 300px;
-        float: left;
-        margin-left: 5%;
-    }
+   
     #carouselExampleIndicator2{
         max-width: 400px;
         max-height: 300px;
         float: left;
         margin-left: 5%;
     }
-
+    .d-block{
+        max-width: 400px;
+        max-height: 300px;
+    }
     #cellup{
         position: relative;
         display: inline-block;
