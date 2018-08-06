@@ -50,14 +50,18 @@
                         </div>
                     </div>
                 </div>
-            <%/*我要發問的按鈕*/%>
-            <%if(user){%>
-                <button class="btn askbutton"  data-toggle="modal" data-target="#askQuestion"></button>
-                <%}
-                else{%>
-                    <button class="btn askbutton loginFirst"></button>
-                <%}
+                <%/*我要發問的按鈕*/%>
+                <%if(user){%>
+                    <button class="btn askbutton"  data-toggle="modal" data-target="#askQuestion"></button>
+                    <%}
+                    else{%>
+                        <button class="btn askbutton loginFirst"></button>
+                        <%}
                 %>
+            <%/*搜尋後可以返回首頁的按鈕*/%>
+            <form action="/qna/backToIndex" method="get">
+                <button type="submit" class="btn btn-danger backToIndex">返回</button>
+            </form>
             <%/*回到頁面最頂端的按鈕*/%>
             <button type="button" class="btn goTop"></button>
             <%/*新增問題modal*/%>
@@ -216,7 +220,7 @@
                                 </div>
                             </div>
                         <%/*編輯板規的modal*/%>
-                        <div class="modal fade bd-example-modal-lg" id="<%= rule[j].id %>-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade bd-example-modal-lg" id="<%= rule[j].id %>-edit"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content QA">
                                     <div class="modal-header">
@@ -317,7 +321,7 @@
                                 </div>
                             </div>
                             <%#新增/編輯答案的Modal%>
-                            <div class="modal fade bd-example-modal-lg" id="<%= question[i].id %>-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade bd-example-modal-lg" id="<%= question[i].id %>-edit" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content QA">
                                         <div class="modal-header">
