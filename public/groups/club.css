@@ -1,3 +1,6 @@
+button {
+    cursor: pointer;
+}
 body{
     background-image: url(系所社團飛船修正版海洋背景.png);
     background-repeat: no-repeat;
