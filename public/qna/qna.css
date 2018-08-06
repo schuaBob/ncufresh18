@@ -80,7 +80,7 @@ th{
     }
     p.classfi{
         /* display: table-cell; */
-        vertical-align: text-top;
+        vertical-align: top;
     }
     a.classfi{
         vertical-align: middle;
