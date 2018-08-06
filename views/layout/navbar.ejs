@@ -46,7 +46,7 @@
 
             <%_ if (user){ -%>
             <li class="nav-item dropdown">
-                <img src="/personal/bighead/<%= user.avatar %>" class="dropdown-toggle avatar" id="avatar" role="button" data-toggle="dropdown">
+                <img src="/personal/bighead/<%= user.avatar %>" class="dropdown-toggle" id="avatar" role="button" data-toggle="dropdown">
                 <div class="dropdown-menu scrollable-menu dropdown-menu-right" >
                     <a class="dropdown-item ddpad" href="/personal">個人專區</a>
                     <a class="dropdown-item ddpad" href="/logout"><% if (user.role === 'admin'){ %>管理登出<% }else{ %>登出<%}%></a> 
@@ -80,6 +80,7 @@
 }
 #avatar{
     padding: 3px 0px;
+    cursor: pointer;
 }
 
 
