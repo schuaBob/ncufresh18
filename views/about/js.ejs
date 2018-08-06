@@ -3,6 +3,11 @@ $(document).ready(() => {
     var w=$(window).width();
     var h=$(window).height();
     // $(".pad").css({'height':h-50});
+    if(w<800){  
+            $(".intro").removeClass("alert");
+            $(".intro").removeClass("alert-dismissible");
+            // $(".picture").css({'width':w});
+        }
     $("body").css({'height':h-50,'width':w});
     $(".screen").css({'background-size':w*0.5+"px "+h*0.28+"px"});
     $(window).resize(function() {
@@ -15,6 +20,8 @@ $(document).ready(() => {
         if(w<800){  
             $("body").css({'height':h-50,'width':w});
             $("body").css({'background-size':w+"px "+h-50+"px"});
+            $(".intro").removeClass("alert");
+            $(".intro").removeClass("alert-dismissible");
             // $(".picture").css({'width':w});
         }
         else{
@@ -139,7 +146,7 @@ $(document).ready(() => {
     $('#fullpage').fullpage({
 		//options here
 		autoScrolling:true,
-		scrollHorizontally: true
+		scrollHorizontally: false
     });
     $.fn.fullpage.setAllowScrolling(false);
     new fullpage('#fullpage', {

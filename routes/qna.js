@@ -265,8 +265,8 @@ router.post('/updateA/:id',checkUser.isAdmin,function(req,res,next){
           Question.findById(req.params.id).exec(function(err,result){
             if(err){return next(err)};
             //if(result.Username===res.locals.username||req.session.type==="admin"){
-            if(req.body.Answer){
-              Question.update({_id:req.params.id}, {Type:req.body.Type},{Answer:req.body.Answer},function(err){
+            if(req.body.AnswerEdit){
+              Question.update({_id:req.params.id}, {Type:req.body.Type,Answer:req.body.AnswerEdit},function(err){
                 if(err)
                     console.log('Fail to update answer.');
                 else
