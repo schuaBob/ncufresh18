@@ -1,4 +1,5 @@
 <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-beta.2/lazyload.js"></script>
 <script>
 
     $(document).ready(function () {
@@ -204,8 +205,9 @@
                         $('#indexmodalp .p').html(data.Element_Intro)
                         for (let i = 0; i < data.Intropic.length; i++) {
                             $('.carousel-indicators').append("<li data-target='#carouselExampleIndicators' data-slide-to='" + i + "'></li>")
-                            $('#carouselExampleIndicators .carousel-inner').append("<div class='carousel-item'><img class='d-block w-100' src='/campus/" + data.Intropic[i] + "'></div>")
+                            $('#carouselExampleIndicators .carousel-inner').append("<div class='carousel-item'><img class='d-block w-100 forlzlo' src='/campus/" + data.Intropic[i] + "'></div>")
                         }
+                        $('.forlzlo').lazyload();
                         $('.carousel-indicators li').first().addClass('active')
                         $('#carouselExampleIndicators .carousel-inner div').first().addClass('active')
                         $('#indexmodal').on('hide.bs.modal', function (e) {
