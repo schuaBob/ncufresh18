@@ -70,6 +70,11 @@
     .name2{
         display: none;
     }
+    .allName{
+        background: url(新生知訊網_去被.png) no-repeat;
+        background-size: contain;
+        z-index: 5000;
+    }
     .marktingName{
         background: url(行銷企劃組.png) no-repeat;
         background-size: contain;
@@ -135,15 +140,39 @@
         background-size: cover;
         left: 23vw;
     }
+    .space{
+        display: none;
+    }
+    /* footer位置 */
+    #dddd{
+        display:none;
+    }
 }
 /* 只有手機板才有的 */
 @media only screen and (max-width:800px){
+    /* 讓footer在最下面 */
+    #dddd{
+        bottom:auto;
+    }
+    #cccc{
+        display: none;
+    }
+    hr.line1{
+        border: 1px #01125e solid;
+        margin: 0rem;
+    }
+    hr.line2{
+        border: 1px #00ffdd solid;
+        opacity: 0.5;
+        margin: 0rem;
+    }
     .intro{
         float: center;
         background-color: transparent; 
         color:#01125e;
-        text-align: center;
+        text-align: left;
         font-weight: bold;
+        margin-top: 15px;
         margin-left: 5px;
         margin-right: 15px;
     }
@@ -153,15 +182,18 @@
     body{
         background: url(晶片.png);
         /* background-size: cover; */
-        overflow-y: scroll;
+        /* overflow-y: scroll; */
     }
     /* 標題 */
     .aboutUs.title1{
         display: none; 
     }
     .title2{
-        position: absolute;
+        position: relative;
         top:50px;
+        z-index: 1800;
+        /* float: static; */
+        float: right;
         width: 50%;
         right: 0;
     }
@@ -240,7 +272,7 @@
     top:15vw; */
     position: fixed;
     width:100%;
-    height: 100%;
+    height: 90%;
 }
 .pad3{
     z-index: 2;
