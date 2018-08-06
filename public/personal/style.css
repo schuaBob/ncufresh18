@@ -133,10 +133,10 @@
 }
 #point {
     position : relative ;
-    top : 4vh ;
+    top : 2vh ;
     text-align:center ;
     width : 18vw ;
-    font-size: 5vw ;
+    font-size: 4vw ;
     font-family: 'myFont' ;
 }
 #record {
@@ -192,7 +192,38 @@ hr {
 button {
     cursor: pointer;
 }
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1700px) and (min-width: 1400px) {
+    #point {
+        position : relative ;
+        top : -3vh ;
+        text-align:center ;
+        width : 57vw ;
+        font-size: 8vw ;
+        font-family: 'myFont' ;
+    }
+}
+@media only screen and (max-width: 1400px) and (min-width: 1000px) {
+    #point {
+        position : relative ;
+        top : -2vh ;
+        text-align:center ;
+        width : 57vw ;
+        font-size: 8vw ;
+        font-family: 'myFont' ;
+    }
+}
+@media only screen and (max-width: 1000px) {
+    #point {
+        position : relative ;
+        top : 0vh ;
+        text-align:center ;
+        width : 57vw ;
+        font-size: 8vw ;
+        font-family: 'myFont' ;
+    }
+
+}
+@media only screen and (max-width: 1700px) {
     #canvas {
         background-image : url("預設封面.png") ;
         background-position: center ;
@@ -213,6 +244,13 @@ button {
     #empty {
         display: none ;
     }
+    #w1 {
+        position: relative;
+        color: rgb(170, 33, 63) ;
+        top : 3px ;
+        left : 0px ;
+        font-size: 4vh ;
+    }
     #score {
         position: absolute ;
         left :41vw ;
@@ -221,21 +259,6 @@ button {
         width: 57vw ;
         background-color: rgb(244, 209, 207) ;
         text-align:center ;
-    }
-    #w1 {
-        position: relative;
-        color: rgb(170, 33, 63) ;
-        top : 3px ;
-        left : 0px ;
-        font-size: 4vh ;
-    }
-    #point {
-        position : relative ;
-        top : 0 ;
-        text-align:center ;
-        width : 57vw ;
-        font-size: 12vw ;
-        font-family: 'myFont' ;
     }
     #btn1 {
         position: absolute ;
