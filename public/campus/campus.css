@@ -177,7 +177,6 @@ body {
 .main_list_detail {
   position: absolute;
   float: right;
-  top: 1%;
   right: 2%;
   width: 25%;
   z-index: 5;
@@ -482,6 +481,7 @@ li {
     padding: 0;
   }
   .main_list_detail {
+    top: unset;
     position: absolute;
     bottom: 0;
     width: 100vw;

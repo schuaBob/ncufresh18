@@ -13,7 +13,7 @@
         <% include ../layout/navbar %>
     </header>
     <main id="campusmain">
-        <!-- 如果已經登入且身分為管理員 -->
+        
         <%_ if (user && user.role === 'admin'){ -%>
             <div class="Admin_edit">
                 <div class="adminbt">
@@ -24,18 +24,18 @@
                 </div>
             </div>
         <%_ } -%>
-        <!-- main_list_detail是右邊黑色選單 -->
+        
         <div class="main_list_detail collapse">
             <li id="listtitle">99</li>
             <div id="closemainlist">
                     <img src="close.png">
             </div>
             <ul>
-                <!-- 全部資料 -->
+                
                 <%for (let i in result) {-%>
-                    <!-- 是否出現多次,1=否 -->
+                    
                     <%if(result[i]['Multi'] == 1){-%>
-                        <!-- 是否需要modal,1=是 -->
+                        
                         <%if (result[i]['Modalneed'] == 0 ) {-%>
                             <li class="elelist modalshow" idconnect="<%=result[i]['_id']%>" val="<%=result[i]['Type']%>">
                                 <%=result[i]['Element_Name']%>
@@ -54,7 +54,7 @@
             <div class="mapshadow">
                 <% for (let i in result) { -%>
                     <% if (result[i]['Buildpic'] != "") { -%>
-                        <!-- 一開始是否顯示圖標 -->
+                        
                         <% if (result[i]['Showdefault'] === 0) { -%>
                             <% if (result[i]['Modalneed'] === 0 ) { -%>
                                 <img title="<%=result[i]['Element_Name']%>" pictitle="<%=result[i]['Element_Name']%>" val="<%=result[i]['Type']%>" class="indexelepic hide modalshow"
@@ -80,7 +80,7 @@
             </div>
 
         </div>
-        <!-- 下方8個類別 -->
+        
         <ul id="List_index">
             <li class="Main_listele1" val="1">
                 <img src="list1.png" alt="">
@@ -107,7 +107,7 @@
                 <img src="list8.png" alt="">
             </li>
         </ul>
-        <!-- 建築物modal -->
+        
         <div class="modal fade" id="indexmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
