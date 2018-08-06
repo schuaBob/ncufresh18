@@ -226,26 +226,12 @@ hr{
     width: 50px;
     z-index: 5;
 }
-/*
-#downNav{
-    position: absolute;
-    right: -10vw;
-    bottom: 2vh;
-    width: 180px;
-    height: 340px; 
-    transform: translate(200px);
-    transition: transform 1s ease; 
-}
-#downNav.activeNav{
-    transform: translate(0);
-}
-*/
 .hide2, .show2{
     position: absolute;
     right: 0vw;
     bottom: 10vh;
     height: 300px;
-    z-index: 1; 
+    z-index: 4; 
 }
 .hide2{
     opacity: 0;
