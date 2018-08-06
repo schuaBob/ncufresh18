@@ -411,7 +411,6 @@ router.post('/editByUser/:id', checkUser.isLoggedIn, function(req, res, next) {
     }
   });
 });
-<<<<<<< HEAD
 // 使用者刪除問題 
 router.post('/deleteByUser/:id', checkUser.isLoggedIn, function(req, res, next) {
   console.log(req.params.id); 
@@ -442,8 +441,6 @@ router.post('/deleteByUser/:id', checkUser.isLoggedIn, function(req, res, next) 
     }
   });
 });
-=======
->>>>>>> origin/about
 // 使用者編輯問題 
 router.post('/editByUser/:id', checkUser.isLoggedIn, function(req, res, next) {
   Question.findById(req.params.id, function(err,result) {
