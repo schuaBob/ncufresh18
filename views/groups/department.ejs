@@ -194,17 +194,17 @@
                     <div class="container">
                       <div id="scroll_nav">
                         <ul class="nav nav-pills flex-column" id="nav_ul-<%= department[i]._id %>">
-                          <li id="modal_button"><a class="nav-link active" data-toggle="pill" id="nav_a" href="#introduction_<%= department[i].name %>">系所介紹</a></li>
+                          <li class="nav-item" id="modal_button"><a class="nav-link active" data-toggle="tab" id="nav_a" href="#introduction_<%= department[i].name %>">系所介紹</a></li>
                           <% if(department[i].name[department[i].name.length-1] === "系" || department[i].name[department[i].name.length-1] === "班"){ %>
-                            <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#organization_<%= department[i].name %>">系學會</a></li>
-                            <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#activity_<%= department[i].name %>">系所活動</a></li>
-                            <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#team_<%= department[i].name %>">系隊</a></li>
-                            <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#course_<%= department[i].name %>">系上課程</a></li> 
-                            <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_i" href="#lightning_round_<%= department[i].name %>" 
+                            <li class="nav-item" id="modal_button"><a class="nav-link" data-toggle="tab" id="nav_a" href="#organization_<%= department[i].name %>">系學會</a></li>
+                            <li class="nav-item" id="modal_button"><a class="nav-link" data-toggle="tab" id="nav_a" href="#activity_<%= department[i].name %>">系所活動</a></li>
+                            <li class="nav-item" id="modal_button"><a class="nav-link" data-toggle="tab" id="nav_a" href="#team_<%= department[i].name %>">系隊</a></li>
+                            <li class="nav-item" id="modal_button"><a class="nav-link" data-toggle="tab" id="nav_a" href="#course_<%= department[i].name %>">系上課程</a></li> 
+                            <li class="nav-item" id="modal_button"><a class="nav-link" data-toggle="tab" id="nav_i" href="#lightning_round_<%= department[i].name %>" 
                               ytID="<% for(let j = 0;　j<QAvideo.length;　j++){ if(map[QAvideo[j].title] === department[i].name){%><%= QAvideo[j].insert %><% break;}}%>">快問快答</a></li>
                           <%}%>
                           <% if(department[i].name[department[i].name.length-1] === "所"){ %>
-                            <li id="modal_button"><a class="nav-link" data-toggle="pill" id="nav_a" href="#organization_<%= department[i].name %>">知道更多</a></li>
+                            <li class="nav-item" id="modal_button"><a class="nav-link" data-toggle="tab" id="nav_a" href="#organization_<%= department[i].name %>">知道更多</a></li>
                           <%}%>
                         </ul>
                       </div>
@@ -333,7 +333,7 @@
     <footer>
         <% include ../layout/footer %>
     </footer>
-        <!-- <% include ../layout/js %> -->
+        <% include ../layout/js %>
         <% include department_js %>
 </body>
 </html>
