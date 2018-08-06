@@ -12,14 +12,14 @@ var checkuser = require('./check-user');
 
 /* 系所社團首頁 */
 router.get('/', function(req, res, next) {
-  res.render('groups/index', { title: '系所社團', user: req.user });
+  res.render('groups/index', { title: '系所社團 ｜ 新生知訊網', user: req.user });
 });
 
 router.get('/department', function(req, res, next) {
   department.find({}).exec(function(err, department) {
     video.find({type:"2"}).sort({id:-1}).exec(function(err, video2) {
       res.render('groups/department', {
-        title: '系所 ',
+        title: '系所 ｜ 新生知訊網',
         department: department,
         QAvideo: video2,       
         user: req.user,
@@ -32,7 +32,7 @@ router.get('/department', function(req, res, next) {
 router.get('/community', function(req, res, next) { 
   community.find({}).exec(function(err, community) {
     res.render('groups/community', {
-      title: '其他學生組織 ',
+      title: '其他學生組織 ｜ 新生知訊網',
       community: community,
       user: req.user,    
     });
@@ -42,7 +42,7 @@ router.get('/community', function(req, res, next) {
 router.get('/student', function(req, res, next) {
   student.find({}).exec(function(err, student) { 
     res.render('groups/student', {
-      title: '學生會',
+      title: '學生會 ｜ 新生知訊網',
       student: student,
       user: req.user,
     });
@@ -58,7 +58,7 @@ router.get('/club', function(req, res, next) {
         club.find({type:"4"}).exec(function(err, club4) {
           let club = club1.concat(club2).concat(club3).concat(club4);
           res.render('groups/club', {
-            title: '社團',
+            title: '社團 ｜ 新生知訊網',
             typelearn: club1,
             typeplay: club2,
             typedate: club3,

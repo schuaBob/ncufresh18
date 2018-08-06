@@ -70,7 +70,7 @@ router.get('/', function (req, res, next) {
     qna.find({DeleteDate: {$exists: false}, Answer : {$nin:[""]}, Reason : ""}).sort({Click : 'desc'}).limit(10).exec(),
     schedule.find().exec()
   ]).then((result) => {
-    res.render('index/index', { title: '首頁', user: req.user, news : result[0], qna : result[1], schedule : JSON.stringify(result[2]) });
+    res.render('index/index', { title: '首頁 ｜ 新生知訊網', user: req.user, news : result[0], qna : result[1], schedule : JSON.stringify(result[2]) });
   }).catch((err) => {
     return next(err);
   })
@@ -216,7 +216,7 @@ router.get('/delete_schedule/:id', (req, res, next) => {
 /* login page */
 router.get('/login', function (req, res, next) {
  // res.render('login/login', { title: '登入', user: req.user, message: req.flash('error')});
- res.render('login/login', { title: '登入', user: req.user});
+ res.render('login/login', { title: '登入 ｜ 新生知訊網', user: req.user});
 });
 
 
@@ -239,7 +239,7 @@ router.post('/login', function (req, res, next) {
 
 
 router.get('/password', function (req, res, next) {
-  res.render('login/password', { title: '登入', user : req.user });
+  res.render('login/password', { title: '登入 ｜ 新生知訊網', user : req.user });
 });
 
 router.post('/password', passport.authenticate('local',{
@@ -349,7 +349,7 @@ router.get('/logout', function (req, res, next) {
 
 /* register page */
 router.get('/register', function (req, res, next) {
-  res.render('login/register', { title: '註冊', user: req.user  });
+  res.render('login/register', { title: '註冊 ｜ 新生知訊網', user: req.user  });
 });
 
 router.post('/register', function (req, res,next) {
@@ -401,7 +401,7 @@ router.post('/register', function (req, res,next) {
 
 /* comingsoon 記得上線後註解*/
 router.get('/comingsoon', function (req, res, next) {
-  res.render('comingsoon/index', { title: '倒數' , user: req.user});
+  res.render('comingsoon/index', { title: '倒數 ｜ 新生知訊網' , user: req.user});
 });
 
 module.exports = router;

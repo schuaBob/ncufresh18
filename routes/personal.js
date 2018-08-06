@@ -26,7 +26,7 @@ router.get('/',checkuser.isLoggedIn, function(req, res, next) {
     Question.find({Username : req.user.id}).exec(function(err, question){
       if(err){return next(err)};
       res.render('personal/index',{
-        title : '個人專區' ,
+        title : '個人專區 ｜ 新生知訊網' ,
         question:question,
         user:req.user,
         picname : picname

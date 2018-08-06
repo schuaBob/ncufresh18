@@ -7,7 +7,7 @@ var check = require('../routes/check-user');
 // 新生必讀首頁 
 router.get('/', function (req, res, next) {
 
-  res.render('documents/index', { title: '新生必讀', user: req.user });
+  res.render('documents/index', { title: '新生必讀 ｜ 新生知訊網', user: req.user });
 
 });
 
