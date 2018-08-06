@@ -826,7 +826,13 @@ a{
     text-decoration:none;
 }
 
-
+.child, .toomuch {
+    cursor: pointer;
+}
+   
+* {
+    user-select: none;
+}
 /*按鈕動畫圖片*/
 .child {
     
