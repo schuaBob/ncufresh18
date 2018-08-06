@@ -9,7 +9,7 @@ var checkLogin = require('./check-user')
 router.get('/', checkLogin.isLoggedIn, function(req, res, next) {
   UserScore.find({}, 'avatar id').sort({ score_high: -1}).exec(function(err, result) {
     if (err) throw err;
-    res.render('smallgame/index', { title: '小遊戲' , user: req.user, result: result});
+    res.render('smallgame/index', { title: '小遊戲 ｜ 新生知訊網' , user: req.user, result: result});
   })
 });
 
