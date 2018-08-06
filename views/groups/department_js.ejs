@@ -201,7 +201,7 @@
                     $('#depmodal-'+  event.currentTarget.attributes.search.value).on('hide.bs.modal', function (e) {
                         $('#depmodal-'+  event.currentTarget.attributes.search.value +' #carouselExampleIndicator3 .carousel-indicators li').remove()
                         $('#depmodal-'+  event.currentTarget.attributes.search.value +' #carouselExampleIndicator3 .carousel-inner .carousel-item').remove()
-                        $('#depmodal-'+  event.currentTarget.attributes.search.value +'#depmodal').off('hide.bs.modal')
+                        $('#depmodal-'+  event.currentTarget.attributes.search.value).off('hide.bs.modal')
                     })
 
                     for (let i = 0; i < data_dep.team_pic.length; i++) {
