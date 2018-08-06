@@ -69,7 +69,7 @@ router.get('/', (req, res, next) => {
   Promise.all([
     news.find().exec(),
     qna.find({DeleteDate: {$exists: false}, Answer : {$nin:[""]}, Reason : ""}).sort({Click : 'desc'}).limit(10).exec(),
-    schedule.find().exec()
+    schedule.find({},{_id: 0, __v: 0}).exec()
   ]).then((result) => {
     res.render('index/index', { title: '首頁', user: req.user, news : result[0], qna : result[1], schedule : JSON.stringify(result[2]) });
   }).catch((err) => {

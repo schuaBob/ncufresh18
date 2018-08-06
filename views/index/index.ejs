@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <% /* This following line is only necessary in the case of using the option `scrollOverflow:true` */%>
+    <script type="text/javascript" src="about/fullPage.js-master/vendors/scrolloverflow.min.js"></script>
     <% include ../layout/head %>
     <link rel="stylesheet" type="text/css" href="about/fullPage.js-master/dist/fullpage.css" />
     <% /* This following line is optional. Only necessary if you use the option css3:false and you want to use other easing effects rather than "easeInOutCubic". */%>
     <% /* <script src="vendors/easings.min.js"></script>*/ %>
-    <% /* This following line is only necessary in the case of using the option `scrollOverflow:true` */%>
-    <% /* <script type="text/javascript" src="vendors/scrolloverflow.min.js"></script> */%>
     <script type="text/javascript" src="about/fullPage.js-master/dist/fullpage.js"></script>
     <script type="text/javascript" src="about/fullPage.js-master/dist/fullpage.extensions.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
@@ -188,8 +188,8 @@
             height: 48px;
         }
         #box1 {
-            overflow-y: scroll;
-            height: calc(80vh - 48px - 3rem);
+            /* overflow-y: scroll;
+            height: calc(80vh - 48px - 3rem); */
             border-radius: 0 0 2% 2%;
             background-color: rgba(255,255,255,0.9);
         }
@@ -204,6 +204,18 @@
             font-weight: 500;
             margin-left: calc((100vw - 72px)/2);
             margin-right: calc((100vw - 72px)/2);
+        }
+        .news-time {
+            white-space: nowrap;
+        }
+        .news-title {
+            text-overflow: ellipsis;
+            <%_ /* Required for text-overflow to do anything */ -%>
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        #news-text {
+            margin-top: 56px;
         }
     </style>
     <style>
@@ -385,7 +397,7 @@
                     <h1 class="text-center">最新消息</h1>
                     <h6 class="text-center">隨時掌握最新動態</h6>
                 </div>
-                <div id="news-box" class="mx-auto mt-5">
+                <div id="news-box" class="mx-auto">
                     <div>
                         <div class="d-inline-block w-100 select-bar">
                             <ul class="nav nav-pills nav-fill">
@@ -406,8 +418,8 @@
                                 <tbody>
                                     <%_ for(let i = 0;i<news.length;i++){ -%>
                                     <tr>
-                                        <td><%= news[i].time.toISOString().substring(0, 10) %></td>
-                                        <td><%= news[i].title %></td>
+                                        <td class="news-time"><%= news[i].time.toISOString().substring(0, 10) %></td>
+                                        <td class="news-title"><%= news[i].title %></td>
                                         <td class="open-modal" id="<%= news[i]._id %>">more</td>
                                     </tr>
                                     <%_ } -%>
@@ -428,7 +440,7 @@
                     </div>
                 </div>
             </div>
-            <div class="section fp-auto-height">
+            <div class="section fp-auto-height-responsive">
                 <div>
                     <h1 class="mx-auto text-center">近期日程</h1>
                 </div>
