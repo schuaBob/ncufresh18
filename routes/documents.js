@@ -15,7 +15,7 @@ router.get('/', function (req, res, next) {
 //從資料庫要資料(for both user and editor)
 router.get('/require_data/:id', function (req, res, next) {
   Document.findOne({ count: req.params.id }).exec(function (err, data) {
-    console.log("require");
+    //console.log("require");
     if (err) return next(err);
     res.send(data);
   });
@@ -25,7 +25,7 @@ router.get('/require_data/:id', function (req, res, next) {
 router.post('/edit/:id',check.isAdmin, function (req, res, next) {
   Document.updateOne({ count: req.params.id }, { title: req.body.title, content: req.body.add_text },
     function (err, result) {
-      console.log(result);
+     // console.log(result);
       if (err)
         console.log('fail to update article.');
       else
