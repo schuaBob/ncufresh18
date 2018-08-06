@@ -896,7 +896,7 @@ iframe {
         left: 35.5vw; 
         padding: 0;
         margin: 0;
-        width: 66vw;
+        width: auto;
         height: 37.5vh;
         writing-mode: vertical-lr;
     }
