@@ -470,18 +470,6 @@ router.post('/editByUser/:id', checkUser.isLoggedIn, function(req, res, next) {
     }
   });
 });
-//判斷是否登入
-function isLoggedIn(req, res, next) {
-  if (req.user)
-    return next();
-  res.redirect('/login');
-}
-//判斷是否管理員
-function isAdmin(req, res, next) {
-  if (req.user && req.user.role === 'admin')
-    return next();
-  res.redirect('/qna');
-}
 //發送成功提示
 // function sendSuccess(){
 //   alert("發送成功");

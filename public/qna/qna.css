@@ -77,12 +77,19 @@ th{
     /* 分類排序的顏色 */
     .classfi{
         color:white;
+        display: table-cell;
     }
+    /* 分類排序的排版 */
     p.classfi{
-        /* display: table-cell; */
         vertical-align: top;
+        /* line-height: 1.8; */
     }
     a.classfi{
+        line-height: 1.8;
+        vertical-align: middle;
+    }
+    .clbtn{
+        line-height: 1.8;
         vertical-align: middle;
     }
     /* 回到頁面最頂端按鈕 */
