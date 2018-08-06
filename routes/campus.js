@@ -11,7 +11,7 @@ router.get("/", function(req, res, next) {
     if(err) {
       return next(err)
     }
-    res.render("campus/index", { title: "校園導覽 ｜ 新生知訊網",result:result,user: req.user});
+    res.render("campus/index", { title: "校園地圖 ｜ 新生知訊網",result:result,user: req.user});
     
   })
 });

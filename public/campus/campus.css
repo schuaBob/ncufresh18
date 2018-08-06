@@ -56,9 +56,9 @@ input:checked + .slider:before {
 h1{
   text-align: center;
 }
-.searchresult{
-  position: absolute;
-  
+
+.indexelepic.hide {
+  z-index: 4;
 }
 .modal-dialog {
   z-index: 1;
