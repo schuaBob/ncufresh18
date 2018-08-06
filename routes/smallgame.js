@@ -8,7 +8,9 @@ var checkLogin = require('./check-user')
 /* 小遊戲首頁 */
 router.get('/', checkLogin.isLoggedIn, function(req, res, next) {
   UserScore.find({}, 'avatar id').sort({ score_high: -1}).exec(function(err, result) {
-    if (err) throw err;
+    if (err) {
+      return next(err);
+    }
     res.render('smallgame/index', { title: '小遊戲' , user: req.user, result: result});
   })
 });
@@ -178,12 +180,16 @@ router.get('/getScore', checkLogin.isLoggedIn, function(req, res, next){
   var type = req.query.type;
   if (type === 'high') {
     UserScore.find({ score_high: { $gte: 0 }}, 'id name score_high avatar').sort({ score_high: -1}).limit(10).exec(function(err, result) {
-      if (err) throw err;
+      if (err) {
+        return next(err);
+      }
       res.send(result);
     }) 
   } else {
     UserScore.find({ score_sum: { $gte: 0 }}, 'id name score_sum avatar').sort({ score_sum: -1}).limit(10).exec(function(err, result) {
-      if (err) throw err;
+      if (err) {
+        return next(err);
+      }
       res.send(result);
     }) 
   }
