@@ -245,7 +245,7 @@ router.post('/login', function (req, res, next) {
   if (grade !== '107')
     return res.redirect('auth/provider');
   Users.findOne({ 'id': req.body.id }, function (err, obj) {
-      if (err) return res.redirect('auth/provider');
+      if (err) return res.redirect('/login');
       //If found, login
       if (obj && obj.password) {
         res.redirect('password?id='+req.body.id);
@@ -279,7 +279,7 @@ router.get('/auth/provider/callback', function (req, res, next) {
   url.parse(req.url, true);
   //If user decline the permissoion to read profile from NCU OAuth2,redirect to login page 
   if (req.query.error || !req.query.code) {
-    return res.redirect('/login');
+    return res.redirect('/');
   }
 
   // Grab accessToken by exchangine code with NCU OAuth2
