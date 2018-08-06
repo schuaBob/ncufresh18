@@ -121,7 +121,7 @@
         position: absolute;
         top:35px;
         /* right:28vw; */
-        width:77%;
+        width:91%;
     }
     .picture.all2{
         display: none;
@@ -130,7 +130,7 @@
     .alert{
         left:30vw;
         /* bottom:-50px; */
-        width:35%;
+        width:30%;
         bottom:3vw;
         position: absolute;
 
@@ -145,6 +145,7 @@
         background: url(晶片.png);
         background-size: cover;
         left: 23vw;
+        width:82vw;
     }
     .space{
         display: none;

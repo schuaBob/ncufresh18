@@ -79,7 +79,11 @@ th{
         color:white;
     }
     p.classfi{
+        /* display: table-cell; */
         vertical-align: text-top;
+    }
+    a.classfi{
+        vertical-align: middle;
     }
     /* 回到頁面最頂端按鈕 */
     .goTop{
