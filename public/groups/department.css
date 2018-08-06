@@ -353,6 +353,10 @@ h5{
     float: left;
     margin-left: 12%;
 }
+.d-block{
+    max-width: 450px;
+    max-height: 300px;
+}
 @media screen and (min-width: 992px) and (max-width: 1000px){
     .bread{
         margin-top:2.3%;
@@ -383,6 +387,10 @@ h5{
         max-height: 250px;
         float: left;
         margin-left: 21%;
+    }
+    .d-block{
+        max-width: 300px;
+        max-height: 250px;
     }
 }
 @media screen and (max-width: 588px) and (min-width: 532px){
@@ -476,7 +484,10 @@ h5{
         float: left;
         margin-left: 5%;
     }
-
+    .d-block{
+        max-width: 400px;
+        max-height: 300px;
+    }
     /* 上方8個按鈕 */
     #cellup{
         position: relative;

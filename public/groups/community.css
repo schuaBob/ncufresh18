@@ -272,6 +272,10 @@ button:hover {
     #nav_ul{
         margin-top: 0;
     }
+    .d-block{
+        max-width: 300px;
+        max-height: 250px;
+    }
 }
 @media screen and (min-width: 992px) and (max-width: 1000px){
     #bread{
@@ -357,7 +361,10 @@ button:hover {
         float: left;
         margin-left: 5%;
     }
-
+    .d-block{
+        max-width: 400px;
+        max-height: 300px;
+    }
     #cell_button{
         position: relative;
         display: inline-block;

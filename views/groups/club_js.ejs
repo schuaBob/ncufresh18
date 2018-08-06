@@ -109,7 +109,7 @@
                     
                     for (let i = 0; i < data_club.act_pic.length; i++) {
                         $('#carouselExampleIndicator2 .carousel-indicators').append("<li data-target='#carouselExampleIndicator2' data-slide-to='" + i + "'></li>")
-                        $('#carouselExampleIndicator2 .carousel-inner').append("<div class='carousel-item'><img class='d-block w-100' src='/groups/img/" + data_club.act_pic[i] + "'></div>")
+                        $('#carouselExampleIndicator2 .carousel-inner').append("<div class='carousel-item'><img class='d-block' src='/groups/img/" + data_club.act_pic[i] + "'></div>")
                     }
                     $('#carouselExampleIndicator2 .carousel-indicators li').first().addClass('active')
                     $('#carouselExampleIndicator2 .carousel-inner div').first().addClass('active')
