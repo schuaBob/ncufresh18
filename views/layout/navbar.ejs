@@ -29,9 +29,11 @@
             <li class="nav-item">
                 <a class="nav-link text-white" href="/about">關於我們</a>
             </li>
+            <%_ if (user){ -%>
             <li class="nav-item">
                 <a class="nav-link text-white" href="/personal">個人專區</a>
             </li>
+            <%_ } -%>
             <li class="nav-item">
                 <%_ /* 就是這裡在雷 by Andrew Lin */ -%>
                 <%_ if (user){ -%>
@@ -59,8 +61,8 @@
 
 <style>
 .navbar {
-    padding: 0px 0px;
-}
+    padding: 0rem 1rem;
+}   
 #navbarImg {
     height:56px;
 }
