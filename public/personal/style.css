@@ -149,6 +149,7 @@
     width : 20vw ;
     text-overflow: ellipsis ;
     overflow:hidden;
+    margin-bottom: 0%;
 }
 #sta {
     width: 5vw ;
