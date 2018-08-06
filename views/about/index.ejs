@@ -12,12 +12,11 @@
         <link rel="stylesheet" type="text/css" href="fullPage.js-master/src/fullpage.css" >
         <script src='fullPage.js-master/dist/fullpage.min.js'></script> 
         
-        
     </header>
     <main>
         <!-- <h1><%= title %></h1> -->
         <img src="面板(中空)_去被.png" class="pad"></div>
-        <img src="面板中空_去被.png" class="pad2"></div>
+        <img src="面板中空_去被.png" class="pad2" style="clear:both;"></div>
         <img src="關於我們標題框(合)_去被.png" class="aboutUs title1"></div>
         <div class="aboutUs screen">
             <img src="關於我們吊掛螢幕改_去被.png" class="screen2">
@@ -53,11 +52,15 @@
                 <p>執行組負責統整知訊網的事務，與各個相關社團、系所、組織進行協商與聯絡，成為各單位之間的橋樑 ; 更需招募知訊網工人，規劃網站的大方向，配合各個小組，共同創作出新生知訊網。</p>
             </div> -->
             <%/*正常版本*/%>
+            <img src="關於我們標題反面_去被.png" class="title2">
             <div class="section all" >
-                <img src="關於我們標題反面_去被.png" class="title2">
                 <img src="大團照2.png" class="picture all1">
                 <img src="大團照2.png" class="picture all2">
             </div>
+            <br class="space">
+            <hr class="space line1">
+            <hr class="space line2">
+            <br class="space">
             <div class="section markting" >
                 <img src="行銷企劃組_去被.png" class="name2">
                 <img src="企劃組團照.jpg" class="picture">
@@ -69,6 +72,10 @@
                 </div>
                     
             </div>
+            <br class="space">
+            <hr class="space line1">
+            <hr class="space line2">
+            <br class="space">
             <div class="section programming">
                 <img src="程式設計組_去被.png" class="name2">
                 <img src="程設組團照.jpg" class="picture">
@@ -79,6 +86,10 @@
                       </button>
                 </div>
             </div>
+            <br class="space">
+            <hr class="space line1">
+            <hr class="space line2">
+            <br class="space">
             <div class="section art">
                 <img src="網頁美工組_去被.png" class="name2">
                 <img src="美工組團照.jpg" class="picture">
@@ -89,6 +100,10 @@
                       </button>
                 </div>    
             </div>
+            <br class="space">
+            <hr class="space line1">
+            <hr class="space line2">
+            <br class="space">
             <div class="section video">
                 <img src="媒體影音組_去被.png" class="name2">    
                 <img src="影音組團照.jpg" class="picture">
@@ -99,6 +114,10 @@
                       </button>
                 </div>
             </div>
+            <br class="space">
+            <hr class="space line1">
+            <hr class="space line2">
+            <br class="space">
             <div class="section" >
                 <img src="執行組_去被.png" class="name2">
                 <img src="執行組團照2.png" class="picture">
@@ -108,14 +127,17 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                <footer id="dddd">
+                    <% include ../layout/footer %>
+                </footer>
             </div>
-
+            
         </div>
     </main>
-    <footer>
+    <% include ../layout/js %>
+    <% include js %>
+    <footer id="cccc">
         <% include ../layout/footer %>
     </footer>
-        <% include ../layout/js %>
-        <% include js %>
 </body>
 </html>

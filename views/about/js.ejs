@@ -45,10 +45,9 @@ $(document).ready(() => {
             // $('.alert').slideToggle(1000);
             e.preventDefault();
     });
-    //預設logo跟字樣
-    // $(".logo").addClass("marktingLogo");
-    // $(".name").addClass("marktingName");
-    //切換logo跟字樣
+    //預設字樣
+    $(".name").addClass("allName");
+    //切換字樣
     $(window).on('hashchange', function() {
         var hash = window.location.hash.substr(1);
         //console.log(hash);
@@ -64,8 +63,9 @@ $(document).ready(() => {
             $(".name").removeClass("artName");
             $(".name").removeClass("videoName");
             $(".name").removeClass("ceoName");
+            $(".name").removeClass("allName");
 
-            $(".title2").hide();
+            // $(".title2").hide();
         }
         else if(hash==="programming"){
             $(".logo").addClass("programmingLogo");
@@ -79,8 +79,9 @@ $(document).ready(() => {
             $(".name").removeClass("artName");
             $(".name").removeClass("videoName");
             $(".name").removeClass("ceoName");
+            $(".name").removeClass("allName");
 
-            $(".title2").hide();
+            // $(".title2").hide();
         }
         else if(hash==="art"){
             $(".logo").addClass("artLogo");
@@ -94,8 +95,9 @@ $(document).ready(() => {
             $(".name").removeClass("marktingName");
             $(".name").removeClass("videoName");
             $(".name").removeClass("ceoName");
+            $(".name").removeClass("allName");
 
-            $(".title2").hide();
+            // $(".title2").hide();
         }
         else if(hash==="video"){
             $(".logo").addClass("videoLogo");
@@ -109,8 +111,9 @@ $(document).ready(() => {
             $(".name").removeClass("artName");
             $(".name").removeClass("marktingName");
             $(".name").removeClass("ceoName");
+            $(".name").removeClass("allName");
 
-            $(".title2").hide();
+            // $(".title2").hide();
         }
         else if(hash==="ceo"){
             $(".logo").addClass("ceoLogo");
@@ -124,16 +127,13 @@ $(document).ready(() => {
             $(".name").removeClass("artName");
             $(".name").removeClass("videoName");
             $(".name").removeClass("marktingName");
+            $(".name").removeClass("allName");
 
-            $(".title2").hide();
+            // $(".title2").hide();
         }
         else if(hash==="all"){
-            $(".logo").removeClass("ceoLogo");
-            $(".logo").removeClass("marktingLogo");
-            $(".logo").removeClass("programmingLogo");
-            $(".logo").removeClass("artLogo");
-            $(".logo").removeClass("videoLogo");
 
+            $(".name").addClass("allName");
             $(".name").removeClass("ceoName");
             $(".name").removeClass("programmingName");
             $(".name").removeClass("artName");
@@ -150,19 +150,22 @@ $(document).ready(() => {
         
     // });
     //fullpage
-    $('#fullpage').fullpage({
-		//options here
-		autoScrolling:true,
-        scrollHorizontally: false,
-        
-    });
-    $.fn.fullpage.setAllowScrolling(false);
-    new fullpage('#fullpage', {
-        navigation: true,
-        resize:true,
-        responsiveWidth: 700,
-        anchors: ['all','markting', 'programming', 'art', 'video', 'ceo'],
-    });
+    if(w>800){
+
+        $('#fullpage').fullpage({
+            //options here
+            autoScrolling:true,
+            scrollHorizontally: false,
+            
+        });
+        $.fn.fullpage.setAllowScrolling(false);
+        new fullpage('#fullpage', {
+            navigation: true,
+            resize:true,
+            responsiveWidth: 700,
+            anchors: ['all','markting', 'programming', 'art', 'video', 'ceo'],
+        });
+    }
     //按鈕動畫
     if(w<800){
 
