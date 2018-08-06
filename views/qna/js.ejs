@@ -16,7 +16,6 @@ $(document).ready(() => {
         else{
             $(".classification").removeClass("dropdown-menu");
             $(".classification").css({'position':'relative !important'});
-            console.log($(".classification"))
             $("ul").removeClass("flex-column");
             $("div.classification2").addClass("nav");
             //滑鼠移動到我要發問按鈕上面會換圖案
@@ -30,15 +29,16 @@ $(document).ready(() => {
         }
     })
     $(".hideAct").hide();
-    if (w < 600) {
+    if (w < 800) {
         //手機版頁面樣式
         //排序與分類的位置
         $(".classification").addClass("dropdown-menu");
         $("ul").addClass("flex-column");
+        $("div.classification2").removeClass("nav");
     }
 // });
-    $('#55555').on('hide.bs.dropdown', function () {
-        console.log("111111");
+    $(".classificationBtn").on('click', function () {
+        console.log("11111");
         $(".classification").css({'position':'relative !important'});
     })
     //預設分類
