@@ -387,25 +387,7 @@ router.get('/deleteR/:id',checkUser.isAdmin,function(req,res,next){
         return next(err);
       }
 });
-// 使用者刪除問題 
-router.post('/deleteByUser/:id', checkUser.isLoggedIn, function(req, res, next) {
-  Question.findById(req.params.id, function(err,result) {
-    if (err){return next(err);}
-    //發問者本人且問題還沒被管理員審核才能刪除問題
-    if ((req.user.id === result.Username)&&(result.Answer==="")) {
-      if(result!==null){
-        /*刪除*/
-        result.remove();
-      }
-      else{
-        return next(err);
-      }
-    } 
-    else {
-      return next(err);
-    }
-  });
-});
+
 // 使用者編輯問題 
 router.post('/editByUser/:id', checkUser.isLoggedIn, function(req, res, next) {
   Question.findById(req.params.id, function(err,result) {
@@ -432,13 +414,24 @@ router.post('/editByUser/:id', checkUser.isLoggedIn, function(req, res, next) {
 });
 // 使用者刪除問題 
 router.post('/deleteByUser/:id', checkUser.isLoggedIn, function(req, res, next) {
+  console.log(req.params.id); 
   Question.findById(req.params.id, function(err,result) {
     if (err){return next(err);}
+    
     //發問者本人且問題還沒被管理員審核才能刪除問題
     if ((req.user.id === result.Username)&&(result.Answer==="")) {
       if(result!==null){
         /*刪除*/
-        result.remove();
+        
+        Question.update({_id:req.params.id}, {DeleteDate:Date.now()},function(err){
+          if(err){
+            console.log('Fail to update reason.');
+          }
+          else{
+            console.log('Done');
+          }
+          res.redirect('/qna');
+        });
       }
       else{
         return next(err);
