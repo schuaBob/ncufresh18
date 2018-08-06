@@ -193,7 +193,7 @@
             border-radius: 0 0 2% 2%;
             background-color: rgba(255,255,255,0.9);
         }
-        main {
+        .fp-auto-height {
             padding-bottom: 24px;
         }
         #prvweek, #nextweek {
@@ -441,13 +441,12 @@
                 <div class="week-btn">
                     <b id="nextweek">後一週</b>
                 </div>
+                <footer>
+                    <% include ../layout/footer %>
+                </footer>
             </div>
         </div>
-
     </main>
-    <footer>
-        <% include ../layout/footer %>
-    </footer>
         <% include ../layout/js %>
         <% include js %>
 </body>

@@ -50,7 +50,7 @@
         schedule[i].week = weekYaer[1];
     }
     <%_ /*然後按照年份和周次sort*/ -%>
-    schedule.sort(function(a, b){return a.year-b.year}).sort(function(a, b){return a.week-b.week});
+    schedule.sort(function(a, b){return a.time-b.time})
 
     <%_ /*印在頁面上*/ -%>
     <%_ /*雛形 -%>
@@ -189,7 +189,7 @@
     for (var i = 0; i < document.getElementsByClassName('open-modal').length; i++) {
         document.getElementsByClassName('open-modal')[i].addEventListener('click',function(event){
             <%_ /* 如果已經有資料了 */ -%>
-            if (newsStorage[event.target.id]){  
+            if (newsStorage[event.target.id]){
                 $("#the-title").text($(event.target).prev().text());
                 $("#the-content").html(newsStorage[event.target.id]);
                 $("#the-only-modal").modal("show");
