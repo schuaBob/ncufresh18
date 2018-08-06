@@ -44,24 +44,82 @@ select {
 .title{
     position: absolute;
     left: 10%;
-    font-size: 30px;
 }
 .title a{
     text-decoration: none;  
     color: black;
 }
-.selectbar{
-    position: relative;
-    height: 60px; 
-    margin-bottom: 10px;
-    
+@media screen and (min-width: 350px){
+    .dropdown_hide, .dropdown_show{
+        position: relative;
+        top: -50px;
+        left: 185px;
+        width: 130px;
+        z-index: 100;
+    }
+    .bar{
+        position: relative;
+        text-align: center;
+        background-color:  rgba(226, 231, 227, 0.5);
+        width: 165px;
+        height: 50px;
+        font-size: 30px;
+        -moz-border-radius: 20px;
+        -webkit-border-radius: 20px;
+        border-radius: 20px;
+    }
+    .subar{
+        position: relative;
+        text-align: left;  
+        height: 30px;
+        width: 130px;
+        font-size: 20px;
+        color: rgb(6, 113, 6);
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+    .selectbar{
+        position: relative;
+        height: 60px; 
+        margin-bottom: 10px;
+    }
 }
-.dropdown_hide, .dropdown_show{
-    position: relative;
-    top: -50px;
-    left: 185px;
-    width: 150px;
-    z-index: 100;
+@media screen and (max-width: 350px){
+    .dropdown_hide, .dropdown_show{
+        position: relative;
+        top: -40px;
+        left: 150px;
+        width: 130px;
+        z-index: 100;
+    }
+    .bar{
+        position: relative;
+        text-align: center;
+        background-color:  rgba(226, 231, 227, 0.5);
+        width: 140px;
+        height: 40px;
+        font-size: 25px;
+        -moz-border-radius: 20px;
+        -webkit-border-radius: 20px;
+        border-radius: 20px;
+    }
+    .subar{
+        position: relative;
+        text-align: left;  
+        height: 30px;
+        width: 130px;
+        font-size: 20px;
+        color: rgb(6, 113, 6);
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+    .selectbar{
+        position: relative;
+        height: 60px; 
+        margin-bottom: 0px;
+    }
 }
 .dropdown_hide{
     opacity: 0;
@@ -73,27 +131,8 @@ select {
 .dropdown_show{
     opacity: 1;
 }
-.bar{
-    position: relative;
-    text-align: center;
-    background-color:  rgba(226, 231, 227, 0.5);
-    width: 165px;
-    height: 50px;
-    -moz-border-radius: 20px;
-    -webkit-border-radius: 20px;
-    border-radius: 20px;
-}
-.subar{
-    position: relative;
-    text-align: left;  
-    height: 30px;
-    width: 150px;
-    font-size: 20px;
-    color: rgb(6, 113, 6);
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-}
+
+
 hr{
     width: 80%;
     margin: auto;
