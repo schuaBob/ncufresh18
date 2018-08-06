@@ -92,7 +92,7 @@ $(document).ready(() => {
                 $('tr.其他').fadeIn(500);
             }      
         });
-
+    
     //人氣與時間的排序(list.js)
     var options = {
         valueNames: [ 'time', 'hot' ]
@@ -163,6 +163,12 @@ $(document).ready(() => {
         $('.askbutton').on('mouseout', function(){
             $(this).css({'background':'url(發問按鈕1.png) no-repeat','background-size':'contain'});
         });
+    }
+    //搜尋後返回首頁的按鍵
+    var url = new URL(window.location.href);
+    //搜尋後才會出現
+    if(url.searchParams.get('keyword')!==null){
+        $('.backToIndex').show();
     }
     //紀錄問題點擊次數
     $(".titleQ").on('click',function(){
