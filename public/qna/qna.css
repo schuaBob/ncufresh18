@@ -222,7 +222,7 @@ th{
     .classification{
         margin:20px;
         position: absolute;
-        z-index: 5000;
+        z-index: 3999;
     }
     a.classfi{
         text-align: center;
@@ -262,7 +262,7 @@ th{
         position: fixed;
         bottom: 20vh;
         right:10px;
-        z-index: 5000;
+        z-index: 3999;
     }
     /* 手機版搜尋過後要返回首頁的按鈕 */
     .backToIndex{

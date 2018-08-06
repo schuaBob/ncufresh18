@@ -206,13 +206,13 @@
             display: block;
             margin-right: auto;
             margin-left: auto;
-            width: 15vh;
+            width: 7vh;
         }
         #down-img {
             margin-right: auto;
             margin-left: auto;
             margin-bottom: 20px;
-            width: 15vh;
+            width: 7vh;
         }
         #down-text {
             width: inherit;
@@ -245,7 +245,7 @@
         }
         #box1 {
             overflow-y: scroll;
-            height: calc(80vh - 48px - 3rem);
+            height: calc(70vh - 48px - 3rem);
             border-radius: 0 0 2% 2%;
             background-color: rgba(255,255,255,0.9);
         }
@@ -451,6 +451,9 @@
         border-radius: 20px;
         font-weight:bold;
     }
+    .modal {
+        z-index : 4001;
+    }
     </style>
 </head>
 <body>
@@ -540,9 +543,9 @@
                             <table class="table" id="one">
                                 <tbody>
                                     <%_ for(let i = 0;i<news.length;i++){ -%>
-                                    <tr class="news-row">
-                                        <td class="news-time"><%= news[i].time.toISOString().substring(0, 10) %></td>
-                                        <td class="news-title px-0"><p class="dotdotdottext"><%= news[i].title %></p></td>
+                                    <tr class="news-row open-modal" id="<%= news[i]._id %>">
+                                        <td class="news-time open-modal" id="<%= news[i]._id %>"><%= news[i].time.toISOString().substring(0, 10) %></td>
+                                        <td class="news-title px-0 open-modal ppppppppppppp" id="<%= news[i]._id %>"><p class="dotdotdottext  open-modal" id="<%= news[i]._id %>"><%= news[i].title %></p></td>
                                         <td class="open-modal" id="<%= news[i]._id %>">more</td>
                                     </tr>
                                     <%_ } -%>
