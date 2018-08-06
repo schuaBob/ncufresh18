@@ -357,13 +357,13 @@ td{
     }
    
     #carouselExampleIndicator2{
-        max-width: 400px;
+        max-width: 300px;
         max-height: 300px;
         float: left;
         margin-left: 5%;
     }
     .d-block{
-        max-width: 400px;
+        max-width: 300px;
         max-height: 300px;
     }
     #cellup{
