@@ -138,6 +138,9 @@
     .intro{
         display: none;
     }
+    p#introContent{
+        margin-bottom: 0px;
+    }
     .content111{
         background: url(晶片.png);
         background-size: cover;

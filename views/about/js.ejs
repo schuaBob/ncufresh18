@@ -38,6 +38,11 @@ $(document).ready(() => {
         $('.people2').css({'transform': 'translate(1000px)'});
     });
     //可以把簡介收起來
+    $('.close-toggle').on('click', function(e) {
+            $('.intro2').toggle(1000);
+            $('.people1').toggleClass('people1-act');
+            e.preventDefault();
+    });
     $('.people1').on('click', function(e) {
             $('.intro2').toggle(1000);
             $('.people1').toggleClass('people1-act');
@@ -47,6 +52,12 @@ $(document).ready(() => {
     });
     //預設字樣
     $(".name").addClass("allName");
+    $('#introContent').append("新生必讀：重要資訊以及開學活動。"+"<br>"+
+                "新生Q&A：新生提出問題的地方。"+"<br>"+
+                "校園地圖：校內地圖及建築物資訊。"+"<br>"+
+                "系所社團：各式社團與系所介紹。"+"<br>"+
+                "中大生活：中央生活的點點滴滴。"+"<br>"+
+                "影音專區：關於中央的介紹。");
     //切換字樣
     $(window).on('hashchange', function() {
         var hash = window.location.hash.substr(1);
@@ -127,7 +138,12 @@ $(document).ready(() => {
 
             //變成各組介紹文字
             $('#introContent').empty();
-            $('#introContent').append();
+            $('#introContent').append("新生必讀：重要資訊以及開學活動。"+"<br>"+
+                "新生Q&A：新生提出問題的地方。"+"<br>"+
+                "校園地圖：校內地圖及建築物資訊。"+"<br>"+
+                "系所社團：各式社團與系所介紹。"+"<br>"+
+                "中大生活：中央生活的點點滴滴。"+"<br>"+
+                "影音專區：關於中央的介紹。");
         }
     });
     // var hash = new URL(window.location.href);
