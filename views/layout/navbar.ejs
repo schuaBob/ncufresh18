@@ -63,16 +63,16 @@
 
 <style>
 .navbar {
-    padding: 0rem 1rem;
+    padding: 0rem 0rem;
 }   
+.navbar-brand{
+    padding: 0px 0px;
+}
 .nav-link.text-white{
     padding: 16px 0px;
 }
 #navbarImg {
     height:56px;
-}
-.navbar-brand{
-    padding: 0px 0px;
 }
 .scrollable-menu {
     height: auto;
@@ -82,9 +82,7 @@
     padding: 3px 0px;
     cursor: pointer;
 }
-
-
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 992px) {
     .navbar-collapse {
         max-height: calc(100vh - 56px);
         overflow-y: auto;
