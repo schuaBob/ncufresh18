@@ -121,6 +121,12 @@ th{
         bottom: 20vh;
         right:15px;
     }
+    /* 太空人舉手 */
+    .askbutton-act{
+        background: url(發問按鈕2.png) no-repeat;
+        background-size: contain;
+        width:130px;
+    }
     tr.admin{
         width: 10%;
         /* width: 10vw; */

@@ -18,16 +18,18 @@ $(document).ready(() => {
             $(".classification").css({'position':'relative !important'});
             $("ul").removeClass("flex-column");
             $("div.classification2").addClass("nav");
-            //滑鼠移動到我要發問按鈕上面會換圖案
-            $('.askbutton').on('mouseover', function(){
-                $(this).css({'background':'url(發問按鈕2.png) no-repeat','background-size':'contain'});
-            });
-            $('.askbutton').on('mouseout', function(){
-                $(this).css({'background':'url(發問按鈕1.png) no-repeat','background-size':'contain'});
-            });
             
         }
     })
+    //滑鼠移動到我要發問按鈕上面會換圖案
+    $('.askbutton').on('mouseover', function(){
+        $(".askbutton").addClass("askbutton-act");
+        // $(this).css({'background':'url(發問按鈕2.png) no-repeat','background-size':'contain'});
+    });
+    $('.askbutton').on('mouseout', function(){
+        $(".askbutton").removeClass("askbutton-act");
+        // $(this).css({'background':'url(發問按鈕1.png) no-repeat','background-size':'contain'});
+    });
     $(".hideAct").hide();
     if (w < 800) {
         //手機版頁面樣式
@@ -36,6 +38,7 @@ $(document).ready(() => {
         $("ul").addClass("flex-column");
         $("div.classification2").removeClass("nav");
     }
+
 // });
     $(".classificationBtn").on('click', function () {
         // console.log("11111");
