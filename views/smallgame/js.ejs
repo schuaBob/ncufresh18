@@ -337,8 +337,10 @@ var states = {
             game.stage.disableVisibilityChange = true   
             // 禁止手機版
             if (!this.game.device.desktop == true) {
-                alert('あのね、あのね，請在電腦端體驗小遊戲喔喔喔~')
-                window.location.href = "/personal/"
+                setTimeout(function(){
+                    alert('あのね、あのね，請在電腦端體驗小遊戲喔喔喔~')
+                    window.location.href = "/personal/"
+                }, 0)
                 game.kill()
             }
 
