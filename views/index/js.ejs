@@ -224,7 +224,7 @@
         document.getElementsByClassName('open-modal')[i].addEventListener('click',function(event){
             <%_ /* 如果已經有資料了 */ -%>
             if (newsStorage[event.target.id]){
-                $("#the-title").text($('#'+event.target.id+'.ppppppppppppp').text());
+                $("#the-title").text($('#'+event.target.id+'.dotdotdottext').text());
                 $("#the-content").html(newsStorage[event.target.id]);
                 $("#the-only-modal").modal("show");
             <%_ /* 沒資料 */ -%>
@@ -237,7 +237,7 @@
                         console.log("",err);
                     },
                     success: function(data){
-                        $("#the-title").text($('#'+event.target.id+'.ppppppppppppp').text());
+                        $("#the-title").text($('#'+event.target.id+'.dotdotdottext').text());
                         $("#the-content").html(data);
                         $("#the-only-modal").modal("show");
                         <%_ /* 存入資料 */ -%>
