@@ -79,7 +79,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser("NcuFresh18"));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/error', express.static(__dirname + '/public/error'));
 
 //Passport (MUST BEHIND VIEW ENGINE SETUP)
 const passport = require('passport');
