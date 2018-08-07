@@ -449,7 +449,6 @@ var states = {
                     bgMusicBack = 1
                     bgMusic.stop()
                 }
-                // console.log("bgMusicFlag: " + bgMusicFlag)
             }
 
             // 松鼠圖片
@@ -957,7 +956,11 @@ var states = {
                         // 隱藏中間姓名
                         for (let i = 0; i < inputData.length; i++) {
                             var str = inputData[i].name
-                            inputData[i].name = str.substr(0,1) + 'O' + str.substr(str.length-1,1)
+                            if (str == null) {
+                                inputData[i].name = '107 新生'
+                            } else {
+                                inputData[i].name = str.substr(0,1) + 'O' + str.substr(str.length-1,1)
+                            }
                         }
 
                         if (type === 'sum') {
