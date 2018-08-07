@@ -313,7 +313,7 @@ function colorEgg() {
     }
 
     function createCute(x, y) {
-        console.log("create cute " +"X:" + x + "Y: " + y)
+        // console.log("create cute " +"X:" + x + "Y: " + y)
         var cute = cutes.create(x, y, 'cute')
         cute.animations.add('jump')
         cute.play('jump', 15, true)
@@ -541,7 +541,7 @@ var states = {
                     bgMusicFlag = 0
                     bgMusicBack = 1
                 }
-                console.log("bgMusicFlag: " + bgMusicFlag)
+                // console.log("bgMusicFlag: " + bgMusicFlag)
             }
 
             // 返回按鈕            
@@ -759,7 +759,7 @@ var states = {
                 // 中文換行處理
                 formatChinese(questionSprite.label, questionSprite)
                 choices = [btnChoiceA, btnChoiceB, btnChoiceC, btnChoiceD]
-                console.log("correctIndex:" + data.correctIndex)
+                // console.log("correctIndex:" + data.correctIndex)
                 // 設定正確選擇
                 for (i = 0; i < choices.length; i++) {
                     choices[i].setLabel(data.o[i])
@@ -780,7 +780,7 @@ var states = {
                 // choiceState 判斷一次答題是否點擊多次
                 if (!choiceState) {
                     count++
-                    console.log("count:" + count)
+                    // console.log("count:" + count)
                     // 彩蛋觸發 
                     if (count >= 100) {
                         var a = colorEgg()
