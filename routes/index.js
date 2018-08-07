@@ -375,9 +375,8 @@ router.get('/auth/provider/callback', function (req, res, next) {
 
               //if id is null or undefined
               if (!personalObj.id) {
-                req.flash('error', '帳號資訊不足，請洽計算機中心');
                 console.log(personalObj.id + ' is not allowed to login')
-                return res.render('error/error');
+                return res.render('error/error', { title: '404 ｜ 新生知訊網', error: req.flash('error', '帳號資訊不足，請洽計算機中心')});
               }
                 Users.findOne({
                   'id': personalObj.id
