@@ -56,7 +56,10 @@ input:checked + .slider:before {
 h1{
   text-align: center;
 }
-
+#indexmodal .modal-body {
+  max-height: calc(178px + 3658 / 5781 * (100vw - 32px));
+  margin-top: auto;
+}
 .indexelepic.hide {
   z-index: 4;
 }
@@ -103,8 +106,8 @@ h1{
 }
 
 #indexmodalcar {
-  width: calc(5781 / 3658 * (60vh - 71.4px));
-  /* (5781/3658)*0.6(100vh - 119px - 32px) */
+  width: 90%;
+  
   position: relative;
   top: 0;
   left: 0;
@@ -123,7 +126,7 @@ h1{
   margin-left: auto;
   margin-bottom: 0;
   display: block;
-  width: 70%;
+  width: 80%;
   padding: 8px;
   word-wrap: break-word;
   border-style: solid;
