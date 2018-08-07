@@ -1,1 +1,0 @@
-{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"ncufresh18.videos"},{"v":2,"unique":true,"key":{"title":1},"name":"title_1","ns":"ncufresh18.videos","background":true},{"v":2,"unique":true,"key":{"insert":1},"name":"insert_1","ns":"ncufresh18.videos","background":true}],"uuid":"049817e9fe7640f69153b8f35046c817"}
