@@ -441,10 +441,12 @@ var states = {
                 if (bgMusicFlag !== 1) {
                     bgMusic = game.add.audio('bgMusic', 1, true).play()
                     bgMusicFlag = 1
+                    bgMusicBack = 0
                     musicSwitch.setFrames(1)
                 } else {
                     musicSwitch.setFrames(0)
                     bgMusicFlag = 0
+                    bgMusicBack = 1
                     bgMusic.stop()
                 }
                 // console.log("bgMusicFlag: " + bgMusicFlag)

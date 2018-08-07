@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"myblog.comments"},{"v":2,"key":{"postId":1,"_id":1},"name":"postId_1__id_1","ns":"myblog.comments"}],"uuid":"f87cb5970fdf46f38b3bdc2e16d74297"}
