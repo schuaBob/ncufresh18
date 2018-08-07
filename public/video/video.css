@@ -950,6 +950,27 @@ iframe {
             transform: translateX(-5.5vw);
         }
     }
+    @media only screen and (width: 414px) and (max-height: 622px){
+        .rotate {
+            top: 15vw;
+        }
+        
+        .video_item_title {
+            overflow-x: hidden;
+
+            -webkit-transform: translateX(-6.5vw);
+            -moz-transform: translateX(-6.5vw);
+            -o-transform: translateX(-6.5vw);
+            -ms-transform: translateX(-6.5vw);
+            transform: translateX(-6.5vw);
+        }
+    }
+    /* iphone 5/SE */
+    @media only screen and (width: 320px) and (height: 568px){
+        .rotate {
+            top: 19vw;
+        }
+    }
 }
 
 

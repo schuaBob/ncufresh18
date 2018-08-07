@@ -446,7 +446,6 @@ li {
     top: 0;
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: fixed;
     overflow-x: hidden;
   }
 
@@ -459,7 +458,7 @@ li {
   #List_index {
     position: relative;
     display: block;
-    margin-top: 5px;
+    margin-top: 0;
     margin-bottom: 0;
     margin-right: 0;
     margin-left: 0;
