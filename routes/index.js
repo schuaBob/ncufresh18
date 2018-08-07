@@ -377,7 +377,8 @@ router.get('/auth/provider/callback', function (req, res, next) {
               if (!personalObj.id) {
                 req.flash('error', '帳號資訊不足，請洽計算機中心');
                 console.log(personalObj.id + ' is not allowed to login')
-                return res.redirect('login');
+                res.sendStatus(404);
+                return res.render('/error/error');;
               }
                 Users.findOne({
                   'id': personalObj.id
