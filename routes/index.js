@@ -395,7 +395,7 @@ router.get('/auth/provider/callback', function (req, res, next) {
                   if (obj) {
                     req.login(obj, function (err) {
                       if (err) return next(err);
-                      console.log(personalObj.id + ' Login')
+                      console.log(personalObj.id + ' 登入via OAuth')
                       res.redirect('/');
                     });
                   } else {
@@ -410,8 +410,8 @@ router.get('/auth/provider/callback', function (req, res, next) {
                       else {
                         req.login(user, function (err) {
                           if (err) return next(err);
-                          console.log(user.id + " Created.");
-                          console.log(personalObj.id + ' Login')
+                          console.log(user.id + " 建立via OAuth");
+                          console.log(personalObj.id + ' 登入via OAuth')
                           res.redirect('/');
                         });
                       }
