@@ -15,19 +15,18 @@
       </span>
       <span>4</span>
     </section>
+    <% if (error.length > 0) { %>
+    <div class="alert alert-danger text-center">
+      <%= error[0] %>
+    </div>
+    <% } %>
     <div class="hint ch">錯誤：找不到此頁面</div>
     <div class="hint en">Error：Not Found</div>
-    <% if (error.length > 0) { %>
-      <div class="alert alert-danger">
-        <%= error[0] %>
-      </div>
-      <% } %>
         <img class="thinman" src="/error/s_man2.png">
         <img class="longUFO" src="/error/s_space2.png">
         <img class="sitman" src="/error/太空小人2_去被.png">
         <img class="UFO" src="/error/飛碟素材.png">
         <!-- <pre><%= error.stack %></pre> -->
-        <pre><%= error.stack %></pre>
   </main>
   <footer>
     <% include ../layout/footer %>
