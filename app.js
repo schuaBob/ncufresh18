@@ -170,7 +170,7 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error/error',{
     user: req.user,
-    title: "404 | 新生知訊網",
+    title: "肆零肆 ｜ 新生知訊網",
     error: req.flash('error')
   });
 });

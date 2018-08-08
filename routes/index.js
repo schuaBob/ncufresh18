@@ -383,7 +383,7 @@ router.get('/auth/provider/callback', function (req, res, next) {
                 req.flash('error', '使用者資訊不足，請洽計算機中心');
                 return res.render('error/error',{
                   user: req.user,
-                  title: "404 | 新生知訊網",
+                  title: "肆零肆 ｜ 新生知訊網",
                   error: req.flash('error')
                 });
               }
