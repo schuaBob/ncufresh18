@@ -273,7 +273,7 @@ router.get('/delete_schedule/:id', checkUser.isAdmin, (req, res, next) => {
 })
 
 /* login page */
-router.get('/login', function (req, res, next) {
+router.get('/login',checkUser.isAllowtoLogin, function (req, res, next) {
   res.render('login/login', {
     title: '登入 ｜ 新生知訊網',
     user: req.user,
@@ -283,7 +283,7 @@ router.get('/login', function (req, res, next) {
 
 
 
-router.post('/login', function (req, res, next) {
+router.post('/login',checkUser.isAllowtoLogin, function (req, res, next) {
   let grade = req.body.id.substring(0, 3);
   if (grade !== '107')
     return res.redirect('auth/provider');
@@ -303,21 +303,21 @@ router.post('/login', function (req, res, next) {
 
 
 
-router.get('/password', function (req, res, next) {
+router.get('/password',checkUser.isAllowtoLogin, function (req, res, next) {
   res.render('login/password', {
     title: '登入 ｜ 新生知訊網',
     user: req.user
   });
 });
 
-router.post('/password', passport.authenticate('local', {
+router.post('/password',checkUser.isAllowtoLogin, passport.authenticate('local', {
   successRedirect: '/personal/',
   failureRedirect: '/login',
   failureFlash: true
 }));
 
 //NCU OAuth2 登入  
-router.get('/auth/provider', function (req, res) {
+router.get('/auth/provider',checkUser.isAllowtoLogin, function (req, res) {
   var url = 'https://api.cc.ncu.edu.tw/oauth/oauth/authorize?response_type=code&scope=user.info.basic.read&client_id=' + PORTAL_CLIENT_ID;
   res.redirect(url);
 });
@@ -383,7 +383,7 @@ router.get('/auth/provider/callback', function (req, res, next) {
                 req.flash('error', '使用者資訊不足，請洽計算機中心');
                 return res.render('error/error',{
                   user: req.user,
-                  title: "404 | 新生知訊網",
+                  title: "肆零肆 ｜ 新生知訊網",
                   error: req.flash('error')
                 });
               }
@@ -431,14 +431,14 @@ router.get('/auth/provider/callback', function (req, res, next) {
 
 
     /* register page */
-    router.get('/register', function (req, res, next) {
+    router.get('/register',checkUser.isAllowtoLogin, function (req, res, next) {
       res.render('login/register', {
-        title: '註冊 ｜ 新生知訊網',
-        user: req.user
+          title: '註冊 ｜ 新生知訊網',
+          user: req.user
       });
     });
 
-    router.post('/register', function (req, res, next) {
+    router.post('/register',checkUser.isAllowtoLogin, function (req, res, next) {
       //Backend Validation
       let name = req.body.name;
       let password = req.body.password;
@@ -462,13 +462,13 @@ router.get('/auth/provider/callback', function (req, res, next) {
         if (err)
           return res.redirect('/');
         if (!obj) {
-          req.flash('error', '不被允許註冊的學號');
+          req.flash('error', '不被允許註冊的學號。有疑惑請來信:ncufreshweb@gmail.com');
           return res.redirect('login');
         }
 
         if (obj.name !== name) {
           console.log('Name not match');
-          req.flash('error', '請確認姓名輸入是否正確');
+          req.flash('error', '請確認姓名輸入是否正確。有疑惑請來信:ncufreshweb@gmail.com');
           return res.redirect('register?id=' + id);
         } else {
           obj.password = password;
