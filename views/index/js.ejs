@@ -13,15 +13,18 @@
     // });
     // fullpage_api.setAllowScrolling(false);
 
-    new fullpage('#fullpage', {
-        licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
-        anchors:['Carousel', 'news-Q&A', 'timeline'],
-        scrollOverflow: true,
-        autoScrolling: true,
-        responsiveHeight: 500,
-        verticalCentered: false,
-        normalScrollElements: '.navbar-collapse, .navbar-nav'
-    });
+    function initialize_fullpage(){
+        new fullpage('#fullpage', {
+            licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
+            anchors:['Carousel', 'news-Q&A', 'timeline'],
+            scrollOverflow: true,
+            autoScrolling: true,
+            responsiveHeight: 500,
+            verticalCentered: false,
+            normalScrollElements: '.navbar-collapse, .navbar-nav'
+        });
+    }
+    initialize_fullpage()
 
     <%_ /*按下即時資訊按鍵*/ -%>
     var news_page = function(){
@@ -220,57 +223,52 @@
     var newsStorage = Object();
 
     <%_ /* 開modal */ -%>
-    for (var i = 0; i < document.getElementsByClassName('open-modal').length; i++) {
-        document.getElementsByClassName('open-modal')[i].addEventListener('click',function(event){
-            <%_ /* 如果已經有資料了 */ -%>
-            if (newsStorage[event.target.id]){
-                $("#the-title").text($('#'+event.target.id+'.ppppppppppppp').text());
-                $("#the-content").html(newsStorage[event.target.id]);
-                $("#the-only-modal").modal("show");
-            <%_ /* 沒資料 */ -%>
-            }else{
-                <%_ /* 要資料 */ -%>
-                $.ajax({
-                    url:    "/require_data/?id="+event.target.id,
-                    method: 'GET',
-                    error: function(err){
-                        console.log("",err);
-                    },
-                    success: function(data){
-                        $("#the-title").text($('#'+event.target.id+'.ppppppppppppp').text());
-                        $("#the-content").html(data);
-                        $("#the-only-modal").modal("show");
-                        <%_ /* 存入資料 */ -%>
-                        newsStorage[event.target.id] = data;
-                    }
-                });
-            }
-        })
-    }
-
-    <%_ /* 開modal */ -%>
-    for (var i = 0; i < document.getElementsByClassName('qna-btn').length; i++) {
-        document.getElementsByClassName('qna-btn')[i].addEventListener('click',function(event){
+    $(document).on("click",".open-modal",function(event){
+        <%_ /* 如果已經有資料了 */ -%>
+        if (newsStorage[event.target.id]){
+            $("#the-title").text($('#'+event.target.id+'.dotdotdottext').text());
+            $("#the-content").html(newsStorage[event.target.id]);
+            $("#the-only-modal").modal("show");
+        <%_ /* 沒資料 */ -%>
+        }else{
             <%_ /* 要資料 */ -%>
             $.ajax({
-                url:    "/qna/clickQ/"+event.target.attributes.oid.value,
+                url:    "/require_data/?id="+event.target.id,
                 method: 'GET',
                 error: function(err){
                     console.log("",err);
                 },
-                success: function(res){
-                    console.log(res);
-                    document.getElementById('show-title').innerHTML = res.title;
-                    document.getElementById('show-content').innerHTML = res.content;
-                    document.getElementById('show-answer').innerHTML = res.answer;
-                    $('#show-modal').modal('show');
-                    <%_ /*動態新增點擊次數*/ -%>
-                    $('#'+event.target.attributes.oid.value).text((new Number($('#'+event.target.attributes.oid.value).text().substring(0,$('#'+event.target.attributes.oid.value).text().length-4))+1)+"人次點閱");
-                    
+                success: function(data){
+                    $("#the-title").text($('#'+event.target.id+'.dotdotdottext').text());
+                    $("#the-content").html(data);
+                    $("#the-only-modal").modal("show");
+                    <%_ /* 存入資料 */ -%>
+                    newsStorage[event.target.id] = data;
                 }
             });
-        })
-    }
+        }
+    })
+
+    <%_ /* 開modal */ -%>
+    $(document).on("click",".qna-btn",function(event){
+        <%_ /* 要資料 */ -%>
+        $.ajax({
+            url:    "/qna/clickQ/"+event.target.attributes.oid.value,
+            method: 'GET',
+            error: function(err){
+                console.log("",err);
+            },
+            success: function(res){
+                document.getElementById('show-title').innerHTML = res.title;
+                document.getElementById('show-content').innerHTML = res.content;
+                document.getElementById('show-answer').innerHTML = res.answer;
+                $('#show-modal').modal('show');
+                <%_ /*動態新增點擊次數*/ -%>
+                $('#'+event.target.attributes.oid.value).text((new Number($('#'+event.target.attributes.oid.value).text().substring(0,$('#'+event.target.attributes.oid.value).text().length-4))+1)+"人次點閱");
+                
+            }
+        });
+    })
 
     $('.dotdotdottext').width($('#news-box').width()-$('.news-time').outerWidth()-$('.ppppppppppppp').outerWidth()-18);
     $( window ).resize(function() {
@@ -281,29 +279,13 @@
         fullpage_api.destroy('all');
     })
     $(".collapse").on('hidden.bs.collapse', function(e) {
-        new fullpage('#fullpage', {
-            licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
-            anchors:['Carousel', 'news-Q&A', 'timeline'],
-            scrollOverflow: true,
-            autoScrolling: true,
-            responsiveHeight: 500,
-            verticalCentered: false,
-            normalScrollElements: '.navbar-collapse, .navbar-nav'
-        });
+        initialize_fullpage()
     })
     $('.modal').on('show.bs.modal', function (e) {
         fullpage_api.destroy('all');
     })
     $('.modal').on('hidden.bs.modal', function (e) {
-        new fullpage('#fullpage', {
-            licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
-            anchors:['Carousel', 'news-Q&A', 'timeline'],
-            scrollOverflow: true,
-            autoScrolling: true,
-            responsiveHeight: 500,
-            verticalCentered: false,
-            normalScrollElements: '.navbar-collapse, .navbar-nav'
-        });
+        initialize_fullpage()
     })
 
 

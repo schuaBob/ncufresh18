@@ -240,6 +240,11 @@
                 font-size: 1em;
             }
         }
+        @media screen and (max-width: 750px) {
+            #news-box {
+                width: 98%;
+            }
+        }
         #select-bar {
             height: 48px;
         }
@@ -545,8 +550,8 @@
                                     <%_ for(let i = 0;i<news.length;i++){ -%>
                                     <tr class="news-row open-modal" id="<%= news[i]._id %>">
                                         <td class="news-time open-modal" id="<%= news[i]._id %>"><%= news[i].time.toISOString().substring(0, 10) %></td>
-                                        <td class="news-title px-0 open-modal ppppppppppppp" id="<%= news[i]._id %>"><p class="dotdotdottext  open-modal" id="<%= news[i]._id %>"><%= news[i].title %></p></td>
-                                        <td class="open-modal" id="<%= news[i]._id %>">more</td>
+                                        <td class="news-title px-0 open-modal" id="<%= news[i]._id %>"><p class="dotdotdottext  open-modal" id="<%= news[i]._id %>"><%= news[i].title %></p></td>
+                                        <td class="open-modal ppppppppppppp" id="<%= news[i]._id %>">more</td>
                                     </tr>
                                     <%_ } -%>
                                 </tbody>

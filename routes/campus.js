@@ -7,13 +7,32 @@ var fs = require("fs");
 var checkuser = require("./check-user");
 /* 校園導覽首頁 */
 router.get("/", function(req, res, next) {
-  elebuilding.find({},{_id: 1, Element_Name:1,Type:1,Buildpic:1,X_position:1,Y_position:1,Size:1,Multi:1,Modalneed:1,Showdefault:1}).exec(function(err,result) {
-    if(err) {
-      return next(err)
-    }
-    res.render("campus/index", { title: "校園地圖 ｜ 新生知訊網",result:result,user: req.user});
-    
-  })
+  elebuilding
+    .find(
+      {},
+      {
+        _id: 1,
+        Element_Name: 1,
+        Type: 1,
+        Buildpic: 1,
+        X_position: 1,
+        Y_position: 1,
+        Size: 1,
+        Multi: 1,
+        Modalneed: 1,
+        Showdefault: 1
+      }
+    )
+    .exec(function(err, result) {
+      if (err) {
+        return next(err);
+      }
+      res.render("campus/index", {
+        title: "校園地圖 ｜ 新生知訊網",
+        result: result,
+        user: req.user
+      });
+    });
 });
 router.get("/editElement", checkuser.isAdmin, function(req, res, next) {
   elebuilding
@@ -24,7 +43,7 @@ router.get("/editElement", checkuser.isAdmin, function(req, res, next) {
         Element_Name: 1,
         Type: 1,
         Element_Intro: 1,
-        X_position :1,
+        X_position: 1,
         Y_position: 1,
         Size: 1
       }
@@ -33,23 +52,27 @@ router.get("/editElement", checkuser.isAdmin, function(req, res, next) {
       if (err) {
         return next(err);
       }
-      res.render("campus/editElement", { title: "編輯物件", result: result, user: req.user});
+      res.render("campus/editElement", {
+        title: "編輯物件",
+        result: result,
+        user: req.user
+      });
     });
 });
-router.post("/AddNew_element",checkuser.isAdmin, function(req, res, next) {
-  if (req.body.elename && req.body.elecategory != 0){
+router.post("/AddNew_element", checkuser.isAdmin, function(req, res, next) {
+  if (req.body.elename && req.body.elecategory != 0) {
     new elebuilding({
       Element_Name: req.body.elename,
       Type: req.body.elecategory,
       Element_Intro: req.body.eleintro,
       Buildpic: "",
       Intropic: [],
-      X_position:0,
-      Y_position:0,
-      Size:8,
-      Showdefault:req.body.radios1,
-      Multi:req.body.radios2,
-      Modalneed:req.body.radios3
+      X_position: 0,
+      Y_position: 0,
+      Size: 8,
+      Showdefault: req.body.radios1,
+      Multi: req.body.radios2,
+      Modalneed: req.body.radios3
     }).save(function(err) {
       if (err) {
         return next(err);
@@ -60,15 +83,15 @@ router.post("/AddNew_element",checkuser.isAdmin, function(req, res, next) {
     res.redirect("/campus/editElement");
   }
 });
-router.post("/editElement/:id",checkuser.isAdmin, function(req, res, next) {
+router.post("/editElement/:id", checkuser.isAdmin, function(req, res, next) {
   elebuilding
     .findByIdAndUpdate(req.params.id, {
       Element_Name: req.body.elename,
       Type: req.body.elecategory,
       Element_Intro: req.body.eleintro,
-      Showdefault:req.body.radios1,
-      Multi:req.body.radios2,
-      Modalneed:req.body.radios3
+      Showdefault: req.body.radios1,
+      Multi: req.body.radios2,
+      Modalneed: req.body.radios3
     })
     .exec(function(err) {
       if (err) {
@@ -77,7 +100,7 @@ router.post("/editElement/:id",checkuser.isAdmin, function(req, res, next) {
       res.redirect("/campus/editElement");
     });
 });
-router.get("/delete/:id", checkuser.isAdmin,function(req, res, next) {
+router.get("/delete/:id", checkuser.isAdmin, function(req, res, next) {
   elebuilding.findByIdAndRemove(req.params.id).exec(function(err, result) {
     if (err) {
       return next(err);
@@ -85,7 +108,7 @@ router.get("/delete/:id", checkuser.isAdmin,function(req, res, next) {
     res.redirect("/campus/editElement");
   });
 });
-router.post("/insert_img/:id", checkuser.isAdmin,function(req, res, next) {
+router.post("/insert_img/:id", checkuser.isAdmin, function(req, res, next) {
   var form = new formidable.IncomingForm();
   form.parse(req, (err, fields, files) => {
     //如果你的表單有不是file的欄位，他們會在fields裡面
@@ -104,17 +127,17 @@ router.post("/insert_img/:id", checkuser.isAdmin,function(req, res, next) {
       readStream
         .on("end", err => {
           if (err) return next(err);
-          
+
           if (fields.imgtype === "0") {
             elebuilding
               .findByIdAndUpdate(req.params.id, {
                 Buildpic: fileName
               })
               .exec(function(err, result) {
-                
                 if (err) {
                   return next(err);
                 }
+                res.redirect("/campus/editElement");
               });
           } else if (fields.imgtype === "1") {
             elebuilding
@@ -141,13 +164,20 @@ router.post("/insert_img/:id", checkuser.isAdmin,function(req, res, next) {
           });
         })
         .pipe(writeStream);
+    } else {
+      res.redirect("/campus/editElement");
     }
-    res.redirect("/campus/editElement");
   });
 });
-router.get("/picposition",checkuser.isAdmin, function(req, res, next) {
+router.get("/picposition", checkuser.isAdmin, function(req, res, next) {
   elebuilding
-    .findById(req.query.id, { _id: 0, Buildpic: 1,X_position:1,Y_position:1,Size:1})
+    .findById(req.query.id, {
+      _id: 0,
+      Buildpic: 1,
+      X_position: 1,
+      Y_position: 1,
+      Size: 1
+    })
     .exec(function(err, result) {
       if (err) {
         return next(err);
@@ -156,7 +186,7 @@ router.get("/picposition",checkuser.isAdmin, function(req, res, next) {
     });
 });
 
-router.get("/getimg",checkuser.isAdmin, function(req, res, next) {
+router.get("/getimg", checkuser.isAdmin, function(req, res, next) {
   elebuilding
     .findById(req.query.id, { _id: 0, Buildpic: 1, Intropic: 1 })
     .exec(function(err, result) {
@@ -165,9 +195,8 @@ router.get("/getimg",checkuser.isAdmin, function(req, res, next) {
       }
       res.send(result);
     });
-  // res.redirect("/campus/editElement");
 });
-router.post("/deleimg",checkuser.isAdmin, function(req, res, next) {
+router.post("/deleimg", checkuser.isAdmin, function(req, res, next) {
   if (req.body.val === "0") {
     elebuilding
       .findByIdAndUpdate(req.body.id, {
@@ -194,35 +223,52 @@ router.post("/deleimg",checkuser.isAdmin, function(req, res, next) {
       });
   }
 });
-router.post("/saveposition/:id",checkuser.isAdmin,function(req,res,next) {
-  elebuilding.findByIdAndUpdate(req.params.id,{
-    X_position : req.body.x_position,
-    Y_position : req.body.y_position,
-    Size : req.body.size
-  }).exec(function(err) {
-    if (err) {
-      return next(err)
-    }
-    res.redirect("/campus/editElement");
-  })
-})
-router.get("/indexmodal",function(req,res,next) {
-  elebuilding.findById(req.query.id,{_id:0,Element_Name:1,Element_Intro:1,Intropic:1}).exec(function(err,result) {
-    if(err) {
-      return next(err)
-    }
-    console.log(result)
-    res.send(result)
-  })
-})
-router.get("/edittext",checkuser.isAdmin,function(req,res,next){
-  elebuilding.findById(req.query.id,{_id:1,Element_Name:1,Type:1,Element_Intro:1,Modalneed:1,Multi:1,Showdefault:1}).exec(function(err,result){
-    if(err) {
-      return next(err)
-    }
-    res.send(result)
-  })
-})
-
+router.post("/saveposition/:id", checkuser.isAdmin, function(req, res, next) {
+  elebuilding
+    .findByIdAndUpdate(req.params.id, {
+      X_position: req.body.x_position,
+      Y_position: req.body.y_position,
+      Size: req.body.size
+    })
+    .exec(function(err) {
+      if (err) {
+        return next(err);
+      }
+      res.redirect("/campus/editElement");
+    });
+});
+router.get("/indexmodal", function(req, res, next) {
+  elebuilding
+    .findById(req.query.id, {
+      _id: 0,
+      Element_Name: 1,
+      Element_Intro: 1,
+      Intropic: 1
+    })
+    .exec(function(err, result) {
+      if (err) {
+        return next(err);
+      }
+      res.send(result);
+    });
+});
+router.get("/edittext", checkuser.isAdmin, function(req, res, next) {
+  elebuilding
+    .findById(req.query.id, {
+      _id: 1,
+      Element_Name: 1,
+      Type: 1,
+      Element_Intro: 1,
+      Modalneed: 1,
+      Multi: 1,
+      Showdefault: 1
+    })
+    .exec(function(err, result) {
+      if (err) {
+        return next(err);
+      }
+      res.send(result);
+    });
+});
 
 module.exports = router;

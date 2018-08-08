@@ -75,7 +75,7 @@
                     if ($(this)[0] === temp) {
                         if ($('.main_list_detail').hasClass('clicked')) {
                             temp = $(this)[0]
-                            <%- /*console.log("1")*/ _%>
+                            
                             $('#List_index li').hover(function (event) {
                                 $('.indexelepic.hide[val=' + event.currentTarget.attributes.val.value + ']').show()
                                 $('.indexelepic[val=' + event.currentTarget.attributes.val.value + ']').velocity({ scale: 1.1 }, 100)
@@ -94,7 +94,7 @@
 
 
                         } else {
-                            <%- /*console.log("2")*/ _%>
+                            
                             temp = $(this)[0]
                             $('#listtitle').text(array1[i - 1])
                             $('.indexelepic').css("filter", "brightness(55%)")
@@ -131,7 +131,7 @@
                         };
                         $('.mapmove').addClass('clicked')
                         if ($('.main_list_detail').hasClass('clicked')) {
-                            <%- /*console.log("3")*/ _%>
+                            
                             $('.indexelepic').css("filter", "brightness(55%)")
                             $('.indexelepic.hide').hide()
                             $('.indexelepic[val='+ event.currentTarget.attributes.val.value +']').css("filter", "none")
@@ -145,7 +145,7 @@
                             })
                             $('.main_list_detail').addClass('clicked')
                         } else {
-                            <%- /*console.log("4")*/ _%>
+                            
                             $('#listtitle').text(array1[i - 1])
                             $('.indexelepic').css("filter", "brightness(55%)")
                             $('#map').css("filter", "brightness(55%)")
@@ -163,7 +163,7 @@
                 }
             }
             $('.mapmove').stop().velocity(properties, 400)
-            <%- /*console.log(temp);*/ _%>
+            
         })
 
         $('#closemainlist').click(function () {

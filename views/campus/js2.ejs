@@ -27,7 +27,7 @@
                     alert("發生錯誤")
                 },
                 success: function (data) {
-                    console.log(data)
+                    
                     $('.editform').attr("action", "/campus/saveposition/" + tempid)
                     $('.editform').attr("method", "POST")
                     if (data.Buildpic != "") {
@@ -39,8 +39,7 @@
 
 
                         $('.posipic').mousemove(function () {
-                            console.log($('#mainmap2').width())
-                            console.log($('#mainmap2').height())
+                            
                             $('input[name="x_position"]').val($('.posipic').position().top / $('#mainmap2').height() * 100)
                             $('input[name="y_position"]').val($('.posipic').position().left / $('#mainmap2').width() * 100)
                         })
@@ -80,7 +79,7 @@
 
                         $('.imgcontent').prepend("<div class='saved buildpic'><img class='pic' src='/campus/" + data.Buildpic + "'><a class='picdele' val='0' ipname=''>Delete</a></div>")
                     }
-                    console.log(data)
+                    
                     if (data.Intropic.length != 0) {
 
                         for (let i = 0; i < data.Intropic.length; i++) {
@@ -89,8 +88,8 @@
 
                     }
                     $('.picdele').click(function (event) {
-                        console.log(event.currentTarget.attributes[2].value);
-                        // console.log(this.closest('.modal-content').find('.imgcontent').data('ooo'))
+                        
+                        
                         var temp = $(this).parents(".imgcontent")[0].attributes.ooo.value
                         var temp2 = $(this)
 
@@ -105,8 +104,7 @@
                                 if (data === true) {
                                     temp2.parent().remove();
                                 }
-                                // $(this).siblings().remove()
-                                // $(this).remove()
+                                
                             }
                         })
 
@@ -148,7 +146,7 @@
                     $('.radios1[value='+ data.Showdefault +']').attr({"checked":"checked"})
                     $('.radios2[value='+ data.Multi +']').attr({"checked":"checked"})
                     $('.radios3[value='+ data.Modalneed +']').attr({"checked":"checked"})
-                    console.log(data._id)
+                    
                     CKEDITOR.instances['edittextarea'].setData(data.Element_Intro);
 
                 }
