@@ -125,6 +125,9 @@ $(document).ready(() => {
             //排序按鈕動畫
             $(".Hot").addClass("onclick");
             $(".Time").removeClass("onclick");
+            // $('.Hot').attr('disabled', true);
+            // $('.Time').removeAttr('disabled');
+            
   
         //人氣的排序(list.js)
         userList.sort("hot",{
@@ -151,18 +154,22 @@ $(document).ready(() => {
         //排序按鈕動畫
         $(".Time").addClass("onclick");
         $(".Hot").removeClass("onclick");
+        // $('.Time').attr('disabled', true);
+        // $('.Hot').removeAttr('disabled');
         //時間的排序(list.js)
         userList.sort("time",{
             order:'desc',
             sortFunction: function (a, b) {
                 var Aobjs = $(a.elm).find('.type');
                 var Bobjs = $(b.elm).find('.type');
+                var Atime = $(a.elm).find('.TIME');
+                var Btime = $(b.elm).find('.TIME');
                 if ((Aobjs[0].innerHTML === "板規") != (Bobjs[0].innerHTML === "板規")) {
                     return Aobjs[0].innerHTML === "板規"  ? 1 : -1;
                 }
                 else{
-                    return (a._values.time -  b._values.time)>0 ? 1 : 
-                            (a._values.time - b._values.time)<0 ? -1 : 0;
+                    return (Atime[0].innerHTML - Btime[0].innerHTML)>0 ? 1 : 
+                            (Atime[0].innerHTML - Btime[0].innerHTML)<0 ? -1 : 0;
     
                 }
     
