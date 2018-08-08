@@ -547,7 +547,7 @@
                         <div id="box1">
                             <table class="table" id="one">
                                 <tbody>
-                                    <%_ for(let i = 0;i<news.length;i++){ -%>
+                                    <%_ for(let i = news.length-1;i>=0;i--){ -%>
                                     <tr class="news-row open-modal" id="<%= news[i]._id %>">
                                         <td class="news-time open-modal" id="<%= news[i]._id %>"><%= news[i].time.toISOString().substring(0, 10) %></td>
                                         <td class="news-title px-0 open-modal" id="<%= news[i]._id %>"><p class="dotdotdottext  open-modal" id="<%= news[i]._id %>"><%= news[i].title %></p></td>
