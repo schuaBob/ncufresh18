@@ -509,7 +509,7 @@ var states = {
             game.stage.disableVisibilityChange = true   
             var combo = 0
             var score = 0
-            var remainTime = 60
+            var remainTime = 6
             game.physics.startSystem(Phaser.Physics.P2JS)
             
             // 設置背景邊界
@@ -802,7 +802,7 @@ var states = {
                         squirrelGroupY -= 40
                         createSquirrel(squirrelGroupY)
                         // 加分, combo
-                        score += 100
+                        score += 1000
                         combo++
                         var goal = choiceBonus(combo)
                         // 選項顏色反饋, 變綠
