@@ -454,7 +454,8 @@ router.get('/auth/provider/callback', function (req, res, next) {
 
       let errors = req.validationErrors();
       if (errors) {
-        return console.log(errors[0]);
+          req.flash('error', '註冊資訊填寫錯誤。有疑惑請來信:ncufreshweb@gmail.com');
+          return res.redirect('login');
       }
       Users.findOne({
         'id': id
@@ -462,23 +463,24 @@ router.get('/auth/provider/callback', function (req, res, next) {
         if (err)
           return res.redirect('/');
         if (!obj) {
+          console.log(id+': 不存在於新生列表');
           req.flash('error', '不被允許註冊的學號。有疑惑請來信:ncufreshweb@gmail.com');
           return res.redirect('login');
         }
 
         if (obj.name !== name) {
-          console.log('Name not match');
+          console.log(id+': 真實性名不合');
           req.flash('error', '請確認姓名輸入是否正確。有疑惑請來信:ncufreshweb@gmail.com');
-          return res.redirect('register?id=' + id);
+          return res.redirect('login');
         } else {
           obj.password = password;
           //Create password for the user in database
           Users.createUser(obj, function (err, user, next) {
             if (err) return next(err);
-            else console.log(id + " Created.");
+            else console.log(id + ": 建立");
             req.login(user, function (err) {
               if (err) return next(err);
-              console.log(obj.id + ' Login')
+              console.log(obj.id + ': 登入')
               res.redirect('/');
             });
           });
