@@ -69,7 +69,7 @@ router.post('/setScore', checkLogin.isLoggedIn, function (req, res, next) {
       UserScore.count({}, function (err, result) {
         count = parseInt(result);
         // UserScore 中少於 20 個直接新建
-        if (count < 10) {
+        if (count < 20) {
           UserScore.findOne({
             id: player.id
           }, function (err, result) {
