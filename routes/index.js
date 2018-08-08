@@ -17,6 +17,8 @@ var qna = mongoose.model('Question');
 var checkUser = require('./check-user');
 
 //passport
+//Don't use passport again
+//You just need a few === comparisons instead of a big package
 var passport = require('passport');
 let LocalStrategy = require('passport-local').Strategy;
 
@@ -35,9 +37,13 @@ passport.use(new LocalStrategy({
       }
       if (!user) {
         console.log(id + '不存在');
+        //Block start
+        //euqual to req.flash('error', "使用者名稱或密碼錯誤");
+        //But in passport's way
         return done(null, false, {
           message: '使用者名稱或密碼錯誤'
         });
+        //Block end
       }
       user.comparePassword(password, user.password, function (err, isMatch) {
         if (err) {
@@ -66,12 +72,6 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
-
-//Pass error message through all pages in index route
-router.get('*', function (req, res, next) {
-  res.locals.error = req.flash('error');
-  next();
-});
 
 /* home page */
 router.get('/', (req, res, next) => {
@@ -274,10 +274,10 @@ router.get('/delete_schedule/:id', checkUser.isAdmin, (req, res, next) => {
 
 /* login page */
 router.get('/login', function (req, res, next) {
-  // res.render('login/login', { title: '登入', user: req.user, message: req.flash('error')});
   res.render('login/login', {
     title: '登入 ｜ 新生知訊網',
-    user: req.user
+    user: req.user,
+    error: req.flash('error')
   });
 });
 
@@ -295,6 +295,7 @@ router.post('/login', function (req, res, next) {
     if (obj && obj.password) {
       res.redirect('password?id=' + req.body.id);
     } else {
+      //if not found, go to register
       res.redirect('register?id=' + req.body.id);
     }
   })
@@ -374,9 +375,17 @@ router.get('/auth/provider/callback', function (req, res, next) {
 
 
               //if id is null or undefined
+              //目前已知只要帳號存在就會通過前面一長串驗證與交換
+              //但是還沒註冊跟辦過離校會CC那邊會依照格式每個回傳Null
+              //於是判斷吃不到學號的就轉404(也就是personalObj.id不存在)
               if (!personalObj.id) {
                 console.log(personalObj.id + ' is not allowed to login')
-                return res.render('error/error', { title: '404 ｜ 新生知訊網', error: req.flash('error', '帳號資訊不足，請洽計算機中心')});
+                req.flash('error', '使用者資訊不足，請洽計算機中心');
+                return res.render('error/error',{
+                  user: req.user,
+                  title: "404 | 新生知訊網",
+                  error: req.flash('error')
+                });
               }
                 Users.findOne({
                   'id': personalObj.id
@@ -435,7 +444,8 @@ router.get('/auth/provider/callback', function (req, res, next) {
       let password = req.body.password;
       let checkpassword = req.body.checkpassword;
       let id = req.body.id;
-
+      //明年不要用這爛套件
+      //自己寫判斷就好
       req.checkBody('id', 'ID is required').notEmpty();
       req.checkBody('name', 'Name is required').notEmpty();
       req.checkBody('password', 'Password is required').notEmpty();
