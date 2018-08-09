@@ -31,13 +31,10 @@ var LabelButton = function(rightOrWrong, game, x, y, key, label, callback, callb
     this.rightOrWrong = false
     this.anchor.setTo(0.5, 0.5)    
     this.label = new Phaser.Text(game, 0, 0, label, this.style)    
-    //puts the label in the center of the button    
     this.label.anchor.setTo(0.5, 0.5)    
     this.addChild(this.label)
     this.setLabel(label)
-    //adds button to game
     game.add.existing(this)
-    // return this
 }
 LabelButton.prototype = Object.create(Phaser.Button.prototype)
 LabelButton.prototype.constructor = LabelButton
@@ -60,9 +57,7 @@ var LabelSprite = function(game, x, y, key, frame) {
         wordWrapWidth: this.width,
         align: "left"
     })
-    // this.label.alignIn(this, Phaser.CENTER)
     this.addChild(this.label)
-    
     game.add.existing(this)
 }
 LabelSprite.prototype = Object.create(Phaser.Sprite.prototype)
@@ -156,7 +151,7 @@ var quiz = [
     { q: '圖書館書最多可以借幾本?', o: ['5','6','10','20'] , correctIndex:3},
     { q: '校內工讀哪個網站可以找到?', o: ['lms','中央資管網頁','portal獎助學金暨工讀管理系統','中央資工網頁'] , correctIndex:2},
     { q: '通識課程在畢業前應修滿幾學分?', o: ['18','20','15','14'] , correctIndex:3},
-    { q: '全校有幾個學系?', o: ['22','33','44','55'] , correctIndex:0},
+    { q: '全校有幾個學系?', o: ['24','33','44','55'] , correctIndex:0},
     { q: '學生專用信箱web mail是由哪個單位負責管理的?', o: ['圖書館','電子計算中心','教務處','學務處'] , correctIndex:1},
     { q: '中央大學語言中心位在哪一棟大樓?', o: ['志希館','地科院','綜教館','管理二館'] , correctIndex:2},
     { q: '中央大學宿舍網路單日(24小時)校外的上傳流量『加總』之後上限為?', o: ['沒限制','3GB','4GB','5GB'] , correctIndex:1},
@@ -308,7 +303,6 @@ function colorEgg() {
             } else if (i === 18) {
                 x = 200, y = yBasic + 200
             }
-
         }, (i *80))
     }
 
@@ -322,7 +316,7 @@ function colorEgg() {
     return cutes
 }
 
-// 遊戲主體長寬
+// 遊戲參數
 var width = 800
 var height = 600
 var rankClick = 0
@@ -509,7 +503,7 @@ var states = {
             game.stage.disableVisibilityChange = true   
             var combo = 0
             var score = 0
-            var remainTime = 6
+            var remainTime = 60
             game.physics.startSystem(Phaser.Physics.P2JS)
             
             // 設置背景邊界
@@ -544,7 +538,6 @@ var states = {
                     bgMusicFlag = 0
                     bgMusicBack = 1
                 }
-                // console.log("bgMusicFlag: " + bgMusicFlag)
             }
 
             // 返回按鈕            
@@ -656,7 +649,6 @@ var states = {
                             dust.kill()
                         })
                     })
-                    
                     fallAnimation.kill()
                 })
             }
@@ -755,7 +747,6 @@ var states = {
                 for (i = 0, len = btnChoices.length; i < len; i++) {
                     btnChoices[i].frame = 0
                 }
-
                 choiceState = 0
                 // 獲取 data 中的題目
                 questionSprite.setLabel(data.q)
@@ -783,7 +774,6 @@ var states = {
                 // choiceState 判斷一次答題是否點擊多次
                 if (!choiceState) {
                     count++
-                    // console.log("count:" + count)
                     // 彩蛋觸發 
                     if (count >= 100) {
                         var a = colorEgg()
@@ -802,7 +792,7 @@ var states = {
                         squirrelGroupY -= 40
                         createSquirrel(squirrelGroupY)
                         // 加分, combo
-                        score += 1000
+                        score += 100
                         combo++
                         var goal = choiceBonus(combo)
                         // 選項顏色反饋, 變綠
@@ -863,7 +853,6 @@ var states = {
             
             // 第一次刷新題目
             resetQuestionAndChoice(data[count])
-            // colorEgg()
         }
     },
     
@@ -908,7 +897,6 @@ var states = {
                 
                 rankLeft.setAll('alpha', 1);
                 game.add.tween(rankLeftImage).from({alpha: 0}, 800, Phaser.Easing.Exponential.In, true)                                
-                
                 game.add.tween(rankLeft).from({alpha: 0}, 1500, Phaser.Easing.Exponential.In, true)            
          
                 var bubbleLength
@@ -973,18 +961,12 @@ var states = {
                         }
                         // 顯示頭像
                         var no1 = rankLeftImage.create(0, 0, JSON.parse(data)[0].id)
-                        // no1.width = 50
-                        // no1.height = 50
                         no1.alignTo(rankLeftSprite, Phaser.TOP_CENTER, -5, 20)
 
                         var no2 = rankLeftImage.create(0, 0, JSON.parse(data)[1].id)
-                        // no2.width = 50
-                        // no2.height = 50
                         no2.alignTo(rankLeftSprite, Phaser.TOP_CENTER, 80, -40)
 
                         var no3 = rankLeftImage.create(0, 0, JSON.parse(data)[2].id)
-                        // no3.width = 50
-                        // no3.height = 50
                         no3.alignTo(rankLeftSprite, Phaser.TOP_CENTER, -90, -65)
 
                         rankLeftImage.setAll('alpha', 1);
@@ -1032,5 +1014,4 @@ Object.keys(states).map(function(key) {
 
 // 啟動遊戲
 game.state.start('preload')
-
 </script>
