@@ -37,7 +37,7 @@ router.post('/setScore', checkLogin.isLoggedIn, function (req, res, next) {
         score_sum: req.user.score_sum,
         avatar: req.user.avatar
       }
-
+      console.log(req.user.id+" try to post "+req.body.score+" in small game");
       var newScoreHigh = Math.floor(parseInt(req.body.score));
       if (parseInt(req.body.score) < 100 || parseInt(req.body.score) > 17000) {
         newScoreHigh = 0

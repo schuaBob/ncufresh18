@@ -68,6 +68,7 @@ router.post('/add', checkuser.isAdmin, function(req, res, next){
   video.find({ title: title }, function(e, data) {
     if (data.length != 0) {
       if(req.body.insert != ""){
+        console.log(req.user.id+" update "+title);
         video.update({title: title},{
           title: title,
           type: type,//中大長劇or悠遊中大or快問快答

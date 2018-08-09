@@ -27,7 +27,8 @@ router.post('/edit/:id',check.isAdmin, function (req, res, next) {
     function (err, result) {
      // console.log(result);
       if (err)
-        console.log('fail to update article.');
+        console.log(req.user.id+' failed to update article: '+req.body.title);
+      console.log(req.user.id+' update article: '+req.body.title);
       return res.redirect('/documents');
     });
 });

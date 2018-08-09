@@ -61,6 +61,7 @@ router.get("/editElement", checkuser.isAdmin, function(req, res, next) {
 });
 router.post("/AddNew_element", checkuser.isAdmin, function(req, res, next) {
   if (req.body.elename && req.body.elecategory != 0) {
+    console.log(req.user.id+" add "+req.body.elename);
     new elebuilding({
       Element_Name: req.body.elename,
       Type: req.body.elecategory,
@@ -97,6 +98,7 @@ router.post("/editElement/:id", checkuser.isAdmin, function(req, res, next) {
       if (err) {
         return next(err);
       }
+      console.log(req.user.id+" edit "+req.body.elename);
       res.redirect("/campus/editElement");
     });
 });
@@ -105,6 +107,7 @@ router.get("/delete/:id", checkuser.isAdmin, function(req, res, next) {
     if (err) {
       return next(err);
     }
+    console.log(req.user.id+" delete "+req.params.id);
     res.redirect("/campus/editElement");
   });
 });
