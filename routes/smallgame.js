@@ -21,6 +21,11 @@ router.get('/', checkLogin.isLoggedIn, function (req, res, next) {
 
 // 上傳分數
 router.post('/setScore', checkLogin.isLoggedIn, function (req, res, next) {
+  // 避免 score 為 undefine
+  req.body.score = parseInt(req.body.score)
+  if (req.body.score === undefined || isNaN(req.body.score)) {
+    req.body.score = 0
+  }
   // 驗證 60s
   User.findOne({
     id: req.user.id
