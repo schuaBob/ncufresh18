@@ -39,7 +39,7 @@ router.post('/setScore', checkLogin.isLoggedIn, function (req, res, next) {
       }
 
       var newScoreHigh = Math.floor(parseInt(req.body.score));
-      if (parseInt(req.body.score) < 100 || parseInt(req.body.score) > 17000) {
+      if (parseInt(req.body.score) < 100 || parseInt(req.body.score) > 17000 || (parseInt(req.body.score) % 100 != 0)) {
         newScoreHigh = 0
       }
       // console.log("player: " + player.id)
@@ -125,7 +125,6 @@ router.post('/setScore', checkLogin.isLoggedIn, function (req, res, next) {
             return next(err);
           })
 
-          // 方案一：重新玩一次就能刷新到排行榜
           function queryHigh(resolve) {
             // console.log("step 1\n")
             UserScore.findOne({
@@ -160,7 +159,6 @@ router.post('/setScore', checkLogin.isLoggedIn, function (req, res, next) {
                 return next(err);
               }
               if (result !== null) {
-                // console.log("resultSum: " + result)
                 highScore.id_sum = result.id
                 highScore.score_sum = result.score_sum;
                 resolve();
@@ -169,15 +167,12 @@ router.post('/setScore', checkLogin.isLoggedIn, function (req, res, next) {
           }
 
           function updateAll() {
-            // console.log("step 3\n")
             UserScore.findOne({
               id: player.id
             }, function (err, result) {
               if (err) {
                 return next(err);
               }
-              // console.log("queryResult: " + result)
-              // console.log("highScore: " + highScore)
               // 如果用戶已經在 UserScore 中則直接更新
               if (result != null) {
                 UserScore.update({
@@ -197,8 +192,11 @@ router.post('/setScore', checkLogin.isLoggedIn, function (req, res, next) {
                 });
               } else {
                 // 如果分數大於 highScore 則替換 UserScore 中的最後一名
-                // console.log("player: " + player)
+                // flag = 1時代表 player 已在單次最高進榜，如果進入累計排行榜的判斷則不替換
+                var flag = 0;
                 if (player.score_high > highScore.score_high) {
+                  flag = 1;
+                  // console.log('111:' + highScore.id_high)
                   UserScore.update({
                     id: highScore.id_high
                   }, {
@@ -217,21 +215,24 @@ router.post('/setScore', checkLogin.isLoggedIn, function (req, res, next) {
                 }
 
                 if (player.score_sum > highScore.score_sum) {
-                  UserScore.update({
-                    id: highScore.id_sum
-                  }, {
-                    $set: {
-                      score_sum: player.score_sum,
-                      score_high: player.score_high,
-                      id: player.id,
-                      name: player.name,
-                      avatar: player.avatar
-                    }
-                  }, function (err, result) {
-                    if (err) {
-                      return next(err);
-                    }
-                  })
+                  if (flag !== 1) {
+                    // console.log('222:' + highScore.id_sum)
+                    UserScore.update({
+                      id: highScore.id_sum
+                    }, {
+                      $set: {
+                        score_sum: player.score_sum,
+                        score_high: player.score_high,
+                        id: player.id,
+                        name: player.name,
+                        avatar: player.avatar
+                      }
+                    }, function (err, result) {
+                      if (err) {
+                        return next(err);
+                      }
+                    })
+                  }
                 }
               }
             })
@@ -240,9 +241,8 @@ router.post('/setScore', checkLogin.isLoggedIn, function (req, res, next) {
         }
         res.end();
       });
-
     } else {
-      res.end('Do not do anything illegal！');
+      res.end('Do not do anything illegal!!!');
     }
   })
 });
