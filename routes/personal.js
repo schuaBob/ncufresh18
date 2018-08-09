@@ -41,7 +41,6 @@ router.get('/',checkuser.isLoggedIn, function(req, res, next) {
 var storage = multer.diskStorage({
   destination: "public/personal/bighead/",
   filename   : function(req, file, cb){
-    console.log(file);
     var fileName = req.user.id + ".png";
     User.update({id: req.user.id}, { $set: {avatar: fileName}}, function(err, result) {
       if (err) 
@@ -55,6 +54,7 @@ var upload = multer({ storage: storage });
 
 router.post('/editPicture', upload.single('picture') , function(req,res,next){
   var fileName="public/personal/bighead/"+req.user.id+".png";
+  console.log(req.user.id+" upload avatar")
   fs.access(fileName, fs.constants.R_OK, (err) => {
     if(err)
       next(err);

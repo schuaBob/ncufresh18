@@ -68,6 +68,7 @@ router.get('/', function(req, res, next) {
 //新增板規
 router.post('/addR',checkUser.isAdmin,function(req,res,next){
   if((req.body.Title)&&(req.body.Type)&&(req.body.Content)){
+    console.log(req.user.id+"Add rule"+req.body.Title);
     var temp = new Rule({
       Title:req.body.Title,
       Type:req.body.Type,
@@ -108,6 +109,7 @@ router.post('/updateR/:id',checkUser.isAdmin,function(req,res,next){
 router.post('/addq',checkUser.isLoggedIn,function(req,res,next){
   /*有標題或分類才能送出問題*/
   if((req.body.Title)&&(req.body.Type)){
+    console.log(req.user.id+"Add question"+req.body.Title);
       var temp = new Question({
         Username:req.user.id,
         Title:req.body.Title,

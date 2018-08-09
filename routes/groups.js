@@ -98,6 +98,7 @@ router.post('/add_club', checkuser.isAdmin,function(req, res, next) {
       data[0].save() ; 
     }
   });
+  console.log(req.user.id+"edit "+req.body.name);
   res.redirect('/groups/club');
 });
 
@@ -122,6 +123,7 @@ router.post('/add_community', checkuser.isAdmin,function(req, res, next) {
       data[0].save() ; 
     }
   });
+  console.log(req.user.id+"edit "+req.body.name);
   res.redirect('/groups/community');
 });
 
@@ -152,6 +154,7 @@ router.post('/add_department',checkuser.isAdmin, function(req, res, next) {
       data[0].save() ; 
     }
   });
+  console.log(req.user.id+"edit "+req.body.name);
   res.redirect('/groups/department');
 });
   
@@ -167,6 +170,7 @@ router.post('/edit_student', checkuser.isAdmin, function(req, res, next) {
       return next(err)
     }
     else 
+    console.log(req.user.id+"edit SA");
     res.redirect('/groups/student');
   });
 });
@@ -210,9 +214,8 @@ router.post('/clubinsert_img', checkuser.isAdmin, (req, res, next) => {
             })
           })
         }
-        console.log(fields);
         fs.unlink(tmpPath, () => {    //把暫存的檔案刪除
-            console.log('File Uploaded to ' + targetPath + ' - ' + uploadedFile.size + ' bytes');
+          console.log(req.user.id+'File Uploaded to ' + targetPath + ' - ' + uploadedFile.size + ' bytes');
         });
       }).pipe(writeStream);
     }
@@ -259,9 +262,8 @@ router.post('/studentinsert_img',  checkuser.isAdmin,(req, res, next) => {
             })
           })
         }
-        console.log(fields);
         fs.unlink(tmpPath, () => {    //把暫存的檔案刪除
-            console.log('File Uploaded to ' + targetPath + ' - ' + uploadedFile.size + ' bytes');
+          console.log(req.user.id+'File Uploaded to ' + targetPath + ' - ' + uploadedFile.size + ' bytes');
         });
       }).pipe(writeStream);
     }
@@ -328,9 +330,8 @@ router.post('/departinsert_img',  checkuser.isAdmin,(req, res, next) => {
             })
           })
         }
-        console.log(fields);
         fs.unlink(tmpPath, () => {    //把暫存的檔案刪除
-            console.log('File Uploaded to ' + targetPath + ' - ' + uploadedFile.size + ' bytes');
+          console.log(req.user.id+'File Uploaded to ' + targetPath + ' - ' + uploadedFile.size + ' bytes');
         });
       }).pipe(writeStream);
     }
@@ -377,9 +378,8 @@ router.post('/cominsert_img',  checkuser.isAdmin, (req, res, next) => {
             })
           })
         }
-        console.log(fields);
         fs.unlink(tmpPath, () => {    //把暫存的檔案刪除
-            console.log('File Uploaded to ' + targetPath + ' - ' + uploadedFile.size + ' bytes');
+            console.log(req.user.id+'File Uploaded to ' + targetPath + ' - ' + uploadedFile.size + ' bytes');
         });
       }).pipe(writeStream);
     }

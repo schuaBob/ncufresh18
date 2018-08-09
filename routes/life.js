@@ -146,6 +146,7 @@ router.post('/editPicture', checkuser.isAdmin,  upload.single('picture'), functi
       if(err){ return next(err);}
       res.redirect('back');
   });
+  console.log(req.user.id+" edit picture of"+ req.body.mainTitle);
 });
 
 router.post('/editContent', checkuser.isAdmin, function(req, res, next){
@@ -165,6 +166,7 @@ router.post('/editContent', checkuser.isAdmin, function(req, res, next){
       })
     }
   });
+  console.log(req.user.id+" edit content of"+ req.body.mainTitle);
   res.redirect('back');
 });
 
@@ -188,6 +190,7 @@ router.post('/editTitle', checkuser.isAdmin, function(req, res, next){
       })
     }
   });
+  console.log(req.user.id+" edit title of"+ req.body.mainTitle);
   res.redirect('back');
 });
 
@@ -211,6 +214,7 @@ router.post('/changingCK', checkuser.isAdmin, function(req, res, next){
 router.post('/delete_pic', checkuser.isAdmin, function(req, res, next){
   picture.remove({path: req.body.path}, function(err, result){
     if(err) return next(err);
+    console.log(req.user.id+" delete picture : "+ req.body.path);
     res.send();
   })
 });
