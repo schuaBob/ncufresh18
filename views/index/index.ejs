@@ -222,9 +222,9 @@
         }
         #news-box {
             min-height: 100px;
-            height: 70vh;
+            height: 60vh;
             width: 70vw;
-            overflow: scroll;
+            overflow: hidden;
         }
         @media screen and (max-width: 460px) {
             .dontnextline {
@@ -250,7 +250,7 @@
         }
         #box1 {
             overflow-y: scroll;
-            height: calc(70vh - 48px - 3rem);
+            height: calc(60vh - 3.5rem);
             border-radius: 0 0 2% 2%;
             background-color: rgba(255,255,255,0.9);
         }
@@ -275,9 +275,9 @@
             white-space: nowrap;
             overflow: hidden;
         }
-        #news-text, #paddingtopeverywhere {
+        /* #news-text, #paddingtopeverywhere {
             padding-top: 56px;
-        }
+        } */
         #logo{
             top: 10%;
             position: relative;
@@ -436,29 +436,29 @@
         }
     </style>
     <style>
-    /* 問題與答案樣式 */
-    .QA{
-        background-image: url(/qna/問題.png);
-        background-size: cover;
-        font-family: Microsoft YaHei;
-    }
-    .blueLetter{
-        display: inline;
-        color: #29ABE2;
-        font-weight:bold;
-    }
-    /* OK按鈕 */
-    .closemodal{
-        background-color: #29ABE2;
-        color: white;
-        font-family: Microsoft YaHei;
-        border-color: #29ABE2;
-        border-radius: 20px;
-        font-weight:bold;
-    }
-    .modal {
-        z-index : 4001;
-    }
+        /* 問題與答案樣式 */
+        .QA{
+            background-image: url(/qna/問題.png);
+            background-size: cover;
+            font-family: Microsoft YaHei;
+        }
+        .blueLetter{
+            display: inline;
+            color: #29ABE2;
+            font-weight:bold;
+        }
+        /* OK按鈕 */
+        .closemodal{
+            background-color: #29ABE2;
+            color: white;
+            font-family: Microsoft YaHei;
+            border-color: #29ABE2;
+            border-radius: 20px;
+            font-weight:bold;
+        }
+        .modal {
+            z-index : 4001;
+        }
     </style>
 </head>
 <body>
@@ -529,7 +529,7 @@
                     <h6 class="text-center">隨時掌握最新動態</h6>
                 </div>
                 <div id="news-box" class="mx-auto">
-                    <div>
+                    
                         <div class="d-inline-block w-100 select-bar">
                             <ul class="nav nav-pills nav-fill">
                                 <li class="nav-item ">
@@ -568,7 +568,7 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    
                 </div>
             </div>
             <div class="section fp-auto-height-responsive">
