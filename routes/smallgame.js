@@ -132,20 +132,20 @@ router.post('/setScore', checkLogin.isLoggedIn, function (req, res, next) {
 
           function queryHigh(resolve) {
             // console.log("step 1\n")
-            UserScore.findOne({
+            UserScore.find({
               score_high: {
                 $gte: 0
               }
             }, 'id score_high avatar').sort({
-              score_high: 1
+              score_high: -1
             }).limit(10).exec(function (err, result) {
               if (err) {
                 return next(err);
               }
-              if (result !== null) {
-                // console.log("resultHigh: " + result)
-                highScore.id_high = result.id
-                highScore.score_high = result.score_high;
+              if (result[9] !== null) {
+                // console.log("resultHigh: " + result[9])
+                highScore.id_high = result[9].id
+                highScore.score_high = result[9].score_high;
                 resolve();
               }
             });
@@ -153,25 +153,31 @@ router.post('/setScore', checkLogin.isLoggedIn, function (req, res, next) {
 
           function querySum(resolve) {
             // console.log("step 2\n")
-            UserScore.findOne({
+            UserScore.find({
               score_sum: {
                 $gte: 0
               }
             }, 'id score_sum avatar').sort({
-              score_sum: 1
+              score_sum: -1
             }).limit(10).exec(function (err, result) {
               if (err) {
                 return next(err);
               }
-              if (result !== null) {
-                highScore.id_sum = result.id
-                highScore.score_sum = result.score_sum;
+              if (result[9] !== null) {
+                // console.log("resultSum: " + result[9])
+                highScore.id_sum = result[9].id
+                highScore.score_sum = result[9].score_sum;
                 resolve();
               }
             });
           }
 
           function updateAll() {
+            // console.log("highScoreSum: " + highScore.score_sum)
+            // console.log("highScoreHigh: " + highScore.score_high)
+            // console.log("highScoreIdHigh: " + highScore.id_high)
+            // console.log("highScoreIdSum: " + highScore.id_sum)
+            // console.log('player: ' + player)
             UserScore.findOne({
               id: player.id
             }, function (err, result) {
@@ -179,7 +185,8 @@ router.post('/setScore', checkLogin.isLoggedIn, function (req, res, next) {
                 return next(err);
               }
               // 如果用戶已經在 UserScore 中則直接更新
-              if (result != null) {
+              if (result !== null) {
+                // console.log('user in UserScore')
                 UserScore.update({
                   id: player.id
                 }, {
@@ -198,6 +205,7 @@ router.post('/setScore', checkLogin.isLoggedIn, function (req, res, next) {
               } else {
                 // 如果分數大於 highScore 則替換 UserScore 中的最後一名
                 // flag = 1時代表 player 已在單次最高進榜，如果進入累計排行榜的判斷則不替換
+                // console.log('user not in UserScore')
                 var flag = 0;
                 if (player.score_high > highScore.score_high) {
                   flag = 1;
@@ -238,6 +246,7 @@ router.post('/setScore', checkLogin.isLoggedIn, function (req, res, next) {
                       }
                     })
                   }
+                  flag = 0
                 }
               }
             })
