@@ -7,7 +7,7 @@ var check = require('../routes/check-user');
 // 新生必讀首頁 
 router.get('/', function (req, res, next) {
 
-  res.render('documents/index', { title: '新生必讀', user: req.user });
+  res.render('documents/index', { title: '新生必讀 ｜ 新生知訊網', user: req.user });
 
 });
 
@@ -27,9 +27,8 @@ router.post('/edit/:id',check.isAdmin, function (req, res, next) {
     function (err, result) {
      // console.log(result);
       if (err)
-        console.log('fail to update article.');
-      else
-        console.log('Save to DB.');
+        console.log(req.user.id+' failed to update article: '+req.body.title);
+      console.log(req.user.id+' update article: '+req.body.title);
       return res.redirect('/documents');
     });
 });

@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
   // job.push(video.find({type:"3"}).sort({id:-1}));
   // Promise.all(job).then(function(video){
   //   res.render('video/index', { 
-  //     title: '影音專區',
+  //     title: '影音專區 ｜ 新生知訊網',
   //     longvideo: video
   //     video[0]
   //     video[1]
@@ -40,7 +40,7 @@ router.get('/', function(req, res, next) {
       video.find({type:"3"}).sort({id:-1}).exec(function(err, video3) { 
         let video = video1.concat(video2).concat(video3);
         res.render('video/index', { 
-          title: '影音專區',
+          title: '影音專區 ｜ 新生知訊網',
           user: req.user,
           longvideo: video1,
           QAvideo: video2,
@@ -68,6 +68,7 @@ router.post('/add', checkuser.isAdmin, function(req, res, next){
   video.find({ title: title }, function(e, data) {
     if (data.length != 0) {
       if(req.body.insert != ""){
+        console.log(req.user.id+" update "+title);
         video.update({title: title},{
           title: title,
           type: type,//中大長劇or悠遊中大or快問快答

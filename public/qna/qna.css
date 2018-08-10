@@ -37,7 +37,7 @@ th{
     background-color: white;
 }
 /* 只有電腦版出現的 */
-@media only screen and (min-width:600px){
+@media only screen and (min-width:800px){
     table{
         width:70%;
         
@@ -57,6 +57,7 @@ th{
     th.thTitle{
         width:30%;
     }
+    /* table的外框 */
     .notebook{
         background: url(外框.png);
         background-size: 100% 2.3em;
@@ -72,25 +73,24 @@ th{
         width:10%;
         text-align: center;
     }
-    /* table的外框 */
-    /* tr::before{
-        background-color:transparent; 
-        content:"";
-        display: inline-block;
-        background-image:url(外框.png);
-        background-size:50px 50px;
-        width: 50px;
-        height:53px;
-        margin: 0;
-        margin-top: calc((4.6em - 1rem - 20vh)/2);
-        margin-bottom: calc((4.6em - 1rem - 20vh)/2);;
-    } */
+    
     /* 分類排序的顏色 */
-    .nav-link{
+    .classfi{
         color:white;
+        display: table-cell;
     }
-    p.nav-link{
-        vertical-align: text-top;
+    /* 分類排序的排版 */
+    p.classfi{
+        vertical-align: top;
+        /* line-height: 1.8; */
+    }
+    a.classfi{
+        line-height: 1.8;
+        vertical-align: middle;
+    }
+    .clbtn{
+        line-height: 1.8;
+        vertical-align: middle;
     }
     /* 回到頁面最頂端按鈕 */
     .goTop{
@@ -121,6 +121,12 @@ th{
         bottom: 20vh;
         right:15px;
     }
+    /* 太空人舉手 */
+    .askbutton-act{
+        background: url(發問按鈕2.png) no-repeat;
+        background-size: contain;
+        width:130px;
+    }
     tr.admin{
         width: 10%;
         /* width: 10vw; */
@@ -138,10 +144,21 @@ th{
     .classificationBtn{
         display:none;
     }
+    /* 選到的分類/排序的切換 */
+    .onclick{
+        background-color:#29ABE2 !important;
+        border-radius:20px !important;
+    }
+     /* 電腦版搜尋過後要返回首頁的按鈕 */
+    .backToIndex{
+        right:80px;
+        top:20vh;
+    }
+    
 }
         
 /* 只有手機板介面出現的 */
-@media only screen and (max-width:600px){
+@media only screen and (max-width:800px){
     .admin{
         display:none;
     }
@@ -195,7 +212,7 @@ th{
     .modal{
         height:100%;
     }
-    .nav-link{
+    .classfi{
         color:black;
     }
     .search{
@@ -205,16 +222,21 @@ th{
     .classification{
         margin:20px;
         position: absolute;
-        z-index: 5000;
+        z-index: 3999;
     }
-    a.nav-link{
+    a.classfi{
         text-align: center;
     }
-    p.nav-link{
+    p.classfi{
         text-align: center;
     }
-    button.nav-link{
+    button.classfi{
       margin: 0 auto;
+    }
+    /* 選到的分類/排序的切換 */
+    .onclick{
+        color:#29ABE2;
+        font-weight:bold;
     }
     /* 手機板回到頁面最頂端按鈕 */
     .goTop{
@@ -240,7 +262,14 @@ th{
         position: fixed;
         bottom: 20vh;
         right:10px;
-        z-index: 5000;
+        z-index: 3999;
+    }
+    /* 手機版搜尋過後要返回首頁的按鈕 */
+    .backToIndex{
+        right:0;
+        margin-top: 10px;
+        height:30px;
+        font-size: 12px;
     }
     
 }
@@ -269,8 +298,12 @@ td{
 /* th{
     width:120px;
 } */
-li{
+/* li{
     height:40px;
+} */
+/* 滑鼠移動到按鈕上面會變色的動畫 */
+.mouseOn{
+    color: #0056b3;
 }
 .article{
     text-align: left;
@@ -303,9 +336,12 @@ li{
     margin-top:15px;
     margin-left:10px;
 }
-
+/* 讓箭頭消失 */
+.classificationBtn.dropdown-toggle::after{
+    display:none;
+}
 /* 排序與分類文字 */
-p.nav-link{
+p.classfi{
     font-size:20px;
     font-weight:bold;
 }
@@ -359,6 +395,18 @@ p.nav-link{
     margin-left:20px;
     margin-right:20px;
 }
+/* 答案文字太長可以換行 */
+p#show-answer{
+    word-wrap:break-word;
+}
+/* 問題內容文字太長可以換行 */
+p#show-content{
+    word-wrap:break-word;
+}
+/* 板規內容文字太長可以換行 */
+p#show-rule-content{
+    word-wrap:break-word;
+}
 /* 問題與答案樣式 */
  .QA{
     background-image: url(問題.png);
@@ -405,6 +453,13 @@ p.nav-link{
     border-radius: 15px;
  }
  /* 區別已送出刪除理由的問題 */
- .gray{
+ /* .gray{
     background:gray;
+ } */
+ /* 搜尋過後要返回首頁的按鈕 */
+ .backToIndex{
+     display: none;
+     /* float: right; */
+     position: fixed;
+     border-radius: 15px;
  }

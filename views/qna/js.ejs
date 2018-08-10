@@ -5,132 +5,116 @@ $(document).ready(() => {
 //  $(window).resize(function() {
         var w=$(window).width();
         var h=$(window).height();
-    $(window).resize(function() {
-        console.log($(window).width());
+        
+    
+    $(window).bind("resize", function () {
+        if ($(this).width() < 800) {
+            $(".classification").addClass("dropdown-menu");
+            $("ul").addClass("flex-column");
+            $("div.classification2").removeClass("nav");
+        } 
+        else{
+            $(".classification").removeClass("dropdown-menu");
+            $(".classification").css({'position':'relative !important'});
+            $("ul").removeClass("flex-column");
+            $("div.classification2").addClass("nav");
+            
+        }
+    })
+    //滑鼠移動到我要發問按鈕上面會換圖案
+    $('.askbutton').on('mouseover', function(){
+        $(".askbutton").addClass("askbutton-act");
+        // $(this).css({'background':'url(發問按鈕2.png) no-repeat','background-size':'contain'});
+    });
+    $('.askbutton').on('mouseout', function(){
+        $(".askbutton").removeClass("askbutton-act");
+        // $(this).css({'background':'url(發問按鈕1.png) no-repeat','background-size':'contain'});
     });
     $(".hideAct").hide();
-    if (w < 600) {
+    if (w < 800) {
         //手機版頁面樣式
-        // $(".classifiaction").css({"float":"left"});
         //排序與分類的位置
         $(".classification").addClass("dropdown-menu");
         $("ul").addClass("flex-column");
+        $("div.classification2").removeClass("nav");
     }
+
 // });
-    //預設分類
-    if (w < 600) {
-        //分類按鈕動畫
-        $("li a[href='#all']").css({"color":"#29ABE2","font-weight":"bold"});
-        $(".Time").css({"color":"#29ABE2","font-weight":"bold"});
-        //排序按鈕動畫
-        $(".Time").css({"font-color":"#29ABE2","font-weight":"bold"});
-        $(".Hot").css({"color":"black","font-weight":"normal"});
-    }
-    else{
-        //分類按鈕動畫
-        $("li a[href='#all']").css({"background-color":"#29ABE2","border-radius":"20px"});
-        $("li a[href='/qna/time']").css({"background-color":"#29ABE2","border-radius":"20px"});
-        //排序按鈕動畫
-        $(".Time").css({"background-color":"#29ABE2","border-radius":"20px"});
-         $(".Hot").css({"background-color":"transparent"});
-    }
-    //只看單一分類
-    $("li a[href='#school'], li a[href='#student'], li a[href='#class'], li a[href='#others'], li a[href='#all']").on('click', function(event) {
-        event.preventDefault();
-        // Store hash
-        var hash = this.hash;
-        if(hash==="#all"){
-            if (w < 600) {
-            $("li a[href='#all']").css({"color":"#29ABE2","font-weight":"bold"});
-            $("li a[href='#student']").css({"color":"black","font-weight":"normal"});
-            $("li a[href='#class']").css({"color":"black","font-weight":"normal"});
-            $("li a[href='#others']").css({"color":"black","font-weight":"normal"});
-            $("li a[href='#school']").css({"color":"black","font-weight":"normal"});
-        }
-        else{
-            $("li a[href='#all']").css({"background-color":"#29ABE2","border-radius":"20px"});
-            $("li a[href='#student']").css({"background-color":"transparent"});
-            $("li a[href='#class']").css({"background-color":"transparent"});
-            $("li a[href='#others']").css({"background-color":"transparent"});
-            $("li a[href='#school']").css({"background-color":"transparent"});
-        }
-        $('tr.Q').fadeIn(500);
-        }
-        else if(hash==="#school"){
-            if (w < 600) {
-            $("li a[href='#school']").css({"color":"#29ABE2","font-weight":"bold"});
-            $("li a[href='#student']").css({"color":"black","font-weight":"normal"});
-            $("li a[href='#class']").css({"color":"black","font-weight":"normal"});
-            $("li a[href='#others']").css({"color":"black","font-weight":"normal"});
-            $("li a[href='#all']").css({"color":"black","font-weight":"normal"});
-        }
-        else{
-            $("li a[href='#school']").css({"background-color":"#29ABE2","border-radius":"20px"});
-            $("li a[href='#student']").css({"background-color":"transparent"});
-            $("li a[href='#class']").css({"background-color":"transparent"});
-            $("li a[href='#others']").css({"background-color":"transparent"});
-            $("li a[href='#all']").css({"background-color":"transparent"});
-        }
-        $('tr.Q').hide();
-        $('tr.校園生活').fadeIn(500);
-        }
-        else if(hash==="#student"){
-            if (w < 600) {
-            //手機版樣式
-            $("li a[href='#student']").css({"color":"#29ABE2","font-weight":"bold"});
-            $("li a[href='#school']").css({"color":"black","font-weight":"normal"});
-            $("li a[href='#class']").css({"color":"black","font-weight":"normal"});
-            $("li a[href='#others']").css({"color":"black","font-weight":"normal"});
-            $("li a[href='#all']").css({"color":"black","font-weight":"normal"});
-        }
-        else{
-            //電腦版樣式
-            $("li a[href='#student']").css({"background-color":"#29ABE2","border-radius":"20px"});
-            $("li a[href='#school']").css({"background-color":"transparent"});
-            $("li a[href='#class']").css({"background-color":"transparent"});
-            $("li a[href='#others']").css({"background-color":"transparent"});
-            $("li a[href='#all']").css({"background-color":"transparent"});
-        }
-        $('tr.Q').hide();
-        $('tr.學生事務').fadeIn(500);
-        }
-        else if(hash==="#class"){
-            if (w < 600) {
-            $("li a[href='#class']").css({"color":"black","font-weight":"bold"});
-            $("li a[href='#student']").css({"color":"#29ABE2","font-weight":"normal"});
-            $("li a[href='#school']").css({"color":"black","font-weight":"normal"});
-            $("li a[href='#others']").css({"color":"black","font-weight":"normal"});
-            $("li a[href='#all']").css({"color":"black","font-weight":"normal"});
-        }
-        else{
-            $("li a[href='#class']").css({"background-color":"#29ABE2","border-radius":"20px"});
-            $("li a[href='#student']").css({"background-color":"transparent"});
-            $("li a[href='#school']").css({"background-color":"transparent"});
-            $("li a[href='#others']").css({"background-color":"transparent"});
-            $("li a[href='#all']").css({"background-color":"transparent"});
-        }
-        $('tr.Q').hide();
-        $('tr.課程相關').fadeIn(500);
-        }
-        else if(hash==="#others"){
-            if (w < 600) {
-                $("li a[href='#others']").css({"color":"#29ABE2","font-weight":"bold"});
-                $("li a[href='#student']").css({"color":"black","font-weight":"normal"});
-                $("li a[href='#class']").css({"color":"black","font-weight":"normal"});
-                $("li a[href='#school']").css({"color":"black","font-weight":"normal"});
-                $("li a[href='#all']").css({"color":"black","font-weight":"normal"});
-            }
-            else{
-                $("li a[href='#others']").css({"background-color":"#29ABE2","border-radius":"20px"});
-                $("li a[href='#student']").css({"background-color":"transparent"});
-                $("li a[href='#class']").css({"background-color":"transparent"});
-                $("li a[href='#school']").css({"background-color":"transparent"});
-                $("li a[href='#all']").css({"background-color":"transparent"});
-            }
-        $('tr.Q').hide();
-        $('tr.其他').fadeIn(500);
-        }      
+    $(".classificationBtn").on('click', function () {
+        // console.log("11111");
+        $(".classification").css({'position':'relative !important'});
+    })
+    $('#55555').on("shown.bs.dropdown",function(){
+        console.log("11111");
     });
+    //預設分類
+        //分類按鈕動畫
+        $("li a[href='#all']").addClass("onclick");
+        //排序按鈕動畫
+        $(".Time").addClass("onclick");
+        //滑鼠移動到按鈕上面會變色
+        if(w >800){
+                
+                $('.clbtn').on('mouseover', function(){
+                    $(this).addClass('mouseOn');
+                });
+                $('.clbtn').on('mouseout', function(){
+                    $(this).removeClass('mouseOn');
+                    
+                });     
+            }
+
+        //只看單一分類
+        $("li a[href='#school'], li a[href='#student'], li a[href='#class'], li a[href='#others'], li a[href='#all']").on('click', function(event) {
+            event.preventDefault();
+                // Store hash
+            var hash = this.hash;
+            if(hash==="#all"){
+                $("li a[href='#all']").addClass("onclick");
+                $("li a[href='#student']").removeClass("onclick");;
+                $("li a[href='#class']").removeClass("onclick");;
+                $("li a[href='#others']").removeClass("onclick");;
+                $("li a[href='#school']").removeClass("onclick");;
+                $('tr.Q').fadeIn(500);
+            }
+            else if(hash==="#school"){
+                $("li a[href='#school']").addClass("onclick");
+                $("li a[href='#student']").removeClass("onclick");;
+                $("li a[href='#class']").removeClass("onclick");;
+                $("li a[href='#others']").removeClass("onclick");;
+                $("li a[href='#all']").removeClass("onclick");;
+                $('tr.Q').hide();
+                $('tr.校園生活').fadeIn(500);
+            }
+            else if(hash==="#student"){
+                $("li a[href='#student']").addClass("onclick");
+                $("li a[href='#all']").removeClass("onclick");;
+                $("li a[href='#class']").removeClass("onclick");;
+                $("li a[href='#others']").removeClass("onclick");;
+                $("li a[href='#school']").removeClass("onclick");;
+                $('tr.Q').hide();
+                $('tr.學生事務').fadeIn(500);
+            }
+            else if(hash==="#class"){
+                $("li a[href='#class']").addClass("onclick");
+                $("li a[href='#student']").removeClass("onclick");;
+                $("li a[href='#all']").removeClass("onclick");;
+                $("li a[href='#others']").removeClass("onclick");;
+                $("li a[href='#school']").removeClass("onclick");;
+                $('tr.Q').hide();
+                $('tr.課程相關').fadeIn(500);
+            }
+            else if(hash==="#others"){
+                $("li a[href='#others']").addClass("onclick");
+                $("li a[href='#student']").removeClass("onclick");;
+                $("li a[href='#class']").removeClass("onclick");;
+                $("li a[href='#all']").removeClass("onclick");;
+                $("li a[href='#school']").removeClass("onclick");;
+                $('tr.Q').hide();
+                $('tr.其他').fadeIn(500);
+            }      
+        });
+    
     //人氣與時間的排序(list.js)
     var options = {
         valueNames: [ 'time', 'hot' ]
@@ -138,21 +122,17 @@ $(document).ready(() => {
     var userList = new List('select111', options);
     //排序判別
     $(".Hot").on('click',function(){
-        if (w < 600) {
-            //手機版排序按鈕動畫
-            $(".Hot").css({"color":"#29ABE2","font-weight":"bold"});
-            $(".Time").css({"color":"black","font-weight":"normal"});
-        }
-        else{
-            //電腦版排序按鈕動畫
-            $(".Hot").css({"background-color":"#29ABE2","border-radius":"20px"});
-            $(".Time").css({"background-color":"transparent"});
-        }
+            //排序按鈕動畫
+            $(".Hot").addClass("onclick");
+            $(".Time").removeClass("onclick");
+            // $('.Hot').attr('disabled', true);
+            // $('.Time').removeAttr('disabled');
+            
+  
         //人氣的排序(list.js)
         userList.sort("hot",{
             order:'desc',
             sortFunction: function (a, b) {
-                console.log(a._values.hot);
                 var Aobjs = $(a.elm).find('.type');
                 var Bobjs = $(b.elm).find('.type');
                 var Aview = $(a.elm).find('.view');
@@ -169,41 +149,27 @@ $(document).ready(() => {
             }
         });
     });
-    //排序按鈕動畫
-    if(w>600){
 
-        $('.clbtn').on('mouseover', function(){
-            $(this).css({'color':'#0056b3'});
-        });
-        $('.clbtn').on('mouseout', function(){
-                $(this).css({'color':'#FFFFFF'});
-    
-        });
-    }
     $(".Time").on('click',function(){
-        if (w < 600) {
-            //手機版排序按鈕動畫
-            $(".Time").css({"color":"#29ABE2","font-weight":"bold"});
-            $(".Hot").css({"color":"black","font-weight":"normal"});
-        }
-        else{
-            //電腦版排序按鈕動畫
-            $(".Time").css({"background-color":"#29ABE2","border-radius":"20px"});
-            $(".Hot").css({"background-color":"transparent"});
-        }
+        //排序按鈕動畫
+        $(".Time").addClass("onclick");
+        $(".Hot").removeClass("onclick");
+        // $('.Time').attr('disabled', true);
+        // $('.Hot').removeAttr('disabled');
         //時間的排序(list.js)
         userList.sort("time",{
             order:'desc',
             sortFunction: function (a, b) {
-                console.log(a._values.time);
                 var Aobjs = $(a.elm).find('.type');
                 var Bobjs = $(b.elm).find('.type');
+                var Atime = $(a.elm).find('.TIME');
+                var Btime = $(b.elm).find('.TIME');
                 if ((Aobjs[0].innerHTML === "板規") != (Bobjs[0].innerHTML === "板規")) {
                     return Aobjs[0].innerHTML === "板規"  ? 1 : -1;
                 }
                 else{
-                    return (a._values.time -  b._values.time)>0 ? 1 : 
-                            (a._values.time - b._values.time)<0 ? -1 : 0;
+                    return (Atime[0].innerHTML - Btime[0].innerHTML)>0 ? 1 : 
+                            (Atime[0].innerHTML - Btime[0].innerHTML)<0 ? -1 : 0;
     
                 }
     
@@ -216,14 +182,12 @@ $(document).ready(() => {
             scrollTop:0
         },300);
     });
-    if(w>600){
-        //滑鼠移動到我要發問按鈕上面會換圖案
-        $('.askbutton').on('mouseover', function(){
-            $(this).css({'background':'url(發問按鈕2.png) no-repeat','background-size':'contain'});
-        });
-        $('.askbutton').on('mouseout', function(){
-            $(this).css({'background':'url(發問按鈕1.png) no-repeat','background-size':'contain'});
-        });
+    
+    //搜尋後返回首頁的按鍵
+    var url = new URL(window.location.href);
+    //搜尋後才會出現
+    if(url.searchParams.get('keyword')!==null){
+        $('.backToIndex').show();
     }
     //紀錄問題點擊次數
     $(".titleQ").on('click',function(){
@@ -238,12 +202,13 @@ $(document).ready(() => {
                 document.getElementById('show-content').innerHTML = res.content;
                 document.getElementById('show-answer').innerHTML = res.answer;
                 $('#show-modal').modal('show');
+                    if(res.answer!==""){
+                        //動態新增點擊次數
+                        var objs = $('.' + id).find('.view');
+                        for (var i = 0; i < objs.length; i++) {
+                            objs[i].innerHTML = parseInt(objs[i].innerHTML) + 1;
+                        }
 
-                    //動態新增點擊次數
-                    var objs = $('.' + id).find('.view');
-                    console.log(objs);
-                    for (var i = 0; i < objs.length; i++) {
-                        objs[i].innerHTML = parseInt(objs[i].innerHTML) + 1;
                     }
 
                 
@@ -277,22 +242,36 @@ $(document).ready(() => {
         alert('請先登入');
     });
     //CKEDITOR
-    CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
-    CKEDITOR.config.shiftEnterMode = CKEDITOR.ENTER_BR; 
-    $('.answer111').each(function(e){
+    <%_ if(user&&user.role==="admin"){ -%>
+
         CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
-        CKEDITOR.config.shiftEnterMode = CKEDITOR.ENTER_BR; 
-        CKEDITOR.replace(this.id,{
-        filebrowserUploadUrl: '/uploader',
+        CKEDITOR.config.shiftEnterMode = CKEDITOR.ENTER_BR;
+        //加了這些CKEDITOR的新增超連結才能用，不知道為啥
+        $.fn.modal.Constructor.prototype._enforceFocus = function() {
+                    var $modalElement = this.$element;
+                    $(document).on('focusin.modal',function(e) {
+                        if ($modalElement[0] !== e.target
+                            && !$modalElement.has(e.target).length
+                            && $(e.target).parentsUntil('*[role="dialog"]').length === 0) {
+                            $modalElement.focus();
+                        }
+                    });
+                }; 
+        $('.answer111').each(function(e){
+            CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
+            CKEDITOR.config.shiftEnterMode = CKEDITOR.ENTER_BR; 
+            CKEDITOR.replace(this.id,{
+            filebrowserUploadUrl: '/uploader',
+            });
         });
-    });
-    $('.rule111').each(function(e){
-        CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
-        CKEDITOR.config.shiftEnterMode = CKEDITOR.ENTER_BR; 
-        CKEDITOR.replace(this.id,{
-        filebrowserUploadUrl: '/uploader',
+        $('.rule111').each(function(e){
+            CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
+            CKEDITOR.config.shiftEnterMode = CKEDITOR.ENTER_BR; 
+            CKEDITOR.replace(this.id,{
+            filebrowserUploadUrl: '/uploader',
+            });
         });
-    });
+    <%_ } -%>
     //刪除問題
     // $('.deleteQ').on('click', function() {
     //   if (confirm("確定要刪除嗎？")) {
@@ -319,7 +298,6 @@ $(document).ready(() => {
         //var id = this.id.split('-')[0];
         //var id=$(this).prop('id');
         //id顯示是對的，但是不知道為什麼addClass是失敗的
-        console.log(this.id);
         $('tr.'+this.id).addClass('hideAct');
         $(".hideAct").hide();
     });

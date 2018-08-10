@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <% /* This following line is only necessary in the case of using the option `scrollOverflow:true` */%>
+    <script type="text/javascript" src="about/fullPage.js-master/vendors/scrolloverflow.min.js"></script>
     <% include ../layout/head %>
     <link rel="stylesheet" type="text/css" href="about/fullPage.js-master/dist/fullpage.css" />
     <% /* This following line is optional. Only necessary if you use the option css3:false and you want to use other easing effects rather than "easeInOutCubic". */%>
     <% /* <script src="vendors/easings.min.js"></script>*/ %>
-    <% /* This following line is only necessary in the case of using the option `scrollOverflow:true` */%>
-    <% /* <script type="text/javascript" src="vendors/scrolloverflow.min.js"></script> */%>
     <script type="text/javascript" src="about/fullPage.js-master/dist/fullpage.js"></script>
+    <script type="text/javascript" src="about/fullPage.js-master/dist/fullpage.extensions.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
     <style>
         .slider_container{
@@ -24,43 +25,84 @@
             top: 0;
             left: 0;
             opacity: 0;
-            filter: alpha(opacity=0);
+            /* filter: alpha(opacity=0); */
+            /* -webkit-filter: drop-shadow(16px 16px 10px rgba(90,88,92,0.68));
+            filter: drop-shadow(16px 16px 10px rgba(90,88,92,0.68)); */
             background-size: cover;
             background-position: 40% center;
         }
         body {
-            background: url("index/ncu首頁.png") no-repeat 83% 10% fixed; 
+            background: url("index/background.png") no-repeat 90% 40% fixed; 
 			-webkit-background-size: cover;
 			-moz-background-size: cover;
 			-o-background-size: cover;
             background-size: cover;
         }
-        #c1 {
-            background-image: url("index/IMG-0.png");
+        @media screen and (max-width: 1050px){
+            <%_ for(let i = 1;i<=9;i++){ -%>
+            #c<%= i %> {
+            background: linear-gradient(
+                rgba(90,88,92,0.68),
+                rgba(90,88,92,0.68)
+                ),url("index/900_600/900_600-<%= i-1 %>.png");
+                background-size: cover;
+            }
+            <%_ } -%>
         }
-        #c2 {
-            background-image: url("index/IMG-1.png");
+        @media screen and (max-width: 1350px) and (min-width: 1051px){
+            <%_ for(let i = 1;i<=9;i++){ -%>
+            #c<%= i %> {
+                background: linear-gradient(
+                rgba(90,88,92,0.68),
+                rgba(90,88,92,0.68)
+                ),url("index/1200_800/1200_800-<%= i-1 %>.png");
+                background-size: cover;
+            }
+            <%_ } -%>
         }
-        #c3 {
-            background-image: url("index/IMG-2.png");
+        @media screen and (max-width: 1650px) and (min-width: 1351px){
+            <%_ for(let i = 1;i<=9;i++){ -%>
+            #c<%= i %> {
+                background: linear-gradient(
+                rgba(90,88,92,0.68),
+                rgba(90,88,92,0.68)
+                ),url("index/1500_1000/1500_1000-<%= i-1 %>.png");
+                background-size: cover;
+            }
+            <%_ } -%>
         }
-        #c4 {
-            background-image: url("index/IMG-3.png");
+        @media screen and (max-width: 1950px) and (min-width: 1651px){
+            <%_ for(let i = 1;i<=9;i++){ -%>
+            #c<%= i %> {
+                background: linear-gradient(
+                rgba(90,88,92,0.68),
+                rgba(90,88,92,0.68)
+                ),url("index/1800_1200/1800_1200-<%= i-1 %>.png");
+                background-size: cover;
+            }
+            <%_ } -%>
         }
-        #c5 {
-            background-image: url("index/IMG-4.png");
+        @media screen and (max-width: 2250px) and (min-width: 1951px){
+            <%_ for(let i = 1;i<=9;i++){ -%>
+            #c<%= i %> {
+                background: linear-gradient(
+                rgba(90,88,92,0.68),
+                rgba(90,88,92,0.68)
+                ),url("index/2100_1400/2100_1400-<%= i-1 %>.png");
+                background-size: cover;
+            }
+            <%_ } -%>
         }
-        #c6 {
-            background-image: url("index/IMG-5.png");
-        }
-        #c7 {
-            background-image: url("index/IMG-6.png");
-        }
-        #c8 {
-            background-image: url("index/IMG-7.png");
-        }
-        #c9 {
-            background-image: url("index/IMG-8.png");
+        @media screen (min-width: 2251px){
+            <%_ for(let i = 1;i<=9;i++){ -%>
+            #c<%= i %> {
+                background: linear-gradient(
+                rgba(90,88,92,0.68),
+                rgba(90,88,92,0.68)
+                ),url("index/2400_1600/2400_1600-<%= i-1 %>.png");
+                background-size: cover;
+            }
+            <%_ } -%>
         }
         @-webkit-keyframes round {
             0% {
@@ -164,13 +206,13 @@
             display: block;
             margin-right: auto;
             margin-left: auto;
-            width: 15vh;
+            width: 7vh;
         }
         #down-img {
             margin-right: auto;
             margin-left: auto;
             margin-bottom: 20px;
-            width: 15vh;
+            width: 7vh;
         }
         #down-text {
             width: inherit;
@@ -180,25 +222,81 @@
         }
         #news-box {
             min-height: 100px;
-            height: 80vh;
+            height: 70vh;
             width: 70vw;
+            overflow: scroll;
+        }
+        @media screen and (max-width: 460px) {
+            .dontnextline {
+                font-size: 1.5em;
+            }
+            #new-box {
+                margin-right: 0;
+                margin-left: 0;
+            }
+        }
+        @media screen and (max-width: 369px) {
+            .dontnextline {
+                font-size: 1em;
+            }
+        }
+        @media screen and (max-width: 750px) {
+            #news-box {
+                width: 98%;
+            }
         }
         #select-bar {
             height: 48px;
         }
         #box1 {
             overflow-y: scroll;
-            height: calc(80vh - 48px - 3rem);
+            height: calc(70vh - 48px - 3rem);
             border-radius: 0 0 2% 2%;
             background-color: rgba(255,255,255,0.9);
         }
-        main {
+        .fp-auto-height {
             padding-bottom: 24px;
         }
         #prvweek, #nextweek {
             font-size: 1.5em;
+            color: white;
+            background-color: rgba(0,74,130, 0.95);
+            border-radius: 10px;
+            font-weight: 500;
             margin-left: calc((100vw - 72px)/2);
             margin-right: calc((100vw - 72px)/2);
+        }
+        .news-time, .left-qna, .right-qna {
+            white-space: nowrap;
+        }
+        .dotdotdottext, .dotdotdotqna {
+            text-overflow: ellipsis;
+            <%_ /* Required for text-overflow to do anything */ -%>
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        #news-text, #paddingtopeverywhere {
+            padding-top: 56px;
+        }
+        #logo{
+            top: 10%;
+            position: relative;
+            max-width: 100vw;
+            max-height: 100vh;
+            width: 50vmax;
+            height: 50vmax;
+        }
+        #big-logo, #small-logo {
+            position: absolute;
+            z-index: 1;
+        }
+        #big-logo{
+            width: 100%;
+        }
+        #small-logo{
+            top: 18%;
+            left: 28.5%;
+            width: 18%;
         }
     </style>
     <style>
@@ -208,6 +306,7 @@
 
         #scrolling {
             overflow: hidden;
+            padding-bottom: 24px;
         }
         
         /* The actual timeline (the vertical ruler) */
@@ -336,17 +435,82 @@
             }
         }
     </style>
+    <style>
+    /* 問題與答案樣式 */
+    .QA{
+        background-image: url(/qna/問題.png);
+        background-size: cover;
+        font-family: Microsoft YaHei;
+    }
+    .blueLetter{
+        display: inline;
+        color: #29ABE2;
+        font-weight:bold;
+    }
+    /* OK按鈕 */
+    .closemodal{
+        background-color: #29ABE2;
+        color: white;
+        font-family: Microsoft YaHei;
+        border-color: #29ABE2;
+        border-radius: 20px;
+        font-weight:bold;
+    }
+    .modal {
+        z-index : 4001;
+    }
+    </style>
 </head>
 <body>
+    <% /*顯示問題跟答案的Modal*/ %>
+    <div class="modal fade bd-example-modal-lg" id="show-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">   
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content QA">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle"><p id="show-title">></p></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body"><h5 class="blueLetter">Q</h5><h5 style="display: inline;font-weight:bold;">uestion</h5></div>
+                <div class="modal-body"><p id="show-content" ></p></div>
+                <div class="modal-body"><h5 class="blueLetter">A</h5><h5 style="display: inline;font-weight:bold;">nswer</h5></div>
+                <div class="modal-body"><p id="show-answer"></p></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary closemodal" data-dismiss="modal">　O K　</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" id="the-only-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="the-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <div class="modal-body" id="the-content"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+    </div>
     <header>
         <% include ../layout/navbar %>
     </header>
     <main>
         <div id="fullpage">
             <div class="section" id="7">
+                <div id="logo">
+                    <img src="index/首頁ncufresh標題.png" id="big-logo">
+                    <a href="http://oia.ncu.edu.tw/" target="_blank"><img src="index/國際處.png" id="small-logo"></a>
+                </div>
                 <div class="latest-news-btn">
                     <a href="#news-Q&A" id="down-btn">
-                        <img id="down-img" src="index/down-arrow-in-small-circle.svg">
+                        <img id="down-img" src="index/navigate-arrows-pointing-to-down.svg">
                     </a>
                 </div>
                 <div class="img_container" id="c1"></div>
@@ -364,18 +528,18 @@
                     <h1 class="text-center">最新消息</h1>
                     <h6 class="text-center">隨時掌握最新動態</h6>
                 </div>
-                <div id="news-box" class="mx-auto mt-5">
+                <div id="news-box" class="mx-auto">
                     <div>
                         <div class="d-inline-block w-100 select-bar">
                             <ul class="nav nav-pills nav-fill">
                                 <li class="nav-item ">
                                     <a class="nav-item nav-link active" id="news-halo">
-                                        <h2 class="text-center nav-item" onclick="news_page();">即時資訊</h2>
+                                        <h2 class="text-center nav-item dontnextline" onclick="news_page();">即時資訊</h2>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-item nav-link" id="qna-halo">
-                                        <h2 class="text-center" onclick="qna_page();">熱門Q&A</h2>
+                                        <h2 class="text-center nav-item dontnextline" onclick="qna_page();">熱門Q&A</h2>
                                     </a>
                                 </li>
                             </ul>
@@ -383,11 +547,11 @@
                         <div id="box1">
                             <table class="table" id="one">
                                 <tbody>
-                                    <%_ for(let i = 0;i<news.length;i++){ -%>
-                                    <tr>
-                                        <td><%= news[i].time.toISOString().substring(0, 10) %></td>
-                                        <td><%= news[i].title %></td>
-                                        <td>more</td>
+                                    <%_ for(let i = news.length-1;i>=0;i--){ -%>
+                                    <tr class="news-row open-modal" id="<%= news[i]._id %>">
+                                        <td class="news-time open-modal" id="<%= news[i]._id %>"><%= news[i].time.toISOString().substring(0, 10) %></td>
+                                        <td class="news-title px-0 open-modal" id="<%= news[i]._id %>"><p class="dotdotdottext  open-modal" id="<%= news[i]._id %>"><%= news[i].title %></p></td>
+                                        <td class="open-modal ppppppppppppp" id="<%= news[i]._id %>">more</td>
                                     </tr>
                                     <%_ } -%>
                                 </tbody>
@@ -395,10 +559,10 @@
                             <table class="table" id="two" style="display: none;">
                                 <tbody>
                                     <%_ for(let i = 0;i<qna.length;i++){ -%>
-                                    <tr>
-                                        <td><%= qna[i].CreateDate.toISOString().substring(0, 10) %></td>
-                                        <td><%= qna[i].Title %></td>
-                                        <td><%= qna[i].Click %>人次點閱</td>
+                                    <tr class="qna-btn">
+                                        <td class="left-qna" oid="<%= qna[i]._id%>"><%= qna[i].CreateDate.toISOString().substring(0, 10) %></td>
+                                        <td class="px-0" oid="<%= qna[i]._id%>"><p class="dotdotdotqna" oid="<%= qna[i]._id%>"><%= qna[i].Title %></p></td>
+                                        <td class="right-qna" id="<%= qna[i]._id%>" oid="<%= qna[i]._id%>"><%= qna[i].Click %>人次點閱</td>
                                     </tr>
                                     <%_ } -%>
                                 </tbody>
@@ -407,49 +571,29 @@
                     </div>
                 </div>
             </div>
-            <div class="section fp-auto-height">
-                <div>
+            <div class="section fp-auto-height-responsive">
+                <div id="paddingtopeverywhere">
                     <h1 class="mx-auto text-center">近期日程</h1>
                 </div>
+                <%_ /* -%>
                 <div class="week-btn">
                     <b id="prvweek">前一周</b>
                 </div>
+                <%_ */ -%>
                 <div id="scrolling">
-                    <div class="timeline" id="QQQQQ">
-                        <%_ /* -%>
-                        <%_ let ooo = true; -%>
-                        <%_ for (let i = 0;i<10;i++){ -%>
-                            <div>
-                                <%_ for (let i = 0;i<10;i++){ -%>
-                                <div class="timeline-container <%= (ooo ? 'left' : 'right') %>">
-                                    <div class="content">
-                                    <h2>08/01</h2>
-                                    <ul>
-                                        <li>aaaaa</li>
-                                        <li>aaaaa</li>
-                                        <li>aaaaa</li>
-                                        <li>aaaaa</li>
-                                        <li>aaaaa</li>
-                                    </ol>
-                                    </div>
-                                </div>
-                                <%_ ooo = (ooo ? false : true); -%>
-                                <%_ } -%>
-                            </div>
-                        <%_ } -%>
-                        <%_ */ -%>
-                    </div>
+                    <div class="timeline" id="QQQQQ"></div>
                 </div>
+                <%_ /* -%>
                 <div class="week-btn">
                     <b id="nextweek">後一週</b>
                 </div>
+                <%_ */ -%>
+                <footer>
+                    <% include ../layout/footer %>
+                </footer>
             </div>
         </div>
-
     </main>
-    <footer>
-        <% include ../layout/footer %>
-    </footer>
         <% include ../layout/js %>
         <% include js %>
 </body>

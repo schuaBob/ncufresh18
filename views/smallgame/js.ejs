@@ -31,13 +31,10 @@ var LabelButton = function(rightOrWrong, game, x, y, key, label, callback, callb
     this.rightOrWrong = false
     this.anchor.setTo(0.5, 0.5)    
     this.label = new Phaser.Text(game, 0, 0, label, this.style)    
-    //puts the label in the center of the button    
     this.label.anchor.setTo(0.5, 0.5)    
     this.addChild(this.label)
     this.setLabel(label)
-    //adds button to game
     game.add.existing(this)
-    // return this
 }
 LabelButton.prototype = Object.create(Phaser.Button.prototype)
 LabelButton.prototype.constructor = LabelButton
@@ -60,9 +57,7 @@ var LabelSprite = function(game, x, y, key, frame) {
         wordWrapWidth: this.width,
         align: "left"
     })
-    // this.label.alignIn(this, Phaser.CENTER)
     this.addChild(this.label)
-    
     game.add.existing(this)
 }
 LabelSprite.prototype = Object.create(Phaser.Sprite.prototype)
@@ -156,14 +151,14 @@ var quiz = [
     { q: '圖書館書最多可以借幾本?', o: ['5','6','10','20'] , correctIndex:3},
     { q: '校內工讀哪個網站可以找到?', o: ['lms','中央資管網頁','portal獎助學金暨工讀管理系統','中央資工網頁'] , correctIndex:2},
     { q: '通識課程在畢業前應修滿幾學分?', o: ['18','20','15','14'] , correctIndex:3},
-    { q: '全校有幾個學系?', o: ['22','33','44','55'] , correctIndex:0},
+    { q: '全校有幾個學系?', o: ['24','33','44','55'] , correctIndex:0},
     { q: '學生專用信箱web mail是由哪個單位負責管理的?', o: ['圖書館','電子計算中心','教務處','學務處'] , correctIndex:1},
     { q: '中央大學語言中心位在哪一棟大樓?', o: ['志希館','地科院','綜教館','管理二館'] , correctIndex:2},
     { q: '中央大學宿舍網路單日(24小時)校外的上傳流量『加總』之後上限為?', o: ['沒限制','3GB','4GB','5GB'] , correctIndex:1},
     { q: '中央大學宿舍網路單日(24小時)校外的下載流量『加總』之後上限為?', o: ['沒限制','3GB','4GB','5GB'] , correctIndex:0},
     { q: '如果腳踏車壞了要去哪修?', o: ['找警衛伯伯','全家','家樂福','後門腳踏車店'] , correctIndex:3},
     { q: '中央大學的英文縮寫為?', o: ['NCU','HGSH','CYGSH','CYSH'] , correctIndex:0},
-    { q: '郵局平日營業時間為?', o: ['9:00~18:00','8:00~17:00','10:00~17:00','9:00~18:00'] , correctIndex:1},
+    { q: '郵局平日營業時間為?', o: ['9:30~18:00','8:30~17:00','10:30~17:00','9:00~18:00'] , correctIndex:1},
     { q: '若有人寄信給你,你該到行政大樓的哪領?', o: ['出納組','課務組','文書組','生活輔導組'] , correctIndex:2},
     { q: '後門的7-11叫甚麼門市?', o: ['學店門市','中央門市','中大門市','學央門市'] , correctIndex:3},
     { q: '國鼎圖書館是為了紀念哪位校友?', o: ['李國鼎','吳國鼎','陳國鼎','王國鼎'] , correctIndex:0},
@@ -203,7 +198,7 @@ var quiz = [
     { q: '哪間宿舍地下室有餐廳、581商店、全家、影印店等等?', o: ['女1','女14','男9','男7'] , correctIndex:1},
     { q: '知名作家吳明益畢業於中央哪個科系?', o: ['地科系','資管系','中文系','客家系'] , correctIndex:2},
     { q: '知名女演員張鈞甯畢業於中央哪個研究所?', o: ['客研所碩士','資管所碩士','EMBA 碩士','產經所碩士'] , correctIndex:3},
-    { q: '知名男演員王宥勝畢業於中央哪個科系?', o: ['財經系','中文系','大氣系','資工系'] , correctIndex:0},
+    { q: '知名男演員王宥勝畢業於中央哪個科系?', o: ['財金系','中文系','大氣系','資工系'] , correctIndex:0},
     { q: '知名藝人浩角翔起的浩子畢業於中央哪個科系?', o: ['電機系','資管系','化材系','資工系'] , correctIndex:1},
     { q: '校歌中 ”宏我黌舍兮”的”黌”字讀做?', o: ['ㄩˋ','ㄏㄨㄤˊ','ㄏㄨㄥˊ','ㄏㄠˋ'] , correctIndex:2},
     { q: '中央大學沒有甚麼友會?', o: ['雲嘉會','中投會','僑友會','北友會'] , correctIndex:3},
@@ -216,7 +211,7 @@ var quiz = [
     { q: '學校哪裡有天文台?', o: ['理學院','管院','科學四館','工學院'] , correctIndex:2},
     { q: '小木屋鬆餅的鬆餅有賣冰淇淋口味的鬆餅嗎?', o: ['有','沒有','以上皆是','以上皆非'] , correctIndex:0},
     { q: '小木屋鬆餅有賣飲料嗎?', o: ['沒有','有','以上皆是','以上皆非'] , correctIndex:1},
-    { q: '女14樓下的全家有自動提款機嗎?', o: ['有','沒有','以上皆是','以上皆非'] , correctIndex:1},
+    { q: '女14樓下的全家有自動提款機嗎?', o: ['有','沒有','以上皆是','以上皆非'] , correctIndex:0},
     { q: 'Fb有個社團可以提供中央的學生買賣二手物品,該社團叫?', o: ['中央省錢福利社','中央復活買賣社','中央復活福利社','中央有錢買賣社'] , correctIndex:2},
     { q: '中央交流選課資訊的fb社團叫?', o: ['中大選課讚讚讚','中大選課~Alt+F4很EAZY!!!','中大選課~Ctrl+F4很EAZY!!!','中大選課~Ctrl+F很EAZY!!!',] , correctIndex:3},
     { q: '中央有設英文畢業門檻嗎?', o: ['有','沒有','以上皆是','以上皆非'] , correctIndex:0},
@@ -277,23 +272,55 @@ var quiz = [
 
 // 血小板
 function colorEgg() {
-    var x = 0, y = 3310;
-    for (let i = 0; i < 4; i++) {
-        createCute(x, y)
-        x += 200
+    var cutes = game.add.group()
+    var yBasic =  game.camera.y - 40
+    var x = 0, y = yBasic;
+    for (let i = 0; i < 22; i++) {
+        setTimeout(function() {
+            if (i === 4 || i === 8) {
+                y += 200
+            } else if (i === 16) {
+                y += 200
+            }
+            createCute(x, y)
+            
+            if (i < 3 || (i >= 8 && i < 12)) {
+                x += 200
+            } else if (i > 3 && i < 7) {
+                x -= 200              
+            } else if (i >= 12 && i < 15) {
+                x += 200
+            } else if (i > 15 && i < 18) {
+                x -= 200
+            } else if (i > 18 && i < 20) {
+                x += 200
+            } else if (i >= 20 && i < 21) {
+                x -= 100
+            }
+
+            if (i === 12) {
+                x = 100, y = yBasic + 100
+            } else if (i === 18) {
+                x = 200, y = yBasic + 200
+            }
+        }, (i *80))
     }
 
     function createCute(x, y) {
-        var cute = game.add.sprite(x, y, 'cute')
+        // console.log("create cute " +"X:" + x + "Y: " + y)
+        var cute = cutes.create(x, y, 'cute')
         cute.animations.add('jump')
         cute.play('jump', 15, true)
     }
+
+    return cutes
 }
 
-// 遊戲主體長寬
+// 遊戲參數
 var width = 800
 var height = 600
 var rankClick = 0
+var bgMusic
 var bgMusicFlag = 0
 var bgMusicBack = 0
 var game = new Phaser.Game(width, height, Phaser.CANVAS, 'game')
@@ -305,8 +332,10 @@ var states = {
             game.stage.disableVisibilityChange = true   
             // 禁止手機版
             if (!this.game.device.desktop == true) {
-                alert('あのね、あのね，請在電腦端體驗小遊戲喔喔喔~')
-                window.location.href = "/personal/"
+                setTimeout(function(){
+                    alert('あのね、あのね，請在電腦端體驗小遊戲喔喔喔~')
+                    window.location.href = "/personal/"
+                }, 0)
                 game.kill()
             }
 
@@ -409,13 +438,14 @@ var states = {
                 if (bgMusicFlag !== 1) {
                     bgMusic = game.add.audio('bgMusic', 1, true).play()
                     bgMusicFlag = 1
+                    bgMusicBack = 0
                     musicSwitch.setFrames(1)
                 } else {
                     musicSwitch.setFrames(0)
                     bgMusicFlag = 0
+                    bgMusicBack = 1
                     bgMusic.stop()
                 }
-                // console.log("bgMusicFlag: " + bgMusicFlag)
             }
 
             // 松鼠圖片
@@ -508,7 +538,6 @@ var states = {
                     bgMusicFlag = 0
                     bgMusicBack = 1
                 }
-                console.log("bgMusicFlag: " + bgMusicFlag)
             }
 
             // 返回按鈕            
@@ -620,7 +649,6 @@ var states = {
                             dust.kill()
                         })
                     })
-                    
                     fallAnimation.kill()
                 })
             }
@@ -719,7 +747,6 @@ var states = {
                 for (i = 0, len = btnChoices.length; i < len; i++) {
                     btnChoices[i].frame = 0
                 }
-
                 choiceState = 0
                 // 獲取 data 中的題目
                 questionSprite.setLabel(data.q)
@@ -747,12 +774,14 @@ var states = {
                 // choiceState 判斷一次答題是否點擊多次
                 if (!choiceState) {
                     count++
-
                     // 彩蛋觸發 
-                    if (count >= quiz.length) {
-                        // colorEgg()
-                        alert("少俠好功夫，正常人是玩不到這裡的")
-                        gameOver()
+                    if (count >= 100) {
+                        var a = colorEgg()
+                        setTimeout(function() {
+                            alert("少俠好功夫，正常人是玩不到這裡的XD")
+                            a.kill()
+                            gameOver()
+                        }, 3000)
                     }
                     choiceState = 1
                     // 選擇正確
@@ -788,7 +817,7 @@ var states = {
                         
                         // 使用 tween 移動鏡頭
                         if (squirrelGroupY <= 3020 && game.camera.y >= 40) {
-                            game.add.tween(playUI).to({y: playUI.y -40}, 1000, Phaser.Easing.Bounce.Out, true)
+                            game.add.tween(playUI).to({y: playUI.y - 40}, 1000, Phaser.Easing.Bounce.Out, true)
                             game.add.tween(otherUI).to({y: otherUI.y - 40}, 1000, Phaser.Easing.Bounce.Out, true)
                             game.add.tween(scoreUI).to({y: scoreUI.y - 40}, 1000, Phaser.Easing.Bounce.Out, true)         
                             game.add.tween(game.camera).to({y: game.camera.y - 40}, 500, Phaser.Easing.Linear.None, true)
@@ -824,7 +853,6 @@ var states = {
             
             // 第一次刷新題目
             resetQuestionAndChoice(data[count])
-            // colorEgg()
         }
     },
     
@@ -869,7 +897,6 @@ var states = {
                 
                 rankLeft.setAll('alpha', 1);
                 game.add.tween(rankLeftImage).from({alpha: 0}, 800, Phaser.Easing.Exponential.In, true)                                
-                
                 game.add.tween(rankLeft).from({alpha: 0}, 1500, Phaser.Easing.Exponential.In, true)            
          
                 var bubbleLength
@@ -920,7 +947,11 @@ var states = {
                         // 隱藏中間姓名
                         for (let i = 0; i < inputData.length; i++) {
                             var str = inputData[i].name
-                            inputData[i].name = str.substr(0,1) + 'O' + str.substr(str.length-1,1)
+                            if (str == null) {
+                                inputData[i].name = '107 新生'
+                            } else {
+                                inputData[i].name = str.substr(0,1) + 'O' + str.substr(str.length-1,1)
+                            }
                         }
 
                         if (type === 'sum') {
@@ -930,18 +961,12 @@ var states = {
                         }
                         // 顯示頭像
                         var no1 = rankLeftImage.create(0, 0, JSON.parse(data)[0].id)
-                        // no1.width = 50
-                        // no1.height = 50
                         no1.alignTo(rankLeftSprite, Phaser.TOP_CENTER, -5, 20)
 
                         var no2 = rankLeftImage.create(0, 0, JSON.parse(data)[1].id)
-                        // no2.width = 50
-                        // no2.height = 50
                         no2.alignTo(rankLeftSprite, Phaser.TOP_CENTER, 80, -40)
 
                         var no3 = rankLeftImage.create(0, 0, JSON.parse(data)[2].id)
-                        // no3.width = 50
-                        // no3.height = 50
                         no3.alignTo(rankLeftSprite, Phaser.TOP_CENTER, -90, -65)
 
                         rankLeftImage.setAll('alpha', 1);
@@ -989,5 +1014,4 @@ Object.keys(states).map(function(key) {
 
 // 啟動遊戲
 game.state.start('preload')
-
 </script>

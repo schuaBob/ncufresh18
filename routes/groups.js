@@ -12,14 +12,14 @@ var checkuser = require('./check-user');
 
 /* 系所社團首頁 */
 router.get('/', function(req, res, next) {
-  res.render('groups/index', { title: '系所社團', user: req.user });
+  res.render('groups/index', { title: '系所社團 ｜ 新生知訊網', user: req.user });
 });
 
 router.get('/department', function(req, res, next) {
   department.find({}).exec(function(err, department) {
     video.find({type:"2"}).sort({id:-1}).exec(function(err, video2) {
       res.render('groups/department', {
-        title: '系所 ',
+        title: '系所 ｜ 新生知訊網',
         department: department,
         QAvideo: video2,       
         user: req.user,
@@ -32,7 +32,7 @@ router.get('/department', function(req, res, next) {
 router.get('/community', function(req, res, next) { 
   community.find({}).exec(function(err, community) {
     res.render('groups/community', {
-      title: '其他學生組織 ',
+      title: '其他學生組織 ｜ 新生知訊網',
       community: community,
       user: req.user,    
     });
@@ -42,7 +42,7 @@ router.get('/community', function(req, res, next) {
 router.get('/student', function(req, res, next) {
   student.find({}).exec(function(err, student) { 
     res.render('groups/student', {
-      title: '學生會',
+      title: '學生會 ｜ 新生知訊網',
       student: student,
       user: req.user,
     });
@@ -58,7 +58,7 @@ router.get('/club', function(req, res, next) {
         club.find({type:"4"}).exec(function(err, club4) {
           let club = club1.concat(club2).concat(club3).concat(club4);
           res.render('groups/club', {
-            title: '社團',
+            title: '社團 ｜ 新生知訊網',
             typelearn: club1,
             typeplay: club2,
             typedate: club3,
@@ -98,6 +98,7 @@ router.post('/add_club', checkuser.isAdmin,function(req, res, next) {
       data[0].save() ; 
     }
   });
+  console.log(req.user.id+"edit "+req.body.name);
   res.redirect('/groups/club');
 });
 
@@ -122,6 +123,7 @@ router.post('/add_community', checkuser.isAdmin,function(req, res, next) {
       data[0].save() ; 
     }
   });
+  console.log(req.user.id+"edit "+req.body.name);
   res.redirect('/groups/community');
 });
 
@@ -152,6 +154,7 @@ router.post('/add_department',checkuser.isAdmin, function(req, res, next) {
       data[0].save() ; 
     }
   });
+  console.log(req.user.id+"edit "+req.body.name);
   res.redirect('/groups/department');
 });
   
@@ -167,6 +170,7 @@ router.post('/edit_student', checkuser.isAdmin, function(req, res, next) {
       return next(err)
     }
     else 
+    console.log(req.user.id+"edit SA");
     res.redirect('/groups/student');
   });
 });
@@ -210,9 +214,8 @@ router.post('/clubinsert_img', checkuser.isAdmin, (req, res, next) => {
             })
           })
         }
-        console.log(fields);
         fs.unlink(tmpPath, () => {    //把暫存的檔案刪除
-            console.log('File Uploaded to ' + targetPath + ' - ' + uploadedFile.size + ' bytes');
+          console.log(req.user.id+'File Uploaded to ' + targetPath + ' - ' + uploadedFile.size + ' bytes');
         });
       }).pipe(writeStream);
     }
@@ -259,9 +262,8 @@ router.post('/studentinsert_img',  checkuser.isAdmin,(req, res, next) => {
             })
           })
         }
-        console.log(fields);
         fs.unlink(tmpPath, () => {    //把暫存的檔案刪除
-            console.log('File Uploaded to ' + targetPath + ' - ' + uploadedFile.size + ' bytes');
+          console.log(req.user.id+'File Uploaded to ' + targetPath + ' - ' + uploadedFile.size + ' bytes');
         });
       }).pipe(writeStream);
     }
@@ -328,9 +330,8 @@ router.post('/departinsert_img',  checkuser.isAdmin,(req, res, next) => {
             })
           })
         }
-        console.log(fields);
         fs.unlink(tmpPath, () => {    //把暫存的檔案刪除
-            console.log('File Uploaded to ' + targetPath + ' - ' + uploadedFile.size + ' bytes');
+          console.log(req.user.id+'File Uploaded to ' + targetPath + ' - ' + uploadedFile.size + ' bytes');
         });
       }).pipe(writeStream);
     }
@@ -377,9 +378,8 @@ router.post('/cominsert_img',  checkuser.isAdmin, (req, res, next) => {
             })
           })
         }
-        console.log(fields);
         fs.unlink(tmpPath, () => {    //把暫存的檔案刪除
-            console.log('File Uploaded to ' + targetPath + ' - ' + uploadedFile.size + ' bytes');
+            console.log(req.user.id+'File Uploaded to ' + targetPath + ' - ' + uploadedFile.size + ' bytes');
         });
       }).pipe(writeStream);
     }
@@ -393,7 +393,6 @@ router.get("/clubmodal",function(req,res,next) {
     if(err) {
       return next(err);
     }
-    console.log(data_club);
     res.send(data_club);
   });
 });
@@ -402,7 +401,6 @@ router.get("/depmodal",function(req,res,next) {
     if(err) {
       return next(err);
     }
-    console.log(data_dep);
     res.send(data_dep);
   });
 });
@@ -411,7 +409,6 @@ router.get("/commodal",function(req,res,next) {
     if(err) {
       return next(err);
     }
-    console.log(data_com);
     res.send(data_com);
   });
 });
@@ -420,7 +417,6 @@ router.get("/stumodal",function(req,res,next) {
     if(err) {
       return next(err);
     }
-    console.log(data_stu);
     res.send(data_stu);
   });
 });

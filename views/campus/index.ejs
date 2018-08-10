@@ -3,7 +3,6 @@
 
 <head>
     <% include ../layout/head %>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="campus.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
             crossorigin="anonymous">
@@ -14,8 +13,8 @@
         <% include ../layout/navbar %>
     </header>
     <main id="campusmain">
+        
         <%_ if (user && user.role === 'admin'){ -%>
-
             <div class="Admin_edit">
                 <div class="adminbt">
                     <button type="button">
@@ -23,132 +22,129 @@
                     </button>
 
                 </div>
-
-
-
-
             </div>
-            <%_ } -%>
-
-                <div class="main_list_detail collapse">
-                    <li id="listtitle">99</li>
-                    <div id="closemainlist">
-                        <img src="close.png">
-                    </div>
-
-                    <ul>
-                        <%for (let i in result) {-%>
-                            <%if(result[i]['Multi'] == 1){-%>
-                                <%if (result[i]['Modalneed'] == 0 ) {-%>
-                                    <li class="elelist modalshow" idconnect="<%=result[i]['_id']%>" val="<%=result[i]['Type']%>">
-                                        <%=result[i]['Element_Name']%>
-                                    </li>
-                                <%}else{%>    
-                                    <li class="elelist" idconnect="<%=result[i]['_id']%>" val="<%=result[i]['Type']%>">
-                                        <%=result[i]['Element_Name']%>
-                                    </li>
-                                <%_}-%>
-                            <%_}-%>
+        <%_ } -%>
+        
+        <div class="main_list_detail collapse">
+            <li id="listtitle">99</li>
+            <div id="closemainlist">
+                    <img src="close.png">
+            </div>
+            <ul>
+                
+                <%for (let i in result) {-%>
+                    
+                    <%if(result[i]['Multi'] == 1){-%>
+                        
+                        <%if (result[i]['Modalneed'] == 0 ) {-%>
+                            <li class="elelist modalshow" idconnect="<%=result[i]['_id']%>" val="<%=result[i]['Type']%>">
+                                <%=result[i]['Element_Name']%>
+                            </li>
+                        <%}else{%>    
+                            <li class="elelist" idconnect="<%=result[i]['_id']%>" val="<%=result[i]['Type']%>">
+                                <%=result[i]['Element_Name']%>
+                            </li>
                         <%_}-%>
-                    </ul>
-                </div>
+                    <%_}-%>
+                <%_}-%>
+            </ul>
+        </div>
 
-                <div class="mapmove">
-                    <div class="mapshadow">
-                        <% for (let i in result) { -%>
-                            <% if (result[i]['Buildpic'] != "") { -%>
-                                <% if (result[i]['Showdefault'] === 0) { -%>
-                                    <% if (result[i]['Modalneed'] === 0 ) { -%>
-                                        <img title="<%=result[i]['Element_Name']%>" pictitle="<%=result[i]['Element_Name']%>" val="<%=result[i]['Type']%>" class="indexelepic hide modalshow"
-                                            src="<%=result[i]['Buildpic']%>" alt="<%=result[i]['_id']%>" style="top: <%=result[i]['X_position']%>%;left:<%=result[i]['Y_position']%>%; width: <%=result[i]['Size']%>%;">
-                                    <% } else { %>
-                                        <img title="<%=result[i]['Element_Name']%>" pictitle="<%=result[i]['Element_Name']%>" val="<%=result[i]['Type']%>" class="indexelepic hide"
-                                                src="<%=result[i]['Buildpic']%>" alt="<%=result[i]['_id']%>" style="top: <%=result[i]['X_position']%>%;left: <%=result[i]['Y_position']%>%; width: <%=result[i]['Size']%>%;">
-                                    <%_ } -%>
-                                <% } else { %>
-                                    <% if (result[i]['Modalneed'] === 1 ) { -%>
-                                         <img title="<%=result[i]['Element_Name']%>" pictitle="<%=result[i]['Element_Name']%>" val="<%=result[i]['Type']%>" class="indexelepic "
-                                                src="<%=result[i]['Buildpic']%>" alt="<%=result[i]['_id']%>" style="top: <%=result[i]['X_position']%>%;left: <%=result[i]['Y_position']%>%; width: <%=result[i]['Size']%>%;">
-                                    <% } else { %>
-                                        <img title="<%=result[i]['Element_Name']%>" pictitle="<%=result[i]['Element_Name']%>" val="<%=result[i]['Type']%>" class="indexelepic modalshow"
-                                                src="<%=result[i]['Buildpic']%>" alt="<%=result[i]['_id']%>"
-                                                    style="top: <%=result[i]['X_position']%>%;left: <%=result[i]['Y_position']%>%; width:<%=result[i]['Size']%>%;">
-                                    <%_ } -%>
-                                <%_ } -%>
+        <div class="mapmove">
+            <div class="mapshadow">
+                <% for (let i in result) { -%>
+                    <% if (result[i]['Buildpic'] != "") { -%>
+                        
+                        <% if (result[i]['Showdefault'] === 0) { -%>
+                            <% if (result[i]['Modalneed'] === 0 ) { -%>
+                                <img title="<%=result[i]['Element_Name']%>" pictitle="<%=result[i]['Element_Name']%>" val="<%=result[i]['Type']%>" class="indexelepic hide modalshow"
+                                    src="<%=result[i]['Buildpic']%>" alt="<%=result[i]['_id']%>" style="top: <%=result[i]['X_position']%>%;left:<%=result[i]['Y_position']%>%; width: <%=result[i]['Size']%>%;">
+                            <% } else { %>
+                                <img title="<%=result[i]['Element_Name']%>" pictitle="<%=result[i]['Element_Name']%>" val="<%=result[i]['Type']%>" class="indexelepic hide"
+                                        src="<%=result[i]['Buildpic']%>" alt="<%=result[i]['_id']%>" style="top: <%=result[i]['X_position']%>%;left: <%=result[i]['Y_position']%>%; width: <%=result[i]['Size']%>%;">
+                            <%_ } -%>
+                        <% } else { %>
+                            <% if (result[i]['Modalneed'] === 1 ) { -%>
+                                    <img title="<%=result[i]['Element_Name']%>" pictitle="<%=result[i]['Element_Name']%>" val="<%=result[i]['Type']%>" class="indexelepic "
+                                        src="<%=result[i]['Buildpic']%>" alt="<%=result[i]['_id']%>" style="top: <%=result[i]['X_position']%>%;left: <%=result[i]['Y_position']%>%; width: <%=result[i]['Size']%>%;">
+                            <% } else { %>
+                                <img title="<%=result[i]['Element_Name']%>" pictitle="<%=result[i]['Element_Name']%>" val="<%=result[i]['Type']%>" class="indexelepic modalshow"
+                                        src="<%=result[i]['Buildpic']%>" alt="<%=result[i]['_id']%>"
+                                            style="top: <%=result[i]['X_position']%>%;left: <%=result[i]['Y_position']%>%; width:<%=result[i]['Size']%>%;">
                             <%_ } -%>
                         <%_ } -%>
+                    <%_ } -%>
+                <%_ } -%>
 
-                        <img id="map" src="back2.png">
+                <img id="map" src="back2.png">
+            </div>
+
+        </div>
+        
+        <ul id="List_index">
+            <li class="Main_listele1" val="1">
+                <img src="list1.png" alt="">
+            </li>
+            <li class="Main_listele2" val="2">
+                <img src="list2.png" alt="">
+            </li>
+            <li class="Main_listele3" val="3">
+                <img src="list3.png" alt="">
+            </li>
+            <li class="Main_listele4" val="4">
+                <img src="list4.png" alt="">
+            </li>
+            <li class="Main_listele5" val="5">
+                <img src="list5.png" alt="">
+            </li>
+            <li class="Main_listele6" val="6">
+                <img src="list6.png" alt="">
+            </li>
+            <li class="Main_listele7" val="7">
+                <img src="list7.png" alt="">
+            </li>
+            <li class="Main_listele8" val="8">
+                <img src="list8.png" alt="">
+            </li>
+        </ul>
+        
+        <div class="modal fade" id="indexmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"></h5>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M14.59 8L12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41 14.59 8zM12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+                        </span>
                     </div>
+                    <div class="modal-body">
+                        <div id="indexmodalcar">
+                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
 
-                </div>
-
-                <ul id="List_index">
-                    <li class="Main_listele1" val="1">
-                        <img src="list1.png" alt="">
-                    </li>
-                    <li class="Main_listele2" val="2">
-                        <img src="list2.png" alt="">
-                    </li>
-                    <li class="Main_listele3" val="3">
-                        <img src="list3.png" alt="">
-                    </li>
-                    <li class="Main_listele4" val="4">
-                        <img src="list4.png" alt="">
-                    </li>
-                    <li class="Main_listele5" val="5">
-                        <img src="list5.png" alt="">
-                    </li>
-                    <li class="Main_listele6" val="6">
-                        <img src="list6.png" alt="">
-                    </li>
-                    <li class="Main_listele7" val="7">
-                        <img src="list7.png" alt="">
-                    </li>
-                    <li class="Main_listele8" val="8">
-                        <img src="list8.png" alt="">
-                    </li>
-                </ul>
-                <div class="modal fade" id="indexmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title"></h5>
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M14.59 8L12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41 14.59 8zM12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
-                                </span>
-                            </div>
-                            <div class="modal-body">
-                                <div id="indexmodalcar">
-
-                                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                                        <ol class="carousel-indicators">
-
-                                        </ol>
-                                        <div class="carousel-inner">
-
-                                        </div>
-                                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="sr-only">Next</span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div id="indexmodalp">
-                                    <div class="p">
-
-                                    </div>
+                                </ol>
+                                <div class="carousel-inner">
 
                                 </div>
+                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
                             </div>
+                        </div>
+                        <div id="indexmodalp">
+                            <div class="p">
 
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
     </main>
     <footer id="campusfooter">
         <% include ../layout/footer %>
