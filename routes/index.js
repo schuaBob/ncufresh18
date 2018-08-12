@@ -274,33 +274,33 @@ router.get('/delete_schedule/:id', checkUser.isAdmin, (req, res, next) => {
 
 /* login page */
 router.get('/login',checkUser.isAllowtoLogin, function (req, res, next) {
-  return res.redirect('/auth/provider');
-  //res.render('login/login', {
-  //  title: '登入 ｜ 新生知訊網',
-  //  user: req.user,
-  //  error: req.flash('error')
-  //});
+  //return res.redirect('/auth/provider');
+  res.render('login/login', {
+   title: '登入 ｜ 新生知訊網',
+   user: req.user,
+   error: req.flash('error')
+  });
 });
 
 
 
 router.post('/login',checkUser.isAllowtoLogin, function (req, res, next) {
-  return res.redirect('/auth/provider');
-  //let grade = req.body.id.substring(0, 3);
-  //if (grade !== '107')
-  //  return res.redirect('auth/provider');
-  //Users.findOne({
-  //  'id': req.body.id
-  //}, function (err, obj) {
-  //  if (err) return res.redirect('/login');
-  //  //If found, login
-  //  if (obj && obj.password) {
-  //    res.redirect('password?id=' + req.body.id);
-  //  } else {
-  //    //if not found, go to register
-  //    res.redirect('register?id=' + req.body.id);
-  //  }
-  //})
+  //return res.redirect('/auth/provider');
+  let grade = req.body.id.substring(0, 3);
+  if (grade !== '107')
+   return res.redirect('auth/provider');
+  Users.findOne({
+   'id': req.body.id
+  }, function (err, obj) {
+   if (err) return res.redirect('/login');
+   //If found, login
+   if (obj && obj.password) {
+     res.redirect('password?id=' + req.body.id);
+   } else {
+     //if not found, go to register
+     res.redirect('register?id=' + req.body.id);
+   }
+  })
 });
 
 
@@ -314,7 +314,8 @@ router.get('/password',checkUser.isAllowtoLogin, function (req, res, next) {
 
 router.post('/password',checkUser.isAllowtoLogin, passport.authenticate('local', {
   successRedirect: '/personal/',
-  failureRedirect: 'auth/provider',
+  failureRedirect: '/login',
+  //failureRedirect: 'auth/provider',
   failureFlash: true
 }));
 
