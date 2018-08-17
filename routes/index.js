@@ -467,13 +467,15 @@ router.get('/auth/provider/callback', function (req, res, next) {
           return res.redirect('/');
         if (!obj) {
           console.log(id+': 不存在於新生列表');
-          req.flash('error', '不被允許註冊的學號。有疑惑請來信:ncufreshweb@gmail.com');
+          //req.flash('error', '不被允許註冊的學號。有疑惑請來信:ncufreshweb@gmail.com');
+          req.flash('error', '如果多次登不進去請以email:ncufreshweb@gmail.com或fb粉專與我們聯絡會有專人負責處理');
           return res.redirect('login');
         }
 
         if (obj.name !== name) {
           console.log(id+': 真實性名不合');
-          req.flash('error', '請確認姓名輸入是否正確。有疑惑請來信:ncufreshweb@gmail.com');
+          //req.flash('error', '請確認姓名輸入是否正確。有疑惑請來信:ncufreshweb@gmail.com');
+          req.flash('error', '如果多次登不進去請以email:ncufreshweb@gmail.com或fb粉專與我們聯絡會有專人負責處理');
           return res.redirect('login');
         } else {
           obj.password = password;
