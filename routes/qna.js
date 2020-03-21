@@ -68,7 +68,7 @@ router.get('/', function(req, res, next) {
 //新增板規
 router.post('/addR',checkUser.isAdmin,function(req,res,next){
   if((req.body.Title)&&(req.body.Type)&&(req.body.Content)){
-    console.log(req.user.id+"Add rule"+req.body.Title);
+    console.log(req.user.id+" add rule : "+req.body.Title);
     var temp = new Rule({
       Title:req.body.Title,
       Type:req.body.Type,
@@ -97,8 +97,9 @@ router.post('/updateR/:id',checkUser.isAdmin,function(req,res,next){
           if(err)
               console.log('Fail to update answer.');
           else
-              //sendSuccess();
-              console.log('Done');
+		console.log(req.user.id+" edit rule: "+req.body.Title);
+        
+      //sendSuccess();
         });
     })   
   //}
@@ -109,7 +110,7 @@ router.post('/updateR/:id',checkUser.isAdmin,function(req,res,next){
 router.post('/addq',checkUser.isLoggedIn,function(req,res,next){
   /*有標題或分類才能送出問題*/
   if((req.body.Title)&&(req.body.Type)){
-    console.log(req.user.id+"Add question"+req.body.Title);
+    console.log(req.user.name+" posts a question : "+req.body.Title);
       var temp = new Question({
         Username:req.user.id,
         Title:req.body.Title,
@@ -145,7 +146,7 @@ router.post('/addq',checkUser.isLoggedIn,function(req,res,next){
               if(err)
               console.log('Fail to update article.');
               else
-              console.log('Done');
+		console.log(req.user.name+" add an answer :"+req.body.Answer);
             });
             }
           })   
@@ -276,7 +277,7 @@ router.post('/updateA/:id',checkUser.isAdmin,function(req,res,next){
                 if(err)
                     console.log('Fail to update answer.');
                 else
-                    console.log('Done');
+		console.log(req.user.name+" revises  answer of :"+req.body.AnswerEdit);
               });
             }    
             //}
@@ -295,7 +296,8 @@ router.post('/updateR/:id',checkUser.isAdmin,function(req,res,next){
               if(err)
                   console.log('Fail to update answer.');
               else
-                  console.log('Done');
+	console.log(req.user.name+" edit a rule");
+
             });
           }    
           //}
@@ -319,8 +321,8 @@ router.post('/deleteReason/:id',checkUser.isAdmin,function(req,res,next){
                       console.log('Fail to update reason.');
                     }
                     else{
-                      console.log('Done');
-                    }
+                    
+}
                     res.redirect('/qna');
                   });
                 }    
@@ -350,7 +352,8 @@ router.get('/deleteQ/:id',checkUser.isAdmin,function(req,res,next){
                     console.log('Fail to update reason.');
                   }
                   else{
-                    console.log('Done');
+	console.log(req.user.name+" delete a post");
+
                   }
                   res.redirect('/qna');
                 });
@@ -401,7 +404,8 @@ router.post('/editByUser/:id', checkUser.isLoggedIn, function(req, res, next) {
           if(err)
               console.log('Fail to update question.');
           else
-              console.log('Done');
+	console.log(req.user.name+" revises a q");
+
         });
       }
       else{
@@ -428,8 +432,9 @@ router.post('/deleteByUser/:id', checkUser.isLoggedIn, function(req, res, next) 
           if(err){
             console.log('Fail to update reason.');
           }
-          else{
-            console.log('Done');
+          else
+{console.log(req.user.name+" delete a q :");
+
           }
           res.redirect('/qna');
         });

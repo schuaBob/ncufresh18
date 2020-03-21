@@ -54,3 +54,8 @@ package-lock.json
 
 #server config 
 bin/
+
+public/personal/bighead/
+addFresh.js
+addOneUser.js
+服務學習.json
