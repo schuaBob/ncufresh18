@@ -60,7 +60,7 @@ app.set('trust proxy', 1)
 const session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 app.use(session({
-  secret: 'ThisIsNcuFresh18Speaking.',
+  secret: 'ThisIsNcuFresh18SpeakingIn2020.',
   name: 'ncufresh.session.id',
   resave: false,  /* 不要每次讀取就存回去一次 */
   saveUninitialized: false, /* 除非做儲存的動作，不然不要為每個使用者都存session */
