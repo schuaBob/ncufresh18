@@ -1,2 +1,2 @@
 # NCUFresh18
-clone from gitlab
+project clone from gitlab
