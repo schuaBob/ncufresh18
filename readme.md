@@ -1,2 +1,3 @@
 # NCUFresh18
-project clone from gitlab
+Project cloned from gitlab
+Website: https://ncufresh18.ncu.edu.tw/
